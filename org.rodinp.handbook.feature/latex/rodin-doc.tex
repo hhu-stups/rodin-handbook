@@ -1,0 +1,63 @@
+\documentclass{book}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{bsymb}
+\usepackage{b2latex}
+\usepackage{fancyhdr,lastpage,color}
+
+\def\doculist#1#2{
+  \vspace{3mm}
+  \noindent
+  \begin{tabular}{lp{0.85\textwidth}}
+    \includegraphics[width=10mm]{#2} & \vspace{-10mm}#1\\
+  \end{tabular}
+}
+
+\def\tick#1{\doculist{#1}{img/tick_64.png}}
+\def\info#1{\doculist{#1}{img/info_64.png}}
+\def\warning#1{\doculist{#1}{img/warning_64.png}}
+\def\pencil#1{\doculist{\vspace{-5mm}#1}{img/pencil_64.png}}
+
+\title{Rodin User Manual v.2.1.1}
+\author{Sample of \LaTeX-based Documentation Overhaul\\ \\
+Contact Info: Michael Jastram \href{mailto:michael.jastram@formalmind.com}{michael.jastram@formalmind.com}}
+
+\begin{document}        
+
+\maketitle
+
+\section*{Introduction}
+
+The Rodin (\ref{rodin_platform}) documentation needs improvement.  This has been established at the Deyploy Exec Meeting in 2010.  We've been collecting background information and the requirements in the \href{http://wiki.event-b.org/index.php/User_Documentation_Overhaul}{Rodin Wiki}.
+
+We are currently investigating various approaches to managing the documentation.  The approach shown here will work as follows:
+
+\begin{itemize}
+\item The documentation is kept as \LaTeX.
+\item We keep the source in Subversion.  That way anybody with access to Subversion can contribute.
+\item By keeping the documentation in Subversion, we can keep Rodin and its documentation in sync.
+\item We use \href{http://plastex.sourceforge.net/}{plasTeX} to generate HTML and Eclipse Help from the \LaTeX.  plasTeX supports templates, so we can use different templates for the two versions (for instance, we would not generate navigation elements for Eclipse Help, as Eclipse Help itself provides navigation).
+\end{itemize}
+
+This document demonstrates this approach with a very small portion of the existing Rodin documentation.  Obviously, it is just a proof of concept.
+
+\section*{Conventions}
+
+We use the following conventions in this manual:
+
+\tick{Checklists and Milestones are designated with tick.}
+\info{Usegful information and tricks are designated by the information sign.}
+\warning{Potential problems and warnings are designated by a warning sign.}
+\pencil{\begin{description} \item Examples and Code are designated by a pencil.\end{description}}
+
+The Rodin (\ref{rodin_platform}) documentation needs improvement.  This has been established at the Deyploy Exec Meeting in 2010.  We've been collecting background information and the requirements in the \href{http://wiki.event-b.org/index.php/User_Documentation_Overhaul}{Rodin Wiki}.
+
+
+\input{tutorial}
+
+\input{reference}
+
+\input{faq}
+
+\end{document}
+

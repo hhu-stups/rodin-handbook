@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<plugin
+   id="org.rodinp.handbook"
+   name="Rodin Handbook v.2.1.1"
+   version="1.0.0.qualifier"
+   provider-name="Formal Mind GmbH (formalmind.com)">
+   <extension point="org.eclipse.help.toc">
+      <toc primary="true" file="eclipse-toc.xml" />
+   </extension>
+</plugin>

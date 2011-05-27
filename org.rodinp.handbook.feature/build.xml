@@ -1,0 +1,61 @@
+<project default="generate-all">
+
+	<target name="generate-all">
+		<antcall target="generate-html" />
+        <antcall target="generate-eclipse" />
+	</target>
+
+	<target name="generate-html">
+    	<antcall target="generate">
+    		<param name="targetdir" value="${basedir}/build/html"/>
+            <param name="theme" value="rodin-theme-html"/>
+		</antcall>
+    	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"></delete>
+   	</target>
+
+    <target name="generate-eclipse">
+        <antcall target="generate">
+            <param name="targetdir" value="${basedir}/build/org.rodinp.handbook"/>
+            <param name="theme" value="rodin-theme-eclipse"/>
+        </antcall>
+        <delete dir="${basedir}/build/org.rodinp.handbook" includes="chm.*,*.hs,*.jhm,*.paux"></delete>
+    	<copy todir="${basedir}/build/org.rodinp.handbook">
+    		<fileset dir="${basedir}/skeleton" />
+    	</copy>
+    	
+    	<replace file="${basedir}/build/org.rodinp.handbook/eclipse-toc.xml" >
+    	<replacetoken><![CDATA[<toc ]]></replacetoken>
+    	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
+        </replace>
+    </target>
+
+    <target name="generate" depends="init">
+        <mkdir dir="${targetdir}"/>
+    	<exec executable="plastex" dir="${basedir}/build/latex">
+    		<env key="XHTMLTEMPLATES" value="${basedir}/build/XHTML"/>
+    		<arg value="-d"/>
+            <arg value="${targetdir}"/>
+    		<arg value="--theme=${theme}"/>
+    		<arg value="${basedir}/build/latex/rodin-doc.tex"/>
+    	</exec>
+    	<copy todir="${targetdir}/files">
+    		<fileset dir="${basedir}/latex/files" />
+		</copy>
+    </target>
+
+	<target name="init">
+		<tstamp/>
+		<!-- plastex cannot deal with subversion files.  Thus, we create a copy -->
+		<copy todir="${basedir}/build/latex">
+			<fileset dir="${basedir}/latex" excludes=".svn,*.sty"/>
+		</copy>
+		<!-- We tweak the Event-B Style Files for plastex -->
+		<copy file="${basedir}/latex/plastex-b2latex.sty" tofile="${basedir}/build/latex/b2latex.sty"/>
+        <copy file="${basedir}/latex/plastex-bsymb.sty" tofile="${basedir}/build/latex/bsymb.sty"/>
+
+		<copy todir="${basedir}/build/XHTML">
+            <fileset dir="${basedir}/XHTML" excludes=".svn"/>
+        </copy>
+	</target>
+
+</project>

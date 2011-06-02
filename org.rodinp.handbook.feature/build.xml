@@ -3,6 +3,7 @@
 	<target name="generate-all">
 		<antcall target="generate-html" />
         <antcall target="generate-eclipse" />
+        <antcall target="generate-pdf" />
 	</target>
 
 	<target name="generate-html">
@@ -12,6 +13,21 @@
 		</antcall>
     	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"></delete>
    	</target>
+
+	   <target name="generate-pdf">
+	   	<!-- Run twice to get cross-references right -->
+	   	<antcall target="run-rubber" />
+        <antcall target="run-rubber" />
+	   	<delete dir="${basedir}/build" includes="*.aux,*.log,*.out"></delete>
+	    </target>
+
+    <target name="run-rubber">
+      <exec executable="rubber" dir="${basedir}/build">
+          <arg value="--pdf"/>
+          <arg value="--force"/>
+          <arg value="${basedir}/build/latex/rodin-doc.tex"/>
+      </exec>
+      </target>
 
     <target name="generate-eclipse">
         <antcall target="generate">

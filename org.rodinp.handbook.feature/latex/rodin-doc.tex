@@ -4,19 +4,23 @@
 \usepackage{bsymb}
 \usepackage{b2latex}
 \usepackage{fancyhdr,lastpage,color}
+\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
+
 
 \def\doculist#1#2{
-  \vspace{3mm}
-  \noindent
-  \begin{tabular}{lp{0.85\textwidth}}
-    \includegraphics[width=10mm]{#2} & \vspace{-10mm}#1\\
-  \end{tabular}
+\begin{quote}
+\hspace{-10mm}
+\includegraphics[width=7mm]{#2}
+\vspace{-8mm}
+
+#1
+\end{quote}
 }
 
 \def\tick#1{\doculist{#1}{img/tick_64.png}}
 \def\info#1{\doculist{#1}{img/info_64.png}}
 \def\warning#1{\doculist{#1}{img/warning_64.png}}
-\def\pencil#1{\doculist{\vspace{-5mm}#1}{img/pencil_64.png}}
+\def\pencil#1{\doculist{#1}{img/pencil_64.png}}
 
 \title{Rodin User Manual v.2.1.1}
 \author{Sample of \LaTeX-based Documentation Overhaul\\ \\
@@ -26,7 +30,7 @@ Contact Info: Michael Jastram \href{mailto:michael.jastram@formalmind.com}{micha
 
 \maketitle
 
-\section*{Introduction}
+\section{Introduction}
 
 The Rodin (\ref{rodin_platform}) documentation needs improvement.  This has been established at the Deyploy Exec Meeting in 2010.  We've been collecting background information and the requirements in the \href{http://wiki.event-b.org/index.php/User_Documentation_Overhaul}{Rodin Wiki}.
 
@@ -41,17 +45,20 @@ We are currently investigating various approaches to managing the documentation.
 
 This document demonstrates this approach with a very small portion of the existing Rodin documentation.  Obviously, it is just a proof of concept.
 
-\section*{Conventions}
+\subsection{Conventions}
 
 We use the following conventions in this manual:
 
 \tick{Checklists and Milestones are designated with tick.}
 \info{Usegful information and tricks are designated by the information sign.}
 \warning{Potential problems and warnings are designated by a warning sign.}
-\pencil{\begin{description} \item Examples and Code are designated by a pencil.\end{description}}
+\pencil{Examples and Code are designated by a pencil.}
+
+We use \texttt{typewriter} font for filenames and directories
 
 The Rodin (\ref{rodin_platform}) documentation needs improvement.  This has been established at the Deyploy Exec Meeting in 2010.  We've been collecting background information and the requirements in the \href{http://wiki.event-b.org/index.php/User_Documentation_Overhaul}{Rodin Wiki}.
 
+\input{style-guide}
 
 \input{tutorial}
 

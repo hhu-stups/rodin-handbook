@@ -212,10 +212,8 @@ table.list td {
 
 /* Quotations and Verse */
 .quotation, .quote, .verse {
-    text-indent: 2em;
 }
 .quotation p, .quote p, .verse p {
-    text-indent: 2em;
     margin-top: 0px;
     margin-bottom: 0px;
 }
@@ -286,6 +284,7 @@ p {
     text-indent: 0em;
     margin-top: 0px;
     margin-bottom: 1em;
+    text-align: justify;
 }
 
 img {
@@ -324,4 +323,11 @@ body {
     font-size: 150%;
     padding-left: 0.5ex;
     padding-right: 0.5ex;
+}
+
+/* (mj) Used for the Hint-Images */
+blockquote p img {
+  float: left;
+  position: absolute;
+  left: 0.5em;
 }

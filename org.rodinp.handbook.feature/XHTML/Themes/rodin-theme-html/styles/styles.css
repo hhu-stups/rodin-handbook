@@ -213,10 +213,8 @@ table.list td {
 
 /* Quotations and Verse */
 .quotation, .quote, .verse {
-    text-indent: 2em;
 }
 .quotation p, .quote p, .verse p {
-    text-indent: 2em;
     margin-top: 0px;
     margin-bottom: 0px;
 }
@@ -287,6 +285,7 @@ p {
     text-indent: 0em;
     margin-top: 0px;
     margin-bottom: 1em;
+    text-align: justify;
 }
 
 img {
@@ -355,3 +354,9 @@ color: #000;
 #navlist a:hover { background-color: #ffffff; }
 #navlist a:visited { color: #000; }
 
+/* (mj) Used for the Hint-Images */
+blockquote p img {
+  float: left;
+  position: absolute;
+  left: 12em;
+}

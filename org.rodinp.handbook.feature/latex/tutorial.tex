@@ -7,6 +7,27 @@ The tutorial doesn't contain all the knowledge that you require.  Instead, it to
 
 Before we build a first model, we will cover some basic math.
 
+\section{Tutorial Proposal (WP1-4)}
+
+These are the chapters of the tutorial.  Average time available to write each chapter: 5 hours.  This is not much time.  Therefore, make sure that the sceleton exists before filling in details.  This is particularly true for screenshots: By all means indicate where screenshots should be, but don't waste time on them until the end.
+
+\begin{description}
+	\item[Background before getting started] -- we give a brief description of what Event-B is and what it is being used for; what kind of background knowledge we expect.
+	\item[Installation] -- Guiding the user through downloading, installing and starting Rodin; Point out platform differences.  Install the provers.  Name the visible views and describe what they are doing.
+	\item[Hello, world] -- a first machine, e.g. a traffic light with booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof lables are read, without changing to the proof perspective.
+	\item[Mathematical notation] -- At this point we quickly go through the most important aspects of predicate calculus and provide pointers to the reference and to external literature
+	\item[Introducing Contexts] -- a little context-only example, but not too mathematical.  E.g. a data structure with axioms to show that it is a tree. Point out partitions as a typical pitfall (also add to FAQ)
+	\item[Combining contexts and machines] -- introducing the ``sees'' relationship.
+	\item[Refinement] -- introducing a refinement to add a new feature - the call button, for instance.
+	\item[Theory behind refinement] -- describe what refinement means mathematically.
+	\item[Data refinement] -- introduce data refinement (boolean to traffic light colors
+	\item[Witnesses] -- What they are and how to work with them.  We need an example
+	\item[Proving] -- hopefully, so far all proof obligations were discharged automatically.  Now we switch for the first time to the prooving perspective and explore it.  We change the auto prover configuration, invalidate proofs and show, that with the new configuration they don't discharge any more.  We prove a simple proof by hand.  We describe the provers available.
+	\item[Tricky Proving] -- we start with a new example that contains a difficult proof.  We walk the user through discharging the proof with plenty of screen shots.
+	\item[Complete Abrial Example] -- we pick an interesting example from the Abrial book, if we get permission.
+	\item[Outlook] -- This concludes the tutorial, but we will provide many pointers to the user.  In particular, we will point to the literature from the deploy project, the Wiki and to plugins that solve specific problems.
+\end{description}
+
 \section{Theory to Get You Started}
 \label{tutorial_theory}
 

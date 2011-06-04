@@ -3,13 +3,31 @@
 \section{Arithmetic}
 \label{arithmetic}
 
+\section{Camille}
+\label{camille}
+
+Camille is an alternative, text-based editor.  It can be installed through the Eclipse Install mechanism.  More information is available in the Rodin Wiki (\ref{rodin_wiki}).
+
+\section{Context}
+\label{context}
+
+\section{Datatypes}
+\label{datatypes}
+
+List of Event-B datatypes
+
 \section{Eclipse}
 \label{eclipse}
 
 ... Eclipse Definition ...
 
+\section{Event}
+\label{event}
+
+Definition event
+
 \section{Event-B}
-\label{event-b}
+\label{eventb}
 
 Event-B is a formal method (\ref{formal_method}) for system-level modelling and analysis. Key features of Event-B are the use of set theory (\ref{set_theory}) as a modelling notation, the use of refinement (\ref{refinement}) to represent systems at different abstraction levels and the use of mathematical proof to verify consistency between refinement levels.
 
@@ -18,6 +36,16 @@ Event-B is a formal method (\ref{formal_method}) for system-level modelling and 
 \item \url{http://www.event-b.org}
 \end{itemize}
 
+\section{Event-B Component}
+\label{eventb_component}
+
+Machines (\ref{machine}) and Contexts (\ref{context}) are components.
+
+\section{Event-B Explorer}
+\label{eventb_explorer}
+
+The View showing the Event-B projects and their content.  In the default Event-B perspective, it is the slim browser on the left edge of the Workspace.  If it is missing, make sure that you use the correct perspective.  You can explicitly enable it with \textsf{Windows $\rangle$ Show View... $\rangle$ Event-B Explorer}.
+
 \section{First Order Predicate Calculus}
 \label{first_order_predicate_calculus}
 
@@ -25,10 +53,26 @@ Event-B is a formal method (\ref{formal_method}) for system-level modelling and 
 \section{Formal Method}
 \label{formal_method}
 
+\section{Guard}
+\label{guard}
+
 \section{IDE}
 \label{ide}
 
-... IDE Definition ...
+Integrated Development Environment
+
+\section{Initialization}
+\label{initialization}
+
+Every machine has a special event \texttt{INITIALIZATION} that will be used to initialize the machine's state.
+
+TODO: Determinism, refinement.
+
+\section{Label}
+\label{label}
+
+\section{Machine}
+\label{machine}
 
 \section{Naming Convention}
 \label{naming_convention}
@@ -38,21 +82,30 @@ In this section we describe a recommended naming convention.  Good naming conven
 \section{Refinement}
 \label{refinement}
 
-... Refinement Definition ...
-
-\subsection{Horizontal Refinement}
-\label{horizontal_refinement}
-
-\subsection{Vertical Refinement}
-\label{vertical_refinement}
-
-\subsection{Data Refinement}
-\label{data_refinement}
+\begin{description}
+	\item[Horizontal Refinement]
+	\item[Vertical Refinement]
+	\item[Data Refinement]
+\end{description}
 
 \paragraph*{See also:}
 \begin{itemize}
 \item Data refinement in the trafficlight tutorial (\ref{tutorial_tl_data_refinement})
 \end{itemize}
+
+\section{Rodin Wiki}
+\label{rodin_wiki}
+
+\url{http://wiki.event-b.org/}
+
+\section{Structural Editor}
+\label{structural_editor}
+
+\section{Project}
+\label{project}
+
+\section{Proof Obligation Labels}
+\label{po_labels}
 
 \section{Propositional Calculus}
 \label{propositional_calculus}
@@ -62,10 +115,22 @@ In this section we describe a recommended naming convention.  Good naming conven
 
 ... Rodin Definition ...
 
+
 \section{Rodin Platform}
 \label{rodin_platform}
 
-... Rodin Platform Definition ...
+\section{Rodin Problems View}
+\label{rodin_problems_view}
+
+
+\section{Rodin Nature}
+\label{rodin_nature}
+
+Eclipse Projects can have one or more natures to describe their purpose.  The GUI can then adapt to their nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
+
+\pencil{
+\texttt{<nature>org.rodinp.core.rodinnature</nature>}
+}
 
 \section{Set Theory}
 \label{set_theory}

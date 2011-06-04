@@ -1,16 +1,15 @@
 \documentclass{book}
+\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{bsymb}
 \usepackage{b2latex}
 \usepackage{fancyhdr,lastpage,color}
-\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
-
 
 \def\doculist#1#2{
 \begin{quote}
 \hspace{-10mm}
-\includegraphics[width=7mm]{#2}
+\textrm{\includegraphics[width=7mm]{#2}} % Hack!  We "mark" the image with textrm so that we can use a different CSS-Style in plastex.
 \vspace{-8mm}
 
 #1
@@ -47,11 +46,11 @@ We decided on the following approach:
 
 This document demonstrates this approach with a very small portion of the existing Rodin documentation.  Obviously, it is just a proof of concept.
 
-\subsection{Foreword}
+\section{Foreword}
 
 By Cliff and/or Jean-Raymond.
 
-\subsection{Conventions}
+\section{Conventions}
 
 We use the following conventions in this manual:
 
@@ -60,9 +59,12 @@ We use the following conventions in this manual:
 \warning{Potential problems and warnings are designated by a warning sign.}
 \pencil{Examples and Code are designated by a pencil.}
 
-We use \texttt{typewriter} font for filenames and directories
+We use \texttt{typewriter} font for filenames and directories.
 
-\subsection{Creative Commons License}
+We use \textsf{sans serif font} for GUI elements like menus and buttons.  Menu actions are depicted by a chain of elements, separated by ``$\rangle$'', e.g. \textsf{File $\rangle$ New $\rangle$ Event-B Component}.
+
+
+\section{Creative Commons License}
 
 \input{style-guide}
 

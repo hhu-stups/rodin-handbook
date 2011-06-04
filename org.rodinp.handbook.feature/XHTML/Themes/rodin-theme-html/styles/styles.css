@@ -286,6 +286,8 @@ p {
     margin-top: 0px;
     margin-bottom: 1em;
     text-align: justify;
+	font-family: Georgia;
+	font-size: 120%;
 }
 
 img {
@@ -355,8 +357,8 @@ color: #000;
 #navlist a:visited { color: #000; }
 
 /* (mj) Used for the Hint-Images */
-blockquote p img {
+blockquote p span.rmfamily img {
   float: left;
   position: absolute;
-  left: 12em;
+  left: 10em;
 }

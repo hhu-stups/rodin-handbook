@@ -10,6 +10,7 @@
 <link tal:condition="links/prev" rel="prev" tal:attributes="href links/prev/url; title links/prev/title/textContent" />
 <link tal:condition="links/up" rel="up" tal:attributes="href links/up/url; title links/up/title/textContent" />
 <link rel="stylesheet" href="styles/styles.css" />
+
 </head>
 <body>
 
@@ -60,6 +61,17 @@
 | <a class="footer" rel="license" href="http://creativecommons.org/licenses/by/3.0/">
 <img alt="Creative Commons License" style="border-width:0" src="icons/cc-by.png" /></a>
 Creative Commons License
+|
+<img src="icons/feedback.gif" /> <a class="footer" href="" id="feedback">Feedback</a>
+<div style="visibility:hidden;" id="section" tal:content="self/title"></div>
+<script>
+section = encodeURIComponent(document.getElementById("section").innerHTML);
+url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
+    + String.fromCharCode(38) + "entry_0=" + section;
+document.getElementById("feedback").href = url;
+</script>
+
+
 
 </div>
 

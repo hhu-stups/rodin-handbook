@@ -17,9 +17,7 @@
 <tr><td valign="top" width="135px">
 
 <center>
-Rodin
-User
-Manual
+<h2><a id="navlist" href="index.html">Rodin Handbook</a></h2>
 </center>
 
 <br/>
@@ -27,10 +25,21 @@ Manual
 <div id="navcontainer">
 <ul id="navlist">
 <li><a href="index.html">Handbook Home</a>
+<li><a href="" id="feedback">Feedback</a>
 <li><a href="">Handbook as PDF</a>
 <li><a href="http://wiki.event-b.org/">Rodin Wiki</a>
 <li><a href="http://sourceforge.net/projects/rodin-b-sharp/">Rodin Download</a>
 <li><a href="mailto:michael.jastram@formalmind.com">Contact</a>
+
+<div style="visibility:hidden;" id="section" tal:content="self/title"></div>
+<script>
+section = encodeURIComponent(document.getElementById("section").innerHTML);
+url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
+    + String.fromCharCode(38) + "entry_0=" + section;
+document.getElementById("feedback").href = url;
+</script>
+
+
 </ul>
 </div>
 

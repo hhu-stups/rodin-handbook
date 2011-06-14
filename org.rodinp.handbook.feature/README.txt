@@ -12,7 +12,8 @@ This feature has two purposes:
 HOW TO BUILD
 ============
 1. Install Plastex on your system (http://plastex.sourceforge.net/)
-2. Run the build.xml ant file
+2. Install Rubber on your system (https://launchpad.net/rubber)
+3. Run the build.xml ant file
 
 The resulting HTML and Eclipse Plugin with Eclipse help will be in the build folder.
 

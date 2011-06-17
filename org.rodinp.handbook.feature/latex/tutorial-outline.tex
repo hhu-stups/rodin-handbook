@@ -1,0 +1,39 @@
+\section*{Tutorial Proposal (WP1-4)}
+
+The objective is to get users to a stage where they can use Rodin and build Event-B models.  We exect from users to have a basic understanding of logic and an idea why doing formal modeling is a good idea.  Such a user should be able to work through the tutorial with no or little outside help.
+
+This tutorial covers installation and configuration of Rodin; it hand-holds the user through building formal models and it provides the essential theory and provides pointers to more information.
+
+We attempt to alternate between theory and practical application, thereby keeping the user motivated.  We encourage not to download solutions to the examples, but instead for the user to actively build them up themselves, as the tutorial progresses.
+
+\textbf{To Authors:} In the first iteration, 5 hours of writing time are allocated to each tutorial section.  Therefore, the authors will make sure that the skeleton exists before filling in details.
+This is particularly true for screenshots, which should be added last.
+
+\subsection*{Outline}
+
+\begin{description}
+	\item[Background before getting started] We give a brief description of what Event-B is and what it is being used for; what kind of background knowledge we expect.
+	\item[Installation] We guide the user through downloading, installing and starting Rodin and point out platform differences.  We install the provers.  We name the visible views and describe what they are doing.
+	\item[A Machine, and nothing else] We introduce a first machine, a traffic light with booleans for signals. 
+      We introduce guards, resulting in the proof obligations to be discharged automatically.
+      We explain how proof labels are read, without changing to the proof perspective.
+	\item[Mathematical notation] At this point we quickly go through the most important aspects of predicate calculus and provide pointers to the reference and to external literature.  We cover everything used by the traffic light system; we introduce all data types; We introduce sets and relations, but not in depth.  Difference between predicates and expressions; for instance, understand the difference between TRUE and $\top$.  
+	\item[Introducing Contexts] We introduce Contexts to apply the theoretical concepts that were introduced in the previous section.  We use the Agatha-Puzzle to step by step introduce more and more complex elements.We point out partitions as a typical pitfall (also add to FAQ).  We will cover Theorems. Well-Definedness is mentioned, but not part of the Agatha-Puzzle.
+	\item[Event-B Concepts] This is another theoretical section that provides more background about the previous examples.  For instance, we analyze the anatomy of a machine, introduce all elements that a machine or context may have. We point to literature about the theory, but won't go into the details of the  calculus.  We describe the sees and refines concepts, which will be applied in the next section.  We will briefly mention concepts like data refinement and witnesses, but leave the details to the literature.
+
+	\item[Expanding the Traffic Light System]  We apply what we learned in the previous section by introducing a context with traffic light colors, and a refinement to integrate them.  We will introduce another refinement for the push buttons.
+
+We may structure this and the previous section differently as we develop the tutorial to ensure readability.  But we won't change the content.
+
+	\item[Proving] Hopefully, so far all proof obligations were discharged automatically.  Now we switch for the first time to the proving perspective and explore it.
+      We change the auto prover configuration, invalidate proofs and show, that with the new configuration they don't discharge any more.
+
+Here we will solicit feedback from the community to find good examples.
+
+
+      We prove a simple proof by hand.  We describe the provers available.
+	\item[Tricky Proving] We start with a new example that contains a difficult proof.  We walk the user through discharging the proof with plenty of screen shots.
+	\item[Complete Abrial Example] We pick an interesting example from the Abrial book, if we get permission.  We could also take one of the Rodin Wiki Tutorial examples (e.g. Location Access Controller).
+	\item[Outlook] This concludes the tutorial, but we will provide many pointers to the user.  In particular, we will point to the literature from the Deploy project, the Wiki and to plugins that solve specific problems.
+\end{description}
+

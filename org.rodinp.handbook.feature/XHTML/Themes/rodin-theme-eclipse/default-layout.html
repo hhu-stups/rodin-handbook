@@ -14,6 +14,12 @@
 </head>
 <body>
 
+<div style="float: right; text-align: center; font-family: sans-serif;">
+<a href="" id="feedbackbubble" style="color: red; text-decoration: none;">
+<img src="icons/bubble_48.png" border="0" align="middle"><br><b>Feedback</b></a>
+</div>
+
+
 <div tal:content="self">File contents</div>
 
 <div tal:condition="self/tableofcontents" tal:attributes="class string:contents ${self/nodeName}-contents"><!--<strong>Subsections</strong>-->
@@ -58,8 +64,8 @@
 
 | <img src="icons/wikipedia.png" /> <a class="footer" href="http://wiki.event-b.org/">Rodin Wiki</a>
 
-| <a class="footer" rel="license" href="http://creativecommons.org/licenses/by/3.0/">
-<img alt="Creative Commons License" style="border-width:0" src="icons/cc-by.png" /></a>
+| <a class="footer" rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
+<img alt="Creative Commons License" style="border-width:0" src="icons/cc-by-sa.png" /></a>
 Creative Commons License
 |
 <img src="icons/feedback.gif" /> <a class="footer" href="" id="feedback">Feedback</a>
@@ -68,6 +74,7 @@ Creative Commons License
 section = encodeURIComponent(document.getElementById("section").innerHTML);
 url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
     + String.fromCharCode(38) + "entry_0=" + section;
+document.getElementById("feedbackbubble").href = url;
 document.getElementById("feedback").href = url;
 </script>
 

@@ -39,12 +39,28 @@ url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRz
 document.getElementById("feedback").href = url;
 </script>
 
-
 </ul>
 </div>
 
 <br/>
 <br/>
+
+
+<div id="cse-search-form" style="width: 150px;">Loading</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('017699211055551047357:t-4vw4yxuhq');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.enableSearchboxOnly("http://google.com/cse?cx=017699211055551047357:t-4vw4yxuhq");    
+    customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
+<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+
+
 <br/>
 <br/>
 <center id="navlist">
@@ -56,8 +72,8 @@ This work is sponsored by the
 <br/>
 <br/>
 
-<img alt="Creative Commons License" style="border-width:0" src="icons/cc-by.png" /><br />
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
+<img alt="Creative Commons License" style="border-width:0" src="icons/cc-by-sa.png" /><br />
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution 3.0 Unported License</a>
 
 </center>
 
@@ -80,6 +96,14 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 <td><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
 </tr>
 </table>
+</div>
+
+<div style="float: right; text-align: center; font-family: sans-serif;">
+<a href="" id="feedbackbubble" style="color: red; text-decoration: none;">
+<img src="icons/bubble_48.png" border="0" align="middle"><br><b>Feedback</b></a>
+<script>
+document.getElementById("feedbackbubble").href = url;
+</script>
 </div>
 
 <div tal:content="self">File contents</div>

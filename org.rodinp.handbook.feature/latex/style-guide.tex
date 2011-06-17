@@ -17,11 +17,12 @@
 	\item sections and subsections are numbered.  In the HTML-Versions, they are broken into subpages.
     \item subsubsections do not receive numbers and are not broken into subpages in the HTML.  Keep this in mind regarding both the reading flow and page sizes.
 	\item Avoid linking (ref) to subsubsections, as they don't have a number.  Latex will instead provide a link to the next higher element.  It works, but could create confusion.
-	\item Generally, we should avoid gaps in the hierarchy (i.e. having a subsubsection in a section without a subsection in between).  \footnote{Coincidentally, this style guide violates this rule. Reason: We want the style guide not broken into subpages, but the proper hierarchy is a section.}
+	\item Generally, we should avoid gaps in the hierarchy (i.e. having a subsubsection in a section without a subsection in between).%
+      \footnote{Coincidentally, this style guide violates this rule. Reason: We want the style guide not broken into subpages, but the proper hierarchy is a section.}
 \end{itemize}
 
 
-\subsubsection{\LaTeX Styling}
+\subsubsection{\LaTeX{} Styling}
 
 \begin{itemize}
 	\item Try to avoid fancy \LaTeX formatting, as PlasTeX (used for generating HTML) is temperamental.  Especially macros don't always work, and sometimes the result is just ugly.

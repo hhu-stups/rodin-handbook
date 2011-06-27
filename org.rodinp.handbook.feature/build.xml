@@ -43,6 +43,10 @@
     	<replacetoken><![CDATA[<toc ]]></replacetoken>
     	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
         </replace>
+    	
+    	<zip destfile="${basedir}/build/org.rodinp.handbook.zip"
+    	       basedir="${basedir}/build/org.rodinp.handbook"
+    	       update="true"/>
     </target>
 
     <target name="generate" depends="init">

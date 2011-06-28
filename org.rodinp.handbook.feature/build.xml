@@ -47,7 +47,7 @@
         </replace>
     	
     	<!-- delete old eclipse help plugin -->
-    	<delete dir="${basedir}/build/plugin" />
+    	<delete dir="${basedir}/build/plugin" includes="*.jar"/>
     	
     	<tstamp>
     	  <format property="qualifier" pattern="yyyyMMddHHmm"/>

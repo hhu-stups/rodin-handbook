@@ -46,6 +46,9 @@
     	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
         </replace>
     	
+    	<!-- delete old eclipse help zip -->
+    	<delete dir="${basedir}/build/plugin" includes="*.zip"/>
+    	
     	<tstamp>
     	  <format property="qualifier" pattern="yyyyMMddHHmm"/>
     	</tstamp>

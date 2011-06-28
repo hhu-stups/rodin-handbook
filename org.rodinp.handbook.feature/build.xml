@@ -4,6 +4,7 @@
 		<antcall target="generate-html" />
         <antcall target="generate-eclipse" />
         <antcall target="generate-pdf" />
+		<antcall target="teardown" />
 	</target>
 
 	<target name="generate-html">
@@ -11,18 +12,19 @@
     		<param name="targetdir" value="${basedir}/build/html"/>
             <param name="theme" value="rodin-theme-html"/>
 		</antcall>
-    	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"></delete>
+    	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"/>
    	</target>
 
-	   <target name="generate-pdf">
-	   	<!-- Run twice to get cross-references right -->
-	   	<antcall target="run-rubber" />
-        <antcall target="run-rubber" />
-	   	<delete dir="${basedir}/build" includes="*.aux,*.log,*.out"></delete>
-	    </target>
+   <target name="generate-pdf">
+   		<mkdir dir="${basedir}/build/pdf"/>
+		<!-- Run twice to get cross-references right -->
+		<antcall target="run-rubber" />
+		<antcall target="run-rubber" />
+		<delete dir="${basedir}/build/pdf" includes="*.aux,*.log,*.out"/>
+    </target>
 
     <target name="run-rubber">
-      <exec executable="rubber" dir="${basedir}/build">
+      <exec executable="rubber" dir="${basedir}/build/pdf">
           <arg value="--pdf"/>
           <arg value="--force"/>
           <arg value="${basedir}/build/latex/rodin-doc.tex"/>
@@ -31,22 +33,28 @@
 
     <target name="generate-eclipse">
         <antcall target="generate">
-            <param name="targetdir" value="${basedir}/build/org.rodinp.handbook"/>
+            <param name="targetdir" value="${basedir}/build/eclipse"/>
             <param name="theme" value="rodin-theme-eclipse"/>
         </antcall>
-        <delete dir="${basedir}/build/org.rodinp.handbook" includes="chm.*,*.hs,*.jhm,*.paux"></delete>
-    	<copy todir="${basedir}/build/org.rodinp.handbook">
+        <delete dir="${basedir}/build/eclipse" includes="chm.*,*.hs,*.jhm,*.paux"/>
+    	<copy todir="${basedir}/build/eclipse">
     		<fileset dir="${basedir}/skeleton" />
     	</copy>
     	
-    	<replace file="${basedir}/build/org.rodinp.handbook/eclipse-toc.xml" >
+    	<replace file="${basedir}/build/eclipse/eclipse-toc.xml" >
     	<replacetoken><![CDATA[<toc ]]></replacetoken>
     	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
         </replace>
     	
-    	<zip destfile="${basedir}/build/org.rodinp.handbook.zip"
-    	       basedir="${basedir}/build/org.rodinp.handbook"
-    	       update="true"/>
+    	<!-- delete old eclipse help plugin -->
+    	<delete dir="${basedir}/build/plugin" />
+    	
+    	<tstamp>
+    	  <format property="qualifier" pattern="yyyyMMddHHmm"/>
+    	</tstamp>
+    	
+    	<jar destfile="${basedir}/build/plugin/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" />
+    	   	
     </target>
 
     <target name="generate" depends="init">
@@ -76,6 +84,11 @@
 		<copy todir="${basedir}/build/XHTML">
             <fileset dir="${basedir}/XHTML" excludes=".svn"/>
         </copy>
+	</target>
+	
+	<target name="teardown">
+		<delete dir="${basedir}/build/XHTML"/>
+		<delete dir="${basedir}/build/latex"/>
 	</target>
 
 </project>

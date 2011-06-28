@@ -2,8 +2,8 @@
 
 	<target name="generate-all">
 		<antcall target="generate-html" />
-        <antcall target="generate-eclipse" />
-        <antcall target="generate-pdf" />
+		<antcall target="generate-pdf" />
+		<antcall target="generate-eclipse" />
 		<antcall target="teardown" />
 	</target>
 
@@ -39,6 +39,7 @@
         <delete dir="${basedir}/build/eclipse" includes="chm.*,*.hs,*.jhm,*.paux"/>
     	<copy todir="${basedir}/build/eclipse">
     		<fileset dir="${basedir}/skeleton" />
+    		<fileset dir="${basedir}/build/pdf" />
     	</copy>
     	
     	<replace file="${basedir}/build/eclipse/eclipse-toc.xml" >

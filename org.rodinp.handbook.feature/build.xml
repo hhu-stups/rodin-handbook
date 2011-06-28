@@ -53,6 +53,8 @@
     	  <format property="qualifier" pattern="yyyyMMddHHmm"/>
     	</tstamp>
     	
+    	<mkdir dir="${basedir}/build/plugin"/>
+    	
     	<jar destfile="${basedir}/build/plugin/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" />
     	   	
     </target>

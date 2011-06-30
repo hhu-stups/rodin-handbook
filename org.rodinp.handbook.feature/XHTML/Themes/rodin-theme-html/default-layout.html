@@ -133,6 +133,25 @@ document.getElementById("feedbackbubble").href = url;
 </ul>
 </div>
 
+<div class="navigation" metal:define-macro="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td tal:condition="links/prev"><a tal:attributes="href links/prev/url; title stripped:links/prev/title"><img border="0" tal:attributes="alt stripped:Previous: ${links/prev/title}" src="icons/go-previous.gif" width="16" height="16" /></a></td>
+<td tal:condition="not:links/prev"><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+<td tal:condition="links/up"><a tal:attributes="href links/up/url; title stripped:links/up/title"><img border="0" tal:attributes="alt stripped:Up: ${links/up/title}" src="icons/go-up.gif" width="16" height="16" /></a></td>
+<td tal:condition="not:links/up"><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+<td tal:condition="links/next"><a tal:attributes="href links/next/url; title stripped:links/next/title"><img border="0" tal:attributes="alt stripped:Next: ${links/next/title}" src="icons/go-next.gif" width="16" height="16" /></a></td>
+<td tal:condition="not:links/next"><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+<td style="width:100%">&nbsp;</td>
+<td tal:condition="links/contents"><a tal:attributes="href links/contents/url" title="Table of Contents"><img border="0" alt="" src="icons/gohome.gif" width="16" height="16" /></a></td>
+<td tal:condition="not:links/contents"><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+<td tal:condition="links/index"><a tal:attributes="href links/index/url" title="Index"><img border="0" alt="" src="icons/go-jump.gif" width="16" height="16" /></a></td>
+<td tal:condition="not:links/index"><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="16" height="16" /></td>
+</tr>
+</table>
+</div>
+
 <div id="footnotes" tal:condition="self/footnotes">
 <p><b>Footnotes</b></p>
 <ol>

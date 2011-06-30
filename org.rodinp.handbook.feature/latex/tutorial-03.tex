@@ -34,7 +34,7 @@ The editor is \textit{form-based}.  This means that in well-defined places an ap
 
 \subsection{Building the Model}
 
-Back to the problem: Our objective is to build a simplified traffic light controller, as described in \ref{tutorial_3}.  We start with the model state.  We will model two traffic lights.  Therefore, we will create two variables, called \texttt{cars\_go} and \texttt{peds\_go}.  Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the green plus-sign to create a new variable.
+Back to the problem: Our objective is to build a simplified traffic light controller, as described in \ref{tutorial_03}.  We start with the model state.  We will model two traffic lights.  Therefore, we will create two variables, called \texttt{cars\_go} and \texttt{peds\_go}.  Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the green plus-sign to create a new variable.
 
 \subsubsection{Creating Variables}
 
@@ -113,6 +113,7 @@ For the traffic light for the cars, we will present a different approach and use
 Note how the parameter is used in the action block.
 
 \subsubsection{Invariants}
+\label{tutorial:invariants}
 
 If this model would control a traffic light, we would have a problem, as nothing is preventing the model from setting both traffic lights to \texttt{TRUE}.  The reason is that so far we only modeled the domain (the traffic lights and their states), and not the requirements.  We have the following safety requirement:
 

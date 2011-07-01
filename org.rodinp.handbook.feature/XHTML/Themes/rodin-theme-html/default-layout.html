@@ -40,7 +40,7 @@ section = encodeURIComponent(document.getElementById("section").innerHTML);
 doctitle = encodeURIComponent(document.getElementById("doctitle").innerHTML);
 url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
     + String.fromCharCode(38) + "entry_0=" + section;
-mail = "mailto:michael.jastram@formalmind.com?cc=lukas.ladenberger@gmx.de" + String.fromCharCode(38) + "subject=Feedback " + doctitle + " (" + section + ")";
+mail = "mailto:michael.jastram@formalmind.com?cc=lukas.ladenberger@formalmind.com" + String.fromCharCode(38) + "subject=Feedback " + doctitle + " (" + section + ")";
 document.getElementById("feedback").href = url;
 document.getElementById("feedbackmail").href = mail;
 </script>

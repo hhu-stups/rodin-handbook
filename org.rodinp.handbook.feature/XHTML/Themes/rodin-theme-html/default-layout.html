@@ -20,10 +20,6 @@
 <h2><a id="navlist" href="index.html">Rodin Handbook</a></h2>
 </center>
 
-<br/>
-
-<div style="visibility:hidden;" id="section" tal:content="self/title"></div>
-
 <div id="navcontainer">
 <ul id="navlist">
 <li><a href="index.html">Handbook Home</a>
@@ -36,17 +32,18 @@
 </ul>
 </div>
 
+<div style="visibility:hidden;" id="section" tal:content="self/title"></div>
+<div style="visibility:hidden;" id="doctitle" tal:content="links/document/title"></div>
+
 <script>
 section = encodeURIComponent(document.getElementById("section").innerHTML);
+doctitle = encodeURIComponent(document.getElementById("doctitle").innerHTML);
 url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
     + String.fromCharCode(38) + "entry_0=" + section;
-mail = "mailto:michael.jastram@formalmind.com?cc=lukas.ladenberger@gmx.de" + String.fromCharCode(38) + "subject=" + section;
+mail = "mailto:michael.jastram@formalmind.com?cc=lukas.ladenberger@gmx.de" + String.fromCharCode(38) + "subject=Feedback " + doctitle + " (" + section + ")";
 document.getElementById("feedback").href = url;
 document.getElementById("feedbackmail").href = mail;
 </script>
-
-<br/>
-<br/>
 
 <div id="cse-search-form" style="width: 150px;">Loading</div>
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>

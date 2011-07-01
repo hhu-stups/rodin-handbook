@@ -303,6 +303,8 @@ Note that we used two very different approaches to model the traffic lights for 
 
 You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model.  We did it here only to demonstrate both approaches).
 
+We won't cover deadlocks (\ref{deadlock}) and deadlock freedom in this tutorial; however, we want to point out that the traffic light for the cars is interesting regarding deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever!  A model checker (like ProB (\ref{prob}) could find it.  This is not a problem, however, as with the given initialization and events, that state is not reachable in the first place.
+
 We hope that this Section helped you to understand the power of abstraction.  The safety invariant from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors, being confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
 
 \subsection{The Refined Machine with All Data Refinement}
@@ -385,4 +387,93 @@ We hope that this Section helped you to understand the power of abstraction.  Th
 \END
 \end{description}
 }
+
+\subsection{One more Refinement: The Push Button}
+
+We will demonstrate another application of refinement: Introducing new features into an existing model.  A typical traffic light system allows the pedestrians to request crossing the street by pressing a button.  We will introduce this feature in a new refinement.
+
+While we could have introduced the push button in the initial machine, introducing it later allows us to structure the model, making it easier to understand and navigate.
+
+We will realize this feature by introducing a new boolean variable for the push button.  We will introduce an event that notifies the model of the pressing of the push button.  Upon allowing the pedestrians to cross, we will reset the push button.
+
+As in the previous Section, we create a new refinement \textsf{mac2} by right-clicking on \textsf{mac1} and selecting \textsf{Refine}.  A stub is generated that contains the events from the abstract machine.  We can simply add a new variable for the push button (including typing and initialization).  We also introduce an event to set the button.  This event doesn't work while the pedestrians have a green light.
+
+\pencil{
+\begin{description}
+\VARIABLES
+	\begin{description}
+		\Item{ button }
+	\end{description}
+\INVARIANTS
+	\begin{description}
+		\nItemX{ type\_button }{ button \in  BOOL }
+	\end{description}
+\EVENTS
+	\INITIALISATION
+		\\\textit{extended}
+		\begin{description}
+		\BeginAct
+			\begin{description}
+			\nItemX{ init\_button }{ button :=  FALSE }
+			\end{description}
+		\EndAct
+		\end{description}
+	\EVT {push\_button}
+		\begin{description}
+		\WhenGrd
+			\begin{description}
+			\nItemX{ grd }{ peds\_colors = red }
+			\end{description}
+		\ThenAct
+			\begin{description}
+			\nItemX{ act }{ button :=  TRUE }
+			\end{description}
+		\EndAct
+		\end{description}
+	\END
+\end{description}
+}
+
+What's left now is the integration of the push button with the traffic light logic.  This includes:
+\begin{itemize}
+	\item Upon pressing the button, the pedestrians must eventually get a green light
+	\item At some point, the button variable must be reset
+\end{itemize}
+
+As we will see in the following discussion, this can get more tricky than it first appears.  For now, we will introduce a guard preventing the car lights to turn to green when button is true.  And we will reset the button when the pedestrian lights turn red:
+
+\pencil{
+\begin{description}
+	\EVT {set\_peds\_red}
+	\EXTD {set\_peds\_red}
+		\begin{description}
+		\BeginAct
+			\begin{description}
+			\nItemX{ act\_button }{ button :=   FALSE }
+			\end{description}
+		\EndAct
+		\end{description}
+	\EVT {set\_cars\_colors}
+	\EXTD {set\_cars\_colors}
+		\begin{description}
+		\WhereGrd
+			\begin{description}
+			\nItemX{ grd\_button }{ \lnot  (cars\_colors = \{  red \}  \land  button = TRUE) }
+			\end{description}
+		\EndAct
+		\end{description}
+\end{description}
+}
+
+\subsection{Discussion}
+
+There are a number of problems associated with the model in its current state.  Let's start with the resetting of the button: The way we built our model so far, \textsf{set\_peds\_red} can be triggered any time - there is not a single guard, neither in the abstract event.  Therefore, the button could be reset any time, without the pedestrian light ever turning green.
+
+This could be prevented with additional guards - for instance, the traffic light events could require an actual change in the light's status.  This in turn could lead to deadlocks.
+
+But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green, instead the pedestrians get green light again and the cycle can start over.
+
+There are tactics to address all these issues.  However, rarely is it possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour, or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
+
+\info{As an exercise, try to improve the model to address these issues.}
 

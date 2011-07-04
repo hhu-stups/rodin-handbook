@@ -1,13 +1,153 @@
 \section{Introducing Contexts}
 \label{tutorial_05}
 
-\tick{\textbf{Goals:} Text ...
+\tick{\textbf{Goals:} In this section we introduce Contexts to apply the theoretical concepts that were introduced in the previois section (\ref{}). We will create a very simple model consisting of just one Context file.
 }
 
-\tick{\textbf{You can skip this Section, if...}
-\begin{itemize}
-	\item ... Point 1
-	\item ... Point 2
-\end{itemize}
+In this tutorial, we will create a model of the well known Agatha puzzle. Here is a brief description of the puzzle:
+
+\textit{Someone in Dreadsbury Mansion killed Aunt Agatha. Agatha, the butler, and Charles live in Dreadsbury Mansion, and are the only ones to live there. A killer always hates, and is no richer than his victim. Charles hates no one that Agatha hates. Agatha hates everybody except the butler. The butler hates everyone not richer than Aunt Agatha. The butler hates everyone whom Agatha hates. No one hates everyone. Who killed Agatha?}
+
+The objective of this Section is to get familiar with Contexts by modeling the Agatha puzzle.
+
+\subsection{Create a Context}
+
+Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}. Give the project the name \texttt{tutorial-05}. 
+
+Next, create a new Event-B Component (\ref{eventb_component}). Unlike in Section (\ref{tutorial_03}) use \texttt{agatha} as the component name and mark the \textsf{Context} (\ref{context}) option in order to create a Context (\ref{context}) file instead of a Machine (\ref{machine}) file:
+
+\begin{center}
+	\includegraphics{img/tutorial/agatha1.png}
+\end{center}
+
+Click on \textsf{Finish}. Rodin should start the editor with the created Context (\ref{context}) file:
+
+\begin{center}
+	\includegraphics{img/tutorial/agatha2.png}
+\end{center}
+
+\subsection{Populate the Context}
+
+In this section we model the Agatha puzzle step by step.
+
+\subsubsection{Modelling the Persons}
+
+We have three persons in the Agatha puzzle: Agatha itself, the butler and Charles. We model the three persons as constants (one constant for each person) in the corresponding \textsf{CONSTANTS} section:
+
+\pencil{
+\begin{description}
+\CONSTANTS
+	\begin{description}
+		\Item{ Agatha }
+		\Item{ butler }
+		\Item{ Charles }
+	\end{description}
+\end{description}
 }
+
+These constants or persons respectively are part of a set:
+
+\pencil{
+\begin{description}
+\SETS
+	\begin{description}
+		\Item{ persons }
+	\end{description}
+\end{description}
+}
+
+Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). Types are provided by axioms. As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ person\_partition }{ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
+	\end{description}
+\end{description}
+}
+
+Corresponding the steps above, expand the \textsf{AXIOMS} section and add one element.
+
+\warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
+}
+
+\subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
+
+We create to more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. 
+
+\info{Note that these relations are abstract which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.}
+
+The first constant \texttt{hates} is an arbitrary relation between \texttt{persons}: 
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ hate\_relation }{ hates \in  persons \rel  persons }
+	\end{description}
+\end{description}
+}
+
+The second constant \texttt{richer} is also a relation between \texttt{persons}. However, we know that the relation is irreflexive (no person is richer than itself), transitive and trichotomous (one person is always richer than the other or vice versa, never both directions):
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
+		\\\hspace*{2,5 cm}  richer \binter  id = \emptyset  \land 
+		\\\hspace*{2,5 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) \land 
+		\\\hspace*{2,5 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y \limp  (x\mapsto y\in richer \leqv  y\mapsto 
+		\\\hspace*{2,5 cm} x \notin  richer)) }
+	\end{description}
+\end{description}
+}
+
+\subsubsection{Modelling the ``Crime''}
+
+Since the objective of the puzzle is to find the killer, we have to create a new constant \texttt{killer} which is an element of \texttt{persons} ($killer \in  persons$).
+
+In addition, the puzzle have some more relationships between the different persons which are all modelled as axioms. For instance, if we want to model the relationship:  
+
+\subsection{The Final Agatha Puzzle Model}
+
+\begin{description}
+\CONTEXT{agatha}
+\SETS
+	\begin{description}
+		\Item{ persons }
+	\end{description}
+\CONSTANTS
+	\begin{description}
+		\Item{ Agatha }
+		\Item{ butler }
+		\Item{ Charles }
+		\Item{ hates }
+		\Item{ richer }
+		\Item{ killer }
+	\end{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ person\_partition }{ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
+		\nItemX{ hate\_relation2 }{ hates \in  persons \rel  persons }
+		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
+		\\\hspace*{3,4 cm}  richer \binter  id = \emptyset  \land 
+		\\\hspace*{3,4 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) \land 
+		\\\hspace*{3,4 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y \limp  (x\mapsto y\in richer \leqv  y\mapsto x \notin  richer)) }
+		\nItemX{ killer\_type }{ killer \in  persons }
+		\nItemX{ killer\_hates }{ killer \mapsto  Agatha \in  hates }
+		\nItemX{ killer\_not\_richer }{ killer \mapsto  Agatha \notin  richer }
+		\nItemX{ charles\_hates }{ hates[\{ Agatha\} ] \binter  hates[\{ Charles\} ] = \emptyset  }
+		\nItemX{ agatha\_hates }{ hates[\{ Agatha\} ] = persons \setminus  \{ butler\}  }
+		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer \limp  butler\mapsto x \in  hates) }
+		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
+		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
+		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }
+		\nItemX{ solution }{ killer = Agatha }
+	\end{description}
+\END
+\end{description}
+
+
 

@@ -106,7 +106,16 @@ The second constant \texttt{richer} is also a relation between \texttt{persons}.
 
 \subsubsection{Modelling the ``Crime''}
 
-Since the objective of the puzzle is to find the killer, we have to create a new constant \texttt{killer} which is an element of \texttt{persons} ($killer \in  persons$).
+Since the objective of the puzzle is to find the killer, we have to create a new constant \texttt{killer} which is an element of \texttt{persons}:
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ killer\_type }{ killer \in  persons }
+	\end{description}
+\end{description}
+}
 
 In addition, the puzzle have some more relationships between the different persons which are all modelled as axioms. For instance, if we want to model the relationship:  
 

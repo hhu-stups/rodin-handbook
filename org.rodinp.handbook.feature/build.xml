@@ -84,11 +84,8 @@
 		<tstamp/>
 		<!-- plastex cannot deal with subversion files.  Thus, we create a copy -->
 		<copy todir="${basedir}/build/latex">
-			<fileset dir="${basedir}/latex" excludes=".svn,*.sty"/>
+			<fileset dir="${basedir}/latex" excludes=".svn"/>
 		</copy>
-		<!-- We tweak the Event-B Style Files for plastex -->
-		<copy file="${basedir}/latex/plastex-b2latex.sty" tofile="${basedir}/build/latex/b2latex.sty"/>
-        <copy file="${basedir}/latex/plastex-bsymb.sty" tofile="${basedir}/build/latex/bsymb.sty"/>
 
 		<copy todir="${basedir}/build/XHTML">
             <fileset dir="${basedir}/XHTML" excludes=".svn"/>

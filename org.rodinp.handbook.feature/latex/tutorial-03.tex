@@ -20,13 +20,22 @@ In this Section, we will implement a simplified controller with the following di
 \subsection{Project Setup}
 
 Models typically consist of multiple files that are managed in a Project (\ref{project}).  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03}.
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/tutorial/tutorial-3.png}
+\end{center}
 
 \warning{Eclipse supports different types of Projects.  The Project must have the Rodin Nature (\ref{rodin_nature}) to work.  A project can have more than one nature.}
 
 Next, create a new Event-B Component (\ref{eventb_component}).  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component}, or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish}.  This will create a Machine (\ref{machine}) file.
 
-The newly created Component will open in the structural editor (\ref{structural_editor}).  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the little triangle to the left of a section to expand it.
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/tutorial/mac.png}
+\end{center}
 
+The newly created Component will open in the structural editor (\ref{structural_editor}).  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the little triangle to the left of a section to expand it.
+\begin{center}
+	\includegraphics[]{img/tutorial/interface.png}
+\end{center}
 The editor is \textit{form-based}.  This means that in well-defined places an appropriate control (text field, dropdown, etc.) allows modifications.
 
 \info{Alternative editors are available as plug-ins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of real estate and can be slow on big models.  The text- based Camille Editor (\ref{camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
@@ -45,16 +54,33 @@ You will see two fields, the left one prepopulated with \texttt{var1}.  Change t
 Create the second variable (\texttt{peds\_go}) correspondingly.  Your editor should now look as follows:
 
 TODO: Screenshot
+\begin{center}
+	\includegraphics[]{img/tutorial/new-variable.png}
+\end{center}
 
 Upon saving, the variables will be highlighted in red, indicating a problem.  The \textsf{Rodin Problems} View (\ref{rodin_problems_view}) shows corresponding error messages, in this case ``Variable cars\_go does not have a type''.
+\begin{center}
+	\includegraphics[]{img/tutorial/error.png}
+\end{center}
+
 
 Types are provided by invariants.  Corresponding the the steps above, expand the \textsf{INVARIANTS} section and add two elements.  Invariants have labels (\ref{label}).  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, representing logical true.  Change this to $cars\_go \in  BOOL$.  Event-B provides the build-in datatype \texttt{BOOL}, amongst others (\ref{datatypes}).
+
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/tutorial/invariants.png}
+\end{center}
 
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation that is substituted automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay.  The symbol view shows all supported mathematical symbols.  The symbol view discloses the ASCII representation by hovering over the symbol in question.}
 
 After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow.  Again, the \textsf{Rodin Problems} View gives us the reason: ``Variable cars\_go is not initialized''.  Every variable must be initialized in a way that is consistent with the model.
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/tutorial/yellow.png}
+\end{center}
 
 To fix this problem, expand the \textsf{EVENTS} and in turn the INITIALIZATION event (\ref{initialization}).  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, provide $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/tutorial/events.png}
+\end{center}
 
 \subsubsection{State Transitions with Events}
 

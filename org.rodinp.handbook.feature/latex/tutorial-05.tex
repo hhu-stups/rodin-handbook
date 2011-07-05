@@ -148,9 +148,58 @@ Since the objective of the puzzle is to find the killer, we have to create a new
 \end{description}
 }
 
-In addition, the puzzle have some more relationships between the different persons which are all modelled as axioms. For instance, if we want to model the relationship:  
+In addition, the puzzle have some more relationships between the different persons which are all modelled as axioms. We know that the killer hates his victim and is no richer than his victim:
 
-\subsection{The Final Agatha Puzzle Model}
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ killer\_hates }{ killer \mapsto  Agatha \in  hates }
+		\nItemX{ killer\_not\_richer }{ killer \mapsto  Agatha \notin  richer }
+	\end{description}
+\end{description}
+}
+
+Charles hates no one that Agatha hates and Agatha hates everybody except the butler:
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ charles\_hates }{ hates[\{ Agatha\} ] \binter  hates[\{ Charles\} ] = \emptyset  }
+		\nItemX{ agatha\_hates }{ hates[\{ Agatha\} ] = persons \setminus  \{ butler\}  }
+	\end{description}
+\end{description}
+}
+
+The butler hates everyone not richer than aunt Agatha and the butler hates everyone whom Agatha hates. However, no one hates everyone:
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer \limp  butler\mapsto x \in  hates) }
+		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
+		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
+		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }
+	\end{description}
+\end{description}
+}
+
+Finally, we have to model the solution:
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ solution }{ killer = Agatha }
+	\end{description}
+\end{description}
+}
+
+This concludes the tutorial. The following section \ref{tut_05_final_model} shows the complete Context.
+
+\subsection{The Final Agatha Puzzle Model} \label{tut_05_final_model}
 
 \begin{description}
 \CONTEXT{agatha}

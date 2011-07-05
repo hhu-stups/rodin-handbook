@@ -56,7 +56,7 @@ These constants or persons respectively are part of a set:
 \end{description}
 }
 
-Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). Types are provided by axioms. As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
+Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). The semantics of the sets (\ref{sets}) and constants (\ref{constants}) are specified in the axioms (\ref{axioms}). As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
 
 \pencil{
 \begin{description}
@@ -70,11 +70,11 @@ Now, the constants itself are not very useful since they have no type (In additi
 \warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
+\info{It exist an easy way to generate the contants, the set and the axiom automatically. Therefore, click on the \textsf{New Enumarated Set Wizard} tool bar item and enter the set name and constant names in the corresponding wizard. The wizard will create the corresponding items (constants, set and axiom) automatically.}
+
 \subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
 
-We create to more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. 
-
-\info{Note that the relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.}
+We create to more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. The relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.
 
 The first constant \texttt{hates} is an arbitrary relation (\ref{relation}) between \texttt{persons}: 
 
@@ -196,6 +196,8 @@ Finally, we have to model the solution:
 	\end{description}
 \end{description}
 }
+
+TODO: explain Theorems and mention Well-Definedness! 
 
 This concludes the tutorial. The following section \ref{tut_05_final_model} shows the complete Context.
 

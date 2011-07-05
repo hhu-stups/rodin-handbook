@@ -67,8 +67,6 @@ Now, the constants itself are not very useful since they have no type (In additi
 \end{description}
 }
 
-Corresponding the steps above, expand the \textsf{AXIOMS} section and add one element.
-
 \warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
@@ -76,9 +74,9 @@ Corresponding the steps above, expand the \textsf{AXIOMS} section and add one el
 
 We create to more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. 
 
-\info{Note that these relations are abstract which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.}
+\info{Note that the relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.}
 
-The first constant \texttt{hates} is an arbitrary relation between \texttt{persons}: 
+The first constant \texttt{hates} is an arbitrary relation (\ref{relation}) between \texttt{persons}: 
 
 \pencil{
 \begin{description}
@@ -89,17 +87,46 @@ The first constant \texttt{hates} is an arbitrary relation between \texttt{perso
 \end{description}
 }
 
-The second constant \texttt{richer} is also a relation between \texttt{persons}. However, we know that the relation is irreflexive (no person is richer than itself), transitive and trichotomous (one person is always richer than the other or vice versa, never both directions):
+The second constant \texttt{richer} is also a relation between \texttt{persons}:
 
 \pencil{
 \begin{description}
 \AXIOMS
 	\begin{description}
-		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
-		\\\hspace*{2,5 cm}  richer \binter  id = \emptyset  \land 
-		\\\hspace*{2,5 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) \land 
-		\\\hspace*{2,5 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y \limp  (x\mapsto y\in richer \leqv  y\mapsto 
-		\\\hspace*{2,5 cm} x \notin  richer)) }
+		\nItemX{ richer\_relation1 }{ richer \in  persons \rel  persons }
+	\end{description}
+\end{description}
+}
+
+However, we know that the relation is irreflexive (no person is richer than itself):
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ richer\_relation2 }{ richer \binter  id = \emptyset }
+	\end{description}
+\end{description}
+}
+
+In addition, we know that the relation is transitive:
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ richer\_relation3 }{ (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) }
+	\end{description}
+\end{description}
+}
+
+Finally, the relation is trichotomous (one person is always richer than the other or vice versa, never both directions):
+
+\pencil{
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ richer\_relation4 }{ (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y \limp  (x\mapsto y\in richer \leqv  y\mapsto  x \notin  richer)) }
 	\end{description}
 \end{description}
 }
@@ -110,6 +137,10 @@ Since the objective of the puzzle is to find the killer, we have to create a new
 
 \pencil{
 \begin{description}
+\CONSTANTS
+	\begin{description}
+		\Item{ killer }
+	\end{description}
 \AXIOMS
 	\begin{description}
 		\nItemX{ killer\_type }{ killer \in  persons }

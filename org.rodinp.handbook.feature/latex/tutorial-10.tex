@@ -4,21 +4,34 @@
 \tick{\textbf{Goals:} The objective of this section is to create a model of the Location Access Controler, and besides detail more complex proofs in order to approach the notion of deadlock freeness.}
 
 \info {First of all you need to download the following file named doors.zip}
+\subsection{Initial Model}
+Through this model, we shall study a complete system and remind the proof rules of formal development.
+What should be established at the very outset is that the system concerns people and locations. Actually, we will construct a model in order to control the access of certain people to different locations of a site.
+The system is thus based on the authorization that a person has or not to penetrate several locations.
+Besides we introduce:
+\begin{itemize}
+	\item The two carrier sets of persons, P, and locations, L
+	\item The constant authorization, \textbf{aut}, representing a relation between P and L, actually where people are allowed to go (Axiom 1).
+	\item The variable, \textbf{sit}, which denote where a person is, \textbf{sit} is a function from P to L.
+\end{itemize}  
+Moreover, we introduce a special constant “location”, named \textbf{outside}. Everyone is authorized to be in outside (Axiom 3) and a person cannot be in two locations at a time. However every person, which is in a certain location, is authorized to be there.
+
+Initially, everyone is outside as indicated in event \textsf{INITIALISATION}.
+The other event \textsf{PASS} of that model has to aim to change the location of a person.
+
 \subsection{Project Setup}
 Import the archive file doors.zip, for this select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into workspace}, and find your file by using the button browse.
 
 The tool takes a few seconds to extract and load all the files. Once it is done, you can look at the initial model through doors\_ctx1 and doors\_0.
-We can notice that there are two carrier sets in the program, actually we have one for the persons (represented by P) and one for locations (represented by L).
+We can notice that there are our two carrier sets in the program (represented by P and L).
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_carrier-sets.png}
 \end{center}
-Moreover the relation \textbf{aut} represents where people are allowed to go (for example, \textbf{outside} is a location, and everyone is allowed to go \textbf{outside}).
 
-The only \textsf{EVENT} of that model has to aim to change the location of a person.
 So, proof of deadlock freeness means proving, that someone can always change room.
 
 Nevertheless you need to add a new derived invariant to doors\_0. We call this invariant \texttt{DLF}.
-In the same time, add the associated predicate which is the disfunction of all guards: there is only one guard here, so it would be,
+In the same time, add the associated predicate which is the dysfunction of all guards: there is only one guard here, so it would be,
 \[
 \exists p,l.(p \longmapsto l \in aut \land sit(p) \neq l )
 \]
@@ -42,17 +55,20 @@ At first glance, we can notice that the auto provers failed to prove the theorem
 \end{center}
 
 Besides we can established that there may be an inconsistency in our model.
-In order to succeed with the proof, we need a tuple \[ p \mapsto l \]that is in aut, but not in sit. Searching the hypotheses, we find AXM4 of doors\_ctx1, which states that there is a location l, where everyone is allowed to go. So, for every person p in P, \[p \mapsto l \] and \[p \mapsto outside\] is in aut. Since these are different, at least one of them cannot be in the function sit. Now, all we would need to prove is that P is nonempty. This holds, as carrier sets always are nonempty, but is a bit hard to derive.
+In order to succeed with the proof, we need a tuple \[ p \mapsto l \]that is in aut, but not in sit. Searching the hypotheses, we find the Axiom 4 of doors\_ctx1, which states that there is a location l, where everyone is allowed to go. So, for every person p in P, \[p \mapsto l \] and \[p \mapsto outside\] is in aut. Since these are different, at least one of them cannot be in the function sit. Now, all we would need to prove is that P is nonempty. 
 
 \warning{In the Proof Control view, first disable the post-tactics (there is a dedicated button in this view on the top right corner, up to the toolbar).}
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
 \end{center}
-
-So we have to add the following hypothesis in the window called \textsf{Proof Control} :
+We have seen that we want to prove  
+\[
+P \neq \emptyset
+\]So we have to replace that by adding the following hypothesis in the window called \textsf{Proof Control}:
 \[
 \exists x.x \in P 
 \]
+
 Then click on the \textbf{ah} (Add Hypothesis) button.
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_hypothesis.png}
@@ -109,47 +125,77 @@ Now click on p0, it would be proved.
 
 \subsection{First Refinement}
 
-Now we get to a bit harder proof: The deadlock freeness proof for the first refinement. There is not much that has changed. The constant com has been added in order to describe which rooms are connected. Additionally, we have a constant exit, which will be explained later. The post-tactics should still be disabled. 
+Now we get to a bit harder proof: the deadlock freeness proof for the first refinement. This refinement will consist to add the new constant \textbf{com} illustrating the notion of possible direct communication between two locations.
+
+Besides \textbf{com} is a binary relation built on the carrier set L. A location does not “communicate” with itself as stated in the Axiom 1 of the doors\_ctx2.
+
+Concerning the events, \textsf{INITIALISATION} does not change, whereas the event \textsf{PASS} is refined as a consequence. Indeed we estimate that a person can move to another location l if there is the authorization to be in l (already defined in the abstraction) and also location l communicates with the location where p is at this precise moment (represented by sit(p)).
+
+Consequently, the guard of this new event version is better than the precedent, since we have :
+
+\[
+( sit(p) \mapsto l \in com ) \Rightarrow ( sit(p)\neq l )
+\]
+
+In fact, we are obviously faced with a difficulty here; it is not possible to prove that the refined event \textsf{PASS} does not happen less often than its more abstract homologue. To demonstrate this, we would have to prove that the guard of the abstract event implies that of the concrete event
+
+The issue is that this condition cannot be verified in general. Moreover the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. Besides the geometry of communication between locations clearly intoduces an additional constraint limiting the way people can move.
+
+As a consequence our study has revealed a problem in our method that was obviously ignored in the document requirements.
+So we must find a sufficient solution.
+\[
+
+\]
 
 At the beginning of this section we need to come back to the \textsf{Event-B view}.
-Open doors\_1 machine
-
--add a derived invariant (theorem) called DLF stating 
+First of all open doors\_1 machine and add the derived invariant (theorem) called DLF stating 
 
 \[
 \exists q,m.(q \mapsto m \in aut \land sit(q) \mapsto m \in com )
 \]
+In other words, the location sit(p), is in communication with at least one other location l, in which p is authorized to go:
+the person p can therefore go out of the the location sit(p), via l.
 
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_invariants2.png}
 \end{center}
 
--save the file
+Then we save the file. After switching to the proving view (the post-tactics should still be disabled), we can notice that once again, the prover fails to prove deadlock freeness automatically. 
+All that we want is "any person authorized to be in a location must also be authorized to go in another location which communicates with the first one".
 
--Switch to the proving view.
-
--Once again, the prover fails to prove deadlock freeness automatically. 
-
--At the beginning of the proof, there are no selected hypothesis at all. So we need to select a few. The old deadlock freeness invariant will be useful, AXM7 of doors\_ctx2 too. To begin with, we try to avoid using exit, as we want to keep things as simple as possible. But since sit and aut are inside the invariant, we also are likely to need:
+\[
+\]
+At the beginning of the proof, there are no selected hypothesis at all. So we need to select a few. The old deadlock freeness invariant will be useful, and the Axiom 7 of doors\_ctx2 too. To begin with, we try to avoid using exit, as we want to keep things as simple as possible. But since \textbf{sit} and \textbf{aut} are inside the invariant, we also need to prove:
 
 \[
 sit \subseteq aut
 \]
-and
+%and
+%\[
+%sit \in P \mapsto L
+%\]
+
+Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if sit(p) = outside. Add this case as previously with a case distinction (dc) and solve it. For q, the choice p is obvious. For m, you will use the existential quantifier of Axiom 7 to instantiate m with l as l0. 
+Axiom 7 proves that we have no deadlock for people who are outside.
+
 \[
-sit \in P \mapsto L
 \]
+For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} is connecting locations to locations and defined at every location except \textbf{out}. 
+We can look at the axioms of doors\_ctx2. 
+\begin{center}
+	\includegraphics[]{img/tutorial/tut_10_axioms.png}
+\end{center}
 
-Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if sit(p) = outside. Add this case as previously with a case distinction (dc) and solve it. For q, the choice p is obvious. For m, you will use the existential quantifier of AXM7 to instantiate m with l as l0. 
-
-For the other case, we will need the notion of exit. The axioms about exit state that 
+It states that :
 
 \begin{itemize}
-	\item (AXM 3) Every room except the outside has exactly one exit. 
-	\item (AXM 4) An exit must be a room that communicates with the current one
-	\item (AXM 5) A chain of exits leads to the outside without any cycles or infinite paths
-	\item (AXM 6) Everyone allowed in a room is allowed to go through its exit. 
+	\item (Axiom 3) Every room except the outside has exactly one exit. 
+	\item (Axiom 4) An exit must be a room that communicates with the current one
+	\item (Axiom 5) A chain of exits leads to the outside without any cycles or infinite paths
+	\item (Axiom 6) Everyone allowed in a room is allowed to go through its exit. 
 \end{itemize}  
 
-In our proof, we still need to show that anyone who is not outside can walk through a door. For this, AXM 5 is useless, so we add all hypothesis containing exit except for AXM 5. Now we only need to instantiate q and m correctly and concluding the proof should not be too hard. Once again, for q, the choice p is obvious. But it is not quite as easy for m. Expressed in language, m must be the room behind the exit door of the room that p is currently in. Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choosing prune.
+In our proof, we still need to show that anyone who is not outside can walk through a door. For this, Axiom 5 is useless, so we add all hypothesis containing exit except for Axiom 5. Now we have to instantiate q and m correctly and to conclude that the proof should not be too hard. Once again, for q, the choice p is obvious. But it is not quite as easy for m. Expressed in language, m must be the room behind the exit door of the room that p is currently in. 
+
+\info{Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choosing prune in order to retry.}
 

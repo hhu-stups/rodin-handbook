@@ -46,9 +46,11 @@ We will reduce (or avoid) redundancy through heavy linking, following these guid
 \subsubsection{Sections}
 
 \begin{itemize}
+	\item We use uppercase for chapter, section, if it refers to a specific one, e.g. ``in Chapter~3''.
+	\item Even to subsections we refer to as Section, e.g. ``see Section~2.5''
 	\item We have a small number of well-defined chapters, the top level structuring element.
-	\item sections and subsections are numbered.  In the HTML-Versions, they are broken into subpages.
-    \item subsubsections do not receive numbers and are not broken into subpages in the HTML.  Keep this in mind regarding both the reading flow and page sizes.
+	\item Sections and subsections are numbered.  In the HTML-Versions, they are broken into subpages.
+    \item Subsubsections do not receive numbers and are not broken into subpages in the HTML.  Keep this in mind regarding both the reading flow and page sizes.
 	\item Avoid linking (ref) to subsubsections, as they don't have a number.  Latex will instead provide a link to the next higher element.  It works, but could create confusion.
 	\item Generally, we should avoid gaps in the hierarchy (i.e. having a subsubsection in a section without a subsection in between).\footnote{Coincidentally, this style guide violates this rule. Reason: We want the style guide not broken into subpages, but the proper hierarchy is a section.}
 	\item Section labels should be all in lower case. Use ``\_'' for blanks.
@@ -59,7 +61,7 @@ We will reduce (or avoid) redundancy through heavy linking, following these guid
 
 \begin{itemize}
 	\item Try to avoid fancy \LaTeX formatting, as PlasTeX (used for generating HTML) is temperamental.  Especially macros don't always work, and sometimes the result is just ugly.
-	\item We have the option to use different files for PDF and HTML generation, but we would generally prefer not to do this.  Look at \texttt{bsymb.sty} and \texttt{plastex-bsymb.sty} as an example.
+	\item We have the option to use different files for PDF and HTML generation, but we would generally prefer not to do this.  Look at \texttt{bsymb.sty} and \texttt{plastex-bsymb.sty} as an example. \textbf{NOTE:} We don't do this any more for any style files.
 	\item Every section should have a label, reflecting the section name, all lowercase, spaces replaced with underscores (\_).
 	\item Don't create subdirectories in the \texttt{latex} folder, as the scripts cannot always deal with them.
 	\item Put images in the \texttt{img} folder.  Feel free to create additional directory structures underneath.

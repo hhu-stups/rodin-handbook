@@ -2,36 +2,50 @@
 \section{Outline}
 
 \begin{enumerate}
-\item Rodin's User Interface to Edit Models
+\item The Rodin Platform
   \begin{enumerate}
   \item Eclipse in general (just references to other resources)
+  \item Performing upgrades
+  \item Plugins: How to find them, install them, etc. Without plugin-specific internals.
   \item The Event-B perspective
-  \item The Event-B Explorer
-  \item The structure editor (with labels, etc.), together with the outline view
-  \item Alternative methods of editing models, e.g. Camille
+    \begin{enumerate}
+    \item The Event-B explorer
+    \item The structure editor (with labels, etc.), together with the outline view
+    \item Symbol view
+    \end{enumerate}
+  \item Proving
+    \begin{enumerate}
+    \item The prover view and proving perspective
+    \item Prover preferences
+    \item Atelier-B provers
+    \end{enumerate}
   \end{enumerate}
 \item Event-B (modeling notation)
   \begin{enumerate}
   \item Contexts
     \begin{enumerate}
-    \item Sets
-    \item Constants and Axioms (with Theorems)
-    \item Extending a Context
+    \item Sets: Introducing sets, with a comment about how to add enumerated sets
+    \item Constants and axioms (with theorems), which POs are generated
+    \item Extending a context
     \end{enumerate}
   \item Models
     \begin{enumerate}
-    \item Variables and Invariants (with Theorems)
+    \item Variables and invariants (with theorems), generated POs 
     \item Seeing a context
-    \item Refining a model
+    \item Refining a model: Refines clause, gluing invariant, general picture of refinement with
+      pointers to the events below, re-use of variables
     \item Variant (very brief, more details in the events section)
     \item Events
       \begin{enumerate}
       \item Parameter and Guards (with Theorems)
+      \item Refinement: Guard strenghtening, re-use of parameters
       \item Actions
+      \item Generated POs
       \item Initialization as a special event
       \item Witnesses (We describe when an user has to specify a witness and
         what is its purpose.)
       \item Status: normal, convergent or anticipated, how it relates to the variant
+      \item Merging events
       \end{enumerate}
     \end{enumerate}
   \end{enumerate}
@@ -45,8 +59,31 @@
   \end{enumerate}
 \item Methodology
   \begin{enumerate}
+  \item Naming Convention
   \item Data refinement
-  \item Superstition refinement (?)
+  \item Not the data refinement :-) (super-\ldots refinement)
+  \item Horizontal and vertical refinement (?)
+  \end{enumerate}
+\item Missing items
+  \begin{enumerate}
+  \item Abstract machine notation: What is meant here? AMN is denotes the syntax of classical B, right?
+  \item Deadlock
+  \item Event-B: It's everywhere
+  \item Event-B component
+  \item IDE
+  \item Label
+  \item Menu Bar
+  \item Model Checker: $\to$ plugin
+  \item Proof obligations: explained where the PO's origin is
+  \item Rodin-Wiki
+  \item Predicate Logic
+  \item ProB: $\to$ plugin
+  \item Proof Obligation Labels
+  \item Propositional Calculus
+  \item Rodin 
+  \item Rodin Nature
+  \item Temporal Logic $\to$ plugin
+  \item Undischarged Proof Obligations
   \end{enumerate}
 
 \end{enumerate}

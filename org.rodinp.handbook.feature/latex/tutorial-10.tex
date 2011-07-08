@@ -112,7 +112,7 @@ This can be done with p0, as sit is a total function. In the first case x is sit
 \[
 P \times outside \subseteq aut
 \]
-Now click on the lasso item in the tool bar, in order to see all of the hypothesis. Find the right hypothesis and put \textbf{outside} in the case.
+Now click on the lasso item in the tool bar, in order to see all of the hypotheses. Find the right hypothesis and put \textbf{outside} in the case.
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_outside.png}
 \end{center}
@@ -141,15 +141,15 @@ Consequently, the guard of this new event version is better than the precedent, 
 ( sit(p) \mapsto l \in com ) \Rightarrow ( sit(p)\neq l )
 \]
 
-In fact, we are obviously faced with a difficulty here; it is not possible to prove that the refined event \textsf{PASS} does not happen less often than its more abstract homologue. To demonstrate this, we would have to prove that the guard of the abstract event implies that of the concrete event
+In fact, we are obviously faced with a difficulty here; it is not possible to prove that the refined event \textsf{PASS} does not happen less often than its more abstract homologue. To demonstrate this, we would have to prove that the guard of the abstract event implies that of the concrete event.
 
-The issue is that this condition cannot be verified in general. Moreover the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. Besides the geometry of communication between locations clearly intoduces an additional constraint limiting the way people can move.
+The issue is that this condition cannot be verified in general. Moreover the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. Besides the geometry of communication between locations clearly introduces an additional constraint limiting the way people can move.
 
 As a consequence our study has revealed a problem in our method that was obviously ignored in the document requirements.
 So we must find a sufficient solution.
 
 At the beginning of this section we need to come back to the \textsf{Event-B view}.
-First of all open doors\_1 machine and add the derived invariant (theorem) called DLF stating 
+First of all open doors\_1 machine and add the derived invariant (theorem) called \textbf{DLF} stating :
 
 \[
 \exists q,m.(q \mapsto m \in aut \land sit(q) \mapsto m \in com )
@@ -169,7 +169,7 @@ This can be illustrated as follow:
 	\includegraphics[]{img/tutorial/tut_10_graph.png}
 \end{center}
 
-At the beginning of the proof, there are no selected hypothesis at all. So we need to select several hypothesis. We shall see that the old deadlock freeness invariant will be useful, and the Axiom 7 of doors\_ctx2 too. But since \textbf{sit} and \textbf{aut} are inside the invariant, to begin with we also need to prove:
+At the beginning of the proof, there are no selected hypotheses at all. So we need to select several hypotheses. We shall see that the old deadlock freeness invariant will be useful, and the Axiom 7 of doors\_ctx2 too. But since \textbf{sit} and \textbf{aut} are inside the invariant, to begin with we also need to prove:
 \[
 sit \subseteq aut
 \]
@@ -177,7 +177,7 @@ sit \subseteq aut
 %\[
 %sit \in P \mapsto L
 %\]
-Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if sit(p) = outside. Add this case as previously with a case distinction (dc) and solve it. For q, the choice p is obvious. For m, you will use the existential quantifier of Axiom 7 to instantiate m with l as l0. 
+Once again, the existential quantifiers are rewritten by the auto-provers in the hypotheses. Now we will consider precisely the proof. There is an easy case if sit(p) = outside. Type this into the proof control and add this case as previously with a case distinction (dc) in order to solve it. For q, we have to select the choice p. However for m, you will use the existential quantifier of Axiom 7 to instantiate m with l as l0. 
 Axiom 7 proves that we have no deadlock for people who are outside.
 
 For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} is connecting locations to locations and defined at every location except \textbf{outside}. 
@@ -195,7 +195,7 @@ It states that :
 	\item (Axiom 6) Everyone allowed in a room is allowed to go through its exit. 
 \end{itemize}  
 
-In our proof, we still need to show that anyone who is not outside can walk through a door. For this, Axiom 5 is useless, so we add all hypothesis containing exit except for Axiom 5. Now we have to instantiate q and m correctly and to conclude that the proof should not be too hard. Once again, for q, the choice p is obvious. But it is not quite as easy for m. Expressed in language, m must be the room behind the exit door of the room that p is currently in. 
+In our proof, we still need to show that anyone who is not outside can walk through a door. For this, Axiom 5 is useless, so we add all hypotheses containing exit except for Axiom 5. Now we have to instantiate q and m correctly and to conclude that the proof should not be too hard. Once again, for q, the choice p is obvious. But it is not quite as easy for m. Expressed in language, m must be the room behind the exit door of the room that p is currently in. 
 
 \info{Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choosing prune in order to retry.}
 \begin{center}

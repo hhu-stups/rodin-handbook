@@ -17,6 +17,19 @@
 \end{quote}
 }
 
+% defining a if(plastex) environment
+\newif\ifplastex
+\plastexfalse
+
+% different method to write an ASCII backslash for plastex and normal pdflatex
+\ifplastex
+  \newcommand{\mybackslash}{\textbackslash}
+\else
+  % we do not use textbackslash for latex, because it does not use the current font setting
+  \newcommand{\mybackslash}{\symbol{`\\}}
+\fi
+
+
 \def\tick#1{\doculist{#1}{img/tick_64.png}}
 \def\info#1{\doculist{#1}{img/info_64.png}}
 \def\warning#1{\doculist{#1}{img/warning_64.png}}

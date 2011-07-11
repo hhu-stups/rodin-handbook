@@ -1,0 +1,43 @@
+% defining a if(plastex) environment
+\newif\ifplastex
+\plastexfalse
+
+\def\doculist#1#2{
+\begin{quote}
+\hspace{-10mm}
+\textrm{\includegraphics[width=7mm]{#2}} % Hack!  We "mark" the image with textrm so that we can use a different CSS-Style in plastex.
+\vspace{-8mm}
+
+#1
+\end{quote}
+}
+
+\def\tick#1{\doculist{#1}{img/tick_64.png}}
+\def\info#1{\doculist{#1}{img/info_64.png}}
+\def\warning#1{\doculist{#1}{img/warning_64.png}}
+\def\pencil#1{\doculist{#1}{img/pencil_64.png}}
+
+% different method to write an ASCII backslash for plastex and normal pdflatex
+\ifplastex
+  \newcommand{\mybackslash}{\textbackslash}
+\else
+  % we do not use textbackslash for latex, because it does not use the current font setting
+  \newcommand{\mybackslash}{\symbol{`\\}}
+\fi
+
+% Path to resources like zip's with machines
+% We use a relative path in the html + eclipe version (in order to work offline)
+% and an absolute path in the pdf version
+\ifplastex
+	\newcommand{\filepath}{files/}
+\else
+	\newcommand{\filepath}{\handbookpath/\versionpath/files/}
+\fi
+
+% Use this definition to create a link to the file. The definition takes to arguments. 
+% The first argument (1) defines the file name i.e. Celebrity.zip or in case if you saved 
+% the file in a subdirectory subdirecotry/Celebrity.zip. The second argument (2) defines 
+% the name which should be displayed in the document, i.e. Celebrity Problem Example Download
+\def\file#1#2{
+\href{\filepath#1}{#2}
+}

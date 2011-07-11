@@ -7,47 +7,8 @@
 \usepackage{fancyhdr,lastpage,color}
 \usepackage{verbatim}
 
-\def\doculist#1#2{
-\begin{quote}
-\hspace{-10mm}
-\textrm{\includegraphics[width=7mm]{#2}} % Hack!  We "mark" the image with textrm so that we can use a different CSS-Style in plastex.
-\vspace{-8mm}
-
-#1
-\end{quote}
-}
-
-% defining a if(plastex) environment
-\newif\ifplastex
-\plastexfalse
-
 \input{config}
-
-% different method to write an ASCII backslash for plastex and normal pdflatex
-\ifplastex
-  \newcommand{\mybackslash}{\textbackslash}
-\else
-  % we do not use textbackslash for latex, because it does not use the current font setting
-  \newcommand{\mybackslash}{\symbol{`\\}}
-\fi
-
-% Path to resources like zip's with machines
-% We use a relative path in the html + eclipe version (in order to work offline)
-% and an absolute path in the pdf version
-\ifplastex
-	\newcommand{\filepath}{files/}
-\else
-	\newcommand{\filepath}{\handbookpath/\versionpath/files/}
-\fi
-
-\def\file#1#2{
-\href{\filepath#1}{#2}
-}
-
-\def\tick#1{\doculist{#1}{img/tick_64.png}}
-\def\info#1{\doculist{#1}{img/info_64.png}}
-\def\warning#1{\doculist{#1}{img/warning_64.png}}
-\def\pencil#1{\doculist{#1}{img/pencil_64.png}}
+\input{makros}
 
 \title{User Manual for Rodin v.\versionnr\\
 Handbook version $ $Rev$ $}

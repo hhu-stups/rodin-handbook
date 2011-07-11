@@ -1,7 +1,7 @@
 \section{Introducing Contexts}
 \label{tutorial_05}
 
-\tick{\textbf{Goals:} In this section we introduce Contexts to apply the theoretical concepts that were introduced in the previois section (\ref{}). We will create a very simple model consisting of just one Context file.
+\tick{\textbf{Goals:} In this section we introduce Contexts to apply the theoretical concepts that were introduced in the previous section (\ref{tutorial_04}). We will create a very simple model consisting of just one Context file.
 }
 
 In this tutorial, we will create a model of the well known Agatha puzzle. Here is a brief description of the puzzle:
@@ -56,7 +56,7 @@ These constants or persons respectively are part of a set:
 \end{description}
 }
 
-Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). The semantics of the sets (\ref{sets}) and constants (\ref{constants}) are specified in the axioms (\ref{axioms}). As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
+Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). The semantics of the sets (\ref{set}) and constants (\ref{constant}) are specified in the axioms (\ref{axiom}). As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
 
 \pencil{
 \begin{description}
@@ -70,7 +70,7 @@ Now, the constants itself are not very useful since they have no type (In additi
 \warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
-\info{It exists an wizard (\ref{wizard}) which creates the contants, the set and the axiom automatically. Therefore, click on the \textsf{New Enumarated Set Wizard} tool bar item. This will bring up the wizard (\ref{wizard}) where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
+\info{There is a wizard (\ref{wizard}) for creating the contants, the set and the axiom automatically. Therefore, click on the \textsf{New Enumarated Set Wizard} tool bar item. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
 
 \subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
 
@@ -207,7 +207,7 @@ Theorems (\ref{theorem}) describe properties that are expected to be able to be 
 
 TODO: explain Theorems and mention Well-Definedness! 
 
-This concludes the tutorial. The following section \ref{tut_05_final_context} shows the complete Context (\ref{context}).
+This concludes the tutorial. The following Section shows the complete Context.
 
 \subsection{The Final Context} \label{tut_05_final_context}
 
@@ -243,7 +243,7 @@ This concludes the tutorial. The following section \ref{tut_05_final_context} sh
 		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
 		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
 		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }
-		\nItemX{ solution }{ killer = Agatha }
+		\nItemX{ solution }  { \fbox{theorem} ~ killer = Agatha }
 	\end{description}
 \END
 \end{description}

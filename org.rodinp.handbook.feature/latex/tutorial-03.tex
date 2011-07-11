@@ -5,11 +5,13 @@
 
 \tick{\textbf{Goals:} The objective of this section is to get acquainted with the modeling environment. We will create a very simple model consisting of just one file to develop a feeling for Rodin and Event-B.}
 
-In this tutorial, we will create a model of a traffic light controller.  We will use this example in repeatedly in subsequent Sections.  The following image depicts what we are trying to achieve:
+In this tutorial, we will create a model of a traffic light controller.  We will use this example in repeatedly in subsequent Sections.  Figure \ref{fig_tut_03_traffic_light} depicts what we are trying to achieve.
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[width=0.7\textwidth]{img/tutorial/trafficlight.png}
+	\includegraphics[]{img/tutorial/tut_03_trafficlight.png}
+	\caption{The traffic light controller}
+	\label{fig_tut_03_traffic_light}
 \end{center}
 \end{figure}
 
@@ -21,31 +23,35 @@ In this Section, we will implement a simplified controller with the following di
 
 \subsection{Project Setup}
 
-Models typically consist of multiple files that are managed in a Project (\ref{project}).  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{Tutorial-03}.
+Models typically consist of multiple files that are managed in a Project (\ref{project}).  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03} as shown in figure \ref{fig_tut_03_new_project_wizard}.
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_3_tutorial-3.png}
+	\includegraphics[]{img/tutorial/tut_03_tutorial-3.png}
+	\caption{New Event-B Project Wizard}
+	\label{fig_tut_03_new_project_wizard}
 \end{center}
 \end{figure}
 
 \warning{Eclipse supports different types of Projects.  The Project must have the Rodin Nature (\ref{rodin_nature}) to work.  A project can have more than one nature.}
 
-Next, create a new Event-B Component (\ref{eventb_component}).  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component}, or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish}.  This will create a Machine (\ref{machine}) file.
+Next, create a new Event-B Component (\ref{eventb_component}).  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component}, or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish} as shown in figure \ref{fig_tut_03_new_component_wizard}. This will create a Machine (\ref{machine}) file.
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_3_mac.png}
+	\includegraphics[]{img/tutorial/tut_03_mac.png}
+	\caption{New Event-B Component Wizard}
+	\label{fig_tut_03_new_component_wizard}
 \end{center}
 \end{figure}
 
 The newly created Component will open in the structural editor (\ref{structural_editor}).  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the little triangle to the left of a section to expand it.
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_3_interface.png}
-\end{center}
-\end{figure}
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_03_interface.png}
+%\end{center}
+%\end{figure}
 
 The editor is \textit{form-based}.  This means that in well-defined places an appropriate control (text field, dropdown, etc.) allows modifications.
 
@@ -62,47 +68,51 @@ You will see two fields, the left one prepopulated with \texttt{var1}.  Change t
 
 \info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as you would expect in programming languages.  You can use the comment field to ``park'' predicates and other strings temporarily.}
 
-Create the second variable (\texttt{peds\_go}) correspondingly.  Your editor should now look as follows:
+Create the second variable (\texttt{peds\_go}) correspondingly.
+
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_03_new-variable.png}
+%\end{center}
+%\end{figure}
+
+Upon saving, the variables will be highlighted in red, indicating an error as shown in figure \ref{fig_tut_03_error}.  The \textsf{Rodin Problems} View (\ref{rodin_problems_view}) shows corresponding error messages, in this case ``Variable cars\_go does not have a type''.
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_3_new-variable.png}
+	\includegraphics[]{img/tutorial/tut_03_error.png}
+	\caption{Red hightlighted elements indicate errors}
+	\label{fig_tut_03_error}
 \end{center}
 \end{figure}
 
-Upon saving, the variables will be highlighted in red, indicating a problem.  The \textsf{Rodin Problems} View (\ref{rodin_problems_view}) shows corresponding error messages, in this case ``Variable cars\_go does not have a type''.
+Types are provided by invariants.  Corresponding the steps above, expand the \textsf{INVARIANTS} section and add two elements.  Invariants have labels (\ref{label}).  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, representing logical true.  Change the first invariant to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.  Event-B provides the build-in datatype \texttt{BOOL}, amongst others (\ref{datatypes}).
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_3_error.png}
-\end{center}
-\end{figure}
-
-Types are provided by invariants.  Corresponding the steps above, expand the \textsf{INVARIANTS} section and add two elements.  Invariants have labels (\ref{label}).  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, representing logical true.  Change this to $cars\_go \in  BOOL$.  Event-B provides the build-in datatype \texttt{BOOL}, amongst others (\ref{datatypes}).
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_3_invariants.png}
-\end{center}
-\end{figure}
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_03_invariants.png}
+%\end{center}
+%\end{figure}
 
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation that is substituted automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay.  The symbol view shows all supported mathematical symbols.  The symbol view discloses the ASCII representation by hovering over the symbol in question.}
 
-After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow.  Again, the \textsf{Rodin Problems} View gives us the reason: ``Variable cars\_go is not initialized''.  Every variable must be initialized in a way that is consistent with the model.
+After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in figure \ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} View gives us the reason: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_3_yellow.png}
+	\includegraphics[]{img/tutorial/tut_03_yellow.png}
+	\caption{Yellow hightlighted elements indicate warnings}
+	\label{fig_tut_03_warning}
 \end{center}
 \end{figure}
 
 To fix this problem, expand the \textsf{EVENTS} and in turn the INITIALIZATION event (\ref{initialization}).  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, provide $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_3_events.png}
-\end{center}
-\end{figure}
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_03_events.png}
+%\end{center}
+%\end{figure}
 
 \subsubsection{State Transitions with Events}
 

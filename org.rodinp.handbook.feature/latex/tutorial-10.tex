@@ -3,7 +3,7 @@
 
 \tick{\textbf{Goals:} The objective of this section is to create a model of the Location Access Controller, and besides detail more complex proofs in order to approach the notion of deadlock freeness.}
 
-\info {First of all you need to download the following file named doors.zip}
+\info {First of all you need to download the following \ file\{doors.zip\}\{Location Access Controller problem\}}
 \subsection{Initial Model}
 Through this model, we shall study a complete system and remind the proof rules of formal development.
 What should be established at the very outset is that the system concerns people and locations. Actually, we will construct a model in order to control the access of certain people to different locations of a site.
@@ -49,7 +49,7 @@ Switch to the \textbf{Proving Perspective}
 
 \textsf{ Window $\rangle$ Open perspective $\rangle$ Proving }
 
-At first glance, we can notice that the auto provers failed to prove the theorem (\textsf{INITIALISATION/DLF/INV})
+At first glance, we can notice that the auto provers failed to prove the theorem (\textsf{DLF/THM})
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_proversfailed.png}
 \end{center}
@@ -169,14 +169,22 @@ This can be illustrated as follow:
 	\includegraphics[]{img/tutorial/tut_10_graph.png}
 \end{center}
 
-At the beginning of the proof, there are no selected hypotheses at all. So we need to select several hypotheses. We shall see that the old deadlock freeness invariant will be useful, and the Axiom 7 of doors\_ctx2 too. But since \textbf{sit} and \textbf{aut} are inside the invariant, to begin with we also need to prove:
+At the beginning of the proof, there are no selected hypotheses at all. So we need to select several hypotheses. In order to complete the proof we need the old deadlock freeness invariant, and the Axiom 7 of doors\_ctx2, which will be useful too.
+
+
+\[
+\texttt{Axiom 7 \space \space \space \space}\exists l.l \in L \backslash \{outside\} \wedge outside \mapsto l \in com \wedge P \times \{l\} \subseteq aut
+\]
+
+
+But since \textbf{sit} and \textbf{aut} are inside the invariant, to begin with we also need to prove:
 \[
 sit \subseteq aut
 \]
-%and
-%\[
-%sit \in P \mapsto L
-%\]
+
+\[
+sit \in P \mapsto L
+\]
 Once again, the existential quantifiers are rewritten by the auto-provers in the hypotheses. Now we will consider precisely the proof. There is an easy case if sit(p) = outside. Type this into the proof control and add this case as previously with a case distinction (dc) in order to solve it. For q, we have to select the choice p. However for m, you will use the existential quantifier of Axiom 7 to instantiate m with l as l0. 
 Axiom 7 proves that we have no deadlock for people who are outside.
 

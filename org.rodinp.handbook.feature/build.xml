@@ -4,6 +4,7 @@
 		<antcall target="generate-html" />
 		<antcall target="generate-pdf" />
 		<antcall target="generate-eclipse" />
+		<antcall target="copy-files" />
 		<antcall target="teardown" />
 	</target>
 
@@ -90,6 +91,12 @@
 		<copy todir="${basedir}/build/XHTML">
             <fileset dir="${basedir}/XHTML" excludes=".svn"/>
         </copy>
+	</target>
+	
+	<target name="copy-files">
+    	<copy todir="${basedir}/build/files">
+    		<fileset dir="${basedir}/latex/files" />
+		</copy>
 	</target>
 	
 	<target name="teardown">

@@ -21,6 +21,8 @@
 \newif\ifplastex
 \plastexfalse
 
+\input{config}
+
 % different method to write an ASCII backslash for plastex and normal pdflatex
 \ifplastex
   \newcommand{\mybackslash}{\textbackslash}
@@ -29,13 +31,25 @@
   \newcommand{\mybackslash}{\symbol{`\\}}
 \fi
 
+% Path to resources like zip's with machines
+% We use a relative path in the html + eclipe version (in order to work offline)
+% and an absolute path in the pdf version
+\ifplastex
+	\newcommand{\filepath}{files/}
+\else
+	\newcommand{\filepath}{\handbookpath/\versionpath/files/}
+\fi
+
+\def\file#1#2{
+\href{\filepath#1}{#2}
+}
 
 \def\tick#1{\doculist{#1}{img/tick_64.png}}
 \def\info#1{\doculist{#1}{img/info_64.png}}
 \def\warning#1{\doculist{#1}{img/warning_64.png}}
 \def\pencil#1{\doculist{#1}{img/pencil_64.png}}
 
-\title{User Manual for Rodin v.2.2\\
+\title{User Manual for Rodin v.\versionnr\\
 Handbook version $ $Rev$ $}
 \author{Work in Progress\\ \\
 \href{mailto:handbook@formalmind.com}{handbook@formalmind.com}\\

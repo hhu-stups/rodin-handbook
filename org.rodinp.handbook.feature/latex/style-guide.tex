@@ -10,7 +10,22 @@
 	\item Use the ``we'' form.
 
 	\item We use British English.
+\end{itemize}
 
+\subsubsection{Files}
+
+Files should be saved in the \texttt{files} subdirectory. You can also create a subdirectory. Then, use the definition 
+
+\begin{verbatim} \filepath{1}{2} \end{verbatim} 
+
+to create a link to the file. The definition takes to arguments. The first argument (1) defines the file name i.e. \texttt{Celebrity.zip} or in case if you saved the file in a subdirectory \texttt{subdirecotry/Celebrity.zip}. The second argument (2) defines the name which should be displayed in the document, i.e. ``Celebrity Problem Example Download''.
+
+\warning{Please note, that you only enter the file name without a path before (expected subdirectories). The build script assigns automatically the correct path to the file on the server.}
+
+Here is an example using the definition: \file{Celebrity.zip}{Celebrity Problem Example Download}.
+
+\subsubsection{Images}
+\begin{itemize}
 	\item Images must be no more than 700 pixels in width (for HTML version)  This is fairly easy for bitmaps (screenshot), pay attention to this regarding how plasTeX converts vector images. (see Latex section below on how to include images)
 
     \item Screenshots should look neat and consistent.  Horizontal real estate will always be an issue, so please resize the windows before taking the screenshot to keep things readable at 700 pixel width.  (see Latex section below on how to include images)
@@ -22,16 +37,14 @@
   \item Image file names should be all in lower case and not include umlaute or special characters. Use ``\_'' for blanks.
 
   \item Image files should keep the following rules:
-	\begin{itemize}
-
+	
+\begin{itemize}
 		\item Tutorial images should be saved in the sub folder \texttt{img/tutorial} with the prefix ``\texttt{tut\_}'' following the section number. For instance, \texttt{tut\_01\_image1.png}.
 
 		\item FAQ images should be saved in the sub folder \texttt{img/faq} with the prefix ``\texttt{faq\_}''. For instance, \texttt{faq\_image1.png}.
 
 	\end{itemize} 
-
-\end{itemize}
-
+	\end{itemize} 
 \subsubsection{Avoiding Redundancy}
 
 We will reduce (or avoid) redundancy through heavy linking, following these guidelines:

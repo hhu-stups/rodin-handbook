@@ -5,6 +5,7 @@
 		<antcall target="generate-pdf" />
 		<antcall target="generate-eclipse" />
 		<antcall target="copy-files" />
+		<antcall target="teardown" />
 	</target>
 
 	<target name="generate-html">
@@ -13,7 +14,6 @@
             <param name="theme" value="rodin-theme-html"/>
 		</antcall>
     	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"/>
-		<antcall target="teardown"/>
    	</target>
 
    <target name="generate-pdf">
@@ -64,7 +64,6 @@
     	       update="true" />
     
     	<delete dir="${basedir}/build/plugin/plugins"/>
-    	<antcall target="teardown"/>
     </target>
 
     <target name="generate" depends="init">

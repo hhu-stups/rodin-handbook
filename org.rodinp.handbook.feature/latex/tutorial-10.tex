@@ -3,32 +3,38 @@
 
 \tick{\textbf{Goals:} The objective of this section is to create a model of the Location Access Controller, and besides detail more complex proofs in order to approach the notion of deadlock freeness.}
 
-\info {First of all you need to download the following \ file\{doors.zip\}\{Location Access Controller problem\}}
+\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
+
 \subsection{Initial Model}
+
 Through this model, we shall study a complete system and remind the proof rules of formal development.
 What should be established at the very outset is that the system concerns people and locations. Actually, we will construct a model in order to control the access of certain people to different locations of a site.
 The system is thus based on the authorization that a person has or not to penetrate several locations.
 Besides we introduce:
+
 \begin{itemize}
 	\item The two carrier sets of persons, P, and locations, L
 	\item The constant authorization, \textbf{aut}, representing a relation between P and L, actually where people are allowed to go (Axiom 1).
 	\item The variable, \textbf{sit}, which denote where a person is, \textbf{sit} is a function from P to L.
-\end{itemize}  
+\end{itemize} 
+ 
 Moreover, we introduce a special constant “location”, named \textbf{outside}. Everyone is authorized to be in outside (Axiom 3) and a person cannot be in two locations at a time. However every person, which is in a certain location, is authorized to be there.
 
 Initially, everyone is outside as indicated in event \textsf{INITIALISATION}.
 The other event \textsf{PASS} of that model has to aim to change the location of a person.
 We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-
 \subsection{Project Setup}
+
 Import the archive file doors.zip, for this select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into workspace}, and find your file by using the button browse.
 
-The tool takes a few seconds to extract and load all the files. Once it is done, you can look at the initial model through doors\_ctx1 and doors\_0.
-We can notice that there are our two carrier sets in the program (represented by P and L).
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_carrier-sets.png}
-\end{center}
+Rodin takes a few seconds to extract and load all the files. Once it is done, you can look at the initial model through \textsf{doors\_ctx1} and \textsf{doors\_0}.
+
+We can notice that there are our two carrier sets in the program (represented by \textsf{P} and \textsf{L}).
+
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_10_carrier-sets.png}
+%\end{center}
 
 Nevertheless you need to add a new derived invariant to doors\_0. We call this invariant \texttt{DLF}.
 In the same time, add the associated predicate which is the dysfunction of all guards: there is only one guard here, so it would be,

@@ -14,17 +14,25 @@ The objective of this Section is to get familiar with Contexts by modeling the A
 
 Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}. Give the project the name \texttt{tutorial-05}. 
 
-Next, create a new Event-B Component (\ref{eventb_component}). Unlike in Section (\ref{tutorial_03}) use \texttt{agatha} as the component name and mark the \textsf{Context} (\ref{context}) option in order to create a Context (\ref{context}) file instead of a Machine (\ref{machine}) file:
+Next, create a new Event-B Component (\ref{eventb_component}). Unlike in Section (\ref{tutorial_03}) use \texttt{agatha} as the component name and mark the \textsf{Context} (\ref{context}) option in order to create a Context file instead of a Machine (\ref{machine}) file.
 
-\begin{center}
-	\includegraphics{img/tutorial/tut_05_agatha1.png}
-\end{center}
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics{img/tutorial/tut_05_agatha1.png}
+%	\caption{New Event-B Component Wizard}
+%	\label{fig_tut_05_new_component}
+%\end{center}
+%\end{figure}
 
-Click on \textsf{Finish}. Rodin should start the editor with the created Context (\ref{context}) file:
+Click on \textsf{Finish}. Rodin should start the editor with the created Context file (see figure \ref{fig_tut_05_context_file}).
 
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/tutorial/tut_05_agatha2.png}
+	\caption{Context file opened with Structural Editor}
+	\label{fig_tut_05_context_file}
 \end{center}
+\end{figure}
 
 \subsection{Populate the Context}
 
@@ -197,13 +205,17 @@ Finally, we have to model the solution:
 \end{description}
 }
 
-We mark the axiom (\ref{axiom}) \texttt{solution} as a theorem (\ref{theorem}) by clicking on the \textsf{not theorem} button:
+We mark the axiom \texttt{solution} as a theorem (\ref{theorem}) by clicking on the \textsf{not theorem} button as shown in figure \ref{fig_tut_05_mark_theorem}.
 
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/tutorial/tut_05_agatha3.png}
+	\caption{Mark an Axiom as Theorem}
+	\label{fig_tut_05_mark_theorem}
 \end{center}
+\end{figure}
 
-\info{Theorems (\ref{theorem}) describe properties that are expected to be able to be derived from the axioms (\ref{axiom}).}
+\info{Theorems describe properties that are expected to be able to be derived from the axioms.}
 
 This concludes the tutorial. The following Section shows the complete Context.
 

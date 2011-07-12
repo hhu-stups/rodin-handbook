@@ -8,12 +8,15 @@
 
 We will continue the example from Section~\ref{tutorial_03}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE, and a number of features were still missing.
 
-We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors.  The following image depicts our mapping for the traffic light.
+We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors. Figure \ref{fig_tut_07_tl_colors} depicts our mapping for the traffic light.
 
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/tutorial/tl-colors.png}
-	\label{fig:tl-colors}
+	\caption{Mapping between Abstract and Concrete Events}
+	\label{fig_tut_07_tl_colors}
 \end{center}
+\end{figure}
 
 For simplicity, the traffic light for pedestrians consists of only two lights, red and green.
 
@@ -122,19 +125,25 @@ Next, we will create a gluing invariant (\ref{gluing_invariant}) that associated
 \end{description}
 }
 
-In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change, but not \textsf{peds\_colors}.  We expect that this will result in undischarged proof obligations \ref{undischarged_proof_obligations}.  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations:
+In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change, but not \textsf{peds\_colors}.  We expect that this will result in undischarged proof obligations \ref{undischarged_proof_obligations}.  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with figure \ref{fig_tut_07_undischarged}).
 
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/tutorial/undischarged1.png}
-	\label{fig:undischarged}
+	\caption{Mapping between Abstract and Concrete Events}
+	\label{fig_tut_07_undischarged}
 \end{center}
+\end{figure}
 
-To fix this, we have to modify the two events in question.  Let's start with \textsf{set\_peds\_go}.  First, we change the event from extended to not extended in the Editor:
+To fix this, we have to modify the two events in question.  Let's start with \textsf{set\_peds\_go}.  First, we change the event from extended to not extended in the Editor as shown in figure \ref{fig_tut_07_event_refinement}.
 
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/tutorial/event-refinement.png}
-	\label{fig:event-refinement}
+	\caption{Switch from extended to not extended}
+	\label{fig_tut_07_event_refinement}
 \end{center}
+\end{figure}
 
 This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colors} (setting it to \textsf{go}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
 

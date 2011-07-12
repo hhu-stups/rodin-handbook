@@ -19,7 +19,7 @@ The goal is to find the celebrity.
 
 Import the archive file \file{Celebrity.zip}{Celebrity.zip}. For this, choose \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Project into workspace}. Then, select the according archive file and click on \textsf{Finish}.
 
-The tool takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
+Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
 
 \begin{figure}[!h]
 \begin{center}
@@ -91,7 +91,7 @@ We should now see the window in figure \ref{fig_tut_08_proving_perspective}.
 \end{center}
 \end{figure}
 
-The Proving Perspective contains three new views:
+The \texttt{Proving Perspective} contains three new views:
 
 \begin{description}
 	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate inside the proof. Currently, we have not started with the proof yet, so there is no new place to move to. 
@@ -99,9 +99,11 @@ The Proving Perspective contains three new views:
 	\item[Goal View (\ref{goal_view})] This window shows what needs to be proved at the current position inside the proof tree.
 \end{description}
 
-Browsing around in the Event-B Explorer (\ref{eventb_explorer}), we can see that the auto-prover (\ref{auto_prover}) did quite a good job. All except for three proofs already should be completed. Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}).
+Expand the \texttt{Celebrity\_1} machine in the Event-B Explorer. After this expand the Proof Obligations section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. All except for three proofs already should be completed (indicated by a green). Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}).
 
-Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. For this expand the \texttt{Celebrity\_1} machine in the Event-B Explorer, expand the Proof Obligations (\ref{proof_obligation}) and double-click on \textsf{remove\_1/inv2/INV}.
+TODO: explain the different icons of the proof obligations!
+
+Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. For this double click on the proof obligation \textsf{remove\_1/inv2/INV}.
 
 %\begin{figure}[!h]
 %\begin{center}

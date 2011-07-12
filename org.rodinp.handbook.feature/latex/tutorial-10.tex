@@ -1,67 +1,89 @@
-\section{Complete Abrial Example}
+\section{Location Access Controller}
 \label{tutorial_10}
 
-\tick{\textbf{Goals:} The objective of this section is to create a model of the Location Access Controller, and besides detail more complex proofs in order to approach the notion of deadlock freeness.}
+\tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. For this, we will use the model of a Location Access Controller. The goal is to develop the proofs for deadlock freeness of the initial model and of the first refinement.}
 
-\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
+%\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
+
+Through the model used in this section, we study a complete system and remind the proof rules of formal development. The system's task is to control the access of certain people to different locations of a site. The system is thus based on the authorization that a person has (or not has) access to a particular location.
+
+Before the start to describe the initial model, import the archive file \file{Doors.zip}{Doors.zip} containing the model. For this select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into Workspace}. Then, select the according archive file and click on \textsf{Finish}. Rodin takes a few seconds to extract and load all the files.
 
 \subsection{Initial Model}
 
-Through this model, we shall study a complete system and remind the proof rules of formal development.
-What should be established at the very outset is that the system concerns people and locations. Actually, we will construct a model in order to control the access of certain people to different locations of a site.
-The system is thus based on the authorization that a person has or not to penetrate several locations.
-Besides we introduce:
+%Besides we introduce:
 
-\begin{itemize}
-	\item The two carrier sets of persons, P, and locations, L
-	\item The constant authorization, \textbf{aut}, representing a relation between P and L, actually where people are allowed to go (Axiom 1).
-	\item The variable, \textbf{sit}, which denote where a person is, \textbf{sit} is a function from P to L.
-\end{itemize} 
+%\begin{itemize}
+%	\item The two carrier sets of persons, P, and locations, L
+%	\item The constant authorization, \textbf{aut}, representing a relation between P and L, actually where people are allowed to go %(Axiom 1).
+%	\item The variable, \textbf{sit}, which denote where a person is, \textbf{sit} is a function from P to L.
+%\end{itemize} 
  
-Moreover, we introduce a special constant “location”, named \textbf{outside}. Everyone is authorized to be in outside (Axiom 3) and a person cannot be in two locations at a time. However every person, which is in a certain location, is authorized to be there.
+%Moreover, we introduce a special constant “location”, named \textbf{outside}. Everyone is authorized to be in outside (Axiom 3) and a %person cannot be in two locations at a time. However every person, which is in a certain location, is authorized to be there.
 
-Initially, everyone is outside as indicated in event \textsf{INITIALISATION}.
-The other event \textsf{PASS} of that model has to aim to change the location of a person.
-We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
+%Initially, everyone is outside as indicated in event \textsf{INITIALISATION}.
+%The other event \textsf{PASS} of that model has to aim to change the location of a person.
+%We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-\subsection{Project Setup}
+Let us look at the initial model, consisting of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context, one for people (\textsf{P}) and one for locations (\textsf{L}). Then, there is a location called outside (\textsf{outside}) where everyone is allowed to go and a relation (\textsf{aut}) which reflects where people are allowed to go. Everyone is allowed to go outside. The model machine has one event (\textsf{pass}), which changes the location of a person and one variable (\textsf{sit}), which denotes where a person is located. 
 
-Import the archive file doors.zip, for this select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into workspace}, and find your file by using the button browse.
+\subsection{Deadlock Freeness}
 
-Rodin takes a few seconds to extract and load all the files. Once it is done, you can look at the initial model through \textsf{doors\_ctx1} and \textsf{doors\_0}.
+Looking through the initial model, you will see that everything already has been proved. This is true, however, Rodin does not do any deadlock freeness (\ref{deadlock_freeness}) proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop the proofs for deadlock freeness (\ref{deadlock_freeness}) of the initial model and of the first refinement. 
 
-We can notice that there are our two carrier sets in the program (represented by \textsf{P} and \textsf{L}).
+Consider the event \textsf{pass} of the initial model:
+
+\begin{description}
+\EVENTS
+	\EVT {pass}
+		\begin{description}
+		\AnyPrm
+			\begin{description}
+			\ItemX{ p }
+			\ItemX{ l }
+			\end{description}
+		\WhereGrd
+			\begin{description}
+			\nItemX{ grd11 }{ p \mapsto  l \in  aut }
+			\nItemX{ grd12 }{ sit(p) \neq  l }
+			\end{description}
+		\ThenAct
+			\begin{description}
+			\nItemX{ act11 }{ sit(p) :=  l }
+			\end{description}
+		\EndAct
+		\end{description}
+\END
+\end{description}
+
+Since, the initial model has only one event \textsf{pass}, the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are together false. Thus, proof of deadlock freeness means proving, that someone can always change room. Clearly, we want to avoid this happening. We have thus to prove that the two guards are always true. For this add a new derived invariant to \texttt{doors\_0} called \textsf{DLF} (making it derived means clicking the \texttt{theorem} button) and change the predicate so that it is the conjunction (\ref{conjunction}) of the two guards:
+
+\begin{description}
+\INVARIANTS
+	\begin{description}
+		\nItemX{ DLF }{ \exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l) }
+	\end{description}
+\end{description}
+
+\info{Verweis auf ProB Plugin mit Deadlock Freeness Funktion}
+
+Save the machine. We will see that the autoprover (\ref{autoprover}) fails to prove the theorem \textsf{DLF/THM}.
+
+\warning{If you don't see the proof obligation \textsf{DLF/THM} maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button. Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant as ``DLF''.}
+
+Let us analyze whether this is an inconsistency in the model. Switch to the \texttt{Proving Perspective } and double click on the proof obligation \textsf{DLF/THM}.
 
 %\begin{center}
 %	\includegraphics[]{img/tutorial/tut_10_carrier-sets.png}
 %\end{center}
 
-Nevertheless you need to add a new derived invariant to doors\_0. We call this invariant \texttt{DLF}.
-In the same time, add the associated predicate which is the dysfunction of all guards: there is only one guard here, so it would be,
-\[
-\exists p,l.(p \longmapsto l \in aut \land sit(p) \neq l )
-\]
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_10_proversfailed.png}
+%\end{center}
 
+In order to succeed with the proof, we need a tuple $p \mapsto l$ that is in \textsf{aut}, but not in \textsf{sit} ($p \mapsto l \in aut \wedge \lnot sit(p)=l$).
 
-
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_new-invariant.png}
-\end{center}
-
-\subsubsection{Auto provers}
-
-First of all, save the machine. Now we are going to verify the provers. 
-Switch to the \textbf{Proving Perspective}
-
-\textsf{ Window $\rangle$ Open perspective $\rangle$ Proving }
-
-At first glance, we can notice that the auto provers failed to prove the theorem (\textsf{DLF/THM})
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_proversfailed.png}
-\end{center}
-
-Besides we can established that there may be an inconsistency in our model.
-In order to succeed with the proof, we need a tuple \[ p \mapsto l \]that is in \textbf{aut}, but not in \textbf{sit}. Searching the hypotheses, we find the Axiom 4 of doors\_ctx1, which states that there is a location l, where everyone is allowed to go. So, for every person p in P, \[p \mapsto l \] and \[p \mapsto outside\] is in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. Now, all we would need to prove is that P is nonempty. 
+Searching the hypotheses, we find the Axiom 4 of \texttt{doors\_ctx1}, which states that there is a location \textsf{l}, where everyone is allowed to go. So, for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outside$ is in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. Now, all we would need to prove is that \textsf{P} is nonempty. 
 
 \warning{In the Proof Control view, first disable the post-tactics (there is a dedicated button in this view on the top right corner, up to the toolbar).}
 \begin{center}

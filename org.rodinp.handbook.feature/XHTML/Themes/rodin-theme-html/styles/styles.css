@@ -363,3 +363,7 @@ blockquote p span.rmfamily img {
   position: absolute;
   left: 10em;
 }
+
+.figure, .caption {
+	margin:25px;
+}

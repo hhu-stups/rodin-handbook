@@ -340,3 +340,7 @@ background-color: #888;
 height: 1px;
 }
 
+.figure, .caption {
+	margin:25px;
+}
+

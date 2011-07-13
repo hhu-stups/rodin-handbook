@@ -9,7 +9,7 @@ Through the model used in this section, we study a complete system and remind th
 
 Before the start to describe the initial model, import the archive file \file{Doors.zip}{Doors.zip} containing the model. For this select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into Workspace}. Then, select the according archive file and click on \textsf{Finish}. Rodin takes a few seconds to extract and load all the files.
 
-\subsection{Initial Model}
+\subsection{Initial Model} \label{tut_10_initial_model}
 
 %Besides we introduce:
 
@@ -25,11 +25,11 @@ Before the start to describe the initial model, import the archive file \file{Do
 %The other event \textsf{PASS} of that model has to aim to change the location of a person.
 %We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-Let us look at the initial model, consisting of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context, one for people (\textsf{P}) and one for locations (\textsf{L}). Then, there is a location called outside (\textsf{outside}) where everyone is allowed to go and a relation (\textsf{aut}) which reflects where people are allowed to go. Everyone is allowed to go outside. The model machine has one event (\textsf{pass}), which changes the location of a person and one variable (\textsf{sit}), which denotes where a person is located. 
+Let us look at the initial model, consisting of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context, one for people (\textsf{P}) and one for locations (\textsf{L}). Then, there is a location called outside (\textsf{outside}) and a relation (\textsf{aut}) which reflects where people are allowed to go. Everyone is allowed to go \textsf{outside}. The model machine has one event (\textsf{pass}), which changes the location of a person and one variable (\textsf{sit}), which denotes where a person is located. 
 
-\subsection{Deadlock Freeness}
+\subsubsection{Deadlock Freeness}
 
-Looking through the initial model, you will see that everything already has been proved. This is true, however, Rodin does not do any deadlock freeness (\ref{deadlock_freeness}) proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop the proofs for deadlock freeness (\ref{deadlock_freeness}) of the initial model and of the first refinement. 
+Looking through the initial model, you will see that everything already has been proved. This is true, however, Rodin does not do any deadlock freeness (\ref{deadlock_freeness}) proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop the proofs for deadlock freeness of the initial model and of the first refinement. 
 
 Consider the event \textsf{pass} of the initial model:
 
@@ -81,86 +81,51 @@ Let us analyze whether this is an inconsistency in the model. Switch to the \tex
 %	\includegraphics[]{img/tutorial/tut_10_proversfailed.png}
 %\end{center}
 
-In order to succeed with the proof, we need a tuple $p \mapsto l$ that is in \textsf{aut}, but not in \textsf{sit} ($p \mapsto l \in aut \wedge \lnot sit(p)=l$).
+In order to succeed with the proof, we need a tuple $p \mapsto l$ that is in \textsf{aut}, but not in \textsf{sit}. Searching the hypotheses, we find the \textsf{axm4} of \texttt{doors\_ctx1}, which states that there is a location \textsf{l}, where everyone is allowed to go:
 
-Searching the hypotheses, we find the Axiom 4 of \texttt{doors\_ctx1}, which states that there is a location \textsf{l}, where everyone is allowed to go. So, for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outside$ is in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. Now, all we would need to prove is that \textsf{P} is nonempty. 
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ axm4 }{ \exists l\qdot l\in L\setminus \{ outside\}  \land  P\cprod \{ l\} \subseteq aut }
+	\end{description}
+\end{description}
+
+So, for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outside$ is in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. Now, all we would need to prove is that \textsf{P} is nonempty. This holds, as carrier sets always are nonempty, but is a bit hard to derive. 
 
 \warning{In the Proof Control view, first disable the post-tactics (there is a dedicated button in this view on the top right corner, up to the toolbar).}
+
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
+%\end{center}
+
+Then add the hypothesis $\exists x . x \in P$ using the \textsf{ah} button. Then, click on the Auto Prover button (The button with a robot on it). Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
+
+Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis View}) as demonstrated in figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated, it leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in figure \ref{fig_tut_10_instantiate_p}. 
+
+\begin{figure}[!h]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
+	\includegraphics{img/tutorial/tut_10_instantiate_x.png}
+	\caption{Click on the existential quantifier in order to ...}
+	\label{fig_tut_10_instantiate_x}
 \end{center}
-We have seen that we want to prove  
-\[
-P \neq \emptyset
-\]So we have to replace that by adding the following hypothesis in the window called \textsf{Proof Control}:
-\[
-\exists x.x \in P 
-\]
+\end{figure}
 
-Then click on the \textbf{ah} (Add Hypothesis) button.
+\begin{figure}[!h]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_10_hypothesis.png}
+	\includegraphics{img/tutorial/tut_10_instantiate_p.png}
+	\caption{TODO: Description}
+	\label{fig_tut_10_instantiate_p}
 \end{center}
+\end{figure}
 
-
-Then, click on the Auto Prover button (The button with a robot on it) until our hypothesis is selected. Actually other provers do not work here.
-Once the hypothesis is in the window \textsf{Selected Hypothesis}, you can instantiate x like in the following illustration:
-
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_instantiate_x.png}
-\end{center}
-
-By this action, it is automatically instantiated, and it leads to the selected hypothesis :
-\[
-\exists x \in P 
-\]
-Now we have to instantiate p in the goal with x : we enter x in the yellow box corresponding to p in the Goal view and click on the existential quantifier.
-
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_instantiate_p.png}
-\end{center}
-
-P has been instantiated with success, however it remains to care about "l". Thus we need a case distinction.
-Type sit(x) = l this into the proof control and click on Case Distinction (dc) to look at the two cases:
-\[
-sit(x)=l 
-\]
-\[
-sit(x) \neq l
-\]
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_case_distinction.png}
-\end{center}
-
-Before starting with the cases, the prover now wants you to prove that 
-\[
- x \in dom(sit)
-\]
-This can be done with p0, as sit is a total function. In the first case x is situated in l, so it cannot be in outside. So, you can instantiate l with \textbf{outside} (type "outside" in the box corresponding to l and click on the existential quantifier). In order to prove that x is allowed to outside, you will need to select the hypothesis
-\[
-P \times outside \subseteq aut
-\]
-Now click on the lasso item in the tool bar, in order to see all of the hypotheses. Find the right hypothesis and put \textbf{outside} in the case.
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_outside.png}
-\end{center}
-
-Now click on p0, it would be proved.
-
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_proved.png}
-\end{center}
+It remains now to instantiated \textsf{l}. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover, as \textsf{sit} is a total function (\ref{total_function}). In the first case \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. So, you can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed to \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view and click on the \textsf{Search Hypothesis button}, and add it to the selected hypothesis with the green plus icon next to it). Then you can finish this case with the \textsf{p0} prover. If you look at the proof tree, you see that you now have reached the other branch of the case distinction. In this case, you can simply instantiate \textsf{l} with \textsf{l}, as \textsf{x} is not situated there. Finally, click on the \textsf{p0} button to finish the proof. 
 
 \subsection{First Refinement}
 
-Now we are going to detail the main complexity of our model : the deadlock freeness proof for the first refinement. 
+Now we are going to detail the main complexity of our model: the deadlock freeness proof for the first refinement. 
 
-This refinement will consist to add the new constant \textbf{com} illustrating the notion of possible direct communication between two locations.
+The difference between the first refinement and the initial model is that a new constant \textsf{com} been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which will be explained later. 
 
-Besides \textbf{com} is a binary relation built on the carrier set L. A location does not “communicate” with itself as stated in the Axiom 1 of the doors\_ctx2.
-\[
-com \in L\leftrightarrow L
-\]
 Concerning the events, \textsf{INITIALISATION} does not change, whereas the event \textsf{PASS} is refined as a consequence. Indeed we estimate that a person can move to another location l if there is the authorization to be in l (already defined in the abstraction) and also location l communicates with the location where p is at this precise moment (represented by sit(p)).
 
 Consequently, the guard of this new event version is better than the precedent, since we have :
@@ -173,68 +138,71 @@ In fact, we are obviously faced with a difficulty here; it is not possible to pr
 
 The issue is that this condition cannot be verified in general. Moreover the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. Besides the geometry of communication between locations clearly introduces an additional constraint limiting the way people can move.
 
-As a consequence our study has revealed a problem in our method that was obviously ignored in the document requirements.
-So we must find a sufficient solution.
+As a consequence our study has revealed a problem in our method that was obviously ignored in the document requirements. So we must find a sufficient solution.
 
-At the beginning of this section we need to come back to the \textsf{Event-B view}.
-First of all open doors\_1 machine and add the derived invariant (theorem) called \textbf{DLF} stating :
+\info{Please note that the post-tactics should still be disabled before starting this part of the tutorial.} 
 
-\[
-\exists q,m.(q \mapsto m \in aut \land sit(q) \mapsto m \in com )
-\]
-That is equivalent to say that the location sit(p) is in communication with at least one other location l, in which p is authorized to go:
-the person p can therefore go out of the the location sit(p), via l, ans does not remain blocked in a location.
+At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. Like in section \ref{tut_10_initial_model} open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
 
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_invariants2.png}
-\end{center}
+\begin{description}
+\INVARIANTS
+	\begin{description}
+		\nItemX{ DLF }{ \exists q, m \cdot (q \mapsto m \in aut \wedge sit(q) \mapsto m \in com)  }
+	\end{description}
+\end{description}
 
-Then we save the file. After switching to the proving view (the post-tactics should still be disabled), we can notice that once again, the prover fails to prove deadlock freeness automatically. 
-Actually all we want is that "any person authorized to be in a location must also be authorized to go in another location which communicates with the first one".
+Save the file. Once again, the prover fails to prove the deadlock freeness automatically. Actually all we want is that "any person authorized to be in a location must also be authorized to go in another location which communicates with the first one".
 
-This can be illustrated as follow:
+This can be illustrated as demonstrated in figure \ref{fig_tut_10_graph}.
+
+\begin{figure}[!h]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_graph.png}
+	\caption{TODO: Description}
+	\label{fig_tut_10_graph}
 \end{center}
+\end{figure}
 
-At the beginning of the proof, there are no selected hypotheses at all. So we need to select several hypotheses. In order to complete the proof we need the old deadlock freeness invariant, and the Axiom 7 of doors\_ctx2, which will be useful too.
+At the beginning of the proof, there are no selected hypothesis at all. So we need to select a few. The old deadlock freeness invariant will be useful, \textsf{axm7} of \texttt{doors\_ctx2} too. 
 
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ axm7 }{ \exists l\qdot l\in L\setminus \{ outside\}  \land  outside\mapsto l\in com \land  P\cprod \{ l\} \subseteq aut  }
+	\end{description}
+\end{description}
+
+To begin with, we try to avoid using \textsf{exit}, as we want to keep things as simple as possible. But since \textsf{sit} and \textsf{aut} are inside the invariant, we also are likely to need 
 
 \[
-\texttt{Axiom 7 \space \space \space \space}\exists l.l \in L \backslash \{outside\} \wedge outside \mapsto l \in com \wedge P \times \{l\} \subseteq aut
+sit \subseteq aut and sit \in P \mathbin \rightarrow L.
 \]
 
+Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if $sit(p) = outside$. Add this case as previously using the \textsf{Case Distinction button (dc)} and solve it. For \textsf{q}, the choice \textsf{p} is obvious. For \textsf{m}, you will use the existential quantifier of \textsf{axm7} of \texttt{doors\_ctx2} to instantiate \textsf{m} with \textsf{l} as \textsf{l0}. 
 
-But since \textbf{sit} and \textbf{aut} are inside the invariant, to begin with we also need to prove:
-\[
-sit \subseteq aut
-\]
+For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} connects locations to locations and defines at every location except \textsf{outside}.
 
-\[
-sit \in P \mapsto L
-\]
-Once again, the existential quantifiers are rewritten by the auto-provers in the hypotheses. Now we will consider precisely the proof. There is an easy case if sit(p) = outside. Type this into the proof control and add this case as previously with a case distinction (dc) in order to solve it. For q, we have to select the choice p. However for m, you will use the existential quantifier of Axiom 7 to instantiate m with l as l0. 
-Axiom 7 proves that we have no deadlock for people who are outside.
+We can look at the axioms about \textsf{exit}:
 
-For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} is connecting locations to locations and defined at every location except \textbf{outside}. 
-We can look at the axioms of doors\_ctx2. 
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_axioms.png}
-\end{center}
+\begin{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ axm3 }{ exit \in  L\setminus \{ outside\}  \tfun  L }
+		\nItemX{ axm4 }{ exit \subseteq  com }
+		\nItemX{ axm5 }{ \forall s\qdot s\subseteq exit^{-1} [s] \limp  s=\emptyset  }
+		\nItemX{ axm6 }{ aut \ransub  \{ outside\}  \subseteq  (aut ; exit^{-1} )  }
+	\end{description}
+\end{description}
 
-It states that :
+The axioms state that:
 
 \begin{itemize}
-	\item (Axiom 3) Every room except the outside has exactly one exit. 
-	\item (Axiom 4) An exit must be a room that communicates with the current one
-	\item (Axiom 5) A chain of exits leads to the outside without any cycles or infinite paths
-	\item (Axiom 6) Everyone allowed in a room is allowed to go through its exit. 
+	\item (axm3) Every room except the outside has exactly one exit. 
+	\item (axm4) An exit must be a room that communicates with the current one
+	\item (axm5) A chain of exits leads to the outside without any cycles or infinite paths
+	\item (axm6) Everyone allowed in a room is allowed to go through its exit. 
 \end{itemize}  
 
-In our proof, we still need to show that anyone who is not outside can walk through a door. For this, Axiom 5 is useless, so we add all hypotheses containing exit except for Axiom 5. Now we have to instantiate q and m correctly and to conclude that the proof should not be too hard. Once again, for q, the choice p is obvious. But it is not quite as easy for m. Expressed in language, m must be the room behind the exit door of the room that p is currently in. 
+In our proof, we still need to show that anyone who is not \textsf{outside} can walk through a door. For this, \textsf{axm5} is useless, so we add all hypotheses containing exit except for \textsf{axm5}. Now we have to instantiate \textsf{q} and \textsf{m} correctly and to conclude that the proof should not be too hard. Once again, for \textsf{q}, the choice \textsf{p} is obvious. But it is not quite as easy for \textsf{m}. Expressed in language, \textsf{m} must be the room behind the exit door of the room that \textsf{p} is currently in. 
 
-\info{Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choosing prune in order to retry.}
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_prune.png}
-\end{center}
-
+\info{Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choosing \textsf{Prune} in order to retry.}

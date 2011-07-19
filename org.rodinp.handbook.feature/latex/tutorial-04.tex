@@ -43,7 +43,10 @@ of the appropriate sets. Let's use integers again:
 \[ \forall a,b \qdot a\in\intg \land b\in\intg \land a\neq b \limp b\neq a \lascii{!a,b.\ a:INT \& b:INT \& a/=b => b/=a} \]
 The conjunction operator ($\land$) has a stronger binding that the implication $\limp$, so the above is equivalent to
 \[ \forall a,b \qdot (a\in\intg \land b\in\intg \land a\neq b) \limp b\neq a\]
+
+\warning{
 If you are unsure which operators bind stronger, we advise you to use parenthesis to avoid mistakes.
+}
 
 \emph{Existential quantification} on the other hand is used to state that there is an object of a certain type that
 fulfills a given property. Let's express the statement that there is a Boolean value that is different from
@@ -89,7 +92,7 @@ give an overview about all types you might encounter.
   Set of pairs (``relations'') play an important role in modeling languages like Event-B.
 \end{description}
 
-\warning{Please do not confound predicates and Boolean values!
+\warning{Please do not confuse predicates and Boolean values!
   E.g. if you want to express the condition ``if the variable $b$ is true, $x$ should be greater than 2'', you \emph{cannot} 
   write $b \limp x>2$ (That would raise a syntax error). 
   Instead you can write $b = \True \limp x>2$.}
@@ -133,13 +136,13 @@ know its cardinality or even if its finite.
   $=$ and $\neq$ expect the same type for the left and right expression.}
 
 If we want to model sub-sets $apples$ and $oranges$ like above, we can add them as
-constants and state $apples \subseteq FRUITS$ and $oranges \subseteq ORANGES$.
-If we that are all fruits we want to model, we can assume $apples \cup oranges = FRUITS$
+constants and state $apples \subseteq FRUITS$ and $oranges \subseteq FRUITS$.
+If apples and oranges are all fruits we want to model, we can assume $apples \cup oranges = FRUITS$
 and if no fruit is both an apple and orange we can write $apples \cap oranges = \emptyset$.
 This can be expressed shorter by saying that apples and oranges constitute a
 partition of the fruits: $partition(FRUITS,apples,oranges)$.
 In general, we can use the partition operator to express that a set $S$ is partitioned by the
-sets $s_1,\ldots,s_n$ with $partition(S,s_1,\ldots,s_n)$.
+sets $s_1,\ldots,s_n$ with $partition(S,s_1,\ldots,s_n)$.  We use partitions in Section~\ref{tut_modelling_the_persons}.
 
 Another typical usage for user defined data types are \emph{enumerated sets}.
 These are sets where we know already all elements. Let's take a system which can be either working or broken.

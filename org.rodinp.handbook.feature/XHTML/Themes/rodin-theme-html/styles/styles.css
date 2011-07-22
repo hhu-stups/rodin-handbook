@@ -368,3 +368,7 @@ blockquote p span.rmfamily img {
 .figure, .caption {
 	margin:25px;
 }
+
+.math.gen {
+	margin:3px;
+}

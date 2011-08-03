@@ -58,7 +58,7 @@ for existential quantification we add it via a conjunction ($\land$).
 
 \subsection{Data types}
 \label{tut04:types}
-We have seen that each identifier (i.e. a variable, constant or parameter) must have an distinguished type.
+We have seen that each identifier (i.e. a variable, constant or parameter) must have a distinguished type.
 If we can introduce an identifier anywhere, we usually must also add a predicate with which the
 identifier's type can be determined. In the traffic light example, a variable \texttt{cars\_go} was
 introduced and typed by an invariant $cars\_go \in \Bool$. In the next section we'll see constants that
@@ -116,7 +116,7 @@ Thus $B\in\pow(A)$ is equivalent to $B\subseteq A$.
 $\pow_1(A)$ \inascii{POW1(A)} is the set of all non-empty subsets of $A$.
 
 \subsection{Introducing user-defined types}
-\label{tut:deferred_sets}
+\label{tut:user_defined_sets}
 
 We can introduce our own new types simply by giving such types a name.
 This is done by adding the name of the type to the \textsl{SETS} section of a context.
@@ -162,7 +162,7 @@ relation is just a set of pairs. Formally, when we have to sets $A$ and $B$, we 
 $r$ is a relation between both by $r \in \pow(A\cprod B)$ \inascii{r:POW(A**B)}.
 Because relations are so common, we can write it shorter $r \in A\rel B$ \inascii{r:A<->B}.
 
-With $a\mapsto b\in r$, we can check if two elements $a$ and $b$ are related is respect to $b$.
+With $a\mapsto b\in r$, we can check if two elements $a$ and $b$ are related in respect to $b$.
 
 We use a small example to illustrate relations. Let $A = \{a,b,c,d\}$ and $B=\{1,2,3,4\}$.
 We define the relation $r$ with $r = \{a\mapsto 1, a\mapsto 3, c\mapsto 2, d\mapsto 1\}$.
@@ -172,7 +172,7 @@ The \emph{domain} of $r$ are all elements occurring on the left side $\dom(r) = 
 To find out to which elements the objects of the set $s=\{b,c,d\}$ are related to, we can use the \emph{relational image}.
 $r[s] = r[\{b,c,d\}] = \{1,2\}$.
 Often we want to know to which object a single element $b$ is related. We just write it as a singleton
-set: $r[{a}] = \{1,3\}$.
+set: $r[\{a\}] = \{1,3\}$.
 
 Event-B supports several operators to work with relations. (TODO: link)
 We don't go more into detail in the course of the tutorial.

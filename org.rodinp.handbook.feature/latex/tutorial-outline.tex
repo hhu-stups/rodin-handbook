@@ -1,22 +1,22 @@
 
 The objective is to get you to a stage where you can use Rodin and build Event-B models.  We expect you to have a basic understanding of logic and an idea why doing formal modeling is a good idea.  You should be able to work through the tutorial with no or little outside help.
 
-This tutorial covers installation and configuration of Rodin; it hand-holds you through building formal models and it provides the essential theory and provides pointers to more information.
+This tutorial covers installation and configuration of Rodin; it brings you through step by step through building formal models and it provides the essential theory and provides pointers to more information.
 
-We attempt to alternate between theory and practical application, thereby keeping you motivated.  We encourage you not to download solutions to the examples, but instead to actively build them up yourself, as the tutorial progresses.
+We attempt to alternate between theory and practical application thereby keeping you motivated.  We encourage you not to download solutions to the examples but instead to actively build them up yourself as the tutorial progresses.
 
 If something is unclear, remember to check the Reference (\ref{reference}) for more information.
 
 \section{Outline}
 
 \begin{description}
-	\item[Background before getting started (\ref{tutorial_01})] We give a brief description of what Event-B is and what it is being used for; what kind of background knowledge we expect.
+	\item[Background before getting started (\ref{tutorial_01})] We give a brief description of what Event-B is and what it is being used for and what kind of background knowledge we expect.
 	\item[Installation (\ref{tutorial_02})] We guide you through downloading, installing and starting Rodin and point out platform differences.  We install the provers.  We name the visible views and describe what they are doing.
-	\item[A Machine, and nothing else (\ref{tutorial_03})] We introduce a first machine, a traffic light with booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically.  We explain how proof labels are read, without changing to the proof perspective.
-	\item[Mathematical notation (\ref{tutorial_04})] At this point we quickly go through the most important aspects of predicate calculus and provide pointers to the reference and to external literature.  We cover everything used by the traffic light system; we introduce all data types; we introduce sets and relations, but not in depth.  Difference between predicates and expressions; for instance, understand the difference between TRUE and $\top$.  
+	\item[A Machine, and nothing else (\ref{tutorial_03})] We introduce a first machine: a traffic light with booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically.  We explain how proof labels are read, without changing to the proof perspective.
+	\item[Mathematical notation (\ref{tutorial_04})] At this point we quickly go through the most important aspects of predicate calculus and provide pointers to the reference and to external literature.  We cover everything used by the traffic light system, we introduce all data types and we introduce sets and relations but not in depth.  Difference between predicates and expressions; for instance, understand the difference between TRUE and $\top$.  
 	\item[Introducing Contexts (\ref{tutorial_05})] We introduce Contexts to apply the theoretical concepts that were introduced in the previous section.  We use the Agatha-Puzzle to step by step introduce more and more complex elements.  We point out partitions as a typical pitfall (also add to FAQ).  We will cover Theorems. Well-Definedness is mentioned.
-	\item[Event-B Concepts (\ref{tutorial_06})] This is another theoretical section that provides more background about the previous examples.  For instance, we analyze the anatomy of a machine, introduce all elements that a machine or context may have. We point to literature about the theory, but won't go into the details of the  calculus.  We describe the sees and refines concepts, which will be applied in the next section.  We will briefly mention concepts like data refinement and witnesses, but leave the details to the literature.
-	\item[Expanding the Traffic Light System (\ref{tutorial_07})]  We apply what we learned in the previous section by introducing a context with traffic light colors, and a refinement to integrate them.  We will introduce another refinement for the push buttons.
+	\item[Event-B Concepts (\ref{tutorial_06})] This is another theoretical section that provides more background about the previous examples.  For instance, we analyze the anatomy of a machine and introduce all elements that a machine or context may have. We point to literature about the theory but won't go into the details of the  calculus.  We describe the sees and refines concepts which will be applied in the next section.  We will briefly mention concepts like data refinement and witnesses but leave the details to the literature.
+	\item[Expanding the Traffic Light System (\ref{tutorial_07})]  We apply what we learned in the previous section by introducing a context with traffic light colors and a refinement to integrate them.  We will introduce another refinement for the push buttons.
 
 	\item[Proving (\ref{tutorial_08})] So far all proof obligations were discharged automatically.  Now we switch for the first time to the proving perspective and explore it.
 We change the auto prover configuration, invalidate proofs and show, that with the new configuration they don't discharge any more.  We prove a simple proof by hand.  We describe the provers available.

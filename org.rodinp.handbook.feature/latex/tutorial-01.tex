@@ -5,9 +5,9 @@ Before we get started with the actual tutorial, we are going to go over the requ
 
 \tick{\textbf{You can skip this section, if...}
 \begin{itemize}
-	\item ... you know what formal modelling means
+	\item ... you know what formal modelling is
 	\item ... you know what predicate logic is
-	\item ... you know what Event-B, Rodin refer to
+	\item ... you know what Event-B and Rodin refer to
 	\item ... you know what Eclipse is
 \end{itemize}
 }
@@ -20,36 +20,36 @@ Ultimately, the purpose of the methods and tools introduced here is to improve s
 
 \subsection{Formal Modelling}
 
-We are concerned with \textit{formalizing specifications}.  This allows us a more rigorous analysis (thereby improving the quality), and allows the reuse of the specification to develop an implementation.  This comes at the cost of higher up-front investments.
+We are concerned with \textit{formalizing specifications}.  This allows us a more rigorous analysis (thereby improving the quality) and allows the reuse of the specification to develop an implementation.  This comes at the cost of higher up-front investments.
 
-Comparing with the traditional development process, in a formal development we transfer some effort from the test phase (where we intend to verify the implementation), to the specification phase (where we intend to guarantee that the specification is correct in relation to the requirements).
+This differs from the traditional development process. In a formal development, we transfer some effort from the test phase (where the implementation is verified) to the specification phase (where the specification in relation to the requirements is verified).
 
 \subsection{Predicate Logic}
 
 Predicate logic (\ref{predicate_logic}) is a mathematical logic containing variables that can be quantified.
 
-Event-B supports first-order logic (\ref{first_order_predicate_calculus}), which is, technically speaking, just one type of predicate logic.  
+Event-B supports first-order logic (\ref{first_order_predicate_calculus}) which is, technically speaking, just one type of predicate logic.  
 
 \subsection{Event-B}
 
 Event-B (\ref{eventb}) is a notation for formal modelling based around an abstract machine notation (\ref{abstract_machine_notation}).
 
-Event-B is considered an evolution of B (also known as classical B (\ref{classical_b})). It is a simpler notation, which is easier to learn and use. It comes with tool support in the form of the Rodin Platform.
+Event-B is considered an evolution of B (also known as classical B (\ref{classical_b})). It is a simpler notation which is easier to learn and use. It comes with tool support in the form of the Rodin Platform.
 
 \subsection{Rodin}
 
-Rodin (\ref{rodin_platform}) is the name of the tool platform for Event-B.  It allows the creation of formal Event-B models with an editor.  It generates proof obligations (\ref{proof_obligation}) that can be discharged, either automatically or interactively.
+Rodin (\ref{rodin_platform}) is the name of the tool platform for Event-B.  It allows formal Event-B models to be created with an editor.  It generates proof obligations (\ref{proof_obligation}) that can be discharged either automatically or interactively.
 
-Rodin is modular software, and many extensions are available.  These include alternative editors, document generators, team support, as well as extensions (called plugins) to the notation, including decomposition or record support.  An up to date list of plugins is maintained in the Rodin Wiki (\ref{rodin_wiki}).
+Rodin is modular software and many extensions are available.  These include alternative editors, document generators, team support, and extensions (called plugins) to the notation which include decomposition or record support.  An up-to-date list of plugins is maintained in the Rodin Wiki (\ref{rodin_wiki}).
 
 \subsection{Eclipse} \label{subsection_eclipse}
 
 Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform for building software tools.  This matters for two reasons:
 \begin{itemize}
 	\item If you have already used Eclipse-based software, then you will feel immediately comfortable with the handling of the Rodin application.
-	\item There are many extensions available to Eclipse-based software, called plug-ins (\ref{plugin}).  There are Rodin-specific plugins as well as Rodin-independent plugins that may be useful to you.  The Rodin Wiki (\ref{rodin_wiki}), contains a list of plugins is maintained.
+	\item Many extensions, or plugins (\ref{plugin}), are available for Eclipse-based software. There are Rodin-specific plugins as well as Rodin-independent plugins that may be useful to you.  The Rodin Wiki (\ref{rodin_wiki}), contains a list of plugins is maintained.
 \end{itemize}
 
-The GUI of an Eclipse application consists of Views, Editors, Toolbars, Quickview, Perspectives and many more elements.  If these terms are unfamiliar to you, please consult Section~\ref{eclipse} which contains pointers to Eclipse tutorials.
+The GUI of an Eclipse application consists of Views, Editors, Toolbars, Quickview, Perspectives and many more elements.  If these terms are unfamiliar to you, please consult Section~\ref{eclipse} which contains references to Eclipse tutorials.
 
 In Section~\ref{tutorial_02}, we present the Rodin-specific GUI elements.

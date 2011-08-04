@@ -41,3 +41,44 @@
 \def\file#1#2{
 \href{\filepath#1}{#2}
 }
+
+% We want to mark contributions from other plugins in a special way, by including the plugin's
+% icon and by putting the content in a gray box.  We have to approach this differently for
+% Latex and for Plastex:
+% Latex: We use "shaded" from package "framed"
+% Platexte: We use "verse" as the marker and create the shading with the style sheet.
+\ifplastex
+\newenvironment{rodin-plugin}[2]
+{
+\renewcommand{\tmpName}{#2} % Otherwise we cannot use #2 in the end block - stupid!
+  \begin{verse}
+\begin{wrapfigure}{l}{}
+    \includegraphics{#1}
+\end{wrapfigure}
+}
+{
+\newline
+\textit{This contribution requires the \textbf{\tmpName} plugin.  The content is maintained by the plugin contributors and my be out of date.}
+\end{verse}}
+\else
+\definecolor{shadecolor}{rgb}{0.93,0.93,0.93}
+\newenvironment{rodin-plugin}[2]
+{
+\renewcommand{\tmpName}{#2} % Otherwise we cannot use #2 in the end block - stupid!
+\begin{shaded}
+\vspace{-2mm}
+\begin{wrapfigure}{l}{10mm}
+\includegraphics[width=10mm]{#1}
+\end{wrapfigure}
+\noindent
+}
+{
+\vspace{1mm}
+\hline
+\vspace{1mm}
+\noindent
+\Tiny{This contribution requires the \textbf{\tmpName} plugin.  The content is maintained by the plugin contributors and my be out of date.}
+\end{shaded}}
+\fi
+
+

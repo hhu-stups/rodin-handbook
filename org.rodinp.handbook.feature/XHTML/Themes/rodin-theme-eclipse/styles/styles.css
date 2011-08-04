@@ -329,6 +329,13 @@ blockquote p span.rmfamily img {
   left: 0.5em;
 }
 
+/* (mj) Used for making the Plugin-Boxes gray */
+blockquote.verse {
+  background-color: #eeeeee;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .footer {
   font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
   color: #888;

@@ -47,6 +47,7 @@
 % Latex and for Plastex:
 % Latex: We use "shaded" from package "framed"
 % Platexte: We use "verse" as the marker and create the shading with the style sheet.
+\newcommand{\tmpName}{Dummy}
 \ifplastex
 \newenvironment{rodin-plugin}[2]
 {
@@ -59,16 +60,19 @@
 {
 \newline
 \textit{This contribution requires the \textbf{\tmpName} plugin.  The content is maintained by the plugin contributors and my be out of date.}
-\end{verse}}
+\end{verse}
+}
 \else
+\usepackage{framed}
 \definecolor{shadecolor}{rgb}{0.93,0.93,0.93}
 \newenvironment{rodin-plugin}[2]
 {
 \renewcommand{\tmpName}{#2} % Otherwise we cannot use #2 in the end block - stupid!
 \begin{shaded}
-\vspace{-2mm}
 \begin{wrapfigure}{l}{10mm}
+\vspace{-5mm}
 \includegraphics[width=10mm]{#1}
+\vspace{-5mm}
 \end{wrapfigure}
 \noindent
 }
@@ -78,7 +82,8 @@
 \vspace{1mm}
 \noindent
 \Tiny{This contribution requires the \textbf{\tmpName} plugin.  The content is maintained by the plugin contributors and my be out of date.}
-\end{shaded}}
+\end{shaded}
+}
 \fi
 
 

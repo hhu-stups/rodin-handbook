@@ -5,7 +5,7 @@
 
 In Event-B we have two kind of components.
 We already encountered a \emph{context} that describes static elements of a model.
-On the other side a \emph{machine} describes the dynamic behavior.
+The other component is a \emph{machine} that describes the dynamic behavior of a model.
 
 \subsection{Contexts}
 \label{tutorial:contexts}
@@ -16,7 +16,7 @@ A context has the following components:
   User-defined types can be declared in the \textsl{SETS} section
   (See also \ref{tutorial:user_defined_sets}).
 \item[Constants]
-  We can declared constants here. The type of each constant must be given
+  We can declare constants here. The type of each constant must be given
   by the axioms.
 \item[Axioms] The axioms are a list of predicates. 
   They describe what can be taken for granted when developing a model.
@@ -43,11 +43,9 @@ There are two kind of proof obligations generated in a context:
   \item Some expressions are not obviously \emph{well-defined}.
     E.g. the axiom $x \div y > 2$ is only meaningful if $y$ is different from 0.
     Thus Rodin generates the proof obligation $y\neq 0$.
-    A well-definedness proof obligation has the name \eventbpo{label/WD}.
+    A well-defined proof obligation has the name \eventbpo{label/WD}.
 \end{itemize}
-Because the proof of a theorem or well-definedness may depend 
-on the axioms and theorems written before, their order matters.
-This is necessary to avoid circular reasoning.
+The order of the axioms and theorems matter because the proof of a theorem or the degree to which an expression is well-definded may depend on the axioms and theorems that are already written. This is necessary to avoid circular reasoning.
 
 
 \subsection{Machines}

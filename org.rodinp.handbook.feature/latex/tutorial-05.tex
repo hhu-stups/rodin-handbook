@@ -1,14 +1,14 @@
 \section{Introducing Contexts}
 \label{tutorial_05}
 
-\tick{\textbf{Goals:} In this section we introduce Contexts to apply the theoretical concepts that were introduced in the previous section (\ref{tutorial_04}). We will create a very simple model consisting of just one Context file.
+\tick{\textbf{Goals:} In this section we introduce contexts that apply to the theoretical concepts that were introduced in the previous section (\ref{tutorial_04}). We will create a very simple model consisting of just one context file.
 }
 
 In this tutorial, we will create a model of the well known Agatha puzzle. Here is a brief description of the puzzle:
 
-\textit{Someone in Dreadsbury Mansion killed Aunt Agatha. Agatha, the butler, and Charles live in Dreadsbury Mansion, and are the only ones to live there. A killer always hates, and is no richer than his victim. Charles hates no one that Agatha hates. Agatha hates everybody except the butler. The butler hates everyone not richer than Aunt Agatha. The butler hates everyone whom Agatha hates. No one hates everyone. Who killed Agatha?}
+\textit{Someone in Dreadsbury Mansion killed Aunt Agatha. Agatha, the butler, and Charles live in Dreadsbury Mansion and are the only ones to live there. A killer always hates, and is no richer than his victim. Charles hates no one that Agatha hates. Agatha hates everybody except the butler. The butler hates everyone not richer than Aunt Agatha. The butler hates everyone whom Agatha hates. No one hates everyone. Who killed Agatha?}
 
-The objective of this Section is to get familiar with Contexts by modeling the Agatha puzzle.
+The objective of this Section is to get familiar with contexts by modeling the Agatha puzzle.
 
 \subsection{Create a Context}
 
@@ -41,7 +41,7 @@ In this section we model the Agatha puzzle step by step.
 \subsubsection{Modelling the Persons}
 \label{tut_modelling_the_persons}
 
-We have three persons in the Agatha puzzle: Agatha itself, the butler and Charles. We model the three persons as constants (one constant for each person) in the corresponding \textsf{CONSTANTS} section:
+We have three persons in the Agatha puzzle: Agatha herself, the butler and Charles. We model the three persons as constants (one constant for each person) in the corresponding \textsf{CONSTANTS} section:
 
 \pencil{
 \begin{description}
@@ -76,14 +76,14 @@ Now, the constants itself are not very useful since they have no type (In additi
 \end{description}
 }
 
-\warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
+\warning{Please note the curly braces \{\} around the constants.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
 \info{There is a wizard (\ref{wizard}) for creating the contants, the set and the axiom automatically. Therefore, click on the \textsf{New Enumarated Set Wizard} tool bar item. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
 
 \subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
 
-We create to more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. The relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.
+We create two more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. The relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.
 
 The first constant \texttt{hates} is an arbitrary relation (\ref{relation}) between \texttt{persons}: 
 

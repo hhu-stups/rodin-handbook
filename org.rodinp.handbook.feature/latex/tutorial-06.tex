@@ -100,7 +100,7 @@ We saw in \ref{tutorial_03} how an event basically looks like using the example 
 		\EndAct
 		\end{description}
 \end{description}
-We have the event's name $set\_cars$, a \emph{parameter} $new\_value$,
+We have the event's name $set\_cars$, a \emph{parameter} with the name $new\_value$,
 a \emph{guard} with label grd1 and an \emph{action} with label act1.
 An event can have an arbitrary number of parameters, guards and events.
 
@@ -122,17 +122,18 @@ Now our aim is to prove that the invariants always hold. To do this, we must pro
   \item Assuming that the machine is in a state where the invariant holds,
     every enabled event leads to a state where the invariant holds.
 \end{itemize}
-Rodin generates proof obligations for every invariant that is possibly affected by an event.
-I.e. that the invariant uses variables that are changed by the event.
+Rodin generates proof obligations for every invariant that can be changed by an event, i.e. the invariant contains variables changed by an event.
 The name of the proof obligation is then \eventbpo{event\_name/invariant\_label/INV}.
 
+\marginpar{Does this sentence mean: The goal of such a proof is to assert that when all affected variables are replaced by new values from the actions, the invariant still is valid.}
 The goal of such a proof is the affected invariant where all variables are replaced by
-the new values from the actions. We can use the following hypothesis:
+the new values from the actions. We can use the following hypotheses:
 \begin{itemize}
+\marginpar{Do the hypotheses mean: 1. The invariants are unchanged because we know that before the even the invariants were true, 2. The guards are valid because the even only occurs when the guards are valid. PLEASE CHECK! These paragraphs don't make sense.}
 \item the unchanged invariants because we now that before the event the invariants were true
 \item the guards because the event only occurs when the guards are true
 \end{itemize}
-In the special case of an initialization we cannot use the invariants, because we do not
+In the special case of an initialization, we cannot use the invariants because we do not
 make any assumptions about uninitialized machines.
 
 \subsection{Refinement}
@@ -140,11 +141,11 @@ make any assumptions about uninitialized machines.
 Refinement is a central concept in Event-B. Refinements are used to gradually
 introduce the details and complexity into a model.
 If a machine \texttt{B} refines a machine \texttt{A}, \texttt{B} is only allowed to behave in a way that
-corresponds to the behavior of \texttt{A}. We now look into more detail what ``corresponds''
+corresponds to the behavior of \texttt{A}. We now look into more detail of what ``corresponds''
 here means.
 In such a setting, we call \texttt{A} the abstract and \texttt{B} the concrete machine.
 
-We give here just a brief overview over the concept of refinement, in the later section \ref{tutorial_07}
+Here we give just a brief overview over the concept of refinement. Later in Section \ref{tutorial_07}
 we use refinement in an example.
 
 The concrete machine has its own set of variables. Its invariants can refer to
@@ -152,30 +153,28 @@ the variables of the concrete and the abstract machine. If a invariant refers to
 we call it a ``gluing invariant''. The gluing invariants are
 used to relate the states between the concrete and abstract machines.
 
-The events of a concrete machine can now refine an abstract event. To provide that the concrete machine
-does only what the abstract one allows, we must show two things:
+The events of a concrete machine can now refine an abstract event. To ensure that the concrete machine 
+does only what is allowed by the abstract one, we must show two things:
 \begin{itemize}
 \item The concrete events can only occur when the abstract one can occur.
 \item If a concrete event occurs, the abstract event can occur in such a way that the resulting
-  states correspond again, i.e. that the gluing invariant remains true.
+  states correspond again, i.e. the gluing invariant remains true.
 \end{itemize}
 
 The first condition is called ``guard strengthening''. The resulting proof obligation has the label
 \eventbpo{concrete\_event/abstract\_guard/GRD}. We have to prove that under the assumption that the
 concrete event is enabled (i.e. its guard are true) and the invariants (both the abstract and the concrete) 
-hold, the abstract guards holds, too. Thus the goal of the proof is the abstract guard and the invariants and
+hold, the abstract guards holds as well. Thus the goal is to prove that the abstract guard, the invariants and the
 concrete guards can be used as hypothesis in the proof.
 
-The second condition that the gluing invariant remains true is just a more general case of the proof obligation
+The second condition, that the gluing invariant remains true, is just a more general case of the proof obligation which ensures 
 that an event does not violate the invariant. So the proof obligation's label is again 
-\eventbpo{concrete\_event/concrete\_invariant/INV}. The goal of the proof is the invariant of the concrete
-machine where each occurrence of a modified variable is replaced by its new value.
-The hypothesis we can use are:
+\eventbpo{concrete\_event/concrete\_invariant/INV}. The goal is to prove that the invariant of the concrete machine is valid when each occurence of a modified variable is replaced by its new value.
+The hypotheses we can use are:
 \begin{itemize}
-\item The invariant of both the concrete and abstract machines: We assume that they hold before the event occurred.
-\item The abstract invariants where the modified variables are replaced by their new values, because
-  we know that the abstract event does not violate the invariants, as we have proven before.
-\item The guards of both the concrete and abstract machines: The event occurs only when they are true.
+\item We assume that the invariant of both the concrete and abstract machines hold before the event occurred.
+\item The abstract invariants where the modified variables are replaced by their new values are valid because we know that the abstract event does not violate the invariants.
+\item The event occurs only when the guards of both the concrete and abstract machines are true.
 \end{itemize}
 
 These two conditions are the central piece to prove the correctness of a refinement. We now just explain a few
@@ -183,30 +182,29 @@ common special cases.
 
 \subsubsection{Variable re-use}
 \label{tutorial:variable_reuse}
-Most often, we do not want replace all variables by new ones. It is sometimes useful to keep even all variables.
+Most often, we do not want replace all variables by new ones. It is sometimes useful to keep all of the variables.
 We can do this just by repeating the names of the abstract variables in the variable section of the concrete
-machine. In that case we must prove for each concrete event that changes such a variable that the corresponding 
+machine. In that case, we must prove for each concrete event that changes such a variable that the corresponding 
 abstract event updates the variable in the same way.
 The proof obligation has the name \eventbpo{concrete\_event/abstract\_action/SIM}.
 
 \subsubsection{Introducing new events}
 \label{tutorial:skip}
-An event in the concrete machine might refine no event in the abstract machine. In that case it is assumed
-to refine \emph{skip}, the event that does nothing and can occur any time. 
+An event in the concrete machine might not refine any event in the abstract machine. In that case it is assumed
+to refine \emph{skip}, which is the event that does nothing and can occur any time. 
 The guard strengthening is then trivially true and doesn't need to be proven.
-It still must be proven that the gluing invariant holds, this time under the assumption that the abstract machine's
-variables have not changed. So the new state of our newly introduced event corresponds to the same state of
-our abstract machine than before the event happened.
+It still must be proven that the gluing invariant holds but this time under the assumption that the abstract machine's
+variables have not changed. Therefore, the new state of our newly introduced event corresponds to the same state of
+our abstract machine from before the event happened.
 
 \subsubsection{Witnesses}
 \label{tutorial:witnesses}
-Let's assume a situation where we have an abstract event with a parameter $p$ and in an refining event we do not
-need that parameter anymore.
-Above we saw that we have to prove that for each concrete event the abstract event may act accordingly.
-But with the parameter, we now have the situation that we must prove the existence of a value for $p$ such
-that an abstract event exists. Proofs with existential quantification are often hard to do so Event-b 
-use the construct of a \emph{witness}. A wittiness is just a predicate on the abstract parameter with the
-name of the variable as label. Often a wittiness has just the simple form $p = \ldots$.
+Let's consider a situation where we have an abstract event with a parameter $p$ and in a refining event that no longer needs that parameter.
+We saw above that we have to prove that for each concrete event the abstract event may act accordingly.
+With the parameter, however, we now have the situation that we must prove the existence of a value for $p$ such
+that an abstract event exists. Proofs with existential quantification are often hard to do, so Event-b 
+uses the construct of a \emph{witness}. A witness is just a predicate of the abstract parameter with the
+name of the variable as label. Often a witness has just the simple form $p = \ldots$.
 
 
 %%% Local Variables: 

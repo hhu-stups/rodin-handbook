@@ -1,12 +1,12 @@
 \section{Expanding the Traffic Light System: Contexts and Refinement}
 \label{tutorial_07}
 
-\tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colors, and a refinement to integrate them. We will introduce another refinement for the push buttons.}
+\tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colors and a refinement to integrate them. We will also introduce another refinement for the push buttons.}
 
 \subsection{Data Refinement}
 \label{tutorial:data_refinement}
 
-We will continue the example from Section~\ref{tutorial_03}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE, and a number of features were still missing.
+We will continue the example from Section~\ref{tutorial_03}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE and a number of features were still missing.
 
 We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors. Figure \ref{fig_tut_07_tl_colors} depicts our mapping for the traffic light.
 
@@ -18,12 +18,12 @@ We will introduce data refinement in this section.  The objective is to create a
 \end{center}
 \end{figure}
 
-For simplicity, the traffic light for pedestrians consists of only two lights, red and green.
+For simplicity, the traffic light for pedestrians consists of only two lights: red and green.
 
 We break this problem into two steps:
 
 \begin{enumerate}
-	\item Create a context with the data structures for the colors
+	\item Create a context with the data structures for the colors.
 	\item Create a refinement of the existing model that sees the new context and refines the boolean states into colors.
 \end{enumerate}
 
@@ -72,11 +72,11 @@ This completes the context.
 
 \subsection{The Actual Data Refinement}
 
-The easiest way to create a refinement is by right-clicking on the machine in the project browser and to select \textsf{Refine}.  This will create a ``stub'' consisting of all variables and events.
+The easiest way to create a refinement is by right-clicking on the machine in the project browser and selecting \textsf{Refine}.  This will create a ``stub'' consisting of all variables and events.
 
 TODO: Screenshot of selecting the context menu.
 
-\warning{In refinements, the \textsf{Edit} View of the Editor hides some information from the abstract machine by default.  This can be particularly important when you modify a refined event.  The \textsf{Pretty Print} View shows all element, with elements from the abstract machine in \textit{italics}.}
+\warning{In refinements, the \textsf{Edit} View of the Editor hides some information from the abstract machine by default.  This can be particularly important when you modify a refined event.  The \textsf{Pretty Print} View shows all the element with elements from the abstract machine in \textit{italics}.}
 
 First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{sees}) statement:
 

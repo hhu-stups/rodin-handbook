@@ -72,23 +72,25 @@ This completes the context.
 
 \subsection{The Actual Data Refinement}
 
-The easiest way to create a refinement is by right-clicking on the machine in the project browser and selecting \textsf{Refine}.  This will create a ``stub'' consisting of all variables and events.
+The easiest way to create a refinement is by right-clicking on the machine in the project browser and selecting \textsf{Refine} (in this case, we will be refining the machine \textsf{mac} from the project \textsf{tutorial-3}).  This will create a ``stub'' consisting of all variables and events.
 
 TODO: Screenshot of selecting the context menu.
 
 \warning{In refinements, the \textsf{Edit} View of the Editor hides some information from the abstract machine by default.  This can be particularly important when you modify a refined event.  The \textsf{Pretty Print} View shows all the element with elements from the abstract machine in \textit{italics}.}
+
+\warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go) and variables that you do not have.})  }
 
 First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{sees}) statement:
 
 \pencil{
 \begin{description}
 \MACHINE{mac1}
-\REFINES{mac0}
+\REFINES{mac}
 \SEES{ctx1}
 \end{description}
 }
 
-We start with the traffic lights for the pedestrians, which consists of just two colors (red and green).  We introduce a new variable to represent the traffic light colors called \textsf{peds\_colors}, with corresponding typing and an initialization (only the changes are shown in the following):
+We start with the traffic lights for the pedestrians which consist of just two colors (red and green).  We introduce a new variable to represent the traffic light colors called \textsf{peds\_colors}, with corresponding invariant and an initialization (the changes are shown in the following):
 
 \pencil{
 \begin{description}
@@ -102,10 +104,10 @@ We start with the traffic lights for the pedestrians, which consists of just two
 	\end{description}
 \EVENTS
 	\INITIALISATION
-		\\\textit{extended}
+		\\\textit{extended}		
 		\begin{description}
 		\BeginAct
-			\begin{description}
+			\begin{description}	
 			\nItemX{ init4 }{ peds\_colors :=  red }
 			\end{description}
 		\EndAct
@@ -114,7 +116,7 @@ We start with the traffic lights for the pedestrians, which consists of just two
 \end{description}
 }
 
-Next, we will create a gluing invariant (\ref{gluing_invariant}) that associated \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_colors} that we just created.  The gluing invariant shall map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
+Next, we will create a gluing invariant (\ref{gluing_invariant}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_colors} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
 
 \pencil{
 \begin{description}
@@ -125,7 +127,7 @@ Next, we will create a gluing invariant (\ref{gluing_invariant}) that associated
 \end{description}
 }
 
-In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change, but not \textsf{peds\_colors}.  We expect that this will result in undischarged proof obligations \ref{undischarged_proof_obligations}.  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with figure \ref{fig_tut_07_undischarged}).
+In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_colors} will not.  We expect that this will result in undischarged proof obligations \ref{undischarged_proof_obligations}.  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with figure \ref{fig_tut_07_undischarged}).
 
 \begin{figure}[!h]
 \begin{center}
@@ -145,11 +147,11 @@ To fix this, we have to modify the two events in question.  Let's start with \te
 \end{center}
 \end{figure}
 
-This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colors} (setting it to \textsf{go}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
+This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colors} (replacing \textsf{peds\_go := true} with \textsf{peds\_colors := green}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
 
-Next, we perform the corresponding change on \textsf{set\_peds\_stop}.  And last, \textsf{set\_cars} also contains a reference to \textsf{peds\_go} that must be replaced.
+Next, we perform the corresponding change on \textsf{set\_peds\_stop} (change the action to \textsf{peds\_colors := red} and rename the event \textsf{set\_peds\_red}). Lastly, the event \textsf{set\_cars} also contains a reference to \textsf{peds\_go} that must be replaced (in the second guard, replace \textsf{peds\_go = FALSE} with \textsf{peds\_colors = red}).
 
-Once all references to \textsf{peds\_go} have been replace, we can remove the variable \textsf{peds\_go} from the \textsf{VARIABLES} section.  You shouldn't have any errors or warnings, and all proof obligations should be discharged.
+Once all references to \textsf{peds\_go} have been replace, we can remove the variable \textsf{peds\_go} from the \textsf{VARIABLES} section. You will also need to change the \textsf{INITIALISATION} event to not extended and remove the action which initialises the variable \textsf{peds\_go}. Now you shouldn't have any errors or warnings, and all proof obligations should be discharged.
 
 \warning{If you get the error message ``Identifier peds\_go has not been declared'', then there are references to the refined variable left somewhere in the model.  It can be helpful to use the \textsf{Pretty Print} view, as it will show the ``inherited'' elements from the abstract machine as well.}
 
@@ -158,7 +160,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 \pencil{
 \begin{description}
 \MACHINE{mac1}
-\REFINES{mac0}
+\REFINES{mac}
 \SEES{ctx1}
 \VARIABLES
 	\begin{description}
@@ -226,13 +228,13 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 
 \subsection{Witnesses}
 
-The refinement of \textsf{set\_cars} is more difficult, as the event uses a parameter (the new value for \textsf{cars\_go}).  In order to create the association, we need a witness (\ref{witness}).
+The refinement of \textsf{set\_cars} is more difficult since the event uses a parameter (the new value for \textsf{cars\_go}).  In order to refine it, we need a witness (\ref{witness}).
 
-A witness is for an event's parameter what a gluing invariant is for a variable: it is a mapping between the abstract parameter and the new parameter and allows the abstract parameter to disappear.  In this example, the abstract parameter \textsf{new\_value} is of type \textsf{BOOL}, while we introduce a new parameter \textsf{new\_value\_colors} of type \textsf{COLORS}.
+A witness is to an event's parameter what a gluing invariant is to a variable: it is a mapping between the abstract parameter and the new parameter and allows the abstract parameter to disappear.  In this example, the abstract parameter \textsf{new\_value} is of type \textsf{BOOL}, and we introduce a new parameter \textsf{new\_value\_colors} of type \textsf{COLORS}.
 
 \warning{The naming of a witnesses' label is mandatory and must be the name of the abstract parameter.  In our example, the label must be \textsf{new\_value}}
 
-So let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as before.  Note that the traffic light for the cars can show more than one color at a time.  Therefore, the variable contains a set of colors, instead of just one color (as modelled for \textsc{peds\_colors}):
+Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one color at a time.  Therefore, the variable contains a set of colors instead of just one color (as modelled for \textsc{peds\_colors}):
 
 \pencil{
 \begin{description}
@@ -258,11 +260,11 @@ So let's get started.  We first provide the new variable, gluing invariant, typi
 \end{description}
 }
 
-We also have to modify the guard on \textsf{set\_peds\_green}, something that you should now be able to figure out yourself.
+We also have to modify the guard on \textsf{set\_peds\_green}, which is something that you should now be able to figure out yourself (just replace \textsf{cars\_go = FALSE} with \textsf{green} \notin \textsf{cars\_colors}).
 
-The interesting piece is the last event, \textsf{set\_cars}, which we rename into \textsf{set\_cars\_colors}.  We change the parameter to \textsf{new\_value\_colors} and type it as a subset of \textsf{COLORS}.
+The interesting piece is the last event, \textsf{set\_cars}, which we rename as \textsf{set\_cars\_colors}.  We change the parameter to \textsf{new\_value\_colors} and type it as a subset of \textsf{COLORS}.
 
-The witness appears in the \textsf{with} section of the event.  The label \textbf{must} be \textsf{new\_value}.  The value itself must describe the relationship between the abstract parameter \textsf{new\_value} and the new parameter \textsf{new\_value\_colors}.  As we use the parameter as the new value for the variable \textsf{cars\_colors}, the witness is an adaptation of the gluing invariant (we just replace \textsf{cars\_colors} with \textsf{new\_value\_colors}.
+The witness appears in the \textsf{with} section of the event.  The label \textbf{must} be \textsf{new\_value}.  The value itself must describe the relationship between the abstract parameter \textsf{new\_value} and the new parameter \textsf{new\_value\_colors}.  As we use the parameter as the new value for the variable \textsf{cars\_colors}, the witness is an adaptation of the gluing invariant (we just replace \textsf{cars\_colors} with \textsf{new\_value\_colors}).
 
 \info{In most cases, the witness is a slightly modified gluing invariant.}
 
@@ -295,7 +297,7 @@ Here is the resulting event:
 \end{description}
 }
 
-Even though all proof obligations are now discharged, we're not done yet: While the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards, with each guard defining one transition:
+Now you can get rid of the variable \textsf{cars\_go} and its inisialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
 
 \pencil{
 \begin{description}
@@ -308,20 +310,20 @@ Even though all proof obligations are now discharged, we're not done yet: While 
 
 \subsection{Discussion}
 
-Note that we used two very different approaches to model the traffic lights for cars and pedestrians.  For the pedestrians, we created one event for each state transition.  For the cars, we handled all states in one single event.
+Notice that we have used two very different approaches to model the traffic lights for cars and pedestrians.  For the pedestrians, we created one event for each state transition.  For the cars, we handled all states in one single event.
 
-You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model.  We did it here only to demonstrate both approaches).
+You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model. We did it here only to demonstrate both approaches).
 
-We won't cover deadlocks (\ref{deadlock}) and deadlock freedom in this tutorial; however, we want to point out that the traffic light for the cars is interesting regarding deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever!  A model checker (like ProB (\ref{prob}) could find it.  This is not a problem, however, as with the given initialization and events, that state is not reachable in the first place.
+We won't cover deadlocks (\ref{deadlock}) and deadlock freedom in this tutorial; however, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as ProB (\ref{prob})) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
 
-We hope that this Section helped you to understand the power of abstraction.  The safety invariant from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors, being confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
+We hope that this section helped you to understand the power of abstraction.  The safety invariant from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
 
 \subsection{The Refined Machine with All Data Refinement}
 
 \pencil{
 \begin{description}
 \MACHINE{mac1}
-\REFINES{mac0}
+\REFINES{mac}
 \SEES{ctx1}
 \VARIABLES
 	\begin{description}
@@ -399,13 +401,13 @@ We hope that this Section helped you to understand the power of abstraction.  Th
 
 \subsection{One more Refinement: The Push Button}
 
-We will demonstrate another application of refinement: Introducing new features into an existing model.  A typical traffic light system allows the pedestrians to request crossing the street by pressing a button.  We will introduce this feature in a new refinement.
+We will demonstrate another application of refinement: introducing new features into an existing model.  A typical traffic light system allows the pedestrians to request a light change by pressing a button.  We will introduce this feature in a new refinement.
 
-While we could have introduced the push button in the initial machine, introducing it later allows us to structure the model, making it easier to understand and navigate.
+We could have introduced the push button in the initial machine, but introducing it later allows us to structure the model and makes it easier to understand and navigate.
 
-We will realize this feature by introducing a new boolean variable for the push button.  We will introduce an event that notifies the model of the pressing of the push button.  Upon allowing the pedestrians to cross, we will reset the push button.
+We will realize this feature by introducing a new boolean variable for the push button.  We will introduce an event that notifies the model that a push button has been pressed.  Upon allowing the pedestrians to cross, we will reset the push button.
 
-As in the previous Section, we create a new refinement \textsf{mac2} by right-clicking on \textsf{mac1} and selecting \textsf{Refine}.  A stub is generated that contains the events from the abstract machine.  We can simply add a new variable for the push button (including typing and initialization).  We also introduce an event to set the button.  This event doesn't work while the pedestrians have a green light.
+As in the previous section, we create a new refinement \textsf{mac2} by right-clicking on \textsf{mac1} and selecting \textsf{Refine}.  A stub is generated that contains the events from the abstract machine.  We simply add a new variable for the push button (including typing and an initialisation clause).  We also introduce an event that sets the button.  This event doesn't work while the pedestrians have a green light.
 
 \pencil{
 \begin{description}
@@ -443,13 +445,13 @@ As in the previous Section, we create a new refinement \textsf{mac2} by right-cl
 \end{description}
 }
 
-What's left now is the integration of the push button with the traffic light logic.  This includes:
+Now we need to integrate the push button with the traffic light logic:
 \begin{itemize}
-	\item Upon pressing the button, the pedestrians must eventually get a green light
-	\item At some point, the button variable must be reset
+	\item Upon pressing the button, the pedestrians must eventually get a green light.
+	\item At some point, the button variable must be reset.
 \end{itemize}
 
-As we will see in the following discussion, this can get more tricky than it first appears.  For now, we will introduce a guard preventing the car lights to turn to green when button is true.  And we will reset the button when the pedestrian lights turn red:
+As we will see in the following discussion, this be more tricky than it first appears.  For now, we will introduce a guard preventing the car lights from turning green when button is true, and we will reset the button when the pedestrian lights turn red:
 
 \pencil{
 \begin{description}
@@ -476,13 +478,13 @@ As we will see in the following discussion, this can get more tricky than it fir
 
 \subsection{Discussion}
 
-There are a number of problems associated with the model in its current state.  Let's start with the resetting of the button: The way we built our model so far, \textsf{set\_peds\_red} can be triggered any time - there is not a single guard, neither in the abstract event.  Therefore, the button could be reset any time, without the pedestrian light ever turning green.
+There are a number of problems associated with the model in its current state.  Let's start with the resetting of the button: The way we built our model so far, \textsf{set\_peds\_red} can be triggered any time; there is not a single guard which prevents this.  Therefore, the button could be reset any time without the pedestrian light ever turning green.
 
-This could be prevented with additional guards - for instance, the traffic light events could require an actual change in the light's status.  This in turn could lead to deadlocks.
+This could be prevented with additional guards. For instance, the traffic light events could require an actual change in the light's status.  This in turn could lead to deadlocks.
 
-But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green, instead the pedestrians get green light again and the cycle can start over.
+But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green. Instead, the pedestrians get a green light again and the cycle continues.
 
-There are tactics to address all these issues.  However, rarely is it possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour, or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
+There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
 
 \info{As an exercise, try to improve the model to address these issues.}
 

@@ -336,6 +336,11 @@ blockquote.verse {
   margin-right: 0px;
 }
 
+/* (mj) Formatting Marginpar */
+p.marginpar {
+  background-color: #ffff00;
+}
+
 .footer {
   font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
   color: #888;

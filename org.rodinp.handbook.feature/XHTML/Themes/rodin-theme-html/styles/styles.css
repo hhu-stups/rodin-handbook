@@ -372,6 +372,11 @@ blockquote.verse {
   margin-right: 0px;
 }
 
+/* (mj) Formatting Marginpar */
+p.marginpar {
+  background-color: #ffff00;
+}
+
 .figure, .caption {
 	margin:25px;
 }

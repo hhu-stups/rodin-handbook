@@ -86,4 +86,9 @@
 }
 \fi
 
+% Marginpars are  cropped - this formats them nicely.
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\scriptsize{#1}]
+{\raggedright\small{#1}}}
+\marginparwidth=2cm
 

@@ -122,17 +122,17 @@ Now our aim is to prove that the invariants always hold. To do this, we must pro
   \item Assuming that the machine is in a state where the invariant holds,
     every enabled event leads to a state where the invariant holds.
 \end{itemize}
+
 Rodin generates proof obligations for every invariant that can be changed by an event, i.e. the invariant contains variables changed by an event.
 The name of the proof obligation is then \eventbpo{event\_name/invariant\_label/INV}.
+The goal of such a proof is to assert that when all affected variables are replaced by new values from the actions, the invariant still holds. The hypotheses for such a proof obligation consist of:
 
-\marginpar{Does this sentence mean: The goal of such a proof is to assert that when all affected variables are replaced by new values from the actions, the invariant still is valid.}
-The goal of such a proof is the affected invariant where all variables are replaced by
-the new values from the actions. We can use the following hypotheses:
 \begin{itemize}
-\marginpar{Do the hypotheses mean: 1. The invariants are unchanged because we know that before the even the invariants were true, 2. The guards are valid because the even only occurs when the guards are valid. PLEASE CHECK! These paragraphs don't make sense.}
-\item the unchanged invariants because we now that before the event the invariants were true
-\item the guards because the event only occurs when the guards are true
+
+\item All invariants, because we assume that all invariants hold before the event is triggered,
+\item All guards, because events can only be triggered when the guards are valid.
 \end{itemize}
+
 In the special case of an initialization, we cannot use the invariants because we do not
 make any assumptions about uninitialized machines.
 

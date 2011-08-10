@@ -260,7 +260,7 @@ Let's get started.  We first provide the new variable, gluing invariant, typing 
 \end{description}
 }
 
-We also have to modify the guard on \textsf{set\_peds\_green}, which is something that you should now be able to figure out yourself (just replace \textsf{cars\_go = FALSE} with \textsf{green} \notin \textsf{cars\_colors}).
+We also have to modify the guard on \textsf{set\_peds\_green}, which is something that you should now be able to figure out yourself (just replace \textsf{cars\_go = FALSE} with \textsf{green} $\notin$ \textsf{cars\_colors}).
 
 The interesting piece is the last event, \textsf{set\_cars}, which we rename as \textsf{set\_cars\_colors}.  We change the parameter to \textsf{new\_value\_colors} and type it as a subset of \textsf{COLORS}.
 

@@ -1,23 +1,23 @@
 \section{Proving}
 \label{tutorial_08}
 
-\tick{\textbf{Goals:} The goal of this section is to get familiar with the Proving Perspective and to prove a simple proof by hand.}
+\tick{\textbf{Goals:} The goal of this section is to get familiar with the Proving Perspective and to carry out a simple proof by hand.}
 
 \subsection{The Celebrity Problem}
 
-In this section we will work on the model of the so-called celebrity problem. In the setting for this problem, we have a ``knows'' relation. This relation is defined so that
+In this section, we will work on the model of the so-called celebrity problem. In the setting for this problem, we have a ``knows'' relation. This relation is defined so that
 
 \begin{itemize}
 	\item no one knows himself,
-	\item the celebrity knows nobody, but
-	\item everybody knows the celebrity.
+	\item the celebrity knows nobody,
+	\item but everybody knows the celebrity.
 \end{itemize}    
 
 The goal is to find the celebrity.
 
-\warning{Make sure that you have no existing Project named Celebrity. If you do, then rename it. For this right click on the project and select \textsf{Rename...}}
+\warning{Make sure that you have no existing Project named Celebrity. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
 
-Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. For this, choose \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Project into workspace}. Then, select the according archive file and click on \textsf{Finish}.
+Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the according archive file and click on \textsf{Finish}.
 
 Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
 
@@ -29,12 +29,12 @@ Rodin takes a few seconds to extract and load all the files. Once it is done, it
 \end{center}
 \end{figure}
 
-In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. The problem is that the event is not declared as a refinement. To solve the problem, expand the event and add a new entry in the \textsf{REFINES} section (Click on the green plus-sign to create a new entry). Select the event \textsf{celebrity}. This declares that the event is a refinement of an event with the same name in the abstract machine (\ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
+In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. Select the event \textsf{celebrity}. The problem is that the event is not declared as a refinement. To solve the problem, expand the event and add a new entry in the \textsf{REFINES} section (Click on the green plus-sign to create a new entry). This declares that the event is a refinement of an event with the same name in the abstract machine (\ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
 
 %Do we need an additional explanation for witnesses, since this is already done in tutorial 07!?
 %In any abstract event that uses parameters, if the concrete event has no parameter with the same name, the tool needs a witness so that it notices what value the parameter should take. Witnesses are also needed for variables that have a non-deterministic (\ref{non_deterministic}) assignment in an abstract event and do not appear in the concrete model.
 
-The three remaining warnings state that witnesses (\ref{witness}) are missing.  So, double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then, expand the \textsf{celebrity} event and add a witness in the \textsf{WITH} section (Click on the green plus-sign to create a new entry).
+The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then expand the \textsf{celebrity} event and add a witness in the \textsf{WITH} section (Click on the green plus-sign to create a new entry).
 
 A default witness \textsf{wit1} has been created, with a default value \textsf{$\top$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness is \textsf{x = b}. The event should now look as follows: 
 
@@ -58,10 +58,10 @@ A default witness \textsf{wit1} has been created, with a default value \textsf{$
 		\end{description}
 \end{description}
 
-Edit the content and save the file. One warning will disappear, two to go.
+Edit the content and save the file. One warning will disappear, and only two will remain.
 
 \info{
-Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left on the Rodin Problems View (\ref{rodin_problems_view}).
+Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems View (\ref{rodin_problems_view}).
 }
 
 The following section \ref{tut_08_final_celebrity} shows the final \texttt{Celebrity\_2} machine.
@@ -162,7 +162,7 @@ The following section \ref{tut_08_final_celebrity} shows the final \texttt{Celeb
 
 \subsection{The First Proof}
 
-In this section we prove the model of the Celebrity Problem. Therefore, switch to the Proving Perspective. You can switch between perspectives using the shortcut bar as shown in figure \ref{fig_tut_08_switch_perspective}. 
+In this section, we prove the model of the Celebrity Problem. To do this, click on the box in the upper right hand corner that has a little plus sign to switch to the Proving Perspective. You can switch between perspectives using the shortcut bar as shown in figure \ref{fig_tut_08_switch_perspective}. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -187,16 +187,16 @@ We should now see the window in figure \ref{fig_tut_08_proving_perspective}.
 The \texttt{Proving Perspective} contains three new important views:
 
 \begin{description}
-	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate inside the proof. Currently, we have not started with the proof yet, so there is no new place to move to. 
+	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate inside the proof. Currently, we have not started with the proof, so there is no new place to move to. 
 	\item[Proof Control View (\ref{proof_control_view})] This is where we perform interactive proofs.
 	\item[Goal View (\ref{goal_view})] This window shows what needs to be proved at the current position inside the proof tree.
 \end{description}
 
-Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. After this expand the Proof Obligations section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. All except for three proofs already should be completed (indicated by a green chop). 
+Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then expand the \textsf{Proof Obligations} section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. Only three proofs have not been completed completed (a completed proof is indicated by a green check). 
 
 %Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}). The p0 prover uses all selected hypotheses (the ones in Selected Hypotheses View).
 
-Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. For this double click on the proof obligation \textsf{remove\_1/inv2/INV}.
+Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
 
 %\begin{figure}[!h]
 %\begin{center}
@@ -206,7 +206,7 @@ Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
 %\end{center}
 %\end{figure}
 
-We should now see the window in figure \ref{fig_tut_08_proof_obligation}.
+We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
 
 \begin{figure}[!h]
 \begin{center}
@@ -218,11 +218,11 @@ We should now see the window in figure \ref{fig_tut_08_proof_obligation}.
 
 \info{Make sure that you understand the different buttons in the \textsf{Proof Control View} (\ref{proof_control_view}).}
 
-In order to prove the proof obligation, it suffices to prove \textsf{$x \neq c$}. So type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{Add Hypothesis button (ah)}. 
+In order to prove the proof obligation, it suffices to prove \textsf{$x \neq c$}. Type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{Add Hypothesis button (ah)}. 
 
-\info{In order to revert a step click on a node in the \texttt{Proof Tree View} and click on the scissors button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
+\info{In order to revert a step, click on a node in the \texttt{Proof Tree View} and click on the scissors button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
 
-The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof. For this click on the Search hypothesis button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (compare with figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the green plus button. 
+The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof. To do this, click on the Search hypothesis button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (compare with figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the green plus button. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -232,7 +232,7 @@ The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourse
 \end{center}
 \end{figure}
 
-Click now on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis} (\ref{Predicate prover on selected hypothesis}). The goal should be discharged and the \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$. Click a second time on the \textsf{p0} button in order to finalize the proof. The simley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in figure \ref{ig_tut_08_proof_final}.
+Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis} (\ref{Predicate prover on selected hypothesis}). The goal should be discharged and the \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$. Click a second time on the \textsf{p0} button in order to finalize the proof. The simley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in figure \ref{ig_tut_08_proof_final}.
 
 \begin{figure}[!h]
 \begin{center}
@@ -244,10 +244,10 @@ Click now on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \te
 
 After saving the proof, the proof obligation \textsf{remove\_1/inv2/INV} in the \textsf{Event-B Explorer} should also become a green chop.
 
-\info{There are alternative ways to prove the proof obligation. For instance we can use the lasso button to load into the \textsf{Selected Hypotheses View} those hidden hypotheses that contain identifiers in common with the goal, and with the selected hypotheses.}
+\info{There are alternative ways to prove the proof obligation. For instance, we can use the lasso button to load those hidden hypotheses that contain identifiers in common with the goal into the \textsf{Selected Hypotheses View}, and we can also use it with the selected hypotheses.}
 
 In order to move to the next undischarged proof obligation, you may also use the \textsf{Next Undischarged PO button (The small right arrow icon)} of the \textsf{Proof Control View} (\ref{proof_control_view}). The next proof can be solved the same way as the last one.
 
-\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: We have to fill in an existential quantifier. First, look in the list of hypothesis if you find any variable that is in P, and select that hypothesis. Then, instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now, all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
+\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: We have to fill in an existential quantifier. First, look in the list of hypothesis to see if you find any variable that is in P and select that hypothesis. Then instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
 
-This concludes the tutorial. Please note that this tutorial gave you only a first view of proving.
+This concludes the tutorial. Please note that this tutorial gave you only an introduction to proving.

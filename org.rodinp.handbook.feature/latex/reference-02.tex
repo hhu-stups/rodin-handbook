@@ -1,8 +1,8 @@
 \section{Event-B (Modeling notation)}
 \label{reference_02}
 
-In Event-B, we have two types of components, contexts and models.
-We describe briefly of what elements a context or model consists.
+In Event-B, we have two types of components: contexts and models.
+Here we describe briefly the different elements of a context or model.
 
 Predicates or expressions can be occur at various places in both components.
 For each predicate or expression, we briefly describe the scope, i.e. which
@@ -22,36 +22,35 @@ A context describes the static part of a model. It consists of
 
 \subsubsection{Sets}
 \label{sets}
-A new type can be declared by adding it's name -- an identifier -- to the \eventbsection{Sets} section.
-The identifier must be unique, i.e. it must not be declared as a constant or set before in an
-extended context.
+A new type can be declared by adding its name -- an identifier -- to the \eventbsection{Sets} section.
+The identifier must be unique, i.e. it must not have been already declared as a constant or set in an extended context.
 The identifier then denotes the set of all elements of the type. 
 
-A common pattern for declaring enumerated sets, i.e. sets where all elements are explicitly given,
-is to use the partition operator. If we want to specify a set $S$ with elements $e_1,\ldots,e_n$, than
+A common pattern for declaring enumerated sets (sets where all elements are explicitly given)
+is to use the partition operator. If we want to specify a set $S$ with elements $e_1,\ldots,e_n$, then
 we declare $S$ as a set, $e_1,\ldots,e_n$ as constants and add the axiom $partition(S,e_1,\ldots,e_n)$.
 
 \subsubsection{Constants and axioms}
 \label{constants_and_axioms}
-Constants can be declared by adding their unique name (an identifier) to the \eventbsection{Constants}.
+Constants can be declared by adding their unique name (an identifier) to the \eventbsection{Constants} section.
 The type of the constant must be inferable by the axioms.
 
 An axiom describes a statement that can be assumed as true in the rest of the model.
 Each axiom consists of a label and a predicate.
 In an axiom, constants and sets of the context itself and of extended contextes can be referenced.
 
-An axiom can be marked as a theorem. In that case a proof obligation with the label (TODO: THM/label or something like that) is added.
+An axiom can be marked as a theorem. In that case a proof obligation with the label \textsf{axiomlabel/THM} is added.
 The goal of the proof obligation is the theorem itself.
-Axioms that are declared above the theorem and the axioms of extended contextes can be used as hypothesis.
+Axioms that are declared before the theorem and the axioms of extended contexts can be used as hypotheses.
 
-If an axiom contains any well-definedness condition, a proof obligation of the form (TODO: WD/label?) is generated.
-Axiom above and axioms of extended contextes can be used as hypothesis.
+If an axiom contains any condition that is well-defined, a proof obligation of the form \textsf{axiomlabel/WD} is generated.
+Axioms declared beforehand and axioms of extended contextes can be used as hypotheses.
    
 \subsubsection{Extending a context}
 Contexts can be extended by adding their name to the \eventbsection{Extends} section.
 
 The resulting context consists of all constants and axioms of all extended contexts and the extending context itself.
-Thus for a context/machine that extends/sees the contexts, there is no difference where a constant or axiom is declared.
+Thus for a context/machine that extends/sees the contexts, it makes no difference where a constant or axiom is declared.
 
 \subsection{Machines}
 A machine describes the dynamic behaviour of a model by means of variables whose values are changed by events.

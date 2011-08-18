@@ -1,21 +1,65 @@
 \section{Event-B (Modeling notation)}
 \label{reference_02}
 
+In Event-B, we have two types of components, contexts and models.
+We describe briefly of what elements a context or model consists.
+
+Predicates or expressions can be occur at various places in both components.
+For each predicate or expression, we briefly describe the scope, i.e. which
+identifier can be used.
+
+We explain which proof obligations are generated. 
+For each proof obligation, we list the goal and the hypothesis that can be used.
+
 \subsection{Contexts}
+A context describes the static part of a model. It consists of
+\begin{itemize}
+\item Sets
+\item Constants
+\item Axioms
+\item Extended contexts
+\end{itemize}
 
 \subsubsection{Sets}
+\label{sets}
+A new type can be declared by adding it's name -- an identifier -- to the \eventbsection{Sets} section.
+The identifier must be unique, i.e. it must not be declared as a constant or set before in an
+extended context.
+The identifier then denotes the set of all elements of the type. 
 
-Introducing sets, with a comment about how to add enumerated sets.
+A common pattern for declaring enumerated sets, i.e. sets where all elements are explicitly given,
+is to use the partition operator. If we want to specify a set $S$ with elements $e_1,\ldots,e_n$, than
+we declare $S$ as a set, $e_1,\ldots,e_n$ as constants and add the axiom $partition(S,e_1,\ldots,e_n)$.
 
-\subsubsection{Constants and axioms (with theorems), which POs are generated}
+\subsubsection{Constants and axioms}
+\label{constants_and_axioms}
+Constants can be declared by adding their unique name (an identifier) to the \eventbsection{Constants}.
+The type of the constant must be inferable by the axioms.
+
+An axiom describes a statement that can be assumed as true in the rest of the model.
+Each axiom consists of a label and a predicate.
+In an axiom, constants and sets of the context itself and of extended contextes can be referenced.
+
+An axiom can be marked as a theorem. In that case a proof obligation with the label (TODO: THM/label or something like that) is added.
+The goal of the proof obligation is the theorem itself.
+Axioms that are declared above the theorem and the axioms of extended contextes can be used as hypothesis.
+
+If an axiom contains any well-definedness condition, a proof obligation of the form (TODO: WD/label?) is generated.
+Axiom above and axioms of extended contextes can be used as hypothesis.
    
 \subsubsection{Extending a context}
+Contexts can be extended by adding their name to the \eventbsection{Extends} section.
 
-\subsection{Models}
+The resulting context consists of all constants and axioms of all extended contexts and the extending context itself.
+Thus for a context/machine that extends/sees the contexts, there is no difference where a constant or axiom is declared.
+
+\subsection{Machines}
+A machine describes the dynamic behaviour of a model by means of variables whose values are changed by events.
 
 \subsubsection{Variables and invariants (with theorems), generated POs}
 
 \subsubsection{Seeing a context}
+If the model sees a context, 
 
 \subsubsection{Refining a model}
 
@@ -32,3 +76,9 @@ How to prove termination by the model's variant and the status of events.
 \subsection{Generated proof obligations}
 
 We give a brief overview about what POs are generated where. This should help the user to identify the reason of a PO when he just know its label.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

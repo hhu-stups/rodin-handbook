@@ -56,6 +56,25 @@ Thus for a context/machine that extends/sees the contexts, it makes no differenc
 A machine describes the dynamic behaviour of a model by means of variables whose values are changed by events.
 
 \subsubsection{Variables and invariants (with theorems), generated POs}
+Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables}.
+The type of the variable must be inferable by the invariants of the machine.
+
+An invariant describes a statement that should be hold in each state of the machine.
+Each invariant consists of a label and a predicate.
+Identifier that can be referenced in an invariant:
+\begin{itemize}
+\item Variables of the machine itself and of a refined machine (transitively, i.e. if the refined machine refines another one, that variables can be also used, and so on)
+\item Constants and sets of seen contexts
+\end{itemize}
+
+An invariant can be marked as a theorem. In that case a proof obligation with the label (TODO: THM/label or something like that) is added.
+The goal of the proof obligation is the theorem itself.
+Hypothesis that can be used in the proof.
+\begin{itemize}
+\item Axioms of seen contexts
+\item Invariants that are declared above the theorem
+\item Invariants of refined machines (TODO: Check if this is true)
+\end{itemize}
 
 \subsubsection{Seeing a context}
 If the model sees a context, 

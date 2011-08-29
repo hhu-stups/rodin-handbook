@@ -95,6 +95,17 @@
 
 \newcommand{\eventbsection}[1]{\textsl{#1}}
 
+% Commands for the structure of the reference section
+\newcommand{\rodinrefsec}[1]{\paragraph{#1}~\\}
+\newenvironment{rodinrefnames}%
+  {%\rodinrefsec{Names}%
+    \begin{tabular}{l@{\quad---\quad}l@{\quad---\quad}l}}%
+    {\end{tabular}}
+\newcommand{\rodinrefascii}[2]{#1 --- \texttt{#2}}
+    
+\newcommand{\mod}{\mathbin{\mathrm{mod}}}
+\newcommand{\wdl}{\mathcal{L}}
+\newcommand{\wdd}{\mathcal{D}}
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "rodin-doc"

@@ -1,3 +1,8 @@
 Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rodin Handbook v.2.1.1
+Bundle-SymbolicName: org.rodinp.handbook;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Formal Mind GmbH (formalmind.com)
 Created-By: Formalmind GmbH
 

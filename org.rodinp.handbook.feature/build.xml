@@ -57,7 +57,7 @@
     	
     	<mkdir dir="${basedir}/build/plugin/plugins"/>
     	
-    	<jar destfile="${basedir}/build/plugin/plugins/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" />
+    	<jar destfile="${basedir}/build/plugin/plugins/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" manifest="${basedir}/skeleton/META-INF/MANIFEST.MF" />
     	 
     	 <zip destfile="${basedir}/build/plugin/org.rodinp.handbook.zip"
     	       basedir="${basedir}/build/plugin"

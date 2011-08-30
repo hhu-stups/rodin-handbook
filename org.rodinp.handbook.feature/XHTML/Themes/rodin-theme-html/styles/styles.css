@@ -1,7 +1,6 @@
 
 pre {
     color: #004000;
-    width: 100%;
     font-size: 90%;
     background-color: #f0f0f0;
     padding-top: 5px;
@@ -370,6 +369,10 @@ blockquote.verse {
   background-color: #eeeeee;
   margin-left: 0px;
   margin-right: 0px;
+}
+
+blockquote.verse p span img {
+padding: 5px;
 }
 
 /* (mj) Formatting Marginpar */

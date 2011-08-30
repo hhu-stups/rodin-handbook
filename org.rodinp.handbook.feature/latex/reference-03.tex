@@ -20,63 +20,73 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 \subsection{Arithmetic}
 
 \subsubsection{Sets of numbers}
-\begin{rodinrefnames}
+\begin{rrnames}
   $\intg$  & \texttt{INT}  & Integers \\
   $\nat$   & \texttt{NAT}  & Natural numbers, starting with 0 \\
   $\nat_1$ & \texttt{NAT1} & Natural numbers, starting with 1 \\
   $\upto$  & \texttt{..}   & Range of numbers
-\end{rodinrefnames}
-\rodinrefsec{Description}
-The set of all integers is denoted by $\intg$. It contains all elements of the type.
-The two subsets $\nat$ and $\nat_1$ contain all elements greater or equal to 0 resp. 1.
-The range of numbers between $a$ and $b$ is denoted by $a \upto b$. If $a$ is greater
-than $b$, $a \upto b$ is empty.
-\rodinrefsec{Definition}
-$\nat   = \{~ n\in\intg~|~n\geq 0~\}$\\
-$\nat_1 = \{~ n\in\intg~|~n\geq 1~\}$\\
-$a\upto b = \{~ n\in\intg~|~a\leq n \land n\leq b~\}$
-%\begin{flalign*}
-%  \nat   &= \{~ n\in\intg~|~n\geq 0~\} &\\
-%  \nat_1 &= \{~ n\in\intg~|~n\geq 1~\} &
-%\end{flalign*}
-\rodinrefsec{Types}
-\begin{tabular}{l@{\,}l@{\qquad}l@{ }l}
-  $\intg$ & $\in\pow(\intg)$ \\
-  $\nat$  & $\in \pow(\intg)$ \\
-  $\nat_1$ & $\in\pow(\intg)$ \\
-  $a \upto b$ & $\in\pow(\intg)$ & with & $a\in\intg$\\
-              &                  &      & $b\in\intg$\\
-\end{tabular}
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  The set of all integers is denoted by $\intg$. It contains all elements of the type.
+  The two subsets $\nat$ and $\nat_1$ contain all elements greater or equal to 0 resp. 1.
+  The range of numbers between $a$ and $b$ is denoted by $a \upto b$.
+  \rrdef
+  $\nat   = \{~ n\in\intg~|~n\geq 0~\}$\\
+  $\nat_1 = \{~ n\in\intg~|~n\geq 1~\}$\\
+  $a\upto b = \{~ n\in\intg~|~a\leq n \land n\leq b~\}$
+  \rrtypes
+  $\intg\in\pow(\intg)$ \\
+  $\nat\in \pow(\intg)$ \\
+  $\nat_1\in\pow(\intg)$ \\
+  $a \upto b\in\pow(\intg)$  with  $a\in\intg$ and $b\in\intg$
+  \rrwd
+  $\wdl(\intg) \defi \btrue$\\
+  $\wdl(\nat) \defi \btrue$\\
+  $\wdl(\nat_1) \defi \btrue$\\
+  $\wdl(a \upto b) \defi \wdl(a) \land \wdl(b)$
+\end{rodinrefentry}
 
 \subsubsection{Arithmetic operations}
-\begin{rodinrefnames}
+\begin{rrnames}
   $+$      & \texttt{+}   & Addition \\
   $-$      & \texttt{-}   & Subtraction or unary minus \\
   $\cdot$ & \texttt{*}   & Multiplication \\
   $\div$   & \texttt{/}   & Integer division \\
   $\mod$   & \texttt{mod} & Modulo \\
-\end{rodinrefnames}
-\rodinrefsec{Description}
-These are the usual arithmetic operations.
-\rodinrefsec{Definition}
-Addition, subtraction and multiplication behave as expected.
-We just describe division and modulo in a more formal way:\\
-$a\div b=c \equiv \exists r \qdot r\in 0\upto b \land  b\cdot c + r = a$\\
-TODO: The same for modulo.
-\rodinrefsec{Types}
-\begin{tabular}{l@{\,}l@{\qquad}l@{\,}l@{\qquad}l@{ }l}
-$a+b$ & $\in\intg$ & $a\cdot b$ & $\in\intg$ & with & $a \in\intg$\\
-$a-b$ & $\in\intg$ & $a\div b$  & $\in\intg$ &      & $b \in\intg$\\
-$-a$  & $\in\intg$  & $a\mod b$ & $\in\intg$ \\
-\end{tabular}
-\rodinrefsec{Well-Definedness}
-TODO: Notation? $\wdl$ is actually implemented in Rodin. Is $\wdd$ still interesting?
-Or should we use something like the domain condition $\mathcal{DOM}$
-because it's simpler for operators?\\
-$\wdl(a\div b) \equiv \wdl(a) \land \wdl(b) \land b\neq 0$ \\
-$\mathcal{DOM}(\div)(a,b) \equiv b\neq 0$
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  These are the usual arithmetic operations.
+  \rrdef
+    Addition, subtraction and multiplication behave as expected.
 
+    The division is defined in a way that $1\div 2=0$ and $-1\div 2=0$:\\
+    $a\div b = \max(\{c ~|~ c\in\nat \land b\cdot c \leq a\})$ for $a\in\nat$ and $b\in\nat$\\
+%    $a\div b=c \rodinequiv \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
+    $(-a)\div b = - (a\div b)$\\
+    $a\div (-b) = - (a\div b)$
 
+    TODO: The same for modulo.
+  \rrtypes
+  With $a\in\intg$ and $b\in\intg$: \\
+  $a+b\in\intg$\\
+  $a-b\in\intg$\\
+  $-a\in\intg$\\
+  $a\cdot b\in\intg$ \\
+  $a\div b\in\intg$ \\
+  $a\mod b\in\intg$
+  \rrwd
+  $\wdl(a+b) \defi \wdl(a) \land \wdl(b)$ \\
+  $\wdl(a-b) \defi \wdl(a) \land \wdl(b)$ \\
+  $\wdl(-a) \defi \wdl(a)$ \\
+  $\wdl(a\cdot b) \defi \wdl(a) \land \wdl(b)$ \\
+  $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
+  $\wdl(a\mod b) \defi \wdl(a) \land \wdl(b) \land b>0$ \\
+  TODO: Notation? $\wdl$ is actually implemented in Rodin. Is $\wdd$ still interesting?
+  Or should we use something like the domain condition $\mathcal{DOM}$
+  because it's simpler for operators?\\
+\end{rodinrefentry}
 
 %%% Local Variables: 
 %%% mode: latex

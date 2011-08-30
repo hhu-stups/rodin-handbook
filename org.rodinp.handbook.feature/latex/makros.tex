@@ -96,13 +96,27 @@
 \newcommand{\eventbsection}[1]{\textsl{#1}}
 
 % Commands for the structure of the reference section
-\newcommand{\rodinrefsec}[1]{\paragraph{#1}~\\}
-\newenvironment{rodinrefnames}%
-  {%\rodinrefsec{Names}%
-    \begin{tabular}{l@{\quad---\quad}l@{\quad---\quad}l}}%
+\newenvironment{rrnames}%
+  {\begin{tabular}{l@{\quad---\quad}l@{\quad---\quad}l}}%
     {\end{tabular}}
-\newcommand{\rodinrefascii}[2]{#1 --- \texttt{#2}}
+
+
+\newlength{\rrindent}
+\setlength{\rrindent}{8em}
+\newenvironment{rodinrefentry}{%
+   \renewcommand\descriptionlabel[1]{\makebox[\rrindent][r]{\textbf{##1}}}
+   \setlength{\leftmargini}{\rrindent}
+   \begin{description}%
+}{%
+   \end{description}%
+}
+\newcommand{\rrdesc}{\item[Description]}
+\newcommand{\rrdef}{\item[Definition]}
+\newcommand{\rrtypes}{\item[Types]}
+%\newcommand{\rrwd}{\item[Well-Definedness]}
+\newcommand{\rrwd}{\item[WD]}
     
+\newcommand{\rodinequiv}{\defi}
 \newcommand{\mod}{\mathbin{\mathrm{mod}}}
 \newcommand{\wdl}{\mathcal{L}}
 \newcommand{\wdd}{\mathcal{D}}

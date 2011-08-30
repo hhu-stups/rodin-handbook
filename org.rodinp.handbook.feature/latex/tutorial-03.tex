@@ -33,8 +33,10 @@ Models typically consist of multiple files that are managed in a project (\ref{p
 \end{center}
 \end{figure}
 
+\index{Project}
 \warning{Eclipse supports different types of projects.  The project must have the Rodin Nature (\ref{rodin_nature}) to work.  A project can have more than one nature.}
 
+\index{Component}
 Next, create a new Event-B Component (\ref{eventb_component}).  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component} or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish} as shown in figure \ref{fig_tut_03_new_component_wizard}. This will create a Machine (\ref{machine}) file.
 
 \begin{figure}[!h]
@@ -57,15 +59,16 @@ The editor is \textit{form-based}.  This means that in well-defined places an ap
 
 \info{Alternative editors are available as plug-ins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
 
-
 \subsection{Building the Model}
 
 Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tutorial_03}.  We start with the model state.  Two traffic lights will be modelled and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the green plus-sign to create a new variable.
 
 \subsubsection{Creating Variables}
 
+\index{Variable}
 You will see two fields. The left one is filled with the word \texttt{var1}.  Change this to \texttt{cars\_go}.  The second field (after the double-slash ``//'') is a comment field in which you can write any necessary notes or explanations.
 
+\index{Comment}
 \info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as you would expect in any programming language.  You can use the comment field to ``park'' predicates and other strings temporarily.}
 
 Create the second variable (\texttt{peds\_go}) in the same way.
@@ -96,6 +99,7 @@ Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add
 
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question.}
 
+\index{Yellow Highlighting}
 After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in Figure \ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} view gives us the reason: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!h]
@@ -144,6 +148,7 @@ The two events will look as follows:
 }
 
 \subsubsection{Event parameters}
+\index{Parameters}
 
 For the traffic light for the cars, we will present a different approach and use only one event with a parameter.  The event will use the new traffic light state as the argument.  The parameter is declared in the \textsf{any} section and typed in the \textsf{where} section:
 

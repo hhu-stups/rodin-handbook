@@ -26,6 +26,17 @@ Windows Installation:
 
 The resulting HTML and Eclipse Plugin with Eclipse help will be in the build folder.
 
+HOW TO BUILD AN UPDATE SITE
+============
+
+1. Import the org.rodinp.handbook plugin (included in the /build/plugin/org.rodinp.handbook.zip)
+as an existing eclipse project into your eclipse workspace.
+2.  Right click on the org.rodinp.feature 
+--> Export --> Plug-in Development --> Deployable features
+3. Please be sure that you have checked "Generate metadata repositiory" and 
+selected the category.xml in "Categorize repository" in the "Options" tab.
+4. Deploy the files ... i.e. http://handbook.event-b.org/updatesite
+
 CONTACT
 =======
 Michael Jastram (michael@jastram.de)

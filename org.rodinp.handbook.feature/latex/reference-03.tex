@@ -17,6 +17,46 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 
 \subsection{Sets and relations}
 
+\subsubsection{Sets of functions}
+\begin{rrnames}
+  $\pfun$  & \texttt{+->}  & Partial functions\\
+  $\tfun$  & \texttt{-->}  & Total functions \\
+  $\pinj$  & \texttt{>+>}  & Partial injections\\
+  $\tinj$  & \texttt{>->}  & Total injections \\
+  $\psur$  & \texttt{+->>}  & Partial surjections\\
+  $\tsur$  & \texttt{-->>}  & Total surjections \\
+  $\tbij$  & \texttt{>->>}  & Bijections \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  A partial function from $S$ to $T$ is a relation that maps an element of $S$ to at most one element
+  of $T$. A function is total if its domain contains all elements of $S$, i.e. it maps every element
+  of $S$ to an element of $T$.
+
+  A function is injective (is an injection) if two distinct elements of $S$ are always mapped to distinct
+  elements of $T$. An equivalent statement is that the inverse of the function is a also a function.
+
+  A function is surjective (is a surjection) if for every element of $T$ there exists an element in $S$
+  that is mapped to it.
+
+  A function is bijective (is a bijection) if it is both injective and surjective.
+  \rrdef
+  $S \pfun T = \{~ f ~|~ f\in S\rel T \land (\forall e,x,y \qdot e\mapsto x\in f \land e\mapsto y\in f \limp x=y) ~\}$\\
+  $S \tfun T = \{~ f ~|~ f\in S\pfun T \land \dom(f) = S ~\}$\\
+  $S \pinj T = \{~ f ~|~ f\in S\pfun T \land f^{-1} \in  T\pfun S ~\}$\\
+  $S \tinj T = (S\pinj T) \binter (S\tfun T)$\\
+  $S \psur T = \{~ f ~|~ f\in S\pfun T \land \ran(f) = T ~\}$\\
+  $S \tsur T = (S\psur T) \binter (S\tfun T)$\\
+  $S \tbij T = (S\tinj T) \binter (S\tsur T)$\\
+  \rrtypes
+  With $S\in\pow(\alpha)$, $T\in\pow(\beta)$ and for each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
+  $S \opelipse T \in \pow(\pow(\alpha\cprod\beta))$
+  \rrwd
+  For each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
+  $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
+\end{rodinrefentry}
+
+
 \subsection{Arithmetic}
 
 \subsubsection{Sets of numbers}
@@ -32,9 +72,9 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
   The two subsets $\nat$ and $\nat_1$ contain all elements greater or equal to 0 resp. 1.
   The range of numbers between $a$ and $b$ is denoted by $a \upto b$.
   \rrdef
-  $\nat   = \{~ n\in\intg~|~n\geq 0~\}$\\
-  $\nat_1 = \{~ n\in\intg~|~n\geq 1~\}$\\
-  $a\upto b = \{~ n\in\intg~|~a\leq n \land n\leq b~\}$
+  $\nat   = \{~ n ~|~ \in\intg\land n\geq 0~\}$\\
+  $\nat_1 = \{~ n ~|~ \in\intg\land n\geq 1~\}$\\
+  $a\upto b = \{~ n ~|~ \in\intg\land a\leq n \land n\leq b~\}$
   \rrtypes
   $\intg\in\pow(\intg)$ \\
   $\nat\in \pow(\intg)$ \\
@@ -63,7 +103,7 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 
     The division is defined in a way that $1\div 2=0$ and $-1\div 2=0$:\\
     $a\div b = \max(\{c ~|~ c\in\nat \land b\cdot c \leq a\})$ for $a\in\nat$ and $b\in\nat$\\
-%    $a\div b=c \rodinequiv \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
+%    $a\div b=c \defi \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
     $(-a)\div b = - (a\div b)$\\
     $a\div (-b) = - (a\div b)$
 

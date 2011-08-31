@@ -19,10 +19,10 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 
 \subsubsection{Sets of functions}
 \begin{rrnames}
-  $\pfun$  & \texttt{+->}  & Partial functions\\
-  $\tfun$  & \texttt{-->}  & Total functions \\
-  $\pinj$  & \texttt{>+>}  & Partial injections\\
-  $\tinj$  & \texttt{>->}  & Total injections \\
+  $\pfun$  & \texttt{+->}   & Partial functions\\
+  $\tfun$  & \texttt{-->}   & Total functions \\
+  $\pinj$  & \texttt{>+>}   & Partial injections\\
+  $\tinj$  & \texttt{>->}   & Total injections \\
   $\psur$  & \texttt{+->>}  & Partial surjections\\
   $\tsur$  & \texttt{-->>}  & Total surjections \\
   $\tbij$  & \texttt{>->>}  & Bijections \\
@@ -109,13 +109,9 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 
     TODO: The same for modulo.
   \rrtypes
-  With $a\in\intg$ and $b\in\intg$: \\
-  $a+b\in\intg$\\
-  $a-b\in\intg$\\
-  $-a\in\intg$\\
-  $a\cdot b\in\intg$ \\
-  $a\div b\in\intg$ \\
-  $a\mod b\in\intg$
+  With $a\in\intg$, $b\in\intg$ and for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\mod$: \\
+  $a\opelipse b\in\intg$\\
+  $-a\in\intg$
   \rrwd
   $\wdl(a+b) \defi \wdl(a) \land \wdl(b)$ \\
   $\wdl(a-b) \defi \wdl(a) \land \wdl(b)$ \\

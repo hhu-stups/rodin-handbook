@@ -100,7 +100,7 @@ Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question.}
 
 \index{Yellow Highlighting}
-After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in Figure \ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} view gives us the reason: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
+After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in Figure~\ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} view gives us the reason: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!h]
 \begin{center}
@@ -195,16 +195,41 @@ To prevent the invariant from being violated (and therefore to allow all proof o
 
 \warning{Before looking at the solution, try to fix the model yourself.}
 
-This concludes the tutorial.
-
 \subsubsection{Finding Invariant Violations with ProB}
+\label{tut:prob}
+\index{ProB}
 \begin{rodin-plugin}{img/prob.png}{ProB}
-A useful tool for understanding and debugging a model is a model checker like ProB.  You can install ProB from the ProB Update Site, directly from ProB.
+A useful tool for understanding and debugging a model is a model checker like ProB (\ref{prob}).  You can install ProB from the ProB Update Site, directly from Rodin.  Just select \textsf{Help $\rangle$ Install New Software... $\rangle$ Event-B Component} and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2`` as an installation option, which you can then install using the normal Eclipse mechanism.
 
-TODO: How to use.
+We will continue the example at the point where we added the safety invariant (REQ-1), but didn't add guards yet to prevent the invariants from being violated.
+
+We launch ProB by right-clicking on the machine we'd like to animate and select \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}.
+
+The top left pane shows the available events of the machines.  Upon starting, only INITIALIZATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations.
+
+We can now interact with the model by triggering events.  this is done by double-clicking on an enabled event, or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALIZATION.  After that, all events are enabled.  Next, we trigger set\_peds\_go and set\_cars with the parameter TRUE.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}).
+
+After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the checking can be triggered by pressing "Start Consistency Checking".  Upon completion, the result of the check is shown.
+
+ProB has many more functions and also supports additional formalisms.  Please visit the ProB Website (\ref{prob}) for more information.
 
 \end{rodin-plugin}
 
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics[]{img/tutorial/tut_03_prob_perspective.png}
+	\caption{The ProB Perspective}
+	\label{fig_tut_prob_perspective}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics[]{img/tutorial/tut_03_prob_invariant_violation.png}
+	\caption{An invariant violation, found by ProB}
+	\label{tut_03_prob_invariant_violation}
+\end{center}
+\end{figure}
 
 
 \subsection{The Final Traffic Light Model}

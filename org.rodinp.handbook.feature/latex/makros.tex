@@ -93,14 +93,28 @@
 {\raggedright\small{#1}}}
 \marginparwidth=2cm
 
+% A command to typeset names of an Event-B section (like variables, invariant, etc)
+% consistently.
 \newcommand{\eventbsection}[1]{\textsl{#1}}
 
+% A command to typeset consistently the names of proof obligations
+\newcommand{\eventbpo}[1]{\textsf{#1}}
+
 % Commands for the structure of the reference section
+
+% rrnames is used for the array of operator symbols and description
+% at the beginning of a reference section.
+% The environment defines an array with three columns:
+% 1) The mathematical symbol
+% 2) The ASCII representation
+% 3) A description of the operator
 \newenvironment{rrnames}%
   {\begin{tabular}{l@{\quad---\quad}l@{\quad---\quad}l}}%
     {\end{tabular}}
 
-
+% The environment rodinrefentry is used for a reference section with several
+% entries: Description, Definition, Types, Well-Definedness
+% \rrindent is the indention in such an environment
 \newlength{\rrindent}
 \setlength{\rrindent}{8em}
 \newenvironment{rodinrefentry}{%
@@ -115,12 +129,34 @@
 \newcommand{\rrtypes}{\item[Types]}
 %\newcommand{\rrwd}{\item[Well-Definedness]}
 \newcommand{\rrwd}{\item[WD]}
-    
-\newcommand{\mod}{\mathbin{\mathrm{mod}}}
+
+% operators (L and D) for well-definendness
 \newcommand{\wdl}{\mathcal{L}}
 \newcommand{\wdd}{\mathcal{D}}
 
+% a placeholder symbol for operators
 \newcommand{\opelipse}{\mathbin{\Box}}
+
+\newcommand{\podef}[4]{%
+  \begin{center}
+    \setlength{\parindent}{2em}\vspace{0.2em}
+    \begin{tabular}{rp{0.5\textwidth}}
+      \hline
+      & \textbf{#1} \\
+      Name       & #2 \\
+      Goal       & #3 \\
+      Hypotheses & #4 \\
+      \hline
+    \end{tabular}
+  \end{center}
+  % \renewcommand\descriptionlabel[1]{\makebox[6.5em][r]{\textbf{##1}}}%
+  % \begin{description}\addtolength{\itemsep}{-0.5\baselineskip}
+  % \item[Name] #1
+  % \item[Goal] #2
+  % \item[Hypotheses] #3
+  % \end{description}
+}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "rodin-doc"

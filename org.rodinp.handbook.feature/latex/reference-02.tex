@@ -1,15 +1,27 @@
+\newcommand{\varlist}[1]{\textbf{#1}}
+
 \section{Event-B (Modeling notation)}
 \label{reference_02}
 
-In Event-B, we have two types of components: contexts and models.
-Here we describe briefly the different elements of a context or model.
+In Event-B, we have two types of components: contexts and machines.
+Here we describe briefly the different elements of a context or machines.
+We do not use a specific syntax for describing the components because this depends on the editor that is
+used. The default editor enforces a structure which contains the elements that are described here.
 
-Predicates or expressions can be occur at various places in both components.
-For each predicate or expression, we briefly describe the scope, i.e. which
-identifier can be used.
+We explain which proof obligations are generated.
+For each proof obligation, we list the goal and the hypotheses that can be used.
+This is done in the form:
+\podef{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the resp. 
+  axiom/invariant/guard/etc.)}{Goal that should be proved}{Hypotheses that can be used}
 
-We explain which proof obligations are generated. 
-For each proof obligation, we list the goal and the hypothesis that can be used.
+\paragraph{Notation}
+If we refer to a list of variables $x_1,\ldots,x_n$ instead of a single variable, we use the form $\varlist{x}$. We use following characters:
+\begin{itemize}
+\item \varlist{c} for all constants
+\item \varlist{v} for all variables
+\item \varlist{p} for all parameters
+\end{itemize}
+
 
 \subsection{Contexts}
 \index{Context}
@@ -40,23 +52,24 @@ An axiom describes a statement that can be assumed as true in the rest of the mo
 Each axiom consists of a label and a predicate.
 In an axiom, constants and sets of the context itself and of extended contextes can be referenced.
 
-An axiom can be marked as a theorem. In that case a proof obligation with the label \textsf{axiomlabel/THM} is added.
-The goal of the proof obligation is the theorem itself.
-Axioms that are declared before the theorem and the axioms of extended contexts can be used as hypotheses.
+An axiom can be marked as a theorem. In that case the following proof obligation is created:
+\podef{Proof obligation of a theorem}{\eventbpo{label/THM}}{the theorem}{axioms defined before the theorem and in extended contextes}
 
-If an axiom contains any condition that is well-defined, a proof obligation of the form \textsf{axiomlabel/WD} is generated.
-Axioms declared beforehand and axioms of extended contextes can be used as hypotheses.
+If an axiom contains any condition that is well-defined, a proof obligation is generated:
+\podef{Well-definedness of an axiom}{\eventbpo{label/WD}}{The axiom's WD-condition}{axioms defined before the theorem and in extended contextes}
    
 \subsubsection{Extending a context}
 Contexts can be extended by adding their name to the \eventbsection{Extends} section.
 
 The resulting context consists of all constants and axioms of all extended contexts and the extending context itself.
-Thus for a context/machine that extends/sees the contexts, it makes no difference where a constant or axiom is declared.
+Thus for a context or machine that extends resp. sees the contexts, it makes no difference where a constant or axiom is declared.
+
+It is an error to extend two contexts wich declare a constant or set of the same name.
 
 \subsection{Machines}
 A machine describes the dynamic behaviour of a model by means of variables whose values are changed by events.
 
-\subsubsection{Variables and invariants (with theorems), generated POs}
+\subsubsection{Variables and invariants}
 \index{Variable}
 Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables}.
 The type of the variable must be inferable by the invariants of the machine.
@@ -69,33 +82,152 @@ Identifier that can be referenced in an invariant:
 \item Constants and sets of seen contexts
 \end{itemize}
 
-An invariant can be marked as a theorem. In that case a proof obligation with the label (TODO: THM/label or something like that) is added.
-The goal of the proof obligation is the theorem itself.
-Hypothesis that can be used in the proof.
-\begin{itemize}
-\item Axioms of seen contexts
-\item Invariants that are declared above the theorem
-\item Invariants of refined machines (TODO: Check if this is true)
-\end{itemize}
+An invariant can be marked as a theorem. In that case the following proof obligation is generated:
+\podef{An invariant as theorem}{\eventbpo{label/THM}}{the theorem}{axioms of seen contexts, invariants that are
+  declared before the theorem, invariants of refined machines}
+Invariant preservation of events that are marked as theorems does not have to be proven for events.
+
+If an invariant contains a well-definendness condition, the following proof obligation is created:
+\podef{Well-definedness of a guard}{\eventbpo{label/WD}}{the WD-condition of the invariant}{
+  axioms of seen contexts, invariants that are
+  declared before this invariant, invariants of refined machines}
 
 \subsubsection{Seeing a context}
-If the model sees a context, 
+If the machine sees a context, its declared sets and constants can be used in
+ all predicates and expressions.
+The axioms can be used as hypothesis in the proofs.
 
-\subsubsection{Refining a model}
+\subsubsection{Refining a machine}
+A machine can refine at most one other machine. 
+We call the refined machine the abstract machine whereas the refinement is the more concrete machine.
+Likewise we call the variables of the abstract machine the abstract variables etc.
+Basically a refinement has two aspects. First, the concrete machine's state is related to the state of the
+abstract machine by a \emph{gluing invariant}. Second, each abstract event can be refined by one or more
+concrete events.
 
-Refines clause, gluing invariant, general picture of refinement with pointers to the event below, re-use of variables.
+The invariant us used to relate abstract and concrete variables. Invariants of a concrete machine are also called gluing invariants.
+The full invariant of the machine contains both abstract and concrete invariants. 
+The invariants are accumulated during refinements.
+
+%\index{common variables}
+The abstract machine and concrete machine may have common variables.
+In that case it is assumed as an \emph{implicit} invariant that the value of the abstract and concrete
+variable are always equal. 
+If a variable disapears in a refinement (i.e. is not listed in the variables section), the variable cannot
+be re-introduced in a later refinement.
 
 \subsubsection{Events}
 
-All aspects of events are covered: Parameters, guards and actions, generated POs, refinement (again with generated POs, re-use of parameters, witnesses), status (normal/convergent/anticipated), merging of events.
+A possible state change of a machine is defined by an event.
+The condition under wich an event can happen is given by a guard, the event's action
+describe how the new and old state relate to each other.
+
+Events occur atomically, i.e. one event happens at a time, leading to a new state.
+Two events never happen at the same time. There is also no notion of time that elapses
+during the event happening.
+
+An event has the following elements:
+\begin{itemize}
+\item Name
+\item Parameters
+\item Guards
+\item Witnesses
+\item Actions
+\item Status (ordinary, convergent or anticipated)
+\end{itemize}
+
+\paragraph{Parameters}
+An event may have an arbitrary number of \emph{parameters}. Their names must be unique. 
+I.e. there must be no set, constant or variable with the same name.
+The types of the parameters must be inferable by the guards of the event.
+
+\paragraph{Guards}
+Each \emph{guard} of consist of a label and a predicate.
+A guard can contain references to constants, variables of the machine and parameters.
+Variables of abstract machines are not accessible in a guard.
+
+Like axioms and invariants, guards can be marked as theorems, too. The following
+proof obligatio is generated:
+\podef{A guard as theorem}{\eventbpo{eventname/label/THM}}{the theorem}{axioms of seen contexts, invariants 
+  (also of refined machines), guards of the event that are declared before the theorem}
+
+If the guard contains WD-conditions, the following proof obligation is generated:
+\podef{WD-condition of a guard}{\eventbpo{eventname/label/WD}}{the guard's WD-condition}{axioms of seen contexts, invariants 
+  (also of refined machines), guards of the event that are declared before the guard}
+
+\paragraph{Actions}
+An action consists of a label and an assignment.
+An assignment can have one of the following forms:
+\begin{itemize}
+\item $v_1,\ldots,v_n \bcmeq E_1(\ldots),\ldots,E_n(\ldots)$
+\item $v(F(\ldots)) \bcmeq E(\ldots)$
+\item $v \bcmin E(\ldots)$
+\item $v_1,\ldots,v_n \bcmsuch Q(\ldots)$
+\end{itemize}
+The last form is the most general one and the others can be translated into it:
+\begin{itemize}
+\item $v_1,\ldots,v_n \bcmeq E_1(\ldots),\ldots,E_n(\ldots) \defi v_1,\ldots,v_n \bcmsuch v_1' = E_1(\ldots) \land \ldots \land v_n' = E_n(\ldots)$
+\item $v(F(\ldots)) \bcmeq E(\ldots) \defi v \bcmsuch v' = v \ovl \{~F(\ldots) \mapsto E(\ldots)~\}$
+\item $v \bcmin E(\ldots) \defi v' \in E(\ldots)$
+\end{itemize}
+
+ The most general form of an assignment
+ is $v_1,\ldots,v_n \bcmsuch Q(\ldots)$ where $v_1,\ldots,v_n$ are the concrete variables that should be changed.
+$Q$ is a predicate that can refer to constants, concrete variables and parameters. 
+Additionally it can use identifiers $v_1',\ldots,v_n'$. 
+$Q$ expresses the relation between the state before the
+event (using the identifiers $v_1,\ldots,v_n$) and after the event 
+(using the identifiers $v_1',\ldots,v_n'$).
+All the event's actions are applied in parallel. To avoid ambiguities, a variable must occur
+at most once on the left side of an assignment in an event.
+
 
 \subsubsection{Termination}
+\label{termination}
+
+
 
 How to prove termination by the model's variant and the status of events.
   
 \subsection{Generated proof obligations}
 
 We give a brief overview about what POs are generated where. This should help the user to identify the reason of a PO when he just know its label.
+
+
+\subsection{Visibility of identifiers}
+\label{visibility_of_identifiers}
+
+This table shows which identifiers can be used in predicates or expressions. 
+\begin{description}
+\item[Sets] Set that are defined in the context (in case of an axiom) or in a seen context.
+  If a context extends another context, the sets of the extended context are treated as if they
+  are defined in the extending context.
+\item[Constants] Like the sets, a constant that is defined in the context (in case of an axiom) or
+  in a seen context.
+\item[Concrete Variables] Variables that are defined in the machine itself. This does \emph{not}
+  include variables of refined machines.
+\item[Abstract Variables] Variables that are defined in an abstract machine.
+\item[Concrete Parameters] Parameters that are defined in the event itself. This does \emph{not}
+  include parameters of refined events.
+\item[Abstract Parameters] Parameters that are defined in an abstract event.
+\end{description}
+
+\begin{center}
+  \newcommand{\markcell}{$\times$}
+  \begin{tabular}{lcccccc}
+  \hline
+            &           &           & concrete  & abstract  & concrete   & abstract \\
+            & sets      & constants & variables & variables & parameters & parameters \\
+  \hline
+  axiom     & \markcell & \markcell &           &           &            & \\
+  invariant & \markcell & \markcell & \markcell & \markcell &            & \\
+  variant   & \markcell & \markcell & \markcell & \markcell &            & \\
+  guard     & \markcell & \markcell & \markcell & \markcell & \markcell  & \\
+  witness$^{*}$   & \markcell & \markcell & \markcell & \markcell & \markcell  & \markcell \\
+  action$^{*}$    & \markcell & \markcell & \markcell & \markcell & \markcell  &  \\
+  \hline
+  \end{tabular}    
+\end{center}
 
 
 %%% Local Variables: 

@@ -18,6 +18,7 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 \subsection{Sets and relations}
 
 \subsubsection{Sets of functions}
+\index{Function}\index{Injection}\index{Surjection}\index{Bijection}
 \begin{rrnames}
   $\pfun$  & \texttt{+->}   & Partial functions\\
   $\tfun$  & \texttt{-->}   & Total functions \\
@@ -72,9 +73,9 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
   The two subsets $\nat$ and $\nat_1$ contain all elements greater or equal to 0 resp. 1.
   The range of numbers between $a$ and $b$ is denoted by $a \upto b$.
   \rrdef
-  $\nat   = \{~ n ~|~ \in\intg\land n\geq 0~\}$\\
-  $\nat_1 = \{~ n ~|~ \in\intg\land n\geq 1~\}$\\
-  $a\upto b = \{~ n ~|~ \in\intg\land a\leq n \land n\leq b~\}$
+  $\nat   = \{~ n ~|~ n\in\intg\land n\geq 0~\}$\\
+  $\nat_1 = \{~ n ~|~ n\in\intg\land n\geq 1~\}$\\
+  $a\upto b = \{~ n ~|~ n\in\intg\land a\leq n \land n\leq b~\}$
   \rrtypes
   $\intg\in\pow(\intg)$ \\
   $\nat\in \pow(\intg)$ \\
@@ -91,9 +92,9 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
 \begin{rrnames}
   $+$      & \texttt{+}   & Addition \\
   $-$      & \texttt{-}   & Subtraction or unary minus \\
-  $\cdot$ & \texttt{*}   & Multiplication \\
+  $\cdot$  & \texttt{*}   & Multiplication \\
   $\div$   & \texttt{/}   & Integer division \\
-  $\mod$   & \texttt{mod} & Modulo \\
+  $\bmod$  & \texttt{mod} & Modulo \\
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
@@ -102,14 +103,14 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
     Addition, subtraction and multiplication behave as expected.
 
     The division is defined in a way that $1\div 2=0$ and $-1\div 2=0$:\\
-    $a\div b = \max(\{c ~|~ c\in\nat \land b\cdot c \leq a\})$ for $a\in\nat$ and $b\in\nat$\\
+    $a\div b = \max(\{~c ~|~ c\in\nat \land b\cdot c \leq a~\})$ for $a\in\nat$ and $b\in\nat$\\
 %    $a\div b=c \defi \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
     $(-a)\div b = - (a\div b)$\\
     $a\div (-b) = - (a\div b)$
 
     TODO: The same for modulo.
   \rrtypes
-  With $a\in\intg$, $b\in\intg$ and for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\mod$: \\
+  With $a\in\intg$, $b\in\intg$ and for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
   $a\opelipse b\in\intg$\\
   $-a\in\intg$
   \rrwd
@@ -118,7 +119,7 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
   $\wdl(-a) \defi \wdl(a)$ \\
   $\wdl(a\cdot b) \defi \wdl(a) \land \wdl(b)$ \\
   $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
-  $\wdl(a\mod b) \defi \wdl(a) \land \wdl(b) \land b>0$ \\
+  $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\leq 0 \land b\neq 0$ \\
   TODO: Notation? $\wdl$ is actually implemented in Rodin. Is $\wdd$ still interesting?
   Or should we use something like the domain condition $\mathcal{DOM}$
   because it's simpler for operators?\\

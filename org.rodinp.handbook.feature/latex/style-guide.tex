@@ -75,7 +75,25 @@ We will reduce (or avoid) redundancy through heavy linking, following these guid
 		\item FAQ images should be saved in the sub folder \texttt{img/faq} with the prefix ``\texttt{faq\_}''. For instance, \texttt{faq\_image1.png}.
 
 	\end{itemize} 
-	\end{itemize} 
+	\end{itemize}
+
+\subsubsection{Index}
+Please use the index, this helps users to look up information more efficiently.
+The \LaTeX-command to do this is \verb#\index{#\textit{word}\verb#}#.
+\begin{itemize}
+\item An index entry should be a noun, singular and written in lowercase.
+\item If there are several locations in the documentation for the same word (e.g. in the tutorial and the
+  reference section), consider to highlight the usually used location with \verb#\index{word|textbf}#.
+  This is usually an entry in the reference section.
+\item Adjectives should be used with care. 
+  Please use them only if omitting the adjective changes the meaning of the entry drastically or
+  if the adjective is necessary to distinguish the entry from other entries with the same noun but
+  other location.
+\item If you use an adjective, consider to use the noun as a key for sorting: \verb#\index{cloud,grey@grey cloud}#
+  instead of \verb#\index{grey cloud}#
+\item If you have multiple entries for the same word, consider using sub-entries (\verb#\index{cloud!grey}#)
+  if different things are meant.
+\end{itemize}
 
 \subsubsection{\LaTeX{} Styling}
 
@@ -101,5 +119,7 @@ There are some lmitations to the environment that we use.  Specifically, headlin
 
 \end{rodin-plugin}
 
-
-
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

@@ -17,6 +17,11 @@
 \def\warning#1{\doculist{#1}{img/warning_64.png}}
 \def\pencil#1{\doculist{#1}{img/pencil_64.png}}
 
+% macro for icons
+\def\icon#1{
+\includegraphics[]{img/icons/#1}
+}
+
 % different method to write an ASCII backslash for plastex and normal pdflatex
 \ifplastex
   \newcommand{\mybackslash}{\textbackslash}

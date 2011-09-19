@@ -8,12 +8,195 @@ What does a proof in Event-B looks like? (Goal, proof tree, hypothesis, selected
 
 \subsection{Proof rules}
 
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+In its pure mathematical form, a proof rule is a tool to perform formal proof and is denoted by: 
+
+$\frac{\quad A\quad}{C}$
+
+where A is a (possibly empty) list of sequents:the antecedents of the proof rule; and C is a sequent: the consequent of the rule. And we interpret the above proof rule as follows: The proofs of each sequent of A together give a proof of sequent C. 
+
+Representation
+
+In Rodin, the representation for proof rules are more structure not only to reduce the space required to store the rule, but more importantly to support proof reuse.
+
+A rule in Rodin contains the following:
+
+    used goal A used goal predicate. 
+
+    used hypotheses The set of used hypotheses. 
+
+    antecedents A list of antecedents (to be explain later). 
+
+    reasoner the reasoner used to generate this proof rule (See reasoners). 
+
+    reasoner input the input to the reasoner to generate this proof rule (See reasoners). 
+
+Each antecedent of the proof rule contains the following information:
+
+    new goal A new goal predicate. 
+
+    added hypotheses The set of added hypotheses. 
+
+With this representation, a proof rule in Rodin corresponding to a proof schema as follows: 
+
+$\begin{array}{c} H, H_u, H_{A_0} \vdash G_{A_0} ~~~\ldots~~~ H, H_u, H_{A_n-1} \vdash G_{A_n-1} \\ \hline H, H_u \vdash G_u \end{array} $
+
+Where:
+
+    Hu is the set of used hypotheses 
+
+    Gu is the used goal 
+
+    $H_{A_i}$ is the set of added hypotheses corresponding to the ith antecedent. 
+
+    $G_{A_i}$ is the new goal corresponding to the ith antecedent. 
+
+    $H$ is the meta-variable that can be instantiated. 
+
+Applying Proof Rules
+
+Given a proof rule of the form mentioned above, the following describes how to apply this rule to an input sequent. The result of this process is a list of output sequents if successful or null otherwise.
+
+    The rule is applicable if the goal of the sequent is not exactly the same as the used goal or any of the used hypotheses is not contained in the set of hypotheses of the input sequent. 
+
+    In the case of applicable, the antecedent sequents are returned. The goal of each antecedent sequent is the new goal correspondingly. The hypotheses of each antecedent sequent is the union of the old hypotheses and added hypotheses of the corresponding antecedent. 
+
 (first only a link to the Wiki page)
 
 \subsection{Proof tactics}
 
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+---> http://wiki.event-b.org/index.php/Rodin\_Proof\_Tactics
+
 (first only a link to the Wiki page)
+
+Tactics provide an easier way to construct and manage proof search and manipulation. They provide calls to the underlying reasoners or other tactics to modify proofs.
+
+The input of a tactic is a proof tree node which will be used as the point of application. The output of a tactic is a boolean to indicate if it is successful or not.
+
+We will describe below some examples of tactics.
+[edit] Basic Tactics
+
+They are those tactics that make change to the proof tree only at the point of application.
+
+    Prune A direct application of the pruning facility providing by the proof tree. The tactic is successful if the input node are non-pending. 
+
+    Rule Application Tactics of this class provide a wrapper around a proof rule (See Proof Rules). The tactic is successful if the proof rule is successful applied to the input node. 
+
+    Reasoner Application Tactics of this class provide a wrapper around a reasoner (See Reasoner). The tactic is successful if the reasoner is successful applied to the input node. 
+
+[edit] Tactical Tactics
+
+They are those tactics that are constructed from existing tactics. They indicate different strategic or heuristic decisions.
+
+    Apply on All Pending Apply a specific sub-tactic to all pending nodes of the point of application. The tactic is successful if the sub-tactic is successful on one of the pending nodes. 
+
+    Repeating Repeating a specific sub-tactic to the point of application until it fails. The tactic is successful if the sub-tactic is successful at least once. 
+
+    Composing Sequential compose a list of sub-tactics to apply to the point of application. The tactic is successful if one of the sub-tactic is successful. 
+
+More complex proof strategy can be constructed by composing the above tactical tactics. 
 
 \subsection{The provers (PP, ML, New-PP)}
 
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
 We just give a very brief over the existing provers. (What are their strengths/weaknesses).
+
+New PP
+
+Names in the proof control: nPP R., nPP with a lasso symbol, nPP
+
+Names in the proof tree: Predicate Prover
+
+Names in the preferences: PP restricted, PP after lasso, PP unrestricted
+
+Input: In the configuration "restricted" all selected hypotheses and the goal are passed to New PP. In the configuration "after lasso" a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that has a common symbol with the goal or a hypothesis that was selected before. In the configuration "unrestricted" all the available hypotheses are passed to New PP.
+
+How the Prover Proceeds: First, all function and predicate symbols that are different from "$\in$" and not related to arithmetic are translated away. For example A $\subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
+
+Some Strengths:
+
+    New PP outputs a set of "used hypotheses". If an unused hypotheses changes, the old proof can be reused.
+    New PP has limited support for equational reasoning. 
+
+Some Weaknesses:
+
+    New PP is unsound. There have been several bug reports. Most notably, see [1].
+    New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic reasoning (when the formula is not ground) is a long standing challenge.
+    New PP is unaware of set theoretical axioms; in particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$, because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
+    If unnecessary hypotheses are present, they may prevent New PP from finding a proof, even when the proof obligation obviously holds. We therefore advise to unselect unnecessary hypotheses.
+    New PP does not take well-definedness into account:
+        Lemma $\vdash_{\mathcal L} b \in f^{-1} [\{f(b)\}]$ is not discharged. In fact, this sequent has exactly the same translation as $\vdash_{\mathcal L} b \in\dom(f)$, which is not provable. 
+    New PP tends to run out of memory, if the input is large. 
+
+PP
+
+Names in the proof control: P0, P1, PP
+
+Names in the proof tree: PP
+
+Names in the preferences: Atelier B P0, Atelier B P1, Atelier B PP
+
+Input: In the configuration "P0" all selected hypotheses and the goal are passed to PP. In the configuration "P1" one lasso operation is applied to the selected hypotheses and the goal and the result is passed to PP. In the configuration "PP" all the available hypotheses are passed to PP.
+
+How the Prover Proceeds: The input sequent is translated to classical B and fed to the PP prover of Atelier B. PP works in a manner similar to newPP, but with support for equational and arithmetic reasoning.
+
+Some Strengths:
+
+    PP has limited support for equational and arithmetic reasoning. 
+
+Some Weaknesses:
+
+    PP does not output a set of used hypotheses.
+    PP is unaware of some set theoretical axioms.
+    PP has similar problems concerning well-definedness as New PP.
+    If unnecessary hypotheses are present, they may prevent PP from finding a proof, even when the proof obligation obviously holds. 
+
+[edit] ML
+
+Names in the proof control: M0, M1, M2, M3, ML
+
+Names in the proof tree: ML
+
+Names in the preferences: Atelier B ML
+
+Input: All visible hypotheses are passed to ML. The different configurations refer to the configuration (proof force) of the ML prover.
+
+How the Prover Proceeds: ML applies a mix of forward, backward and rewriting rules in order to discharge the goal (or detect a contradiction among hypotheses).
+
+Some Strengths:
+
+    ML has limited support for equational and arithmetic reasoning.
+    ML is more resilient to unnecessary hypotheses than newPP and PP. 
+
+Some Weaknesses:
+
+    ML does not output a set of used hypotheses.
+    Not all set theoretical axioms are part of ML. 
+
+[edit] How to Use the Provers Effectively
+
+It is very hard, in general, to predict whether a certain automatic prover can or cannot discharge a given proof obligation within a given amount of time. (This is also the case for many other automatic first order theorem provers.) Therefore applying the 11 configurations in a trial and error fashion is often frustrating.
+
+The following guidelines may be useful:
+
+    Add New PP restricted (PP restricted), P0 (Atelier B P0), and ML (Atelier B ML) to the auto-tactic. If the auto-tactic runs out of memory, remove New PP.
+    If the model is small, add New PP after lasso (PP after lasso) and P1 (Atelier B P1) to the auto-tactic.
+    Whenever you think that the current proof obligation should be discharged automatically, invoke the auto-tactic (the green robot) instead of some particular automatic prover.
+    If the auto-tactic fails, it is usually best to simplify the proof obligation in some way. The most important ways of simplifying the proof obligation are:
+        Remove unnecessary hypotheses; add required hypotheses that have been missing.
+        Do some case splits.
+        Instantiate quantifiers.
+        Apply ae (abstract expression) to replace complicated expressions by fresh variables. 
+    You can also apply one of the automatic provers. They may be more successful than the auto-tactic, because they have a longer timeout.
+        Try New PP before PP or ML, because New PP proofs can be better reused, if the model changes.
+        The configurations that act on more than the selected hypotheses (New PP after lasso and unrestricted, P1 and PP, ML) become useless when the model grows. 
+    When everything fails, start to unfold the proof obligation manually, by clicking on the red links.
+        You may discover that some assumption was missing.
+        You may complete the proof.
+        If you observe that a valid proof obligation cannot be proved manually, please send a bug report. (Rodin Bug Tracker) 
+
+

@@ -125,6 +125,218 @@ All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots).
   because it's simpler for operators?\\
 \end{rodinrefentry}
 
+\subsection{ASCII Representations of the Mathematical Symbols}
+\label{ascii_representations_of_the_mathematical_symbols}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+The mathematical symbols used in the Event-B mathematical language are Unicode characters, beyond the ASCII subset. These characters are not always easy to input with a regular keyboard. To help users enter these characters, a list of standard input strings have been defined. When any of these strings is entered, it is automatically converted by the user interface to the corresponding Unicode character (i.e., mathematical symbol).
+
+\subsubsection{Atomic Symbols}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	true & $\top$ \\ \hline
+	false & $\bot$ \\ \hline
+	INT & $\mathbb{Z}$ \\ \hline
+	NAT & $\mathbb{N}$ \\ \hline
+	NAT1 & $\mathbb{N_1}$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	BOOL & $\mathrm{BOOL}$ \\ \hline
+	TRUE & $\mathrm{TRUE}$ \\ \hline
+	FALSE & $\mathrm{FALSE}$ \\ \hline
+	\{\} & $\emptyset$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	prj1 & $\prjone$ \\ \hline
+	prj2 & $\prjtwo$ \\ \hline
+	id & $\id$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Unary Operators}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	not & $\neg$ \\ \hline
+	finite & $finite$ \\ \hline
+	card & $\card$ \\ \hline
+	POW & $\pow$ \\ \hline
+	POW1 & $\pown$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	union & $\union$ \\ \hline
+	inter & $\inter$ \\ \hline
+	dom & $\dom$ \\ \hline
+	ran & $\ran$ \\ \hline
+%TODO: TILDE!
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	min & $\min$ \\ \hline
+	max & $\max$ \\ \hline
+	- & $-$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Assignment Operators}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	:= & $\bcmeq$ \\ \hline
+	:| & $\bcmsuch$ \\ \hline
+	:: & $\bcmin$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Binary Operators}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	\& & $\land$ \\ \hline
+	or & $\lor$ \\ \hline
+	$=>$ & $\limp$ \\ \hline
+	$<=>$ & $\leqv$ \\ \hline
+	= & $=$ \\ \hline
+	/= & $\neq$ \\ \hline
+	: & $\in$ \\ \hline
+	$<<:$ & $\subset$ \\ \hline
+	$/<<:$ & $\not\subset$ \\ \hline
+	$<:$ & $\subseteq$ \\ \hline
+	$/<$: & $\not\subseteq$ \\ \hline
+	$<$ & $<$ \\ \hline
+	$<=$ & $\leq$ \\ \hline
+	$>$ & $>$ \\ \hline
+	$>=$ & $\geq$ \\ \hline
+	/: & $\notin$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	$|->$ & $\mapsto$ \\ \hline
+	$<->$ & $\rel$ \\ \hline
+	$<<->$ & $\trel$ \\ \hline
+	$<->>$ & $\srel$ \\ \hline
+	$<<->>$ & $\strel$ \\ \hline
+	$+->$ & $\pfun$ \\ \hline
+	$-->$ & $\tfun$ \\ \hline
+	$+>>$ & $\psur$ \\ \hline
+	$->>$ & $\tsur$ \\ \hline
+	$>->>$ & $\tbij$ \\ \hline
+	$/\backslash$ & $\binter$ \\ \hline
+	$\backslash/$ & $\bunion$ \\ \hline
+	$\backslash$ & $\setminus$ \\ \hline
+	$**$ & $\cprod$ \\ \hline
+	$>->$ & $\tinj$ \\ \hline
+	$>+>$ & $\pinj$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	$<+$ & $\ovl$ \\ \hline
+	$||$ & $\pprod$ \\ \hline
+	$><$ & $\dprod$ \\ \hline
+	$circ$ & $\bcomp$ \\ \hline
+	$;$ & $\fcomp$ \\ \hline
+	$<|$ & $\domres$ \\ \hline
+	$<<|$ & $\domsub$ \\ \hline
+	$|>$ & $\ranres$ \\ \hline
+	$-$ & $-$ \\ \hline
+	$*$ & $*$ \\ \hline
+	$/$ & $\div$ \\ \hline
+	$..$ & $\upto$ \\ \hline
+	$TODO$ & $\expn$ \\ \hline
+	$+$ & $+$ \\ \hline
+	$|>>$ & $\ransub$ \\ \hline
+    \end{tabular}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	$mod$ & $mod$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Multiple Operators}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	partition & $partition$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Quantifiers}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	! & $\forall$ \\ \hline
+	\# & $\exists$ \\ \hline
+	\% & $\lambda$ \\ \hline
+	UNION & $\Union$ \\ \hline
+	INTER & $\Inter$ \\ \hline
+	| & $|$ \\ \hline
+	. & $\qdot$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Bracketing}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	oftype & $\forall$ \\ \hline
+	\# & $\exists$ \\ \hline
+	\% & $\lambda$ \\ \hline
+	UNION & $\Union$ \\ \hline
+	INTER & $\Inter$ \\ \hline
+	| & $|$ \\ \hline
+	. & $\qdot$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	( & $($ \\ \hline
+	) & $)$ \\ \hline
+	[ & $[$ \\ \hline
+	] & $]$ \\ \hline
+	\{ & $\{$ \\ \hline
+	\} & $\}$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Typing}
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+	ASCII & Symbol \\ \hline
+	oftype & \includegraphics[]{img/reference/ref_03_offtype_symbol.png} \\ \hline
+    \end{tabular}
+\end{center}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "rodin-doc"

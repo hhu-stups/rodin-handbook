@@ -132,6 +132,90 @@ The type expressions are defined recursively as follows:
 	\item If \textit{S} and \textit{T} are type expressions then \textit{ST} is a type expression. 
 \end{itemize} 
 
+\subsection{How can I create a new Event-B Project?}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+Please check the tutorial \ref{tutorial_03_project_setup} to learn how to create a new Event-B project.
+
+\subsection{How to remove a Event-B Project?}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+In order to remove a project, you first select it on the \textsf{Project Explorer} (\ref{reference_01_the_project_explorer}) and then right click with the mouse. The contextual menu will appear on the screen as indicated in figure \ref{fig_faq_removeproject}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/faq/faq_removeproject.png}
+	\caption{Removing a Event-B Project}
+	\label{fig_faq_removeproject}
+\end{center}
+\end{figure}
+
+You simply click on Delete and your project will be deleted (confirmation is asked). It is then removed from the \textsf{Project Explorer}.
+
+\subsection{How to export a Event-B Project?}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+Exporting a project is the operation by which you can construct automatically a "zip" file containing the entire project. Such a file is ready to be sent by mail. Once received, an exported project can be imported (next section), it then becomes a project like the other ones which were created locally. In order to export a project, first select it, and then click on \textsf{File $\rangle$ Export...} from the menubar as indicated in figure \ref{fig_faq_exportproject}. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/faq/faq_exportproject.png}
+	\caption{Export a Event-B Project}
+	\label{fig_faq_exportproject}
+\end{center}
+\end{figure}
+
+The Export wizard will pop up. In this window, select \textsf{General $\rangle$ Archive File} click \textsf{Next >} button. Specify the path and name of the archive file into which you want to export your project and finally click \textsf{Finish}. This menu sequence belongs (as well as the various options) to Eclipse. For more information, have a look at the Eclipse documentation. 
+
+\subsection{How to import a Event-B Project?}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+A ".zip" file corresponding to a project which has been exported elsewhere can be imported locally. In order to do that, click on \textsf{File $\rangle$ Import} from the menubar. In the import wizard, select \textsf{General $\rangle$ Existing Projects into Workspace} and click \textsf{Next >}. Then, enter the file name of the imported project and finally click Finish. Like for exporting, the menu sequence and layout are part of Eclipse.
+
+The importation is refused if the name of the imported project (not the name of the file), is the same as the name of an existing local project. The moral of the story is that when exporting a project to a partner you better modify its name in case your partner has already got a project with that same name (maybe a previous version of the exported project). Changing the name of a project is explained in the next section. 
+
+\subsection{How to change the name of a Event-B Project?}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+Select the project whose name you want to modify, and then click on \textsf{File $\rangle$ Rename...}. Modify the name and click on \textsf{OK}. The name of your project has been modified accordingly. 
+
+\subsection{How to create a Event-B Component}
+
+Please check the tutorial \ref{tutorial_03_project_setup} to learn how to create a new Event-B component.
+
+\subsection{How to remove a Event-B Component}
+
+In order to remove a component, press the right mouse button on the component. In the context menu, select \textsf{Delete}. This component is removed from the \textsf{Project Explorer}. 
+
+\subsection{How to save a Context or a Machine}
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+
+Once a machine or context is (possibly partly only) edited, you can save it by using the save button as indicated in figure \ref{fig_faq_saveaction}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/faq/faq_saveaction.png}
+	\caption{Save a context or a machine}
+	\label{fig_faq_saveaction}
+\end{center}
+\end{figure}
+
+Once a "Save" is done, three tools are called automatically, these are:
+
+\begin{itemize}
+	\item the Static Checker (\ref{static_checker})
+	\item the Proof Obligation Generator (\ref{proof_obligation_generator})
+	\item the Auto-Prover (\ref{auto_prover})
+\end{itemize}
+
+This can take a certain time. A "Progress" window can be opened at the bottom right of the screen to see which tools are working (most of the time, it is the auto-prover). 
+
 \section{Proving}
 
 \subsection{How can I do a Proof by Induction?}

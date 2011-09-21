@@ -154,12 +154,20 @@
       \hline
     \end{tabular}
   \end{center}
-  % \renewcommand\descriptionlabel[1]{\makebox[6.5em][r]{\textbf{##1}}}%
-  % \begin{description}\addtolength{\itemsep}{-0.5\baselineskip}
-  % \item[Name] #1
-  % \item[Goal] #2
-  % \item[Hypotheses] #3
-  % \end{description}
+}
+
+% a second approach to proof obligations
+\newcommand{\pode}[3]{%
+  \begin{center}
+    \setlength{\parindent}{2em}\vspace{0.2em}
+    \begin{tabular}{rp{0.6\textwidth}}
+      \hline
+      & \textbf{#1} \\
+      Name       & #2 \\
+      Goal       & #3 \\
+      \hline
+    \end{tabular}
+  \end{center}
 }
 
 %%% Local Variables: 

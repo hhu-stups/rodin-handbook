@@ -2,8 +2,8 @@
 \label{reference_03}
 
 \paragraph{Note about the current state of the documentation}
-Some laws (like the commutative law of addition in arithmetic) would be nice but will not be part of the first iteration of the documentation. E.g. the Z reference manual does this.
-References to related proof rules would be nice to have, too. But again, this is not part of the first iteration.
+It would be nice for some laws (like the commutative law of addition in arithmetic) to be included, but this will not be part of the first iteration of the documentation. The Z reference manual does this.
+References to related proof rules would be nice to have too, but again, this is not part of the first iteration.
 
 \subsection{Introduction}
 
@@ -20,7 +20,7 @@ In Event-B we have 3 kinds of basic data types:
   There is no assumption made about carrier sets unless it is stated explicitly as
   an axiom.
 \end{itemize}
-From all data types $\alpha, \beta$ can two other kinds of data types be constructed:
+From all data types $\alpha, \beta$, two other kinds of data types can be constructed:
 \begin{itemize}
 \item $\pow(\alpha)$ contains the sets of elements of $\alpha$.
 \item $\alpha\cprod\beta$ contains the pairs where the first element is of type $\alpha$ and the
@@ -30,35 +30,33 @@ From all data types $\alpha, \beta$ can two other kinds of data types be constru
 We use the Greek letters $\alpha$, $\beta$, $\gamma$, \ldots to represent arbitrary data types.
 For an expression $E$, we write $E\in\alpha$ to state that $E$ is of type $\alpha$.
 In the following descriptions of Event-B's mathematical construct we describe the
-  types of all constructs and it components.
+  types of all constructs and their components.
 
-E.g., we describe the type of the maplet $E\mapsto F$ with $E\mapsto F\in\alpha\cprod\beta$ with
+For example, we will describe the maplet $E\mapsto F$ which is defined as $E\mapsto F\in\alpha\cprod\beta$ with
  $E\in\alpha$ and $F\in\beta$. We do not make any restrictions on the types $\alpha$ and $\beta$.
 
-For predicates, we just describe the data types of its components. 
+For predicates, we just describe the data types of their components. 
 The predicate itself does not have a type.
-E.g. the components' types of the equality of two expressions $E=F$: $E\in\alpha$ and $F\in\alpha$.
+For example, consider the components' types of the equality of two expressions $E=F$: $E\in\alpha$ and $F\in\alpha$.
 By stating that $E$ and $F$ are both of type $\alpha$, we express that both expressions must have the
-  same type, but do not make any further assumptions about their types.
+  same type but do not make any further assumptions about their types.
 
 \subsubsection{Well-definedness}
 \label{well_definedness}
 \index{well definedness}
 
-A well definedness condition of an expression or predicate in Event-B is a predicate which describes the condition 
-  under which it can be safely evaluated.
-The integer division is a prominent example: The expression $x\div y$ makes only sense when $y\neq 0$.
+A predicate which describes the condition under which an expression or predicate in Event-B can be safely evaluated is the well-definedness condition.
+An example with integer division makes this clear: The expression $x\div y$ makes only sense when $y\neq 0$.
 
 In Rodin, the $\wdl$ operator (TODO: look up how this is called correctly and add a reference to the appropriate
-sources) is implemented. Applied to the example above: $\wdl(x\div y) \defi y\neq 0$.
+sources) is implemented. When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
 
-Well-definedness conditions are usually used in the well-definedness proof obligations.
+Well-definedness conditions are usually used for the well-definedness proof obligations.
 
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
-In many cases, this is just the conjunction of the well-definedness conditions of the syntactical parts of a 
-construct. 
+In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a constrict.
 
-See section~\ref{welldefinedness_of_assignments} for well-definedness conditions of assignments.
+See section~\ref{welldefinedness_of_assignments} for well-definedness of assignments.
 
 \subsubsection{Structure of the reference}
 The following reference sections follow the form: \\[2em]
@@ -69,8 +67,8 @@ The following reference sections follow the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc A short description of what the operator does
   \rrdef A more formal definition
-  \rrtypes A description of the types of all arguments and -- if the operation
-    is an expression -- the expression's type.
+  \rrtypes A description of the types of all arguments and, if the operation
+    is an expression, the expression's type.
   \rrwd
     A description of the well-definedness conditions using the $\wdl$ operator.
 \end{rodinrefentry}
@@ -85,7 +83,7 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-  $\btrue$ resp. $\bfalse$ is the predicate that is always true resp. false.
+  The predicates $\btrue$ and $\bfalse$ are the predicates that are true and false respectively.
   \rrwd
   $\wdl(\btrue) \defi \btrue$ \\
   $\wdl(\bfalse) \defi \btrue$ \\
@@ -125,10 +123,9 @@ The following reference sections follow the form: \\[2em]
   \rrtypes
     All arguments are predicates.
   \rrwd
-    Please note that whereas operators like $\land$ and $\lor$ are principally commutative,
-    their well-definedness conditions are not. Thus if their arguments have well-definedness
-    conditions, the order matters. E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
-    but $y\div x=3 \land x\neq 0$ has still the well-definedness condition $x\neq 0$.
+    Please note that although operators like $\land$ and $\lor$ are principally commutative,
+    their well-definedness conditions are not. Therefore, if their arguments have well-definedness conditions, the order matters. E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
+    but $y\div x=3 \land x\neq 0$ still has the well-definedness condition $x\neq 0$.
 
     $\wdl(P\land Q) \defi \ldots$ \\
     $\wdl(P\lor Q) \defi \ldots$ \\
@@ -198,7 +195,7 @@ The following reference sections follow the form: \\[2em]
   of $S$ to an element of $T$.
 
   A function is injective (is an injection) if two distinct elements of $S$ are always mapped to distinct
-  elements of $T$. An equivalent statement is that the inverse of the function is a also a function.
+  elements of $T$. It is also equivalent to say that the inverse of an injective function is a also a function.
 
   A function is surjective (is a surjection) if for every element of $T$ there exists an element in $S$
   that is mapped to it.
@@ -233,7 +230,7 @@ The following reference sections follow the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
   The set of all integers is denoted by $\intg$. It contains all elements of the type.
-  The two subsets $\nat$ and $\nat_1$ contain all elements greater or equal to 0 resp. 1.
+  The two subsets $\nat$ and $\nat_1$ contain all elements greater than or equal to 0 and 1 respectively.
   The range of numbers between $a$ and $b$ is denoted by $a \upto b$.
   \rrdef
   $\nat   = \{~ n ~|~ n\in\intg\land n\geq 0~\}$\\
@@ -294,7 +291,7 @@ The following reference sections follow the form: \\[2em]
 
 \marginpar{CONTENT MIGRATED FROM WIKI!}
 
-The mathematical symbols used in the Event-B mathematical language are Unicode characters, beyond the ASCII subset. These characters are not always easy to input with a regular keyboard. To help users enter these characters, a list of standard input strings have been defined. When any of these strings is entered, it is automatically converted by the user interface to the corresponding Unicode character (i.e., mathematical symbol).
+The mathematical symbols used in the Event-B mathematical language are Unicode characters beyond the ASCII subset. These characters are not always easy to input with a regular keyboard. To help users enter these characters, a list of standard input strings have been defined. When any of these strings is entered, it is automatically converted by the user interface to the corresponding Unicode character (i.e., mathematical symbol).
 
 \subsubsection{Atomic Symbols}
 

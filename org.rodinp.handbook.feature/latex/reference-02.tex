@@ -12,14 +12,14 @@
 
 In Event-B, we have two types of components: contexts and machines.
 Here we describe briefly the different elements of a context or machine.
-We do not use a specific syntax for describing the components because this depends on the editor that is
-used. The default editor enforces a structure which contains the elements that are described here.
+We do not use a specific syntax for describing the components because the syntax is dependent on the editor that is
+used. The default editor requires a structure which contains the elements that are described here.
 
 Proof obligations are generated to guarantee certain properties of the modeled system.
-We explain here which proof obligations are generated and for each we list the goal and hypotheses that can be used
-when performing the proof.
+We will explain here which proof obligations are generated and we will list the goal and hypotheses that can be used
+when performing the proof for each one.
 This is done in the form:
-\podef{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the resp. 
+\podef{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the respective 
   axiom/invariant/guard/etc.)}{Goal that should be proved}{Hypotheses that can be used}
 
 \subsection{About the notation that we use}
@@ -58,26 +58,26 @@ we declare $S$ as a set, $e_1,\ldots,e_n$ as constants and add the axiom $partit
 Other contexts can be extended by adding their name to the \eventbsection{Extends} section.
 
 The resulting context consists of all constants and axioms of all extended contexts and the extending context itself.
-Thus for a context or machine that extends resp. sees the contexts, it makes no difference where a constant or axiom is declared.
+Thus for a context or machine that extends or sees the contexts, it makes no difference where a constant or axiom is declared.
 
-It is an error to extend two contexts which declare a constant or set of the same name.
+Extending two contexts which declare a constant or set using the same identifier will result in an error.
 
 \subsubsection{Constants and axioms}
 \label{constants_and_axioms}
 \index{constant}
 \index{axiom}
 Constants can be declared by adding their unique name (an identifier) to the \eventbsection{Constants} section.
-The type of the constant must be inferable by the axioms.
+An axiom must also be in place from which the type of the constant can be inferred.
 We denote the sequence of all constants with $\varlist{c}$.
 
-An axiom describes a statement that can be assumed as true in the rest of the model.
+An axiom is a statement that is assumed as true in the rest of the model.
 Each axiom consists of a label and a predicate $A(\varlist{c})$.
 
 \index{theorem!axiom@axiom as theorem}
 An axiom $A_{thm}$ can be marked as a theorem. In that case the following proof obligation is created:
 %\podef{Proof obligation of a theorem}{\eventbpo{label/THM}}{the theorem}{axioms defined before the theorem and in extended contextes}
 \pode{Proof obligation of a theorem}{\eventbpo{label/THM}}{$A_b(\allconstants) \limp A_{thm}(\allconstants)$}
-where $A_b$ denotes (the conjunction of) all axioms declared in extended contexts or before the theorem in the current context.
+where $A_b$ denotes (the conjunction of) all axioms declared in extended contexts and the axioms already declared in the current context before the theorem in question.
 
 If an axiom $A$ contains any condition that is well-defined, a proof obligation is generated:
 %\podef{Well-definedness of an axiom}{\eventbpo{label/WD}}{The axiom's WD-condition}{axioms defined before the theorem and in extended contextes}
@@ -88,67 +88,68 @@ If an axiom $A$ contains any condition that is well-defined, a proof obligation 
 \index{machine}
 A machine describes the dynamic behavior of a model by means of variables whose values are changed by events.
 
-There are two basic things that must be proven for a machine. First that the machine is
-consistent, i.e. that it could never reach a state which violates the invariant. Second,
-that the machine is a correct refinement, i.e. that its behavior corresponds to the
-refined machine.
+There are two basic things that must be proven for a machine:
+\begin{enumerate}
+	\item The machine must be consistent, i.e. it should never reach a state which violates the invariant.
+	\item The machine is a correct refinement, i.e. its behavior must correspond to any machines that it refines
+\end{enumerate}
 
 \subsubsection{Refinement}
-A machine can refine at most one other machine. 
-We call the refined machine the abstract machine whereas the refinement is the more concrete machine. 
+A machine can only refine one other machine. 
+We refer to the refined machine as the abstract machine and refer to the refinement as the concrete machine. 
 More generally, a machine $M_0$ can be refined by machine $M_1$, $M_1$ refined by $M_2$ 
-and so on until the most concrete refinement $M_n$. 
+and so on. The most concrete refinement would be $M_n$. 
 
-Basically a refinement has two aspects. First, the concrete machine's state is related to the state of the
-abstract machine by a \emph{gluing invariant}. Second, each abstract event can be refined by one or more
+Basically, a refinement consists of two aspects:
+\begin{enumerate}
+	\item The concrete machine's state is connected to the state of the
+abstract machine. To do this, an invariant is used to relate abstract and concrete variable. This invariant is called a \emph{gluing invariant}. 
+	\item Each abstract event can be refined by one or more
 concrete events.
+\end{enumerate}
 
-The invariant is used to relate abstract and concrete variables. Invariants of a concrete machine are also called gluing invariants.
-The full invariant of the machine contains both abstract and concrete invariants. 
+The full invariant of the machine contists of both abstract and concrete invariants. 
 The invariants are accumulated during refinements.
 
 \subsubsection{Seeing a context}
-If the machine sees a context, its declared sets and constants can be used in
+If the machine sees a context, the sets and constants declared in the context can be used in
  all predicates and expressions.
-The conjunction of axioms $A(\allconstants)$ can be used as hypothesis in the proofs.
+The conjunction of axioms $A(\allconstants)$ can be used as hypotheses in the proofs.
 
 \subsubsection{Variables and invariants}
 \index{variable}
-Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables}.
-The type of the variable must be inferable by the invariants of the machine.
-We denote the variables of the abstract machines $M_1,\ldots,M_{n-1}$ with $\absvariables$ and
-the variables of the concrete machine $\concvariables$.
+Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables} section. The invariants of the machine must make the type of the variable clear.
+We denote the variables of the abstract machines $M_1,\ldots,M_{n-1}$ with a $\absvariables$ and the variables of the concrete machine with a $\concvariables$.
 
 \index{invariant}
-An invariant describes a statement that should be hold in each state of the machine.
+An invariant is a statement that must hold at each state of the machine.
 Each invariant $i$ consists of a label and a predicate $I_i(\allconstants,\absvariables,\concvariables)$.
-Beside constants, an invariant can refer to variables of the concrete and all abstract machines.
+An invariant can refer to the constants as well as the variables of the concrete and all abstract machines.
 
-We write $I(\allconstants,\absvariables,\concvariables)$ for the conjunction of all invariants
+We write $I(\allconstants,\absvariables,\concvariables)$ to denote the conjunction of all invariants
 of the machine and all its abstract machines. We call this the invariant of the machine.
 
 \index{theorem!invariant@invariant as theorem}
-An invariant $I_{thm}(\allconstants,\absvariables,\concvariables)$ can be marked as a theorem. In that case the following proof obligation is generated:
+An invariant $I_{thm}(\allconstants,\absvariables,\concvariables)$ can be marked as a theorem. In this case, the following proof obligation is generated:
 \pode{An invariant as theorem}{\eventbpo{label/THM}}{$A(\allconstants) \land I_b(\allconstants,\absvariables,\concvariables) \limp I_{thm}(\allconstants,\absvariables,\concvariables)$}
-where $I_b$ denotes (the conjunction of) all invariants declared in abstract machines or before
-the theorem in the concrete machine.
+where $I_b$ denotes (the conjunction of) all invariants declared in abstract machines and all invariants declared in the concrete machine before
+the theorem in question.
 
-Invariant preservation of events does not need to be proven for invariants that are marked as theorems, because
- their correctness results from the preservation of the other invariants (see below for details).
+Invariants that are marked as theorems derive their correctness from the preservation of other invariants (see below for details), so their preservation does not need to be proven.
 
-If an invariant $I_i$ contains a well-definedness condition, the following proof obligation is created:
+If an invariant $I_i$ contains a well-definedness condition, the following proof obligation is generated:
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}{$A(\allconstants) \land I_b(\allconstants,\absvariables,\concvariables) \limp \wdl(I_i(\allconstants,\absvariables,\concvariables))$}
 
 \paragraph{Common variables between machines}
 \index{variable!common@common variable}
-With some restrictions can the abstract variables $\absvariables$ and concrete
-  variables $\concvariables$ have variables in common.
+With some restrictions, the abstract variables $\absvariables$ and concrete
+  variables $\concvariables$ can have variables in common.
 If a variable $v$ is declared in a machine $M_i$, it can be re-used in the
   direct refinement $M_{i+1}$. 
-In that case it is assumed that the values of the abstract and concrete variable 
+In that case, it is assumed that the values of the abstract and concrete variable 
   are always equal.
-To ensure this, special proof obligations are generated. (see below in section \ref{events})
-Once a variable disappears in a refinement, e.g. is not declared in machine $M_{i+2}$,
+To ensure this, special proof obligations are generated (see below in section \ref{events}).
+Once a variable disappears in a refinement, i.e. is not declared in machine $M_{i+2}$,
   it cannot be re-introduced in a later refinement.
 
 \subsubsection{Events (without refinement)}

@@ -7,21 +7,6 @@ References to related proof rules would be nice to have, too. But again, this is
 
 \subsection{Introduction}
 
-\subsubsection{Structure of the reference}
-The following reference sections follow the form: \\[2em]
-\begin{rrnames}
-  math. Symbol  & \texttt{ASCII representation}  & Name of the operator \\
-  \ldots & \ldots & \ldots \\
-\end{rrnames}
-\begin{rodinrefentry}
-  \rrdesc A short description of what the operator does
-  \rrdef A more formal definition
-  \rrtypes A description of the types of all arguments and -- if the operation
-    is an expression -- the expression's type.
-  \rrwd
-    A description of the well-definedness conditions using the $\wdl$ operator.
-\end{rodinrefentry}
-
 \subsubsection{Data types}
 \label{data_types}
 
@@ -42,7 +27,7 @@ From all data types $\alpha, \beta$ can two other kinds of data types be constru
   second element of type $\beta$.
 \end{itemize}
 \paragraph{A note about the notation}
-We use the Greek letters $\alpha$, $\beta$, $\gamma$ to represent arbitrary data types.
+We use the Greek letters $\alpha$, $\beta$, $\gamma$, \ldots to represent arbitrary data types.
 For an expression $E$, we write $E\in\alpha$ to state that $E$ is of type $\alpha$.
 In the following descriptions of Event-B's mathematical construct we describe the
   types of all constructs and it components.
@@ -74,6 +59,21 @@ In many cases, this is just the conjunction of the well-definedness conditions o
 construct. 
 
 See section~\ref{welldefinedness_of_assignments} for well-definedness conditions of assignments.
+
+\subsubsection{Structure of the reference}
+The following reference sections follow the form: \\[2em]
+\begin{rrnames}
+  math. Symbol  & \texttt{ASCII representation}  & Name of the operator \\
+  \ldots & \ldots & \ldots \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc A short description of what the operator does
+  \rrdef A more formal definition
+  \rrtypes A description of the types of all arguments and -- if the operation
+    is an expression -- the expression's type.
+  \rrwd
+    A description of the well-definedness conditions using the $\wdl$ operator.
+\end{rodinrefentry}
 
 \subsection{Predicates}
 
@@ -137,9 +137,48 @@ See section~\ref{welldefinedness_of_assignments} for well-definedness conditions
     $\wdl(\lnot(P)) \defi \wdl(P)$ \\
 \end{rodinrefentry}
 
-All operators that work with predicates ($\land$, $\lor$, quantifier, \ldots). 
+\subsubsection{Quantified predicates}
+\label{quantified_predicates}
+\ldots
+
+\subsubsection{Equality}
+\label{equality}
+\ldots
+
+\subsubsection{Membership}
+\label{membership}
+\ldots
+
+\subsubsection{Subsets}
+\label{subsets}
+
+\ldots
 
 \subsection{Sets and relations}
+
+\subsubsection{Sets}
+\label{sets}
+\ldots (power set, finite )
+
+\subsubsection{Partitions}
+\label{partitions}
+\ldots
+
+\subsubsection{Relations}
+\label{relations}
+\ldots
+
+\subsubsection{Domain and Range}
+\label{domain_and_range}
+\ldots
+
+\subsubsection{Domain and Range Restrictions}
+\label{domain_and_range_restrictions}
+\ldots
+
+\subsubsection{Constant relations}
+\label{constant_relations}
+\ldots (identity, the projection functions)
 
 \subsubsection{Sets of functions}
 \index{function}\index{injection}\index{surjection}\index{bijection}

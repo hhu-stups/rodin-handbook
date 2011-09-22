@@ -647,16 +647,15 @@ Three actions are available for Machine files.
 
 \marginpar{CONTENT MIGRATED FROM WIKI!}
 
-Introduction
+\paragraph{Introduction}
 
 The purpose is to give more detailed preferences to the user to build his own automated tactics. More precisely, the user should on the one hand have a way to specify which parameters have to be passed to the reasoners, and on the other hand to construct complex proof strategies.
-Example
 
-In the case of ML, an user could for example indicate which forces to use and what timeout. In parallel, he could sequentially compose a list of tactics to apply.
-User Documentation
+\paragraph{User Documentation}
 
 Here is the documentation about the current implementation of automatic tactics preferences: Auto-tactic \& Post-tactic
-Tactic Combinators
+
+\paragraph{Tactic Combinators}
 
 Tactic combinators can be used to construct complex proof strategies.
 
@@ -665,7 +664,8 @@ Historically, one combinator exists since the beginning of auto tactic preferenc
 The following is a list of combinators present by default.
 
 One may notice the absence of child-specific combinator, i.e applying tactic T1 on first child, T2 on second child, ..., whereas this kind of combinator exists in other provers. The reason is that we are constructing here auto tactics, that is tactics to be attempted in a general context. In provers with child-specific combinators, they are used to make manual proofs, hence needing proof-specific adaptation.
-Composers
+
+\subparagraph{Composers}
 
 A composer combinator applies its given tactic(s) to the given node. The given node may be open or closed. It succeeds if at least 1 tactic application succeeded. 
 
@@ -680,7 +680,7 @@ A composer combinator applies its given tactic(s) to the given node. The given n
     \end{tabular}
 \end{center}
 
-Selectors
+\subparagraph{Selectors}
 
 A selector combinator applies its given tactic to the set of nodes it selects. Selected nodes are computed from the given node. The given node may be open or closed. It succeeds if the tactic application succeeded for at least 1 selected node. 
 
@@ -692,7 +692,7 @@ A selector combinator applies its given tactic to the set of nodes it selects. S
     \end{tabular}
 \end{center}
 
-Post Actions
+\subparagraph{Post Actions}
 
 A post actions applies its given tactic to the given node. The given node must be open (else it fails). Then, it performs a specific treatment, guarded by a trigger condition. 
 
@@ -704,17 +704,14 @@ A post actions applies its given tactic to the given node. The given node must b
     \end{tabular}
 \end{center}
 
-Loop on All pending
+\subparagraph{Loop on All pending}
 
 $loopOnAllPending(T_1 \ldots T_n) \;\;\defi\;\; loop(onAllPending(composeUntilSuccess(T_1 \ldots T_n)))  $
 
-Other Ideas
-
-    lasso (as a tactic rather than a combinator): selects all hypotheses that have free identifiers in common with the current goal and currently selected hypotheses 
-
-    example: $compose(lasso, myTactic)$ 
+\paragraph{Other Ideas}
 
     timeout: a post action of arity 1 (with duration as input): limits the time allocated for the tactic it is applied to (fails after time has gone out)
+
     limitDepth: a post action of arity 1 (with depth as input): limits the proof tree depth for the tactic it is applied to (prevents tree from growing beyond a given depth) 
 
 \subsubsection{Proof Skeleton View}

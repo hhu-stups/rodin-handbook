@@ -54,9 +54,7 @@ sources) is implemented. When applied to the above example, integer division can
 Well-definedness conditions are usually used for the well-definedness proof obligations.
 
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
-In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a constrict.
-
-See section~\ref{welldefinedness_of_assignments} for well-definedness of assignments.
+In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a construct.
 
 \subsubsection{Structure of the reference}
 The following reference sections follow the form: \\[2em]
@@ -71,6 +69,9 @@ The following reference sections follow the form: \\[2em]
     is an expression, the expression's type.
   \rrwd
     A description of the well-definedness conditions using the $\wdl$ operator.
+  \rrfis
+    Non-deterministic assignments may have feasability conditions.
+    These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations})
 \end{rodinrefentry}
 
 \subsection{Predicates}
@@ -285,6 +286,113 @@ The following reference sections follow the form: \\[2em]
   Or should we use something like the domain condition $\mathcal{DOM}$
   because it's simpler for operators?\\
 \end{rodinrefentry}
+
+\subsection{Assignments}
+\label{assignments}
+
+In the previous sections, we did not consider the scope of the expressions. I.e. we did
+not say which constants or variables can be used in an expression or predicate because
+this depends completely on the context where the expression is used.
+
+The following paragraphs are about assignments. Depending on the type of assignment it
+may be important to specify which identifiers can be used.
+Thus we use the notion $E(x_1,\ldots,x_n)$ to specify which free identifiers may occur
+in the expression $E$.
+
+\newcommand{\eventbassignmentexpr}[1]{E_{#1}(\allconstants,\concvariables,\concparameters)}
+
+\subsubsection{Deterministic Assignments}
+\label{deterministic_assignments}
+\begin{rrnames}
+  $\bcmeq$ & \texttt{:=} & deterministic assignment
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x_1,\ldots,x_n \bcmeq ,\eventbassignmentexpr{1}\ldots,\eventbassignmentexpr{n}$
+    assigns the expressions $E_i$ to the variable $x_i$, with $i\in1\upto n$.
+    All $x_i$ must be distinct identifiers that refer to variables of the concrete machine.
+    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    variables of the concrete machine and parameters of the concrete event.
+
+    There is a special form of the assignment wich does a relational overwrite:\\
+    $x(F(\allconstants,\concvariables,\concparameters)) \bcmeq E(\allconstants,\concvariables,\concparameters)$.
+  \rrdef
+    The before-after-predicate of $x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}$ is\\ $x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
+
+    The assignment is equivalent to
+    $x_1,\ldots,x_n \bcmsuch x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
+
+    The special form is syntactic sugar for:\\
+    $x(\eventbassignmentexpr{1}) \bcmeq \eventbassignmentexpr{2}
+      \quad\defi\quad 
+      x \bcmeq x \ovl \{~\eventbassignmentexpr{1} \mapsto \eventbassignmentexpr{2}~\}$
+  \rrtypes
+    $x_i\in\alpha$ and  $\eventbassignmentexpr{i}\in\alpha$ for $i \in 1\upto n$.
+  \rrwd
+    $\wdl(~x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}~)
+      \quad\defi\quad 
+      \wdl(\eventbassignmentexpr{1}) \land \ldots \land \wdl(\eventbassignmentexpr{n})$ \\
+    $\wdl(~x(\eventbassignmentexpr{1}) \bcmeq \eventbassignmentexpr{2}~)
+    \quad\defi\quad 
+    \wdl(\eventbassignmentexpr{1}) \land \wdl(\eventbassignmentexpr{2})$
+\end{rodinrefentry}
+
+\subsubsection{Non-deterministic assignments}
+\label{nondeterministic_assignments}
+
+\begin{rrnames}
+  $\bcmsuch$ & \texttt{:|} & non-deterministic assignment with a before-after-predicate
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
+    assigns to the variables $x_1\ldots,x_n$ any value such that the the
+    before-after-predicate $Q$ is fulfilled.
+    All $x_i$ are identifier that refer to a variable of the concrete machine.
+    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    variables of the concrete machine and parameters of the concrete event.
+    $x_1,\ldots,x_n$ are in $\concvariables$.
+
+    This is the most general form of assignment, all other assignments can be converted to this.
+  \rrdef
+    The before-after-predicate is $Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$. \\
+  \rrtypes
+    $x\in\alpha$ and $\eventbassignmentexpr{}\in\pow(\alpha)$
+  \rrwd
+    $\wdl(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')~)
+    \quad\defi\quad
+    \wdl(x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n'))$
+  \rrfis
+    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')~)
+      \quad\defi\quad
+      \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
+\end{rodinrefentry}
+
+\begin{rrnames}
+  $\bcmin$ & \texttt{::} & non-deterministic assignment of a set member
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x \bcmin \eventbassignmentexpr{}$ assigns to the variable $x$ any value of the
+    set $E$. $x$ is an identifier that refers to a variable
+    of the concrete machine.
+    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    variables of the concrete machine and parameters of the concrete event.
+  \rrdef
+    The before-after-predicate is $x' \in \eventbassignmentexpr{}$. \\
+    The assignment is equivalent to
+    $x \bcmsuch x' \in \eventbassignmentexpr{}$.
+  \rrtypes
+    $x\in\alpha$ and $\eventbassignmentexpr{}\in\pow(\alpha)$
+  \rrwd
+    $\wdl(~x \bcmin\eventbassignmentexpr{}~)
+    \quad\defi\quad
+    \wdl(E(\allconstants,\concvariables,\concparameters))$
+  \rrfis
+    $\actfis(~x \bcmin \eventbassignmentexpr{}~) \defi \eventbassignmentexpr{}\neq\emptyset$
+\end{rodinrefentry}
+
+
 
 \subsection{ASCII Representations of the Mathematical Symbols}
 \label{ascii_representations_of_the_mathematical_symbols}

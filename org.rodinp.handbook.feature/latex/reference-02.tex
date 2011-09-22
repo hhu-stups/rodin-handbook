@@ -1,4 +1,4 @@
-\newcommand{\varlist}[1]{\textbf{#1}}
+\newcommand{\varlist}[1]{\mathbf{#1}}
 \newcommand{\allconstants}{\varlist{c}}
 \newcommand{\absvariables}{\varlist{v}}
 \newcommand{\concvariables}{\varlist{w}}
@@ -6,6 +6,8 @@
 \newcommand{\absparameters}{\varlist{t}}
 \newcommand{\concparameters}{\varlist{u}}
 \newcommand{\allparameters}{{\absparameters,\concparameters}}
+\newcommand{\absbeforeafter}{\mathcal{S}}
+\newcommand{\concbeforeafter}{\mathcal{T}}
 
 \section{Event-B (Modeling notation)}
 \label{reference_02}
@@ -152,8 +154,8 @@ To ensure this, special proof obligations are generated (see below in section \r
 Once a variable disappears in a refinement, i.e. is not declared in machine $M_{i+2}$,
   it cannot be re-introduced in a later refinement.
 
-\subsubsection{Events (without refinement)}
-\label{events_no_refinement}
+\subsubsection{Events}
+\label{events}
 \index{event}
 A possible state change of a machine is defined by an event.
 The condition under which an event can happen is given by a guard, the event's action
@@ -170,24 +172,37 @@ An event has the following elements:
 \item Guards
 \item Witnesses
 \item Actions
-\item Status (ordinary, convergent or anticipated)
+\item Status (ordinary, convergent or anticipated): The status is used
+  for termination proofs (see section~\ref{termination} for details).
 \end{itemize}
 
 An event can refine one or more events of an abstract machine. To keep things simple, we
-  first consider only events that do not refine other events.
+  first consider only events that have at most one refined event.
+If there are several refinement steps -- e.g. event $E_1$ is refined by $E_2$ and $E_2$ by
+  $E3$, we call $E_1$ and $E_2$ the abstract events and $E_3$ the concrete event.
+Likewise, if we refer e.g. to the parameters of the abstract events, we mean all parameters
+  of $E_1$ and $E_2$.
 
 \paragraph{Parameters}
 \index{parameter}
 An event may have an arbitrary number of \emph{parameters}. Their names must be unique. 
-I.e. there must be constant or variable with the same name.
+I.e. there must be no constant or variable with the same name.
 The types of the parameters must be inferable by the guards of the event.
-We denote the parameters of a concrete event with $\concparameters$.
+We denote the parameters of all abstract events with $\absparameters$, the
+parameters of the concrete event with $\concparameters$.
+
+Analogously to variables, an event can have parameters in common with the event it refines.
+If the refined event has a parameter $t$ which is not a parameter of the refinement, 
+a witness $W(\allconstants,\allvariables,\concparameters,t)$ for the abstract parameter must be specified (see below).
 
 \paragraph{Guards}
 \index{guard}
-Each \emph{guard} of consist of a label and a predicate $G(\allconstants,\concvariables,\concparameters)$.
+Each \emph{guard} consist of a label and a predicate $H(\allconstants,\concvariables,\concparameters)$.
 Variables or parameters of abstract machines are not accessible in a guard.
 
+We write $G(\allconstants,\absvariables,\absparameters)$ for the (conjunction of) all guards of all refined events.
+
+\marginpar{Check the proof obligations and text for the role of witnesses and in the case of refinement}
 Like axioms and invariants, guards can be marked as theorems, too. The following
 proof obligation is generated where $G_b$ denotes the (conjunction of) the guards occurring before the theorem:
 %\podef{A guard as theorem}{\eventbpo{eventname/label/THM}}{the theorem}{axioms of seen contexts, invariants 
@@ -200,120 +215,17 @@ If the guard $G_i$ contains WD-conditions, the following proof obligation is gen
 {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land G_b(\allconstants,\concvariables,\concparameters) 
 \limp \wdl(G_i(\allconstants,\concvariables,\concparameters))$}
 
+
 \paragraph{Actions}
 \label{actions}
 An action consists of a label and an assignment.
-An assignment can have one of the following forms:
-\begin{itemize}
-\item $x_1,\ldots,x_n \bcmeq E_1(\allconstants,\concvariables,\concparameters),\ldots,E_n(\allconstants,\concvariables,\concparameters)$ \\
-  where $E_i$ is an expression that denotes the new value of the concrete variable $x_i$.
-  $E_i$ has same type as $x_i$.
-\item $x(F(\allconstants,\concvariables,\concparameters)) \bcmeq E(\allconstants,\concvariables,\concparameters)$ \\
-  where $x$ is a concrete variable that is a relation.
-  In the new state $x$ maps $F(\allconstants,\concvariables,\concparameters)$ to $E(\allconstants,\concvariables,\concparameters)$.
-  $x$ has the type $\pow(\alpha\cprod\beta)$, $F$ the type $\alpha$ and $E$ the
-  type $\beta$.
-\item $x \bcmin E(\allconstants,\concvariables,\concparameters)$ \\
-  assigns the concrete variable $x$ a new value of the set $E(\allconstants,\concvariables,\concparameters)$.
-  $x$ is of type
-  $\alpha$ and $E(\allconstants,\concvariables,\concparameters)$ of type $\pow(\alpha)$.
-\item $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$ \\
-  where $Q$ is a before-after-predicate that describes possible new states.
-  $x_1,\ldots,x_n$ refer to the values of variable in the state before the event occurs,
-  $x_1',\ldots,x_n'$ to the values in the new state after the event.
-\end{itemize}
-The first two form of assignment are deterministic assignments, because 
-  there is exactly one possible new value for fixed values for variables and parameters.
-Accordingly the third and fourth form are non-deterministic.
-The last form is the most general one and the others can be translated into it:
-\begin{itemize}
-\item $x(F(\allconstants,\concvariables,\concparameters)) \bcmeq E(\allconstants,\concvariables,\concparameters)
-  \quad\defi\quad 
-  x \bcmeq x \ovl \{~F(\allconstants,\concvariables,\concparameters) \mapsto E(\allconstants,\concvariables,\concparameters)~\}$
-\item $x_1,\ldots,x_n \bcmeq E_1(\allconstants,\concvariables,\concparameters),\ldots,E_n(\allconstants,\concvariables,\concparameters)
-  \quad\defi\quad
-  x_1,\ldots,x_n \bcmsuch x_1' = E_1(\allconstants,\concvariables,\concparameters) \land \ldots \land x_n' = E_n(\allconstants,\concvariables,\concparameters)$
-\item $x \bcmin E(\allconstants,\concvariables,\concparameters) 
-  \quad\defi\quad
-  x' \in E(\allconstants,\concvariables,\concparameters)$
-\end{itemize}
-To avoid ambiguities a variable can only be assigned once in an action, i.e. all identifiers 
-  of the left side of $\bcmsuch$ must be distinct.
-If an action has more than one action, they are executed in parallel. Again, it is an error
-  to assign to a variable in more than one action.
+Section~\ref{assignments} gives an overview over the assignments.
+They can be put into two groups: deterministic and non-deterministic assignments.
+Each assignment affects one or more concrete variables.
+
+If an action has more than one action, they are executed in parallel. 
+It is an error to assign to a variable in more than one action.
 All variables that are not assigned to in an action, keep the same value in new and old state.
-
-\paragraph{Initialization}
-\index{initialization}
-The initialization of a machine is given by a special event, called \textsl{INITIALISATION}.
-Unlike in other events, the initialization must not contain guards and parameters.
-The actions must not make use of variable values before the initialization event occurs.
-All variables must be assigned a value to. If there is no assignment for the variable $x$,
-Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
-
-\paragraph{Well-definedness of assignments}
-\label{welldefinedness_of_assignments}
-\index{well definedness!of assignments}
-The well-definedness conditions of the assignments are: \\
-$\wdl(~x_1,\ldots,x_n \bcmeq E_1(\allconstants,\concvariables,\concparameters),\ldots,E_n(\allconstants,\concvariables,\concparameters)~)
-  \quad\defi\quad 
-  \wdl(E_1(\allconstants,\concvariables,\concparameters)) \land \ldots \land \wdl(E_n(\allconstants,\concvariables,\concparameters))$ \\
-$\wdl(~x(F(\allconstants,\concvariables,\concparameters)) \bcmeq E(\allconstants,\concvariables,\concparameters)~)
-  \quad\defi\quad 
-  \wdl(F(\allconstants,\concvariables,\concparameters)) \land \wdl(E(\allconstants,\concvariables,\concparameters))$ \\
-$\wdl(~x \bcmin E(\allconstants,\concvariables,\concparameters)~)
-  \quad\defi\quad
-  \wdl(E(\allconstants,\concvariables,\concparameters))$\\
-$\wdl(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')~)
-  \quad\defi\quad
-  \wdl(Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n'))$
-\paragraph{Proof obligations}
-The following proof obligations are generated for events:
-
-Every action $a$ with label $\eventbpo{actionlabel}$ of an event must be well-defined.
-  \pode{Well-definedness of actions}%
-  {\eventbpo{eventlabel/actionlabel/WD}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
-    \wdl(~a~)$}
-  
-
-If the event's guard is enabled, every action must be feasible.
-  This trivially true in the case of the deterministic assignments.
-  For $x \bcmin E(\allconstants,\concvariables,\concparameters)$ it must be proven that the
-  set $E$ is not empty:
-  \pode{Action feasibility (for $\bcmin$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
-    E(\allconstants,\concvariables,\concparameters) \neq \emptyset$}
-  For $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
-  values must exist that fulfill $Q$:
-  \pode{Action feasibility (for $\bcmsuch$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
-    \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$}  
-
-For each invariant $I_i$ with label \eventbpo{invlabel} 
-  that contains a variable that is affected by the assignment, it must be proven
-  that the invariant still holds with the new values.
-  \pode{Invariant preservation}%
-  {\eventbpo{eventlabel/invlabel/INV}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables) \limp I_i(\allconstants,\allvariables')$}
-  Rodin simplifies this proof obligations by replacing $x'$ by $x$ for variables that are not
-  changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
-  for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
-
-For the initializations we have the following special cases:
-  \pode{Action feasibility (for $\bcmin$ in initialization)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
-  {$A(\allconstants) \limp  E(\allconstants) \neq \emptyset$}
-  \pode{Action feasibility (for $\bcmsuch$ in INITIALISATION)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
-  {$A(\allconstants) \limp \exists x_1',\ldots,x_n' \qdot Q(\allconstants,x_1',\ldots,x_n')$}  
-  \pode{Invariant preservation (in INITIALISATION)}%
-  {\eventbpo{INITIALISATION/invlabel/INV}}%
-  {$A(\allconstants) \limp I_i(\allconstants,\allvariables')$}
-
-\subsubsection{Refinement of events}
-\label{refinement_of_events}
-An event can refine one or more events of the abstract machine.
-We first consider only the refinement of at most one event. 
-For refining more than one event -- called merging events --, please see below in section~\ref{merging_events}.
 
 \paragraph{Witnesses}
 Witnesses consists of a label and a predicate that are used to establish a link between values 
@@ -335,15 +247,67 @@ Witnesses are necessary in the following circumstances:
   The witness has the form $W(\allconstants,\allvariables,\allparameters,x')$.
 \end{itemize}
 
-It must be proven that a witness is satisfiable, $\Box$ denotes the parameter $p$ or variable $v'$ that
-  the witness is written for.
+It must be proven that a witness is satisfiable, $x$ is a place-holder for the parameter $p$
+  or variable $v'$ that the witness is written for.
 \pode{Witness feasibility}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
   {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
-    T(\allconstants,\concparameters,\concvariables,\concvariables') \limp
-    W(\allconstants,\allvariables,\allparameters,\Box)$}
-A witness $W(\allconstants,\allvariables,\allparameters,\Box)$ may contain well-definedness conditions.
+    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
+    W(\allconstants,\allvariables,\allparameters,x)$}
+A witness $W(\allconstants,\allvariables,\allparameters,x)$ may contain well-definedness conditions.
 \pode{Well-definedness of a witness}{\eventbpo{eventlabel/witnesslabel/WWD}}%
   {TODO}
+
+\paragraph{Initialization}
+\index{initialization}
+The initialization of a machine is given by a special event, called \textsl{INITIALISATION}.
+Unlike in other events, the initialization must not contain guards and parameters.
+The actions must not make use of variable values before the initialization event occurs.
+All variables must be assigned a value to. If there is no assignment for the variable $x$,
+Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
+
+\paragraph{Ensuring machine consistency}
+\label{consistency_proof_obligations}
+The following proof obligations are generated for events:
+
+The assignment $a$ of each action with label $\eventbpo{actionlabel}$ of an event must be well-defined.
+  \pode{Well-definedness of actions}%
+  {\eventbpo{eventlabel/actionlabel/WD}}%
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
+    \wdl(~a~)$}
+  
+
+If the event's guard is enabled, every action must be feasible.
+  This trivially true in the case of the deterministic assignments.
+  For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
+  The feasibility operator $\actfis$ is defined in the reference
+  secion of the non-deterministic assignments.
+  
+  \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp \actfis(a)$}
+
+For each invariant $I_i$ with label \eventbpo{invlabel} 
+  that contains a variable that is affected by the assignment, it must be proven
+  that the invariant still holds with the new values.
+  \pode{Invariant preservation}%
+  {\eventbpo{eventlabel/invlabel/INV}}%
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables) \limp I_i(\allconstants,\allvariables')$}
+  Rodin simplifies this proof obligations by replacing $x'$ by $x$ for variables that are not
+  changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
+  for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
+
+For the initializations we have the following special cases:
+  \pode{Action feasibility (in the initialization)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
+  {$A(\allconstants) \limp  \actfis(a)$}
+  \pode{Invariant establishment}%
+  {\eventbpo{INITIALISATION/invlabel/INV}}%
+  {$A(\allconstants) \limp I_i(\allconstants,\allvariables')$}
+
+\subsubsection{Ensuring a correct refinement}
+\label{refinement_proof_obligations}
+An event can refine one or more events of the abstract machine.
+We first consider only the refinement of at most one event. 
+For refining more than one event -- called merging events --, please see below in section~\ref{merging_events}.
+
 
 A concrete event must only be enabled if the abstract event is enabled.
 This condition is called \emph{guard strengthening}.
@@ -352,6 +316,13 @@ This condition is called \emph{guard strengthening}.
 \subsubsection{Merging events}
 \label{merging_events}
 (This section will be written in a later iteration.)
+
+\subsubsection{Extending events}
+\index{superposition refinement}
+\label{extending_events}
+(This section will be written in a later iteration.)
+``Superposition'' should be mentioned here.
+
 
 \subsubsection{Termination}
 \label{termination}

@@ -15,7 +15,7 @@ Here we describe briefly the different elements of a context or machine.
 We do not use a specific syntax for describing the components because this depends on the editor that is
 used. The default editor enforces a structure which contains the elements that are described here.
 
-Proof obligations are generated to guarantee certain properties of the modelled system.
+Proof obligations are generated to guarantee certain properties of the modeled system.
 We explain here which proof obligations are generated and for each we list the goal and hypotheses that can be used
 when performing the proof.
 This is done in the form:
@@ -60,7 +60,7 @@ Other contexts can be extended by adding their name to the \eventbsection{Extend
 The resulting context consists of all constants and axioms of all extended contexts and the extending context itself.
 Thus for a context or machine that extends resp. sees the contexts, it makes no difference where a constant or axiom is declared.
 
-It is an error to extend two contexts wich declare a constant or set of the same name.
+It is an error to extend two contexts which declare a constant or set of the same name.
 
 \subsubsection{Constants and axioms}
 \label{constants_and_axioms}
@@ -86,11 +86,11 @@ If an axiom $A$ contains any condition that is well-defined, a proof obligation 
 
 \subsection{Machines}
 \index{machine}
-A machine describes the dynamic behaviour of a model by means of variables whose values are changed by events.
+A machine describes the dynamic behavior of a model by means of variables whose values are changed by events.
 
 There are two basic things that must be proven for a machine. First that the machine is
 consistent, i.e. that it could never reach a state which violates the invariant. Second,
-that the machine is a correct refinement, i.e. that its behaviour corresponds to the
+that the machine is a correct refinement, i.e. that its behavior corresponds to the
 refined machine.
 
 \subsubsection{Refinement}
@@ -136,7 +136,7 @@ the theorem in the concrete machine.
 Invariant preservation of events does not need to be proven for invariants that are marked as theorems, because
  their correctness results from the preservation of the other invariants (see below for details).
 
-If an invariant $I_i$ contains a well-definendness condition, the following proof obligation is created:
+If an invariant $I_i$ contains a well-definedness condition, the following proof obligation is created:
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}{$A(\allconstants) \land I_b(\allconstants,\absvariables,\concvariables) \limp \wdl(I_i(\allconstants,\absvariables,\concvariables))$}
 
 \paragraph{Common variables between machines}
@@ -155,7 +155,7 @@ Once a variable disappears in a refinement, e.g. is not declared in machine $M_{
 \label{events_no_refinement}
 \index{event}
 A possible state change of a machine is defined by an event.
-The condition under wich an event can happen is given by a guard, the event's action
+The condition under which an event can happen is given by a guard, the event's action
 describe how the new and old state relate to each other.
 
 Events occur atomically, i.e. one event happens at a time, leading to a new state.
@@ -200,6 +200,7 @@ If the guard $G_i$ contains WD-conditions, the following proof obligation is gen
 \limp \wdl(G_i(\allconstants,\concvariables,\concparameters))$}
 
 \paragraph{Actions}
+\label{actions}
 An action consists of a label and an assignment.
 An assignment can have one of the following forms:
 \begin{itemize}
@@ -216,7 +217,7 @@ An assignment can have one of the following forms:
   $x$ is of type
   $\alpha$ and $E(\allconstants,\concvariables,\concparameters)$ of type $\pow(\alpha)$.
 \item $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$ \\
-  where $Q$ is a before-after-predidate that describes possible new states.
+  where $Q$ is a before-after-predicate that describes possible new states.
   $x_1,\ldots,x_n$ refer to the values of variable in the state before the event occurs,
   $x_1',\ldots,x_n'$ to the values in the new state after the event.
 \end{itemize}
@@ -241,16 +242,18 @@ If an action has more than one action, they are executed in parallel. Again, it 
   to assign to a variable in more than one action.
 All variables that are not assigned to in an action, keep the same value in new and old state.
 
-\paragraph{Initialisation}
-\index{initialisation}
-The intitialisation of a machine is given by a special event, called \textsl{INITIALISATION}.
-Unlike in other events, the initialisation must not contain guards and parameters.
-The actions must not make use of variable values before the initialisation event occurs.
+\paragraph{Initialization}
+\index{initialization}
+The initialization of a machine is given by a special event, called \textsl{INITIALISATION}.
+Unlike in other events, the initialization must not contain guards and parameters.
+The actions must not make use of variable values before the initialization event occurs.
 All variables must be assigned a value to. If there is no assignment for the variable $x$,
 Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
 
 \paragraph{Well-definedness of assignments}
-The well-definendness conditions of the assignments are: \\
+\label{welldefinedness_of_assignments}
+\index{well definedness!of assignments}
+The well-definedness conditions of the assignments are: \\
 $\wdl(~x_1,\ldots,x_n \bcmeq E_1(\allconstants,\concvariables,\concparameters),\ldots,E_n(\allconstants,\concvariables,\concparameters)~)
   \quad\defi\quad 
   \wdl(E_1(\allconstants,\concvariables,\concparameters)) \land \ldots \land \wdl(E_n(\allconstants,\concvariables,\concparameters))$ \\
@@ -266,23 +269,23 @@ $\wdl(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_
 \paragraph{Proof obligations}
 The following proof obligations are generated for events:
 
-Every action $a$ with label $\eventbpo{actionlabel}$ of an event must be well-definend.
+Every action $a$ with label $\eventbpo{actionlabel}$ of an event must be well-defined.
   \pode{Well-definedness of actions}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
     \wdl(~a~)$}
   
 
-If the event's guard is enabled, every action must be feasable.
+If the event's guard is enabled, every action must be feasible.
   This trivially true in the case of the deterministic assignments.
   For $x \bcmin E(\allconstants,\concvariables,\concparameters)$ it must be proven that the
   set $E$ is not empty:
-  \pode{Action feasability (for $\bcmin$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
+  \pode{Action feasibility (for $\bcmin$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
     E(\allconstants,\concvariables,\concparameters) \neq \emptyset$}
   For $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
-  values must exist that fulfil $Q$:
-  \pode{Action feasability (for $\bcmsuch$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
+  values must exist that fulfill $Q$:
+  \pode{Action feasibility (for $\bcmsuch$)}{\eventbpo{eventlabel/actionlabel/FIS}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
     \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$}  
 
@@ -296,12 +299,12 @@ For each invariant $I_i$ with label \eventbpo{invlabel}
   changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
   for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
 
-For the initialisations we have the following special cases:
-  \pode{Action feasability (for $\bcmin$ in initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
+For the initializations we have the following special cases:
+  \pode{Action feasibility (for $\bcmin$ in initialization)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
   {$A(\allconstants) \limp  E(\allconstants) \neq \emptyset$}
-  \pode{Action feasability (for $\bcmsuch$ in initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
+  \pode{Action feasibility (for $\bcmsuch$ in INITIALISATION)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
   {$A(\allconstants) \limp \exists x_1',\ldots,x_n' \qdot Q(\allconstants,x_1',\ldots,x_n')$}  
-  \pode{Invariant preservation (in initialisation)}%
+  \pode{Invariant preservation (in INITIALISATION)}%
   {\eventbpo{INITIALISATION/invlabel/INV}}%
   {$A(\allconstants) \limp I_i(\allconstants,\allvariables')$}
 
@@ -333,7 +336,7 @@ Witnesses are necessary in the following circumstances:
 
 It must be proven that a witness is satisfiable, $\Box$ denotes the parameter $p$ or variable $v'$ that
   the witness is written for.
-\pode{Witness feasability}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
+\pode{Witness feasibility}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
   {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
     T(\allconstants,\concparameters,\concvariables,\concvariables') \limp
     W(\allconstants,\allvariables,\allparameters,\Box)$}

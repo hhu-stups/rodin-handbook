@@ -65,13 +65,15 @@ A well definedness condition of an expression or predicate in Event-B is a predi
 The integer division is a prominent example: The expression $x\div y$ makes only sense when $y\neq 0$.
 
 In Rodin, the $\wdl$ operator (TODO: look up how this is called correctly and add a reference to the appropriate
-sources) is implemented. Applied to the example above: $\wdl(x\div y) = y\neq 0$.
+sources) is implemented. Applied to the example above: $\wdl(x\div y) \defi y\neq 0$.
 
 Well-definedness conditions are usually used in the well-definedness proof obligations.
 
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
 In many cases, this is just the conjunction of the well-definedness conditions of the syntactical parts of a 
-construct.
+construct. 
+
+See section~\ref{welldefinedness_of_assignments} for well-definedness conditions of assignments.
 
 \subsection{Predicates}
 

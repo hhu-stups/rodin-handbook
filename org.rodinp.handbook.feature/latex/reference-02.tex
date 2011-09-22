@@ -105,7 +105,9 @@ and so on. The most concrete refinement would be $M_n$.
 Basically, a refinement consists of two aspects:
 \begin{enumerate}
 	\item The concrete machine's state is connected to the state of the
-abstract machine. To do this, an invariant is used to relate abstract and concrete variable. This invariant is called a \emph{gluing invariant}. 
+      abstract machine. To do this, an invariant is used to relate abstract and concrete variable. 
+      \index{gluing invariant}
+      This invariant is called a \emph{gluing invariant}. 
 	\item Each abstract event can be refined by one or more
 concrete events.
 \end{enumerate}
@@ -247,6 +249,7 @@ Witnesses are necessary in the following circumstances:
   The witness has the form $W(\allconstants,\allvariables,\allparameters,x')$.
 \end{itemize}
 
+\index{feasibility!of witnesses}
 It must be proven that a witness is satisfiable, $x$ is a place-holder for the parameter $p$
   or variable $v'$ that the witness is written for.
 \pode{Witness feasibility}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
@@ -275,7 +278,7 @@ The assignment $a$ of each action with label $\eventbpo{actionlabel}$ of an even
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
     \wdl(~a~)$}
   
-
+\index{feasibility!of actions}
 If the event's guard is enabled, every action must be feasible.
   This trivially true in the case of the deterministic assignments.
   For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
@@ -326,7 +329,13 @@ This condition is called \emph{guard strengthening}.
 
 \subsubsection{Termination}
 \label{termination}
+\index{variant}
+\index{status of an event}
+\index{ordinary (status)}\index{anticipated (status)}\index{convergent (status)}
 (This section will be written in a later iteration.)
+
+\marginpar{CONTENT MIGRATED FROM WIKI!}
+The variant section appears in a refined machine (section 1) containing some convergent or anticipated events (section 2). This machine section contains either a natural number expression which must be decreased by each convergent event and not be increased by each anticipated event, or a finite set expression which must be made strictly smaller by each convergent event or not made greater by each anticipated events. 
 
   
 \subsection{Generated proof obligations}

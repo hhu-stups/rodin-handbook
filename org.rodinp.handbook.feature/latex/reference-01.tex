@@ -409,26 +409,45 @@ The \textsf{Proof Control view} contains the buttons which you can use to perfor
 The Proof Control view offers a number of buttons whose effects we briefly describe next; moving from left to right on the toolbar:
 
 \begin{itemize}
-    \item (nPP) invokes the new predicate prover, a drop-down list indicates alternative strategies.
-    \item (R) indicates that a node has been reviewed: in an attempt by the user to carry out proofs in a stepwise fashion, they might decide to postpone the task of discharging some proofs until a later stage. To do this the proofs can be marked as reviewed by choosing the proof node and clicking on this button. This indicates that by visually checking the proof the user is convinced that they can discharge it later, but they do not want to do it right now.
+    \item \icon{rodin/nppr.png} invokes the new predicate prover, a drop-down list indicates alternative strategies.
+    \item \icon{rodin/reviewed.png} indicates that a node has been reviewed: in an attempt by the user to carry out proofs in a stepwise fashion, they might decide to postpone the task of discharging some proofs until a later stage. To do this the proofs can be marked as reviewed by choosing the proof node and clicking on this button. This indicates that by visually checking the proof the user is convinced that they can discharge it later, but they do not want to do it right now.
     \item (p0) the PP and ML provers can be invoked from the drop-down list using different forces.
-    \item (dc) do proof by cases: the proof is split into two branches. In the first branch:- the predicate supplied by the user is added to the Selected Hypotheses, and the user attempts to discharge this branch. In the second branch :- the predicate supplied by the user is negated and added to the Selected Hypotheses; the user then attempts to discharge this branch. 
-    \item (ah) add a new lemma: the predicate in the editing area should be proved by the user. It is then added as a new selected hypothesis.
-    \item (ae) abstract expression: the expression in the editing area is given a fresh name.
-    \item the robot: invokes the auto-prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a "save" without any intervention of the user. Using this button, you can invoke the auto-prover within an interactive proof.
-    \item the post-tactic is executed ,
-    \item lasoo: load into the Selected Hypotheses window those hidden hypotheses that contain identifiers in common with the goal, and with the selected hypotheses.
-    backtrack form the current node (i.e., prune its parent),
-    \item scissors: prune the proof tree from the node selected in the proof tree,
-    \item Search Hypotheses: find hypotheses containing the character string in the editing area, and display in the Search Hypothesis view.
-    \item Cache Hypotheses: press this to display the "Cache Hypotheses" view. This view displays all hypotheses that are related to the current goal.
-    \item load the previous undischarged proof obligation,
-    \item load the next undischarged proof obligation,
-    \item (i) show information corresponding to the current proof obligation in the corresponding window. This information correspond to the elements that directly took part in the proof obligation generation (events, invariant, etc.),
-    \item goto the next pending node of the current proof tree,
-    \item load the next reviewed node of the current proof tree.
-    \item Disable/Enable Post-tactics: allows the user to choose whether post-tactics run after each interactive proof step. 
+    \item \icon{rodin/dc_prover.png} do proof by cases: the proof is split into two branches. In the first branch:- the predicate supplied by the user is added to the Selected Hypotheses, and the user attempts to discharge this branch. In the second branch :- the predicate supplied by the user is negated and added to the Selected Hypotheses; the user then attempts to discharge this branch. 
+    \item \icon{rodin/ah_prover.png} add a new lemma: the predicate in the editing area should be proved by the user. It is then added as a new selected hypothesis.
+    \item \icon{rodin/ae_prover.png} abstract expression: the expression in the editing area is given a fresh name.
+    \item \icon{rodin/auto_prover.png} invokes the auto-prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a "save" without any intervention of the user. Using this button, you can invoke the auto-prover within an interactive proof.
+    \item \icon{rodin/broom_prover.png} executes the post-tactics,
+    \item \icon{rodin/lasoo_prover.png} load into the Selected Hypotheses window those hidden hypotheses that contain identifiers in common with the goal, and with the selected hypotheses.
+    \item \icon{rodin/bk_prover.png} backtracks form the current node (i.e., prune its parent),
+    \item \icon{rodin/pn_prover.png} prune the proof tree from the node selected in the proof tree,
+    \item \icon{rodin/sh_prover.png} find hypotheses containing the character string in the editing area, and display in the Search Hypothesis view.
+    \item \icon{rodin/ch_prover.png} press this to display the "Cache Hypotheses" view. This view displays all hypotheses that are related to the current goal.
+    \item \icon{rodin/prev_prover.png} loads the previous undischarged proof obligation,
+    \item \icon{rodin/next_prover.png} loads the next undischarged proof obligation,
+    \item \icon{rodin/info_prover.png} show information corresponding to the current proof obligation in the corresponding window. This information correspond to the elements that directly took part in the proof obligation generation (events, invariant, etc.),
+    \item \icon{rodin/next_pd.png} goto the next pending node of the current proof tree,
+    \item \icon{rodin/next_rv.png} load the next reviewed node of the current proof tree.
 \end{itemize}
+
+Furthermore, you can disable/enable post-tactics which allows you to choose whether post-tactics run after each interactive proof step. In addition you can open the preferences for post-tactics. For this, open the menu of the \textsf{Proof Control View} via the little triangle on the top right corner of the view.
+
+The smiley can be one of three different colors: (1) red, indicates that the proof tree contains one or more undischarged sequents, (2) blue, indicates that all undischarged sequents of the proof tree have been reviewed, (3) green, indicates that all sequents of the proof tree are discharged.
+
+The editing area allows the user to supply parameters for proof commands. For example, when the user attempts to add a new hypothesis (by clicking on the lemma ah button), the new hypothesis should have been written by the user in the editing area.
+
+ML (mono-lemma) prover appears in the drop-down list under the button (pp) as M0, M1, M2, M3, ML. The different configuration (e.g., M0) refer to the proof force of the ML prover. All hypotheses are passed to ML.
+
+PP (predicate prover) appears in the drop-down list under the button (pp) as P0, P1, PP.
+
+\begin{itemize}
+	\item P0 uses all selected hypotheses (the ones in Selected Hypotheses window).
+	\item P1 employs a lasoo operation to the selected hypotheses and the goal, and uses the resulting hypotheses.
+	\item PP uses all hypotheses. 
+\end{itemize}
+
+\subsubsection{The Search Hypotheses View}
+
+By typing a string in the Proof Control window and pressing the Search Hypotheses button a window is provided which contains the hypotheses having a character string in common with the one entered by the user in the editing area. For example, if we search for hypotheses involving the character string "cr", then after pressing the Search Hypothesis button on the proof control window, we obtain the following: 
 
 ---------------------------------------------------------------------------------------------------------------------
 

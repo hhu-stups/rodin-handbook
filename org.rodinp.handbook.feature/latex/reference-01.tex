@@ -130,10 +130,93 @@ In order to activate the \textsf{New Enumerated Set Wizard}, you have to press t
 \end{center}
 \end{figure}
 
-You can enter the name of the new enumerated set as well as the name of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you’re finished, press the \textsf{OK} button. The effect of using this wizard as indicated is to add the new carrier set COLOR and the three constants red, green, and orange. Finally, it adds the following axiom (section 2.4):
-\operatorname{partition}(COLOR , \{red\}, \{green\}, \{orange\})
+You can enter the name of the new enumerated set as well as the name of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you’re finished, press the \textsf{OK} button. The benefit of using this wizard is for instance when you add the new carrier set \texttt{COLOR} and the three constants \texttt{red}, \texttt{green}, and \texttt{orange} the wizard creates automatically beside the set and constants the following axiom $partition(COLOR , \{red\}, \{green\}, \{orange\})$.
 
-If you enter several time the same enumerated set element, you get an error message. 
+\subsubsection{New Constants Wizard}
+
+In order to activate the \textsf{New Constants Wizard}, you have to press the \icon{rodin/newcst_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor6}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor6.png}
+	\caption{New Constants Wizard}
+	\label{fig_ref_01_eventb_editor6}
+\end{center}
+\end{figure}
+
+You can then enter the names of the constants, and an axiom which can be used to define its type. By pressing \textsf{More Axm.} button you can enter additional axioms. For adding more constants, press the \textsf{Add} button. When you’re finished, press the \textsf{OK} button.
+
+\subsubsection{New Axioms Wizard}
+
+In order to activate the \textsf{New Axioms Wizard}, you have to press the \icon{rodin/newaxm_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor7}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor7.png}
+	\caption{New Axioms Wizard}
+	\label{fig_ref_01_eventb_editor7}
+\end{center}
+\end{figure}
+
+You can then enter the axioms you want. If more axioms are needed then press \textsf{More} button. When you are finished, press \textsf{OK} button.
+
+The "Theorem" checkbox indicates whether the corresponding axiom is a theorem.
+
+\subsubsection{Dependencies}
+
+By selecting the "Dependencies" tab of the editor, you obtain the window as shown in figure \ref{}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor8.png}
+	\caption{Dependencies tab of the Event-B editor}
+	\label{fig_ref_01_eventb_editor8}
+\end{center}
+\end{figure}
+
+The dependencies tab allows you to express that the current context is extending other contexts of the current project. In order to add the name of the context you want to extend, use the combobox which appears at the bottom of the window and then select the corresponding context name.
+
+There exists another way to directly create a new context extending an existing one. Select the context in the project window, then press the right mouse key, you’ll get the following menu and select \textsf{Extend}. This should bring up the window as shown in figure \ref{fig_ref_01_eventb_editor9}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor9.png}
+	\caption{New EXTENDS Clause window}
+	\label{fig_ref_01_eventb_editor9}
+\end{center}
+\end{figure}
+
+You can then enter the name of the new context which will be made automatically an extension of your chosen context. 
+
+\subsubsection{Pretty Print}
+
+By selecting the "Pretty Print" tab, you may have a global view of your context as if it would have been entered through an input text file as demonstrated in figure \ref{fig_ref_01_eventb_editor10}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor10.png}
+	\caption{The Pretty Print tab of the Event-B editor}
+	\label{fig_ref_01_eventb_editor10}
+\end{center}
+\end{figure}
+
+\subsubsection{Synthesis}
+
+By selecting the "Synthesis" tab, you may have a global view of your context's elements (carrier set/constant/axiom/extended context) as demonstrated in figure \ref{fig_ref_01_eventb_editor11}. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor11.png}
+	\caption{The Synthesis tab of the Event-B editor}
+	\label{fig_ref_01_eventb_editor11}
+\end{center}
+\end{figure}
+
+After pressing set (respectively cst or axm), you can filter carrier sets of your context (respectively constants or axioms).
+
+If you select for example an axiom, you can change its priority order by pressing \icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}‎. You can do the same for carrier sets, constants or extended contexts.
+
+After a right click in this view a contextual menu will pop up which allows you to add new carrier sets, constants, axioms or a new extended context. 
 
 -------------------------------------------
 

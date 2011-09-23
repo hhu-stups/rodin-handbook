@@ -102,7 +102,24 @@ By pressing the \icon{rodin/add.png} button, you can add a new modelling element
 
 For removing a modelling element, press the \icon{rodin/remove.png} button. You can also move an modelling element up or down by selecting it and then pressing one of the two arrows (\icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}).
 
-It is also possible to add and editor modelling elements in a different way as explained in next sub sections. The creation of these elements, except dependencies, can be made by two distinct methods, either by using wizards or by editing them directly. In each section, we shall review both methods.
+It is also possible to add modelling elements by using wizards. You can active the different wizard by using the buttons in the tool bar as shown in figure \ref{fig_ref_01_eventb_editor12} and in figure \ref{fig_ref_01_eventb_editor13} respectively (The wizards depend on the active file machine or context). The next sections explain how to use these wizards.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor12.png}
+	\caption{Wizards for context specific elements located in the tool bar}
+	\label{fig_ref_01_eventb_editor12}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor13.png}
+	\caption{Wizards for machine specific elements located in the tool bar}
+	\label{fig_ref_01_eventb_editor13}
+\end{center}
+\end{figure}
+
 
 \subsubsection{New Carrier Sets Wizard}
 
@@ -162,7 +179,51 @@ You can then enter the axioms you want. If more axioms are needed then press \te
 
 The "Theorem" checkbox indicates whether the corresponding axiom is a theorem.
 
-\subsubsection{Dependencies}
+\subsubsection{New Variable Wizard}
+
+In order to activate the \textsf{New Variable Wizard}, you have to press the \icon{rodin/newvar_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor15}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor14.png}
+	\caption{New Variable Wizard}
+	\label{fig_ref_01_eventb_editor14}
+\end{center}
+\end{figure}
+
+You can then enter the names of the variables, its initialization, and an invariant which can be used to define its type. By pressing button \textsf{More Inv.} you can enter additional invariants. For adding more variables, press the \textsf{Add} button. When you’re finished, press the \textsf{OK} button. 
+
+\subsubsection{New Invariants Wizard}
+
+In order to activate the \textsf{New Invariants Wizard}, you have to press the \icon{rodin/newinv_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor15}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor15.png}
+	\caption{New Invariants Wizard}
+	\label{fig_ref_01_eventb_editor15}
+\end{center}
+\end{figure}
+
+You can then enter the invariants you want. If more invariants are needed then press \textsf{More} button. The \textsf{Theorem} checkbox indicates whether the corresponding invariant is a theorem.
+
+\subsubsection{New Event Wizard}
+
+In order to activate the \textsf{New Events Wizard}, you have to press the \icon{rodin/newevt_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor16}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor16.png}
+	\caption{New Event Wizard}
+	\label{fig_ref_01_eventb_editor16}
+\end{center}
+\end{figure}
+
+You can then enter the events you want. As indicated, the following elements can be entered: name, parameters, guards, and actions. More parameters, guards and actions can be entered by pressing the corresponding buttons. If more events are needed then press the \textsf{Add} button. Press the \textsf{OK} button when you’re finished.
+
+Note that an event with no guard is considered to have a true guard. Moreover, an event with no action is considered to have the "skip" action. 
+
+\subsubsection{Dependencies (Context)}
 
 By selecting the "Dependencies" tab of the editor, you obtain the window as shown in figure \ref{}.
 
@@ -188,21 +249,13 @@ There exists another way to directly create a new context extending an existing 
 
 You can then enter the name of the new context which will be made automatically an extension of your chosen context. 
 
-\subsubsection{Pretty Print}
+\subsubsection{Dependencies (Machine)}
 
-By selecting the "Pretty Print" tab, you may have a global view of your context as if it would have been entered through an input text file as demonstrated in figure \ref{fig_ref_01_eventb_editor10}.
+The "Dependencies" tab of machines is very similar to the one of contexts expect of that two kinds of dependencies can be established: machine dependency in the upper part and context dependencies in the lower part.
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor10.png}
-	\caption{The Pretty Print tab of the Event-B editor}
-	\label{fig_ref_01_eventb_editor10}
-\end{center}
-\end{figure}
+\subsubsection{Synthesis (Context)}
 
-\subsubsection{Synthesis}
-
-By selecting the "Synthesis" tab, you may have a global view of your context's elements (carrier set/constant/axiom/extended context) as demonstrated in figure \ref{fig_ref_01_eventb_editor11}. 
+By selecting the "Synthesis" tab, you may have a global view of your context's elements (carrier set / constant / axiom / extended context) as demonstrated in figure \ref{fig_ref_01_eventb_editor11}. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -217,6 +270,22 @@ After pressing set (respectively cst or axm), you can filter carrier sets of you
 If you select for example an axiom, you can change its priority order by pressing \icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}‎. You can do the same for carrier sets, constants or extended contexts.
 
 After a right click in this view a contextual menu will pop up which allows you to add new carrier sets, constants, axioms or a new extended context. 
+
+\subsubsection{Synthesis (Machine)}
+
+The "Systhesis" tab of machines is very similar to the one of contexts except of that you may have a global view of your machine's elements (refined machine/seen context/variable/invariant/event/variant).
+
+\subsubsection{Pretty Print}
+
+By selecting the "Pretty Print" tab, you may have a global view of your context as if it would have been entered through an input text file as demonstrated in figure \ref{fig_ref_01_eventb_editor10}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor10.png}
+	\caption{The Pretty Print tab of the Event-B editor}
+	\label{fig_ref_01_eventb_editor10}
+\end{center}
+\end{figure}
 
 -------------------------------------------
 

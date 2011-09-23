@@ -287,332 +287,150 @@ By selecting the "Pretty Print" tab, you may have a global view of your context 
 \end{center}
 \end{figure}
 
--------------------------------------------
-
-These modelling elements can be edited in a way that is similar to what has been explained for contexts in section 2, it is not repeated here.
-
-It is also possible to do so in a different way as explained in sections 3.1 to 3.6. The creation of these elements, except dependencies can be made by two distinct methods, either by using wizards or by editing them directly. In each section, we shall review both methods. NOTE: The hurried reader can skip these sections and go directly to section 3.7 
-
-\subsubsection{Dependencies}
-
-The "Dependencies" window is shown automatically after creating a machine (you can also get it by selecting the "Dependencies" tab). This was shown in the previous section so that we do not copy the screen shot again. As can be seen on this window, two kinds of dependencies can be established: machine dependency in the upper part and context dependencies in the lower part.
-
-In this section, we only speak of context dependencies (machine dependency will be covered in section 3.8). It corresponds to the "sees" relationship alluded in section 1. In the lower editing area, you can select some contexts "seen" by the current machine. 
-
-\subsubsection{Variables Creation Wizard}
-
-In order to activate the variables creation wizard, you have to press the corresponding button in the toolbar as indicated below: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor2.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor2}
-%\end{center}
-%\end{figure}
-
-After pressing that button, the following wizard pops up: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor3.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor3}
-%\end{center}
-%\end{figure}
-
-You can then enter the names of the variables, its initialization, and an invariant which can be used to define its type. By pressing button "More Inv." you can enter additional invariants. For adding more variables, press the "Add" button. When you’re finished, press the "OK" button. 
-
-\subsubsection{Direct Editing of Variables}
-
-It is also possible to create (button "Add") or remove (button "Delete") variables by using the central editing window. For this, you have first to select the "Variables" tab of the editor. You can also change the relative place of a variable: first select it and then press button "Up" or "Down". 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor4.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor4}
-%\end{center}
-%\end{figure}
-
-\subsubsection{Invariants Creation Wizard}
-
-In order to activate the invariants creation wizard, you have to press the corresponding button:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor5.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor5}
-%\end{center}
-%\end{figure}
-
-After pressing that button, the following wizard pops up: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor6.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor6}
-%\end{center}
-%\end{figure}
-
-You can then enter the invariants you want. If more invariants are needed then press "More".
-
-The "Theorem" checkbox indicates whether the corresponding invariant is a theorem. If checked, a Proof Obligation will be generated for this predicate. This mechanism replaces the older one, in which there used to be separate entries for invariants on one hand (w/o PO) and theorems on the other hand (with PO). So now, there remains only invariants, which may or may not be theorems.
-
-\subsubsection{Direct Editing of Invariants}
-
-It is also possible to create (button "Add") or remove (button "Delete") invariants by using the central editing window. For this, you have first to select the "Invariants" tab of the editor. You can also change the relative place of an invariant: first select it and then press button "Up" or "Down". 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor7.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor7}
-%\end{center}
-%\end{figure}
-
-\subsubsection{Events Creation Wizard}
-
-In order to activate the events creation wizard, you have to press the corresponding button in the toolbar as indicated below:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor8.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor8}
-%\end{center}
-%\end{figure}
-
-After pressing that button, the following wizard pops up: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor9.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor9}
-%\end{center}
-%\end{figure}
-
-You can then enter the events you want. As indicated, the following elements can be entered: name, parameters, guards, and actions. More parameters, guards and actions can be entered by pressing the corresponding buttons. If more events are needed then press "Add". Press "OK" when you’re finished.
-
-Note that an event with no guard is considered to have a true guard. Moreover, an event with no action is considered to have the "skip" action. 
-
-\subsubsection{Direct Editing of Events}
-
-It is also possible to perform a direct creation (button "Add Event") of variables by using the central editing window. For this, you have first to select the "Events" tab of the editor. You can also change the relative place of a variable: first select it and then press button "Up" or "Down".
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor10.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor10}
-%\end{center}
-%\end{figure}
-
-Once an event is selected you can add parameters, guards, and actions. The components of an events can be seen by pressing the little triangle situated on the left of the event name: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor11.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor11}
-%\end{center}
-%\end{figure}
-
-As can be seen, event rmv\_1 is made of two parameters, x and y, three guards, $x \in Q$, $y \in Q$, and $x \mapsto y \in k$, and one action $Q := Q \setminus \{ x\}$ . These elements can be modified (select and edit) or removed (select, right click on the mouse, and press "Delete"). Similar elements can be added by pressing the relevant buttons on the right of the window. 
-
-\subsubsection{Adding Comments}
-
-It is possible to add comments to variables, invariants, theorems, events, guards, and actions. For doing so, select the corresponding modeling element and enter the "Properties" window as indicated below where it is shown how one can add comments on a certain guard: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor12.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor12}
-%\end{center}
-%\end{figure}
-
-Multiline comments can be added in the editing area labeled "Comments". 
-
-\subsubsection{Pretty Print}
-
-The pretty print of a machine looks like an input file. It is produced as an output of the editing process: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor13.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor13}
-%\end{center}
-%\end{figure}
-
-\subsubsection{Dependencies: Refining a Machine}
-
-A machine can be refined by other ones. This can be done directly by selecting the machine to be refined in the "Project Explorer" window. A right click on the mouse yields the following contextual menu:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor14.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor14}
-%\end{center}
-%\end{figure}
-
-You then press button "Refine". A wizard will ask you to enter the name of the refined machine. The abstract machine is entirely copied in the refined machine: this is very convenient as, quite often, the refined machine has lots of elements in common with its abstraction. 
-
-\subsubsection{Abstract Event}
-
-The abstraction of an event is denoted by a "Refine Event" element. Most of the time the concrete and abstract events bear the same name. But, it is always possible to change the name of a concrete event or the name of its abstraction. If you want to specify the abstraction of an event, first select the "Event" tab of the editor and right click on the event name. The following contextual menu will pop up:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor15.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor15}
-%\end{center}
-%\end{figure}
-
-You have then to choose the "New Refine Event" option. The abstract event can then be entered by adding the name of the abstract event: here rmv\_1.
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor16.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor16}
-%\end{center}
-%\end{figure}
-
-TODO: Explain what proof obligation is generated 
-
-\subsubsection{Splitting an Event}
-
-An abstract event can be split into two or more concrete events by just saying that these events refine the former (as explained in previous section).
-
-\subsubsection{Merging Events}
-
-Two or more abstract events can be merged into a single concrete event by saying that the latter refines all the former. This is done by using several times the approach explained in the previous case. The constraints is that the abstract events to be merged must have exactly the same actions (including the labels of these actions). A proof obligation is generated which states that the guard of the concrete event implies the disjunction of the guards of the abstract events
-
-\subsubsection{Closing Events}
-
-An abstract event could possibly not be refined. Such an event is then called "closed" event. Closing an event happens when one considers that this event should not be taken into consideration at a given level of refinement. Formally, it is equivalent to set a "false" guard of this event. As the static checker performs some verifications to ensure that the user didn't close an event by mistake, it is asked to the user to explicitely close his events by adding the "false" guard to them (e.g. a guard containing the literal predicate "false").
-
-\subsubsection{Witnesses}
-
-When an abstract event contains some parameters, the refinement proof obligation involves proving an existentially quantified statement. In order to simplify the proof, the user is required to give witnesses for those abstract parameters which are not present in the refinement (those appearing in the refinement are implicitly taken as witnesses for their corresponding abstract counterparts). Here is an example of an abstract event (left) and its refinement (right): 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor17.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor17}
-%\end{center}
-%\end{figure}
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor18.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor18}
-%\end{center}
-%\end{figure}
-
-The parameter x, being common to both the abstraction and the refinement, does not require a witness, whereas one is needed for abstract parameter y. In order to define the witness, one has first to select the "Events" tab of the editor for the concrete machine where the concrete event (here rmv\_1) is selected. After a right click, a menu appears in the window as indicated:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor19.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor19}
-%\end{center}
-%\end{figure}
-
-You press button "New Witness" and then you enter the parameter name (here y) and a predicate involving y (here y = b) as indicated below
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor20.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor20}
-%\end{center}
-%\end{figure}
-
-Most of the time, the predicate is an equality as in the previous example, meaning that the parameter is defined in a deterministic way. But it can also be any predicate, in which case the parameter is defined in a non-deterministic way. 
-
-\subsubsection{Variant}
-
-New events can be defined in a concrete machine. Such events have no abstract counterparts. They must refine the implicit "empty" abstract event which does nothing.
-
-Some of the new events can be selected to decrease a variant so that they do not take control for ever. Such events are said to be CONVERGENT. In order to make a new event CONVERGENT, select it in the "Events" tab and open the "Properties" window. You can edit the "conv." area. There are three options: ORDINARY (the default), CONVERGENT, or ANTICIPATED. The latter corresponds to a new event which is not yet declared to be CONVERGENT but will be in a subsequent refinement.
-
-In order to define the variant, use the variant wizard as shown below:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor21.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor21}
-%\end{center}
-%\end{figure}
-
-After pressing that button, the following wizard will pop up
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor22.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor22}
-%\end{center}
-%\end{figure}
-
-You can enter the variant and then press "OK". The variant is either a natural number expression or a finite set expression. 
-
-\subsubsection{Synthesis}
-
-By selecting the "Synthesis" tab, you may have a global view of your machine's elements (refined machine/seen context/variable/invariant/event/variant).
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor23.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor23}
-%\end{center}
-%\end{figure}
-
-After pressing var (respectively grd, inv or prm), you can filter variables of your machine (respectively guards,invariants or event's parameters).
-
-If you select for example an invariant, you can change its priority order by pressing Image:Synthesis3.PNG‎ or Image:Synthesis4.PNG‎. You can do the same for variables, guards or event's parameters.
-
-After a right click on an event the following contextual menu will pop up:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor24.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor24}
-%\end{center}
-%\end{figure}
-
-You have then the choice to modify your event (add a new refined event/parameter/guard/witness/action) or your machine (add a new refined machine/seen context/variable/invariant/event/variant).
-
-You can also "Open Abstraction". In that case a new tab is opened with the machine refined by the current one.
-
-After a right click on any other element (except an event) the following contextual menu will pop up:
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor25.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor25}
-%\end{center}
-%\end{figure}
-
-You have then the choice to modify your machine (add a new refined machine/seen context/variable/invariant/event/variant). 
-
 \subsection{The Proving Perspective}
 \label{ref_01_proving_perspective}
+
+When proof obligations (POs) (\ref{proof_obligation}) are not discharged automatically the user can attempt to discharge them interactively using the Proving Perspective. This page provides an overview of the Proving Perspective and its use. If the Proving Perspective is not visible as a tab on the top right-hand corner of the main interface, the user can switch to it via \textsf{Window $\rangle$ Open Perspective}.
+
+The Proving Perspective consists of a number of views: the \textsf{Proof Tree}, the \textsf{Goal}, the \textsf{Selected Hypotheses}, the \textsf{Proof Control}, the \textsf{Search Hypotheses}, the \textsf{Cache Hypotheses} and the \textsf{Proof Information}. In the discussion that follows we look at each of these views individually. Figure \ref{fig_ref_01_proving_perspective1} shows an overview of the Proving Perspective.
+
+\imagedpi{img/reference/ref_01_proving_perspective1.pdf}{150mm}{img/reference/ref_01_proving_perspective1.png}{Overview of the Proving Perspective}{fig_ref_01_proving_perspective1}
+
+\subsubsection{Loading a Proof}
+
+To work on an undischarged PO it is necessary to load the proof into the Proving Perspective. To do this switch to the Proving Perspective; select the project from the Event-B Explorer; select and expand the component (context or machine); and finally select (double-click) the proof obligation of interest. A number of views will be updated with details of the corresponding proof. 
+
+Note that pressing \icon{rodin/discharged.png} button on the top left hand side of the \textsf{Event-B Explorer} will remove all discharged proof obligations (PO's) from the view. 
+
+\subsubsection{The Proof Tree}
+
+The proof tree view provides a graphical representation of each individual proof step, as seen in figure \ref{fig_ref_01_proving_perspective2}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective2.png}
+	\caption{The Proof Tree}
+	\label{fig_ref_01_proving_perspective2}
+\end{center}
+\end{figure}
+
+Each node in the tree corresponds to a sequent. A line is right shifted when the corresponding node is a direct descendant of the node of the previous line. Each node is labeled with a comment which indicates which rule has been applied, or which prover discharged the proof. By selecting a node in the proof tree, the corresponding sequent is loaded: the hypotheses of the sequent are loaded to the \textsf{Selected Hypotheses window}, and the goal of the sequent is loaded to the \textsf{Goal view}.
+
+The leaves of the tree are decorated with one of three icons:
+
+\begin{itemize}
+	\item \icon{rodin/discharged.png} means that this leaf is discharged,
+	\item \icon{rodin/pending.png} means that this leaf is not discharged,
+	\item \icon{rodin/reviewed.png} means that this leaf has been reviewed. 
+\end{itemize}
+
+Internal nodes in the proof tree are decorated in reverse colours. Note that a "reviewed" leaf is one that is not discharged yet by the prover. Instead, it has been "seen" by the user who decided to postpone the proof. Marking nodes as "reviewed" is very convenient since the provers will ignore these leaves and focus on specific areas of interest. This allows interactive proof in a gradual fashion. In order to discharge a "reviewed" node, select it and prune the tree at that node: the node will become "brown" again (undischarged) and you can now try to discharge it. 
+
+On top of the proof tree view, one can see three buttons:
+
+\begin{itemize}
+	\item \icon{rodin/showgoal.png} buttons allows you to see the goal of the sequent corresponding to each node,
+	\item \icon{rodin/collapseall.png} button allows you to fully expand the proof tree,
+	\item \icon{rodin/expandall.png} allows you to fully collapse the tree: only the root stays visible. 
+\end{itemize}
+
+The little square (with a "+" or "-" inside) next to each node in the proof tree allows you to expand or collapse the subtree starting at that node. 
+
+The proof tree can be pruned at a selected node; the subtree of the selected node is removed from the proof tree. The selected node becomes a leaf and is decorated with \icon{rodin/pending.png}. The proof activity can then be resumed from this node. After selecting a node in the proof tree pruning can be performed in two ways:
+
+\begin{itemize}
+	\item by right-clicking and then selecting "Prune",
+	\item by clicking on the \icon{rodin/pn_prover.png} button in the proof control view. 
+\end{itemize}
+
+Note that after pruning, the post-tactic is not applied to the new current sequent. The post-tactic should be applied manually, if required, by clicking on the post-tactic button in the Proof Control view. This is useful, in particular, when you want to redo a proof from the beginning. The proof tree can be pruned at its root node and then the proof can proceed again, with invocation of internal or external provers; or with interactive proof.
+
+Before pruning a particular node, the node (and its subtree) can be copied to the clipboard. If the new proof strategy subsequently fails, the copied version can be pasted back into the pruned node (see the next section). 
+
+By selecting a node in the proof tree and then right-clicking with the mouse, you can copy the part of the proof tree starting at that sequent (the node and its subtree). Pasting the node and subtree back in is done in a similar manner, with a right mouse click on a proof node. This allows reuse of part of a proof tree in the same, or even in another, proof.
+
+\subsubsection{Goal and Selected Hypotheses}
+
+The nodes in the proof tree view correspond to sequents. A user will work with one selected node, and thus one sequent, at a time; attempting various strategies in an effort to show that the sequent goal is true. The \textsf{Goal} and \textsf{Selected Hypotheses} views provide information to the user about the currently selected sequent. Figure \ref{fig_ref_01_proving_perspective3} shows an example.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective3.png}
+	\caption{Open proof obligation}
+	\label{fig_ref_01_proving_perspective3}
+\end{center}
+\end{figure}
+
+A hypothesis can be removed from the list of selected hypotheses by selecting the check the box situated next to it (you can click on several boxes) and then by clicking on the \icon{rodin/remove.png} button at the top of the selected hypotheses window.
+
+Note that the deselected hypotheses are not lost: you can find them again using the \textsf{Search Hypotheses} \icon{rodin/sh_prover.png} button in the Proof Control view. Other buttons are used as follows:
+
+\begin{itemize}
+	\item \icon{rodin/select_all_prover.png} select all hypotheses. 
+	\item \icon{rodin/inv_prover.png} invert the selection. 
+	\item \icon{rodin/falsify_prover.png} next to the goal - proof by contradiction 1: The negation of the goal becomes a selected hypothesis and the goal becomes "$\bot$". 
+	\item \icon{rodin/falsify_prover.png} next to a selected hypothesis - proof by contradiction 2: The negation of the hypothesis becomes the goal and the negated goal becomes a selected hypothesis. 
+\end{itemize}
+
+A user wishing to attempt an interactive proof has a number of proof rules available, and these may be either rewrite rules or inference rules. In the \textsf{Goal} and the \textsf{Selected Hypotheses} views various operators may appear in red coloured font. The red font indicates that some interactive proof rule(s) are applicable and may be applied as a step in the proof attempt. When the mouse hovers over such an operator a number of applicable rules may be displayed; the user may choose to apply one of the rules by clicking on it. Figure \ref{fig_ref_01_proving_perspective4} shows an example.
+
+Other proof rules can be applied when green buttons appear in the \textsf{Goal} and \textsf{Selected Hypotheses} views. Examples are proof by contradiction \icon{rodin/falsify_prover.png}, that we have already encountered; and \icon{rodin/conjI_prover.png} for conjunction introduction in the goal. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective4.png}
+	\caption{Applying a rule}
+	\label{fig_ref_01_proving_perspective4}
+\end{center}
+\end{figure}
+
+To instantiate a quantifier the user enters the desired expression in the box behind the quantifier and clicks on the quantifier as demonstrated in figure \ref{fig_ref_01_proving_perspective5}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective5.png}
+	\caption{Instantiating a quatifier}
+	\label{fig_ref_01_proving_perspective5}
+\end{center}
+\end{figure}
+
+\subsubsection{The Proof Control View}
+
+The \textsf{Proof Control view} contains the buttons which you can use to perform an interactive proof. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective6.png}
+	\caption{The Proof Control View}
+	\label{fig_ref_01_proving_perspective6}
+\end{center}
+\end{figure}
+
+The Proof Control view offers a number of buttons whose effects we briefly describe next; moving from left to right on the toolbar:
+
+\begin{itemize}
+    \item (nPP) invokes the new predicate prover, a drop-down list indicates alternative strategies.
+    \item (R) indicates that a node has been reviewed: in an attempt by the user to carry out proofs in a stepwise fashion, they might decide to postpone the task of discharging some proofs until a later stage. To do this the proofs can be marked as reviewed by choosing the proof node and clicking on this button. This indicates that by visually checking the proof the user is convinced that they can discharge it later, but they do not want to do it right now.
+    \item (p0) the PP and ML provers can be invoked from the drop-down list using different forces.
+    \item (dc) do proof by cases: the proof is split into two branches. In the first branch:- the predicate supplied by the user is added to the Selected Hypotheses, and the user attempts to discharge this branch. In the second branch :- the predicate supplied by the user is negated and added to the Selected Hypotheses; the user then attempts to discharge this branch. 
+    \item (ah) add a new lemma: the predicate in the editing area should be proved by the user. It is then added as a new selected hypothesis.
+    \item (ae) abstract expression: the expression in the editing area is given a fresh name.
+    \item the robot: invokes the auto-prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a "save" without any intervention of the user. Using this button, you can invoke the auto-prover within an interactive proof.
+    \item the post-tactic is executed ,
+    \item lasoo: load into the Selected Hypotheses window those hidden hypotheses that contain identifiers in common with the goal, and with the selected hypotheses.
+    backtrack form the current node (i.e., prune its parent),
+    \item scissors: prune the proof tree from the node selected in the proof tree,
+    \item Search Hypotheses: find hypotheses containing the character string in the editing area, and display in the Search Hypothesis view.
+    \item Cache Hypotheses: press this to display the "Cache Hypotheses" view. This view displays all hypotheses that are related to the current goal.
+    \item load the previous undischarged proof obligation,
+    \item load the next undischarged proof obligation,
+    \item (i) show information corresponding to the current proof obligation in the corresponding window. This information correspond to the elements that directly took part in the proof obligation generation (events, invariant, etc.),
+    \item goto the next pending node of the current proof tree,
+    \item load the next reviewed node of the current proof tree.
+    \item Disable/Enable Post-tactics: allows the user to choose whether post-tactics run after each interactive proof step. 
+\end{itemize}
+
+---------------------------------------------------------------------------------------------------------------------
 
 If we type 'inv' in the filter area, we'll obtain the following:
 
@@ -675,34 +493,9 @@ In the above example, INITIALISATION/inv1/INV is filtered out by the text filter
 
 When the Static Checker discovers an error in a project, a little "x" is added to this project and to the faulty component in the "Project Explorer" window as shown in figure \ref{fig_ref_01_problemsview1}.
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview1.png}
-	\caption{A little "x" in the Project Explorer indicates an error in the component}
-	\label{fig_ref_01_problemsview1}
-\end{center}
-\end{figure}
-
 The error itself is shown by opening the "Problems" window (see figure \ref{fig_ref_01_problemsview2}). 
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview2.png}
-	\caption{The Problems View}
-	\label{fig_ref_01_problemsview2}
-\end{center}
-\end{figure}
-
 By double-clicking on the error statement, you are transferred automatically into the place where the error has been detected so that you can correct it easily as shown in figure \ref{fig_ref_01_problemsview3}. 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview3.png}
-	\caption{You are transferred automatically into the place where the error has been detected}
-	\label{fig_ref_01_problemsview3}
-\end{center}
-\end{figure}
-
 
 We do basically the same as for the Event-B perspective. The views are proof tree, goal, control and statistics.
  

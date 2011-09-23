@@ -33,7 +33,9 @@ The outline view displays the outline of the active Event-B editor, and lists el
 
 \subsubsection{Rodin Problems View}
 
-he Rodin Problems view shows problems (i.e. syntax errors) of the active Event-B editor.
+When the Static Checker discovers an error in a project, a little "x" is added to this project and to the faulty component in the \textsf{Event-B Explorer}. The error itself is shown in the Rodin Problems view (i.e. syntax errors) of the active Event-B editor.
+
+By double-clicking on the error statement, you are transferred automatically into the place where the error has been detected so that you can correct it easily.
 
 \subsubsection{Symbols View}
 \label{reference_01_symbols_view}
@@ -562,6 +564,8 @@ Note that the post-tactic can be disabled quickly by clicking on the little arro
 \end{center}
 \end{figure}
 
+\paragraph{Principles}
+
 The ordered list of rewrite, inference tactics and external provers that should be applied is called a profile. There are two default profiles, one for the auto-tactic and one for the post-tactic. These default profiles are immutable in time, but can be duplicated for further modification by the user. Indeed, the user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are shipped with projects if defined at this scope, or can be imported or exported if defined at a workspace level, which is very useful to share them.
 
 There are two ways to run the automatic or post tactics:
@@ -573,75 +577,6 @@ There are two ways to run the automatic or post tactics:
 
 The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the "Auto/Post Tactic" preference page to address these choices. These tabs will be described in the two next sections. 
 
----------------------------------------------------------------------------------------------------------------------
-
-If we type 'inv' in the filter area, we'll obtain the following:
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer5.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer5}
-\end{center}
-\end{figure}
-
-This is exactly the same, nothing was filtered out because all PO names contain 'inv' as substring. Now, if we add '2', we will only have POs related to invariant 'inv2', as follows: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer6.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer6}
-\end{center}
-\end{figure}
-
-Now, let's see what we obtain if we type in 'THM': 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer7.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer7}
-\end{center}
-\end{figure}
-
-Only theorems are displayed, the entry 'INITIALISATION/inv1/inv' has been filtered out because it contains no 'THM' substring.
-
-Note: filtering is case sensitive, thus 'thm' is different from 'THM'.
-
-Beside the input text box is a green button, the same that is used in the explorer for discharged POs. Clicking this button hides discharged POs: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer8.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer8}
-\end{center}
-\end{figure}
-
-It's also possible to combine text filter and discharged filter: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer9.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer9}
-\end{center}
-\end{figure}
-
-In the above example, INITIALISATION/inv1/INV is filtered out by the text filter (does not contain 'THM') and inv3/THM is filtered out by the discharged PO filter. 
-
-\subsubsection{Problems View}
-\label{reference_01_the_problems_view}
-
-When the Static Checker discovers an error in a project, a little "x" is added to this project and to the faulty component in the "Project Explorer" window as shown in figure \ref{fig_ref_01_problemsview1}.
-
-The error itself is shown by opening the "Problems" window (see figure \ref{fig_ref_01_problemsview2}). 
-
-By double-clicking on the error statement, you are transferred automatically into the place where the error has been detected so that you can correct it easily as shown in figure \ref{fig_ref_01_problemsview3}. 
-
-We do basically the same as for the Event-B perspective. The views are proof tree, goal, control and statistics.
- 
 \subsection{Preferences}
 
 We briefly describe what preference can be set for Rodin. For their deeper meaning, we'll refer to the other sections (esp. the prover settings).
@@ -652,11 +587,11 @@ We briefly describe what preference can be set for Rodin. For their deeper meani
 
 This page describes the mechanism used to set element prefixes, and perform renaming using dedicated actions for both machines and contexts. Note that prefixes are used for automatic renaming when element should be alphanumerically ordered, as well as for new element creation. 
 
-Principles
+\paragraph{Principles}
 
 This mechanism is close to eclipse preferences and properties settings. In our case, the prefixes are in any case, defined globally for a workspace scope. If the user does not set specific settings for prefixes at the workspace scope, the default prefixes which are given by elements contributions are used. Moreover, if the user changes the prefixes once, they will then be persisted. The new feature is here the ability for one to set up some specific settings for prefixes at a project scope. The settings will be then persisted through a file attached to the project settings (i.e., the prefixes used will be shared at export).
 
-Summary
+\paragraph{Summary}
 
 \begin{itemize}
 	\item Default prefixes correspond to Rodin's default values,
@@ -756,8 +691,6 @@ Three actions are available for Machine files.
 %\end{figure}
 
 \subsubsection{Preferences for the automatic tactics}
-
-\marginpar{CONTENT MIGRATED FROM WIKI!}
 
 \paragraph{Introduction}
 

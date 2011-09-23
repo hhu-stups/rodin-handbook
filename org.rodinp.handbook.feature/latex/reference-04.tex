@@ -179,7 +179,7 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 		\item New PP has limited support for equational reasoning. 
 	\end{itemize}
 	\item[Some Weaknesses:]
-	\begin{itemize}
+	\begin{itemize} ~
 		\item New PP is unsound. There have been several bug reports. Most notably, see [1].
 		\item New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic 	reasoning (when the formula is not ground) is a long standing challenge.
 		\item New PP is unaware of set theoretical axioms; in particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$, because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.

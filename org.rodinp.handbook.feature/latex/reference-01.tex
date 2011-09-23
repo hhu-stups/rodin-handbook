@@ -316,6 +316,8 @@ The proof tree view provides a graphical representation of each individual proof
 
 Each node in the tree corresponds to a sequent. A line is right shifted when the corresponding node is a direct descendant of the node of the previous line. Each node is labeled with a comment which indicates which rule has been applied, or which prover discharged the proof. By selecting a node in the proof tree, the corresponding sequent is loaded: the hypotheses of the sequent are loaded to the \textsf{Selected Hypotheses window}, and the goal of the sequent is loaded to the \textsf{Goal view}.
 
+\paragraph{Decoration}
+
 The leaves of the tree are decorated with one of three icons:
 
 \begin{itemize}
@@ -326,6 +328,8 @@ The leaves of the tree are decorated with one of three icons:
 
 Internal nodes in the proof tree are decorated in reverse colours. Note that a "reviewed" leaf is one that is not discharged yet by the prover. Instead, it has been "seen" by the user who decided to postpone the proof. Marking nodes as "reviewed" is very convenient since the provers will ignore these leaves and focus on specific areas of interest. This allows interactive proof in a gradual fashion. In order to discharge a "reviewed" node, select it and prune the tree at that node: the node will become "brown" again (undischarged) and you can now try to discharge it. 
 
+\paragraph{Navigation within the Proof Tree}
+
 On top of the proof tree view, one can see three buttons:
 
 \begin{itemize}
@@ -334,7 +338,13 @@ On top of the proof tree view, one can see three buttons:
 	\item \icon{rodin/expandall.png} allows you to fully collapse the tree: only the root stays visible. 
 \end{itemize}
 
+\paragraph{Manipulating the Proof Tree}
+
+\subparagraph{Hiding}
+
 The little square (with a "+" or "-" inside) next to each node in the proof tree allows you to expand or collapse the subtree starting at that node. 
+
+\subparagraph{Pruning}
 
 The proof tree can be pruned at a selected node; the subtree of the selected node is removed from the proof tree. The selected node becomes a leaf and is decorated with \icon{rodin/pending.png}. The proof activity can then be resumed from this node. After selecting a node in the proof tree pruning can be performed in two ways:
 
@@ -346,6 +356,8 @@ The proof tree can be pruned at a selected node; the subtree of the selected nod
 Note that after pruning, the post-tactic is not applied to the new current sequent. The post-tactic should be applied manually, if required, by clicking on the post-tactic button in the Proof Control view. This is useful, in particular, when you want to redo a proof from the beginning. The proof tree can be pruned at its root node and then the proof can proceed again, with invocation of internal or external provers; or with interactive proof.
 
 Before pruning a particular node, the node (and its subtree) can be copied to the clipboard. If the new proof strategy subsequently fails, the copied version can be pasted back into the pruned node (see the next section). 
+
+\subparagraph{Copy/Paste}
 
 By selecting a node in the proof tree and then right-clicking with the mouse, you can copy the part of the proof tree starting at that sequent (the node and its subtree). Pasting the node and subtree back in is done in a similar manner, with a right mouse click on a proof node. This allows reuse of part of a proof tree in the same, or even in another, proof.
 
@@ -431,11 +443,21 @@ The Proof Control view offers a number of buttons whose effects we briefly descr
 
 Furthermore, you can disable/enable post-tactics which allows you to choose whether post-tactics run after each interactive proof step. In addition you can open the preferences for post-tactics. For this, open the menu of the \textsf{Proof Control View} via the little triangle on the top right corner of the view.
 
+\paragraph{The Smiley}
+
 The smiley can be one of three different colors: (1) red, indicates that the proof tree contains one or more undischarged sequents, (2) blue, indicates that all undischarged sequents of the proof tree have been reviewed, (3) green, indicates that all sequents of the proof tree are discharged.
+
+\paragraph{The Editing Area}
 
 The editing area allows the user to supply parameters for proof commands. For example, when the user attempts to add a new hypothesis (by clicking on the lemma ah button), the new hypothesis should have been written by the user in the editing area.
 
+\paragraph{ML/PP and Hypotheses}
+
+\subparagraph{ML}
+
 ML (mono-lemma) prover appears in the drop-down list under the button (pp) as M0, M1, M2, M3, ML. The different configuration (e.g., M0) refer to the proof force of the ML prover. All hypotheses are passed to ML.
+
+\subparagraph{PP}
 
 PP (predicate prover) appears in the drop-down list under the button (pp) as P0, P1, PP.
 
@@ -447,7 +469,109 @@ PP (predicate prover) appears in the drop-down list under the button (pp) as P0,
 
 \subsubsection{The Search Hypotheses View}
 
-By typing a string in the Proof Control window and pressing the Search Hypotheses button a window is provided which contains the hypotheses having a character string in common with the one entered by the user in the editing area. For example, if we search for hypotheses involving the character string "cr", then after pressing the Search Hypothesis button on the proof control window, we obtain the following: 
+By typing a string in the \textsf{Proof Control View} and pressing the Search Hypotheses (\icon{rodin/sh_prover.png}) button a window is provided which contains the hypotheses having a character string in common with the one entered by the user in the editing area. For example, if we search for hypotheses involving the character string "cr", then after pressing the Search Hypothesis (\icon{rodin/sh_prover.png}) button on the \textsf{Proof Control View}, we obtain the windows as shown in figure \ref{fig_ref_01_proving_perspective7}. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective7.png}
+	\caption{The Search Hypotheses View}
+	\label{fig_ref_01_proving_perspective7}
+\end{center}
+\end{figure}
+
+This view also integrates a "quick search" area (A), that allows us to search quickly hypotheses involving short character strings such as "cr". A search hypothesis button (B) that behaves the same as the button of the proving window, a refresh button (C) that updates the window manually for more control, and a drop down menu (D) to set the preferences of the view up.
+
+By pressing return key or the button (B) (once a short string has been given in the input area (A)), hypotheses can be searched quickly as if we used the Proof Control as described before.
+
+The drop down menu (D) is accessible to set some preferences over the searched hypotheses.
+
+If we change preferences for the search, we might need to "update" manually the view with the button (C). By selecting "Consider hidden hypotheses in search" option, we can review all hypotheses that have been unselected in the \textsf{Selected Hypotheses} window.
+
+To move hypotheses to the \textsf{Selected Hypotheses} window, select those required (using the check boxes) and press the \icon{rodin/add.png} button. Adding these hypotheses to the selected hypotheses means that they will be visible to the prover. They can then be used during the next interactive proof phase.
+
+To remove hypotheses from the \textsf{Search Hypotheses} window use the \icon{rodin/remove.png} button. This button also appears above the selected hypotheses, and allows the user to remove any hypothesis from the \textsf{Selected Hypotheses} window.
+
+The other button, situated to the left each hypotheses, is the \icon{rodin/falsify_prover.png} button. clicking on this will attempt a proof by contradiction. The effect is the same as if the hypothesis were in the Selected Hypotheses. 
+
+\subsubsection{The Cache Hypotheses Window}
+
+This window allows the user to keep track of recently manipulated (e.g., used, removed, selected) hypotheses for any PO. For example, when the user applies a rewrite to an hypothesis, a new hypothesis (after the rewriting) is selected, and the original hypothesis is deselected and put in the Cache Hypotheses window.
+
+Similar operations (to that of the Selected Hypotheses and Search Hypotheses windows) such as removing, selecting and proof by contradiction (ct) are also available for the cached hypotheses. Interactive proof steps (e.g., rewriting) can also be carried out from the Cache Hypotheses window as well as the Search Hypotheses window. 
+
+\subsubsection{Proof Information View}
+
+This view displays information so that the user can relate a proof obligation to the model. For example, typical information for an event invariant preservation PO includes the event; as well as the invariant in question. For instance in figure \ref{fig_ref_01_proving_perspective8}, the hyperlinks 'CreateToken' and 'inv2' can be used to navigate to the containing machine. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective8.png}
+	\caption{Proof Information View}
+	\label{fig_ref_01_proving_perspective8}
+\end{center}
+\end{figure}
+
+\subsubsection{Rule Details View}
+
+This view displays the information relative to a given proof tree node, on which a rule was applied.
+A command is available when right-clicking on a proof tree node, in order to reveal the \textsf{Rule Details View} (See figure \ref{fig_ref_01_proving_perspective9}).
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective9.png}
+	\caption{Open Rule Details View}
+	\label{fig_ref_01_proving_perspective9}
+\end{center}
+\end{figure}
+
+By default, this view is a fast view. A button (identified by the view's icon) is then available at the bottom left of the workbench, to show up this view.
+
+Figure \ref{} gives an overview of the \textsf{Rule Details View}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective10.png}
+	\caption{Rule Details View}
+	\label{fig_ref_01_proving_perspective10}
+\end{center}
+\end{figure}
+
+A quick view on the applied rule contents is provided. On the picture above, we display the contents of the rule named "∀ hyp mp" where an input has been used to instantiate an hypothesis. One can see quickly which was the input used by the instantiation (following instantiated with), and which was the hypothesis considered by this rule (this is given by the hypothesis of Input Sequent). Furthermore, it is possible to view the antecedents created by this rule in details (i.e. child proof tree nodes) and the actions performed on hypotheses : selection, deselection, etc. 
+
+\subsubsection{Auto-tactic and Post-tactic}
+
+The auto-tactic applies a combination (i.e. ordered list) of rewrite, inference tactics and external provers automatically to newly generated proof obligations. However, they can also be invoked by the user by clicking on the \icon{rodin/auto_prover.png} button in the \textsf{Proof Control view}. Note that the automatic application of the auto-prover can be quickly toggled with the Prove automatically menu item available from the Project menu (compare with figure \ref{fig_ref_01_proving_perspective11}).
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective11.png}
+	\caption{Toggle auto-prover via project menu}
+	\label{fig_ref_01_proving_perspective11}
+\end{center}
+\end{figure}
+
+The post-tactic is also a combination of rewrite, inference tactics and external provers, and is applied automatically after each interactive proof step. However, it can also be invoked manually by clicking on the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control view}.
+
+Note that the post-tactic can be disabled quickly by clicking on the little arrow (marked with an A) of the \textsf{Proof Control view} (right upper corner) and then on "Disable post-tactic" (B) as shown in figure \ref{fig_ref_01_proving_perspective12}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_proving_perspective12.png}
+	\caption{Proof Control view menu}
+	\label{fig_ref_01_proving_perspective12}
+\end{center}
+\end{figure}
+
+The ordered list of rewrite, inference tactics and external provers that should be applied is called a profile. There are two default profiles, one for the auto-tactic and one for the post-tactic. These default profiles are immutable in time, but can be duplicated for further modification by the user. Indeed, the user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are shipped with projects if defined at this scope, or can be imported or exported if defined at a workspace level, which is very useful to share them.
+
+There are two ways to run the automatic or post tactics:
+
+\begin{itemize}
+	\item the manual way consists into clicking on the \icon{rodin/auto_prover.png} button, or the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control view}, to respectively launch the auto-tactic (with the selected auto-tactic profile) and the post-tactic (with the selected post-tactic profile).
+	\item the automatic way if such preference is activated. (Auto-tactic after each proof step, and post-tactic at each step and rebuild) The mandatory condition for post-tactics or auto-tactics to automatically run is that they should be activated from their preference or property. 
+\end{itemize}
+
+The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the "Auto/Post Tactic" preference page to address these choices. These tabs will be described in the two next sections. 
 
 ---------------------------------------------------------------------------------------------------------------------
 

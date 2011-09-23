@@ -9,202 +9,135 @@ Just references to other resources.
 
 \subsection{The Event-B Perspective}
 
-The Event-B perspective: We briefly describe the various views (Event-B explorer, structure editor, outline view, symbol view) and their content. We want to cover every element of each view (like buttons, entry fields, etc.), but for the underlying theory we link to the other reference sections. The relevant menu entries are also described.
+\marginpar{The Event-B perspective: We briefly describe the various views (Event-B explorer, structure editor, outline view, symbol view) and their content. We want to cover every element of each view (like buttons, entry fields, etc.), but for the underlying theory we link to the other reference sections. The relevant menu entries are also described.}
 
-\subsubsection{Symbol Table}
+Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the initial situation of the Event-B Perspective. The following subsections name the different Rodin GUI elements (i.e. Views) which are visible and explain their functions.
 
-\marginpar{CONTENT MIGRATED FROM WIKI!}
+\imagedpi{img/reference/ref_01_eventb_perspective1.pdf}{150mm}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
 
-he symbol table is a view that is intended to give users a convenient way to type in mathematical symbols into the various model editors. It is provided by the org.eventb.ui.symboltable plug-in.
-[edit] How to display the symbol table
+\subsubsection{Menu bar}
 
-Click Window > Show view > Others...
+The menu bar of provides for instance file and edit operations.
 
-In Event-B category, select Symbols: 
+\subsubsection{Tool bar}
 
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_symbol_table1.png}
-%	\caption{Auto Prover Preferences}
-%	\label{fig_ref_01_symbol_table1}
-%\end{center}
-%\end{figure}
+The tool bar provides short cuts for familiar commands like save, print, undo and redo. Furthermore, the tool bar provides wizard short cuts for creating elements like axioms, constants, enumerated sets, etc. which are described in section \ref{ref_01_the_eventb_editor}.
 
-The symbol table looks like the following: 
+\subsubsection{Editor View}
 
-%\begin{center}
-%	\includegraphics{img/reference/ref_02_symbol_table1.png}
-%	\caption{Auto Prover Preferences}
-%	\label{fig_ref_02_symbol_table1}
-%\end{center}
-%\end{figure}
+The editor view contains the active Event-B editor which is described in section \ref{ref_01_the_eventb_editor}.
 
-Usage
+\subsubsection{Outline View}
 
-If an editor is open and a text field is active (the cursor is blinking), then clicking a symbol inserts it at the current position: 
+The outline view displays the outline of the active Event-B editor, and lists elements like axioms, variables, etc.. 
+
+\subsubsection{Rodin Problems View}
+
+he Rodin Problems view shows problems (i.e. syntax errors) of the active Event-B editor.
+
+\subsubsection{Symbols View}
+\label{reference_01_symbols_view}
+
+The symbols view is intended to give users a convenient way to type in mathematical symbols into the various model editors. If an editor is open and a text field is active (the cursor is blinking), then clicking a symbol inserts it at the current position as demonstrated in figure \ref{fig_ref_01_symbol_table1}. 
 
 The ASCII code corresponding to the symbol where the mouse hovers is also displayed as a tooltip, so that the user can also learn how to input symbols directly. 
 
-%\begin{center}
-%	\includegraphics{img/reference/ref_03_symbol_table1.png}
-%	\caption{Auto Prover Preferences}
-%	\label{fig_ref_03_symbol_table1}
-%\end{center}
-%\end{figure}
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_symbol_table1.png}
+	\caption{Clicking a symbol inserts it at the current position}
+	\label{fig_ref_01_symbol_table1}
+\end{center}
+\end{figure}
 
-\subsubsection{Project Explorer}
-\label{reference_01_the_project_explorer}
+\subsubsection{Event-B Explorer}
+\label{reference_01_eventb_explorer}
 
-\marginpar{CONTENT MIGRATED FROM WIKI!}
+Projects are reachable in the RODIN platform by means of a view called the \textsf{Event-B Explorer}. This view is usually situated on the left hand side of the screen as shown in figure \ref{fig_ref_01_eventb_perspective1}. The \textsf{Event-B Explorer} contains a list of name of the current projects. Next to each project name is a little triangle. By pressing it, one can expand a project and see its components like machines and contexts.
 
-Projects are reachable in the RODIN platform by means of a window called the "Project Explorer". This window is usually situated on the left hand side of the screen (but, in Eclipse, the place of such windows can be changed very easily). Figure \ref{fig_ref_01_project_explorer1} shows a screen shot of the "Project Explorer" window.
+The icons (\icon{rodin/ctx_obj.png} or \icon{rodin/mch_obj.png}) situated next to the components help recognizing their kind (context or machine respectively).
+
+In expanding a machine (respectively a context), you can explore its elements. Double clicking on a specific element (i.e. a variable) opens the Event-B editor and marks the position of the variable in the machine (respectively in the context) as shown in figure \ref{fig_ref_01_project_explorer1}. Furthermore, proof obligations are displayed at tree structure's leafs (for more information see section \ref{ref_01_proving_perspective}).
 
 \begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/reference/ref_01_project_explorer1.png}
-	\caption{Project Explorer View}
+	\caption{Double clicking on an element opens the Event-B editor and marks the corresponding position}
 	\label{fig_ref_01_project_explorer1}
 \end{center}
 \end{figure}
 
-As can be seen in figure \ref{fig_ref_01_project_explorer1}, the Project Explorer window contains the list of current project names. Next to each project name is a little triangle. By pressing it, one can expand a project and see its components as shown in figure \ref{fig_ref_01_project_explorer2}. 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer2.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer2}
-\end{center}
-\end{figure}
-
-We expanded the project named "celebrity". This project contains 2 contexts named "celebrity\_ctx\_0" and "celebrity\_ctx\_1". It also contains 4 machines named "celebrity\_0" to "celebrity\_3". The icons (context or machine) situated next to the components help recognizing their kind (context or machine respectively).
-
-The "Event-B Explorer" window shows the projects' tree structures. It has projects as main entries and for each one its contexts and machines.In expanding a machine(respectively a context), you can explore its elements. When they exist, proof obligations are displayed at tree structure's leafs. 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer3.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer3}
-\end{center}
-\end{figure}
-
-To browse through a proof, you can use the Proof Skeleton View.
-
-As can be seen in the screen shot above, machine "celebrity\_1" of project "celebrity" is expanded. We find seven proof obligations. Each of them has got a compound name as indicated in the tables below. A green logo situated on the left of the proof obligation name states that it has been proved (an A means it has been proved automatically). If you switch in proving perspective and click on the proof obligation name in the Event-B Explorer, you are transferred into a window where you can handle your proof. We are going to describe it more precisely in subsequent sections.
-
-The text field above the explorer tree can be used to filter displayed POs. Only POs with a name that contains the input text will appear in the view. We will start an example from the following: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer4.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer4}
-\end{center}
-\end{figure}
-
-If we type 'inv' in the filter area, we'll obtain the following:
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer5.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer5}
-\end{center}
-\end{figure}
-
-This is exactly the same, nothing was filtered out because all PO names contain 'inv' as substring. Now, if we add '2', we will only have POs related to invariant 'inv2', as follows: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer6.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer6}
-\end{center}
-\end{figure}
-
-Now, let's see what we obtain if we type in 'THM': 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer7.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer7}
-\end{center}
-\end{figure}
-
-Only theorems are displayed, the entry 'INITIALISATION/inv1/inv' has been filtered out because it contains no 'THM' substring.
-
-Note: filtering is case sensitive, thus 'thm' is different from 'THM'.
-
-Beside the input text box is a green button, the same that is used in the explorer for discharged POs. Clicking this button hides discharged POs: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer8.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer8}
-\end{center}
-\end{figure}
-
-It's also possible to combine text filter and discharged filter: 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer9.png}
-	\caption{Project Explorer View with expanded project}
-	\label{fig_ref_01_project_explorer9}
-\end{center}
-\end{figure}
-
-In the above example, INITIALISATION/inv1/INV is filtered out by the text filter (does not contain 'THM') and inv3/THM is filtered out by the discharged PO filter. 
-
-\subsubsection{Problems View}
-\label{reference_01_the_problems_view}
-
-When the Static Checker discovers an error in a project, a little "x" is added to this project and to the faulty component in the "Project Explorer" window as shown in figure \ref{fig_ref_01_problemsview1}.
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview1.png}
-	\caption{A little "x" in the Project Explorer indicates an error in the component}
-	\label{fig_ref_01_problemsview1}
-\end{center}
-\end{figure}
-
-The error itself is shown by opening the "Problems" window (see figure \ref{fig_ref_01_problemsview2}). 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview2.png}
-	\caption{The Problems View}
-	\label{fig_ref_01_problemsview2}
-\end{center}
-\end{figure}
-
-By double-clicking on the error statement, you are transferred automatically into the place where the error has been detected so that you can correct it easily as shown in figure \ref{fig_ref_01_problemsview3}. 
-
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_problemsview3.png}
-	\caption{You are transferred automatically into the place where the error has been detected}
-	\label{fig_ref_01_problemsview3}
-\end{center}
-\end{figure}
-
 \subsection{The Event-B Editor}
+\label{ref_01_the_eventb_editor}
 
-Once a machine is created, a window such as the following appears in the editing area: 
+Once a context (or respectively a machine) is created, a window appears in the editing area as shown in figure \ref{fig_ref_01_eventb_editor1}.
 
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_structurededitor1.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_structurededitor1}
-%\end{center}
-%\end{figure}
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor1.png}
+	\caption{The Event-B editor}
+	\label{fig_ref_01_eventb_editor1}
+\end{center}
+\end{figure}
 
-You are in the "Edit" page allowing you to edit elements of the machine, namely dependencies (keywords "REFINES" and "SEES"), variables (keyword "VARIABLES"), invariants (keyword "INVARIANTS), variants (keyword "VARIANTS"), or events (Keywords "EVENTS"). These modelling elements can be edited in a way that is similar to what has been explained for contexts in section 2, it is not repeated here.
+You are in the "Edit" area allowing you to edit modelling elements of the context, namely dependencies (keyword "EXTENDS"), carrier sets (keyword "SETS"), constants (keyword "CONSTANTS"), or axioms (keyword "AXIOMS"). By pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you can add, remove, or move corresponding modelling elements. As an example, figure \ref{fig_ref_01_eventb_editor2} shows what you obtain after pressing the triangle next to the keyword "AXIOMS".
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor2.png}
+	\caption{By pressing the triangle you can collapse/expand context sections}
+	\label{fig_ref_01_eventb_editor2}
+\end{center}
+\end{figure}
+
+By pressing the \icon{rodin/add.png} button, you can add a new modelling element. For instance clicking on the \icon{rodin/add.png} button next in the "AXIOMS" section will add a new axiom element. You can now enter a new axiom and a comment in the corresponding boxes as indicated in figure \ref{fig_ref_01_eventb_editor3}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor3.png}
+	\caption{Adding a new modelling element}
+	\label{fig_ref_01_eventb_editor3}
+\end{center}
+\end{figure}
+
+For removing a modelling element, press the \icon{rodin/remove.png} button. You can also move an modelling element up or down by selecting it and then pressing one of the two arrows (\icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}).
+
+It is also possible to add and editor modelling elements in a different way as explained in next sub sections. The creation of these elements, except dependencies, can be made by two distinct methods, either by using wizards or by editing them directly. In each section, we shall review both methods.
+
+\subsubsection{New Carrier Sets Wizard}
+
+In order to activate the \textsf{New Carrier Sets Wizard}, you have to press the \icon{rodin/newset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor4}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor4.png}
+	\caption{New Carrier Sets Wizard}
+	\label{fig_ref_01_eventb_editor4}
+\end{center}
+\end{figure}
+
+You can enter as many carrier sets as you want by pressing the \textsf{More} button. When you’re finished, press the \textsf{OK} button. 
+
+\subsubsection{New Enumerated Set Wizard}
+
+In order to activate the \textsf{New Enumerated Set Wizard}, you have to press the \icon{rodin/newenuset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in figure \ref{fig_ref_01_eventb_editor5}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor5.png}
+	\caption{New Enumerated Set Wizard}
+	\label{fig_ref_01_eventb_editor5}
+\end{center}
+\end{figure}
+
+You can enter the name of the new enumerated set as well as the name of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you’re finished, press the \textsf{OK} button. The effect of using this wizard as indicated is to add the new carrier set COLOR and the three constants red, green, and orange. Finally, it adds the following axiom (section 2.4):
+\operatorname{partition}(COLOR , \{red\}, \{green\}, \{orange\})
+
+If you enter several time the same enumerated set element, you get an error message. 
+
+-------------------------------------------
+
+These modelling elements can be edited in a way that is similar to what has been explained for contexts in section 2, it is not repeated here.
 
 It is also possible to do so in a different way as explained in sections 3.1 to 3.6. The creation of these elements, except dependencies can be made by two distinct methods, either by using wizards or by editing them directly. In each section, we shall review both methods. NOTE: The hurried reader can skip these sections and go directly to section 3.7 
 
@@ -527,6 +460,97 @@ After a right click on any other element (except an event) the following context
 You have then the choice to modify your machine (add a new refined machine/seen context/variable/invariant/event/variant). 
 
 \subsection{The Proving Perspective}
+\label{ref_01_proving_perspective}
+
+If we type 'inv' in the filter area, we'll obtain the following:
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_project_explorer5.png}
+	\caption{Project Explorer View with expanded project}
+	\label{fig_ref_01_project_explorer5}
+\end{center}
+\end{figure}
+
+This is exactly the same, nothing was filtered out because all PO names contain 'inv' as substring. Now, if we add '2', we will only have POs related to invariant 'inv2', as follows: 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_project_explorer6.png}
+	\caption{Project Explorer View with expanded project}
+	\label{fig_ref_01_project_explorer6}
+\end{center}
+\end{figure}
+
+Now, let's see what we obtain if we type in 'THM': 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_project_explorer7.png}
+	\caption{Project Explorer View with expanded project}
+	\label{fig_ref_01_project_explorer7}
+\end{center}
+\end{figure}
+
+Only theorems are displayed, the entry 'INITIALISATION/inv1/inv' has been filtered out because it contains no 'THM' substring.
+
+Note: filtering is case sensitive, thus 'thm' is different from 'THM'.
+
+Beside the input text box is a green button, the same that is used in the explorer for discharged POs. Clicking this button hides discharged POs: 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_project_explorer8.png}
+	\caption{Project Explorer View with expanded project}
+	\label{fig_ref_01_project_explorer8}
+\end{center}
+\end{figure}
+
+It's also possible to combine text filter and discharged filter: 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_project_explorer9.png}
+	\caption{Project Explorer View with expanded project}
+	\label{fig_ref_01_project_explorer9}
+\end{center}
+\end{figure}
+
+In the above example, INITIALISATION/inv1/INV is filtered out by the text filter (does not contain 'THM') and inv3/THM is filtered out by the discharged PO filter. 
+
+\subsubsection{Problems View}
+\label{reference_01_the_problems_view}
+
+When the Static Checker discovers an error in a project, a little "x" is added to this project and to the faulty component in the "Project Explorer" window as shown in figure \ref{fig_ref_01_problemsview1}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_problemsview1.png}
+	\caption{A little "x" in the Project Explorer indicates an error in the component}
+	\label{fig_ref_01_problemsview1}
+\end{center}
+\end{figure}
+
+The error itself is shown by opening the "Problems" window (see figure \ref{fig_ref_01_problemsview2}). 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_problemsview2.png}
+	\caption{The Problems View}
+	\label{fig_ref_01_problemsview2}
+\end{center}
+\end{figure}
+
+By double-clicking on the error statement, you are transferred automatically into the place where the error has been detected so that you can correct it easily as shown in figure \ref{fig_ref_01_problemsview3}. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_problemsview3.png}
+	\caption{You are transferred automatically into the place where the error has been detected}
+	\label{fig_ref_01_problemsview3}
+\end{center}
+\end{figure}
+
 
 We do basically the same as for the Event-B perspective. The views are proof tree, goal, control and statistics.
  
@@ -717,6 +741,14 @@ $loopOnAllPending(T_1 \ldots T_n) \;\;\defi\;\; loop(onAllPending(composeUntilSu
 \subsubsection{Proof Skeleton View}
 
 \marginpar{CONTENT MIGRATED FROM WIKI!}
+
+The text field on top of the \textsf{Event-B Explorer} can be used to filter displayed proof obligations. Only POs with a name that contains the input text will appear in the view. We will start an example from the following: 
+
+To browse through a proof, you can use the Proof Skeleton View.
+
+As can be seen in the screen shot above, machine "celebrity\_1" of project "celebrity" is expanded. We find seven proof obligations. Each of them has got a compound name as indicated in the tables below. A green logo situated on the left of the proof obligation name states that it has been proved (an A means it has been proved automatically). If you switch in proving perspective and click on the proof obligation name in the Event-B Explorer, you are transferred into a window where you can handle your proof. We are going to describe it more precisely in subsequent sections.
+
+
 
 Purpose
 

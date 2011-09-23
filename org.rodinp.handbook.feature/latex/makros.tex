@@ -22,6 +22,31 @@
 \includegraphics[]{img/icons/#1}
 }
 
+% macro for image versions (pdf version + html version)
+% #1 Path to image for pdf version
+% #2 Path to image for html version
+% #3 Caption
+% #4 Label
+\def\imagedpi#1#2#3#4#5{
+	\ifplastex
+		\begin{figure}[!h]
+		\begin{center}
+			\includegraphics{#3}
+			\caption{#4}
+			\label{#5}
+		\end{center}
+		\end{figure}
+	\else
+		\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width=#2]{#1}
+			\caption{#4}
+			\label{#5}
+		\end{center}
+		\end{figure}
+	\fi
+}
+
 % different method to write an ASCII backslash for plastex and normal pdflatex
 \ifplastex
   \newcommand{\mybackslash}{\textbackslash}

@@ -575,11 +575,71 @@ There are two ways to run the automatic or post tactics:
 	\item the automatic way if such preference is activated. (Auto-tactic after each proof step, and post-tactic at each step and rebuild) The mandatory condition for post-tactics or auto-tactics to automatically run is that they should be activated from their preference or property. 
 \end{itemize}
 
-The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the "Auto/Post Tactic" preference page to address these choices. These tabs will be described in the two next sections. 
+The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the "Auto/Post Tactic" preference page to address these choices. These tabs will be described in section \ref{ref_01_preferences_auto_post_tactic}. 
 
 \subsection{Preferences}
 
 We briefly describe what preference can be set for Rodin. For their deeper meaning, we'll refer to the other sections (esp. the prover settings).
+
+\subsubsection{Auto/Post Tactic}
+\label{ref_01_preferences_auto_post_tactic}
+
+\paragraph{Preferences for the selected auto and post tactic profile}
+
+This section describes the "Auto/Post Tactic" tab of the "Auto/Post Tactic" preference page.
+
+There are two scopes to set up preferences for the auto and post tactics : at workspace level, and at project level. Note that if the automatic application of tactics (auto or post) is decided only at workspace level, and this choice is held at project level.
+
+To access these preferences, one as to go open the "Auto/Post Tactic" preference page that can be found after \textsf{Window $\rangle$ Preference $\rangle$ Sequent Prover}.
+
+Figure \ref{fig_ref_01_preferences7} shows the "Auto/Post Tactic" preference page.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences7.png}
+	\caption{The "Auto/Post Tactic" preference page}
+	\label{fig_ref_01_preferences7}
+\end{center}
+\end{figure}
+
+The buttons 1 and 2 are activating/deactivating the automatic use of respectively auto and post tactics. One can also see on this picture the selected profile to be use as auto and post tactic. Note that there is always a profile selected, and this profile can be changed whether the tactic are automatically launched or not, as there is alway a way to manually launch auto and post tactics. On the preference appearing above, the Default Auto Tactic Profile is used to compose the automatic tactic, and the Default Post Tactic Profile is used to compose the post-tactic.
+
+Figure \ref{fig_ref_01_preferences8} shows the "Auto/Post Tactic" reference page with both auto-tactic and post-tactic to automatically run, and where the user selects the profile "MyFirstTacticProfile" to be used as auto-tactic profile. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences8.png}
+	\caption{Selecting a profile for the Auto-Tactics}
+	\label{fig_ref_01_preferences8}
+\end{center}
+\end{figure}
+
+\paragraph{Preferences for available profiles}
+
+This section describes the "Profile" tab of the "Auto/Post Tactic" preference page. 
+
+Figure \ref{} shows the contents of the profile tab. There are two visible lists : a list of profiles on the left the tactics or provers that compose these profiles (Profile Details). Here one can see the contents of the Defaut Auto Tactic Profile.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences9.png}
+	\caption{Selecting a profile for the Auto-Tactics}
+	\label{fig_ref_01_preferences9}
+\end{center}
+\end{figure}
+
+There are 4 buttons available to the user :
+
+\begin{itemize}
+	\item New : to create a new profile "from scratch",
+	\item Edit : to edit an existing (editable) profile,
+	\item Remove : to remove a profile definitively,
+	\item Duplicate : to duplicate a selected profile for further slight modification.
+\end{itemize}
+
+Default profiles can not be edited nor removed. That is why they are greyed on the image above.
+
+On the picture below appears the dialog available to edit or create a profile. Here we create a profile named 'MyFirstTacticProfile'. 
 
 \subsubsection{Customize Prefixes}
 

@@ -9,15 +9,51 @@ Just references to other resources.
 
 \subsection{The Event-B Perspective}
 
-\marginpar{The Event-B perspective: We briefly describe the various views (Event-B explorer, structure editor, outline view, symbol view) and their content. We want to cover every element of each view (like buttons, entry fields, etc.), but for the underlying theory we link to the other reference sections. The relevant menu entries are also described.}
-
 Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the initial situation of the Event-B Perspective. The following subsections name the different Rodin GUI elements (i.e. Views) which are visible and explain their functions.
 
 \imagedpi{img/reference/ref_01_eventb_perspective1.pdf}{150mm}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
 
 \subsubsection{Menu bar}
 
-The menu bar of provides for instance file and edit operations.
+The menu bar of provides for instance file, edit operations and other useful Event-B specific operations. We briefly describe the most important menu items.
+
+\paragraph{Rename menu}
+
+When opening a machine or context file respectively some actions for automatic renaming Event-B model elements are available for the user:
+
+One action is available for context files (see figure \ref{fig_ref_01_menubar1}).
+
+    \begin{itemize}
+    	\item Automatic Axiom Labelling: this action will perform alphanumeric renaming on axioms given their order of appearance. 
+    \end{itemize}
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_menubar1.png}
+	\caption{Automatic rename actions for machine files}
+	\label{fig_ref_01_menubar1}
+\end{center}
+\end{figure}
+
+Three actions are available for machine files (see figure \ref{fig_ref_01_menubar2}).
+
+    \begin{itemize}
+    	\item Automatic Invariant Labelling: this action will perform alphanumeric renaming on invariants given their order of appearance,
+	\item Automatic Guard Labelling: this action will perform alphanumeric renaming on guards given their order of appearance,
+	\item Automatic Action Labelling: this action will perform alphanumeric renaming on guards given their order of appearance. 
+    \end{itemize}
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_menubar2.png}
+	\caption{Automatic rename actions for context files}
+	\label{fig_ref_01_menubar2}
+\end{center}
+\end{figure}
+
+\paragraph{Event-B menu}
+
+When opening a machine or context file respectively some wizards for creating Event-B model elements are available for the user. The different wizards are described in section \ref{ref_01_the_eventb_editor}.
 
 \subsubsection{Tool bar}
 
@@ -104,7 +140,7 @@ By pressing the \icon{rodin/add.png} button, you can add a new modelling element
 
 For removing a modelling element, press the \icon{rodin/remove.png} button. You can also move an modelling element up or down by selecting it and then pressing one of the two arrows (\icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}).
 
-It is also possible to add modelling elements by using wizards. You can active the different wizard by using the buttons in the tool bar as shown in figure \ref{fig_ref_01_eventb_editor12} and in figure \ref{fig_ref_01_eventb_editor13} respectively (The wizards depend on the active file machine or context). The next sections explain how to use these wizards.
+It is also possible to add modelling elements by using wizards. You can active the different wizard by using the buttons in the tool bar as shown in figure \ref{fig_ref_01_eventb_editor12} and in figure \ref{fig_ref_01_eventb_editor13} respectively or via the Event-B menu bar item (The wizards depend on the active file machine or context). The next sections explain how to use the wizards.
 
 \begin{figure}[!h]
 \begin{center}
@@ -579,9 +615,83 @@ The user can separately define tactic profiles and assign them to post and auto 
 
 \subsection{Preferences}
 
-We briefly describe what preference can be set for Rodin. For their deeper meaning, we'll refer to the other sections (esp. the prover settings).
+Rodin provides several options to set preferences for instance on the appearance of the Event-B editor or on the auto/post tactics. You can access the preferences via \textsf{Window $\rangle$ Preferences $\rangle$ Event-B} in the menu bar. The following subsections describe the different preference option.
 
-\subsubsection{Auto/Post Tactic}
+\subsubsection{Appearance}
+
+This section provides settings for the Event-B editor appearance.
+
+\paragraph{Colors and Fonts}
+
+This section
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences13.png}
+	\caption{Colors and Fonts preferences}
+	\label{fig_ref_01_preferences13}
+\end{center}
+\end{figure}
+
+\subsubsection{Modelling UI}
+
+\subsubsection{Prefix Settings}
+
+This page describes the mechanism used to set element prefixes, and perform renaming using dedicated actions for both machines and contexts. Note that prefixes are used for automatic renaming when element should be alphanumerically ordered, as well as for new element creation. 
+
+%\paragraph{Principles}
+
+%This mechanism is close to eclipse preferences and properties settings. In our case, the prefixes are in any case, defined globally for a workspace scope. If the user does not set specific settings for prefixes at the workspace scope, the default prefixes which are given by elements contributions are used. Moreover, if the user changes the prefixes once, they will then be persisted. The new feature is here the ability for one to set up some specific settings for prefixes at a project scope. The settings will be then persisted through a file attached to the project settings (i.e., the prefixes used will be shared at export).
+
+%\paragraph{Summary}
+
+%\begin{itemize}
+%	\item Default prefixes correspond to Rodin's default values,
+%	\item A user can modify workspace settings via "Window" > "Preferences" menu,
+%	\item Workspace modifications are persisted from one session to another,
+%	\item Project specific settings can be set up and will then be persisted in a project scope,
+%	\item Restoring default prefixes for a project will enable the current workspace prefix settings,
+%	\item Restoring default prefixes for the workspace will reset the prefixes to their original values corresponding to the values which are set at Rodin's %%first launch.
+%\end{itemize}
+
+%\paragraph{Overview}
+
+Figure \ref{fig_ref_01_preferences1} shows that modifying prefixes at a workspace scope or project scope, will affect the names used at creation of new Event-B elements. One can see that the prefix for a variable (resp. invariant) originally set to "var" (resp. "inv") has been replaced by "variable" (resp. "invariant"). New elements are then named using those prefixes.
+
+\imagedpi{img/reference/ref_01_preferences1.pdf}{135mm}{img/reference/ref_01_preferences1.png}{Prefix Settings}{fig_ref_01_preferences1}
+
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics{img/reference/ref_01_preferences1.png}
+%	\caption{Prefix Settings}
+%	\label{fig_ref_01_preferences1}
+%\end{center}
+%\end{figure}
+
+\paragraph{How to set prefixes}
+
+Prefix settings can be accessed through 2 different ways depending on the scope of their application: \textsf{Window $\rangle$ Preferences $\rangle$ Event-B $\rangle$ Modelling UI $\rangle$ Prefix settings} or directly via, \textsf{Rename $\rangle$ Customize prefixes...}.
+
+\paragraph{Project specific settings}
+
+The user can select profiles locally to project. To do so, one has to select the "Prefix Settings" property page available from right-click > Properties on a project, or by clicking the Configure project specific settings link on the "Prefix Settings" preference page. In this case, one will have to choose the project on which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
+
+A dialog (see figure \ref{fig_ref_01_preferences2}) appears, where a page handling prefixes settings, allows one user to customize prefixes for a chosen project. One this page, the user can toggle the button "Enable project specific settings".
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences2.png}
+	\caption{Project specific prefix settings}
+	\label{fig_ref_01_preferences2}
+\end{center}
+\end{figure}
+
+\begin{itemize}
+	\item If this button is enabled: the prefixes used are those which are specified at this project level, 
+	\item If this button is not enabled: the prefixes used are those which are defined at a workspace level. 
+\end{itemize}
+
+\subsubsection{Sequent Prover / Auto/Post Tactic}
 \label{ref_01_preferences_auto_post_tactic}
 
 \paragraph{Preferences for the selected auto and post tactic profile}
@@ -604,21 +714,21 @@ Figure \ref{fig_ref_01_preferences7} shows the "Auto/Post Tactic" preference pag
 
 The buttons 1 and 2 are activating/deactivating the automatic use of respectively auto and post tactics. One can also see on this picture the selected profile to be use as auto and post tactic. Note that there is always a profile selected, and this profile can be changed whether the tactic are automatically launched or not, as there is alway a way to manually launch auto and post tactics. On the preference appearing above, the Default Auto Tactic Profile is used to compose the automatic tactic, and the Default Post Tactic Profile is used to compose the post-tactic.
 
-Figure \ref{fig_ref_01_preferences8} shows the "Auto/Post Tactic" reference page with both auto-tactic and post-tactic to automatically run, and where the user selects the profile "MyFirstTacticProfile" to be used as auto-tactic profile. 
+%Figure \ref{fig_ref_01_preferences8} shows the "Auto/Post Tactic" reference page with both auto-tactic and post-tactic to automatically run, and where the user selects the profile "MyFirstTacticProfile" to be used as auto-tactic profile. 
 
-\begin{figure}[!h]
-\begin{center}
-	\includegraphics{img/reference/ref_01_preferences8.png}
-	\caption{Selecting a profile for the Auto-Tactics}
-	\label{fig_ref_01_preferences8}
-\end{center}
-\end{figure}
+%\begin{figure}[!h]
+%\begin{center}
+%	\includegraphics{img/reference/ref_01_preferences8.png}
+%	\caption{Selecting a profile for the Auto-Tactics}
+%	\label{fig_ref_01_preferences8}
+%\end{center}
+%\end{figure}
 
 \paragraph{Preferences for available profiles}
 
 This section describes the "Profile" tab of the "Auto/Post Tactic" preference page. 
 
-Figure \ref{} shows the contents of the profile tab. There are two visible lists : a list of profiles on the left the tactics or provers that compose these profiles (Profile Details). Here one can see the contents of the Defaut Auto Tactic Profile.
+Figure \ref{fig_ref_01_preferences9} shows the contents of the profile tab. There are two visible lists: a list of profiles on the left and the tactics or provers that compose these profiles (Profile Details). Here one can see the contents of the default Auto Tactic Profile.
 
 \begin{figure}[!h]
 \begin{center}
@@ -628,7 +738,7 @@ Figure \ref{} shows the contents of the profile tab. There are two visible lists
 \end{center}
 \end{figure}
 
-There are 4 buttons available to the user :
+There are 4 buttons available to the user:
 
 \begin{itemize}
 	\item New : to create a new profile "from scratch",
@@ -637,118 +747,48 @@ There are 4 buttons available to the user :
 	\item Duplicate : to duplicate a selected profile for further slight modification.
 \end{itemize}
 
-Default profiles can not be edited nor removed. That is why they are greyed on the image above.
+Default profiles can not be edited nor removed. That is why they are grayed on the image above.
 
-On the picture below appears the dialog available to edit or create a profile. Here we create a profile named 'MyFirstTacticProfile'. 
+Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or create a profile. For instance, here we create a profile named "MyFirstTacticProfile".
 
-\subsubsection{Customize Prefixes}
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences10.png}
+	\caption{Selecting a profile for the Auto-Tactics}
+	\label{fig_ref_01_preferences10}
+\end{center}
+\end{figure}
 
-\marginpar{CONTENT MIGRATED FROM WIKI!}
+The list of the right represents the available and unselected tactics. The list of the left is the profile contents, and represents the selected tactics to be applied from the top to down. The user can select some available tactic from the list of the right using the ">>" button or unselect some tactics from the list of the left using the "<<" button. The user can re-order contiguous selection of selected tactics using the "Up" and "Down" button. By clicking on "Finish" the profile will be saved and available for use in the auto and post tactics.
 
-This page describes the mechanism used to set element prefixes, and perform renaming using dedicated actions for both machines and contexts. Note that prefixes are used for automatic renaming when element should be alphanumerically ordered, as well as for new element creation. 
+\paragraph{Project specific settings}
 
-\paragraph{Principles}
+The user can select profiles locally to project. To do so, one has to select the "Auto/Post Tactic" property page available from right-click > Properties on a project, or by clicking the Configure project specific settings link on the "Auto/Post Tactic" preference page. Figure \ref{fig_ref_01_preferences11} shows the property page for project specific settings, opened on the Auto/Post tactic tab.
 
-This mechanism is close to eclipse preferences and properties settings. In our case, the prefixes are in any case, defined globally for a workspace scope. If the user does not set specific settings for prefixes at the workspace scope, the default prefixes which are given by elements contributions are used. Moreover, if the user changes the prefixes once, they will then be persisted. The new feature is here the ability for one to set up some specific settings for prefixes at a project scope. The settings will be then persisted through a file attached to the project settings (i.e., the prefixes used will be shared at export).
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences11.png}
+	\caption{Auto/Post Tactic Tab for project specific settings for Auto/Post Tactic}
+	\label{fig_ref_01_preferences11}
+\end{center}
+\end{figure}
 
-\paragraph{Summary}
+Note that the enablement of automatic use of post and auto tactics is decided at a workspace level. Figure \ref{fig_ref_01_preferences12} shows the Profiles tab of the Auto/Post Tactic page for a project specific setting. At the project level, there is a contextual menu available on right click from the list of defined profiles. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_01_preferences12.png}
+	\caption{Profiles Tab for project specific settings for Auto/Post Tactic}
+	\label{fig_ref_01_preferences12}
+\end{center}
+\end{figure}
+
+This contextual menu offers two options to the user :
 
 \begin{itemize}
-	\item Default prefixes correspond to Rodin's default values,
-	\item A user can modify workspace settings via "Window" > "Preferences" menu,
-	\item Workspace modifications are persisted from one session to another,
-	\item Project specific settings can be set up and will then be persisted in a project scope,
-	\item Restoring default prefixes for a project will enable the current workspace prefix settings,
-	\item Restoring default prefixes for the workspace will reset the prefixes to their original values corresponding to the values which are set at Rodin's first launch. 
+	\item Import Workspace Profiles to retrieve all the defined profiles in the workspace,
+	\item Export to Workspace Profiles to push a selected profile up in the list of workspace profiles.
 \end{itemize}
-
-Overview 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences1.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences1}
-%\end{center}
-%\end{figure}
-
-The image above shows that modifying prefixes at a workspace scope or project scope, will affect the names used at creation of new Event-B elements. On this image, one can see that the prefix for a variable (resp. invariant) originally set to "var" (resp. "inv") has been replaced by "variable" (resp. "invariant"). New elements are then named using those prefixes.
-
-How to set prefixes
-
-Prefix settings can be accessed through 2 differents ways depending on the scope of their application:
-
-Workspace scope settings
-
-Window > Preferences > Event-B > Modelling UI > Prefix settings, 
-    
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences2.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences2}
-%\end{center}
-%\end{figure}
-
-or directly via,
-
-    Rename > Customize prefixes... (The rename menu appeared in previous releases as the refactoring menu) 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences3.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences3}
-%\end{center}
-%\end{figure}
-
-Project scope settings
-
-    by right-clicking on a project and then choosing "Properties",
-    Menu "Project > Properties",
-    or via the Window > Preferences and then click on the link "Configure project specific settings". In this case, one will have to choose the project on which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
-
-A dialog (see picture below) appears, where a page handling prefixes settings, allows one user to customize prefixes for a chosen project. One this page, the user can toggle the button "Enable project specific settings".
-
-    If this button is enabled :
-        the prefixes used are those which are specified at this project level, 
-    If this button is not enabled :
-        the prefixes used are those which are defined at a workspace level. 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences4.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences4}
-%\end{center}
-%\end{figure}
-
-Automatic Renaming
-
-    One action is available for Context files.
-        Automatic Axiom Labelling : this action will perform alphanumeric renaming on axioms given their order of appearance.
- 
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences5.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences5}
-%\end{center}
-%\end{figure}
-
-Three actions are available for Machine files.
-
-    Automatic Invariant Labelling : this action will perform alphanumeric renaming on invariants given their order of appearance,
-    Automatic Guard Labelling : this action will perform alphanumeric renaming on guards given their order of appearance,
-    Automatic Action Labelling : this action will perform alphanumeric renaming on guards given their order of appearance. 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences6.png}
-%	\caption{The Structured Editor}
-%	\label{fig_ref_01_preferences6}
-%\end{center}
-%\end{figure}
 
 \subsubsection{Preferences for the automatic tactics}
 

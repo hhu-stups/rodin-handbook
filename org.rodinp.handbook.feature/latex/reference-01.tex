@@ -623,7 +623,7 @@ This section provides settings for the Event-B editor appearance.
 
 \paragraph{Colors and Fonts}
 
-This section
+The color and fonts preference page allows to set the text and comment color of the Event-B editor. Furthermore, it allows to toggle on or off respectively the borders of the different fields in the Event-B editor. Figure \ref{fig_ref_01_preferences13} shows the Colors and Fonts preference page.
 
 \begin{figure}[!h]
 \begin{center}
@@ -633,7 +633,9 @@ This section
 \end{center}
 \end{figure}
 
-\subsubsection{Modelling UI}
+\subsubsection{Context and Machine Editor}
+
+The context and machine editor preference pages allow to customize the visible tabs of the context and machine editor respectively.
 
 \subsubsection{Prefix Settings}
 
@@ -674,7 +676,7 @@ Prefix settings can be accessed through 2 different ways depending on the scope 
 
 \paragraph{Project specific settings}
 
-The user can select profiles locally to project. To do so, one has to select the "Prefix Settings" property page available from right-click > Properties on a project, or by clicking the Configure project specific settings link on the "Prefix Settings" preference page. In this case, one will have to choose the project on which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
+The user can select profiles locally to project. To do so, one has to select the "Prefix Settings" property page available via right-click on a project and selecting the Properties item, or by clicking the Configure project specific settings link on the "Prefix Settings" preference page. In this case, one will have to choose the project on which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
 
 A dialog (see figure \ref{fig_ref_01_preferences2}) appears, where a page handling prefixes settings, allows one user to customize prefixes for a chosen project. One this page, the user can toggle the button "Enable project specific settings".
 
@@ -759,11 +761,11 @@ Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or crea
 \end{center}
 \end{figure}
 
-The list of the right represents the available and unselected tactics. The list of the left is the profile contents, and represents the selected tactics to be applied from the top to down. The user can select some available tactic from the list of the right using the ">>" button or unselect some tactics from the list of the left using the "<<" button. The user can re-order contiguous selection of selected tactics using the "Up" and "Down" button. By clicking on "Finish" the profile will be saved and available for use in the auto and post tactics.
+The list of the right represents the available and unselected tactics. The list of the left is the profile contents, and represents the selected tactics to be applied from the top to down. The user can select some available tactic from the list of the right using the "$>>$" button or unselect some tactics from the list of the left using the "$<<$" button. The user can re-order contiguous selection of selected tactics using the "Up" and "Down" button. By clicking on "Finish" the profile will be saved and available for use in the auto and post tactics.
 
 \paragraph{Project specific settings}
 
-The user can select profiles locally to project. To do so, one has to select the "Auto/Post Tactic" property page available from right-click > Properties on a project, or by clicking the Configure project specific settings link on the "Auto/Post Tactic" preference page. Figure \ref{fig_ref_01_preferences11} shows the property page for project specific settings, opened on the Auto/Post tactic tab.
+The user can select profiles locally to project. To do so, one has to select the "Auto/Post Tactic" property page available via right-click on a project and selecting the  Properties item, or by clicking the Configure project specific settings link on the "Auto/Post Tactic" preference page. Figure \ref{fig_ref_01_preferences11} shows the property page for project specific settings, opened on the Auto/Post tactic tab.
 
 \begin{figure}[!h]
 \begin{center}
@@ -857,82 +859,4 @@ $loopOnAllPending(T_1 \ldots T_n) \;\;\defi\;\; loop(onAllPending(composeUntilSu
 
     timeout: a post action of arity 1 (with duration as input): limits the time allocated for the tactic it is applied to (fails after time has gone out)
 
-    limitDepth: a post action of arity 1 (with depth as input): limits the proof tree depth for the tactic it is applied to (prevents tree from growing beyond a given depth) 
-
-\subsubsection{Proof Skeleton View}
-
-\marginpar{CONTENT MIGRATED FROM WIKI!}
-
-The text field on top of the \textsf{Event-B Explorer} can be used to filter displayed proof obligations. Only POs with a name that contains the input text will appear in the view. We will start an example from the following: 
-
-To browse through a proof, you can use the Proof Skeleton View.
-
-As can be seen in the screen shot above, machine "celebrity\_1" of project "celebrity" is expanded. We find seven proof obligations. Each of them has got a compound name as indicated in the tables below. A green logo situated on the left of the proof obligation name states that it has been proved (an A means it has been proved automatically). If you switch in proving perspective and click on the proof obligation name in the Event-B Explorer, you are transferred into a window where you can handle your proof. We are going to describe it more precisely in subsequent sections.
-
-
-
-Purpose
-
-The Proof Skeleton View allows to quickly browse through a proof built either automatically or interactively with the Rodin prover. This view can be used on any proof, independently of the presence of a corresponding proof obligation.
-
-Furthermore, this view allows user to see together proof rules and corresponding sequents.
-
-The Proof Skeleton View
-Showing the View
-
-The Proof Skeleton View is available as other views in the Window > Show View > Other > Event-B > Proof Skeleton View menu.
-
-To watch a proof skeleton, simply select a proof obligation or a proof file in the Event-B Explorer.
-
-View Interpretation
-
-Proof skeletons are displayed in a two-part view. On the left-hand side is the tree structure of rules applied in the proof. On the right-hand side stands the sequent on which the currently selected rule is applied. The proof which is displayed is the one stored in the proof file on disk, never the one which is currently edited through the proof control. This can be very handy as it can allow one to see the previous proof of a proof obligation while working on a new proof of it. 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_proofskeletonview1.jpg}
-%	\caption{A typical example of machine and context relationship}
-%	\label{fig_ref_01_proofskeletonview1}
-%\end{center}
-%\end{figure}
-
-The tree can be expanded or collapsed by using [+] and [-] buttons on the upper right corner.
-
-Copy/Paste to Proof Tree
-
-The copy/paste feature allows to reuse a stored proof into a new proof. Starting from the following configuration: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_proofskeletonview2.png}
-%	\caption{A typical example of machine and context relationship}
-%	\label{fig_ref_01_proofskeletonview2}
-%\end{center}
-%\end{figure}
-
-where the proof we are working on (top left) is similar to another proof whose skeleton is displayed on bottom left. We can then copy/paste the interesting sub tree from the skeleton to the proof: 
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_proofskeletonview3.png}
-%	\caption{A typical example of machine and context relationship}
-%	\label{fig_ref_01_proofskeletonview3}
-%\end{center}
-%\end{figure}
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_proofskeletonview4.png}
-%	\caption{A typical example of machine and context relationship}
-%	\label{fig_ref_01_proofskeletonview5}
-%\end{center}
-%\end{figure}
-
-%\begin{figure}[!h]
-%\begin{center}
-%	\includegraphics{img/reference/ref_01_proofskeletonview5.png}
-%	\caption{A typical example of machine and context relationship}
-%	\label{fig_ref_01_proofskeletonview5}
-%\end{center}
-%\end{figure}
-
+    limitDepth: a post action of arity 1 (with depth as input): limits the proof tree depth for the tactic it is applied to (prevents tree from growing beyond a given depth)

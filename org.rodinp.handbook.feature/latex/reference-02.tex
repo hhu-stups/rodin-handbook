@@ -160,12 +160,11 @@ Once a variable disappears in a refinement, i.e. is not declared in machine $M_{
 \label{events}
 \index{event}
 A possible state change of a machine is defined by an event.
-The condition under which an event can happen is given by a guard, the event's action
-describe how the new and old state relate to each other.
+The condition under which an event can be executed is given by a guard. The event's action
+describes how the new and old state relate to each other.
 
-Events occur atomically, i.e. one event happens at a time, leading to a new state.
-Two events never happen at the same time. There is also no notion of time that elapses
-during the event happening.
+Events occur atomically (i.e. one event happens at a time) leading to a new state.
+Two events never happen at the same time. Time is also not factored into the execution of the event.
 
 An event has the following elements:
 \begin{itemize}
@@ -178,22 +177,21 @@ An event has the following elements:
   for termination proofs (see section~\ref{termination} for details).
 \end{itemize}
 
-An event can refine one or more events of an abstract machine. To keep things simple, we
-  first consider only events that have at most one refined event.
+An event can refine one or more events of an abstract machine. To keep things simple, we will
+  first consider events with only one refined event.
 If there are several refinement steps -- e.g. event $E_1$ is refined by $E_2$ and $E_2$ by
   $E3$, we call $E_1$ and $E_2$ the abstract events and $E_3$ the concrete event.
-Likewise, if we refer e.g. to the parameters of the abstract events, we mean all parameters
+Likewise, if we refer to the parameters of the abstract events, we mean all the parameters
   of $E_1$ and $E_2$.
 
 \paragraph{Parameters}
 \index{parameter}
-An event may have an arbitrary number of \emph{parameters}. Their names must be unique. 
-I.e. there must be no constant or variable with the same name.
+An event may have an arbitrary number of \emph{parameters}. Their names must be unique, i.e. there must be no constant or variable with the same name.
 The types of the parameters must be inferable by the guards of the event.
-We denote the parameters of all abstract events with $\absparameters$, the
+We denote the parameters of all abstract events with $\absparameters$ and the
 parameters of the concrete event with $\concparameters$.
 
-Analogously to variables, an event can have parameters in common with the event it refines.
+Similarly to variables, an event can have parameters in common with the event it refines.
 If the refined event has a parameter $t$ which is not a parameter of the refinement, 
 a witness $W(\allconstants,\allvariables,\concparameters,t)$ for the abstract parameter must be specified (see below).
 
@@ -202,11 +200,11 @@ a witness $W(\allconstants,\allvariables,\concparameters,t)$ for the abstract pa
 Each \emph{guard} consist of a label and a predicate $H(\allconstants,\concvariables,\concparameters)$.
 Variables or parameters of abstract machines are not accessible in a guard.
 
-We write $G(\allconstants,\absvariables,\absparameters)$ for the (conjunction of) all guards of all refined events.
+We write $G(\allconstants,\absvariables,\absparameters)$ for the conjunction of all guards of all refined events.
 
 \marginpar{Check the proof obligations and text for the role of witnesses and in the case of refinement}
-Like axioms and invariants, guards can be marked as theorems, too. The following
-proof obligation is generated where $G_b$ denotes the (conjunction of) the guards occurring before the theorem:
+Like axioms and invariants, guards can be marked as theorems too. The following
+proof obligation is generated where $G_b$ denotes the conjunction of the guards occurring before the theorem:
 %\podef{A guard as theorem}{\eventbpo{eventname/label/THM}}{the theorem}{axioms of seen contexts, invariants 
 %  (also of refined machines), guards of the event that are declared before the theorem}
 \pode{A guard as theorem}{\eventbpo{eventname/guardlabel/THM}}%
@@ -220,18 +218,18 @@ If the guard $G_i$ contains WD-conditions, the following proof obligation is gen
 
 \paragraph{Actions}
 \label{actions}
-An action consists of a label and an assignment.
-Section~\ref{assignments} gives an overview over the assignments.
+An action is composed of a label and an assignment.
+Section~\ref{assignments} gives an overview of how they are assigned.
 They can be put into two groups: deterministic and non-deterministic assignments.
 Each assignment affects one or more concrete variables.
 
-If an action has more than one action, they are executed in parallel. 
-It is an error to assign to a variable in more than one action.
-All variables that are not assigned to in an action, keep the same value in new and old state.
+If an event has more than one action, they are executed in parallel. 
+An error will occur if a new value is assigned to a variable in more than one action.
+All variables to which no new value is assigned keep the same value in new and old state.
 
 \paragraph{Witnesses}
-Witnesses consists of a label and a predicate that are used to establish a link between values 
-  of variables and parameters of the concrete and abstract events.
+Witnesses are composed of a label and a predicate that are is to establish a link between the values 
+  of the variables and parameters of the concrete and abstract events.
 \warning{Unlike other elements in Event-B that have a label, the label of a witness has a meaning
   and cannot be chosen arbitrarily.}
 If the user does not specify a witness, Rodin uses the default witness $\btrue$.
@@ -240,18 +238,15 @@ Witnesses are necessary in the following circumstances:
 \begin{itemize}
 \item The abstract event has a parameter $p$ that is not a parameter of the concrete
   event.
-  The label of the witness must be $p$.
-  The witness has the form $W(\allconstants,\allvariables,\concparameters,p)$.
+  In this case, the label of the witness must be $p$, and the witness has the form $W(\allconstants,\allvariables,\concparameters,p)$.
   (TODO: I did not check this, might be slightly different)
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
-  The label of the witness must be $x'$.
-  The witness has the form $W(\allconstants,\allvariables,\allparameters,x')$.
+  In this case, the label of the witness must be $x'$, the witness has the form $W(\allconstants,\allvariables,\allparameters,x')$.
 \end{itemize}
 
 \index{feasibility!of witnesses}
-It must be proven that a witness is satisfiable, $x$ is a place-holder for the parameter $p$
-  or variable $v'$ that the witness is written for.
+The validity of the witness must be proven, i.e. that $x$ is a place-holder for the parameter $p$ or variable $v'$ for which the witness is written.
 \pode{Witness feasibility}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
   {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
     \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
@@ -262,17 +257,16 @@ A witness $W(\allconstants,\allvariables,\allparameters,x)$ may contain well-def
 
 \paragraph{Initialization}
 \index{initialization}
-The initialization of a machine is given by a special event, called \textsl{INITIALISATION}.
-Unlike in other events, the initialization must not contain guards and parameters.
+The initialization of a machine is given by a special event called \textsl{INITIALISATION}.
+Unlike other events, the initialization must not contain guards and parameters.
 The actions must not make use of variable values before the initialization event occurs.
-All variables must be assigned a value to. If there is no assignment for the variable $x$,
-Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
+All variables must have a value assigned to them. If there is no assignment for the variable $x$, Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
 
 \paragraph{Ensuring machine consistency}
 \label{consistency_proof_obligations}
 The following proof obligations are generated for events:
 
-The assignment $a$ of each action with label $\eventbpo{actionlabel}$ of an event must be well-defined.
+The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of an event must be well-defined.
   \pode{Well-definedness of actions}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
@@ -280,26 +274,26 @@ The assignment $a$ of each action with label $\eventbpo{actionlabel}$ of an even
   
 \index{feasibility!of actions}
 If the event's guard is enabled, every action must be feasible.
-  This trivially true in the case of the deterministic assignments.
+  This is trivially true in the case of the deterministic assignments.
   For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
   The feasibility operator $\actfis$ is defined in the reference
-  secion of the non-deterministic assignments.
+  section regarding non-deterministic assignments.
   
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp \actfis(a)$}
 
-For each invariant $I_i$ with label \eventbpo{invlabel} 
-  that contains a variable that is affected by the assignment, it must be proven
+For each invariant $I_i$ with the label \eventbpo{invlabel} 
+  that contains a variable affected by the assignment, it must be proven
   that the invariant still holds with the new values.
   \pode{Invariant preservation}%
   {\eventbpo{eventlabel/invlabel/INV}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables) \limp I_i(\allconstants,\allvariables')$}
-  Rodin simplifies this proof obligations by replacing $x'$ by $x$ for variables that are not
+  Rodin simplifies this proof obligations by replacing $x'$ with $x$ for variables that are not
   changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
   for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
 
-For the initializations we have the following special cases:
-  \pode{Action feasibility (in the initialization)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
+There are special cases regarding initialisation:
+  \pode{Action feasibility (in the initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
   {$A(\allconstants) \limp  \actfis(a)$}
   \pode{Invariant establishment}%
   {\eventbpo{INITIALISATION/invlabel/INV}}%
@@ -308,8 +302,8 @@ For the initializations we have the following special cases:
 \subsubsection{Ensuring a correct refinement}
 \label{refinement_proof_obligations}
 An event can refine one or more events of the abstract machine.
-We first consider only the refinement of at most one event. 
-For refining more than one event -- called merging events --, please see below in section~\ref{merging_events}.
+We first consider the refinement of only one event. 
+For refining more than one event (i.e. merging events), please see below in section~\ref{merging_events}.
 
 
 A concrete event must only be enabled if the abstract event is enabled.
@@ -341,15 +335,15 @@ The variant section appears in a refined machine (section 1) containing some con
 \subsection{Generated proof obligations}
 \label{ref:generated_proof_obligations}
 
-We give a brief overview about what POs are generated where. This should help the user to identify the reason of a PO when he just know its label.
+We give a brief overview about which POs are generated. This should help the user to identify the why a PO generated when he can identify its label.
 
 \marginpar{CONTENT MIGRATED FROM WIKI!}
 
-Proof obligations (abbreviated as PO) are generated by the proof obligation generator and have the form of Sequents. 
+Proof obligations (abbreviated as PO) are generated by the proof obligation generator and have the form of sequents. 
 
 The following tables list the different PO and their associated name.
 
-Next is a table describing the names of context proof obligations: 
+This table describes the names of context proof obligations: 
 
 \begin{center}
     \begin{tabular}{| p{6cm} | p{3cm} | p{5cm} |}
@@ -360,7 +354,7 @@ Next is a table describing the names of context proof obligations:
     \end{tabular}
 \end{center}
 
-Next is a table showing the name of machine proof obligations:
+This table shows the name of machine proof obligations:
 
 \begin{center}
     \begin{tabular}{| p{6cm} | p{3cm} | p{5cm} |}
@@ -376,7 +370,7 @@ Next is a table showing the name of machine proof obligations:
     \end{tabular}
 \end{center}
 
-Next are the proof obligations concerned with machine refinements:
+This table shows the proof obligations concerned with machine refinements:
 
 \begin{center}
     \begin{tabular}{| p{6cm} | p{3cm} | p{5cm} |}
@@ -388,7 +382,7 @@ Next are the proof obligations concerned with machine refinements:
     \end{tabular}
 \end{center}
 
-Next are the proof obligations concerned with the new events variant:
+This table shows the proof obligations concerned with the new events variant:
 
 \begin{center}
     \begin{tabular}{| p{6cm} | p{3cm} | p{5cm} |}
@@ -400,7 +394,7 @@ Next are the proof obligations concerned with the new events variant:
     \end{tabular}
 \end{center}
 
-Finally, here are the proof obligations concerned with witnesses:
+Finally, this table shows are the proof obligations concerned with witnesses:
 
 \begin{center}
     \begin{tabular}{| p{6cm} | p{3cm} | p{5cm} |}
@@ -410,17 +404,17 @@ Finally, here are the proof obligations concerned with witnesses:
     \end{tabular}
 \end{center}
 
-Remark: At the moment, the deadlock freeness proof obligation generation is missing. If you need it, you can generate it yourself as a derived invariant saying the the disjunction of the abstract guards imply the disjunction of the concrete guards.
+Remark: At the moment, the proof obligation generation for deadlock freeness is missing. If you need it, you can generate it yourself as a derived invariant by saying that the disjunction of the abstract guards imply the disjunction of the concrete guards.
 
 \subsection{Visibility of identifiers}
 \label{visibility_of_identifiers}
 
 This table shows which identifiers can be used in predicates or expressions. 
 \begin{description}
-\item[Sets] Set that are defined in the context (in case of an axiom) or in a seen context.
+\item[Sets] Sets that are defined in the context (in case of an axiom) or in a seen context.
   If a context extends another context, the sets of the extended context are treated as if they
   are defined in the extending context.
-\item[Constants] Like the sets, a constant that is defined in the context (in case of an axiom) or
+\item[Constants] Like the sets, constants that are defined in the context (in case of an axiom) or
   in a seen context.
 \item[Concrete Variables] Variables that are defined in the machine itself. This does \emph{not}
   include variables of refined machines.

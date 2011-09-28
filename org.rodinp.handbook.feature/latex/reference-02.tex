@@ -235,6 +235,9 @@ An error will occur if a new value is assigned to a variable in more than one ac
 All variables to which no new value is assigned keep the same value in new and old state.
 
 \paragraph{Witnesses}
+\label{witness}
+\index{witness}
+
 Witnesses are composed of a label and a predicate that are is to establish a link between the values 
   of the variables and parameters of the concrete and abstract events.
 \warning{Unlike other elements in Event-B that have a label, the label of a witness has a meaning
@@ -261,6 +264,17 @@ The validity of the witness must be proven, i.e. that $x$ is a place-holder for 
 A witness $W(\allconstants,\allvariables,\allparameters,x)$ may contain well-definedness conditions.
 \pode{Well-definedness of a witness}{\eventbpo{eventlabel/witnesslabel/WWD}}%
   {TODO}
+
+\subparagraph{Witness (TODO: From Wiki)}
+
+When a concrete event refines an abstract one which is parameterized, then all abstract parameters must receive a value in the concrete event. Such values are called the witnesses. Each witness is labelled with the concerned abstract parameter. The witness is defined by a predicate involving the abstract parameter. Most of the time, this predicate is a simple equality. Next is an example showing two witnesses. On the left hand side we have an abstract event named pass with two parameters. On the right hand side we have a concrete event named new\_pass refining pass 
+
+$\begin{array}{l} \texttt{pass} \ \ \defi \\ \quad \textbf{any} \\ \quad \quad p \\ \quad \quad l \\ \quad \textbf{where}\\ \quad \quad grd1: \ \ {p \mapsto l \,\in\, aut}\\ \quad \quad grd2: \ \ sit(p)\mapsto l \,\in\, com \\ \quad \textbf{then} \\ \quad \quad act1: \ \ sit(p) \,:=\, l \\ \quad \textbf{end} \end{array}
+\begin{array}{l} \texttt{new\_pass} \ \ \defi \\ \quad \textbf{refines} \\ \quad \quad \texttt{pass} \\ \quad \textbf{any} \\ \quad \quad d \\ \quad \textbf{where}\\ \quad \quad grd1: \ \ \ d \,\in\, ran(dap) \\ \quad \textbf{with} \\ \quad \quad p: \ \ \ p=dap^{-1}(d) \\ \quad \quad l: \ \ \ l=dst(d) \\ \quad \textbf{then} \\ \quad \quad act1: \ \ sit(dap^{-1}(d)) \,:=\, dst(d) \ \\ \quad \quad act2: \ \ dap \,:=\, dap \ransub \{d\} \\ \quad \textbf{end} \end{array} $
+
+When the concrete event is also parameterized then an abstract parameter which is the same as a concrete need not be given an explicit witness: it is always the corresponding concrete parameter.
+
+The initialisation event sometimes needs witnesses, in this case do not forget to use the after value of variable (x'). 
 
 \paragraph{Initialization}
 \index{initialization}
@@ -447,6 +461,176 @@ This table shows which identifiers can be used in predicates or expressions.
   \hline
   \end{tabular}    
 \end{center}
+
+
+\subsection{Well-Definedness}
+
+In classical set theory (see, e.g., H. B. Enderton, Elements of Set Theory, Academic Press, 1977), the formula $1\div 0 = 1\div 0$ is true, because $1\div 0$ denotes some set or number; we just do not know which one. In Event-B however, $1\div 0$ does not denote a particular set or number and therefore receives a specialized treatment. The formula $1\div 0 = 1\div 0$ is then neither true nor false; it is ill-defined.
+
+Formally, there is a syntactic transformation $\mathcal{D}$ mapping terms and formulae to a well-definedness condition, which itself is a formula. The term or formula E is well-defined iff $\mathcal{D}(E)$ can be proved and otherwise ill-defined. For example:
+
+    $\mathcal{D}(x\div y) \defi y \neq 0.$
+    $\mathcal{D}(\phi\lor\psi)\defi(\mathcal{D}(\phi)\land\mathcal{D}(\psi))\lor(\mathcal{D}(\phi)\land\phi)\lor(\mathcal{D}(\psi)\land\psi).$
+    $\mathcal{D}(y=0 \lor (x\div y) * y = x)$ is equivalent to $y\neq0 \lor y = 0, whence y\neq0\limp(x\div y)*y=x$ is well-defined.
+    Because $\mathcal{D}$ preserves the symmetry of disjunction, $(x\div y)*y=x \lor y = 0$ is also well-defined. 
+
+Well-definedness is similar to well-typedness, just that checking well-definedness is undecidable, because it involves finding a proof.
+
+As $\mathcal{D}(E)$ in the worst case grows exponentially in the size of E, it is not computed directly in the Rodin platform. Instead another syntactic transformation $\mathcal{L}$ is defined, and $\mathcal{D}(E)$ is approximated by $\mathcal{L}(E)$. In the case of disjunction, $\mathcal{L}(\phi\lor\psi)\defi\mathcal{L}(\phi)\land(\lnot\phi\limp\mathcal{L}(\psi))$, which is equivalent to the first two disjuncts of $\mathcal{D}(\phi\lor\psi)$. One may therefore view $\mathcal{L}(E)$ as an incomplete strategy for proving $\mathcal{D}(E)$. Approximating $\mathcal{D}$ by $\mathcal{L}$ is sound, because $\mathcal{L}(E)\limp\mathcal{D}(E)$ is always provable. 
+
+Nomenclature
+
+In this article the following nomenclature is used:
+
+    1 + 1 = 2 is a formula.
+    1 + 1 is a term.
+    + is an operator.
+    = is a predicate. 
+
+In other places (but not in this wiki-page), 1 + 1 = 2 is called predicate and 1 + 1 expression.
+[edit] D-Well-Definedness
+[edit] Definition
+
+We associate with each operator f a domain condition $\mathcal{DOM}(f)$. Informally, the domain condition of an operator determines which terms the operator may be applied to. Formally, if $f(\mathbf{t})$ is a term, then $\mathcal{DOM}(f)(\mathbf{t})$ is a formula. Intuitively, if $f(\mathbf{t})$ is a (well-typed) term, $\mathcal{DOM}(f)(\mathbf{t})$ is true if and only if $\mathbf{t}$ belongs to the "intended domain" of f.
+
+For example,
+
+    $\mathcal{DOM}(\div)(t, u) \defi u \neq 0$,
+    $\mathcal{DOM}(\mathrm{app})(r,x)) \defi x \in \dom(r) \land r \in A \pfun B$, assuming that r is of type $\pow(A \times B)$. 
+
+Here the operator app takes a function r and a value x and returns the result of applying r to x.
+
+The various domain conditions can be found in the Event-B mathematical language description.
+
+Based on the domain conditions, we associate with each term or formula E a well-definedness condition $\mathcal{D}(E)$, respectively. Well-definedness conditions are formulae as follows:
+(x ranges over variables, f over operators, p over predicates, $\mathbf{t}$ over sequences of terms of length $|\mathbf{t}|$, and $φ$, $ψ$ over formulae. All terms and formulae are well-formed and well-typed.)
+
+    $\mathcal{D}(x)\defi \btrue$,
+    $\mathcal{D}(f(\mathbf{t}))\defi \mathcal{DOM}(f)(\mathbf{t}) \land \bigwedge_{i=1}^{|\mathbf{t}|} \mathcal{D}(t_i)$,
+    $\mathcal{D}(\{x\mid \phi\})\defi \forall x\qdot \mathcal{D}(\phi)$,
+    $\mathcal{D}(p(\mathbf{t}))\defi \bigwedge_{i=1}^{|\mathbf{t}|} \mathcal{D}(t_i)$,
+    $\mathcal{D}(\btrue) \defi \mathcal{D}(\bfalse) \defi \btrue$,
+    $\mathcal{D}(\lnot\phi) \defi \mathcal{D}(\phi)$,
+    $\mathcal{D}(\phi\land\psi)\defi (\mathcal{D}(\phi) \land \mathcal{D}(\psi)) \lor (\mathcal{D}(\phi) \land \lnot\phi) \lor (\mathcal{D}(\psi) \land \lnot\psi)$,
+    $\mathcal{D}(\phi\lor\psi)\defi (\mathcal{D}(\phi) \land \mathcal{D}(\psi)) \lor (\mathcal{D}(\phi) \land \phi) \lor (\mathcal{D}(\psi) \land \psi)$,
+    $\mathcal{D}(\phi\limp\psi)\defi (\mathcal{D}(\phi) \land \mathcal{D}(\psi)) \lor (\mathcal{D}(\phi) \land \lnot\phi) \lor (\mathcal{D}(\psi) \land \psi)$,
+    $\mathcal{D}(\phi\leqv\psi)\defi \mathcal{D}(\phi) \land \mathcal{D}(\psi)$,
+    $\mathcal{D}(\forall x\qdot \phi)\defi (\forall x \qdot \mathcal{D}(\phi)) \lor (\exists x \qdot \mathcal{D}(\phi) \land \lnot \phi)$,
+    $\mathcal{D}(\exists x\qdot \phi)\defi (\forall x \qdot \mathcal{D}(\phi)) \lor (\exists x \qdot \mathcal{D}(\phi) \land \phi)$. 
+
+A constant c is an operator of arity zero and therefore has the well-definedness condition $\mathcal{DOM}(c)()$, which equals $\btrue$ for all currently supported constants.
+
+Intuitively, the well-definedness condition of a term or formula is true if and only if the term or formula can be evaluated without applying an operator to an argument outside of its domain.
+
+Well-Definedness and Provability
+
+Recall that the set of provable sequents is the smallest set of sequents such that if all antecedents of some inference rule are provable then so is the consequent. See Inference Rules and All Rewrite Rules for an incomplete list of rules that may be used to prove a sequent. (Here we view rewrite rules also as inference rules.) In the future, more rules will be added to this list so that more sequents will be provable. In particular, the following rules may also be used to prove a sequent:
+
+TODO FORMULA!
+
+A formula $φ$ is provable if and only if the sequents $\vdash\phi and \vdash\mathcal{D}(\phi)$ are provable.
+
+It can be checked (see F. D. Mehta, Proofs for the working engineer, Diss. ETH Zurich, 2008) that for each term or formulae E the formula $\mathcal{D}(E)$ is provable iff $\vdash\mathcal{D}(E)$ is provable. We therefore say that a term or formula is well-defined iff its well-definedness condition is provable. A term or formula is ill-defined iff it is not well-defined.
+
+Informally, well-definedness conditions appear in two ways during proofs:
+
+    When proving a formula, we also have to prove its well-definedness.
+    When proving a sequent, we may always assume that the hypotheses and the goal of the sequent are well-defined. 
+
+L-Well-Definedness
+
+As $\mathcal{D}(E)$ in the worst case grows exponentially in the size of E, $\mathcal{D}$ is never evaluated explicitely in the Rodin platform. To avoid evaluating $\mathcal{D}$, we define the syntactic transformation $\mathcal{L}$ as follows:
+(Again, x ranges over variables, f over operators, p over predicates, $\mathbf{t}$ over sequences of terms of length $|\mathbf{t}|$, and $φ$, $ψ$ over formulae. All terms and formulae are well-formed and well-typed.)
+
+    $\mathcal{L}(x)\defi \btrue$,
+    $\mathcal{L}(f(\mathbf{t}))\defi \mathcal{DOM}(f)(\mathbf{t}) \land \bigwedge_{i=1}^{|\mathbf{t}|} \mathcal{L}(t_i)$,
+    $\mathcal{L}(\{x\mid \phi\})\defi \forall x\qdot \mathcal{L}(\phi)$,
+    $\mathcal{L}(p(\mathbf{t}))\defi \bigwedge_{i=1}^{|\mathbf{t}|} \mathcal{L}(t_i)$,
+    $\mathcal{L}(\btrue) \defi \mathcal{L}(\bfalse) \defi \btrue$,
+    $\mathcal{L}(\lnot\phi) \defi \mathcal{L}(\phi)$,
+    $\mathcal{L}(\phi\land\psi)\defi \mathcal{L}(\phi) \land (\phi \limp \mathcal{L}(\psi))$,
+    $\mathcal{L}(\phi\lor\psi)\defi \mathcal{L}(\phi) \land (\lnot\phi \limp \mathcal{L}(\psi))$,
+    $\mathcal{L}(\phi\limp\psi)\defi \mathcal{L}(\phi) \land (\phi \limp \mathcal{L}(\psi))$,
+    $\mathcal{L}(\phi\leqv\psi)\defi \mathcal{L}(\phi) \land \mathcal{L}(\psi)$,
+    $\mathcal{L}(\forall x\qdot \phi)\defi \forall x\qdot \mathcal{L}(\phi)$,
+    $\mathcal{L}(\exists x\qdot \phi)\defi \forall x\qdot \mathcal{L}(\phi)$. 
+
+Only Conditions 7, 8, 9, 11, 12 differ from the corresponding conditions in the definition of $\mathcal{D}$.
+
+The two syntactic transformations $\mathcal{D}$ and $\mathcal{L}$ are related as follows:
+
+    $\mathcal{L}(E) \limp \mathcal{D}(E)$ is provable for every term or formula E.
+
+Based on this observation, the transformation $\mathcal{D}$ is avoided in Rodin's proof calculus as follows:
+
+    To prove φ, the user has to prove $\vdash\phi$ and $\vdash\mathcal{L}(\phi)$.
+    If an inference rule contains well-definedness conditions $\mathcal{D}(E)$, the rule may not be added to the list of rules available in Rodin.
+        If the well-definedness conditions $\mathcal{D}(E)$ only appear as goals of antecedents and hypotheses of the consequent, the rule obtained by replacing $\mathcal{D}(E)$ by $\mathcal{L}(E)$ is made available in Rodin. For example, instead of adding the rule
+
+        TODO FORMULA!
+        the rule 
+        TODO FORMULA!
+        is added to the list of inference rules. 
+
+        If a well-definedness condition $\mathcal{D}(E)$ appears as a hypothesis of an antecedent or as the goal of the consequent, the rule may not be added to the list of rules available in Rodin. Therefore the above rules (*) are unavailable in Rodin. 
+
+Note that avoiding $\mathcal{D}$ in Rodin's proof calculus is not necessary for soundness; it is just a way of making sequents arising in proofs smaller. The price of avoiding $\mathcal{D}$ in Rodin's proofs is that some formulae and sequents become unprovable.
+[edit] Distinction between D and L
+
+As $\mathcal{L}(E)$ is stronger than $\mathcal{D}(E)$, mixing them up easily leads to inconsistency in Rodin's proof calculus. To help the reader differentiate between the two syntactic transformations $\mathcal{D}$ and $\mathcal{L}$, we provide a summary of what is used where:
+
+    In the documentation of Inference rules (Inference Rules and All Rewrite Rules), "WD" refers to $\mathcal{L}$.
+    In the Rodin source code, the term "well-definedness predicate" refers to $\mathcal{L}(E)$, and (at the time of writing) the API of org.eventb.core.ast provides no method for computing $\mathcal{D}$.
+    In Rodin, the goal of a well-definedness proof obligation is created by $\mathcal{L}$.
+    The above rules (*) are sound, but the analog rules with $\mathcal{D}$ replaced by $\mathcal{L}$ are not, and they may therefore neither be added to the proof calculus nor be used to justify new inference rules. 
+
+[edit] Design Decisions Revisited
+
+In the following, we review some properties of the syntactic transformation $\mathcal{DOM}$, which should be preserved when introducing new operators and predicates in Event-B. We also list some properties of $\mathcal{D}$ and $\mathcal{L}$ to illustrate some design decisions underlying their definitions.
+[edit] Important Properties of DOM
+
+Technically, domain conditions map sequences of terms to formulae. But not every such mapping may be used as a domain condition.
+
+    Only variables appearing in the sequence $\mathbf{x}$ of variables appear free in $\mathcal{DOM}(f)(\mathbf{x})$.
+    $\mathcal{DOM}(f)(\mathbf{t}) \defi \mathcal{DOM}(f)(\mathbf{x})[\mathbf{x}\bcmeq\mathbf{t}]$.
+    $\mathcal{DOM}(f)(\mathbf{x})$ syntactically only contains definite operators. An operator f is definite iff $\mathcal{DOM}(f)(\mathbf{x})\defi\btrue$ for every sequence $\mathbf{x}$ of variables of appropriate length and type. 
+
+Property 3 ensures that $\mathcal{D}(E)$ is provable if and only if $\vdash\mathcal{D}(E)$ is provable. In the future, Property 3 may be replaced by a weaker version.
+[edit] Important Properties of D and L
+[edit] L is stronger than D
+
+$\mathcal{L}(E) \limp \mathcal{D}(E)$ is provable for each term or formula E.
+[edit] Monotonicity
+
+We define the order $\sqsubseteq$ on terms and formulae by
+
+    $t \sqsubseteq u iff \mathcal{D}(t)\limp t=u$ is provable, and
+   $ \phi\sqsubseteq\psi iff \mathcal{D}(\phi)\limp (\phi\leqv\psi) is provable$. 
+
+Then, $\mathcal{D}$ has the following monotonicity properties (TODO: add citation):
+(u, v are terms, x is a variable, ψ, χ are formulae, E is a term or a formula, and p is a position in E.)
+
+    If $u \sqsubseteq v, then E[x\bcmeq u] \sqsubseteq E[x\bcmeq v]$.
+    If $\psi \sqsubseteq \chi, then E_p[\psi] \sqsubseteq E_p[\chi]$.
+
+Here, Ep[ψ] denotes the term or formula obtained by replacing the subformula at position p in E by ψ. We assume that bound variables of E do not appear free in ψ or χ, which can be achieved by consistent renaming of variables.
+
+The above monotonicity properties are crucial for the soundness of several rewrite rules, such as t * 0 $\defi 0$.
+
+It is possible to prove similar monotonicity properties for $\mathcal{L}$ but monotonicity of $\mathcal{L}$ is not necessary for soundness of any inference rule.
+[edit] Strictness
+
+We have decided to make operators strict, i.e., if some element in the list of terms $\mathbf{t}$ is ill-defined, then so is $f(\mathbf{t})$, where f is an operator. Predicates are also strict.
+
+The strictness property can be dropped without making any inference rule unsound, as long as the monotonicity properties of the previous section are preserved. An example for a non-strict operator retaining the monotonicity property is lazy multiplication mult: the term mult(t,u) denotes the same value as t * u if both t and u are well-defined, it denotes 0 if either t or u denotes 0, and it is ill-defined otherwise.
+[edit] Predicates and Sets are Definite
+
+We have decided to make predicates definite, i.e., a formula $p(t)$ is well-defined provided each element of $t$ is. Therefore, sets are also definite, i.e., $t \in A$ is well-defined provided t and A are.
+
+It may be possible to allow for indefinite predicates and sets without compromising soundness of the proof calculus. In that case, it may be desirable to retain soundness of the following rewrite rules:
+$p(t) \defi t \in \{x\mid p(x)\}$
+$t\in\{x\mid p(x)\} \defi p(t)$
+(t is a term, p a predicate, and x a variable.) 
 
 
 %%% Local Variables: 

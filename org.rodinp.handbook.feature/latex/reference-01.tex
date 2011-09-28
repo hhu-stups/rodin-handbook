@@ -14,6 +14,40 @@ Eclipse is a multi-language software development environment comprising an integ
 
 Eclipse provides the technical foundation of Rodin.
 
+\subsubsection{Project Constituents and Relationships}
+\label{project}
+\index{project}
+
+The primary concept in doing formal developments with the Rodin Platform is that of a project. A project contains the complete mathematical development of a Discrete Transition System. It is made of several components of two kinds: machines and contexts. Machines contain the variables, invariants, theorems, and events of a project, whereas contexts contain the carrier sets, constants, axioms, and theorems of a project. Figure \ref{fig_ref_10_project1} shows an overview.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_10_project1.png}
+	\caption{Overview Machine and Context}
+	\label{fig_ref_10_project1}
+\end{center}
+\end{figure}
+
+We remind the reader of the various relationships existing between machines and contexts. This is illustrated in the following figure. A machine can be "refined" by another one, and a context can be "extended" by another one (no cycles are allowed in both these relationships). Moreover, a machine can "see" one or several contexts. A typical example of machine and context relationship is shown in figure \ref{fig_ref_10_project2}. 
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_10_project2.png}
+	\caption{A typical example of machine and context relationship}
+	\label{fig_ref_10_project2}
+\end{center}
+\end{figure}
+
+\subsubsection{Rodin Nature}
+\label{rodin_nature}
+
+Eclipse Projects can have one or more natures to describe their purpose.  The GUI can then adapt to their nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
+
+\pencil{
+\texttt{<nature>org.rodinp.core.rodinnature</nature>}
+}
+
+
 \subsection{The Event-B Perspective}
 
 Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. Views) which are visible and explain their functions.

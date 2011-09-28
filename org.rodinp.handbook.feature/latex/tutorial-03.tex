@@ -24,7 +24,7 @@ In this section, we will implement a simplified controller with the following ch
 \subsection{Project Setup}
 \label{tutorial_03_project_setup}
 
-Models typically consist of multiple files that are managed in a project (\ref{project}).  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03} as shown in figure \ref{fig_tut_03_new_project_wizard}.
+Models typically consist of multiple files that are managed in a project.  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03} as shown in figure \ref{fig_tut_03_new_project_wizard}.
 
 \begin{figure}[!h]
 \begin{center}
@@ -38,7 +38,7 @@ Models typically consist of multiple files that are managed in a project (\ref{p
 \warning{Eclipse supports different types of projects.  The project must have the Rodin Nature (\ref{rodin_nature}) to work.  A project can have more than one nature.}
 
 \index{Component}
-Next, create a new Event-B Component (\ref{eventb_component}).  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component} or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish} as shown in figure \ref{fig_tut_03_new_component_wizard}. This will create a Machine (\ref{machine}) file.
+Next, create a new Event-B Component.  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component} or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name and click \textsf{Finish} as shown in figure \ref{fig_tut_03_new_component_wizard}. This will create a Machine (\ref{machine}) file.
 
 \begin{figure}[!h]
 \begin{center}
@@ -48,7 +48,7 @@ Next, create a new Event-B Component (\ref{eventb_component}).  Either use \text
 \end{center}
 \end{figure}
 
-The newly created Component will open in the structural editor (\ref{structural_editor}).  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the little triangle to the left of a section to expand it.
+The newly created Component will open in the structural editor.  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the little triangle to the left of a section to expand it.
 
 %\begin{figure}[!h]
 %\begin{center}
@@ -59,6 +59,18 @@ The newly created Component will open in the structural editor (\ref{structural_
 The editor is \textit{form-based}.  This means that in well-defined places an appropriate control (text field, dropdown, etc.) allows modifications.
 
 \info{Alternative editors are available as plug-ins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
+
+\subsection{Camille, a text-based editor}
+\label{camille}
+
+\begin{rodin-plugin}{img/camille.png}{Camille}
+Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor, including copy and paste, undo, redo, etc.  However, please note that at this time, not all Rodin plugins are compatible with Camille.  Also, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
+
+Camille can be installed via its update site, which is preconfigured in Rodin.  Once installed, Camille is made the default editor.  The structural editor can still be used by selecting it from the context menu of a file in the project browser.
+
+For more information, please visit \url{http://wiki.event-b.org/index.php/Text_Editor}
+
+\end{rodin-plugin}
 
 \subsection{Building the Model}
 

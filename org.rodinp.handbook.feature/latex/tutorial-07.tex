@@ -314,7 +314,7 @@ Notice that we have used two very different approaches to model the traffic ligh
 
 You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model. We did it here only to demonstrate both approaches).
 
-We won't cover deadlocks (\ref{deadlock}) and deadlock freedom in this tutorial; however, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as ProB (\ref{prob})) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
+We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as ProB (\ref{prob})) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
 
 We hope that this section helped you to understand the power of abstraction.  The safety invariant from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
 

@@ -36,16 +36,35 @@ The Rodin (\ref{rodin_platform}) documentation needs improvement.  This has been
 
 \section{Overview}
 
-We decided on the following approach:
+This handbook consists of three parts:
 
-\begin{itemize}
-\item The documentation is kept as \LaTeX.
-\item We keep the source in Subversion.  That way anybody with access to Subversion can contribute.
-\item By keeping the documentation in Subversion, we can keep Rodin and its documentation in sync.
-\item We use \href{http://plastex.sourceforge.net/}{plasTeX} to generate HTML and Eclipse Help from the \LaTeX.  plasTeX supports templates, so we can use different templates for the two versions (for instance, we would not generate navigation elements for Eclipse Help, as Eclipse Help itself provides navigation).
-\end{itemize}
+\begin{description}
+	\item[Introduction] -- You are reading the introduction right now.  It helps you to orient yourself and to find information quickly.
+	\item[Tutorial] -- If you are completely new to Rodin, the Tutorial is a good way to get up to speed quickly.  It guides you through installation and usage of the tool and gives you an overview of the Event-B modeling notation.
+	\item[Reference] -- The reference section provides comprehensive documentation of Rodin, and its components.
+	\item[Frequently Asked Questions] -- Common issues are listed by category in the FAQ.
+	\item[Index] -- Particularly for the print version of this handbook, we included an index.  In the electronic versions, you may want to try the search functionality as well.
+\end{description}
 
-This document demonstrates this approach with a very small portion of the existing Rodin documentation.  Obviously, it is just a proof of concept.
+\subsection{Formats of this Handbook}
+
+The handbook comes in various formats:
+
+\begin{description}
+	\item[Eclipse Help] -- Rodin is shipped with Rodin and can be accessed through the help system.  The handbook will be updated through the standard Rodin update mechanism.
+	\item[Online Help] -- You can access the handbook online at \url{http://handbook.event-b.org}.
+	\item[PDF Help] -- Both online versions also include a link to the PDF version of the handbook.
+	\item[Phyiscal Book] -- If there is enough interest, we may make the handbook available through a print-on-demand retailer.
+\end{description}
+
+\subsection{Rodin Wiki}
+\label{rodin_wiki}
+
+This handbook is complemented by the Rodin wiki (\url{http://wiki.event-b.org/}).  Sometimes, the handbook will refer to the wiki for more information.  Also, plugin and developer information is usually located in the wiki.
+
+\subsection{Feedback}
+
+All online versions of the handbook contain a button or link for feedback.  Work on the handbook continues at least until January 2012, so your feedback will be read and will help to improve this handbook.  You can also submit feedback via email to \texttt{rodin-handbook@formalmind.com}.
 
 \section{Foreword}
 
@@ -73,6 +92,17 @@ The content of this handbook has grown over many years, since the formation of t
 We would also like to thank Cliff Jones, who never gave up the quest for improved Rodin documentation.
 
 The icons that you find throughout this handbook were created by Pixel-Mixer\footnote{\url{http://pixel-mixer.com/}}, who provides them freely.  Thanks!
+
+\section{DEPLOY}
+\label{deploy}
+
+This work has been sponsored by the DEPLOY project\footnote{\url{http://www.deploy-project.eu/}}.  DEPLOY is an European Commission Information and Communication Technologies FP7 project.
+
+The overall aim of the EC Information and Communication Technologies FP7 DEPLOY Project is to make major advances in engineering methods for dependable systems through the deployment of formal engineering methods. Formal engineering methods enable greater mastery of complexity than found in traditional software engineering processes. It is the central role played by mechanically-analysed formal models throughout the system development flow that enables mastery of complexity.
+
+As well as leading to big improvements in system dependability, greater mastery of complexity also leads to greater productivity by reducing the expensive test-debug-rework cycle and by facilitating increased reuse of software.
+
+The work of the project is driven by the tasks of achieving and evaluating industrial take-up, initially by DEPLOY's industrial partners, of DEPLOY's methods and tools, together with the necessary further research on methods and tools. 
 
 \input{creative-commons}
 

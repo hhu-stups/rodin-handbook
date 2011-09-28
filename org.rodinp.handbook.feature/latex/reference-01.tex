@@ -1,11 +1,18 @@
 \section{The Rodin Platform}
 \label{reference_01}
 
-This Chapter should give the user an overview about the UI elements he might encounter.
+In this section, we describe the details of the tool platform, as it is presented to the user.  You will find a description of all GUI elements that you may encounter.
 
 \subsection{Eclipse in General}
+\label{eclipse}
 
-Just references to other resources.
+\textbf{From the Eclipse Website\footnote{\url{http://www.eclipse.org/}}:}
+Eclipse is an open source community, whose projects are focused on building an open development platform comprised of extensible frameworks, tools and runtimes for building, deploying and managing software across the lifecycle. The Eclipse Foundation is a not-for-profit, member supported corporation that hosts the Eclipse projects and helps cultivate both an open source community and an ecosystem of complementary products and services.
+
+\textbf{From Wikipedia\footnote{\url{http://en.wikipedia.org/}}:}
+Eclipse is a multi-language software development environment comprising an integrated development environment (IDE) and an extensible plug-in system. It is written mostly in Java and can be used to develop applications in Java and, by means of various plug-ins, other programming languages including Ada, C, C++, COBOL, Perl, PHP, Python, R, Ruby (including Ruby on Rails framework), Scala, Clojure, Groovy and Scheme. It can also be used to develop packages for the software Mathematica. The IDE is often called Eclipse ADT (Ada Development Toolkit) for Ada, Eclipse CDT for C/C++, Eclipse JDT for Java, and Eclipse PDT for PHP.
+
+Eclipse provides the technical foundation of Rodin.
 
 \subsection{The Event-B Perspective}
 
@@ -14,6 +21,7 @@ Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening win
 \imagedpi{img/reference/ref_01_eventb_perspective1.pdf}{150mm}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
 
 \subsubsection{Menu bar}
+\label{menu_bar}
 
 The menu bar provides file and edit operations and other useful Event-B specific operations. We will briefly describe the most important menu items here.
 
@@ -60,10 +68,12 @@ When opening a machine or context file, some wizards for creating Event-B model 
 The tool bar provides short cuts for familiar commands like save, print, undo and redo. The tool bar also provides short cuts to the wizards for creating elements like axioms, constants, enumerated sets, etc., which are described in section \ref{ref_01_the_eventb_editor}.
 
 \subsubsection{Editor View}
+\label{editor_view}
 
 The editor view contains the active Event-B editor which is described in section \ref{ref_01_the_eventb_editor}.
 
 \subsubsection{Outline View}
+\label{outline_view}
 
 The outline view displays the outline of the active Event-B editor and lists elements like axioms, variables, etc.. 
 
@@ -104,6 +114,36 @@ When expanding a machine or a context, you can explore its elements. Double clic
 	\label{fig_ref_01_project_explorer1}
 \end{center}
 \end{figure}
+
+\subsection{Customizing a perspective suitable for RODIN}
+\label{customizing_a_perspective_suitable_for_rodin}
+
+So far, you needed two different perspectives to work with RODIN. But really, it is possible to work with only one perspective. In this section, we try to customize a perspective so that we do not need any other. If you have experience with customizing Eclipse perspectives, you may only want to read the next paragraph which contains a few thoughts about a good perspective for RODIN.
+
+As a start, we should think about what we want the perspective to look like. The proving perspective already is pretty nice. We just could use little bit more editing space and the windows of the Event-B perspective. To create more space, we could move all windows that currently are on both sides of the editing area onto one side, as they never really need to be used simultaneously. For even a bit more space, we could dock all of these windows onto the so-called Fast View Bar, so that they disappear when they are not needed. Like that, there should be enough space to even work split-screen with different components, for example, we could have an abstract machine on one side of the editing surface, and the concrete machine on the other.
+
+Most of the perspective editing is simply drag and drop. First of all, you need to find the Fast View Bar. Usually, it is at the bottom end of the Eclipse window. But it also can be on the side or hidden inside the Shortcut Bar. For our purposes, it probably is best to have it on the right side of the screen. Place it there by dragging it with the mouse. Now, add some items to it. To do that, press the New Fast View button on the bar. It might be useful to leave the Goal, the Problems and the Proof Control window at the bottom of the screen, as you may want them to stay open while editing. A good choice for the Fast view may be:
+
+\begin{itemize}
+	\item Project Explorer
+	\item Obligation Explorer
+	\item Search Hypothesis
+	\item Cache Hypothesis
+	\item Proof Tree
+	\item Proof Information
+	\item Progress Window
+\end{itemize}
+
+All of the windows that you cannot create directly when clicking on the New Fast View Bar can be found in Others/General. Once you are done, the window should look like in Figure \ref{fig_ref_10_customizing}. Click on ``Save Perspective As…'' in the Window menu to save the perspective.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_10_customizing.png}
+	\caption{Our self-made Quick perspective}
+	\label{fig_ref_10_customizing}
+\end{center}
+\end{figure}
+
 
 \subsection{The Event-B Editor}
 \label{ref_01_the_eventb_editor}
@@ -341,6 +381,7 @@ To work on an PO that has not yet been discharged, it is necessary to load the p
 Note that pressing the \icon{rodin/discharged.png} button on the top left hand side of the \textsf{Event-B Explorer} will remove all discharged proof obligations (PO's) from the view. 
 
 \subsubsection{The Proof Tree}
+\label{proof_tree_view}
 
 The proof tree view provides a graphical representation of each individual proof step as seen in figure \ref{fig_ref_01_proving_perspective2}.
 
@@ -447,6 +488,7 @@ To instantiate a quantifier, the user enters the desired expression in the box b
 \end{figure}
 
 \subsubsection{The Proof Control View}
+\label{proof_control_view}
 
 The \textsf{Proof Control} view contains the buttons with which you can perform an interactive proof. An overview of this proof can be seen in Figure \ref{fig_ref_01_proving_perspective6}.
 
@@ -506,6 +548,21 @@ PP (predicate prover) appears in the drop-down list under the button (pp) as P0,
 	\item P1 performs a lasoo operation on the selected hypotheses and the goal and uses the resulting hypotheses.
 	\item PP uses all hypotheses. 
 \end{itemize}
+
+\subsection{Auto Prover}
+\label{auto_prover}
+
+The auto-prover can be configured by means of a preference page, which can be obtained as follows: press the "Window" button on the top tooolbar. On the coming menu, press the "Preferences" button. On the coming menu, press the "Event-B" menue, then the "Sequent Prover’, and finally the "Auto-Tactic" button. This yields the window in figure \ref{fig_ref_10_auto_prover_pref}.
+
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics{img/reference/ref_10_auto_prover_pref.png}
+	\caption{Auto Prover Preferences}
+	\label{fig_ref_10_auto_prover_pref}
+\end{center}
+\end{figure}
+
+On the left part you can see the ordered sequence of individual tactics composing the auto-prover, whereas the right part contains further tactics you can incorporate in the left part. By selecting a tactic you can move it from on part to the other or change the order in the left part. 
 
 \subsubsection{The Search Hypotheses View}
 

@@ -28,6 +28,7 @@ Before describing the initial model, import the archive file \file{Doors.zip}{Do
 Let us look at the initial model which consists of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context. One is for people (\textsf{P}) and the other is for locations (\textsf{L}). There is a location called outside (\textsf{outside}) and a relation (\textsf{aut}) which reflects where people are allowed to go. Everyone is permitted to go \textsf{outside}. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, \textsf{sit}, which denotes where a person is located. 
 
 \subsubsection{Deadlock Freeness}
+\label{deadlock}
 
 Looking through the initial model, you will see that everything already has been proved. This is true, but Rodin does not do any deadlock freeness (\ref{deadlock_freeness}) proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
 

@@ -11,6 +11,7 @@
 
 \section{Event-B (Modeling notation)}
 \label{reference_02}
+\label{proof_obligation}
 
 In Event-B, we have two types of components: contexts and machines.
 Here we describe briefly the different elements of a context or machine.
@@ -46,7 +47,7 @@ A context describes the static part of a model. It consists of
 \end{itemize}
 
 \subsubsection{Carrier Sets}
-\label{sets}
+\label{carrier_sets}
 \index{carrier set}
 A new data type can be declared by adding its name -- an identifier -- to the \eventbsection{Sets} section.
 The identifier must be unique, i.e. it must not have been already declared as a constant or set in an extended context.
@@ -87,6 +88,7 @@ If an axiom $A$ contains any condition that is well-defined, a proof obligation 
 
 
 \subsection{Machines}
+\label{machine}
 \index{machine}
 A machine describes the dynamic behavior of a model by means of variables whose values are changed by events.
 
@@ -96,7 +98,9 @@ There are two basic things that must be proven for a machine:
 	\item The machine is a correct refinement, i.e. its behavior must correspond to any machines that it refines
 \end{enumerate}
 
-\subsubsection{Refinement}
+\subsubsection{Refinement and Abstract machines}
+\label{abstract_machine}
+\index{abstract machine}
 A machine can only refine one other machine. 
 We refer to the refined machine as the abstract machine and refer to the refinement as the concrete machine. 
 More generally, a machine $M_0$ can be refined by machine $M_1$, $M_1$ refined by $M_2$ 
@@ -114,6 +118,9 @@ concrete events.
 
 The full invariant of the machine contists of both abstract and concrete invariants. 
 The invariants are accumulated during refinements.
+
+\info{\textbf{How to use Refinement:} Refinement can be used to subsequently add complexity to the model - this is called superposition refinement (or horizontal refinement).  It can also be used to add detail to data structures -- this is called data refinement (or vertical refinement).  We've seen both types of refinement in the tutorial (Chapter~\ref{tutorial}).
+}
 
 \subsubsection{Seeing a context}
 If the machine sees a context, the sets and constants declared in the context can be used in

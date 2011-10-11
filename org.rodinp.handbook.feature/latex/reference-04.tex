@@ -16,33 +16,33 @@ In Section~\ref{ref:generated_proof_obligations}, we learned what proof obligati
 \subsection{Sequents}
 \label{sequents}
 
-A sequent stands for something we want to prove.
+A sequent is a formal statement describing something we want to prove.
 
-Sequents are of the following form
+Sequents are of the following form 
 
 $H \vdash G$
 
-where H is the set of hypotheses (predicates) and G is the goal (a predicate in the mathematical language).
+where H is the set of hypotheses (predicates) and G is the goal that can be inferred from the predicates.
 
-The meaning of the above sequent is that: Under the hypotheses H, prove the goal G. 
+The above statement can be read as follows: Under the hypotheses H, prove the goal G. 
 
 \subsection{Proof Rules}
 \index{proof rule}
 
-In its pure mathematical form, a proof rule is a tool to perform formal proof and is denoted by: 
+In its pure mathematical form, a proof rule is a tool to perform a formal proof and is denoted by: 
 
 $$\frac{\quad A\quad}{C}$$
 
-where A is a (possibly empty) list of sequents (the antecedents of the proof rule), and C is a sequent (the consequent of the rule). We interpret the above proof rule as follows: The combination of the proofs of each sequent of A prove the sequent C. 
+where A is a (possibly empty) list of sequents (the antecedents of the proof rule) and C is a sequent (the consequent of the rule). We interpret the above proof rule as follows: The combination of the proofs of each sequent of A prove the sequent C. 
 
 \pencil{\textbf{Example:} Consider the following proof rule:
 $$ \frac{ E_1 }{ E_1 \lor E_2 } $$
-This says that if $E_1$ holds, then $E_1 \lor E_2$ holds as well.  Thus, we can replace the sequent by the consequent.
+This says that if $E_1$ holds, then the statement $E_1 \lor E_2$ must hold as well.  Thus, we can replace the sequent by the consequent.
 }
 
 \subsubsection{Proof Rule Representation in Rodin}
 
-In Rodin, the representation for proof rules is more structured not only to reduce the space required to store the rule but more importantly to support proof reuse.
+In Rodin, the representation for proof rules is more structured not only to reduce the space required to store the rule but, more importantly, to support proof reuse.
 A proof rule in Rodin contains the following:
 
 \begin{description}
@@ -75,7 +75,7 @@ Where:
 
 \subsubsection{Applying Proof Rules}
 
-Given a proof rule of the form mentioned above, the following describes how to apply this rule to an input sequent. The result of this process is a list of output sequents if the process is successful or none if not.
+Given a proof rule of the form mentioned above, the following describes how to apply this rule to an input sequent. If the process is successful, a list of output sequences is produced. 
 
 \begin{itemize}
 	\item The rule is applicable if the goal of the sequent is not exactly the same as the used goal or if any of the used hypotheses are not contained in the set of hypotheses of the input sequent. 
@@ -95,54 +95,54 @@ Tactics provide an easier way to construct and manage proof search and manipulat
 Tactics can be applied as follows:
 
 \begin{description}
-	\item[Automatic] Rodin can try a number of tactics after each manual proof step (In the GUI: Section~\ref{}).
-	\item[Proof tree] Pruning the proof tree is one (drastic) tactic that is applied from the proof tree through the context menu.  Other tactics may be available there.
-	\item[In sequents] Some sequents have elements that are highlighted in red.  clicking on those exposes a menu with all applicable tactics, where they can be applied manually.
+	\item[Automatic] Rodin can automatically apply a number of tactics after each manual proof step (In the GUI: Section~\ref{}).
+	\item[Proof tree] Pruning the proof tree is a tactic that can be applied from the proof tree through the context menu.  Other tactics may be available there.
+	\item[In sequents] Some sequents have elements that are highlighted in red.  Clicking on these elements brings up a menu with all applicable tactics so that they can be applied manually.
 \end{description}
 
-It can be useful to consider the following categorization of tactics:
+It may be useful to consider the following categories of tactics:
 
 \subsubsection{Basic Tactics}
 
-They are those tactics that make change to the proof tree only at the point of application.
+The tactics that change the proof tree only at the point of application.
 
 \begin{itemize}
-	\item     Prune A direct application of the pruning facility providing by the proof tree. The tactic is successful if the input node are non-pending. 
-	\item     Rule Application Tactics of this class provide a wrapper around a proof rule (See Proof Rules). The tactic is successful if the proof rule is successful applied to the input node. 
+	\item     Prune - A direct application of the pruning facility providing by the proof tree. The tactic is successful if the input node are not pending. 
+	\item     Rule Application Tactics - Tactics of this class provide a wrapper around a proof rule (See Proof Rules). The tactic is successful if the proof rule is successfully applied to the input node. 
 
-	\item     Reasoner Application Tactics of this class provide a wrapper around a reasoner (See Reasoner). The tactic is successful if the reasoner is successful applied to the input node. 
+	\item     Reasoner Application Tactics - Tactics of this class provide a wrapper around a reasoner (See Reasoner). The tactic is successful if the reasoner is successfully applied to the input node. 
 \end{itemize}
 
 \subsubsection{Tactical Tactics}
 
-They are those tactics that are constructed from existing tactics. They indicate different strategic or heuristic decisions.
+The tactics that are constructed from existing tactics. They indicate different strategic or heuristic decisions.
 
 \begin{itemize}
-	\item         Apply on All Pending Apply a specific sub-tactic to all pending nodes of the point of application. The tactic is successful if the sub-tactic is successful on one of the pending nodes. 
-	\item         Repeating Repeating a specific sub-tactic to the point of application until it fails. The tactic is successful if the sub-tactic is successful at least once. 
-	\item         Composing Sequential compose a list of sub-tactics to apply to the point of application. The tactic is successful if one of the sub-tactic is successful. 
+	\item         Apply on All Pending - A tactic to apply a specific sub-tactic to all pending nodes at the point of application. The tactic is successful if the sub-tactic is successful on one of the pending nodes. 
+	\item         Repeating - A tactic that repeats a specific sub-tactic at the point of application until it fails. The tactic is successful if a sub-tactic is successful at least once. 
+	\item         Composing Sequential - A tactic to compose a list of sub-tactics that can be applied to the point of application. The tactic is successful if one of the sub-tactics is successful. 
 \end{itemize}
 
-More complex proof strategy can be constructed by composing the above tactical tactics. 
+More complex proof strategy can be constructed by combining the above tactical tactics. 
 
 \subsection{Provers}
 \index{Atelier B provers}
 \label{atelier_b_provers}
 
-In the end, provers perform the actual work.  Rodin comes with one prover installed (NewPP).  It is strongly recommended to install the third-party provers from Atelier B provers (as described in Section~\ref{}), adding the PP and ML provers.  More provers may be available as plugins.
+In the end, provers perform the actual work.  Rodin comes with one prover installed (New PP).  It is strongly recommended that you install the third-party provers from Atelier B provers (as described in Section~\ref{}) in order to add the PP and ML provers.  More provers may be available as plugins.
 
-We will now give a very brief overview over the existing provers, pointing out their strengths/weaknesses.
+We will now give a very brief overview of the existing provers by pointing out their strengths/weaknesses.
 
 \subsubsection{PP}
 
-PP is recommended as the prover to try first, as it is sound and generally pretty good.
+We recommend trying the PP prover first because it is sound and does a pretty good job.
 
 \begin{description}
 	\item[Names in the proof control:]  P0, P1, PP
 	\item[Names in the proof tree:] PP
 	\item[Names in the preferences:] Atelier B P0, Atelier B P1, Atelier B PP
-	\item[Input:] In the configuration "P0" all selected hypotheses and the goal are passed to PP. In the configuration "P1" one lasso operation is applied to the selected hypotheses and the goal and the result is passed to PP. In the configuration "PP" all the available hypotheses are passed to PP.
-	\item[How the Prover Proceeds:] The input sequent is translated to classical B and fed to the PP prover of Atelier B. PP works in a manner similar to newPP, but with support for equational and arithmetic reasoning.
+	\item[Input:] In the configuration ``P0", all selected hypotheses and the goal are passed to PP. In the configuration ``P1", one lasso operation is applied to the selected hypotheses and the goal and the result is passed to PP. In the configuration ``PP", all the available hypotheses are passed to PP.
+	\item[How the Prover Proceeds:] The input sequent is translated to classical B and fed to the PP prover of Atelier B. PP works in a manner similar to newPP but with support for equational and arithmetic reasoning.
 	\item[Some Strengths:] ~
 	\begin{itemize}
 		\item PP has limited support for equational and arithmetic reasoning. 
@@ -151,8 +151,8 @@ PP is recommended as the prover to try first, as it is sound and generally prett
 \begin{itemize}
 	\item PP does not output a set of used hypotheses.
 	\item PP is unaware of some set theoretical axioms.
-	\item PP has similar problems concerning well-definedness as New PP.
-	\item If unnecessary hypotheses are present, they may prevent PP from finding a proof, even when the proof obligation obviously holds. 
+	\item PP has similar problems to New PP with regard to well-definedness.
+	\item If unnecessary hypotheses are present, they may prevent PP from finding a proof even when the proof obligation obviously holds. 
 \end{itemize}
 \end{description}
 
@@ -180,13 +180,13 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 
 
 \subsubsection{New PP}
-\warning{New PP is unsound. There have been several bug reports. Some have been fixed, but at this point We do not recommend New PP for inexperienced users.}
+\warning{New PP is unsound. There have been several bug reports. Some have been fixed, but at this point we do not recommend New PP for inexperienced users.}
 
 \begin{description}
 	\item[Names in the proof control:] nPP R., nPP with a lasso symbol, nPP
 	\item[Names in the proof tree:] Predicate Prover
 	\item[Names in the preferences:] PP restricted, PP after lasso, PP unrestricted
-	\item[Input:] In the configuration "restricted" all selected hypotheses and the goal are passed to New PP. In the configuration "after lasso" a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that has a common symbol with the goal or a hypothesis that was selected before. In the configuration "unrestricted" all the available hypotheses are passed to New PP.
+	\item[Input:] In the configuration "restricted", all selected hypotheses and the goal are passed to New PP. In the configuration "after lasso", a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that have a common symbol with the goal or a hypothesis that is currently selected. In the configuration "unrestricted", all the available hypotheses are passed to New PP.
 	\item[How the Prover Proceeds:] First, all function and predicate symbols that are different from "$\in$" and not related to arithmetic are translated away. For example A $\subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
 	\item[Some Strengths:] ~
 	\begin{itemize}
@@ -197,11 +197,11 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 	\begin{itemize} ~
 		\item New PP is unsound. There have been several bug reports. Most notably, see [1].
 		\item New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic 	reasoning (when the formula is not ground) is a long standing challenge.
-		\item New PP is unaware of set theoretical axioms; in particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$, because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
-		\item If unnecessary hypotheses are present, they may prevent New PP from finding a proof, even when the proof obligation obviously holds. We therefore advise to unselect unnecessary hypotheses.
+		\item New PP is unaware of set theoretical axioms. In particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$ is not recognized because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
+		\item If unnecessary hypotheses are present, they may prevent New PP from finding a proof even when the proof obligation obviously holds. We therefore advise you to unselect unnecessary hypotheses.
 		\item New PP does not take well-definedness into account:
 	        Lemma $\vdash_{\mathcal L} b \in f^{-1} [\{f(b)\}]$ is not discharged. In fact, this sequent has exactly the same translation as $\vdash_{\mathcal L} b \in\dom(f)$, which is not provable. 
-		\item New PP tends to run out of memory, if the input is large. 
+		\item New PP tends to run out of memory if the input is large. 
 	\end{itemize}
 \end{description}
 
@@ -223,12 +223,12 @@ The following guidelines may be useful:
 		\item Instantiate quantifiers.
 		\item Apply ae (abstract expression) to replace complicated expressions by fresh variables. 
 	\end{itemize}
-	\item You can also apply one of the automatic provers. They may be more successful than the auto-tactic, because they have a longer timeout.
+	\item You can also apply one of the automatic provers. They may be more successful than the auto-tactic because they have a longer timeout.
 	\begin{itemize}
-		\item Try New PP before PP or ML, because New PP proofs can be better reused, if the model changes.
-		\item The configurations that act on more than the selected hypotheses (New PP after lasso and unrestricted, P1 and PP, ML) become useless when the model grows. 
+		\item Try New PP before PP or ML because New PP proofs can be better reused, if the model changes.
+		\item The configurations that act on more than the selected hypotheses (New PP after lasso and unrestricted P1, PP and ML) become useless when the model grows. 
 	\end{itemize}
-	\item When everything fails, start to unfold the proof obligation manually, by clicking on the red links.
+	\item When everything fails, try to unfold the proof obligation manually, by clicking on the red links.
 	\begin{itemize}
 		\item You may discover that some assumption was missing.
 		\item You may complete the proof.
@@ -240,9 +240,9 @@ The following guidelines may be useful:
 \label{ref:reasoners}
 \index{reasoner}
 
-Reasoners apply on the sequent of a given proof tree node and is a way to contribute to the provers.  They are typically not of direct interest to the user, but to the developer.
+Reasoners apply to the sequent of a given proof tree node and provide a way to contribute to the provers.  They are typically of more interest to the developer than the user. 
 
-A reasoner is (and has to be) quite "rough" : it shall take a given sequent and produce a proof rule that will (if possible) apply on this given sequent, whereas a tactic could be smarter. Indeed, a tactic can involve several reasoners, thus apply them in loops, and combine them, or even call other tactics.
+A reasoner is (and has to be) quite "rough" : it takes a given sequent and produces a proof rule that will (if possible) apply to this given sequent. A tactic could be smarter. Indeed, a tactic can use several reasoners by applying them in loops, combining them, or even calling other tactics.
 
 \subsection{Purging Proofs}
 \index{purging proofs}
@@ -256,13 +256,13 @@ The purpose of the proof purger is to allow the user to delete obsolete proofs.
 
 Proof obligations are named after the main elements related to it, such as events and invariants. Therefore, each time such an element is renamed manually, the corresponding proof obligations get a new name. However, the existing proof is not renamed, and a new proof gets created with the new name.
 
-Therefore, after a lot of model editing, there are more and more obsolete proofs stored in proof files.
+Consequently, after a lot of model editing, there are more and more obsolete proofs stored in proof files.
 
 \subsubsection{Selecting purge input}
 
-In any view, right-clicking an Event-B project or file will display a popup menu, containing a Purge Proofs... entry. If several files or projects (or both) are selected, purging will apply to all of them.
+In any view, right-clicking an Event-B project or file will display a popup menu, with a \textsf{Purge Proofs...} option. If several files or projects (or both) are selected, purging will apply to all of them.
 
-Firstly, the proof purger tries to find obsolete proofs in the selection. If no obsolete proof is found, a message will pop up telling that no proof needs to be purged. Otherwise, a new window will pop up displaying a list of all POs that are considered obsolete, that is all proofs that exist in some proof file and that do not have any corresponding proof obligation. 
+Firstly, the proof purger tries to find obsolete proofs in the selection. If no obsolete proof is found, a message will pop up informing the user that no proof needs to be purged. Otherwise, a new window will pop up displaying a list of all POs that are considered obsolete, i.e. all proofs that exist in some proof file and do not have any corresponding proof obligation. 
 
 \subsubsection{Choosing proofs to delete}
 
@@ -274,11 +274,10 @@ Firstly, the proof purger tries to find obsolete proofs in the selection. If no 
 \end{center}
 \end{figure}
 
-For the moment, nothing has been erased. The new window (see figure \ref{fig_ref_10_proof_purger}) shows obsolete proofs and offers to choose among them which ones should be deleted. One may wish to keep some of them, knowing they might be useful in the future.
+For the moment, nothing has been erased. The new window (see figure \ref{fig_ref_10_proof_purger}) shows obsolete proofs and allows the user to choose among them and select the ones which should be deleted. One may wish to keep some of them knowing they might be useful in the future.
 
-Once the selection has been decided, clicking the Delete button will actually delete selected proofs from proof files. Files becoming empty will be deleted as well.
+Once the selection has been decided, clicking the Delete button to actually delete the selected proofs from the proof files. Files that become empty will be deleted as well.
 
 \subsubsection{Caution}
 
-Proof purging shall not be performed on models that are not in a stable state. For instance, it should not be applied to a model that bears some errors or warnings issued by the type checker. This is because, in case of errors and warnings, it can happen that not all proof obligations are generated. Therefore, some proofs could be considered wrongly as obsolete.
-
+Proof purging should not be performed on models that are not in a stable state. For instance, it should not be applied to a model that has some errors or warnings issued by the type checker. This is because if there are errors and warnings, not all proof obligations are generated. Therefore, some proofs may have been considered wrongly as obsolete.

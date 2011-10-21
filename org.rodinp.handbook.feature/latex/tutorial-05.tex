@@ -79,7 +79,7 @@ Now, the constants itself are not very useful since they have no type (In additi
 \warning{Please note the curly braces \{\} around the constants.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
-\info{There is a wizard (\ref{wizard}) for creating the contants, the set and the axiom automatically. Therefore, click on the \textsf{New Enumarated Set Wizard} tool bar item. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
+\info{The \textsf{New Enumerated Set Wizard} (\ref{wizard}) allows you to create the contants, the set and the axiom automatically at the same time. To access this wizard, click on the \textsf{New Enumerated Set Wizard} tool bar item or find it under \textsf{ Event-B $\rangle$ New Enumerated Set Wizard}. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
 
 \subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
 
@@ -240,7 +240,7 @@ This concludes the tutorial. The following section shows the complete Context.
 \AXIOMS
 	\begin{description}
 		\nItemX{ person\_partition }{ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
-		\nItemX{ hate\_relation2 }{ hates \in  persons \rel  persons }
+		\nItemX{ hate\_relation }{ hates \in  persons \rel  persons }
 		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
 		\\\hspace*{3,4 cm}  richer \binter  id = \emptyset  \land 
 		\\\hspace*{3,4 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) \land 

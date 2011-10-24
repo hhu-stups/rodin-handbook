@@ -9,7 +9,7 @@
 \newcommand{\absbeforeafter}{\mathcal{S}}
 \newcommand{\concbeforeafter}{\mathcal{T}}
 
-\section{Event-B (Modeling notation)}
+\section{Event-B's modeling notation}
 \label{reference_02}
 \label{proof_obligation}
 
@@ -26,14 +26,12 @@ This is done in the form:
   axiom/invariant/guard/etc.)}{Goal that should be proved}{Hypotheses that can be used}
 
 \subsection{About the notation that we use}
-(Variable substitution)
-
-We denote a sequence of identifiers with $\varlist{x} = x_1,\ldots,x_n$ and $\varlist{x}' = x'_1,\ldots,x'_n$
+We denote a sequence of identifiers with $\varlist{x} = x_1,\ldots,x_n$ and $\varlist{x}' = x'_1,\ldots,x'_n$.
 As a convention, we use
 \begin{itemize}
 \item $\allconstants$ for constants
-\item $\absvariables$ and $\concvariables$ for abstract variables and concrete variables
-\item $\absparameters$ and $\concparameters$ for abstract and concrete parameters
+\item $\absvariables$ and $\concvariables$ for variables of an abstract resp. concrete machine
+\item $\absparameters$ and $\concparameters$ for parameters of an abstract resp. concrete machine
 \end{itemize}
 
 \subsection{Contexts}
@@ -95,13 +93,13 @@ A machine describes the dynamic behavior of a model by means of variables whose 
 There are two basic things that must be proven for a machine:
 \begin{enumerate}
 	\item The machine must be consistent, i.e. it should never reach a state which violates the invariant.
-	\item The machine is a correct refinement, i.e. its behavior must correspond to any machines that it refines
+	\item The machine is a correct refinement, i.e. its behavior must correspond to any machines that it refines.
 \end{enumerate}
 
 \subsubsection{Refinement and Abstract machines}
 \label{abstract_machine}
 \index{abstract machine}
-A machine can only refine one other machine. 
+A machine can refine at most one other machine. 
 We refer to the refined machine as the abstract machine and refer to the refinement as the concrete machine. 
 More generally, a machine $M_0$ can be refined by machine $M_1$, $M_1$ refined by $M_2$ 
 and so on. The most concrete refinement would be $M_n$. 
@@ -116,7 +114,7 @@ Basically, a refinement consists of two aspects:
 concrete events.
 \end{enumerate}
 
-The full invariant of the machine contists of both abstract and concrete invariants. 
+The full invariant of the machine consists of both abstract and concrete invariants. 
 The invariants are accumulated during refinements.
 
 \info{\textbf{How to use Refinement:} Refinement can be used to subsequently add complexity to the model - this is called superposition refinement (or horizontal refinement).  It can also be used to add detail to data structures -- this is called data refinement (or vertical refinement).  We've seen both types of refinement in the tutorial (Chapter~\ref{tutorial}).
@@ -129,7 +127,8 @@ The conjunction of axioms $A(\allconstants)$ can be used as hypotheses in the pr
 
 \subsubsection{Variables and invariants}
 \index{variable}
-Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables} section. The invariants of the machine must make the type of the variable clear.
+Variables can be declared by adding their unique name (an identifier) to the \eventbsection{Variables} section. 
+The type of the variables must be inferable by the invariants of the machine.
 We denote the variables of the abstract machines $M_1,\ldots,M_{n-1}$ with a $\absvariables$ and the variables of the concrete machine with a $\concvariables$.
 
 \index{invariant}
@@ -234,6 +233,18 @@ If an event has more than one action, they are executed in parallel.
 An error will occur if a new value is assigned to a variable in more than one action.
 All variables to which no new value is assigned keep the same value in new and old state.
 
+We now define the before-after-predicate $\concbeforeafter$ of the actions together.
+Let $Q_1,\ldots,Q_n$ be the before-after-predicate of the event's assignments. 
+Let $x_1,\ldots,x_k$ be the variables that are assigned by any action of the event.
+And $y_1,\ldots,y_l$ be the variables of the concrete machine that are \emph{not} modified by any of 
+ the event's actions (i.e. $\concvariables = x_1,\ldots,x_k,y_1,\ldots,y_l$).
+Then the before-after-predicate of the concrete event is 
+  $\concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables') = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
+
+Please note that Rodin optimizes prove obligations when a before-after-predicate is a hypothesis.
+$x'$ is replaced directly by $x$ when $x$ is not changed by the event and replaced by $E(\allconstants,\concvariables,\concparameters)$
+ when $E(\allconstants,\concvariables,\concparameters)$ is assigned to $x$ deterministically.
+
 \paragraph{Witnesses}
 \label{witness}
 \index{witness}
@@ -290,8 +301,8 @@ The following proof obligations are generated for events:
 The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of an event must be well-defined.
   \pode{Well-definedness of actions}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp %
-    \wdl(~a~)$}
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) 
+    \land H(\allconstants,\allvariables) \limp \wdl(~a~)$}
   
 \index{feasibility!of actions}
 If the event's guard is enabled, every action must be feasible.
@@ -301,14 +312,16 @@ If the event's guard is enabled, every action must be feasible.
   section regarding non-deterministic assignments.
   
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) \limp \actfis(a)$}
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters)
+    \land H(\allconstants,\allvariables) \limp \actfis(a)$}
 
 For each invariant $I_i$ with the label \eventbpo{invlabel} 
   that contains a variable affected by the assignment, it must be proven
   that the invariant still holds with the new values.
   \pode{Invariant preservation}%
   {\eventbpo{eventlabel/invlabel/INV}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables) \limp I_i(\allconstants,\allvariables')$}
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables) 
+    \land H(\allconstants,\allvariables) \limp I_i(\allconstants,\allvariables')$}
   Rodin simplifies this proof obligations by replacing $x'$ with $x$ for variables that are not
   changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
   for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
@@ -326,9 +339,15 @@ An event can refine one or more events of the abstract machine.
 We first consider the refinement of only one event. 
 For refining more than one event (i.e. merging events), please see below in section~\ref{merging_events}.
 
-
+\paragraph{Guard strengthening}
 A concrete event must only be enabled if the abstract event is enabled.
-This condition is called \emph{guard strengthening}.
+This condition is called \emph{guard strengthening}. \ldots
+
+\paragraph{Action simulation} \ldots
+
+\paragraph{Variable equality (TODO)} \ldots
+
+\paragraph{(Not modifying forbidden variables)}
 
 
 \subsubsection{Merging events}
@@ -348,10 +367,16 @@ This condition is called \emph{guard strengthening}.
 \index{status of an event}
 \index{ordinary (status)}\index{anticipated (status)}\index{convergent (status)}
 (This section will be written in a later iteration.)
+From the Wiki about the variant:
+\begin{quote}
+  The variant section appears in a refined machine (section 1) containing some convergent or anticipated events (section 2).
+  This machine section contains either a natural number expression which must be decreased by each convergent event and not be
+  increased by each anticipated event, or a finite set expression which must be made strictly smaller by each convergent event 
+  or not made greater by each anticipated events. 
+\end{quote}
 
 The variant section appears in a refined machine (section 1) containing some convergent or anticipated events (section 2). This machine section contains either a natural number expression which must be decreased by each convergent event and not be increased by each anticipated event, or a finite set expression which must be made strictly smaller by each convergent event or not made greater by each anticipated events. 
 
-  
 \subsection{Generated proof obligations}
 \label{ref:generated_proof_obligations}
 

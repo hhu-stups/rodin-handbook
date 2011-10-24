@@ -66,12 +66,12 @@ The following reference sections follow the form: \\[2em]
   \rrdesc A short description of what the operator does
   \rrdef A more formal definition
   \rrtypes A description of the types of all arguments and, if the operation
-    is an expression, the expression's type.
+    is an expression, the expression's type
   \rrwd
-    A description of the well-definedness conditions using the $\wdl$ operator.
+    A description of the well-definedness conditions using the $\wdl$ operator
   \rrfis
     Non-deterministic assignments may have feasability conditions.
-    These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations})
+    These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations}).
 \end{rodinrefentry}
 
 \subsection{Predicates}
@@ -128,10 +128,10 @@ The following reference sections follow the form: \\[2em]
     their well-definedness conditions are not. Therefore, if their arguments have well-definedness conditions, the order matters. E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
     but $y\div x=3 \land x\neq 0$ still has the well-definedness condition $x\neq 0$.
 
-    $\wdl(P\land Q) \defi \ldots$ \\
-    $\wdl(P\lor Q) \defi \ldots$ \\
-    $\wdl(P\limp Q) \defi \ldots$ \\
-    $\wdl(P\leqv Q) \defi \ldots$ \\
+    $\wdl(P\land Q) \defi \wdl(P) \land (P \limp \wdl(Q))$ \\
+    $\wdl(P\lor Q)  \defi \wdl(P) \land (P \lor \wdl(Q))$ \\
+    $\wdl(P\limp Q) \defi \wdl(P) \land (P \limp \wdl(Q))$ \\
+    $\wdl(P\leqv Q) \defi \wdl(P) \land \wdl(Q)$ \\
     $\wdl(\lnot(P)) \defi \wdl(P)$ \\
 \end{rodinrefentry}
 
@@ -282,16 +282,13 @@ The following reference sections follow the form: \\[2em]
   $\wdl(a\cdot b) \defi \wdl(a) \land \wdl(b)$ \\
   $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
   $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\leq 0 \land b\neq 0$ \\
-  TODO: Notation? $\wdl$ is actually implemented in Rodin. Is $\wdd$ still interesting?
-  Or should we use something like the domain condition $\mathcal{DOM}$
-  because it's simpler for operators?\\
 \end{rodinrefentry}
 
 \subsection{Assignments}
 \label{assignments}
 
-In the previous sections, we did not consider the scope of the expressions. I.e. we did
-not say which constants or variables can be used in an expression or predicate because
+We did not consider the scope of the expressions in the previous sections.
+I.e. we did not say which constants or variables can be used in an expression or predicate because
 this depends completely on the context where the expression is used.
 
 The following paragraphs are about assignments. Depending on the type of assignment it
@@ -314,7 +311,7 @@ in the expression $E$.
     $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
     variables of the concrete machine and parameters of the concrete event.
 
-    There is a special form of the assignment wich does a relational overwrite:\\
+    There is a special form of the assignment which does a relational overwrite:\\
     $x(F(\allconstants,\concvariables,\concparameters)) \bcmeq E(\allconstants,\concvariables,\concparameters)$.
   \rrdef
     The before-after-predicate of $x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}$ is\\ $x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.

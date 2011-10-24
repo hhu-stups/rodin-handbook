@@ -1,6 +1,12 @@
 <project default="generate-all">
 
+	<property name="build-dir" value="${basedir}/build"/>
+	
+	<property name="theme-html" value="rodin-theme-html"/>
+	<property name="theme-eclipse" value="rodin-theme-eclipse"/>	
+	
 	<target name="generate-all">
+		<antcall target="cleanup" />
 		<antcall target="generate-html" />
 		<antcall target="generate-pdf" />
 		<antcall target="generate-eclipse" />
@@ -8,72 +14,76 @@
 		<antcall target="teardown" />
 	</target>
 
+    <target name="cleanup">
+    	<delete dir="${basedir}/build" /> 
+    </target>
+	
 	<target name="generate-html">
     	<antcall target="generate">
-    		<param name="targetdir" value="${basedir}/build/html"/>
-            <param name="theme" value="rodin-theme-html"/>
+    		<param name="targetdir" value="${build-dir}/html"/>
+            <param name="theme" value="${theme-html}"/>
 		</antcall>
-    	<delete dir="${basedir}/build/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"/>
+    	<delete dir="${build-dir}/html" includes="chm.*,*.xml,*.hs,*.jhm,*.paux"/>
    	</target>
 
    <target name="generate-pdf">
-   		<mkdir dir="${basedir}/build/pdf"/>
+   		<mkdir dir="${build-dir}/pdf"/>
 		<!-- Run twice to get cross-references right -->
 		<antcall target="run-rubber" />
 		<antcall target="run-rubber" />
-		<delete dir="${basedir}/build/pdf" includes="*.aux,*.log,*.out"/>
+		<delete dir="${build-dir}/pdf" includes="*.aux,*.log,*.out,*.idx,*.ilg,*.ind,*.toc"/>
     </target>
 
     <target name="run-rubber">
-      <exec executable="rubber" dir="${basedir}/build/pdf">
+      <exec executable="rubber" dir="${build-dir}/pdf">
           <arg value="--pdf"/>
           <arg value="--force"/>
-          <arg value="${basedir}/build/latex/rodin-doc.tex"/>
+          <arg value="${build-dir}/latex/rodin-doc.tex"/>
       </exec>
       </target>
 
     <target name="generate-eclipse">
         <antcall target="generate">
-            <param name="targetdir" value="${basedir}/build/eclipse"/>
-            <param name="theme" value="rodin-theme-eclipse"/>
+            <param name="targetdir" value="${build-dir}/eclipse"/>
+            <param name="theme" value="${theme-eclipse}"/>
         </antcall>
-        <delete dir="${basedir}/build/eclipse" includes="chm.*,*.hs,*.jhm,*.paux"/>
-    	<copy todir="${basedir}/build/eclipse">
+        <delete dir="${build-dir}/eclipse" includes="*.aux,*.log,*.out,*.idx,*.ilg,*.ind,*.toc"/>
+    	<copy todir="${build-dir}/eclipse">
     		<fileset dir="${basedir}/skeleton" />
-    		<fileset dir="${basedir}/build/pdf" />
+    		<fileset dir="${build-dir}/pdf" />
     	</copy>
     	
-    	<replace file="${basedir}/build/eclipse/eclipse-toc.xml" >
+    	<replace file="${build-dir}/eclipse/eclipse-toc.xml" >
     	<replacetoken><![CDATA[<toc ]]></replacetoken>
     	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
         </replace>
     	
     	<!-- delete old eclipse help zip -->
-    	<delete dir="${basedir}/build/plugin" includes="*.zip"/>
+    	<delete dir="${build-dir}/plugin" includes="*.zip"/>
     	
     	<tstamp>
     	  <format property="qualifier" pattern="yyyyMMddHHmm"/>
     	</tstamp>
     	
-    	<mkdir dir="${basedir}/build/plugin/plugins"/>
+    	<mkdir dir="${build-dir}/plugin/plugins"/>
     	
-    	<jar destfile="${basedir}/build/plugin/plugins/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" manifest="${basedir}/skeleton/META-INF/MANIFEST.MF" />
+    	<jar destfile="${build-dir}/plugin/plugins/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" manifest="${basedir}/skeleton/META-INF/MANIFEST.MF" />
     	 
-    	 <zip destfile="${basedir}/build/plugin/org.rodinp.handbook.zip"
-    	       basedir="${basedir}/build/plugin"
+    	 <zip destfile="${build-dir}/plugin/org.rodinp.handbook.zip"
+    	       basedir="${build-dir}/plugin"
     	       update="true" />
     
-    	<delete dir="${basedir}/build/plugin/plugins"/>
+    	<delete dir="${build-dir}/plugin/plugins"/>
     </target>
 
     <target name="generate" depends="init">
         <mkdir dir="${targetdir}"/>
-    	<exec executable="plastex" dir="${basedir}/build/latex">
-    		<env key="XHTMLTEMPLATES" value="${basedir}/build/XHTML"/>
+    	<exec executable="plastex" dir="${build-dir}/latex">
+    		<env key="XHTMLTEMPLATES" value="${build-dir}/XHTML"/>
     		<arg value="-d"/>
             <arg value="${targetdir}"/>
     		<arg value="--theme=${theme}"/>
-    		<arg value="${basedir}/build/latex/rodin-doc.tex"/>
+    		<arg value="${build-dir}/latex/rodin-doc.tex"/>
     	</exec>
     	<copy todir="${targetdir}/files">
     		<fileset dir="${basedir}/latex/files" />
@@ -83,11 +93,11 @@
 	<target name="init">
 		<tstamp/>
 		<!-- plastex cannot deal with subversion files.  Thus, we create a copy -->
-		<copy todir="${basedir}/build/latex">
+		<copy todir="${build-dir}/latex">
 			<fileset dir="${basedir}/latex" excludes=".svn"/>
 		</copy>
 
-		<copy todir="${basedir}/build/XHTML">
+		<copy todir="${build-dir}/XHTML">
             <fileset dir="${basedir}/XHTML" excludes=".svn"/>
         </copy>
 	</target>
@@ -99,8 +109,8 @@
 	</target>
 	
 	<target name="teardown">
-		<delete dir="${basedir}/build/XHTML"/>
-		<delete dir="${basedir}/build/latex"/>
+		<delete dir="${build-dir}/XHTML"/>
+		<delete dir="${build-dir}/latex"/>
 	</target>
 
 </project>

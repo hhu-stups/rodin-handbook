@@ -138,7 +138,32 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Quantified predicates}
 \label{quantified_predicates}
-\ldots
+\index{for all}
+\index{exists}
+\index{quantification!universal}
+\index{quantification!existential}
+\begin{rrnames}
+  $\forall$ & \texttt{!} & Universal quantification \\
+  $\exists$ & \texttt{\#} & Existential quantification \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The universal quantification $\forall x_1\ldots,x_n~\qdot~P$ is true if $P$ is satisfied for all
+    possible values of $x_1\ldots,x_n$.
+    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~P_1\limp P_2$ where
+    $P_1$ is used to specify the types of the identifiers.
+
+    The existantial quantification $\forall x_1\ldots,x_n~\qdot~P$ is true if there is a valuation of
+    $x_1\ldots,x_n$ such that $P$ is satisfied.
+
+    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $P$.
+    They can be referenced in $P$.
+  \rrtypes
+    The quantifiers and the $P$ are predicates.    
+  \rrwd
+    $\wdl(\forall x_1\ldots,x_n~\qdot~P) \defi ~\forall x_1\ldots,x_n \qdot \wdl(P)$
+    $\wdl(\exists x_1\ldots,x_n~\qdot~P) \defi ~\forall x_1\ldots,x_n \qdot \wdl(P)$
+\end{rodinrefentry}
 
 \subsubsection{Equality}
 \label{equality}
@@ -178,8 +203,6 @@ The following reference sections follow the form: \\[2em]
     $\wdl(e\not\in S) \defi \wdl(e) \land \wdl(S)$ \\
 \end{rodinrefentry}
 
-\ldots
-
 \subsection{Booleans}
 \label{booleans}
 \index{bool}
@@ -194,7 +217,7 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\Bool$ is a pre-defined set that contains the elements $\True$ and $\False$.
+    $\Bool$ is a pre-defined carrier set that contains the constants $\True$ and $\False$.
 
     $\bool(P)$ denotes the Boolean value of a predicate $P$. If $P$ is true, the expression
     is $\True$, if $P$ is false, the expression is $\False$.
@@ -392,7 +415,7 @@ The following reference sections follow the form: \\[2em]
     the sets $s_1,\ldots,s_n$ constitute a partition of $S$.
     The union of all elements of a partition is $S$ and all elements are disjoint.
 
-    $\bpartition(S) = \emptyset$
+    $\bpartition(S)$ is equivalent to $S = \emptyset$
   \rrdef
     $\bpartition(S,s_1,\ldots,s_n) \defi S=s_1\bunion\ldots\bunion s_n \land \forall i,j \qdot i\neq j \limp s_i\binter s_j = \emptyset$
   \rrtypes
@@ -426,12 +449,57 @@ The following reference sections follow the form: \\[2em]
 
 
 \subsubsection{Quantified union and intersection}
-TODO
+\index{union!quantified union}
+\index{intersection!quantified intersection}
+\begin{rrnames}
+  $\Union$ & \texttt{UNION} & Quantified union \\
+  $\Inter$ & \texttt{INTER} & Quantified intersection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\Union x_1\ldots,x_n~\qdot~P~|~E$ is the union of all values of $E$ for valuations of the identifiers
+    $x_1\ldots,x_n$ that fulfill the predicate $P$. The types of $x_1,\ldots,x_n$ must be inferable by $P$.
+
+    Analougously is $\Union x_1\ldots,x_n~\qdot~P~|~E$ is the intersection of all values of $E$ for
+    valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $P$.
+  \rrdef
+    $\Union x_1\ldots,x_n~\qdot~P~|~E = \union(\{~x_1\ldots,x_n~\qdot~P~|~E\})$\\
+    $\Inter x_1\ldots,x_n~\qdot~P~|~E = \inter(\{~x_1\ldots,x_n~\qdot~P~|~E\})$
+  \rrtypes
+    With $E\in\pow(\alpha)$ and $P$ being a predicate:\\
+    $(\Union x_1\ldots,x_n~\qdot~P~|~E) \in \pow(\alpha)$\\
+    $(\Inter x_1\ldots,x_n~\qdot~P~|~E) \in \pow(\alpha)$
+  \rrwd
+    $\wdl(\Union x_1\ldots,x_n~\qdot~P~|~E) \defi (~\forall x_1\ldots,x_n \qdot \wdl(P) \land (P\limp\wdl(E))~)$\\
+    $\wdl(\Inter x_1\ldots,x_n~\qdot~P~|~E) \defi (~\forall x_1\ldots,x_n \qdot \wdl(P) \land (P\limp\wdl(E))~) \land (\exists x_1\ldots,x_n \qdot \wdl(P))$
+\end{rodinrefentry}
 
 \subsection{Relations}
 \label{relations}
 \subsubsection{Relations}
-\ldots
+\index{relations}
+\begin{rrnames}
+  $\rel$   & \texttt{<->} & Relations \\
+  $\trel$  & \texttt{<}\texttt{<->} & Total relations \\
+  $\srel$  & \texttt{<->>} & Surjective relations \\
+  $\strel$ & \texttt{<}\texttt{<->>} & Total surjective relations \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $S \rel T = \pow(S\cprod T)$\\
+    $S \trel T = \{~r~|~r\in S\rel T\land \dom(r) = S~\}$\\
+    $S \srel T = \{~r~|~r\in S\rel T\land \ran(r) = S~\}$\\
+    $S \strel T = (S \trel T) \land (S \srel T)$
+  \rrtypes
+    For $S\in\pow(\alpha)$ and $T\in\pow(\beta)$ and
+    for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
+    $S \opelipse T\in\pow\pow(\alpha\prod \beta)$
+  \rrwd
+    $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
+    for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$.
+\end{rodinrefentry}
 
 \subsubsection{Domain and Range}
 \label{domain_and_range}

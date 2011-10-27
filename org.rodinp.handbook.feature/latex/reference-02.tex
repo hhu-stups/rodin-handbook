@@ -25,6 +25,8 @@ This is done in the form:
   axiom/invariant/guard/etc.)}{Goal that should be proved}{Hypotheses that can be used}
 
 \subsection{About the notation that we use}
+\label{about_the_notation}
+
 We denote a sequence of identifiers with $\varlist{x} = x_1,\ldots,x_n$ and $\varlist{x}' = x'_1,\ldots,x'_n$.
 As a convention, we use
 \begin{itemize}
@@ -34,7 +36,9 @@ As a convention, we use
 \end{itemize}
 
 \subsection{Contexts}
+\label{context}
 \index{context}
+
 A context describes the static part of a model. It consists of
 \begin{itemize}
 \item Carrier sets
@@ -87,6 +91,7 @@ If an axiom $A$ contains any condition that is well-defined, a proof obligation 
 \subsection{Machines}
 \label{machine}
 \index{machine}
+
 A machine describes the dynamic behavior of a model by means of variables whose values are changed by events.
 
 There are two basic things that must be proven for a machine:
@@ -98,6 +103,7 @@ There are two basic things that must be proven for a machine:
 \subsubsection{Refinement and Abstract machines}
 \label{abstract_machine}
 \index{abstract machine}
+
 A machine can refine at most one other machine. 
 We refer to the refined machine as the abstract machine and refer to the refinement as the concrete machine. 
 More generally, a machine $M_0$ can be refined by machine $M_1$, $M_1$ refined by $M_2$ 
@@ -483,6 +489,7 @@ This table shows which identifiers can be used in predicates or expressions.
 
 
 \subsection{Well-Definedness}
+\label{well_definedness}
 
 In classical set theory (see, e.g., H. B. Enderton, Elements of Set Theory, Academic Press, 1977), the formula $1\div 0 = 1\div 0$ is true, because $1\div 0$ denotes some set or number; we just do not know which one. In Event-B however, $1\div 0$ does not denote a particular set or number and therefore receives a specialized treatment. The formula $1\div 0 = 1\div 0$ is then neither true nor false; it is ill-defined.
 

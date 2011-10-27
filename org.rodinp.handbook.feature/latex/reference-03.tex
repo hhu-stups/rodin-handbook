@@ -141,29 +141,294 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Equality}
 \label{equality}
-\ldots
+\index{equality}
+\begin{rrnames}
+  $=$    & \texttt{=}  & equality \\
+  $\neq$ & \texttt{/=} & inequality \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  Checks if both expressions are (not) equal.
+  \rrdef
+  $E \neq F \defi \lnot( E=F)$
+  \rrtypes
+    $E = F$ and $E \neq F$ are predicates with $E\in\alpha$ and $F\in\alpha$, i.e. $E$ and $F$ must have the same type.
+  \rrwd
+    $\wdl(E = F) \defi \wdl(E) \land \wdl(F)$ \\
+    $\wdl(E \neq F) \defi \wdl(E) \land \wdl(F)$ \\
+\end{rodinrefentry}
 
 \subsubsection{Membership}
 \label{membership}
+\index{membership}
+\begin{rrnames}
+  $\in$    & \texttt{:}  & set membership \\
+  $\not\in$ & \texttt{/:} & negated set membership \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    Checks if an expression $e$ denotes an element of a set $S$.
+  \rrdef
+    $e \not\in S \defi \lnot( e\in S)$
+  \rrtypes
+    $e \in S$ and $e\not\in S$ are predicates with $e\in\alpha$ and $S\in\pow(\alpha)$.
+  \rrwd
+    $\wdl(e\in S) \defi \wdl(e) \land \wdl(S)$ \\
+    $\wdl(e\not\in S) \defi \wdl(e) \land \wdl(S)$ \\
+\end{rodinrefentry}
+
 \ldots
+
+\subsection{Booleans}
+\label{booleans}
+\index{booleans}
+\index{true!as expression $\True$}
+\index{false!as expression $\False$}
+\begin{rrnames}
+  $\Bool$     & \texttt{BOOL}    & Boolean values \\
+  $\True$     & \texttt{TRUE}    & Boolean true \\
+  $\False$    & \texttt{TRUE}    & Boolean false \\
+  $\bool$     & \texttt{bool}    & Convert a predicate into a Boolean value \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\Bool$ is a pre-defined set that contains the elements $\True$ and $\False$.
+
+    $\bool(P)$ denotes the Boolean value of a predicate $P$. If $P$ is true, the expression
+    is $\True$, if $P$ is false, the expression is $\False$.
+  \rrdef
+    $\Bool = \{\True,\False\}$ \\
+    $\bool(P)=\True \leqv P$
+  \rrtypes
+    $\Bool\in\pow(\Bool)$\\
+    $\True\in\Bool$ \\
+    $\False\in\Bool$ \\
+    $\bool(P)\in\Bool$ with $P$ being a predicate.
+  \rrwd
+    $\wdl(\Bool) \defi \btrue$\\
+    $\wdl(\True) \defi \btrue$\\
+    $\wdl(\False) \defi \btrue$\\
+    $\wdl(\bool(P)) \defi \wdl(P)$
+\end{rodinrefentry}
+
+
+\subsection{Sets}
+
+\subsubsection{Set comprehensions}
+\label{set_comprehensions}
+\index{set!comprehension set}
+\begin{rrnames}
+  $\{~\textit{ids}~\qdot~P~|~E~\}$     & \texttt{\{\textit{ids}.P|E\}}    & Set comprehension with expression \\
+  $\{~\textit{ids}~|~P~\}$             & \texttt{\{\textit{ids}|P\}}      & Set comprehension \\
+  $\{~E~|~P~\}$                        & \texttt{\{\textit{ids}|P\}}      & Set comprehension ??? \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    \textit{ids} is a comma-separated list of one ore more identifiers whose type
+    must be inferable by the predicate $P$.
+    The predicate $P$ and $E$ can contain references to the identifiers \textit{ids}.
+
+    The set comprehension $\{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ contains all values of $E$ for values
+    of $x_1,\ldots,x_n$ where $P$ is true.
+
+    The form $\{~x_1,\ldots,x_n~|~P~\}$ contains all values of $x_1,\ldots,x_n$ where $P$ is true.
+
+    $\{~E~|~P~\}$ is a short form for $\{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ where the identifiers
+    $x_1,\ldots,x_n$ are implicitly given by the free identifiers of $E$ and $P$.    
+  \rrdef
+    $\{~x_1,\ldots,x_n~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~x_1\mapsto\ldots\mapsto x_n~\}$\\
+    $\{~E~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ where $x_1\ldots,x_n$ are the free identifiers in $E$ and $P$
+  \rrtypes
+    With $x_1\in\alpha_1, \ldots, x_n\in\alpha_n$ and $E\in\beta$:\\
+    $\{~x_1,\ldots,x_n~\qdot~P~|~E~\} \in \pow(\beta)$\\
+    $\{~x_1,\ldots,x_n~|~P~\} \in \pow(\alpha_1\cprod\ldots\cprod\alpha_n)$\\
+    $\{~E~|~P~\} \in \pow(\beta)$  
+  \rrwd
+    $\wdl(\{~x_1,\ldots,x_n~\qdot~P~|~E~\}) \quad\defi\quad \forall x_1,\ldots,x_n \qdot \wdl(P) \land (P \limp \wdl(E))$
+  \rrex
+    The following set comprehensions contain all the first 10 squares numbers:\\
+    $\{1,4,9,16,25,36,49,64,81,100\}$\\
+    $= \{~x~\qdot~x\in 1\upto 10~|~x\expn 2\}$\\
+    $= \{~x~|~ \exists y \qdot y\in 1\upto 10 \land x=y\expn 2~\}$\\
+    $= \{~x\expn 2~|~x\in 1\upto 10~\}$
+\end{rodinrefentry}
+
+\subsubsection{Basic sets}
+\index{set!empty set}
+\index{set!set extension}
+\begin{rrnames}
+  $\emptyset$     & \texttt{\{\}}        & Empty set \\
+  $\{\textit{exprs}\}$    & \texttt{\{\textit{exprs}\}}  & Set extension \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\textit{exprs}$ is a comma-separated list of one or more expressions of the same type.
+
+    The empty set $\emptyset$ contains no elements.
+    The set extension $\{E_1,\ldots,E_n\}$ is the set that contains exactly the elements $E_1,\ldots,E_n$.
+  \rrdef
+    $\emptyset = \{~x~|~\bfalse~\}$\\
+    $\{E_1,\ldots,E_n\} = \{~x~|~x=E_1\lor\ldots\lor x=E_n\}$
+  \rrtypes
+    $\emptyset\in\pow(\alpha)$, where $\alpha$ is an arbitrary type.\\
+    $\{E_1,\ldots,E_n\}\in\pow(\alpha)$ with $E_1\in\alpha,\ldots,E_n\in\alpha$
+  \rrwd
+    $\wdl(\emptyset) \defi \btrue$\\
+    $\wdl(\{E_1,\ldots,E_n\}) \defi \wdl(E_1) \land\ldots\land \wdl(E_n)$
+\end{rodinrefentry}
 
 \subsubsection{Subsets}
 \label{subsets}
+\index{subset}
+\begin{rrnames}
+  $\subseteq$     & \texttt{<:}  & subset \\
+  $\not\subseteq$ & \texttt{/<:}  & not a subset \\
+  $\subset$       & \texttt{<}\texttt{<:}  & strict subset \\
+  $\not\subset$   & \texttt{/<}\texttt{<:}  & not a strict subset \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $S\subseteq T$ checks if $S$ is a subset of $T$, i.e. if all elements of $S$ occurr in $T$.
+    $S\subset T$ checks if $S$ is a subset of $T$ and $S$ does not equal $T$.
+    $S\not\subseteq T$ resp. $S\not\subset T$ are the respective negated variants.
+  \rrdef
+    $S \subseteq T \defi \forall e \qdot e\in S \limp e\in T$\\
+    $S \not\subseteq T \defi \lnot(S \subseteq T)$\\
+    $S \subset T \defi S \subseteq T \land S\neq T$\\
+    $S \not\subset T \defi \lnot(S \subseteq T)$
+  \rrtypes
+    $S \opelipse T$ is a predicate
+    with $S\in\pow(\alpha)$, $T\in\pow(\alpha)$ and for each operator $\opelipse$ of 
+    $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
+  \rrwd
+    $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
+    for each operator $\opelipse$ of  $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
+\end{rodinrefentry}
 
-\ldots
+\subsubsection{Operations on sets}
+\index{union}
+\index{intersection}
+\index{set!difference set}
+\index{set!set subtraction}
+\begin{rrnames}
+  $\bunion$   & \texttt{\mybackslash/} & Union \\
+  $\binter$   & \texttt{/\mybackslash} & Intersection \\
+  $\setminus$ & \texttt{\mybackslash}  & Set subtraction \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The union $S\bunion T$ denotes the set that contains all elements that are in $S$ or $T$.
+    The intersection $S\binter T$ denotes the set that contains all elment that are in both $S$ and $T$.
+    The set subtraction or set difference $S\setminus T$ denotes all elements that are in $S$ but not in $T$.
+  \rrdef
+    $S\bunion T = \{~x~|~x\in S\lor x\in T~\}$\\
+    $S\binter T = \{~x~|~x\in S\land x\in T~\}$\\
+    $S\setminus T = \{~x~|~x\in S\land x\not\in T~\}$
+  \rrtypes
+    $S\opelipse T\in\pow(\alpha)$
+    with $S\in\pow(\alpha)$ and $T\in\pow(\alpha)$ and for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
+  \rrwd
+    $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
+    for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
+\end{rodinrefentry}
 
-\subsection{Sets and relations}
+\subsubsection{Power sets}
+\index{set!power set}
+\begin{rrnames}
+  $\pow$      & \texttt{POW}  & Power set \\
+  $\pow_1$    & \texttt{POW1} & Set of non-empty subsets \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\pow(S)$ denotes the set of all subsets of the set $S$.
+    $\pow(S)$ denotes the set of all non-empty subsets of the set $S$.
+  \rrdef
+    $\pow(S) = \{~x~|~x\subseteq S~\}$\\
+    $\pow_1(S) = \pow(S)\setminus\{\emptyset\}$
+  \rrtypes
+    $\pow(\alpha)\in\pow(\pow(\alpha))$ and $\pow_1(\alpha)\in\pow(\pow(\alpha))$ with
+    $S\in\pow(\alpha)$.
+  \rrwd
+    $\wdl(\pow(S)) \defi \wdl(S)$\\
+    $\wdl(\pow_1(S)) \defi \wdl(S)$
+\end{rodinrefentry}
 
-\subsubsection{Sets}
-\label{sets}
-\ldots (set extensions, empty set, set comprehension, power set, finite)
+\subsubsection{Finite sets}
+\index{set!finite}
+\index{set!cardinality}
+\index{cardinality}
+\begin{rrnames}
+  $\bfinite$ & \texttt{finite} & Finite set \\
+  $\card$    & \texttt{card}   & Cardinality of a finite set \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bfinite(S)$ is a predicate that states that $S$ is a finite set.
+    $\card(S)$ denotes the cardinality of $S$. The cardinality is only defined for
+    finite sets.
+  \rrdef
+    TODO
+  \rrtypes
+    $\bfinite(S)$ is a predicate and
+    $\card(S)\in\intg$
+    with $S\in\pow(\alpha)$, i.e. $S$ must be a set.
+  \rrwd
+    $\wdl(\bfinite(S)) \defi \wdl(S)$\\
+    $\wdl(\card(S)) \defi \wdl(S) \land \bfinite(S)$
+\end{rodinrefentry}
 
 \subsubsection{Partition}
-\label{partitions}
-\ldots
+\label{partition}
+\index{partition}
+\index{set!partition}
+\begin{rrnames}
+  $\bpartition$ & \texttt{partition} & Partitions of a set \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bpartition(S,s_1,\ldots,s_n)$ is a predicate that states that 
+    the sets $s_1,\ldots,s_n$ constitute a partition of $S$.
+    The union of all elements of a partition is $S$ and all elements are disjoint.
 
-\subsubsection{Relations}
+    $\bpartition(S) = \emptyset$
+  \rrdef
+    $\bpartition(S,s_1,\ldots,s_n) \defi S=s_1\bunion\ldots\bunion s_n \land \forall i,j \qdot i\neq j \limp s_i\binter s_j = \emptyset$
+  \rrtypes
+    $\bpartition(S,s_1,\ldots,s_n)$ is a predicate with $S\in\pow(\alpha)$ and $s_i\in\pow(\alpha)$ for $i\in 1\upto n$
+  \rrwd
+    $\wdl(\bfinite(S)) \defi \wdl(S)$\\
+    $\wdl(\card(S)) \defi \wdl(S) \land \bfinite(S)$
+\end{rodinrefentry}
+
+\subsubsection{Generalized union and intersection}
+\index{union!generalized union}
+\index{intersection!generalized intersection}
+\begin{rrnames}
+  $\bunaryunion$ & \texttt{union} & Generalized union \\
+  $\bunaryinter$ & \texttt{inter} & Generalized intersection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bunaryunion(S)$ is the union of all elements of $S$.
+    $\bunaryinter(S)$ is the intersection of all elements of $S$. 
+    The intersection is only defined for non-empty $S$.
+  \rrdef
+    $\bunaryunion(S) = \{~x~|~\exists s \qdot s\in S \land x\in s~\}$ \\
+    $\bunaryinter(S) = \{~x~|~\forall s \qdot s\in S \limp x\in s~\}$
+  \rrtypes
+    $\bunaryunion(S)\in\pow(\alpha)$ and $\bunaryinter(S)\in\pow(\alpha)$ with $S\in\pow(\pow(\alpha))$.
+  \rrwd
+    $\wdl(\bunaryunion(S)) \defi \wdl(S)$ \\
+    $\wdl(\bunaryinter(S)) \defi \wdl(S) \land S\neq\emptyset$
+\end{rodinrefentry}
+
+
+\subsubsection{Quantified union and intersection}
+TODO
+
+\subsection{Relations}
 \label{relations}
+\subsubsection{Relations}
 \ldots
 
 \subsubsection{Domain and Range}
@@ -256,6 +521,7 @@ The following reference sections follow the form: \\[2em]
   $\cdot$  & \texttt{*}   & Multiplication \\
   $\div$   & \texttt{/}   & Integer division \\
   $\bmod$  & \texttt{mod} & Modulo \\
+  $\expn$  & \texttt{\textasciicircum} & Exponentation \\
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
@@ -281,7 +547,8 @@ The following reference sections follow the form: \\[2em]
   $\wdl(-a) \defi \wdl(a)$ \\
   $\wdl(a\cdot b) \defi \wdl(a) \land \wdl(b)$ \\
   $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
-  $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\leq 0 \land b\neq 0$ \\
+  $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\neq 0$ \\
+  $\wdl(a\expn b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\geq 0$ 
 \end{rodinrefentry}
 
 \subsection{Assignments}

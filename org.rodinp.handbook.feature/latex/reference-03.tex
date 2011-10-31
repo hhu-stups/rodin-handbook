@@ -18,7 +18,8 @@ In Event-B we have 3 kinds of basic data types:
   It has two elements $\Bool = \{\True,\False\}$.
 \item User defined carrier sets. 
   These are defined in the \eventbsection{Sets} section of a context.
-  There is no assumption made about carrier sets unless it is stated explicitly as
+  Carrier sets are never empty.
+  There is no other assumption made about carrier sets unless it is stated explicitly as
   an axiom.
 \end{itemize}
 From all data types $\alpha, \beta$, two other kinds of data types can be constructed:
@@ -495,7 +496,7 @@ The following reference sections follow the form: \\[2em]
   \rrtypes
     For $S\in\pow(\alpha)$ and $T\in\pow(\beta)$ and
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
-    $S \opelipse T\in\pow\pow(\alpha\prod \beta)$
+    $S \opelipse T\in\pow(\pow(\alpha\cprod\beta))$
   \rrwd
     $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$.

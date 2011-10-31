@@ -127,13 +127,13 @@ As specified in the \href{http://wiki.event-b.org/index.php/Witnesses_(Modelling
 
 \subsection{What are type expressions in Event-B?}
 
-The type expressions are defined recursively as follows: 
+The type expressions are defined recursively as follows (TODO: Add a link to the reference section, is the term ``type expression'' used anywhere?): 
 
 \begin{itemize}
-	\item Built-in types: $\intg$ , BOOL (Note that $\nat$ is NOT a type expressions). 
+	\item Built-in types: $\intg$ , BOOL (Note that $\nat$ is NOT a type expression).
 	\item Any carrier set is a type expression. 
-	\item If \textit{T} is a type expression, then \textit{(T)} is a type expression. 
-	\item If \textit{S} and \textit{T} are type expressions, then \textit{ST} is a type expression. 
+	\item If $T$ is a type expression, then $\pow(T)$ is a type expression. 
+	\item If $S$ and $T$ are type expressions, then $S\cprod T$ is a type expression. 
 \end{itemize} 
 
 \subsection{How can I create a new Event-B Project?}
@@ -241,3 +241,8 @@ When you are looking for a particular view, and the view does not appear or if i
 
 \section{Plug-In Questions}
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

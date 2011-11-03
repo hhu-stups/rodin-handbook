@@ -503,15 +503,79 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Domain and Range}
 \label{domain_and_range}
-\ldots
+\index{domain}
+\index{range}
+\begin{rrnames}
+  $\dom$  & \texttt{dom} & Domain \\
+  $\ran$  & \texttt{ran} & Range \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $\dom(r) = \{~x~|~\exists y \qdot x\mapsto y\in r~\}$\\
+    $\ran(r) = \{~y~|~\exists x \qdot x\mapsto y\in r~\}$
+  \rrtypes
+    $\dom(r)\in\pow(\alpha)$ and $\ran(r)\in\pow(\beta)$ with $r\in\pow(\alpha\cprod\beta)$.
+  \rrwd
+    $\wdl(\dom(r)) \defi \wdl(r)$\\
+    $\wdl(\ran(r)) \defi \wdl(r)$
+\end{rodinrefentry}
 
 \subsubsection{Domain and Range Restrictions}
 \label{domain_and_range_restrictions}
-\ldots
+\begin{rrnames}
+  $\domres$  & \texttt{<|}           & Domain restriction\\
+  $\domsub$  & \texttt{<}\texttt{<|} & Domain subtraction\\
+  $\domres$  & \texttt{|>}           & Range restriction\\
+  $\domsub$  & \texttt{|>>}          & Range subtraction
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $s\domres r = \{~x,y~|~x\mapsto y\in r \land x\in s\}$\\
+    $s\domsub r = \{~x,y~|~x\mapsto y\in r \land x\not\in s\}$\\
+    $r\ranres s = \{~x,y~|~x\mapsto y\in r \land y\in s\}$\\
+    $r\ransub s = \{~x,y~|~x\mapsto y\in r \land y\not\in s\}$
+  \rrtypes
+    $s\domres r\in\pow(\alpha\cprod\beta)$ and $s\domsub r\in\pow(\alpha\cprod\beta)$
+    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\alpha)$.
+
+    $r\ranres s\in\pow(\alpha\cprod\beta)$ and $r\ransub s\in\pow(\alpha\cprod\beta)$
+    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\beta)$.    
+  \rrwd
+    $\wdl(s\domres r)\defi\wdl(s)\land\wdl(r)$\\
+    $\wdl(s\domsub r)\defi\wdl(s)\land\wdl(r)$\\
+    $\wdl(r\ranres s)\defi\wdl(r)\land\wdl(s)$\\
+    $\wdl(r\ransub s)\defi\wdl(r)\land\wdl(s)$
+\end{rodinrefentry}
 
 \subsubsection{Constant relations}
 \label{constant_relations}
-\ldots (identity, the projection functions)
+\index{identity relation}
+\index{projection}
+\begin{rrnames}
+  $\id$      & \texttt{id}   & Identity relation \\
+  $\prjone$  & \texttt{prj1} & First projection \\
+  $\prjtwo$  & \texttt{prj2} & Second projection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $\id = \{~x\mapsto x~|~\btrue~\}$\\
+    $\prjone = \{~ (x\mapsto y)\mapsto x~|~\btrue~\}$\\
+    $\prjtwo = \{~ (x\mapsto y)\mapsto y~|~\btrue~\}$
+  \rrtypes
+    $\id\in\pow(\alpha\cprod\alpha)$ for an arbitrary type $\alpha$.\\
+    $\prjone\in\pow((\alpha\cprod\beta)\cprod\alpha)$ and
+    $\prjone\in\pow((\alpha\cprod\beta)\cprod\beta)$ for arbitrary types $\alpha$ and $\beta$.
+  \rrwd
+    $\wdl(\id)\defi\btrue$\\
+    $\wdl(\prjone)\defi\btrue$\\
+    $\wdl(\prjtwo)\defi\btrue$
+\end{rodinrefentry}
 
 \subsubsection{Sets of functions}
 \index{function}\index{injection}\index{surjection}\index{bijection}
@@ -619,6 +683,29 @@ The following reference sections follow the form: \\[2em]
   $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
   $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\neq 0$ \\
   $\wdl(a\expn b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\geq 0$ 
+\end{rodinrefentry}
+
+\subsubsection{Minimum and Maximum}
+\label{minimum_and_maximum}
+\index{minimum}
+\index{maximum}
+\begin{rrnames}
+  $\min$      & \texttt{min}   & Minimum \\
+  $\max$      & \texttt{max}   & Maximum
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\min(I)$ resp. $\max(I)$ denotes the smallest resp. largest number in the set of integers $I$.
+
+    The minimum resp. maximum is only defined if such a number exists.
+  \rrdef
+    $\min(I) = b \defi b\in I \land (\forall x\qdot x\in I\limp b\leq x)$\\
+    $\max(I) = b \defi b\in I \land (\forall x\qdot x\in I\limp b\geq x)$
+  \rrtypes
+    $\min(I)\in\intg$ and $\max(I)\in\intg$ with $I\in\pow(\intg)$.
+  \rrwd
+    $\wdl(\min(I)) \defi \wdl(I) \land I\neq\emptyset \land \exists b \qdot \forall x\qdot x\in I\limp b\leq x$\\
+    $\wdl(\max(I)) \defi \wdl(I) \land I\neq\emptyset \land \exists b \qdot \forall x\qdot x\in I\limp b\geq x$
 \end{rodinrefentry}
 
 \subsection{Assignments}

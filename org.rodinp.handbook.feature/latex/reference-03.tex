@@ -475,9 +475,15 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsection{Relations}
+
+\subsubsection{Pairs}
+\label{pairs}
+\index{pair}
+TODO
+
 \label{relations}
 \subsubsection{Relations}
-\index{relations}
+\index{relation}
 \begin{rrnames}
   $\rel$   & \texttt{<->} & Relations \\
   $\trel$  & \texttt{<}\texttt{<->} & Total relations \\
@@ -551,6 +557,63 @@ The following reference sections follow the form: \\[2em]
     $\wdl(r\ransub s)\defi\wdl(r)\land\wdl(s)$
 \end{rodinrefentry}
 
+\subsubsection{Operations on relations}
+\label{operations_on_relations}
+\index{relational image}
+\index{relation!image}
+\index{composition of relations}
+\index{relation!composition}
+\index{parallel product}
+\index{direct product}
+\index{relation!parallel product}
+\index{relation!direct product}
+\index{inverse}
+\index{relation!inverse}
+
+\begin{rrnames}
+  $\fcomp$    & \texttt{;}                  & Relational forward composition\\
+  $\bcomp$    & \texttt{circ}               & Relational backward composition\\
+  $\ovl$      & \texttt{<+}                 & Relational override \\
+  $\pprod$    & \texttt{||}                 & Parallel product \\
+  $\dprod$    & \texttt{><}                 & Direct product \\
+  $\mbox{}^{-1}$ & \texttt{\textasciitilde}  & Inverse \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $r\fcomp s = \{~x \mapsto y~|~\exists z\qdot x \mapsto z \in r \land z \mapsto y \in s~\}$\\
+    $r\bcomp s = s\fcomp r$\\
+    $r\ovl s = s\bunion (dom(s)\domsub r)$\\
+    $r\pprod s = \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in r \land x\mapsto z\in s ~\}$\\
+    $r\dprod s = \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in r \land y\mapsto n\in s ~\}$\\
+    $r^{-1} = \{y\mapsto x~|~x\mapsto y\in r~\}$
+  \rrtypes
+    $r\fcomp s\in\pow(\alpha\cprod\gamma)$ with $r\in\pow(\alpha\cprod\beta)$ and
+      $s\in\pow(\beta\cprod\gamma)$.\\
+    $r\bcomp s\in\pow(\gamma\cprod\alpha)$ with $r\in\pow(\alpha\cprod\beta)$ and
+      $s\in\pow(\beta\cprod\gamma)$.\\
+    $r\ovl s\in\pow(\alpha\cprod\beta)$ with $r\in\pow(\alpha\cprod\beta)$ and
+      $s\in\pow(\alpha\cprod\beta)$.\\
+    TODO
+  \rrwd
+    TODO
+\end{rodinrefentry}
+
+\subsubsection{Relational image}
+\label{relational_image}
+\begin{rrnames}
+  $[\ldots]$  & \texttt{[}\ldots\texttt{]}  & Relational image
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  \rrdef
+  \rrtypes
+  \rrwd
+\end{rodinrefentry}
+
+
+
 \subsubsection{Constant relations}
 \label{constant_relations}
 \index{identity relation}
@@ -617,6 +680,11 @@ The following reference sections follow the form: \\[2em]
   $\wdl(S\opelipse T) \defi \wdl(S) \land \wdl(T)$
 \end{rodinrefentry}
 
+
+\subsubsection{Function application}
+\label{function_application}
+\index{function application}
+TODO
 
 \subsection{Arithmetic}
 

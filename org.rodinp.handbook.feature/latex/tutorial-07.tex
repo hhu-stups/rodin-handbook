@@ -87,7 +87,8 @@ First we have to make the machine aware of the context by adding a \textsf{sees}
 \end{description}
 }
 
-We start with the traffic lights for the pedestrians which consist of just two colors (red and green).  We introduce a new variable to represent the traffic light color called \textsf{peds\_color}, with corresponding invariant and an initialization (the changes are shown in the following):
+\marginpar{Please check English grammar!}
+We start with the traffic lights for the pedestrians. It consist of just two colors (red and green), exactly one of them is shown.  We introduce a new variable to represent which light is shown called \textsf{peds\_color}, with corresponding invariant and an initialization (the changes are shown in the following):
 
 \pencil{
 \begin{description}
@@ -231,7 +232,7 @@ A witness is to an event's parameter what a gluing invariant is to a variable: i
 
 \warning{The naming of a witnesses' label is mandatory and must be the name of the abstract parameter.  In our example, the label must be \textsf{new\_value}}
 
-Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one color at a time.  Therefore, the variable contains a set of colors instead of just one color (as modelled for \textsc{peds\_color}):
+Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one color at a time.  Therefore, the variable contains a set of colors instead of just one color (as modelled for \textsf{peds\_color}):
 
 \pencil{
 \begin{description}

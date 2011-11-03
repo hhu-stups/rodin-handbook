@@ -313,7 +313,8 @@ You will often be confronted with situations where many modelling approaches are
 
 We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as ProB (\ref{prob})) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
 
-We hope that this section helped you to understand the power of abstraction.  The safety invariant from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
+We hope that this section helped you to understand the power of abstraction.  The safety invariant
+$\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
 
 \subsection{The Refined Machine with All Data Refinement}
 

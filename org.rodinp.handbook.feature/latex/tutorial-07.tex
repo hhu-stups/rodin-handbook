@@ -30,8 +30,9 @@ We break this problem into two steps:
 \subsection{A Context with Colors}
 
 Start by creating a context called \texttt{ctx1}, as described in Section~\ref{tutorial_05}.
-We model the colors as constants:
-
+We model the colors of the traffic light as a so-called ``enumerated set'' (see \ref{tut:user_defined_sets}): 
+We explicitly specify all elements (the three colors) of a new user-defined data type.
+We define the constants:
 \pencil{
 \begin{description}
 \CONSTANTS
@@ -42,9 +43,7 @@ We model the colors as constants:
 	\end{description}
 \end{description}
 }
-
-These constants are part of a set:
-
+We introduce the new data type as a set:
 \pencil{
 \begin{description}
 \SETS
@@ -53,9 +52,7 @@ These constants are part of a set:
 	\end{description}
 \end{description}
 }
-
-And last, we need to provide typing.  We do this by creating a partition (\ref{tut:user_defined_sets}):
-
+And last, we need to provide typing of the constants.  We do this by creating a partition (\ref{partition}):
 \pencil{
 \begin{description}
 \AXIOMS

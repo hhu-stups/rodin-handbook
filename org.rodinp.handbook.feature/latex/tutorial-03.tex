@@ -200,14 +200,21 @@ If this model was actually in control of a traffic light, we would have a proble
 
 \begin{center}REQ-1: Both traffic lights must not be \texttt{TRUE} at the same time.\end{center}
 
-We can model this requirement with the following invariant (please add this invariant to the model):
+We can model this requirement with the following invariant:
 \[
 \lnot  (cars\_go = TRUE \land  peds\_go = TRUE)
 \]
+Please add this invariant with the label \texttt{inv3} to the model, use \texttt{not} and \texttt{\&} for $\lnot$ and $\land$.
 
-Obviously, this invariant can be violated, and Rodin informs us of this.  The \textsf{Event-B Explorer} (\ref{eventb_explorer}) provides this information in various ways.  Go to the explorer and expand the project (\texttt{tutorial-03}), the machine (\texttt{mac}) and the entry ``Proof Obligations''.  You should see four proof obligations, two of which are discharged and two of which are not discharged.
+Obviously, this invariant can be violated, and Rodin informs us of this.  The \textsf{Event-B Explorer} (\ref{eventb_explorer}) provides this information in various ways.  Go to the explorer and expand the project (\texttt{tutorial-03}), the machine (\texttt{mac}) and the entry ``Proof Obligations''.
+You should see four proof obligations, two of which are discharged (marked with \inlineicon{rodin/discharged}) and two of which are not discharged (\inlineicon{rodin/pending}).
 
-\info{Make sure that you understand the proof obligation labels (\ref{po_labels}).  The proof obligations can also be found via other entries.  Elements that have non-discharged proof obligations as children are marked with a small question mark.  For instance, \texttt{inv3} has all proof obligations as children, while the event \texttt{set\_cars} has one.}
+\info{\textbf{Proof obligations:} Have a look at the proof obligation labels.
+  They indicate the origin in the model where they were generated. 
+  E.g. \eventbpo{set\_peds\_go/inv3/INV} is the proof obligation that the event  \eventbpo{set\_peds\_go} preserves the invariant (\eventbpo{INV}) with the label \eventbpo{inv3}.
+  An overview about all labels can be found in \ref{generated_proof_obligations}.
+  The proof obligations can also be found via other entries in the explorer, like the events they belong to.
+  Elements that have non-discharged proof obligations as children are marked with a small question mark.  For instance, \texttt{inv3} has all proof obligations as children, while the event \texttt{set\_cars} has one.}
 
 To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (\ref{guard}) of the events.
 

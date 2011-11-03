@@ -72,7 +72,7 @@ The following reference sections follow the form: \\[2em]
   \rrwd
     A description of the well-definedness conditions using the $\wdl$ operator
   \rrfis
-    Non-deterministic assignments may have feasability conditions.
+    Non-deterministic assignments may have feasibility conditions.
     These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations}).
 \end{rodinrefentry}
 
@@ -162,7 +162,7 @@ The following reference sections follow the form: \\[2em]
   \rrtypes
     The quantifiers and the $P$ are predicates.    
   \rrwd
-    $\wdl(\forall x_1\ldots,x_n~\qdot~P) \defi ~\forall x_1\ldots,x_n \qdot \wdl(P)$
+    $\wdl(\forall x_1\ldots,x_n~\qdot~P) \defi ~\forall x_1\ldots,x_n \qdot \wdl(P)$\\
     $\wdl(\exists x_1\ldots,x_n~\qdot~P) \defi ~\forall x_1\ldots,x_n \qdot \wdl(P)$
 \end{rodinrefentry}
 
@@ -321,7 +321,7 @@ The following reference sections follow the form: \\[2em]
     $S \subseteq T \defi \forall e \qdot e\in S \limp e\in T$\\
     $S \not\subseteq T \defi \lnot(S \subseteq T)$\\
     $S \subset T \defi S \subseteq T \land S\neq T$\\
-    $S \not\subset T \defi \lnot(S \subseteq T)$
+    $S \not\subset T \defi \lnot(S \subset T)$
   \rrtypes
     $S \opelipse T$ is a predicate
     with $S\in\pow(\alpha)$, $T\in\pow(\alpha)$ and for each operator $\opelipse$ of 
@@ -422,8 +422,7 @@ The following reference sections follow the form: \\[2em]
   \rrtypes
     $\bpartition(S,s_1,\ldots,s_n)$ is a predicate with $S\in\pow(\alpha)$ and $s_i\in\pow(\alpha)$ for $i\in 1\upto n$
   \rrwd
-    $\wdl(\bfinite(S)) \defi \wdl(S)$\\
-    $\wdl(\card(S)) \defi \wdl(S) \land \bfinite(S)$
+    $\wdl(\bpartition(S,s_1,\ldots,s_n)) \defi \wdl(S) \land \wdl(s_1) \land \ldots \land \wdl(s_n)$
 \end{rodinrefentry}
 
 \subsubsection{Generalized union and intersection}
@@ -461,7 +460,7 @@ The following reference sections follow the form: \\[2em]
     $\Union x_1\ldots,x_n~\qdot~P~|~E$ is the union of all values of $E$ for valuations of the identifiers
     $x_1\ldots,x_n$ that fulfill the predicate $P$. The types of $x_1,\ldots,x_n$ must be inferable by $P$.
 
-    Analougously is $\Union x_1\ldots,x_n~\qdot~P~|~E$ is the intersection of all values of $E$ for
+    Analougously is $\Union x_1\ldots,x_n~\qdot~P~|~E$ the intersection of all values of $E$ for
     valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $P$.
   \rrdef
     $\Union x_1\ldots,x_n~\qdot~P~|~E = \union(\{~x_1\ldots,x_n~\qdot~P~|~E\})$\\

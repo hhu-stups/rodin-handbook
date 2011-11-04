@@ -1,12 +1,12 @@
 \section{Event-B Concepts}
-\label{tutorial_06}
+\label{tut_eventb_concepts}
 
 In Event-B we have two kind of components.
 We already encountered a \emph{context} that describes static elements of a model.
 The other component is a \emph{machine} that describes the dynamic behavior of a model.
 
 \subsection{Contexts}
-\label{tutorial:contexts}
+\label{tut_concepts_contexts}
 \index{context}
 
 A context has the following components:
@@ -54,7 +54,7 @@ The order of the axioms and theorems matter because the proof of a theorem or th
 
 
 \subsection{Machines}
-\label{tutorial:machines}
+\label{tut_machines}
 \index{machine}
 
 A machine describes the dynamic behavior of a model by means of
@@ -85,10 +85,10 @@ First we briefly summarize of which parts a machine consists:
 \end{description}
 
 \subsection{Events}
-\label{tutorial:events}
+\label{tut_events}
 \index{event}
 
-We saw in Section \ref{tutorial_03} what an event basically looks like using the example of a traffic light:
+We saw in Section \ref{tut_first_machine} what an event basically looks like using the example of a traffic light:
 \begin{description}
 	\EVT {set\_cars}
 		\begin{description}
@@ -145,7 +145,7 @@ In the special case of an initialization, we cannot use the invariants because w
 make any assumptions about uninitialized machines.
 
 \subsection{Refinement}
-\label{tutorial:refinement}
+\label{tut_refinement}
 \index{refinement}
 Refinement is a central concept in Event-B. Refinements are used to gradually
 introduce the details and complexity into a model.
@@ -154,7 +154,7 @@ corresponds to the behavior of \texttt{A}. We now look into more detail of what 
 here means.
 In such a setting, we call \texttt{A} the abstract and \texttt{B} the concrete machine.
 
-Here we give just a brief overview over the concept of refinement. Later in Section \ref{tutorial_07}
+Here we give just a brief overview over the concept of refinement. Later in Section \ref{tut_expanding_traffic_light_system}
 we use refinement in an example.
 
 The concrete machine has its own set of variables. Its invariants can refer to
@@ -190,7 +190,7 @@ These two conditions are the central piece to prove the correctness of a refinem
 common special cases.
 
 \subsubsection{Variable re-use}
-\label{tutorial:variable_reuse}
+\label{tut_variable_reuse}
 Most often, we do not want replace all variables by new ones. It is sometimes useful to keep all of the variables.
 We can do this just by repeating the names of the abstract variables in the variable section of the concrete
 machine. In that case, we must prove for each concrete event that changes such a variable that the corresponding 
@@ -198,7 +198,7 @@ abstract event updates the variable in the same way.
 The proof obligation has the name \eventbpo{concrete\_event/abstract\_action/SIM}.
 
 \subsubsection{Introducing new events}
-\label{tutorial:skip}
+\label{tut_skip}
 An event in the concrete machine might not refine any event in the abstract machine. In that case it is assumed
 to refine \emph{skip}, which is the event that does nothing and can occur any time. 
 The guard strengthening is then trivially true and doesn't need to be proven.
@@ -207,7 +207,7 @@ variables have not changed. Therefore, the new state of our newly introduced eve
 our abstract machine from before the event happened.
 
 \subsubsection{Witnesses}
-\label{tutorial:witnesses}
+\label{tut_witnesses}
 \index{witness}
 Let's consider a situation where we have an abstract event with a parameter $p$ and in a refining event that no longer needs that parameter.
 We saw above that we have to prove that for each concrete event the abstract event may act accordingly.

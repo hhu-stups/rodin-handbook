@@ -1,8 +1,8 @@
 \section{Introducing Contexts}
-\label{tutorial_05}
+\label{tut_contexts}
 \index{context}
 
-\tick{\textbf{Goals:} In this section we introduce contexts that apply to the theoretical concepts that were introduced in the previous section (\ref{tutorial_04}). We will create a very simple model consisting of just one context file.
+\tick{\textbf{Goals:} In this section we introduce contexts that apply to the theoretical concepts that were introduced in the previous section (\ref{tut_mathematical_notation}). We will create a very simple model consisting of just one context file.
 }
 
 In this tutorial, we will create a model of the well known Agatha puzzle. Here is a brief description of the puzzle:
@@ -13,11 +13,12 @@ Contexts are used to model static properties of a model, things that do not chan
 The objective of this Section is to get familiar with contexts by modeling the Agatha puzzle.
 
 \subsection{Create a Context}
+\label{tut_create_context}
 \index{context!creation of}
 
 Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}. Give the project the name \texttt{tutorial-05}. 
 
-Next, create a new Event-B Component (\ref{eventb_component}). Unlike in Section (\ref{tutorial_03}) use \texttt{agatha} as the component name and mark the \textsf{Context} (\ref{context}) option in order to create a Context file instead of a Machine (\ref{machine}) file.
+Next, create a new Event-B Component. Unlike in Section (\ref{tut_first_machine}) use \texttt{agatha} as the component name and mark the \textsf{Context} (\ref{context}) option in order to create a Context file instead of a Machine (\ref{machine}) file.
 
 %\begin{figure}[!h]
 %\begin{center}
@@ -38,11 +39,12 @@ Click on \textsf{Finish}. Rodin should start the editor with the created Context
 \end{figure}
 
 \subsection{Populate the Context}
+\label{tut_populate_context}
 
 In this section we model the Agatha puzzle step by step.
 
 \subsubsection{Modelling the Persons}
-\label{tut_modelling_the_persons}
+\label{tut_modelling_persons}
 
 We have three persons in the Agatha puzzle: Agatha herself, the butler and Charles. We model the three persons as constants (one constant for each person) in the corresponding \textsf{CONSTANTS} section:
 
@@ -68,7 +70,7 @@ These constants or persons respectively are part of a set:
 \end{description}
 }
 
-Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). The semantics of the sets (\ref{set}) and constants (\ref{constant}) are specified in the axioms (\ref{axiom}). As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
+Now, the constants itself are not very useful since they have no type (In addition, the constants will be highlighted in red, indicating a problem). The semantics of the sets (\ref{sets}) and constants (\ref{constants_and_axioms}) are specified in the axioms (\ref{constants_and_axioms}). As already mentioned above the persons are part of the set \texttt{persons}. We model this by creating a partition (\ref{partition}) in the \textsf{AXIOMS} section: 
 
 \pencil{
 \begin{description}
@@ -83,13 +85,13 @@ Now, the constants itself are not very useful since they have no type (In additi
 }
 
 \index{wizard!New Enumerated Set Wizard}
-\info{The \textsf{New Enumerated Set Wizard} (\ref{wizard}) allows you to create the contants, the set and the axiom automatically at the same time. To access this wizard, click on the \textsf{New Enumerated Set Wizard} tool bar item or find it under \textsf{ Event-B $\rangle$ New Enumerated Set Wizard}. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
+\info{The \textsf{New Enumerated Set Wizard} (\ref{enumerated_set_wizard}) allows you to create the constants, the set and the axiom automatically at the same time. To access this wizard, click on the \textsf{New Enumerated Set Wizard} tool bar item or find it under \textsf{ Event-B $\rangle$ New Enumerated Set Wizard}. This will bring up the wizard where we can enter the name of the set and the constants in the corresponding text fields. The wizard will create the enumarted set, the constants and the axiom automatically.}
 
 \subsubsection{Modelling the Relations ``Persons who hate each other'' and ``Who's how rich''}
 
 We create two more constants \texttt{hates} and \texttt{richer} to model the relations ``Persons who hate each other'' and ``Who's how rich''. The relations are abstract, which means that they say nothing about the concrete persons (Agatha, the butler and Charles). We define the concrete relationships between the persons later in this section.
 
-The first constant \texttt{hates} is an arbitrary relation (\ref{relation}) between \texttt{persons}: 
+The first constant \texttt{hates} is an arbitrary relation (\ref{relations}) between \texttt{persons}: 
 
 \pencil{
 \begin{description}
@@ -235,7 +237,8 @@ We mark the axiom \texttt{solution} as a theorem (\ref{theorem}) by clicking on 
 
 This concludes the tutorial. The following section shows the complete Context.
 
-\subsection{The Final Context} \label{tut_05_final_context}
+\subsection{The Final Context} 
+\label{tut_final_context}
 
 \begin{description}
 \CONTEXT{agatha}

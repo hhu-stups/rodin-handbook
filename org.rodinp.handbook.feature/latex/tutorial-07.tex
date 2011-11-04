@@ -1,12 +1,12 @@
 \section{Expanding the Traffic Light System: Contexts and Refinement}
-\label{tutorial_07}
+\label{tut_expanding_traffic_light_system}
 
 \tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colors and a refinement to integrate them. We will also introduce another refinement for the push buttons.}
 
 \subsection{Data Refinement}
-\label{tutorial:data_refinement}
+\label{tut_data_refinement}
 
-We will continue the example from Section~\ref{tutorial_03}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE and a number of features were still missing.
+We will continue the example from Section~\ref{tut_first_machine}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE and a number of features were still missing.
 
 We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors. Figure \ref{fig_tut_07_tl_colors} depicts our mapping for the traffic light.
 
@@ -28,8 +28,9 @@ We break this problem into two steps:
 \end{enumerate}
 
 \subsection{A Context with Colors}
+\label{tut_context_with_colors}
 
-Start by creating a context called \texttt{ctx1}, as described in Section~\ref{tutorial_05}.
+Start by creating a context called \texttt{ctx1}, as described in Section~\ref{tut_contexts}.
 We model the colors of the traffic light as a so-called ``enumerated set'' (see \ref{tut:user_defined_sets}): 
 We explicitly specify all elements (the three colors) of a new user-defined data type.
 We define the constants:
@@ -68,6 +69,7 @@ And last, we need to provide typing of the constants.  We do this by creating a 
 This completes the context.
 
 \subsection{The Actual Data Refinement}
+\label{tut_actual_data_refinement}
 
 The easiest way to create a refinement is by right-clicking on the machine in the project browser and selecting \textsf{Refine} (in this case, we will be refining the machine \textsf{mac} from the project \textsf{tutorial-3}).  This will create a ``stub'' consisting of all variables and events. Please use this method to create a machine with name \texttt{mac1}.
 
@@ -154,6 +156,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 \warning{If you get the error message ``Identifier peds\_go has not been declared'', then there are references to the refined variable left somewhere in the model.  It can be helpful to use the \textsf{Pretty Print} view, as it will show the ``inherited'' elements from the abstract machine as well.}
 
 \subsection{The refined machine with data refinement for peds\_go}
+\label{tut_refined_machine}
 
 \pencil{
 \begin{description}
@@ -225,6 +228,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 }
 
 \subsection{Witnesses}
+\label{tut_witnesses}
 \index{witness}
 
 The refinement of \textsf{set\_cars} is more difficult since the event uses a parameter (the new value for \textsf{cars\_go}).  In order to refine it, we need a witness (\ref{witness}).
@@ -308,6 +312,7 @@ Now you can get rid of the variable \textsf{cars\_go} and its inisialisation cla
 }
 
 \subsection{Discussion}
+\label{tut_concepts_discussion}
 
 Notice that we have used two very different approaches to model the traffic lights for cars and pedestrians.  For the pedestrians, we created one event for each state transition.  For the cars, we handled all states in one single event.
 
@@ -400,6 +405,7 @@ $\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invari
 }
 
 \subsection{One more Refinement: The Push Button}
+\label{tut_one_more_refinement}
 
 We will demonstrate another application of refinement: introducing new features into an existing model.  A typical traffic light system allows the pedestrians to request a light change by pressing a button.  We will introduce this feature in a new refinement.
 
@@ -477,6 +483,7 @@ As we will see in the following discussion, this be more tricky than it first ap
 }
 
 \subsection{Discussion}
+\label{tut_concepts_discussion2}
 
 There are a number of problems associated with the model in its current state.  Let's start with the resetting of the button: The way we built our model so far, \textsf{set\_peds\_red} can be triggered any time; there is not a single guard which prevents this.  Therefore, the button could be reset any time without the pedestrian light ever turning green.
 

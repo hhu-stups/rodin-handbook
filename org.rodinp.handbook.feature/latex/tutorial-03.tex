@@ -1,5 +1,5 @@
 \section{The First Machine: A Traffic Light Controller}
-\label{tutorial_03}
+\label{tut_first_machine}
 
 % a first machine, e.g. a traffic light with booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof lables are read, without changing to the proof perspective.
 
@@ -24,7 +24,7 @@ In this section, we will implement a simplified controller with the following ch
 
 
 \subsection{Project Setup}
-\label{tutorial_03_project_setup}
+\label{tut_project_setup}
 
 Models typically consist of multiple files that are managed in a project.  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03} as shown in Figure \ref{fig_tut_03_new_project_wizard}.
 
@@ -60,11 +60,10 @@ The newly created component will open in the structural editor.  The editor has 
 
 The editor is \textit{form-based}.  This means that in well-defined places an appropriate control (text field, dropdown, etc.) allows modifications.
 
-\info{Alternative editors are available as plug-ins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
-
+\info{Alternative editors are available as plug-ins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{tut_camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
 
 \subsection{Camille, a text-based editor}
-\label{camille}
+\label{tut_camille}
 \marginpar{Should the link for Camille be in a footnote?}
 \begin{rodin-plugin}{img/camille.png}{Camille}
 Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor, including copy and paste, undo, redo, etc.  However, please note that at this time, not all Rodin plugins are compatible with Camille.  Also, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
@@ -77,8 +76,9 @@ For more information, please visit \url{http://wiki.event-b.org/index.php/Text_E
 \end{rodin-plugin}
 
 \subsection{Building the Model}
+\label{tut_building_the_model}
 
-Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tutorial_03}.  We start with the model state.  Two traffic lights will be modelled and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  
+Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tut_first_machine}.  We start with the model state.  Two traffic lights will be modelled and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  
 
 \subsubsection{Creating Variables}
 \index{variable!creating a variable}
@@ -106,9 +106,9 @@ Upon saving, the variables will be highlighted in red, indicating an error as sh
 \end{center}
 \end{figure}
 
-Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels (\ref{label}).  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
+Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
 Change the first invariant (the $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
-Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{datatypes}).
+Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_types}).
 
 %\begin{figure}[!h]
 %\begin{center}
@@ -129,7 +129,7 @@ After saving, you should see that the \textsf{EVENTS} section is highlighted in 
 \end{center}
 \end{figure}
 
-To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZATION event (\ref{initialization}).  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
+To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZATION event.  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
 %\begin{figure}[!h]
 %\begin{center}
@@ -139,7 +139,7 @@ To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZAT
 
 \subsubsection{State Transitions with Events}
 
-Our traffic light controller cannot yet change its state.  To make this possible, we create events (\ref{event}). We will first consider the traffic light for the pedestrians, and we will create two events. One will set it to ``go'' and one will set it to ``stop''.
+Our traffic light controller cannot yet change its state.  To make this possible, we create events (\ref{events}). We will first consider the traffic light for the pedestrians, and we will create two events. One will set it to ``go'' and one will set it to ``stop''.
 
 \warning{From now on, we won't describe the individual steps in the editor any more.  Instead, we will simply show the resulting model.} 
 
@@ -218,7 +218,7 @@ You should see four proof obligations, two of which are discharged (marked with 
   The proof obligations can also be found via other entries in the explorer, like the events they belong to.
   Elements that have non-discharged proof obligations as children are marked with a small question mark.  For instance, \texttt{inv3} has all proof obligations as children, while the event \texttt{set\_cars} has one.}
 
-To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (\ref{guard}) of the events.
+To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (\ref{guards}) of the events.
 
 \warning{Before looking at the solution, try to fix the model yourself.}
 
@@ -260,6 +260,7 @@ ProB has many more functions and also supports additional formalisms.  Please vi
 
 
 \subsection{The Final Traffic Light Model}
+\label{tut_final_model}
 
 \pencil{
 \begin{description}

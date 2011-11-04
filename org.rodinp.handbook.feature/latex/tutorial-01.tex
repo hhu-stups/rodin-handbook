@@ -1,5 +1,5 @@
 \section{Before Getting Started}
-\label{tutorial_01}
+\label{tut_before_getting_started}
 
 Before we get started with the actual tutorial, we are going to go over the required background information to make sure that you have a rudimentary understanding of the necessary concepts.
 
@@ -13,19 +13,21 @@ Before we get started with the actual tutorial, we are going to go over the requ
 }
 
 \subsection{Systems Development}
+\label{tut_systems_development}
 
 Ultimately, the purpose of the methods and tools introduced here is to improve systems development.  By this we mean the design and management of complex engineering projects over their life cycle.  Examples include cars, air traffic control systems, etc.
 
 ``Taking an interdisciplinary approach to engineering systems is inherently complex since the behaviour of and interaction among system components is not always immediately well defined or understood. Defining and characterizing such systems and subsystems and the interactions among them is one of the goals of systems engineering. In doing so, the gap that exists between informal requirements from users, operators, marketing organizations, and technical specifications is successfully bridged.''\footnote{http://en.wikipedia.org/wiki/Systems\_engineering\#Managing\_complexity}
 
 \subsection{Formal Modelling}
+\label{tut_formal_modelling}
 
 We are concerned with \textit{formalizing specifications}.  This allows us a more rigorous analysis (thereby improving the quality) and allows us to reuse the specification in the development an implementation.  This comes at the cost of higher up-front investments.
 
 This differs from the traditional development process. In a formal development, we transfer some effort from the test phase (where the implementation is verified) to the specification phase (where the specification in relation to the requirements is verified).
 
 \subsection{Predicate Logic}
-\label{predicate_logic}
+\label{tut_predicate_logic}
 \index{predicate logic}
 
 Predicate logic is a mathematical logic containing variables that can be quantified.
@@ -33,7 +35,7 @@ Predicate logic is a mathematical logic containing variables that can be quantif
 Event-B supports first-order logic which is, technically speaking, just one type of predicate logic.  
 
 \subsection{Event-B}
-\label{eventb}
+\label{tut_eventb}
 \index{Event-B}
 
 Event-B is a notation for formal modelling based around an abstract machine notation (\index{abstract machine notation}).
@@ -41,12 +43,14 @@ Event-B is a notation for formal modelling based around an abstract machine nota
 Event-B is considered an evolution of B (also known as classical B). It is a simpler notation which is easier to learn and use. It comes with tool support in the form of the Rodin Platform.
 
 \subsection{Rodin}
+\label{tut_rodin}
 
-Rodin (\ref{rodin_platform}) is the name of the tool platform for Event-B.  It allows formal Event-B models to be created with an editor.  It generates proof obligations (\ref{proof_obligation}) that can be discharged either automatically or interactively.
+Rodin (\ref{rodin_platform}) is the name of the tool platform for Event-B.  It allows formal Event-B models to be created with an editor.  It generates proof obligations (\ref{generated_proof_obligations}) that can be discharged either automatically or interactively.
 
 Rodin is modular software and many extensions are available.  These include alternative editors, document generators, team support, and extensions (called plugins) to the notation which include decomposition or record support.  An up-to-date list of plugins is maintained in the Rodin Wiki (\ref{rodin_wiki}).
 
-\subsection{Eclipse} \label{subsection_eclipse}
+\subsection{Eclipse} 
+\label{tut_eclipse}
 \index{eclipse}
 
 Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform for building software tools.  This matters for two reasons:
@@ -57,4 +61,4 @@ Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform fo
 
 The GUI of an Eclipse application consists of views, editors, toolbars, quickviews, perspectives and many more elements.  If these terms are unfamiliar to you, please consult Section~\ref{eclipse} which contains references to Eclipse tutorials.
 
-In Section~\ref{tutorial_02}, we present the Rodin-specific GUI elements.
+In Section~\ref{tut_installation}, we present the Rodin-specific GUI elements.

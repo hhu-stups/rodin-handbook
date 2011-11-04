@@ -1,5 +1,5 @@
 \section{Location Access Controller}
-\label{tutorial_10}
+\label{tut_location_access_controller}
 
 \marginpar{Maybe someone should go through this section and carry out all of the tasks to see if it is logical and makes sense}
 \tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. For this we use the model of a location access controller. The goal is to develop the proofs that ensure there are no deadlocks present in the initial model and in the first refinement.}
@@ -10,7 +10,8 @@ Through the model used in this section, we study a complete system and remind th
 
 Before describing the initial model, import the archive file \file{Doors.zip}{Doors.zip} that contains the model. To do this, select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into Workspace}. Then select the according archive file and click on \textsf{Finish}. It will take Rodin a few seconds to extract and load all the files.
 
-\subsection{Initial Model} \label{tut_10_initial_model}
+\subsection{Initial Model} 
+\label{tut_initial_model}
 
 %Besides we introduce:
 
@@ -100,7 +101,7 @@ So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outsi
 %	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
 %\end{center}
 
-Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button. Then, click on the \icon{rodin/auto_prover.png button}. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
+Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button. Then, click on the \icon{rodin/auto_prover.png} button. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
 
 Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
 
@@ -126,6 +127,7 @@ Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a c
 \textsf{x} is not situated there. Finally, use the \textsf{p0} button to finish the proof. 
 
 \subsection{First Refinement}
+\label{tut_location_first_refinement}
 
 Now we are going to explain the main complexity of our model: the deadlock freeness proof for the first refinement. 
 

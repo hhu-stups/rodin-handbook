@@ -7,31 +7,38 @@ The other component is a \emph{machine} that describes the dynamic behavior of a
 
 \subsection{Contexts}
 \label{tutorial:contexts}
+\index{context}
 
 A context has the following components:
 \begin{description}
 \item[Sets]
+\index{set}
   User-defined types can be declared in the \textsl{SETS} section
   (See also \ref{tutorial:user_defined_sets}).
 \item[Constants]
+index{constant}
   We can declare constants here. The type of each constant must be given
   by the axioms.
 \item[Axioms] The axioms are a list of predicates. 
+index{axiom}
   They describe what can be taken for granted when developing a model.
   The axioms can be later used in proofs that occur in components that
   use (``\emph{see}'') this context.
   Each axiom has a label attached to it.
-\item[Theorems] 
+\item[Theorems]
+\index{theorem} 
   Axioms can be marked as \emph{theorems}. In that case, we declare that
   the predicate is provable by using the axioms that are written 
   before the theorem.
   Theorems can be used later in proofs just like the axioms.
 \item[Extends]
+\index{extends}
   A context may extend an arbitrary number of other contexts.
   Extending another context $A$ has the effect that we can make use of
   all constants and axioms declared in $A$ and we can add new constants
   and axioms.
 \end{description}
+\index{proving!proof obligation}
 Rodin automatically generates \emph{proof obligations} (often abbreviated as PO) for properties that
 should be proven. Each proof obligation has a name that explains where it comes from.
 There are two kind of proof obligations generated in a context:
@@ -48,6 +55,7 @@ The order of the axioms and theorems matter because the proof of a theorem or th
 
 \subsection{Machines}
 \label{tutorial:machines}
+\index{machine}
 
 A machine describes the dynamic behavior of a model by means of
 variables whose values are changed by events.
@@ -57,20 +65,20 @@ that satisfy the invariant.
 First we briefly summarize of which parts a machine consists:
 
 \begin{description}
-\item[Refines] Optionally a machine can refine another one.
-  We'll see in \ref{tutorial:refinement} what that means.
-\item[Sees] We can use the context's sets, constants and axioms  in
+\item[Refines] \index{refines} Optionally a machine can refine another one.
+  We'll see in Section \ref{tutorial:refinement} what that means.
+\item[Sees] \index{sees} We can use the context's sets, constants and axioms  in
   a machine by declaring it in the \textsl{Sees} section.
   The axioms can be used in every proof in the machine as hypothesis.
-\item[Variables]
+\item[Variables] \index{variable}
   The variables' values are determined by an initialization and
   can be changed by events. Together they constitute the state
   of the machine.
   Each variable must be given a type by the invariants.
-\item[Invariants]
+\item[Invariants] \index{invariant}
   This are predicates that should be true for every reachable state.
   Each invariant has a label.
-\item[Events]
+\item[Events] \index{event}
   An event can assign new values to variables.
   The \emph{guards} of an event specify under which conditions it might occur.
   The initialization of the machine is a special case of an event.
@@ -78,8 +86,9 @@ First we briefly summarize of which parts a machine consists:
 
 \subsection{Events}
 \label{tutorial:events}
+\index{event}
 
-We saw in \ref{tutorial_03} how an event basically looks like using the example of a traffic light:
+We saw in Section \ref{tutorial_03} what an event basically looks like using the example of a traffic light:
 \begin{description}
 	\EVT {set\_cars}
 		\begin{description}
@@ -111,6 +120,7 @@ All the other variables keep their old values. Beside the simple assignment ($\b
 there are other forms of actions ($\bcmin$ or $\bcmsuch$) which are explained in
 the reference section \ref{actions}.
 
+\index{initialization}
 The \emph{initialization} of the machine is a special form of event. It has neither parameters
 nor guards.
 
@@ -136,6 +146,7 @@ make any assumptions about uninitialized machines.
 
 \subsection{Refinement}
 \label{tutorial:refinement}
+\index{refinement}
 Refinement is a central concept in Event-B. Refinements are used to gradually
 introduce the details and complexity into a model.
 If a machine \texttt{B} refines a machine \texttt{A}, \texttt{B} is only allowed to behave in a way that
@@ -197,6 +208,7 @@ our abstract machine from before the event happened.
 
 \subsubsection{Witnesses}
 \label{tutorial:witnesses}
+\index{witness}
 Let's consider a situation where we have an abstract event with a parameter $p$ and in a refining event that no longer needs that parameter.
 We saw above that we have to prove that for each concrete event the abstract event may act accordingly.
 With the parameter, however, we now have the situation that we must prove the existence of a value for $p$ such

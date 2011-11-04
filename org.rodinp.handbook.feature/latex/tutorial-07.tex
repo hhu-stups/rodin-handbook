@@ -75,7 +75,7 @@ TODO: Screenshot of selecting the context menu.
 
 \warning{In refinements, the \textsf{Edit} View of the Editor hides some information from the abstract machine by default.  This can be particularly important when you modify a refined event.  The \textsf{Pretty Print} View shows all the element with elements from the abstract machine in \textit{italics}.}
 
-\warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go) and variables that you do not have.})  }
+\warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go}) and variables that you do not have.)  }
 
 First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{sees}) statement:
 
@@ -87,8 +87,7 @@ First we have to make the machine aware of the context by adding a \textsf{sees}
 \end{description}
 }
 
-\marginpar{Please check English grammar!}
-We start with the traffic lights for the pedestrians. It consist of just two colors (red and green), exactly one of them is shown.  We introduce a new variable to represent which light is shown called \textsf{peds\_color}, with corresponding invariant and an initialization (the changes are shown in the following):
+We will start with the traffic lights for the pedestrians. It has only two colors (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_color} to represent which of the lights is shown. The variable has a corresponding invariant and initialization (the changes are shown in the following code snippet):
 
 \pencil{
 \begin{description}
@@ -114,6 +113,7 @@ We start with the traffic lights for the pedestrians. It consist of just two col
 \end{description}
 }
 
+\index{gluing invariant}
 Next, we will create a gluing invariant (\ref{gluing_invariant}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_color} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
 
 \pencil{
@@ -125,7 +125,7 @@ Next, we will create a gluing invariant (\ref{gluing_invariant}) that associates
 \end{description}
 }
 
-In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations \ref{undischarged_proof_obligations}.  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with figure \ref{fig_tut_07_undischarged}).
+In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations (\ref{undischarged_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
 
 \begin{figure}[!h]
 \begin{center}
@@ -225,6 +225,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 }
 
 \subsection{Witnesses}
+\index{witness}
 
 The refinement of \textsf{set\_cars} is more difficult since the event uses a parameter (the new value for \textsf{cars\_go}).  In order to refine it, we need a witness (\ref{witness}).
 

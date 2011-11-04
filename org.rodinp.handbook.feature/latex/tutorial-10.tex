@@ -1,7 +1,8 @@
 \section{Location Access Controller}
 \label{tutorial_10}
 
-\tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. For this we use the model of a Location Access Controller. The goal is to develop the proofs that ensure there are no deadlocks present in the initial model and in the first refinement.}
+\marginpar{Maybe someone should go through this section and carry out all of the tasks to see if it is logical and makes sense}
+\tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. For this we use the model of a location access controller. The goal is to develop the proofs that ensure there are no deadlocks present in the initial model and in the first refinement.}
 
 %\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
 
@@ -99,9 +100,9 @@ So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outsi
 %	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
 %\end{center}
 
-Now add the hypothesis $\exists x . x \in P$ using the \textsf{ah} button. Then, click on the Auto Prover button (The button with a robot on it). Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
+Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button. Then, click on the \icon{rodin/auto_prover.png button}. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
 
-Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
+Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -121,7 +122,7 @@ Click on the existential quantifier of the expression $\exists x \cdot x \in P$ 
 
 \warning{If the hypothesis does not appear immediately in the \textsf{Selected Hypothesis} view, reclick on the Auto Prover button until it does.}
 
-Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover since \textsf{sit} is a total function (\ref{total_function}). In the first case, \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. You can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view, click on the \textsf{Search Hypothesis button} and add it to the selected hypothesis using the green plus icon). Then you can finish this case with the \textsf{p0} prover (select the items from this case from the proof tree and hit the h0 button. If this doesn't work, hit the lasoo button to select all of the necessary hypotheses and try again). Now you have reached the other branch of the case distinction in the proof tree. In this case, you can simply instantiate \textsf{l} with \textsf{l} since 
+Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} \marginpar{no icon for dc} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover since \textsf{sit} is a total function (\ref{total_function}). In the first case, \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. You can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view, click on the \textsf{Search Hypothesis button} and add it to the selected hypothesis using the green plus icon). Then you can finish this case with the \textsf{p0} prover (select the items from this case from the proof tree and hit the \textsf{p0} button. If this doesn't work, hit the \icon{rodin/lasoo_prover.png} button to select all of the necessary hypotheses and try again). Now you have reached the other branch of the case distinction in the proof tree. In this case, you can simply instantiate \textsf{l} with \textsf{l} since 
 \textsf{x} is not situated there. Finally, use the \textsf{p0} button to finish the proof. 
 
 \subsection{First Refinement}
@@ -146,7 +147,7 @@ Now we know that this model contains a problem ignored in the document requremen
 
 \info{Please note that post-tactics should still be disabled before starting this part of the tutorial.} 
 
-At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. As described in section \ref{tut_10_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
+At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. As described in Section \ref{tut_10_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
 
 \begin{description}
 \INVARIANTS
@@ -157,7 +158,7 @@ At the beginning of this section we need to come back to the \textsf{Event-B Per
 
 Save the file. Once again, the prover fails to prove the deadlock freeness automatically. Actually all we want to prove is that ``any person authorized to be in a location must also be authorized to go in another location which communicates with the first one''.
 
-This can be illustrated as demonstrated in figure \ref{fig_tut_10_graph}.
+This can be illustrated as demonstrated in Figure \ref{fig_tut_10_graph}.
 
 \begin{figure}[!h]
 \begin{center}

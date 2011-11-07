@@ -480,10 +480,30 @@ The following reference sections follow the form: \\[2em]
 \subsection{Relations}
 \label{relations}
 
-\subsubsection{Pairs}
-\label{pairs}
+\subsubsection{Pairs and Cartesian product}
+\label{pairs_and_cartesian_product}
 \index{pair}
-TODO
+\index{maplet}
+\index{Cartesian product}
+\begin{rrnames}
+  $\mapsto$ & \texttt{|->} & Pair \\
+  $\cprod$  & \texttt{**}  & Cartesian product
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x\mapsto y$ denotes the pair whose first element is $x$ and second element is $y$.
+
+    $S\cprod T$ denotes the set of pairs where the first element is a member of $S$ and
+    second element is a member of $T$.
+  \rrdef
+    $S\cprod T = \{~x\mapsto y~|~x\in S\land y\in Y~\}$
+  \rrtypes
+    $x\mapsto y\in\alpha\cprod\beta$ with $x\in\alpha$ and $y\in\beta$.\\
+    $S\cprod T\in\pow(\alpha\cprod\beta)$ with $S\in\pow(\alpha)$ and $T\in\pow(\beta)$.
+  \rrwd
+    $\wdl(x\mapsto y)\defi\wdl(x)\land\wdl(y)$\\
+    $\wdl(S\cprod T)\defi\wdl(S)\land\wdl(T)$
+\end{rodinrefentry}
 
 \subsubsection{Relations}
 \index{relation}
@@ -562,8 +582,6 @@ TODO
 
 \subsubsection{Operations on relations}
 \label{operations_on_relations}
-\index{relational image}
-\index{relation!image}
 \index{composition of relations}
 \index{relation!composition}
 \index{parallel product}
@@ -605,17 +623,22 @@ TODO
 
 \subsubsection{Relational image}
 \label{relational_image}
+\index{relational image}
+\index{relation!image}
 \begin{rrnames}
   $[\ldots]$  & \texttt{[}\ldots\texttt{]}  & Relational image
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
+    The relational image $r[S]$ are those elements in the range of $r$
+    that are mapped from $S$.
   \rrdef
+    $r[S] = \{~x,y~\qdot~x\in S\land x\mapsto y\in r~|~y~\}$
   \rrtypes
+    $r[S]\in\pow(\beta)$ with $r\in\pow(\alpha\cprod\beta)$ and $S\in\pow(\alpha)$
   \rrwd
+    $\wdl(r[S])\defi\wdl(r)\land\wdl(S)$
 \end{rodinrefentry}
-
-
 
 \subsubsection{Constant relations}
 \label{constant_relations}
@@ -687,7 +710,44 @@ TODO
 \subsubsection{Function application}
 \label{function_application}
 \index{function application}
-TODO
+\begin{rrnames}
+  $(\ldots)$  & \texttt{(}\ldots\texttt{)}  & Function application
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    TODO
+  \rrdef
+    $f(x) = y \defi x \mapsto y\in f$
+  \rrtypes
+    $f(x)\in\beta$ with $f\in\pow(\alpha\cprod\beta)$ and $x\in\alpha$
+  \rrwd
+    $\wdl(f(x))\defi\wdl(f)\land\wdl(x)\land f\in\alpha\pfun\beta \land x\in\dom(f)$
+    with $\pow(\alpha\cprod\beta)$ being the type of $f$.
+\end{rodinrefentry}
+
+\subsubsection{Lambda}
+\label{lambda}
+\index{lambda}
+\begin{rrnames}
+  $\lambda$  & \texttt{\%}  & Lambda
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $(\lambda~x~\qdot~P~|~E~)$ is a function that maps an ``input'' $x$ to
+    a result $E$ such that $P$ holds. 
+
+    TODO (esp. pattern instead of identifiers)
+  \rrdef
+    $(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~) = \{~(x_1\mapsto\ldots\mapsto x_n)\mapsto E~|~P~\}$
+  \rrtypes
+    $(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~)\in\pow(~(\alpha_1\cprod\ldots\cprod\alpha_n)\cprod\beta~)$ with the identifiers $x_1\in\alpha_1$, \dots, $x_n\in\alpha_n$, $P$ being a predicate
+    and $E\in\beta$.
+  \rrwd
+    $\wdl(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~)\defi
+    \forall x_1,\ldots,x_n~\qdot~\wdl(P)\land (P\limp \wdl(E))$
+\end{rodinrefentry}
+
+
 
 \subsection{Arithmetic}
 \label{arithmetic}

@@ -17,7 +17,8 @@ In Event-B we have 3 kinds of basic data types:
 \item \index{boolean!as type}
   $\Bool$ is the set of Booleans. 
   It has two elements $\Bool = \{\True,\False\}$.
-\item User defined carrier sets. 
+\item \index{carrier sets}
+  User defined carrier sets. 
   These are defined in the \eventbsection{Sets} section of a context.
   Carrier sets are never empty.
   There is no other assumption made about carrier sets unless it is stated explicitly as
@@ -29,6 +30,8 @@ From all data types $\alpha, \beta$, two other kinds of data types can be constr
 \item $\alpha\cprod\beta$ contains the pairs where the first element is of type $\alpha$ and the
   second element of type $\beta$.
 \end{itemize}
+\index{type expression} Expressions that are constructed by the rules above are called \emph{type expressions}.
+
 \paragraph{A note about the notation}
 We use the Greek letters $\alpha$, $\beta$, $\gamma$, \ldots to represent arbitrary data types.
 For an expression $E$, we write $E\in\alpha$ to state that $E$ is of type $\alpha$.
@@ -528,7 +531,14 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    $S\rel T$ is the set of relations between the two sets $S$ and $T$.
+    A relation consists of pairs where the first element is of $S$ and the
+    second of $T$. $S\rel T$ is just an abreviation for $\pow(S\rel T)$.
+
+    A total relation is a relation which relates each element of $S$ to at least one element of $T$.
+
+    A surjective relation is a relation where there is at least one element of $S$ for each element of $T$
+    such that both are related.
   \rrdef
     $S \rel T = \pow(S\cprod T)$\\
     $S \trel T = \{~r~|~r\in S\rel T\land \dom(r) = S~\}$\\
@@ -553,7 +563,12 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    If $r$ is a relation between the sets $S$ and $T$, 
+    the domain $\dom(r)$ is the set of elements of $S$ that are related to at least one
+    element of $T$ by $r$.
+
+    Likewise the range $\ran(r)$ is the set of elements of $T$ where at least one element
+    of $S$ relates to by $r$.
   \rrdef
     $\dom(r) = \{~x~|~\exists y \qdot x\mapsto y\in r~\}$\\
     $\ran(r) = \{~y~|~\exists x \qdot x\mapsto y\in r~\}$
@@ -670,7 +685,13 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    $\id$ is the identity relation that maps every element to itself.
+
+    $\prjone$ is a function that maps a pair to its first element. Likewise $\prjtwo$ maps
+    a pair to its second element.
+
+    $\id$, $\prjone$ and $\prjtwo$ are generic definitions. Their type must be infered
+    from the environment.
   \rrdef
     $\id = \{~x\mapsto x~|~\btrue~\}$\\
     $\prjone = \{~ (x\mapsto y)\mapsto x~|~\btrue~\}$\\
@@ -683,6 +704,9 @@ The following reference sections follow the form: \\[2em]
     $\wdl(\id)\defi\btrue$\\
     $\wdl(\prjone)\defi\btrue$\\
     $\wdl(\prjtwo)\defi\btrue$
+  \rrex
+    The assumption that a relation $r$ is irreflexive can be expressed by:\\
+    $r\binter \id=\emptyset$
 \end{rodinrefentry}
 
 \subsubsection{Sets of functions}
@@ -734,7 +758,8 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    The function application $f(x)$ yields the value for $x$ of the function $f$.
+    It is only defined if $x$ is in the domain of $f$ and if $f$ is a actually a function.
   \rrdef
     $f(x) = y \defi x \mapsto y\in f$
   \rrtypes
@@ -873,6 +898,34 @@ The following reference sections follow the form: \\[2em]
     $\wdl(\max(I)) \defi \wdl(I) \land I\neq\emptyset \land \exists b \qdot \forall x\qdot x\in I\limp b\geq x$
 \end{rodinrefentry}
 
+\subsection{Typing}
+\label{typing}
+\index{oftype operator ($\boftype$)}
+\begin{rrnames}
+  $\boftype$      & \texttt{oftype}   & of type
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $E\boftype \alpha$ is an expression that has exactly the value of $E$ but its
+    type is specified by the type expression (\ref{data_type}) $\alpha$.
+
+    $E$ is restricted to \ldots (TODO).
+
+    This expression is only needed when the type of an expression is otherwise not inferable.
+    $\boftype$ is rarely used, mostly inside proofs, not models (TODO: Is that so?).
+  \rrdef
+    $E\boftype\alpha = E$
+  \rrtypes
+    $E\boftype\alpha\in\alpha$ with $E\in\alpha$
+  \rrwd
+    $\wdl(E\boftype\alpha) \defi \wdl(E)$
+  \rrex
+    The predicate $\emptyset=\emptyset$ is not correctly typed in Event-B because the types
+    of $\emptyset$ are not inferable. A valid alternative would be:\\
+    $(\emptyset\boftype\intg) = \emptyset$
+\end{rodinrefentry}
+
+
 \subsection{Assignments}
 \label{assignments}
 
@@ -977,191 +1030,6 @@ in the expression $E$.
   \rrfis
     $\actfis(~x \bcmin \eventbassignmentexpr{}~) \defi \eventbassignmentexpr{}\neq\emptyset$
 \end{rodinrefentry}
-
-
-
-\subsection{ASCII Representations of the Mathematical Symbols}
-\label{ascii_representations_of_the_mathematical_symbols}
-
-\marginpar{CONTENT MIGRATED FROM WIKI!}
-
-The mathematical symbols used in the Event-B mathematical language are Unicode characters beyond the ASCII subset. These characters are not always easy to input with a regular keyboard. To help users enter these characters, a list of standard input strings have been defined. When any of these strings is entered, it is automatically converted by the user interface to the corresponding Unicode character (i.e., mathematical symbol).
-
-\subsubsection{Atomic Symbols}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	true & $\top$ \\ \hline
-	false & $\bot$ \\ \hline
-	INT & $\mathbb{Z}$ \\ \hline
-	NAT & $\mathbb{N}$ \\ \hline
-	NAT1 & $\mathbb{N_1}$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	BOOL & $\mathrm{BOOL}$ \\ \hline
-	TRUE & $\mathrm{TRUE}$ \\ \hline
-	FALSE & $\mathrm{FALSE}$ \\ \hline
-	\{\} & $\emptyset$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	prj1 & $\prjone$ \\ \hline
-	prj2 & $\prjtwo$ \\ \hline
-	id & $\id$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Unary Operators}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	not & $\neg$ \\ \hline
-	finite & $finite$ \\ \hline
-	card & $\card$ \\ \hline
-	POW & $\pow$ \\ \hline
-	POW1 & $\pown$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	union & $\union$ \\ \hline
-	inter & $\inter$ \\ \hline
-	dom & $\dom$ \\ \hline
-	ran & $\ran$ \\ \hline
-%TODO: TILDE!
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	min & $\min$ \\ \hline
-	max & $\max$ \\ \hline
-	- & $-$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Assignment Operators}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	:= & $\bcmeq$ \\ \hline
-	:| & $\bcmsuch$ \\ \hline
-	:: & $\bcmin$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Binary Operators}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	\& & $\land$ \\ \hline
-	or & $\lor$ \\ \hline
-	$=>$ & $\limp$ \\ \hline
-	$<=>$ & $\leqv$ \\ \hline
-	= & $=$ \\ \hline
-	/= & $\neq$ \\ \hline
-	: & $\in$ \\ \hline
-	$<<:$ & $\subset$ \\ \hline
-	$/<<:$ & $\not\subset$ \\ \hline
-	$<:$ & $\subseteq$ \\ \hline
-	$/<$: & $\not\subseteq$ \\ \hline
-	$<$ & $<$ \\ \hline
-	$<=$ & $\leq$ \\ \hline
-	$>$ & $>$ \\ \hline
-	$>=$ & $\geq$ \\ \hline
-	/: & $\notin$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	$|->$ & $\mapsto$ \\ \hline
-	$<->$ & $\rel$ \\ \hline
-	$<<->$ & $\trel$ \\ \hline
-	$<->>$ & $\srel$ \\ \hline
-	$<<->>$ & $\strel$ \\ \hline
-	$+->$ & $\pfun$ \\ \hline
-	$-->$ & $\tfun$ \\ \hline
-	$+>>$ & $\psur$ \\ \hline
-	$->>$ & $\tsur$ \\ \hline
-	$>->>$ & $\tbij$ \\ \hline
-	$/\backslash$ & $\binter$ \\ \hline
-	$\backslash/$ & $\bunion$ \\ \hline
-	$\backslash$ & $\setminus$ \\ \hline
-	$**$ & $\cprod$ \\ \hline
-	$>->$ & $\tinj$ \\ \hline
-	$>+>$ & $\pinj$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	$<+$ & $\ovl$ \\ \hline
-	$||$ & $\pprod$ \\ \hline
-	$><$ & $\dprod$ \\ \hline
-	$circ$ & $\bcomp$ \\ \hline
-	$;$ & $\fcomp$ \\ \hline
-	$<|$ & $\domres$ \\ \hline
-	$<<|$ & $\domsub$ \\ \hline
-	$|>$ & $\ranres$ \\ \hline
-	$-$ & $-$ \\ \hline
-	$*$ & $*$ \\ \hline
-	$/$ & $\div$ \\ \hline
-	$..$ & $\upto$ \\ \hline
-	$TODO$ & $\expn$ \\ \hline
-	$+$ & $+$ \\ \hline
-	$|>>$ & $\ransub$ \\ \hline
-    \end{tabular}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	$mod$ & $mod$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Multiple Operators}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	partition & $partition$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Quantifiers}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	! & $\forall$ \\ \hline
-	\# & $\exists$ \\ \hline
-	\% & $\lambda$ \\ \hline
-	UNION & $\Union$ \\ \hline
-	INTER & $\Inter$ \\ \hline
-	| & $|$ \\ \hline
-	. & $\qdot$ \\ \hline
-    \end{tabular}
-\end{center}
-
-\subsubsection{Typing}
-
-\begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
-    \hline
-	ASCII & Symbol \\ \hline
-	oftype & \includegraphics[]{img/reference/ref_03_offtype_symbol.png} \\ \hline
-    \end{tabular}
-\end{center}
 
 %%% Local Variables: 
 %%% mode: latex

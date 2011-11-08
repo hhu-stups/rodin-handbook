@@ -225,7 +225,8 @@ The following reference sections follow the form: \\[2em]
     $\bool(P)$ denotes the Boolean value of a predicate $P$. If $P$ is true, the expression
     is $\True$, if $P$ is false, the expression is $\False$.
   \rrdef
-    $\Bool = \{\True,\False\}$ \\
+    $\bpartition(\Bool,\{\True\},\{\False\})$\\
+    %$\Bool = \{\True,\False\}$ \\
     $\bool(P)=\True \leqv P$
   \rrtypes
     $\Bool\in\pow(\Bool)$\\
@@ -622,14 +623,21 @@ The following reference sections follow the form: \\[2em]
     $r^{-1} = \{y\mapsto x~|~x\mapsto y\in r~\}$
   \rrtypes
     $r\fcomp s\in\pow(\alpha\cprod\gamma)$ with $r\in\pow(\alpha\cprod\beta)$ and
-      $s\in\pow(\beta\cprod\gamma)$.\\
+      $s\in\pow(\beta\cprod\gamma)$\\
     $r\bcomp s\in\pow(\gamma\cprod\alpha)$ with $r\in\pow(\alpha\cprod\beta)$ and
-      $s\in\pow(\beta\cprod\gamma)$.\\
+      $s\in\pow(\beta\cprod\gamma)$\\
     $r\ovl s\in\pow(\alpha\cprod\beta)$ with $r\in\pow(\alpha\cprod\beta)$ and
-      $s\in\pow(\alpha\cprod\beta)$.\\
-    TODO
+      $s\in\pow(\alpha\cprod\beta)$\\
+    $r\pprod s\in\pow(\alpha\cprod(\beta\cprod\gamma))$ with $r\in\pow(\alpha\cprod\beta)$ and
+      $s\in\pow(\alpha\cprod\gamma)$\\
+    $r\dprod s\in\pow(~(\alpha\cprod\gamma)\cprod(\beta\cprod\delta)~)$ with
+      $r\in\pow(\alpha\cprod\beta)$ and
+      $s\in\pow(\gamma\cprod\delta)$\\
+    $r^{-1}\in\pow(\beta\cprod\alpha)$ with $r\in\pow(\alpha\cprod\beta)$
   \rrwd
-    TODO
+    $\wdl(r\opelipse s)\defi\wdl(r)\land\wdl(s)$ for each operator $\opelipse$ of
+    $\fcomp$, $\bcomp$, $\ovl$, $\pprod$, $\dprod$\\
+    $\wdl(r^{-1})\defi\wdl(r)$
 \end{rodinrefentry}
 
 \subsubsection{Relational image}

@@ -151,7 +151,7 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    The universal quantification $\forall x_1\ldots,x_n~\qdot~P$ is true if $P$ is satisfied for all
+    The universal quantification $\forall x_1,\ldots,x_n~\qdot~P$ is true if $P$ is satisfied for all
     possible values of $x_1\ldots,x_n$.
     A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~P_1\limp P_2$ where
     $P_1$ is used to specify the types of the identifiers.
@@ -247,9 +247,10 @@ The following reference sections follow the form: \\[2em]
 \label{set_comprehensions}
 \index{set!comprehension set}
 \begin{rrnames}
-  $\{~\textit{ids}~\qdot~P~|~E~\}$     & \texttt{\{\textit{ids}.P|E\}}    & Set comprehension with expression \\
-  $\{~\textit{ids}~|~P~\}$             & \texttt{\{\textit{ids}|P\}}      & Set comprehension \\
-  $\{~E~|~P~\}$                        & \texttt{\{\textit{ids}|P\}}      & Set comprehension ??? \\
+  $\{~\textit{ids}~\qdot~P~|~E~\}$     & \texttt{\{\textit{ids}.P|E\}}    & Set comprehension \\
+% The following set does not exists!
+%  $\{~\textit{ids}~|~P~\}$             & \texttt{\{\textit{ids}|P\}}      & Set comprehension \\
+  $\{~E~|~P~\}$                        & \texttt{\{E|P\}}      & Set comprehension (short form)\\
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
@@ -260,20 +261,21 @@ The following reference sections follow the form: \\[2em]
     The set comprehension $\{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ contains all values of $E$ for values
     of $x_1,\ldots,x_n$ where $P$ is true.
 
-    The form $\{~x_1,\ldots,x_n~|~P~\}$ contains all values of $x_1,\ldots,x_n$ where $P$ is true.
+    %The form $\{~x_1,\ldots,x_n~|~P~\}$ contains all values of $x_1,\ldots,x_n$ where $P$ is true.
 
-    $\{~E~|~P~\}$ is a short form for $\{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ where the identifiers
-    $x_1,\ldots,x_n$ are implicitly given by the free identifiers of $E$ and $P$.    
+    $\{~E~|~P~\}$ is a short form for $\{~\freeids{E}~\qdot~P~|~E~\}$ where $\freeids{E}$ denotes the
+    list of free identifiers occurring in $E$ (see \ldots (TODO)).
   \rrdef
-    $\{~x_1,\ldots,x_n~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~x_1\mapsto\ldots\mapsto x_n~\}$\\
-    $\{~E~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~E~\}$ where $x_1\ldots,x_n$ are the free identifiers in $E$ and $P$
+    % $\{~x_1,\ldots,x_n~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~x_1\mapsto\ldots\mapsto x_n~\}$\\
+    $\{~E~|~P~\} = \{~\freeids{E}~\qdot~P~|~E~\}$
   \rrtypes
     With $x_1\in\alpha_1, \ldots, x_n\in\alpha_n$ and $E\in\beta$:\\
     $\{~x_1,\ldots,x_n~\qdot~P~|~E~\} \in \pow(\beta)$\\
-    $\{~x_1,\ldots,x_n~|~P~\} \in \pow(\alpha_1\cprod\ldots\cprod\alpha_n)$\\
+    %$\{~x_1,\ldots,x_n~|~P~\} \in \pow(\alpha_1\cprod\ldots\cprod\alpha_n)$\\
     $\{~E~|~P~\} \in \pow(\beta)$  
   \rrwd
-    $\wdl(\{~x_1,\ldots,x_n~\qdot~P~|~E~\}) \quad\defi\quad \forall x_1,\ldots,x_n \qdot \wdl(P) \land (P \limp \wdl(E))$
+    $\wdl(\{~x_1,\ldots,x_n~\qdot~P~|~E~\}) \quad\defi\quad \forall x_1,\ldots,x_n \qdot \wdl(P) \land (P \limp \wdl(E))$\\
+    $\wdl(\{~E~|~P~\}) \quad\defi\quad \forall \freeids{E} \qdot \wdl(P) \land (P \limp \wdl(E))$
   \rrex
     The following set comprehensions contain all the first 10 squares numbers:\\
     $\{1,4,9,16,25,36,49,64,81,100\}$\\
@@ -465,16 +467,26 @@ The following reference sections follow the form: \\[2em]
 
     Analougously is $\Union x_1\ldots,x_n~\qdot~P~|~E$ the intersection of all values of $E$ for
     valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $P$.
+
+    Like set comprehensions (\ref{set_comprehensions}), the quantified union and intersection have a
+    short form where the free variables of the expression are quantified implicitly:
+    $\Union E~|~P$ and $\Inter E~|~P$.
   \rrdef
     $\Union x_1\ldots,x_n~\qdot~P~|~E = \union(\{~x_1\ldots,x_n~\qdot~P~|~E\})$\\
-    $\Inter x_1\ldots,x_n~\qdot~P~|~E = \inter(\{~x_1\ldots,x_n~\qdot~P~|~E\})$
+    $\Inter x_1\ldots,x_n~\qdot~P~|~E = \inter(\{~x_1\ldots,x_n~\qdot~P~|~E\})$\\
+    $\Union E~|~P = \Union \freeids{E}~\qdot~P~|~E$\\
+    $\Inter E~|~P = \Inter \freeids{E}~\qdot~P~|~E$
   \rrtypes
     With $E\in\pow(\alpha)$ and $P$ being a predicate:\\
     $(\Union x_1\ldots,x_n~\qdot~P~|~E) \in \pow(\alpha)$\\
-    $(\Inter x_1\ldots,x_n~\qdot~P~|~E) \in \pow(\alpha)$
+    $(\Inter x_1\ldots,x_n~\qdot~P~|~E) \in \pow(\alpha)$\\
+    $(\Union E~|~P) \in \pow(\alpha)$\\
+    $(\Inter E~|~P) \in \pow(\alpha)$\\
   \rrwd
     $\wdl(\Union x_1\ldots,x_n~\qdot~P~|~E) \defi (~\forall x_1\ldots,x_n \qdot \wdl(P) \land (P\limp\wdl(E))~)$\\
-    $\wdl(\Inter x_1\ldots,x_n~\qdot~P~|~E) \defi (~\forall x_1\ldots,x_n \qdot \wdl(P) \land (P\limp\wdl(E))~) \land (\exists x_1\ldots,x_n \qdot \wdl(P))$
+    $\wdl(\Inter x_1\ldots,x_n~\qdot~P~|~E) \defi (~\forall x_1\ldots,x_n \qdot \wdl(P) \land (P\limp\wdl(E))~) \land \exists x_1\ldots,x_n \qdot \wdl(P)$\\
+    $\wdl(\Union E~|~P) \defi (~\forall\freeids{E} \qdot \wdl(P) \land (P\limp\wdl(E))~)$\\
+    $\wdl(\Inter E~|~P) \defi (~\forall\freeids{E} \qdot \wdl(P) \land (P\limp\wdl(E))~) \land \exists\freeids{E} \qdot \wdl(P)$
 \end{rodinrefentry}
 
 \subsection{Relations}
@@ -563,16 +575,15 @@ The following reference sections follow the form: \\[2em]
   \rrdesc
     TODO
   \rrdef
-    $s\domres r = \{~x,y~|~x\mapsto y\in r \land x\in s\}$\\
-    $s\domsub r = \{~x,y~|~x\mapsto y\in r \land x\not\in s\}$\\
-    $r\ranres s = \{~x,y~|~x\mapsto y\in r \land y\in s\}$\\
-    $r\ransub s = \{~x,y~|~x\mapsto y\in r \land y\not\in s\}$
+    $s\domres r = \{~x\mapsto y~|~x\mapsto y\in r \land x\in s\}$\\
+    $s\domsub r = \{~x\mapsto y~|~x\mapsto y\in r \land x\not\in s\}$\\
+    $r\ranres s = \{~x\mapsto y~|~x\mapsto y\in r \land y\in s\}$\\
+    $r\ransub s = \{~x\mapsto y~|~x\mapsto y\in r \land y\not\in s\}$
   \rrtypes
     $s\domres r\in\pow(\alpha\cprod\beta)$ and $s\domsub r\in\pow(\alpha\cprod\beta)$
-    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\alpha)$.
-
+    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\alpha)$\\
     $r\ranres s\in\pow(\alpha\cprod\beta)$ and $r\ransub s\in\pow(\alpha\cprod\beta)$
-    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\beta)$.    
+    with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\beta)$  
   \rrwd
     $\wdl(s\domres r)\defi\wdl(s)\land\wdl(r)$\\
     $\wdl(s\domsub r)\defi\wdl(s)\land\wdl(r)$\\
@@ -728,23 +739,37 @@ The following reference sections follow the form: \\[2em]
 \subsubsection{Lambda}
 \label{lambda}
 \index{lambda}
+\newcommand{\lambdapattern}{\mathcal{P}}
 \begin{rrnames}
   $\lambda$  & \texttt{\%}  & Lambda
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $(\lambda~x~\qdot~P~|~E~)$ is a function that maps an ``input'' $x$ to
+    $(\lambda~\lambdapattern~\qdot~P~|~E~)$ is a function that maps an ``input'' $\lambdapattern$ to
     a result $E$ such that $P$ holds. 
 
-    TODO (esp. pattern instead of identifiers)
+    $\lambdapattern$ is a pattern of identifiers, parentheses and $\mapsto$ which follows the
+    following rules:
+    \begin{itemize}
+    \item An identifier $x$ is a pattern.
+    \item A pair $p\mapsto q$ is a pattern when $p$ and $q$ are patterns.
+    \item $(p)$ is pattern when $p$ is pattern.
+    \end{itemize}
+    In the simplest case, $\lambdapattern$ is just an identifier.
   \rrdef
-    $(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~) = \{~(x_1\mapsto\ldots\mapsto x_n)\mapsto E~|~P~\}$
+    $(\lambda~\lambdapattern~\qdot~P~|~E~) = \{~\lambdapattern\mapsto E~|~P~\}$
   \rrtypes
-    $(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~)\in\pow(~(\alpha_1\cprod\ldots\cprod\alpha_n)\cprod\beta~)$ with the identifiers $x_1\in\alpha_1$, \dots, $x_n\in\alpha_n$, $P$ being a predicate
-    and $E\in\beta$.
+    $(\lambda~\lambdapattern~\qdot~P~|~E~)\in\pow(~\alpha\cprod\beta~)$
+    with $\lambdapattern\in\alpha$, $P$ being a predicate and $E\in\beta$.
   \rrwd
-    $\wdl(\lambda~x_1,\ldots,x_n~\qdot~P~|~E~)\defi
-    \forall x_1,\ldots,x_n~\qdot~\wdl(P)\land (P\limp \wdl(E))$
+    $\wdl(\lambda~\lambdapattern~\qdot~P~|~E~)~\defi~
+    \forall \freeids{\lambdapattern}~\qdot~\wdl(P)\land (P\limp \wdl(E))$
+  \rrex
+    A function $double$ that returns the double value of a natural number:\\
+    $double = (\lambda x~\qdot~x\in\nat~|~2\cdot x)$
+
+    The dot product of two 2-dimensional vectors can be defined by:\\
+    $dotp = (\lambda~(a \mapsto b)\mapsto(c \mapsto d)~\qdot~a\in\intg\land  b\in\intg\land  c\in\intg\land  d\in\intg~|~a\cdot c+b\cdot d~)$
 \end{rodinrefentry}
 
 

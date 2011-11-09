@@ -13,11 +13,11 @@ References to related proof rules would be nice to have too, but again, this is 
 
 In Event-B we have 3 kinds of basic data types:
 \begin{itemize}
-\item $\intg$ is the set of all integers.
+\item \index{integer!as type} $\intg$ is the set of all integers.
 \item \index{boolean!as type}
   $\Bool$ is the set of Booleans. 
   It has two elements $\Bool = \{\True,\False\}$.
-\item \index{carrier sets}
+\item \index{carrier set}
   User defined carrier sets. 
   These are defined in the \eventbsection{Sets} section of a context.
   Carrier sets are never empty.
@@ -62,6 +62,75 @@ Well-definedness conditions are usually used for the well-definedness proof obli
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
 In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a construct.
 
+\subsubsection{Free identifiers}
+\label{free_identifiers}
+\index{identifiers!free}
+Free identifiers in predicates and expressions are those identifiers which are used but not introduced by quantifiers.
+More formally, we define the set of free identifiers \freeids recursively as follows:
+
+\begin{tabular}{|l|l|}
+  \hline
+  \textbf{Expression / Predicate} & \textbf{Free identifiers} \\
+  \hline
+  Identifier $x$ & $\{x\}$ \\
+  \hline
+  Integer $n$ & $\emptyset$ \\
+  \hline
+  $\begin{array}{lllll}
+    \btrue &  \bfalse & \Bool & \True & \False \\
+    \emptyset & \id & \prjone & \prjtwo & \intg \\
+    \nat & \nat_1
+  \end{array}$ 
+  & $\emptyset$ \\
+  \hline
+  $\begin{array}{lllll}
+    \lnot A & \bool(A) & \pow(A) & \pow_1(A) & \bfinite(A) \\
+    \card(A) & \bunaryunion(A) & \bunaryinter(A) & A^{-1} & \dom(A) \\
+    \ran(A) & -A & \min(A) & \max(A)
+  \end{array}$ 
+  & $\freeids{A}$ \\
+  \hline
+  $\begin{array}{lllll}
+    A\land B & A\lor B & A\limp B & A\leqv B & A=B \\
+    A\neq B & A\in B & A\not\in B & A\subseteq B & A\not\subseteq B \\
+    A\subset B & A\not\subset B & A\bunion B & A\binter B & A\setminus B \\
+    A\cprod B & A\rel B & A\trel B & A\srel B & A\strel B \\
+    A\domres B & A\domsub B & A\ranres B &  A\ransub B & A\fcomp B \\
+    A\bcomp B & A\ovl B & A\pprod B & A\dprod B & A[B] \\
+    A\pfun B & A\tfun B & A\pinj B & A\tinj B & A\psur B \\
+    A\tsur B & A\tbij B & A(B) & A+B & A-B \\
+    A\cdot B & A\div B & A\bmod B & A\expn B & A\boftype B
+  \end{array}$ 
+  & $\freeids{A}\cup\freeids{B}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~E_1,\ldots,E_n~\} &
+    \bpartition(E_1,\ldots,E_n)
+  \end{array}$
+  & $\freeids{E_1}\cup\ldots\cup\freeids{E_n}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \forall\textsl{ids}~\qdot~P &
+    \exists\textsl{ids}~\qdot~P
+  \end{array}$
+  & $\freeids{P}\setminus\textsl{ids}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~\textsl{ids}~\qdot~P~|~E~\} & 
+    \Union\textsl{ids}~\qdot~P~|~E &
+    \Inter\textsl{ids}~\qdot~P~|~E
+  \end{array}$
+  & $(\freeids{P}\cup\freeids{E})\setminus\textsl{ids}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~E~|~P~\} &
+    \Union E~|~P &
+    \Inter E~|~P
+  \end{array}$
+  & $\freeids{P}\setminus\freeids{E}$\\
+  \hline
+\end{tabular}
+
 \subsubsection{Structure of the reference}
 The following reference sections follow the form: \\[2em]
 \begin{rrnames}
@@ -78,13 +147,15 @@ The following reference sections follow the form: \\[2em]
   \rrfis
     Non-deterministic assignments may have feasibility conditions.
     These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations}).
+  \rrex
+    We add examples to some constructs to clarify their use.
 \end{rodinrefentry}
 
 \subsection{Predicates}
 \label{predicates}
 
 \subsubsection{Logical primitives}
-\index{true!as predicate@as predicate $\btrue$}\index{false!as predicate@as predicate $\bfalse$}
+\index{true!as predicate@as predicate ($\btrue$)}\index{false!as predicate@as predicate ($\bfalse$)}
 \begin{rrnames}
   $\btrue$  & \texttt{true}  & True \\
   $\bfalse$ & \texttt{false} & False \\
@@ -98,7 +169,7 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Logical operators}
-\index{conjunction}\index{disjunction}\index{implication}\index{equivalence}\index{negation}
+\index{conjunction@conjunction ($\land$)}\index{disjunction@disjunction ($\lor$)}\index{implication@implication ($\limp$)}\index{equivalence@equivalence ($\leqv$)}\index{negation@negation ($\lnot$)}
 \begin{rrnames}
   $\land$  & \texttt{\&}  & Conjunction \\
   $\lor$   & \texttt{or}  & Disjunction \\
@@ -144,10 +215,10 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Quantified predicates}
 \label{quantified_predicates}
-\index{for all}
-\index{exists}
-\index{quantification!universal}
-\index{quantification!existential}
+\index{for all@for all ($\forall$)}
+\index{exists@exists ($\exists$)}
+\index{quantification!universal@universal ($\forall$)}
+\index{quantification!existential@existential ($\exists$)}
 \begin{rrnames}
   $\forall$ & \texttt{!} & Universal quantification \\
   $\exists$ & \texttt{\#} & Existential quantification \\
@@ -173,7 +244,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Equality}
 \label{equality}
-\index{equality}
+\index{equality@equality ($=$)}
 \begin{rrnames}
   $=$    & \texttt{=}  & equality \\
   $\neq$ & \texttt{/=} & inequality \\
@@ -192,7 +263,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Membership}
 \label{membership}
-\index{membership}
+\index{membership@membership ($\in$)}
 \begin{rrnames}
   $\in$    & \texttt{:}  & set membership \\
   $\not\in$ & \texttt{/:} & negated set membership \\
@@ -213,8 +284,8 @@ The following reference sections follow the form: \\[2em]
 \label{booleans}
 \index{boolean}
 \index{boolean!the operator $\bool$}
-\index{true!as expression $\True$}
-\index{false!as expression $\False$}
+\index{true!as expression ($\True$)}
+\index{false!as expression ($\False$)}
 \begin{rrnames}
   $\Bool$     & \texttt{BOOL}    & Boolean values \\
   $\True$     & \texttt{TRUE}    & Boolean true \\
@@ -268,7 +339,7 @@ The following reference sections follow the form: \\[2em]
     %The form $\{~x_1,\ldots,x_n~|~P~\}$ contains all values of $x_1,\ldots,x_n$ where $P$ is true.
 
     $\{~E~|~P~\}$ is a short form for $\{~\freeids{E}~\qdot~P~|~E~\}$ where $\freeids{E}$ denotes the
-    list of free identifiers occurring in $E$ (see \ldots (TODO)).
+    list of free identifiers occurring in $E$ (see \ref{free_identifiers})).
   \rrdef
     % $\{~x_1,\ldots,x_n~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~x_1\mapsto\ldots\mapsto x_n~\}$\\
     $\{~E~|~P~\} = \{~\freeids{E}~\qdot~P~|~E~\}$
@@ -289,7 +360,7 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Basic sets}
-\index{set!empty set}
+\index{set!empty set@empty set ($\emptyset$)}
 \index{set!set extension}
 \begin{rrnames}
   $\emptyset$     & \texttt{\{\}}        & Empty set \\
@@ -314,7 +385,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Subsets}
 \label{subsets}
-\index{subset}
+\index{subset@subset ($\subseteq,\subset$)}
 \begin{rrnames}
   $\subseteq$     & \texttt{<:}  & subset \\
   $\not\subseteq$ & \texttt{/<:}  & not a subset \\
@@ -341,10 +412,11 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Operations on sets}
-\index{union}
-\index{intersection}
-\index{set!difference set}
-\index{set!set subtraction}
+\index{union@union ($\bunion$)}
+\index{intersection@intersection ($\binter$)}
+\index{set!difference set@difference set ($\setminus$)}
+\index{set!set subtraction@set subtraction ($\setminus$)}
+\index{subtraction!of sets@of sets ($\setminus$)}
 \begin{rrnames}
   $\bunion$   & \texttt{\mybackslash/} & Union \\
   $\binter$   & \texttt{/\mybackslash} & Intersection \\
@@ -368,7 +440,7 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Power sets}
-\index{set!power set}
+\index{set!power set@power set ($\pow$)}
 \begin{rrnames}
   $\pow$      & \texttt{POW}  & Power set \\
   $\pow_1$    & \texttt{POW1} & Set of non-empty subsets \\
@@ -390,8 +462,8 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Finite sets}
 \index{set!finite}
-\index{set!cardinality}
-\index{cardinality}
+\index{set!cardinality@cardinality ($\card$)}
+\index{cardinality@cardinality ($\card$)}
 \begin{rrnames}
   $\bfinite$ & \texttt{finite} & Finite set \\
   $\card$    & \texttt{card}   & Cardinality of a finite set \\
@@ -402,7 +474,8 @@ The following reference sections follow the form: \\[2em]
     $\card(S)$ denotes the cardinality of $S$. The cardinality is only defined for
     finite sets.
   \rrdef
-    TODO
+    $\bfinite(S) ~\defi~ \exists n,b~\qdot~n\in\nat\land b\in S\tbij 1\upto n$\\
+    $\card(S)=n ~\defi~ \exists b~\qdot~b\in S\tbij 1\upto n$
   \rrtypes
     $\bfinite(S)$ is a predicate and
     $\card(S)\in\intg$
@@ -436,7 +509,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Generalized union and intersection}
 \index{union!generalized union}
-\index{intersection!generalized intersection}
+\index{intersection!generalized intersection@generalized intersection ($\bunaryinter$)}
 \begin{rrnames}
   $\bunaryunion$ & \texttt{union} & Generalized union \\
   $\bunaryinter$ & \texttt{inter} & Generalized intersection \\
@@ -458,8 +531,8 @@ The following reference sections follow the form: \\[2em]
 
 
 \subsubsection{Quantified union and intersection}
-\index{union!quantified union}
-\index{intersection!quantified intersection}
+\index{union!quantified union@quantified union ($\Union$)}
+\index{intersection!quantified intersection@quantified intersection ($\Inter$)}
 \begin{rrnames}
   $\Union$ & \texttt{UNION} & Quantified union \\
   $\Inter$ & \texttt{INTER} & Quantified intersection \\
@@ -499,8 +572,8 @@ The following reference sections follow the form: \\[2em]
 \subsubsection{Pairs and Cartesian product}
 \label{pairs_and_cartesian_product}
 \index{pair}
-\index{maplet}
-\index{Cartesian product}
+\index{maplet@maplet ($\mapsto$)}
+\index{Cartesian product@Cartesian product ($\cprod$)}
 \begin{rrnames}
   $\mapsto$ & \texttt{|->} & Pair \\
   $\cprod$  & \texttt{**}  & Cartesian product
@@ -522,7 +595,7 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Relations}
-\index{relation}
+\index{relation@relation ($\rel$,$\trel$,$\srel$,$\strel$)}
 \begin{rrnames}
   $\rel$   & \texttt{<->} & Relations \\
   $\trel$  & \texttt{<}\texttt{<->} & Total relations \\
@@ -555,8 +628,8 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Domain and Range}
 \label{domain_and_range}
-\index{domain}
-\index{range}
+\index{domain@domain ($\dom$)}
+\index{range@range ($\ran$)}
 \begin{rrnames}
   $\dom$  & \texttt{dom} & Domain \\
   $\ran$  & \texttt{ran} & Range \\
@@ -581,6 +654,10 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Domain and Range Restrictions}
 \label{domain_and_range_restrictions}
+\index{domain restriction@domain restriction ($\domres$)}
+\index{domain subtraction@domain subtraction ($\domsub$)}
+\index{range restriction@range restriction ($\ranres$)}
+\index{range subtraction@range subtraction ($\ransub$)}
 \begin{rrnames}
   $\domres$  & \texttt{<|}           & Domain restriction\\
   $\domsub$  & \texttt{<}\texttt{<|} & Domain subtraction\\
@@ -589,7 +666,13 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    The domain restriction $S\domres r$ is a subset of the relation $r$ that contains
+    all pairs whose first element is in $S$. $S\domsub r$ is the subset where 
+    the pair's first element is \emph{not} in $S$.
+    
+    Analogously the range restriction $r\ranres S$ is a subset that contains all pairs
+    whose second element is in $S$ and $r\ransub S$ is the set where the pair's second
+    element is not in $S$.
   \rrdef
     $s\domres r = \{~x\mapsto y~|~x\mapsto y\in r \land x\in s\}$\\
     $s\domsub r = \{~x\mapsto y~|~x\mapsto y\in r \land x\not\in s\}$\\
@@ -601,23 +684,22 @@ The following reference sections follow the form: \\[2em]
     $r\ranres s\in\pow(\alpha\cprod\beta)$ and $r\ransub s\in\pow(\alpha\cprod\beta)$
     with $r\in\pow(\alpha\cprod\beta)$ and $s\in\pow(\beta)$  
   \rrwd
-    $\wdl(s\domres r)\defi\wdl(s)\land\wdl(r)$\\
-    $\wdl(s\domsub r)\defi\wdl(s)\land\wdl(r)$\\
-    $\wdl(r\ranres s)\defi\wdl(r)\land\wdl(s)$\\
-    $\wdl(r\ransub s)\defi\wdl(r)\land\wdl(s)$
+    $\wdl(s\opelipse r)\defi\wdl(s)\land\wdl(r)$ for each operator $\opelipse$ of
+    $\domres$, $\domsub$, $\ranres$, $\ransub$
 \end{rodinrefentry}
 
 \subsubsection{Operations on relations}
 \label{operations_on_relations}
-\index{composition of relations}
-\index{relation!composition}
-\index{parallel product}
-\index{direct product}
-\index{relation!parallel product}
-\index{relation!direct product}
-\index{inverse}
-\index{relation!inverse}
-
+\index{composition!forward composition of relations ($\fcomp$)}
+\index{composition!backward composition of relations ($\bcomp$)}
+\index{relation!backward composition ($\bcomp$)}
+\index{relation!forward composition ($\bcomp$)}
+\index{product!parallel product of relations ($\pprod$)}
+\index{product!direct product of relations ($\dprod$)}
+\index{relation!parallel product ($\pprod$)}
+\index{relation!direct product ($\dprod$)}
+\index{inverse ($\mbox{}^{-1}$)}
+\index{relation!inverse ($\mbox{}^{-1}$)}
 \begin{rrnames}
   $\fcomp$    & \texttt{;}                  & Relational forward composition\\
   $\bcomp$    & \texttt{circ}               & Relational backward composition\\
@@ -628,7 +710,26 @@ The following reference sections follow the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    TODO
+    An element $x$ is related by $r\fcomp S$ to an element $y$ if
+    there is an element $z$ such that $R$ relates $x$ to $z$ and $S$ relates
+    $z$ to $y$.
+
+    $s\bcomp r$ can be written as an alternative to $r\fcomp s$.
+    This reflects the fact that for two functions $f$ and $g$ holds
+    $f(g(x)) = (f\bcomp g)(x)$.
+
+    The relational overwrite $r\ovl s$ is equal to $r$ except all entries in $r$
+    whose first element is in the domain of $s$ are replaced by the corresponding 
+    entries in $s$.
+    
+    If a relation $r$ relates an element $x$ to $z$ and $s$ relates $x$ to $z$,
+    the parallel product $r\pprod s$ relates $x$ to the pair $y\mapsto z$.
+
+    The direct product $r\dprod s$ relates a pair $x\mapsto y$ to a pair $m\mapsto n$
+    when $r$ relates $x$ to $m$ and $s$ relates $y$ to $n$.
+
+    The inverse relation $r^{-1}$ relates an element $x$ to $y$ if the original relation $r$ 
+    relates $y$ to $x$.
   \rrdef
     $r\fcomp s = \{~x \mapsto y~|~\exists z\qdot x \mapsto z \in r \land z \mapsto y \in s~\}$\\
     $r\bcomp s = s\fcomp r$\\
@@ -676,8 +777,9 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Constant relations}
 \label{constant_relations}
-\index{identity relation}
-\index{projection}
+\index{identity relation@identity relation ($\id$)}
+\index{relation!identity ($\id$)}
+\index{projection@projection ($\prjone$,$\prjtwo$)}
 \begin{rrnames}
   $\id$      & \texttt{id}   & Identity relation \\
   $\prjone$  & \texttt{prj1} & First projection \\
@@ -710,7 +812,10 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Sets of functions}
-\index{function}\index{injection}\index{surjection}\index{bijection}
+\index{function@function ($\pfun$, $\tfun$)}
+\index{injection@injection ($\pinj$,$\tinj$)}
+\index{surjection@surjection ($\psur$,$\tsur$)}
+\index{bijection@bijection ($\tbij$)}
 \begin{rrnames}
   $\pfun$  & \texttt{+->}   & Partial functions\\
   $\tfun$  & \texttt{-->}   & Total functions \\
@@ -771,7 +876,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsubsection{Lambda}
 \label{lambda}
-\index{lambda}
+\index{lambda@lamba expression ($\lambda$)}
 \newcommand{\lambdapattern}{\mathcal{P}}
 \begin{rrnames}
   $\lambda$  & \texttt{\%}  & Lambda
@@ -811,6 +916,8 @@ The following reference sections follow the form: \\[2em]
 \label{arithmetic}
 
 \subsubsection{Sets of numbers}
+\index{integer!as set@as set ($\intg$)}
+\index{natural numbers@natural numbers ($\nat$)}
 \begin{rrnames}
   $\intg$  & \texttt{INT}  & Integers \\
   $\nat$   & \texttt{NAT}  & Natural numbers, starting with 0 \\
@@ -839,6 +946,16 @@ The following reference sections follow the form: \\[2em]
 \end{rodinrefentry}
 
 \subsubsection{Arithmetic operations}
+\label{arithmetic_operations}
+\index{addition@addition ($+$)}
+\index{plus@plus ($+$)}
+\index{subtraction!of integers@of integers ($-$)}
+\index{minus@minus ($-$)}
+\index{multiplication@multiplication ($\cdot$)}
+\index{product!of integers@of integers ($\cdot$)}
+\index{division@division ($\div$)}
+\index{modulo@modulo ($\bmod$)}
+\index{exponentation@exponentation ($\expn$)}
 \begin{rrnames}
   $+$      & \texttt{+}   & Addition \\
   $-$      & \texttt{-}   & Subtraction or unary minus \\
@@ -858,9 +975,8 @@ The following reference sections follow the form: \\[2em]
 %    $a\div b=c \defi \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
     $(-a)\div b = - (a\div b)$\\
     $a\div (-b) = - (a\div b)$
-    TODO: Take the definition from Matthias' paper.
 
-    TODO: The same for modulo.
+    $a\bmod b = c~\defi~c\in 0\upto b-1 \land \exists k~\qdot~k\in\nat\land k\cdot b + c = a$
   \rrtypes
   With $a\in\intg$, $b\in\intg$ and for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
   $a\opelipse b\in\intg$\\
@@ -871,14 +987,14 @@ The following reference sections follow the form: \\[2em]
   $\wdl(-a) \defi \wdl(a)$ \\
   $\wdl(a\cdot b) \defi \wdl(a) \land \wdl(b)$ \\
   $\wdl(a\div b) \defi \wdl(a) \land \wdl(b) \land b\neq 0$ \\
-  $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\neq 0$ \\
+  $\wdl(a\bmod b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b> 0$ \\
   $\wdl(a\expn b) \defi \wdl(a) \land \wdl(b) \land a\geq 0 \land b\geq 0$ 
 \end{rodinrefentry}
 
 \subsubsection{Minimum and Maximum}
 \label{minimum_and_maximum}
-\index{minimum}
-\index{maximum}
+\index{minimum@minimum ($\min$)}
+\index{maximum@maximum ($\max$)}
 \begin{rrnames}
   $\min$      & \texttt{min}   & Minimum \\
   $\max$      & \texttt{max}   & Maximum
@@ -909,10 +1025,8 @@ The following reference sections follow the form: \\[2em]
     $E\boftype \alpha$ is an expression that has exactly the value of $E$ but its
     type is specified by the type expression (\ref{data_types}) $\alpha$.
 
-    $E$ is restricted to \ldots (TODO).
-
-    This expression is only needed when the type of an expression is otherwise not inferable.
-    $\boftype$ is rarely used, mostly inside proofs, not models (TODO: Is that so?).
+    $E$ is restricted to expressions whose type does not depend on an argument of that expression.
+    Namely these are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
   \rrdef
     $E\boftype\alpha = E$
   \rrtypes

@@ -213,7 +213,8 @@ parameters of the concrete event with $\concparameters$.
 
 Similarly to variables, an event can have parameters in common with the event it refines.
 If the refined event has a parameter $t$ which is not a parameter of the refinement, 
-a witness $W(\allconstants,\allvariables,\concparameters,t)$ for the abstract parameter must be specified (see below).
+ a witness $W_t(\allconstants,\allvariables,\concvariables',\concparameters,t)$ for
+ the abstract parameter must be specified (see below).
 
 \paragraph{Guards}
 \label{guards}
@@ -221,20 +222,18 @@ a witness $W(\allconstants,\allvariables,\concparameters,t)$ for the abstract pa
 Each \emph{guard} consist of a label and a predicate $H(\allconstants,\concvariables,\concparameters)$.
 Variables or parameters of abstract machines are not accessible in a guard.
 
-We write $G(\allconstants,\absvariables,\absparameters)$ for the conjunction of all guards of all refined events.
+We write $G(\allconstants,\absvariables,\absparameters)$ for the conjunction of all guards of all abstract events.
 
 \marginpar{Check the proof obligations and text for the role of witnesses and in the case of refinement}
 Like axioms and invariants, guards can be marked as theorems too. The following
-proof obligation is generated where $G_b$ denotes the conjunction of the guards occurring before the theorem:
-%\podef{A guard as theorem}{\eventbpo{eventname/label/THM}}{the theorem}{axioms of seen contexts, invariants 
-%  (also of refined machines), guards of the event that are declared before the theorem}
+proof obligation is generated where $H_b$ denotes the conjunction of the guards occurring before the theorem:
 \pode{A guard as theorem}{\eventbpo{eventname/guardlabel/THM}}%
-{$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land G_b(\allconstants,\concvariables,\concparameters) 
-\limp G_{thm}(\allconstants,\concvariables,\concparameters)$}
-If the guard $G_i$ contains WD-conditions, the following proof obligation is generated:
+{$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land H_b(\allconstants,\concvariables,\concparameters) 
+\limp H_{thm}(\allconstants,\concvariables,\concparameters)$}
+If the guard $H_i$ contains WD-conditions, the following proof obligation is generated:
 \pode{WD-condition of a guard}{\eventbpo{eventname/guardlabel/WD}}%
-{$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land G_b(\allconstants,\concvariables,\concparameters) 
-\limp \wdl(G_i(\allconstants,\concvariables,\concparameters))$}
+{$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land H_b(\allconstants,\concvariables,\concparameters) 
+\limp \wdl(H_i(\allconstants,\concvariables,\concparameters))$}
 
 
 \paragraph{Actions}
@@ -278,12 +277,13 @@ Witnesses are necessary in the following circumstances:
 \begin{itemize}
 \item The abstract event has a parameter $p$ that is not a parameter of the concrete  event.
   In this case, the label of the witness must be $p$, and the witness has the form 
-  $W(\allconstants,\allvariables,\concvariables',\concparameters,p)$.
+  $W_p(\allconstants,\allvariables,\concvariables',\concparameters,p)$.
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
   In this case, the label of the witness must be $x'$, the witness has the form
-  $W(\allconstants,\allvariables,\concvariables',\allparameters,x')$.
+  $W_{x'}(\allconstants,\allvariables,\concvariables',\allparameters,x')$.
 \end{itemize}
+We denote the conjunction of all witnesses of an event with $W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)$.
 
 \index{feasibility!of witnesses}
 The feasibility of the witness must be proven, i.e. that there is actually a value such that the
@@ -316,7 +316,7 @@ The following proof obligations are generated for events:
 The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of an event must be well-defined.
   \pode{Well-definedness of actions}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters) 
+  {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters)
     \land H(\allconstants,\allvariables) \limp \wdl(~a~)$}
   
 \index{feasibility!of actions}
@@ -355,21 +355,43 @@ An event can refine one or more events of the abstract machine.
 We first consider the refinement of only one event. 
 For refining more than one event (i.e. merging events), please see below in section~\ref{merging_events}.
 
+\index{skip}
+If an event does not refine an abstract event, it is implicitly assumed that it refines \emph{skip}, the
+  event that is always enabled (i.e. its guard is $\btrue$) and does nothing (i.e. all variables keep their
+  values).
+
 \paragraph{Guard strengthening}
 \index{guard!strengthening}
 \index{strengthening of a guard}
 \index{proof obligation!guard strengthening}
 A concrete event must only be enabled if the abstract event is enabled.
 This condition is called \emph{guard strengthening}.
+\pode{Guard strenghtening}%
+  {\eventbpo{eventname/guardlabel/GRD}}%
+  {$A(\allconstants) \land I(\allconstants,\allvariables)
+    \land H(\allconstants,\concvariables,\concparameters)
+    \land W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)
+    \land \concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables')
+    \limp G(\allconstants,\absvariables,\absparameters)$}
 
-
-\paragraph{Action simulation} \ldots
+\paragraph{Action simulation}
 \index{proof obligation!action simulation}
+If an abstract event's action $i$ (with before-after predicate $Q_i$ 
+  assigns a value to a variable
+  that is also declared in the concrete machine,
+  it must be proven that the concrete events behaviour
+  corresponds to the abstract. (TODO: thats complete gibberish)
+\pode{Action simulation}%
+  {\eventbpo{eventname/actionlabel/SIM}}%
+  {$\ldots \limp Q_i$}
 
-\paragraph{Variable equality (TODO)} \ldots
-
-\paragraph{(Not modifying forbidden variables)}
-
+\paragraph{Preserved variables}
+If the concrete event assigns a value to a variable $x$ but the refined
+  event does not assign to that variable,
+  it must be proven that its value does not change.
+\pode{Equality of a preserved variable $x$}%
+  {\eventbpo{eventname/$x$/EQL}}%
+  {$\ldots \limp x'=x$}
 
 \subsubsection{Merging events}
 \label{merging_events}

@@ -955,6 +955,7 @@ The following reference sections follow the form: \\[2em]
 \index{product!of integers@of integers ($\cdot$)}
 \index{division@division ($\div$)}
 \index{modulo@modulo ($\bmod$)}
+\index{reminder|see{modulo}}
 \index{exponentation@exponentation ($\expn$)}
 \begin{rrnames}
   $+$      & \texttt{+}   & Addition \\
@@ -1042,6 +1043,7 @@ The following reference sections follow the form: \\[2em]
 
 \subsection{Assignments}
 \label{assignments}
+\index{assignment}
 
 We did not consider the scope of the expressions in the previous sections.
 I.e. we did not say which constants or variables can be used in an expression or predicate because
@@ -1056,6 +1058,7 @@ in the expression $E$.
 
 \subsubsection{Deterministic Assignments}
 \label{deterministic_assignments}
+\index{assignment!deterministic ($\bcmeq$)}
 \begin{rrnames}
   $\bcmeq$ & \texttt{:=} & deterministic assignment
 \end{rrnames}
@@ -1092,7 +1095,10 @@ in the expression $E$.
 
 \subsubsection{Non-deterministic assignments}
 \label{nondeterministic_assignments}
-
+\index{assignment!non-deterministic}
+\index{assignment!become such@become such ($\bcmsuch$)}
+\index{become such@become such assignment ($\bcmsuch$)}
+\index{before-after predicate}
 \begin{rrnames}
   $\bcmsuch$ & \texttt{:|} & non-deterministic assignment with a before-after-predicate
 \end{rrnames}
@@ -1121,6 +1127,8 @@ in the expression $E$.
       \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
 \end{rodinrefentry}
 
+\index{assignment!become element of@become element of ($\bcmin$)}
+\index{become element of@become element of assignment ($\bcmin$)}
 \begin{rrnames}
   $\bcmin$ & \texttt{::} & non-deterministic assignment of a set member
 \end{rrnames}

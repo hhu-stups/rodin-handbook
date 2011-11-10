@@ -9,6 +9,10 @@
 \newcommand{\absbeforeafter}{\mathcal{S}}
 \newcommand{\concbeforeafter}{\mathcal{T}}
 
+%TODO Maybe this can be removed later, but the screenshots from the previous
+% section should not appear in this section
+\clearpage
+
 \section{Event-B's modeling notation}
 \label{modeling_notation}
 
@@ -21,8 +25,8 @@ Proof obligations are generated to guarantee certain properties of the modeled s
 We will explain here which proof obligations are generated and we will list the goal and hypotheses that can be used
 when performing the proof for each one.
 This is done in the form:
-\podef{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the respective 
-  axiom/invariant/guard/etc.)}{Goal that should be proved}{Hypotheses that can be used}
+\pode{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the respective 
+  axiom/invariant/guard/etc.)}{Goal that should be proved}
 
 \subsection{About the notation that we use}
 \label{about_the_notation}
@@ -78,13 +82,13 @@ An axiom is a statement that is assumed as true in the rest of the model.
 Each axiom consists of a label and a predicate $A(\varlist{c})$.
 
 \index{theorem!axiom@axiom as theorem}
+\index{proof obligation!axiom as theorem}
 An axiom $A_{thm}$ can be marked as a theorem. In that case the following proof obligation is created:
-%\podef{Proof obligation of a theorem}{\eventbpo{label/THM}}{the theorem}{axioms defined before the theorem and in extended contextes}
 \pode{Proof obligation of a theorem}{\eventbpo{label/THM}}{$A_b(\allconstants) \limp A_{thm}(\allconstants)$}
 where $A_b$ denotes (the conjunction of) all axioms declared in extended contexts and the axioms already declared in the current context before the theorem in question.
 
 If an axiom $A$ contains any condition that is well-defined, a proof obligation is generated:
-%\podef{Well-definedness of an axiom}{\eventbpo{label/WD}}{The axiom's WD-condition}{axioms defined before the theorem and in extended contextes}
+\index{proof obligation!well-definedness of an axiom}
 \pode{Well-definedness of an axiom}{\eventbpo{label/WD}}{$A_b(\allconstants) \limp \wdl(A(\allconstants))$}.
 
 
@@ -103,6 +107,7 @@ There are two basic things that must be proven for a machine:
 \subsubsection{Refinement and Abstract machines}
 \label{abstract_machine}
 \index{abstract machine}
+\index{refinement}
 
 A machine can refine at most one other machine. 
 We refer to the refined machine as the abstract machine and refer to the refinement as the concrete machine. 
@@ -122,6 +127,8 @@ concrete events.
 The full invariant of the machine consists of both abstract and concrete invariants. 
 The invariants are accumulated during refinements.
 
+\index{superposition refinement}
+\index{data refinement}
 \info{\textbf{How to use Refinement:} Refinement can be used to subsequently add complexity to the model - this is called superposition refinement (or horizontal refinement).  It can also be used to add detail to data structures -- this is called data refinement (or vertical refinement).  We've seen both types of refinement in the tutorial (Chapter~\ref{tutorial}).
 }
 
@@ -146,6 +153,7 @@ of the machine and all its abstract machines. We call this the invariant of the 
 
 \index{theorem!invariant@invariant as theorem}
 An invariant $I_{thm}(\allconstants,\absvariables,\concvariables)$ can be marked as a theorem. In this case, the following proof obligation is generated:
+\index{proof obligation!invariant as theorem}
 \pode{An invariant as theorem}{\eventbpo{label/THM}}{$A(\allconstants) \land I_b(\allconstants,\absvariables,\concvariables) \limp I_{thm}(\allconstants,\absvariables,\concvariables)$}
 where $I_b$ denotes (the conjunction of) all invariants declared in abstract machines and all invariants declared in the concrete machine before
 the theorem in question.
@@ -153,6 +161,7 @@ the theorem in question.
 Invariants that are marked as theorems derive their correctness from the preservation of other invariants (see below for details), so their preservation does not need to be proven.
 
 If an invariant $I_i$ contains a well-definedness condition, the following proof obligation is generated:
+\index{proof obligation!well-definedness of an invariant}
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}{$A(\allconstants) \land I_b(\allconstants,\absvariables,\concvariables) \limp \wdl(I_i(\allconstants,\absvariables,\concvariables))$}
 
 \paragraph{Common variables between machines}
@@ -230,6 +239,8 @@ If the guard $G_i$ contains WD-conditions, the following proof obligation is gen
 
 \paragraph{Actions}
 \label{actions}
+\index{action}
+\index{assignment}
 An action is composed of a label and an assignment.
 Section~\ref{assignments} gives an overview of how they are assigned.
 They can be put into two groups: deterministic and non-deterministic assignments.
@@ -239,6 +250,7 @@ If an event has more than one action, they are executed in parallel.
 An error will occur if a new value is assigned to a variable in more than one action.
 All variables to which no new value is assigned keep the same value in new and old state.
 
+\index{before-after predicate}
 We now define the before-after-predicate $\concbeforeafter$ of the actions together.
 Let $Q_1,\ldots,Q_n$ be the before-after-predicate of the event's assignments. 
 Let $x_1,\ldots,x_k$ be the variables that are assigned by any action of the event.
@@ -257,41 +269,37 @@ $x'$ is replaced directly by $x$ when $x$ is not changed by the event and replac
 
 Witnesses are composed of a label and a predicate that are is to establish a link between the values 
   of the variables and parameters of the concrete and abstract events.
+Most of the time, this predicate is a simple equality.
 \warning{Unlike other elements in Event-B that have a label, the label of a witness has a meaning
   and cannot be chosen arbitrarily.}
 If the user does not specify a witness, Rodin uses the default witness $\btrue$.
 
 Witnesses are necessary in the following circumstances:
 \begin{itemize}
-\item The abstract event has a parameter $p$ that is not a parameter of the concrete
-  event.
-  In this case, the label of the witness must be $p$, and the witness has the form $W(\allconstants,\allvariables,\concparameters,p)$.
-  (TODO: I did not check this, might be slightly different)
+\item The abstract event has a parameter $p$ that is not a parameter of the concrete  event.
+  In this case, the label of the witness must be $p$, and the witness has the form 
+  $W(\allconstants,\allvariables,\concvariables',\concparameters,p)$.
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
-  In this case, the label of the witness must be $x'$, the witness has the form $W(\allconstants,\allvariables,\allparameters,x')$.
+  In this case, the label of the witness must be $x'$, the witness has the form
+  $W(\allconstants,\allvariables,\concvariables',\allparameters,x')$.
 \end{itemize}
 
 \index{feasibility!of witnesses}
-The validity of the witness must be proven, i.e. that $x$ is a place-holder for the parameter $p$ or variable $v'$ for which the witness is written.
-\pode{Witness feasibility}{\eventbpo{eventlabel/witnesslabel/WFIS}}%
+The feasibility of the witness must be proven, i.e. that there is actually a value such that the
+ predicate holds.
+\pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
   {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
     \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
-    W(\allconstants,\allvariables,\allparameters,x)$}
-A witness $W(\allconstants,\allvariables,\allparameters,x)$ may contain well-definedness conditions.
+    W(\allconstants,\allvariables,\concvariables',\concparameters,p)$}
+\pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
+  {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
+    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
+    W(\allconstants,\allvariables,\concvariables',\allparameters,x')$}
+A witness $W$ may contain well-definedness conditions.
 \pode{Well-definedness of a witness}{\eventbpo{eventlabel/witnesslabel/WWD}}%
-  {TODO}
-
-\subparagraph{Witness (TODO: From Wiki)}
-
-When a concrete event refines an abstract one which is parameterized, then all abstract parameters must receive a value in the concrete event. Such values are called the witnesses. Each witness is labelled with the concerned abstract parameter. The witness is defined by a predicate involving the abstract parameter. Most of the time, this predicate is a simple equality. Next is an example showing two witnesses. On the left hand side we have an abstract event named pass with two parameters. On the right hand side we have a concrete event named new\_pass refining pass 
-
-$\begin{array}{l} \texttt{pass} \ \ \defi \\ \quad \textbf{any} \\ \quad \quad p \\ \quad \quad l \\ \quad \textbf{where}\\ \quad \quad grd1: \ \ {p \mapsto l \,\in\, aut}\\ \quad \quad grd2: \ \ sit(p)\mapsto l \,\in\, com \\ \quad \textbf{then} \\ \quad \quad act1: \ \ sit(p) \,:=\, l \\ \quad \textbf{end} \end{array}
-\begin{array}{l} \texttt{new\_pass} \ \ \defi \\ \quad \textbf{refines} \\ \quad \quad \texttt{pass} \\ \quad \textbf{any} \\ \quad \quad d \\ \quad \textbf{where}\\ \quad \quad grd1: \ \ \ d \,\in\, ran(dap) \\ \quad \textbf{with} \\ \quad \quad p: \ \ \ p=dap^{-1}(d) \\ \quad \quad l: \ \ \ l=dst(d) \\ \quad \textbf{then} \\ \quad \quad act1: \ \ sit(dap^{-1}(d)) \,:=\, dst(d) \ \\ \quad \quad act2: \ \ dap \,:=\, dap \ransub \{d\} \\ \quad \textbf{end} \end{array} $
-
-When the concrete event is also parameterized then an abstract parameter which is the same as a concrete need not be given an explicit witness: it is always the corresponding concrete parameter.
-
-The initialisation event sometimes needs witnesses, in this case do not forget to use the after value of variable (x'). 
+  {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
+    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp \wdl(W)$}
 
 \paragraph{Initialization}
 \index{initialization}
@@ -302,6 +310,7 @@ All variables must have a value assigned to them. If there is no assignment for 
 
 \paragraph{Ensuring machine consistency}
 \label{consistency_proof_obligations}
+\index{consistency of a machine}
 The following proof obligations are generated for events:
 
 The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of an event must be well-defined.
@@ -317,6 +326,7 @@ If the event's guard is enabled, every action must be feasible.
   The feasibility operator $\actfis$ is defined in the reference
   section regarding non-deterministic assignments.
   
+  \index{proof obligation!action feasibility}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
   {$A(\allconstants) \land I(\allconstants,\allvariables) \land G(\allconstants,\concvariables,\concparameters)
     \land H(\allconstants,\allvariables) \limp \actfis(a)$}
@@ -346,10 +356,15 @@ We first consider the refinement of only one event.
 For refining more than one event (i.e. merging events), please see below in section~\ref{merging_events}.
 
 \paragraph{Guard strengthening}
+\index{guard!strengthening}
+\index{strengthening of a guard}
+\index{proof obligation!guard strengthening}
 A concrete event must only be enabled if the abstract event is enabled.
-This condition is called \emph{guard strengthening}. \ldots
+This condition is called \emph{guard strengthening}.
+
 
 \paragraph{Action simulation} \ldots
+\index{proof obligation!action simulation}
 
 \paragraph{Variable equality (TODO)} \ldots
 
@@ -358,6 +373,8 @@ This condition is called \emph{guard strengthening}. \ldots
 
 \subsubsection{Merging events}
 \label{merging_events}
+\index{event!merging events}
+\index{merging events}
 (This section will be written in a later iteration.)
 
 \subsubsection{Extending events}

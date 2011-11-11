@@ -1,10 +1,12 @@
 \section{The Rodin Platform}
 \label{rodin_platform}
+\index{Rodin}
 
 In this section, we describe the details of the tool platform, as it is presented to the user.  You will find a description of all GUI elements that you may encounter.
 
 \subsection{Eclipse in General}
 \label{eclipse}
+\index{eclipse}
 
 \textbf{From the Eclipse Website\footnote{\url{http://www.eclipse.org/}}:}
 Eclipse is an open source community, whose projects are focused on building an open development platform comprised of extensible frameworks, tools and runtimes for building, deploying and managing software across the lifecycle. The Eclipse Foundation is a not-for-profit, member supported corporation that hosts the Eclipse projects and helps cultivate both an open source community and an ecosystem of complementary products and services.
@@ -50,6 +52,8 @@ Eclipse Projects can have one or more natures to describe their purpose.  The GU
 
 \subsection{The Event-B Perspective}
 \label{event_b_perspective}
+\index{Event-B!perspective}
+\index{perspective!Event-B}
 
 Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. Views) which are visible and explain their functions.
 
@@ -405,6 +409,8 @@ Selecting the \textsf{Pretty Print} tab gives you a global view of your context 
 
 \subsection{The Proving Perspective}
 \label{proving_perspective}
+\index{perspective!proving}
+\index{proving!perspective}
 
 When proof obligations (POs) (\ref{proof_obligation}) are not discharged automatically, the user can attempt to discharge them interactively using the Proving Perspective. This page provides an overview of the Proving Perspective and its use. If the Proving Perspective is not visible as a tab on the top right-hand corner of the main interface, the user can switch to it via \textsf{Window $\rangle$ Open Perspective}.
 
@@ -707,10 +713,11 @@ There are two ways to run the automatic or post tactics:
 	\item Automatically if such preference is activated. (Auto-tactic will then run after each proof step and post-tactic will run after each step and rebuild). Post-tactics and auto-tactics only need to be activated in order to run automatically (see previous sections on how to activate auto- and post-tactic). 
 \end{itemize}
 
-The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the \textsf{Auto/Post Tactic} preference page for each of these choices. These tabs will be described in section \ref{ref_01_preferences_auto_post_tactic}. 
+The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the \textsf{Auto/Post Tactic} preference page for each of these choices. These tabs will be described in Section \ref{ref_01_preferences_auto_post_tactic}. 
 
 \subsection{Preferences}
 \label{preferences}
+\index{preferences}
 
 Rodin provides several options to set preferences the Event-B editor. You can access the preferences via \textsf{Window $\rangle$ Preferences $\rangle$ Event-B} in the menu bar. The following subsections describe the different preference option.
 
@@ -775,7 +782,7 @@ Prefix settings can be accessed through in two different ways depending on the s
 
 The user can select profiles locally for a project. To do so, you can select the \textsf{Prefix Settings} property page available via right-click on a project and select the \textsf{Properties} item. You can also click on the \textsf{Configure project specific settings} link on the \textsf{Prefix Settings} preference page. In this case, one will have to choose the project for which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
 
-A window (see figure \ref{fig_ref_01_preferences2}) appears, where a page handling prefixes settings allows a user to customize prefixes for a chosen project. On this page, the user can toggle the button \textsf{Enable project specific settings}.
+A window (see Figure \ref{fig_ref_01_preferences2}) appears, where a page handling prefixes settings allows a user to customize prefixes for a chosen project. On this page, the user can toggle the button \textsf{Enable project specific settings}.
 
 \begin{figure}[!h]
 \begin{center}
@@ -799,14 +806,14 @@ This section describes the \textsf{Auto/Post Tactic} tab of the \textsf{Auto/Pos
 
 There are two scopes to set up preferences for the auto and post tactics: the workspace level and the project level. Note that if the automatic application of tactics is decided only at the workspace level, this option will also be set for the project level.
 
-To access these preferences, open the "Auto/Post Tactic" preference page that can be found after \textsf{Window $\rangle$ Preference $\rangle$ Sequent Prover}.
+To access these preferences, open the ``Auto/Post Tactic" preference page that can be found after \textsf{Window $\rangle$ Preference $\rangle$ Sequent Prover}.
 
 Figure \ref{fig_ref_01_preferences7} shows the \textsf{Auto/Post Tactic} preference page.
 
 \begin{figure}[!h]
 \begin{center}
 	\includegraphics{img/reference/ref_01_preferences7.png}
-	\caption{The "Auto/Post Tactic" preference page}
+	\caption{The ``Auto/Post Tactic" preference page}
 	\label{fig_ref_01_preferences7}
 \end{center}
 \end{figure}
@@ -840,15 +847,15 @@ Figure \ref{fig_ref_01_preferences9} shows the contents of the profile tab. Ther
 There are 4 buttons available to the user:
 
 \begin{itemize}
-	\item New : to create a new profile "from scratch",
-	\item Edit : to edit an existing (editable) profile,
-	\item Remove : to remove a profile definitively,
-	\item Duplicate : to duplicate a selected profile for further slight modification.
+	\item New: to create a new profile ``from scratch",
+	\item Edit: to edit an existing (editable) profile,
+	\item Remove: to remove a profile definitively,
+	\item Duplicate: to duplicate a selected profile for further slight modification.
 \end{itemize}
 
 Default profiles can not be edited nor removed. That is why they this option appears in gray on the previously referenced figure.
 
-Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or create a profile. For instance, here we create a profile named "MyFirstTacticProfile".
+Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or create a profile. For instance, here we create a profile named ``MyFirstTacticProfile".
 
 \begin{figure}[!h]
 \begin{center}
@@ -858,7 +865,7 @@ Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or crea
 \end{center}
 \end{figure}
 
-The list on the right represents the available and unselected tactics. The list of the left displays the profile contents and shows the selected tactics that will be applied from the top to the bottom. The user can choose a tactic from the list on the left and hit the "$>>$" button to select it or unselect some tactics from the list of the right using the "$<<$" button. The user can re-order the priority of the selected tactic using the "Up" and "Down" button. By clicking on "Finish", the profile will be saved and available for use in the auto and post tactics.
+The list on the right represents the available and unselected tactics. The list of the left displays the profile contents and shows the selected tactics that will be applied from the top to the bottom. The user can choose a tactic from the list on the left and hit the \textsf{$>>$} button to select it or unselect some tactics from the list of the right using the \textsf{$<<$} button. The user can re-order the priority of the selected tactic using the \textsf{Up} and \textsf{Down} button. By clicking on \textsf{Finish}, the profile will be saved and available for use in the auto and post tactics.
 
 \paragraph{Project specific settings}
 
@@ -898,7 +905,7 @@ The purpose of this section is to give a more detailed preferences to the user s
 
 \paragraph{User Documentation}
 
-Here is the documentation about the current implementation of automatic tactics preferences: Auto-tactic \& Post-tactic
+Here is the documentation about the current implementation of the Auto-tactic and Post-tactic preferences.
 
 \paragraph{Tactic Combinators}
 

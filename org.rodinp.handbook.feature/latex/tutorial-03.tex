@@ -7,7 +7,7 @@
 
 In this tutorial, we will create a model of a traffic light controller.  We will use this example repeatedly in subsequent sections.  Figure \ref{fig_tut_03_traffic_light} depicts what we are trying to achieve.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_trafficlight.png}
 	\caption{The traffic light controller}
@@ -28,7 +28,7 @@ In this section, we will implement a simplified controller with the following ch
 
 Models typically consist of multiple files that are managed in a project.  Create a new Event-B Project \textsf{File $\rangle$ New $\rangle$ Event-B Project}.  Give the project the name \texttt{tutorial-03} as shown in Figure \ref{fig_tut_03_new_project_wizard}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_tutorial-3.png}
 	\caption{New Event-B Project Wizard}
@@ -42,7 +42,7 @@ Models typically consist of multiple files that are managed in a project.  Creat
 \index{component}
 Next, create a new Event-B Component.  Either use \textsf{File $\rangle$ New $\rangle$ Event-B Component} or right-click on the newly created project and select \textsf{New $\rangle$ Event-B Component}.  Use \texttt{mac} as the component name, select \textsf{Machine} as component-type, and click \textsf{Finish} as shown in Figure \ref{fig_tut_03_new_component_wizard}. This will create a Machine (\ref{machine}) file.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_mac.png}
 	\caption{New Event-B Component Wizard}
@@ -52,7 +52,7 @@ Next, create a new Event-B Component.  Either use \textsf{File $\rangle$ New $\r
 
 The newly created component will open in the structural editor.  The editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the \icon{rodin/collapsed.png} button to the left of a section to expand it.
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %	\includegraphics[]{img/tutorial/tut_03_interface.png}
 %\end{center}
@@ -90,7 +90,7 @@ You will see two fields. The left one is filled with the word \texttt{var1}.  Ch
 
 Create the second variable (\texttt{peds\_go}) in the same way.
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %	\includegraphics[]{img/tutorial/tut_03_new-variable.png}
 %\end{center}
@@ -98,7 +98,7 @@ Create the second variable (\texttt{peds\_go}) in the same way.
 
 Upon saving, the variables will be highlighted in red, indicating an error as shown in Figure \ref{fig_tut_03_error}.  The \textsf{Rodin Problems} view (\ref{rodin_problems_view}) shows corresponding error messages. In this case, the error message is ``Variable cars\_go does not have a type''.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_error.png}
 	\caption{Red highlighted elements indicate errors}
@@ -110,7 +110,7 @@ Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add
 Change the first invariant (the $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
 Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_types}).
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_03_invariants.png}
 %\end{center}
@@ -121,7 +121,7 @@ Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_t
 \index{yellow highlighting}
 After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in Figure~\ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} view gives us the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_yellow.png}
 	\caption{Yellow highlighted elements indicate warnings}
@@ -131,7 +131,7 @@ After saving, you should see that the \textsf{EVENTS} section is highlighted in 
 
 To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZATION event.  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %	\includegraphics[]{img/tutorial/tut_03_events.png}
 %\end{center}
@@ -242,7 +242,7 @@ ProB has many more functions and also supports additional formalisms.  Please vi
 
 \end{rodin-plugin}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_prob_perspective.png}
 	\caption{The ProB Perspective}
@@ -250,7 +250,7 @@ ProB has many more functions and also supports additional formalisms.  Please vi
 \end{center}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_03_prob_invariant_violation.png}
 	\caption{An invariant violation, found by ProB}

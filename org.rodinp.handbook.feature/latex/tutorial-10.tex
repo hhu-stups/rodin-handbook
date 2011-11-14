@@ -32,7 +32,7 @@ Let us look at the initial model which consists of \texttt{doors\_ctx1} and \tex
 \subsubsection{Deadlock Freeness}
 \label{deadlock}
 
-Looking through the initial model, you will see that everything already has been proved. This is true, but Rodin does not do any deadlock freeness (\ref{deadlock_freeness}) proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
+Looking through the initial model, you will see that everything already has been proved. This is true, but Rodin does not do any deadlock freeness proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
 
 Consider the event \textsf{pass} from the initial model:
 
@@ -59,7 +59,7 @@ Consider the event \textsf{pass} from the initial model:
 \END
 \end{description}
 
-Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{theorem} button to make it derived) and change the predicate so that it is the conjunction (\ref{conjunction}) of the two guards:
+Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{theorem} button to make it derived) and change the predicate so that it is the conjunction of the two guards:
 
 \begin{description}
 \INVARIANTS
@@ -70,7 +70,7 @@ Since the initial model has only one event (\textsf{pass}), the system might dea
 
 \info{Refer to the ProB Plugin with the deadlock freeness function.}
 
-Save the machine. We will see that the autoprover (\ref{autoprover}) fails to prove the theorem \textsf{DLF/THM}.
+Save the machine. We will see that the autoprover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
 
 \warning{If you don't see the proof obligation \textsf{DLF/THM}, maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button. Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
 
@@ -123,7 +123,7 @@ Click on the existential quantifier of the expression $\exists x \cdot x \in P$ 
 
 \warning{If the hypothesis does not appear immediately in the \textsf{Selected Hypothesis} view, reclick on the Auto Prover button until it does.}
 
-Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} \marginpar{no icon for dc} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover since \textsf{sit} is a total function (\ref{total_function}). In the first case, \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. You can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view, click on the \textsf{Search Hypothesis button} and add it to the selected hypothesis using the green plus icon). Then you can finish this case with the \textsf{p0} prover (select the items from this case from the proof tree and hit the \textsf{p0} button. If this doesn't work, hit the \icon{rodin/lasoo_prover.png} button to select all of the necessary hypotheses and try again). Now you have reached the other branch of the case distinction in the proof tree. In this case, you can simply instantiate \textsf{l} with \textsf{l} since 
+Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} \marginpar{no icon for dc} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover since \textsf{sit} is a total function (\ref{relations}). In the first case, \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. You can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view, click on the \textsf{Search Hypothesis button} and add it to the selected hypothesis using the green plus icon). Then you can finish this case with the \textsf{p0} prover (select the items from this case from the proof tree and hit the \textsf{p0} button. If this doesn't work, hit the \icon{rodin/lasoo_prover.png} button to select all of the necessary hypotheses and try again). Now you have reached the other branch of the case distinction in the proof tree. In this case, you can simply instantiate \textsf{l} with \textsf{l} since 
 \textsf{x} is not situated there. Finally, use the \textsf{p0} button to finish the proof. 
 
 \subsection{First Refinement}
@@ -149,7 +149,7 @@ Now we know that this model contains a problem ignored in the document requremen
 
 \info{Please note that post-tactics should still be disabled before starting this part of the tutorial.} 
 
-At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. As described in Section \ref{tut_10_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
+At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. As described in Section \ref{tut_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
 
 \begin{description}
 \INVARIANTS

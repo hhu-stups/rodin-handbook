@@ -127,7 +127,7 @@ Next, we will create a gluing invariant (\ref{abstract_machine}) that associates
 \end{description}
 }
 
-In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations (\ref{undischarged_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
+In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations (\ref{generated_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
 
 \begin{figure}[!h]
 \begin{center}
@@ -228,7 +228,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 }
 
 \subsection{Witnesses}
-\label{tut_witnesses}
+\label{tut_extend_traffic_witnesses}
 \index{witness}
 
 The refinement of \textsf{set\_cars} is more difficult since the event uses a parameter (the new value for \textsf{cars\_go}).  In order to refine it, we need a witness (\ref{witness}).
@@ -300,7 +300,7 @@ Here is the resulting event:
 \end{description}
 }
 
-Now you can get rid of the variable \textsf{cars\_go} and its inisialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
+Now you can get rid of the variable \textsf{cars\_go} and its inisialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{tut_data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
 
 \pencil{
 \begin{description}
@@ -491,7 +491,7 @@ This could be prevented with additional guards. For instance, the traffic light 
 
 But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green. Instead, the pedestrians get a green light again and the cycle continues.
 
-There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
+There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
 
 \info{As an exercise, try to improve the model to address these issues.}
 

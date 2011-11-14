@@ -31,7 +31,7 @@ We break this problem into two steps:
 \label{tut_context_with_colors}
 
 Start by creating a context called \texttt{ctx1}, as described in Section~\ref{tut_contexts}.
-We model the colors of the traffic light as a so-called ``enumerated set'' (see \ref{tut:user_defined_sets}): 
+We model the colors of the traffic light as a so-called ``enumerated set'' (see \ref{sets}): 
 We explicitly specify all elements (the three colors) of a new user-defined data type.
 We define the constants:
 \pencil{
@@ -79,7 +79,7 @@ TODO: Screenshot of selecting the context menu.
 
 \warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go}) and variables that you do not have.)  }
 
-First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{sees}) statement:
+First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{seeing_a_context}) statement:
 
 \pencil{
 \begin{description}
@@ -116,7 +116,7 @@ We will start with the traffic lights for the pedestrians. It has only two color
 }
 
 \index{gluing invariant}
-Next, we will create a gluing invariant (\ref{gluing_invariant}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_color} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
+Next, we will create a gluing invariant (\ref{abstract_machine}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_color} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
 
 \pencil{
 \begin{description}
@@ -491,7 +491,7 @@ This could be prevented with additional guards. For instance, the traffic light 
 
 But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green. Instead, the pedestrians get a green light again and the cycle continues.
 
-There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
+There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
 
 \info{As an exercise, try to improve the model to address these issues.}
 

@@ -10,7 +10,7 @@ We will continue the example from Section~\ref{tut_first_machine}, where we buil
 
 We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors. Figure \ref{fig_tut_07_tl_colors} depicts our mapping for the traffic light.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tl-colors.png}
 	\caption{Mapping between Abstract and Concrete Events}
@@ -129,7 +129,7 @@ Next, we will create a gluing invariant (\ref{abstract_machine}) that associates
 
 In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations (\ref{generated_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/undischarged1.png}
 	\caption{Mapping between Abstract and Concrete Events}
@@ -139,7 +139,7 @@ In its current state, this gluing invariant can be violated: if the event \texts
 
 To fix this, we have to modify the two events in question.  Let's start with \textsf{set\_peds\_go}.  First, we change the event from extended to not extended in the Editor as shown in figure \ref{fig_tut_07_event_refinement}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/event-refinement.png}
 	\caption{Switch from extended to not extended}
@@ -318,7 +318,7 @@ Notice that we have used two very different approaches to model the traffic ligh
 
 You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model. We did it here only to demonstrate both approaches).
 
-We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as ProB (\ref{prob})) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
+We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB}) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
 
 We hope that this section helped you to understand the power of abstraction.  The safety invariant
 $\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
@@ -491,7 +491,7 @@ This could be prevented with additional guards. For instance, the traffic light 
 
 But even if we introduce such guards, we could get stuck in a situation where cars would never get green light any more.  Consider the following scenario: (1) pedestrians get green light; (2) the light turns red; (3) a pedestrian presses the button again; (4) this prevents the car lights from turning green. Instead, the pedestrians get a green light again and the cycle continues.
 
-There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers \ref{model_checker} to validate the model's behaviour or even to use temporal logic \ref{temporal_logic} to articulate properties of the model.
+There are tactics to address all these issues.  However, it is rarely possible to generate proof obligations for such scenarios (without making the model much more complicated).  It can be useful to use model checkers to validate the model's behaviour or even to use temporal logic to articulate properties of the model.
 
 \info{As an exercise, try to improve the model to address these issues.}
 

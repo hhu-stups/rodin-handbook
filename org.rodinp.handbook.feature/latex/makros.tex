@@ -32,7 +32,7 @@
 % #4 Label
 \def\imagedpi#1#2#3#4#5{
 	\ifplastex
-		\begin{figure}[!h]
+		\begin{figure}[!ht]
 		\begin{center}
 			\includegraphics{#3}
 			\caption{#4}
@@ -40,7 +40,7 @@
 		\end{center}
 		\end{figure}
 	\else
-		\begin{figure}[!h]
+		\begin{figure}[!ht]
 		\begin{center}
 			\includegraphics[width=#2]{#1}
 			\caption{#4}

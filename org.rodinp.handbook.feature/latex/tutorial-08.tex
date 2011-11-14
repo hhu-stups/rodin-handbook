@@ -24,7 +24,7 @@ Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explo
 
 Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_rodin_problems.png}
 	\caption{Warnings in the Rodin Problems View}
@@ -169,7 +169,7 @@ The following Section \ref{tut_final_second_refinement} shows the final \texttt{
 
 In this section, we prove the model of the Celebrity Problem. To do this, click on the box in the upper right hand corner that has a little plus sign to switch to the Proving Perspective. You can switch between perspectives using the shortcut bar as shown in Figure \ref{fig_tut_08_switch_perspective}. 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_switch_perspective.png}
 	\caption{Switch Persepctive}
@@ -181,7 +181,7 @@ In this section, we prove the model of the Celebrity Problem. To do this, click 
 
 We should now see the window in Figure \ref{fig_tut_08_proving_perspective}. 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_proving_perspective.png}
 	\caption{Rodin Proving Perspective}
@@ -203,7 +203,7 @@ Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then 
 
 Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %	\includegraphics{img/tutorial/tut_08_proof1.png}
 %	\caption{Rodin Proving Perspective}
@@ -213,7 +213,7 @@ Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
 
 We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_proof2.png}
 	\caption{Proof Obligation}
@@ -229,7 +229,7 @@ In order to prove the proof obligation, it suffices to prove \textsf{$x \neq c$}
 
 The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof. To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_search_hypothesis.png}
 	\caption{Search Hypothesis View}
@@ -238,9 +238,9 @@ The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourse
 \end{figure}
 
 \marginpar{is there an icon for the p0 button?}
-Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis} (\ref{Predicate prover on selected hypothesis}). The goal should be discharged and the \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$. Click a second time on the \textsf{p0} button in order to finalize the proof. The simley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
+Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and the \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$. Click a second time on the \textsf{p0} button in order to finalize the proof. The simley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_proof_final.png}
 	\caption{The green smiley indicates that all sequents of the proof tree are discharged}

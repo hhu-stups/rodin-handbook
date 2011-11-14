@@ -368,12 +368,8 @@ If an event does not refine an abstract event, it is implicitly assumed that it 
 A concrete event must only be enabled if the abstract event is enabled.
 This condition is called \emph{guard strengthening}.
 \pode{Guard strenghtening}%
-  {\eventbpo{eventname/guardlabel/GRD}}%
-  {$A(\allconstants) \land I(\allconstants,\allvariables)
-    \land H(\allconstants,\concvariables,\concparameters)
-    \land W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)
-    \land \concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables')
-    \limp G(\allconstants,\absvariables,\absparameters)$}
+{\eventbpo{eventname/guardlabel/GRD}}% 
+{$A(\allconstants) \land I(\allconstants,\allvariables) \land H(\allconstants,\concvariables,\concparameters) \land W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters) \land \concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables') \limp G(\allconstants,\absvariables,\absparameters)$}
 
 \paragraph{Action simulation}
 \index{proof obligation!action simulation}

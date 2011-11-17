@@ -1,5 +1,6 @@
 \section{Mathematical Notation}
 \label{mathematical_notation}
+\index{notation!mathematical}
 
 \paragraph{Note about the current state of the documentation}
 It would be nice for some laws (like the commutative law of addition in arithmetic) to be included, but this will not be part of the first iteration of the documentation. The Z reference manual does this.
@@ -10,6 +11,7 @@ References to related proof rules would be nice to have too, but again, this is 
 
 \subsubsection{Data types}
 \label{data_types}
+\index{data types}
 
 In Event-B we have 3 kinds of basic data types:
 \begin{itemize}
@@ -65,7 +67,7 @@ In many cases, this is just the conjunction of the well-definedness conditions f
 \label{free_identifiers}
 \index{identifiers!free}
 Free identifiers in predicates and expressions are those identifiers which are used but not introduced by quantifiers.
-More formally, we define the set of free identifiers \freeids recursively as follows:
+More formally, we define the set of free identifiers \freeids{} recursively as follows:
 
 \begin{tabular}{|l|l|}
   \hline
@@ -130,8 +132,8 @@ More formally, we define the set of free identifiers \freeids recursively as fol
   \hline
 \end{tabular}
 
-\subsubsection{Structure of the reference}
-The following reference sections follow the form: \\[2em]
+\subsubsection{Structure of the subsections}
+The following reference subsections will have the form the form: \\[2em]
 \begin{rrnames}
   math. Symbol  & \texttt{ASCII representation}  & Name of the operator \\
   \ldots & \ldots & \ldots \\
@@ -145,7 +147,7 @@ The following reference sections follow the form: \\[2em]
     A description of the well-definedness conditions using the $\wdl$ operator
   \rrfis
     Non-deterministic assignments may have feasibility conditions.
-    These are used in the proof obligations of an event (section~\ref{consistency_proof_obligations}).
+    These are used in the proof obligations of an event (Section~\ref{consistency_proof_obligations}).
   \rrex
     We add examples to some constructs to clarify their use.
 \end{rodinrefentry}
@@ -338,7 +340,7 @@ The following reference sections follow the form: \\[2em]
     %The form $\{~x_1,\ldots,x_n~|~P~\}$ contains all values of $x_1,\ldots,x_n$ where $P$ is true.
 
     $\{~E~|~P~\}$ is a short form for $\{~\freeids{E}~\qdot~P~|~E~\}$ where $\freeids{E}$ denotes the
-    list of free identifiers occurring in $E$ (see \ref{free_identifiers})).
+    list of free identifiers occurring in $E$ (see Section \ref{free_identifiers})).
   \rrdef
     % $\{~x_1,\ldots,x_n~|~P~\} = \{~x_1,\ldots,x_n~\qdot~P~|~x_1\mapsto\ldots\mapsto x_n~\}$\\
     $\{~E~|~P~\} = \{~\freeids{E}~\qdot~P~|~E~\}$
@@ -544,7 +546,7 @@ The following reference sections follow the form: \\[2em]
     Analougously is $\Union x_1\ldots,x_n~\qdot~P~|~E$ the intersection of all values of $E$ for
     valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $P$.
 
-    Like set comprehensions (\ref{set_comprehensions}), the quantified union and intersection have a
+    Like set comprehensions (Section \ref{set_comprehensions}), the quantified union and intersection have a
     short form where the free variables of the expression are quantified implicitly:
     $\Union E~|~P$ and $\Inter E~|~P$.
   \rrdef
@@ -1003,7 +1005,7 @@ The following reference sections follow the form: \\[2em]
   \rrdesc
     $\min(I)$ resp. $\max(I)$ denotes the smallest resp. largest number in the set of integers $I$.
 
-    The minimum resp. maximum is only defined if such a number exists.
+    The minimum and maximum are only defined if such a number exists.
   \rrdef
     $\min(I) = b \defi b\in I \land (\forall x\qdot x\in I\limp b\leq x)$\\
     $\max(I) = b \defi b\in I \land (\forall x\qdot x\in I\limp b\geq x)$
@@ -1023,7 +1025,7 @@ The following reference sections follow the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     $E\boftype \alpha$ is an expression that has exactly the value of $E$ but its
-    type is specified by the type expression (\ref{data_types}) $\alpha$.
+    type is specified by the type expression $\alpha$ (Section \ref{data_types}).
 
     $E$ is restricted to expressions whose type does not depend on an argument of that expression.
     Namely these are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
@@ -1044,8 +1046,7 @@ The following reference sections follow the form: \\[2em]
 \label{assignments}
 \index{assignment}
 
-We did not consider the scope of the expressions in the previous sections.
-I.e. we did not say which constants or variables can be used in an expression or predicate because
+We did not consider the scope of the expressions in the previous sections, i.e. we did not say which constants or variables can be used in an expression or predicate because
 this depends completely on the context where the expression is used.
 
 The following paragraphs are about assignments. Depending on the type of assignment it

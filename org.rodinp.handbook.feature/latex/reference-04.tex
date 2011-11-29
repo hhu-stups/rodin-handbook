@@ -16,6 +16,7 @@ In Section~\ref{generated_proof_obligations}, we learned what proof obligations 
 
 \subsection{Sequents}
 \label{sequents}
+\index{sequent}
 
 A sequent is a formal statement describing something we want to prove.
 
@@ -51,8 +52,8 @@ A proof rule in Rodin contains the following:
 	\item[used goal] A used goal predicate. 
 	\item[used hypotheses] The set of used hypotheses. 
 	\item[antecedents] A list of antecedents (to be explain later). 
-	\item[reasoner] The reasoner used to generate this proof rule (see reasoners (\ref{reasoners})). 
-	\item[reasoner input] The input for the reasoner to generate this proof rule (see reasoners (\ref{reasoners}). 
+	\item[reasoner] The reasoner used to generate this proof rule (see reasoners (Section \ref{reasoners})). 
+	\item[reasoner input] The input for the reasoner to generate this proof rule (see reasoners (Section \ref{reasoners}). 
 \end{description}
 
 Each antecedent of the proof rule contains the following information:
@@ -93,7 +94,7 @@ Given a proof rule of the form mentioned above, the following describes how to a
 
 Tactics provide an easier way to construct and manage proof search and manipulation. They provide calls to the underlying reasoners or other tactics to modify proofs.
 
-\info{A list of all proof tactics is maintained in the Rodin Wiki\footnote{\url{http://wiki.event-b.org/index.php/Rodin_Proof_Tactics}}}.  This list is really comprehensive --- be sure to check it out!
+\info{A list of all proof tactics is maintained in the Rodin Wiki.\footnote{\url{http://wiki.event-b.org/index.php/Rodin_Proof_Tactics}} This list is really comprehensive --- be sure to check it out!}
 
 Tactics can be applied as follows:
 
@@ -131,8 +132,9 @@ More complex proof strategy can be constructed by combining the above tactical t
 \subsection{Provers}
 \index{Atelier B provers}
 \label{atelier_b_provers}
+\index{proving!provers}
 
-In the end, provers perform the actual work.  Rodin comes with one prover installed (New PP).  It is strongly recommended that you install the third-party provers from Atelier B provers (as described in Section~\ref{atelier_b_provers}) in order to add the PP and ML provers.  More provers may be available as plugins.
+In the end, provers perform the actual work.  Rodin comes with one prover installed (New PP).  It is strongly recommended that you install the third-party provers from Atelier B (as described in Section~\ref{atelier_b_provers}) in order to add the PP and ML provers.  More provers may be available as plugins.
 
 We will now give a very brief overview of the existing provers by pointing out their strengths/weaknesses.
 
@@ -189,16 +191,16 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 	\item[Names in the proof control:] nPP R., nPP with a lasso symbol, nPP
 	\item[Names in the proof tree:] Predicate Prover
 	\item[Names in the preferences:] PP restricted, PP after lasso, PP unrestricted
-	\item[Input:] In the configuration "restricted", all selected hypotheses and the goal are passed to New PP. In the configuration "after lasso", a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that have a common symbol with the goal or a hypothesis that is currently selected. In the configuration "unrestricted", all the available hypotheses are passed to New PP.
-	\item[How the Prover Proceeds:] First, all function and predicate symbols that are different from "$\in$" and not related to arithmetic are translated away. For example A $\subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
+	\item[Input:] In the configuration ``restricted", all selected hypotheses and the goal are passed to New PP. In the configuration ``after lasso", a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that have a common symbol with the goal or a hypothesis that is currently selected. In the configuration ``unrestricted", all the available hypotheses are passed to New PP.
+	\item[How the Prover Proceeds:] First, all function and predicate symbols that are different from ``$\in$" and not related to arithmetic are translated away. For example A $\subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
 	\item[Some Strengths:] ~
 	\begin{itemize}
-		\item New PP outputs a set of "used hypotheses". If an unused hypotheses changes, the old proof can be reused.
+		\item New PP outputs a set of ``used hypotheses". If an unused hypotheses changes, the old proof can be reused.
 		\item New PP has limited support for equational reasoning. 
 	\end{itemize}
 	\item[Some Weaknesses:]
 	\begin{itemize} ~
-		\item New PP is unsound. There have been several bug reports. Most notably, see [1].
+		\item New PP is unsound. There have been several bug reports. Most notably, see [1]. \marginpar{What is the [1] here refering to?}
 		\item New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic 	reasoning (when the formula is not ground) is a long standing challenge.
 		\item New PP is unaware of set theoretical axioms. In particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$ is not recognized because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
 		\item If unnecessary hypotheses are present, they may prevent New PP from finding a proof even when the proof obligation obviously holds. We therefore advise you to unselect unnecessary hypotheses.
@@ -218,7 +220,7 @@ The following guidelines may be useful:
 \begin{itemize}
 	\item Add New PP restricted (PP restricted), P0 (Atelier B P0), and ML (Atelier B ML) to the auto-tactic. If the auto-tactic runs out of memory, remove New PP.
 	\item If the model is small, add New PP after lasso (PP after lasso) and P1 (Atelier B P1) to the auto-tactic.
-	\item Whenever you think that the current proof obligation should be discharged automatically, invoke the auto-tactic (the green robot) instead of some particular automatic prover.
+	\item Whenever you think that the current proof obligation should be discharged automatically, invoke the auto-tactic (\icon{rodin/auto_prover.png}) instead of some particular automatic prover.
 	\item If the auto-tactic fails, it is usually best to simplify the proof obligation in some way. The most important ways of simplifying the proof obligation are:
 	\begin{itemize}
 		\item Remove unnecessary hypotheses; add required hypotheses that have been missing.
@@ -245,7 +247,7 @@ The following guidelines may be useful:
 
 Reasoners apply to the sequent of a given proof tree node and provide a way to contribute to the provers.  They are typically of more interest to the developer than the user. 
 
-A reasoner is (and has to be) quite "rough" : it takes a given sequent and produces a proof rule that will (if possible) apply to this given sequent. A tactic could be smarter. Indeed, a tactic can use several reasoners by applying them in loops, combining them, or even calling other tactics.
+A reasoner is (and has to be) quite ``rough" : it takes a given sequent and produces a proof rule that will (if possible) apply to this given sequent. A tactic could be smarter. Indeed, a tactic can use several reasoners by applying them in loops, combining them, or even calling other tactics.
 
 \subsection{Purging Proofs}
 \label{purging_proofs}
@@ -278,7 +280,7 @@ Firstly, the proof purger tries to find obsolete proofs in the selection. If no 
 \end{center}
 \end{figure}
 
-For the moment, nothing has been erased. The new window (see figure \ref{fig_ref_10_proof_purger}) shows obsolete proofs and allows the user to choose among them and select the ones which should be deleted. One may wish to keep some of them knowing they might be useful in the future.
+For the moment, nothing has been erased. The new window (see Figure \ref{fig_ref_10_proof_purger}) shows obsolete proofs and allows the user to choose among them and select the ones which should be deleted. One may wish to keep some of them knowing they might be useful in the future.
 
 Once the selection has been decided, clicking the Delete button to actually delete the selected proofs from the proof files. Files that become empty will be deleted as well.
 

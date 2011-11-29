@@ -4,23 +4,25 @@
 \section{General Questions}
 
 \subsection{What is Event-B?}
+\index{Event-B}
 
 Event-B is a formal method for system-level modelling and analysis. Key features of event-B are the use of set theory as a modelling notation, the use of refinement to represent systems at different abstraction levels and the use of mathematical proof to verify consistency between refinement levels.
 More details are available in \url{http://www.event-b.org}.
 
 \subsection{What is the difference between Event-B and the B method?}
 
-Event-B (\ref{tut_eventb}) is derived from the \href{http://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{http://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, ...) However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while the purpose of Event-B is used to model full systems (including hardware, software and environment of operation).
+Event-B (Section \ref{tut_eventb}) is derived from the \href{http://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{http://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, ...) However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while the purpose of Event-B is used to model full systems (including hardware, software and environment of operation).
 
 Event-B and the B method use mathematical languages which are similar but do not match exactly (in particular, operator precedences are different).
 
 \subsection{What is Rodin?}
+\index{Rodin}
 
 The \textbf{Rodin Platform} is an Eclipse-based IDE for Event-B that provides support for refinement and mathematical proofs. The platform is open source, contributes to the Eclipse framework and can be extended with plugins.
 
 \subsection{Where does the Rodin name come from?}
 
-The Rodin Platform (\ref{rodin_platform}) was initially developed within the European Commission funded Rodin project (IST-511599 ), where Rodin is an acronym for ``Rigorous Open Development Environment for Complex Systems”. Rodin is also the name of a famous French sculptor. One of his most famous works is the \href{http://en.wikipedia.org/wiki/The_Thinker}{Thinker}. 
+The Rodin Platform (Section \ref{rodin_platform}) was initially developed within the European Commission funded Rodin project (IST-511599 ), where Rodin is an acronym for ``Rigorous Open Development Environment for Complex Systems”. Rodin is also the name of a famous French sculptor. One of his most famous works is the \href{http://en.wikipedia.org/wiki/The_Thinker}{Thinker}. 
 
 \subsection{Where I can download Rodin?}
 \label{faq_where_download_rodin}
@@ -34,6 +36,7 @@ Glad to hear that you want to help!  Please see the \href{http://wiki.event-b.or
 \section{General Tool Usage}
 
 \subsection{Do I lose my proofs when I clean a project?}
+\index{project!clean}
 No! This is a common misunderstanding of what a project clean does. A project contains two kinds of files: 
 
 \begin{itemize}
@@ -63,7 +66,7 @@ Generally, the builder spends most of its time attempting to prove POs. There ar
 	\item the second one is to mark a PO as reviewed if you do not want the auto-prover to attempt it anymore. 
 \end{itemize}
 
-Note that if you disable the automated prover, you always can run it later on some files by using the contextual menu in the event-B Explorer. 
+Note that if you disable the automated prover, you always can run it later on some files by using the contextual menu in the Event-B Explorer. 
 
 To disable the automated prover, open \textsf{Rodin Preferences} 
 (menu \textsf{Window $\rangle$ Preferences...}). In the tree on the left-hand panel, select \textsf{Event-B $\rangle$ Sequent Prover $\rangle$ Auto-tactic}. Then, in the right-hand panel ensure that the checkbox labelled \textsf{Enable auto-tactic} for proving is disabled. 
@@ -71,6 +74,7 @@ To disable the automated prover, open \textsf{Rodin Preferences}
 To review a proof obligation, just open it in the interactive prover and then click on the \emph{review} button (this is a round blue button with a \emph{R} in the proof control toolbar). The proof obligation should now labelled with the same icon in the Event-B explorer. 
 
 \subsection{What are the ASCII shortcuts for mathematical operators}
+\index{symbols}
 
 The ASCII shortcuts that can be used for entering mathematical operators are described in the following section: \textsf{Rodin Keyboard User Guide $\rangle$ Getting Started $\rangle$ Special Combos}. 
 
@@ -113,6 +117,7 @@ The workaround is to:
 \end{itemize}
 
 \section{Modeling}
+\index{modeling}
 
 \subsection{Witness for \textsf{Xyz} missing. Default witness generated}
 
@@ -123,6 +128,7 @@ A parameter has disappeared during a refinement. If this is intentional, you hav
 You refer to \textsf{Xyz} in a witness predicate where \textsf{Xyz} is a disappearing abstract variable or parameter which is not set as the witness label. 
 
 \subsection{In \textsf{INITIALISATION}, I get Witness \textsf{Xyz} must be a disappearing abstract variable or parameter}
+\index{witness}
 
 The witness is for the after value of the abstract variable, hence you should use the primed variable. The witness label should be \textsf{Xyz'}, and the predicate should refer to \textsf{Xyz'} too. 
 
@@ -131,6 +137,7 @@ The witness is for the after value of the abstract variable, hence you should us
 As specified in the \href{http://wiki.event-b.org/index.php/Witnesses_(Modelling_Language)}{modelling language manual}, the witness must be labelled by the name \textsf{Xyz} of the concrete variable being concerned.
 
 \subsection{How can I create a new Event-B Project?}
+\index{project}
 
 Please check Tutorial \ref{tut_project_setup} to learn how to create a new Event-B project.
 
@@ -150,7 +157,7 @@ You simply click on \textsf{Delete} and your project will be deleted (after you 
 
 \subsection{How to export an Event-B Project?}
 
-Exporting a project is the operation by which you can construct automatically a ``zip" file containing the entire project. Such a file is ready to be sent by mail. Once received, an exported project can be imported (next section). It then becomes a project like the other ones which were created locally. In order to export a project, first select it, and then click on \textsf{File $\rangle$ Export...} from the menubar as indicated in figure \ref{fig_faq_exportproject}. 
+Exporting a project is the operation by which you can construct automatically a ``zip" file containing the entire project. Such a file is ready to be sent by mail. Once received, an exported project can be imported (next section). It then becomes a project like the other ones which were created locally. In order to export a project, first select it, and then click on \textsf{File $\rangle$ Export...} from the menubar as indicated in Figure \ref{fig_faq_exportproject}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -182,7 +189,7 @@ In order to remove a component, press the right mouse button on the component. I
 
 \subsection{How to save a Context or a Machine}
 
-Once a machine or context is (partially) edited, you can save it by using the save button as indicated in figure \ref{fig_faq_saveaction}.
+Once a machine or context is (partially) edited, you can save it by using the save button as indicated in Figure \ref{fig_faq_saveaction}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -195,14 +202,15 @@ Once a machine or context is (partially) edited, you can save it by using the sa
 Once a ``Save" is done, three tools are called automatically, these are:
 
 \begin{itemize}
-	\item the Static Checker (\ref{static_checker})
-	\item the Proof Obligation Generator (\ref{generated_proof_obligations})
-	\item the Auto-Prover (\ref{auto_prover})
+	\item the Static Checker (Section \ref{static_checker})
+	\item the Proof Obligation Generator (Section \ref{generated_proof_obligations})
+	\item the Auto-Prover (Section \ref{auto_prover})
 \end{itemize}
 
 This can some time. A ``Progress" window can be opened at the bottom right of the screen to see which tools are working (most of the time, it will be the auto-prover). 
 
 \section{Proving}
+\index{proving}
 
 \subsection{Help!  Proving is difficult!}
 

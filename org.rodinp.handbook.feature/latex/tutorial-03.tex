@@ -22,6 +22,13 @@ In this section, we will implement a simplified controller with the following ch
 	\item Too keep the initial model simple, we will not include the push button yet. We will add it later.
 \end{itemize}
 
+\subsection{Excursus: The specification process}
+
+While this handbook is concerned with use of the Rodin tool, it's important to understand the specification process as well.  Especially for beginners it can be daunting and unclear where to start with the model, what kind of data structures and abstractions to use, and so on.
+
+We cover a few examples in this chapter that implicitly answer these questions, but there is no explicit set of instructions.  For example, we will first model the traffic lights as booleans, and later refine them into actual colors.  But how did we come up with this refinement strategy?  Likewise, we decided to add the push buttons at a later refinement.  In retrospect this may seem useful, but it leaves open the question on how we arrived at this structure in the first place.
+
+Abrial has something to say about this in his book\footnote{\url{http://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}, for which some chapters are available in the Rodin Wiki.
 
 \subsection{Project Setup}
 \label{tut_project_setup}

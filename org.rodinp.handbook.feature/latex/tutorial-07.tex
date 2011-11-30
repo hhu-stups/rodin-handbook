@@ -409,7 +409,7 @@ We will demonstrate another application of refinement: introducing new features 
 
 We could have introduced the push button in the initial machine, but introducing it later allows us to structure the model and makes it easier to understand and navigate.
 
-We will realize this feature by introducing a new boolean variable for the push button.  We will introduce an event that notifies the model that a push button has been pressed.  Upon allowing the pedestrians to cross, we will reset the push button.
+We will realize this feature by introducing a new boolean variable for the push button.  We will introduce an event that notifies the model that a push button has been pressed.  Upon allowing the pedestrians to cross, we will reset the push button.  This is a simplification of the problem.  In practice, a lot would depend on the controller's capabilities.  Specifically, how does the push button notification get to the controller software?  How is the pressing/depressing sequence handled?  In this example, the event directly sets the controller's state.  This demonstrates the concept of feature refinement, without introducing too much complexity for a tutorial example.
 
 As in the previous section, we create a new refinement \textsf{mac2} by right-clicking on \textsf{mac1} and selecting \textsf{Refine}.  A stub is generated that contains the events from the abstract machine.  We simply add a new variable for the push button (including typing and an initialisation clause).  We also introduce an event that sets the button.  This event doesn't work while the pedestrians have a green light.
 

@@ -121,7 +121,7 @@ The \LaTeX-command to do this is \verb#\index{#\textit{word}\verb#}#.
 	\item Every section should have a label, reflecting the section name, all lowercase, spaces replaced with underscores (\_).
 	\item Don't create subdirectories in the \texttt{latex} folder, as the scripts cannot always deal with them.
 	\item Put images in the \texttt{img} folder.  Feel free to create additional directory structures underneath.
-	\item Files other than images (e.g. Event-B projects) TODO - we have to figure out whether to keep them in svn (then they won't be accessible from PDFs) or on the Wiki (then they won't be accessible offline).
+	\item Files other than images (e.g. Event-B projects) --- we have macros to link them absolute in the PDF, and to link them relative in HTML and Eclipse Help.
 	\item Use linked sections numbers (generated with \texttt{\\ref{}} instead of hyperlinks for cross-references. This is necessary for the print documentation to be useful.
 	\item When including images in Latex, do not provide a width!  Instead, try to embed the print size in the image itself.  For instance, PNGs allow you to set the print size (in mm).  This way we can be sure that the images are rendered as HTML without distortion.
 \end{itemize}

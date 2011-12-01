@@ -1,20 +1,20 @@
 \section{Expanding the Traffic Light System: Contexts and Refinement}
 \label{tut_expanding_traffic_light_system}
 
-\tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colors and a refinement to integrate them. We will also introduce another refinement for the push buttons.}
+\tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colours and a refinement to integrate them. We will also introduce another refinement for the push buttons.}
 
 \subsection{Data Refinement}
 \label{tut_data_refinement}
 
 We will continue the example from Section~\ref{tut_first_machine}, where we built a simplified model of a traffic light controller.  The model was simplified because we abstracted the traffic lights to TRUE and FALSE and a number of features were still missing.
 
-We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colors. Figure \ref{fig_tut_07_tl_colors} depicts our mapping for the traffic light.
+We will introduce data refinement in this section.  The objective is to create a mapping between the abstract traffic light values and actual colours. Figure \ref{fig_tut_07_tl_colours} depicts our mapping for the traffic light.
 
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tl-colors.png}
 	\caption{Mapping between Abstract and Concrete Events}
-	\label{fig_tut_07_tl_colors}
+	\label{fig_tut_07_tl_colours}
 \end{center}
 \end{figure}
 
@@ -23,16 +23,16 @@ For simplicity, the traffic light for pedestrians consists of only two lights: r
 We break this problem into two steps:
 
 \begin{enumerate}
-	\item Create a context with the data structures for the colors.
-	\item Create a refinement of the existing model that sees the new context and refines the boolean states into colors.
+	\item Create a context with the data structures for the colours.
+	\item Create a refinement of the existing model that sees the new context and refines the boolean states into colours.
 \end{enumerate}
 
-\subsection{A Context with Colors}
+\subsection{A Context with Colours}
 \label{tut_context_with_colors}
 
 Start by creating a context called \texttt{ctx1}, as described in Section~\ref{tut_contexts}.
-We model the colors of the traffic light as a so-called ``enumerated set'' (see \ref{sets}): 
-We explicitly specify all elements (the three colors) of a new user-defined data type.
+We model the colours of the traffic light as a so-called ``enumerated set'' (see \ref{sets}): 
+We explicitly specify all elements (the three colours) of a new user-defined data type.
 We define the constants:
 \pencil{
 \begin{description}
@@ -49,7 +49,7 @@ We introduce the new data type as a set:
 \begin{description}
 \SETS
 	\begin{description}
-		\Item{ COLORS }
+		\Item{ COLOURS }
 	\end{description}
 \end{description}
 }
@@ -58,12 +58,12 @@ And last, we need to provide typing of the constants.  We do this by creating a 
 \begin{description}
 \AXIOMS
 	\begin{description}
-		\nItemX{ type }{ partition(COLORS, \{ red\} , \{ yellow\} , \{ green\} ) }
+		\nItemX{ type }{ partition(COLOURS, \{ red\} , \{ yellow\} , \{ green\} ) }
 	\end{description}
 \end{description}
 }
 
-\warning{Please note the curly braces \{\} around the colors.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
+\warning{Please note the curly braces \{\} around the colours.  It's very easy to forget these, which will result in typing errors that are very hard to interpret for a novice.
 }
 
 This completes the context.
@@ -87,17 +87,17 @@ First we have to make the machine aware of the context by adding a \textsf{sees}
 \end{description}
 }
 
-We will start with the traffic lights for the pedestrians. It has only two colors (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_color} to represent which of the lights is shown. The variable has a corresponding invariant and initialization (the changes are shown in the following code snippet):
+We will start with the traffic lights for the pedestrians. It has only two colours (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_colour} to represent which of the lights is shown. The variable has a corresponding invariant and initialization (the changes are shown in the following code snippet):
 
 \pencil{
 \begin{description}
 \VARIABLES
 	\begin{description}
-		\Item{ peds\_color }
+		\Item{ peds\_colour }
 	\end{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ inv4 }{ peds\_color \in  \{  red, green \}  }
+		\nItemX{ inv4 }{ peds\_colour \in  \{  red, green \}  }
 	\end{description}
 \EVENTS
 	\INITIALISATION
@@ -105,7 +105,7 @@ We will start with the traffic lights for the pedestrians. It has only two color
 		\begin{description}
 		\BeginAct
 			\begin{description}	
-			\nItemX{ init4 }{ peds\_color :=  red }
+			\nItemX{ init4 }{ peds\_colour :=  red }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -114,18 +114,18 @@ We will start with the traffic lights for the pedestrians. It has only two color
 }
 
 \index{gluing invariant}
-Next, we will create a gluing invariant (\ref{abstract_machine}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_color} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
+Next, we will create a gluing invariant (\ref{abstract_machine}) that associates \textsf{peds\_go} from the abstract machine with the variable \textsf{peds\_colour} that we just created.  The gluing invariant will map \textsf{TRUE} to \textsf{green} and \textsf{FALSE} to \textsf{red}:
 
 \pencil{
 \begin{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ gluing }{ peds\_go = TRUE \leqv  peds\_color = green }
+		\nItemX{ gluing }{ peds\_go = TRUE \leqv  peds\_colour = green }
 	\end{description}
 \end{description}
 }
 
-In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_color} will not.  We expect that this will result in undischarged proof obligations (\ref{generated_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
+In its current state, this gluing invariant can be violated: if the event \textsf{set\_peds\_go} is triggered, for instance, the variable \textsf{peds\_go} will change but \textsf{peds\_colour} will not.  We expect that this will result in undischarged proof obligations (\ref{generated_proof_obligations}).  We can check this by expanding the machine in the Event-B Explorer.  Indeed, we now see two undischarged proof obligations (compare with Figure \ref{fig_tut_07_undischarged}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -145,9 +145,9 @@ To fix this, we have to modify the two events in question.  Let's start with \te
 \end{center}
 \end{figure}
 
-This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_color} (replacing \textsf{peds\_go := true} with \textsf{peds\_color := green}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
+This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colour} (replacing \textsf{peds\_go := true} with \textsf{peds\_colour := green}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
 
-Next, we perform the corresponding change on \textsf{set\_peds\_stop} (change the action to \textsf{peds\_color := red} and rename the event \textsf{set\_peds\_red}). Lastly, the event \textsf{set\_cars} also contains a reference to \textsf{peds\_go} that must be replaced (in the second guard, replace \textsf{peds\_go = FALSE} with \textsf{peds\_color = red}).
+Next, we perform the corresponding change on \textsf{set\_peds\_stop} (change the action to \textsf{peds\_colour := red} and rename the event \textsf{set\_peds\_red}). Lastly, the event \textsf{set\_cars} also contains a reference to \textsf{peds\_go} that must be replaced (in the second guard, replace \textsf{peds\_go = FALSE} with \textsf{peds\_colour = red}).
 
 Once all references to \textsf{peds\_go} have been replace, we can remove the variable \textsf{peds\_go} from the \textsf{VARIABLES} section. You will also need to change the \textsf{INITIALISATION} event to not extended and remove the action which initialises the variable \textsf{peds\_go}. Now you shouldn't have any errors or warnings, and all proof obligations should be discharged.
 
@@ -164,12 +164,12 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 \VARIABLES
 	\begin{description}
 		\Item{ cars\_go }
-		\Item{ peds\_color }
+		\Item{ peds\_colour }
 	\end{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ inv4 }{ peds\_color \in  \{  red, green \}  }
-		\nItemX{ gluing }{ peds\_go = TRUE \leqv  peds\_color = green }
+		\nItemX{ inv4 }{ peds\_colour \in  \{  red, green \}  }
+		\nItemX{ gluing }{ peds\_go = TRUE \leqv  peds\_colour = green }
 	\end{description}
 \EVENTS
 	\INITIALISATION
@@ -177,7 +177,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 		\BeginAct
 			\begin{description}
 			\nItemX{ act1 }{ cars\_go :=  FALSE }
-			\nItemX{ init4 }{ peds\_color :=  red }
+			\nItemX{ init4 }{ peds\_colour :=  red }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -190,7 +190,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 			\end{description}
 		\ThenAct
 			\begin{description}
-			\nItemX{ act2 }{ peds\_color :=  green }
+			\nItemX{ act2 }{ peds\_colour :=  green }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -199,7 +199,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 		\begin{description}
 		\BeginAct
 			\begin{description}
-			\nItemX{ act1 }{ peds\_color :=  red }
+			\nItemX{ act1 }{ peds\_colour :=  red }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -213,7 +213,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 		\WhereGrd
 			\begin{description}
 			\nItemX{ grd1 }{ new\_value \in  BOOL }
-			\nItemX{ grd2 }{ new\_value = TRUE \limp  peds\_color = red }
+			\nItemX{ grd2 }{ new\_value = TRUE \limp  peds\_colour = red }
 			\end{description}
 		\ThenAct
 			\begin{description}
@@ -231,29 +231,29 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 
 The refinement of \textsf{set\_cars} is more difficult since the event uses a parameter (the new value for \textsf{cars\_go}).  In order to refine it, we need a witness (\ref{witness}).
 
-A witness is to an event's parameter what a gluing invariant is to a variable: it is a mapping between the abstract parameter and the new parameter and allows the abstract parameter to disappear.  In this example, the abstract parameter \textsf{new\_value} is of type \textsf{BOOL}, and we introduce a new parameter \textsf{new\_value\_colors} of type \textsf{COLORS}.
+A witness is to an event's parameter what a gluing invariant is to a variable: it is a mapping between the abstract parameter and the new parameter and allows the abstract parameter to disappear.  In this example, the abstract parameter \textsf{new\_value} is of type \textsf{BOOL}, and we introduce a new parameter \textsf{new\_value\_colours} of type \textsf{COLOURS}.
 
 \warning{The naming of a witnesses' label is mandatory and must be the name of the abstract parameter.  In our example, the label must be \textsf{new\_value}}
 
-Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one color at a time.  Therefore, the variable contains a set of colors instead of just one color (as modelled for \textsf{peds\_color}):
+Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialization as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one colour at a time.  Therefore, the variable contains a set of colours instead of just one colour (as modelled for \textsf{peds\_colour}):
 
 \pencil{
 \begin{description}
 \VARIABLES
 	\begin{description}
-		\Item{ cars\_colors }
+		\Item{ cars\_colours }
 	\end{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ inv5 }{ cars\_colors \subseteq  COLORS }
-		\nItemX{ gluing\_cars }{ cars\_go = TRUE \leqv  green \in  cars\_colors }
+		\nItemX{ inv5 }{ cars\_colours \subseteq  COLOURS }
+		\nItemX{ gluing\_cars }{ cars\_go = TRUE \leqv  green \in  cars\_colours }
 	\end{description}
 \EVENTS
 	\INITIALISATION
 		\begin{description}
 		\BeginAct
 			\begin{description}
-			\nItemX{ init5 }{ cars\_colors :=  \{  red \}  }
+			\nItemX{ init5 }{ cars\_colours :=  \{  red \}  }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -261,11 +261,11 @@ Let's get started.  We first provide the new variable, gluing invariant, typing 
 \end{description}
 }
 
-We also have to modify the guard on \textsf{set\_peds\_green}, which is something that you should now be able to figure out yourself (just replace \textsf{cars\_go = FALSE} with \textsf{green} $\notin$ \textsf{cars\_colors}).
+We also have to modify the guard on \textsf{set\_peds\_green}, which is something that you should now be able to figure out yourself (just replace \textsf{cars\_go = FALSE} with \textsf{green} $\notin$ \textsf{cars\_colours}).
 
-The interesting piece is the last event, \textsf{set\_cars}, which we rename as \textsf{set\_cars\_colors}.  We change the parameter to \textsf{new\_value\_colors} and type it as a subset of \textsf{COLORS}.
+The interesting piece is the last event, \textsf{set\_cars}, which we rename as \textsf{set\_cars\_colours}.  We change the parameter to \textsf{new\_value\_colours} and type it as a subset of \textsf{COLOURS}.
 
-The witness appears in the \textsf{with} section of the event.  The label \textbf{must} be \textsf{new\_value}.  The value itself must describe the relationship between the abstract parameter \textsf{new\_value} and the new parameter \textsf{new\_value\_colors}.  As we use the parameter as the new value for the variable \textsf{cars\_colors}, the witness is an adaptation of the gluing invariant (we just replace \textsf{cars\_colors} with \textsf{new\_value\_colors}).
+The witness appears in the \textsf{with} section of the event.  The label \textbf{must} be \textsf{new\_value}.  The value itself must describe the relationship between the abstract parameter \textsf{new\_value} and the new parameter \textsf{new\_value\_colours}.  As we use the parameter as the new value for the variable \textsf{cars\_colours}, the witness is an adaptation of the gluing invariant (we just replace \textsf{cars\_colours} with \textsf{new\_value\_colours}).
 
 \info{In most cases, the witness is a slightly modified gluing invariant.}
 
@@ -273,25 +273,25 @@ Here is the resulting event:
 
 \pencil{
 \begin{description}
-	\EVT {set\_cars\_colors}
+	\EVT {set\_cars\_colours}
 	\REF {set\_cars}
 		\begin{description}
 		\AnyPrm
 			\begin{description}
-			\ItemX{ new\_value\_colors }
+			\ItemX{ new\_value\_colours }
 			\end{description}
 		\WhereGrd
 			\begin{description}
-			\nItemX{ grd1 }{ new\_value\_colors \subseteq  COLORS }
-			\nItemX{ grd2 }{ green \in  new\_value\_colors \limp  peds\_color = red }
+			\nItemX{ grd1 }{ new\_value\_colours \subseteq  COLOURS }
+			\nItemX{ grd2 }{ green \in  new\_value\_colours \limp  peds\_colour = red }
 			\end{description}
 		\Witnesses
 			\begin{description}
-			\nItem{ new\_value }{ new\_value = TRUE \leqv  green \in  new\_value\_colors }
+			\nItem{ new\_value }{ new\_value = TRUE \leqv  green \in  new\_value\_colours }
 			\end{description}
 		\ThenAct
 			\begin{description}
-			\nItemX{ act1 }{ cars\_colors :=  new\_value\_colors }
+			\nItemX{ act1 }{ cars\_colours :=  new\_value\_colours }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -302,10 +302,10 @@ Now you can get rid of the variable \textsf{cars\_go} and its inisialisation cla
 
 \pencil{
 \begin{description}
-\nItemX{ grd\_y\_r }{ cars\_colors = \{  yellow \}  \limp  new\_value\_colors = \{  red \}  }
-\nItemX{ grd\_r\_ry }{ cars\_colors = \{  red \}  \limp  new\_value\_colors = \{  red, yellow \}  }
-\nItemX{ grd\_ry\_g }{ cars\_colors = \{  red, yellow \}  \limp  new\_value\_colors = \{  green \}  }
-\nItemX{ grd\_g\_y }{ cars\_colors = \{  green \}  \limp  new\_value\_colors = \{  yellow \}  }
+\nItemX{ grd\_y\_r }{ cars\_colours = \{  yellow \}  \limp  new\_value\_colours = \{  red \}  }
+\nItemX{ grd\_r\_ry }{ cars\_colours = \{  red \}  \limp  new\_value\_colours = \{  red, yellow \}  }
+\nItemX{ grd\_ry\_g }{ cars\_colours = \{  red, yellow \}  \limp  new\_value\_colours = \{  green \}  }
+\nItemX{ grd\_g\_y }{ cars\_colours = \{  green \}  \limp  new\_value\_colours = \{  yellow \}  }
 \end{description}
 }
 
@@ -316,10 +316,10 @@ Notice that we have used two very different approaches to model the traffic ligh
 
 You will often be confronted with situations where many modelling approaches are possible.  You should consider two main factors when modelling: (1) readability of the model and (2) ease of proof.  In this case, both approaches are equally good (although we wouldn't recommend mixing different approaches in one model. We did it here only to demonstrate both approaches).
 
-We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colors = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colors} forever.  A model checker (such as \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB}) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
+We will cover deadlock freeness later in Section~\ref{deadlock}.  If you are interested in the topic, it may interest you to examine the traffic light model for deadlocks.  Consider \textsf{cars\_colours = \{ green, red \}}. This is a legal state, but it would block \textsf{set\_cars\_colours} forever.  A model checker (such as \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB}) could find it.  In this case, however, this is not a problem because with the given initialization and events this state is not reachable in the first place.
 
 We hope that this section helped you to understand the power of abstraction.  The safety invariant
-$\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colors because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
+$\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invariants} was very simple.  We could now introduce colours because we are confident that the invariant will still hold (assuming, of course, that our gluing invariant is correct).
 
 \subsection{The Refined Machine with All Data Refinement}
 
@@ -330,23 +330,23 @@ $\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invari
 \SEES{ctx1}
 \VARIABLES
 	\begin{description}
-		\Item{ peds\_color }
-		\Item{ cars\_colors }
+		\Item{ peds\_colour }
+		\Item{ cars\_colours }
 	\end{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ inv4 }{ peds\_color \in  \{  red, green \}  }
-		\nItemX{ inv5 }{ cars\_colors \subseteq  COLORS }
-		\nItemX{ gluing\_peds }{ peds\_go = TRUE \leqv  peds\_color = green }
-		\nItemX{ gluing\_cars }{ cars\_go = TRUE \leqv  green \in  cars\_colors }
+		\nItemX{ inv4 }{ peds\_colour \in  \{  red, green \}  }
+		\nItemX{ inv5 }{ cars\_colours \subseteq  COLOURS }
+		\nItemX{ gluing\_peds }{ peds\_go = TRUE \leqv  peds\_colour = green }
+		\nItemX{ gluing\_cars }{ cars\_go = TRUE \leqv  green \in  cars\_colours }
 	\end{description}
 \EVENTS
 	\INITIALISATION
 		\begin{description}
 		\BeginAct
 			\begin{description}
-			\nItemX{ init4 }{ peds\_color :=  red }
-			\nItemX{ init5 }{ cars\_colors :=  \{  red \}  }
+			\nItemX{ init4 }{ peds\_colour :=  red }
+			\nItemX{ init5 }{ cars\_colours :=  \{  red \}  }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -355,11 +355,11 @@ $\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invari
 		\begin{description}
 		\WhenGrd
 			\begin{description}
-			\nItemX{ grd1 }{ green \notin  cars\_colors }
+			\nItemX{ grd1 }{ green \notin  cars\_colours }
 			\end{description}
 		\ThenAct
 			\begin{description}
-			\nItemX{ act2 }{ peds\_color :=  green }
+			\nItemX{ act2 }{ peds\_colour :=  green }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -368,33 +368,33 @@ $\lnot(cars\_go = TRUE \land peds\_go = TRUE)$ from Section~\ref{tutorial:invari
 		\begin{description}
 		\BeginAct
 			\begin{description}
-			\nItemX{ act1 }{ peds\_color :=  red }
+			\nItemX{ act1 }{ peds\_colour :=  red }
 			\end{description}
 		\EndAct
 		\end{description}
-	\EVT {set\_cars\_colors}
+	\EVT {set\_cars\_colours}
 	\REF {set\_cars}
 		\begin{description}
 		\AnyPrm
 			\begin{description}
-			\ItemX{ new\_value\_colors }
+			\ItemX{ new\_value\_colours }
 			\end{description}
 		\WhereGrd
 			\begin{description}
-			\nItemX{ grd1 }{ new\_value\_colors \subseteq  COLORS }
-			\nItemX{ grd2 }{ green \in  new\_value\_colors \limp  peds\_color = red }
-			\nItemX{ grd\_y\_r }{ cars\_colors = \{  yellow \}  \limp  new\_value\_colors = \{  red \}  }
-			\nItemX{ grd\_r\_ry }{ cars\_colors = \{  red \}  \limp  new\_value\_colors = \{  red, yellow \}  }
-			\nItemX{ grd\_ry\_g }{ cars\_colors = \{  red, yellow \}  \limp  new\_value\_colors = \{  green \}  }
-			\nItemX{ grd\_g\_y }{ cars\_colors = \{  green \}  \limp  new\_value\_colors = \{  yellow \}  }
+			\nItemX{ grd1 }{ new\_value\_colours \subseteq  COLOURS }
+			\nItemX{ grd2 }{ green \in  new\_value\_colours \limp  peds\_colour = red }
+			\nItemX{ grd\_y\_r }{ cars\_colours = \{  yellow \}  \limp  new\_value\_colours = \{  red \}  }
+			\nItemX{ grd\_r\_ry }{ cars\_colours = \{  red \}  \limp  new\_value\_colours = \{  red, yellow \}  }
+			\nItemX{ grd\_ry\_g }{ cars\_colours = \{  red, yellow \}  \limp  new\_value\_colours = \{  green \}  }
+			\nItemX{ grd\_g\_y }{ cars\_colours = \{  green \}  \limp  new\_value\_colours = \{  yellow \}  }
 			\end{description}
 		\Witnesses
 			\begin{description}
-			\nItem{ new\_value }{ new\_value = TRUE \leqv  green \in  new\_value\_colors }
+			\nItem{ new\_value }{ new\_value = TRUE \leqv  green \in  new\_value\_colours }
 			\end{description}
 		\ThenAct
 			\begin{description}
-			\nItemX{ act1 }{ cars\_colors :=  new\_value\_colors }
+			\nItemX{ act1 }{ cars\_colours :=  new\_value\_colours }
 			\end{description}
 		\EndAct
 		\end{description}
@@ -437,7 +437,7 @@ As in the previous section, we create a new refinement \textsf{mac2} by right-cl
 		\begin{description}
 		\WhenGrd
 			\begin{description}
-			\nItemX{ grd }{ peds\_color = red }
+			\nItemX{ grd }{ peds\_colour = red }
 			\end{description}
 		\ThenAct
 			\begin{description}
@@ -468,12 +468,12 @@ As we will see in the following discussion, this be more tricky than it first ap
 			\end{description}
 		\EndAct
 		\end{description}
-	\EVT {set\_cars\_colors}
-	\EXTD {set\_cars\_colors}
+	\EVT {set\_cars\_colours}
+	\EXTD {set\_cars\_colours}
 		\begin{description}
 		\WhereGrd
 			\begin{description}
-			\nItemX{ grd\_button }{ \lnot  (cars\_colors = \{  red \}  \land  button = TRUE) }
+			\nItemX{ grd\_button }{ \lnot  (cars\_colours = \{  red \}  \land  button = TRUE) }
 			\end{description}
 		\EndAct
 		\end{description}

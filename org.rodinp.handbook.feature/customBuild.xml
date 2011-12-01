@@ -82,6 +82,7 @@
     		<env key="XHTMLTEMPLATES" value="${build-dir}/XHTML"/>
     		<arg value="-d"/>
             <arg value="${targetdir}"/>
+    		<arg value="--sec-num-depth=6"/>
     		<arg value="--theme=${theme}"/>
     		<arg value="${build-dir}/latex/rodin-doc.tex"/>
     	</exec>

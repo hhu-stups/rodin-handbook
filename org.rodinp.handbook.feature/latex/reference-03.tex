@@ -2,10 +2,6 @@
 \label{mathematical_notation}
 \index{notation!mathematical}
 
-\paragraph{Note about the current state of the documentation}
-It would be nice for some laws (like the commutative law of addition in arithmetic) to be included, but this will not be part of the first iteration of the documentation. The Z reference manual does this.
-References to related proof rules would be nice to have too, but again, this is not part of the first iteration.
-
 \subsection{Introduction}
 \label{mathematical_notation_introduction}
 
@@ -892,6 +888,8 @@ The following reference subsections will have the form the form: \\[2em]
     following rules:
     \begin{itemize}
     \item An identifier $x$ is a pattern.
+    \item An identifier $x$, followed by an $\boftype$ operator is a pattern (See \ref{typing}
+      for more details).
     \item A pair $p\mapsto q$ is a pattern when $p$ and $q$ are patterns.
     \item $(p)$ is pattern when $p$ is pattern.
     \end{itemize}
@@ -1030,6 +1028,10 @@ The following reference subsections will have the form the form: \\[2em]
 
     $E$ is restricted to expressions whose type does not depend on an argument of that expression.
     Namely these are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
+
+    Another location where the operator can be used is the declaration of bound variables 
+    in quantifiers and patterns in lambda expressions.
+    Each identifier can be followed by $\boftype$ and the identifier's type.
   \rrdef
     $E\boftype\alpha = E$
   \rrtypes
@@ -1040,6 +1042,15 @@ The following reference subsections will have the form the form: \\[2em]
     The predicate $\emptyset=\emptyset$ is not correctly typed in Event-B because the types
     of $\emptyset$ are not inferable. A valid alternative would be:\\
     $(\emptyset\boftype\intg) = \emptyset$
+
+    The predicate $\exists x,y ~\qdot~ x\neq y$ is not correctly typed because the types of $x$ and $y$
+    cannot be inferred: A valid alternative (for integers) is:\\
+    $\exists x\boftype\intg,y ~\qdot~ x\neq y$
+
+    The following lambda expression uses the $\boftype$ operator:\\
+    $(\lambda x\boftype \intg\mapsto y\boftype\Bool ~|~ x>0 ~\qdot~ x+1)$\\
+    An arguably more readably version without the use of $\boftype$ is:\\
+    $(\lambda x\mapsto y ~|~ x>0 \land y\in\Bool ~\qdot~ x+1)$
 \end{rodinrefentry}
 
 

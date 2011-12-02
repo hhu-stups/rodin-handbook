@@ -121,7 +121,7 @@ The workaround is to:
 
 \subsection{Witness for \textsf{Xyz} missing. Default witness generated}
 
-A parameter has disappeared during a refinement. If this is intentional, you have to add a \href{http://wiki.event-b.org/index.php/Witnesses_(Modelling_Language)}{witness} telling how the abstract parameter is refined. 
+A parameter has disappeared during a refinement. If this is intentional, you have to add a witness \ref{witness} telling how the abstract parameter is refined. 
 
 \subsection{Identifier \textsf{Xyz} should not occur free in a witness}
 
@@ -134,7 +134,7 @@ The witness is for the after value of the abstract variable, hence you should us
 
 \subsection{I've added a witness for \textsf{Xyz} but it keeps saying ``Identifier \textsf{Xyz} has not been defined''}
 
-As specified in the \href{http://wiki.event-b.org/index.php/Witnesses_(Modelling_Language)}{modelling language manual}, the witness must be labelled by the name \textsf{Xyz} of the concrete variable being concerned.
+As specified in the \ref{witness} section, the witness must be labelled by the name \textsf{Xyz} of the concrete variable being concerned.
 
 \subsection{How can I create a new Event-B Project?}
 \index{project}
@@ -226,7 +226,7 @@ Yes, it is.  Check out Section~\ref{use_provers_effectively} to get started with
 	\item \textsf{ah} means \textit{add hypothesis},
 	\item \textsf{eh} means rewrite with \textit{equality from hypothesis} from left to right,
 	\item \textsf{he} means rewrite with \textit{equality from hypothesis} from right to left,
-	\item \textsf{rv} tells us that this goal has been manually \href{http://wiki.event-b.org/index.php/The_Proving_Perspective_(Rodin_User_Manual)#The_Proof_Control_Window}{reviewed},
+	\item \textsf{rv} tells us that this goal has been manually reviewed (see \ref{proof_control_view}),
 	\item \textsf{sl/ds} means \textit{selection/deselection},
 	\item \textsf{PP} means \textit{discharged by the predicate prover},
 	\item \textsf{ML} means \textit{discharged by the mono lemma prover}

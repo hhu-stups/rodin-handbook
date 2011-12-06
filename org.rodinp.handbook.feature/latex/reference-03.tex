@@ -46,16 +46,17 @@ By stating that $E$ and $F$ are both of type $\alpha$, we express that both expr
   same type but do not make any further assumptions about their types.
 
 \subsubsection{Well-definedness}
-\index{well definedness}
-\index{L-operator!$\wdl{}$-operator}
+\label{well_definedness}
+\index{well-definedness}
+\index{L-operator@$\wdl{}$-operator}
 
 A predicate which describes the condition under which an expression or predicate in Event-B can be safely evaluated is the well-definedness condition.
 An example with integer division makes this clear: The expression $x\div y$ makes only sense when $y\neq 0$.
 
-In Rodin, the $\wdl$ operator (TODO: look up how this is called correctly and add a reference to the appropriate
-sources) is implemented. When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
-
 Well-definedness conditions are usually used for the well-definedness proof obligations.
+
+In Rodin, the $\wdl$-operator defines which well-defined condition a predicate or expression has.
+When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
 
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
 In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a construct.
@@ -200,8 +201,10 @@ The following reference subsections will have the form the form: \\[2em]
   \rrtypes
     All arguments are predicates.
   \rrwd
-    Please note that although operators like $\land$ and $\lor$ are principally commutative,
-    their well-definedness conditions are not. Therefore, if their arguments have well-definedness conditions, the order matters. E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
+    Please note that the operators $\land$ and $\lor$ are not commutative,
+    because their well-definedness conditions distinguish between the first and second argument.
+    Therefore, if their arguments have well-definedness conditions, the order matters.
+    E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
     but $y\div x=3 \land x\neq 0$ still has the well-definedness condition $x\neq 0$.
 
     $\wdl(P\land Q) \defi \wdl(P) \land (P \limp \wdl(Q))$ \\

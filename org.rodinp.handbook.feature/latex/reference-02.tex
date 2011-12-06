@@ -175,8 +175,8 @@ An invariant is a statement that must hold at each state of the machine.
 Each invariant $i$ consists of a label and a predicate $I_i(\allconstants,\absvariables,\concvariables)$.
 An invariant can refer to the constants as well as the variables of the concrete and all abstract machines.
 
-We write $\absinvariant$ to denote the conjunction of all invariants
-of the abstract machines and $\concinvariant$ for the conjunction of the machine's invariant.
+We write $\absinvariants$ to denote the conjunction of all invariants
+of the abstract machines and $\concinvariants$ for the conjunction of the machine's invariant.
 
 Invariants that are marked as theorems derive their correctness from the preservation
   of other invariants, so their preservation does not need to be proven.
@@ -719,7 +719,7 @@ This table shows which identifiers can be used in predicates or expressions.
 \end{center}
 
 $\mbox{}^{*}$ Witnesses and actions have additional identifiers in their scope.
-See \ref{witnesses} for details on witnesses resp. \ref{assignments} for the scope
+See \ref{witness} for details on witnesses resp. \ref{assignments} for the scope
 of the different assignments in actions.
 
 %%% Local Variables: 

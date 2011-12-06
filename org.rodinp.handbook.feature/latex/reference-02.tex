@@ -15,6 +15,7 @@
 \newcommand{\absguards}{G(\allconstants,\absvariables,\absparameters)}
 \newcommand{\concguards}{H(\allconstants,\concvariables,\concparameters)}
 \newcommand{\witnesspred}{W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)}
+\newcommand{\bapred}{\concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables')}
 
 % The screenshots from the previous section should not appear in this section
 \clearpage
@@ -151,7 +152,8 @@ The full invariant of the machine consists of both abstract and concrete invaria
 The invariants are accumulated during refinements.
 
 \index{superposition refinement}
-\index{data refinement}
+\index{refinement!data@data refinement}\index{refinement!vertical}
+\index{refinement!superposition}\index{refinement!horizontal}
 \info{\textbf{How to use Refinement:} Refinement can be used to subsequently add complexity to the model - this is called superposition refinement (or horizontal refinement).  It can also be used to add detail to data structures -- this is called data refinement (or vertical refinement).  We've seen both types of refinement in the tutorial (Chapter~\ref{tutorial}).
 }
 
@@ -173,8 +175,8 @@ An invariant is a statement that must hold at each state of the machine.
 Each invariant $i$ consists of a label and a predicate $I_i(\allconstants,\absvariables,\concvariables)$.
 An invariant can refer to the constants as well as the variables of the concrete and all abstract machines.
 
-We write $I(\allconstants,\absvariables,\concvariables)$ to denote the conjunction of all invariants
-of the machine and all its abstract machines. We call this the invariant of the machine.
+We write $\absinvariant$ to denote the conjunction of all invariants
+of the abstract machines and $\concinvariant$ for the conjunction of the machine's invariant.
 
 Invariants that are marked as theorems derive their correctness from the preservation
   of other invariants, so their preservation does not need to be proven.
@@ -235,7 +237,7 @@ parameters of the concrete event with $\concparameters$.
 Similarly to variables, an event can have parameters in common with the event it refines.
 If the refined event has a parameter $t$ which is not a parameter of the refinement, 
  a witness $W_t(\allconstants,\allvariables,\concvariables',\concparameters,t)$ for
- the abstract parameter must be specified (see below).
+ the abstract parameter must be specified (see below -- \ref{witness}).
 
 \paragraph{Guards}
 \label{guards}
@@ -270,7 +272,7 @@ Let $x_1,\ldots,x_k$ be the variables that are assigned by any action of the eve
 And $y_1,\ldots,y_l$ be the variables of the concrete machine that are \emph{not} modified by any of 
  the event's actions (i.e. $\concvariables = x_1,\ldots,x_k,y_1,\ldots,y_l$).
 Then the before-after-predicate of the concrete event is 
-  $\concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables') = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
+  $\bapred = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
 
 Please note that Rodin optimizes proof obligations when a before-after-predicate is a hypothesis.
 $x'$ is replaced directly by $x$ when $x$ is not changed by the event and replaced by $E(\allconstants,\concvariables,\concparameters)$
@@ -297,19 +299,18 @@ Witnesses are necessary in the following circumstances:
   In this case, the label of the witness must be $x'$, the witness has the form
   $W_{x'}(\allconstants,\allvariables,\concvariables',\allparameters,x')$.
 \end{itemize}
-We denote the conjunction of all witnesses of an event with $W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)$.
+We denote the conjunction of all witnesses of an event with $\witnesspred$.
 
 \index{feasibility!of witnesses}
 The feasibility of the witness must be proven, i.e. that there is actually a value such that the
  predicate holds.
 \index{proof obligation!witness feasibility@witness feasibility (\eventbpo{WFIS})}
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
-    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
+  {$\axioms \land \absinvariants \land \concinvariants \land \bapred \limp
     W(\allconstants,\allvariables,\concvariables',\concparameters,p)$}
 \pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables) \land J(\allconstants,\allvariables) \land
-    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables') \limp
+  {$\axioms \land \absinvariants \land \concinvariants \land
+    \bapred \limp
     W(\allconstants,\allvariables,\concvariables',\allparameters,x')$}
 A witness may contain well-definedness conditions, see \ref{well_definedness_of_witnesses}
   for the corresponding proof obligation.
@@ -389,20 +390,19 @@ proof obligation is generated:
 {$\begin{array}{r@{\ }l}
    & \axioms \land \absinvariants \land \concinvariants
   \land \concguards \\
-  \land & \witnesspred
-  \land \concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables')  \\
+  \land & \witnesspred \land \bapred  \\
   \limp & G_i(\allconstants,\absvariables,\absparameters)
   \end{array}$}
 
 \paragraph{Action simulation}
 \label{action_simulation}
-\index{proof obligation!action simulation}
 \marginpar{TODO}
 If an abstract event's action $i$ (with before-after predicate $Q_i$ 
   assigns a value to a variable
   that is also declared in the concrete machine,
   it must be proven that the concrete events behaviour
   corresponds to the abstract. (TODO: thats complete gibberish)
+\index{proof obligation!action simulation@action simulation (\eventbpo{SIM})}
 \pode{Action simulation}%
   {\eventbpo{eventname/actionlabel/SIM}}%
   {$\ldots \limp Q_i$}
@@ -413,7 +413,7 @@ If an abstract event's action $i$ (with before-after predicate $Q_i$
 If $x$ is a variable of both the abstract and concrete machine and
   the concrete event assigns a value $x$ but the abstract event not,
   it must be proven that its value does not change.
-\index{proof obligation!Equality of a preserved variable@Equality of a preserved variable (\eventbpo{EQL})}
+\index{proof obligation!equality of a preserved variable@equality of a preserved variable (\eventbpo{EQL})}
 \pode{Equality of a preserved variable $x$}%
   {\eventbpo{eventname/$x$/EQL}}%
   {$\ldots \limp x'=x$}
@@ -433,11 +433,10 @@ created with $G_1,\ldots,G_n$ being the abstract guards of the merged events
   and $\absparameters_1,\ldots,\absparameters_n$ their parameters.
 \pode{Guard strengthening (merge)}{\eventbpo{eventlabel/MRG}}%
   {$\begin{array}{l@{\ }l}
-      & A(\allconstants) \land I(\allconstants,\allvariables) \land
-      H(\allconstants,\concvariables,\concparameters) \\ \land &
-      W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters) \land
-    \concbeforeafter(\allparameters,\concvariables,\concparameters,\concvariables') \\
-    \limp & G_1(\allconstants,\absvariables,\absparameters_1)\lor\ldots\lor G_n(\allconstants,\absvariables,\absparameters_n)      
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \concguards \\
+      \land & \witnesspred \land \bapred \\
+      \limp & G_1(\allconstants,\absvariables,\absparameters_1)\lor\ldots\lor G_n(\allconstants,\absvariables,\absparameters_n)      
     \end{array}
 $}
 The other proof obligations are the same than refining a single event.
@@ -445,7 +444,7 @@ Also the same rules for defining witnesses apply.
 
 \subsubsection{Extending events}
 \label{extending_events}
-\index{superposition refinement}
+\index{refinement!superposition}
 \index{extending!an event}
 Instead of refining another event, an event can \emph{extend} it.
 In this case the refined event will implicitly have all the parameters, 
@@ -495,40 +494,50 @@ A variant must be well-defined, the corresponding well-definedness proof obligat
   can be found in \ref{well_definedness_of_variants}.
 The following other proof obligations are generated:
 
-\paragraph{If the variant is numeric,}
-\label{po_numeric_variant}
-  an anticipated or convergent event
+\paragraph{Numeric variant}
+\label{numeric_variant}
+  If the variant is numeric an anticipated or convergent event
   must only be enabled when the variant is non-negative.
 \pode{Numeric variant is a natural number}{\eventbpo{eventlabel/NAT}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land
-    G(\allconstants,\absvariables,\absparameters) \land H(\allconstants,\concvariables,\concparameters)
-    \limp V(\allconstants,\concvariables)\in\nat$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \absguards \land \concguards \\
+      \limp & V(\allconstants,\concvariables)\in\nat
+    \end{array}$}
 A convergent event must decrease the variant
 \pode{Decreasing of a numeric variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land
-    G(\allconstants,\absvariables,\absparameters) \land H(\allconstants,\concvariables,\concparameters)
-    \limp V(\allconstants,\concvariables')<V(\allconstants,\concvariables)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \absguards \land \concguards \land \bapred \\
+      \limp & V(\allconstants,\concvariables')<V(\allconstants,\concvariables)
+    \end{array}$}
 and an anticipated event must not increase the variant.
 \pode{Decreasing of a numeric variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land
-    G(\allconstants,\absvariables,\absparameters) \land H(\allconstants,\concvariables,\concparameters)
-    \limp V(\allconstants,\concvariables')\leq V(\allconstants,\concvariables)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \absguards \land \concguards \land \bapred \\
+      \limp & V(\allconstants,\concvariables')\leq V(\allconstants,\concvariables)
+    \end{array}$}
 
-\paragraph{If the variant is a set,}
-\label{po_set_variant}
-  it must be proven that the set is always finite:
+\paragraph{Set variant}
+\label{set_variant}
+  If the variant is a set t must be proven that the set is always finite:
 \pode{Decreasing of a variant (anticipated event)}{\eventbpo{FIN}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \limp \bfinite(V(\allconstants,\concvariables))$}
+  {$\axioms \land \absinvariants \land \concinvariants \limp \bfinite(V(\allconstants,\concvariables))$}
 A convergent event must remove elements from the set
 \pode{Decreasing of a set variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land
-    G(\allconstants,\absvariables,\absparameters) \land H(\allconstants,\concvariables,\concparameters)
-    \limp V(\allconstants,\concvariables')\subset V(\allconstants,\concvariables)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \absguards \land \concguards \land \bapred \\
+      \limp & V(\allconstants,\concvariables')\subset V(\allconstants,\concvariables)
+    \end{array}$}
 and an anticipated event must not add elements.
 \pode{Decreasing of a set variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
-  {$A(\allconstants) \land I(\allconstants,\absvariables,\concvariables) \land
-    G(\allconstants,\absvariables,\absparameters) \land H(\allconstants,\concvariables,\concparameters)
-    \limp V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land
+      \absguards \land \concguards \land \bapred \\
+      \limp & V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)
+    \end{array}$}
 
 \subsection{Well-definedness proof obligations}
 \label{well_definedness_proof_obligations}
@@ -545,7 +554,7 @@ For an axiom $A_w$,
   let $A_b$ denote (the conjunction of) all axioms declared
   in extended contexts and the axioms already declared in
   the current context before the axiom in question.
-\index{proof obligation!well-definedness of an axiom@well-definedness of an axiom (\eventbpo(WD))}
+\index{proof obligation!well-definedness of an axiom@well-definedness of an axiom (\eventbpo{WD})}
 \pode{Well-definedness of an axiom}{\eventbpo{label/WD}}%
   {$A_b(\allconstants) \limp \wdl(A_w(\allconstants))$}.
 
@@ -576,7 +585,7 @@ A witness $W$ may contain well-definedness conditions.
 \index{proof obligation!well-definedness of a witness@well-definedness of a witness (\eventbpo{WWD})}
 \pode{Well-definedness of a witness}{\eventbpo{eventlabel/witnesslabel/WWD}}%
   {$\axioms \land \absinvariants \land \concinvariants \land
-    \concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables')
+    \bapred
     \limp \wdl(W)$}
 
 \paragraph{Actions}
@@ -667,9 +676,9 @@ For further information we refer to the relevant reference section.
   \hline
   \multicolumn{3}{l}{\textbf{generated for termination proofs}} \\
   well definedness of a variant & \eventbpo{VWD} & \ref{well_definedness_of_variants} \\
-  finiteness for a set variant  & \eventbpo{FIN} & \ref{po_set_variant} \\
-  natural number for a numeric variant & \eventbpo{event/NAT} & \ref{po_numeric_variant} \\
-  decreasing of variant & \eventbpo{event/VAR} &\ref{po_numeric_variant} \\
+  finiteness for a set variant  & \eventbpo{FIN} & \ref{set_variant} \\
+  natural number for a numeric variant & \eventbpo{event/NAT} & \ref{numeric_variant} \\
+  decreasing of variant & \eventbpo{event/VAR} &\ref{numeric_variant} \\
   \hline
 \end{tabular}
 
@@ -708,6 +717,10 @@ This table shows which identifiers can be used in predicates or expressions.
   \hline
   \end{tabular}    
 \end{center}
+
+$\mbox{}^{*}$ Witnesses and actions have additional identifiers in their scope.
+See \ref{witnesses} for details on witnesses resp. \ref{assignments} for the scope
+of the different assignments in actions.
 
 %%% Local Variables: 
 %%% mode: latex

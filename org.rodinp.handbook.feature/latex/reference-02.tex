@@ -306,12 +306,15 @@ The feasibility of the witness must be proven, i.e. that there is actually a val
  predicate holds.
 \index{proof obligation!witness feasibility@witness feasibility (\eventbpo{WFIS})}
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land \bapred \limp
-    W(\allconstants,\allvariables,\concvariables',\concparameters,p)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
+      \limp & W(\allconstants,\allvariables,\concvariables',\concparameters,p)      
+    \end{array}$}
 \pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land
-    \bapred \limp
-    W(\allconstants,\allvariables,\concvariables',\allparameters,x')$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
+      \limp & W(\allconstants,\allvariables,\concvariables',\allparameters,x')
+    \end{array}$}
 A witness may contain well-definedness conditions, see \ref{well_definedness_of_witnesses}
   for the corresponding proof obligation.
 
@@ -340,9 +343,11 @@ If the event's guard is enabled, every action must be feasible.
   
   \index{proof obligation!action feasibility@action feasibility (\eventbpo{FIS})}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
-  {$\axioms \land \absinvariants \land \concinvariants
-    \land \absguards \land \concguards 
-    \limp \actfis(a)$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants
+      \land \absguards \land \concguards \\
+      \limp & \actfis(a)      
+    \end{array}$}
 
 For each invariant $I_i$ with the label \eventbpo{invlabel} 
   that contains a variable affected by the assignment, it must be proven
@@ -350,9 +355,11 @@ For each invariant $I_i$ with the label \eventbpo{invlabel}
   \index{proof obligation!invariant preservation@invariant preservation (\eventbpo{INV})}
   \pode{Invariant preservation}%
   {\eventbpo{eventlabel/invlabel/INV}}%
-  {$\axioms \land \absinvariants \land \concinvariants 
-    \land \absguards \land \concguards
-    \limp I_i(\allconstants,\allvariables')$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants 
+      \land \absguards \land \concguards \\
+      \limp & I_i(\allconstants,\allvariables')      
+    \end{array}$}
   Rodin simplifies this proof obligations by replacing $x'$ with $x$ for variables that are not
   changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
   for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
@@ -389,34 +396,48 @@ proof obligation is generated:
 {\eventbpo{eventname/guardlabel/GRD}}% 
 {$\begin{array}{r@{\ }l}
    & \axioms \land \absinvariants \land \concinvariants
-  \land \concguards \\
-  \land & \witnesspred \land \bapred  \\
+  \land \concguards \land \\
+  & \witnesspred \land \bapred  \\
   \limp & G_i(\allconstants,\absvariables,\absparameters)
   \end{array}$}
 
 \paragraph{Action simulation}
 \label{action_simulation}
-\marginpar{TODO}
-If an abstract event's action $i$ (with before-after predicate $Q_i$ 
-  assigns a value to a variable
-  that is also declared in the concrete machine,
-  it must be proven that the concrete events behaviour
-  corresponds to the abstract. (TODO: thats complete gibberish)
+If an abstract event's action $i$ (with before-after predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$)
+  assigns a value to a variable that is also declared in the concrete machine,
+  it must be proven that the abstract event's behaviour
+  corresponds to the concrete behaviour.
+The behaviour of the concrete event is given by the concrete before-after-predicate $\bapred$,
+the relevant abstract behaviour by the before-after-predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$.
+The relation between abstract and concrete event is specified by the witnesses.
 \index{proof obligation!action simulation@action simulation (\eventbpo{SIM})}
 \pode{Action simulation}%
   {\eventbpo{eventname/actionlabel/SIM}}%
-  {$\ldots \limp Q_i$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants 
+      \land \concguards \land \\
+      & \witnesspred \land \bapred \\
+      \limp & Q_i(\allconstants,\absvariables,\absparameters,\absvariables')
+    \end{array}$}
+When the assignments are deterministic or the witnesses are equations, the proof obligation can usually
+be simplified by Rodin.
 
 \paragraph{Preserved variables}
 \label{preserved_variables}
-\marginpar{TODO}
 If $x$ is a variable of both the abstract and concrete machine and
-  the concrete event assigns a value $x$ but the abstract event not,
-  it must be proven that its value does not change.
+  the concrete event assigns a value $x$ but the abstract event does not,
+  it must be proven that the variable's value does not change.
+Let $Q_i(\allconstants,\concvariables,\concparameters,\concvariables')$ be the before-after-predicate
+  of the action that changes $x$.
 \index{proof obligation!equality of a preserved variable@equality of a preserved variable (\eventbpo{EQL})}
 \pode{Equality of a preserved variable $x$}%
   {\eventbpo{eventname/$x$/EQL}}%
-  {$\ldots \limp x'=x$}
+  {$\begin{array}{r@{\ }l}
+      & \axioms \land \absinvariants \land \concinvariants 
+      \land \concguards
+      \land Q_i(\allconstants,\concvariables,\concparameters,\concvariables') \\
+      \limp & x'=x      
+    \end{array}$}
 
 \subsubsection{Merging events}
 \label{merging_events}
@@ -431,11 +452,12 @@ To merge events, two conditions must be taken into account.
 Instead of the guard strengthening proof obligation, the following proof obligation is
 created with $G_1,\ldots,G_n$ being the abstract guards of the merged events
   and $\absparameters_1,\ldots,\absparameters_n$ their parameters.
+\index{proof obligation!merging events@merging events (\eventbpo{MRG})}
 \pode{Guard strengthening (merge)}{\eventbpo{eventlabel/MRG}}%
   {$\begin{array}{l@{\ }l}
       & \axioms \land \absinvariants \land \concinvariants \land
-      \concguards \\
-      \land & \witnesspred \land \bapred \\
+      \concguards \land \\
+      & \witnesspred \land \bapred \\
       \limp & G_1(\allconstants,\absvariables,\absparameters_1)\lor\ldots\lor G_n(\allconstants,\absvariables,\absparameters_n)      
     \end{array}
 $}
@@ -507,15 +529,15 @@ The following other proof obligations are generated:
 A convergent event must decrease the variant
 \pode{Decreasing of a numeric variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \absguards \land \concguards \land \bapred \\
+      & \axioms \land \absinvariants \land \concinvariants \land \\
+      & \absguards \land \concguards \land \bapred \\
       \limp & V(\allconstants,\concvariables')<V(\allconstants,\concvariables)
     \end{array}$}
 and an anticipated event must not increase the variant.
 \pode{Decreasing of a numeric variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \absguards \land \concguards \land \bapred \\
+      & \axioms \land \absinvariants \land \concinvariants \land \\
+      & \absguards \land \concguards \land \bapred \\
       \limp & V(\allconstants,\concvariables')\leq V(\allconstants,\concvariables)
     \end{array}$}
 
@@ -527,15 +549,15 @@ and an anticipated event must not increase the variant.
 A convergent event must remove elements from the set
 \pode{Decreasing of a set variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \absguards \land \concguards \land \bapred \\
+      & \axioms \land \absinvariants \land \concinvariants \land \\
+      & \absguards \land \concguards \land \bapred \\
       \limp & V(\allconstants,\concvariables')\subset V(\allconstants,\concvariables)
     \end{array}$}
 and an anticipated event must not add elements.
 \pode{Decreasing of a set variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \absguards \land \concguards \land \bapred \\
+      & \axioms \land \absinvariants \land \concinvariants \land \\
+      & \absguards \land \concguards \land \bapred \\
       \limp & V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)
     \end{array}$}
 
@@ -603,7 +625,7 @@ The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of
 A variant $V(\allconstants,\concvariables)$ must be well-defined.
 \index{proof obligation!well-definedness of a variant@well-definedness of a variant (\eventbpo{VWD})}
 \pode{Well-definedness of a variant}{\eventbpo{VWD}}%
-  {$axioms \land \concinvariants \limp \wdl(V(\allconstants,\concvariables))$}
+  {$\axioms \land \concinvariants \limp \wdl(V(\allconstants,\concvariables))$}
 
 
 \subsection{Theorems}

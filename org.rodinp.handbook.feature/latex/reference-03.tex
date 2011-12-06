@@ -65,7 +65,7 @@ In many cases, this is just the conjunction of the well-definedness conditions f
 \label{free_identifiers}
 \index{free identifiers}
 Free identifiers in predicates and expressions are those identifiers which are used but not introduced by quantifiers.
-More formally, we define the set of free identifiers \freeids{} recursively as follows:
+More formally, we define the set of free identifiers \freeids{E} of an expression or predicate $E$ recursively as follows:
 
 \begin{tabular}{|l|l|}
   \hline
@@ -1029,7 +1029,7 @@ The following reference subsections will have the form the form: \\[2em]
     $E\boftype \alpha$ is an expression that has exactly the value of $E$ but its
     type is specified by the type expression $\alpha$ (Section \ref{data_types}).
 
-    $E$ is restricted to expressions whose type does not depend on an argument of that expression.
+    $\mathsf{E}$ is restricted to expressions whose type does not depend on an argument of that expression.
     Namely these are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
 
     Another location where the operator can be used is the declaration of bound variables 

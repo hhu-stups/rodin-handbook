@@ -60,17 +60,19 @@
 % and an absolute path in the pdf version
 \ifplastex
 	\newcommand{\filepath}{files/}
+    \newcommand{\file}[2]{\href{\filepath#1}{#2}}
 \else
 	\newcommand{\filepath}{\handbookpath/\versionpath/files/}
+    \newcommand{\file}[2]{\href{\filepath#1}{#2}\footnote{The URL of the resource is: \filepath#1}}
 \fi
 
 % Use this definition to create a link to the file. The definition takes to arguments. 
 % The first argument (1) defines the file name i.e. Celebrity.zip or in case if you saved 
 % the file in a subdirectory subdirecotry/Celebrity.zip. The second argument (2) defines 
 % the name which should be displayed in the document, i.e. Celebrity Problem Example Download
-\def\file#1#2{
-\href{\filepath#1}{#2}
-}
+%\def\file#1#2{
+%\href{\filepath#1}{#2}
+%}
 
 % We want to mark contributions from other plugins in a special way, by including the plugin's
 % icon and by putting the content in a gray box.  We have to approach this differently for

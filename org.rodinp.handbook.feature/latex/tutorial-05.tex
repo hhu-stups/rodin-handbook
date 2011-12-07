@@ -5,7 +5,11 @@
 \tick{\textbf{Goals:} In this section we introduce contexts that apply to the theoretical concepts that were introduced in the previous section (\ref{tut_mathematical_notation}). We will create a very simple model consisting of just one context file.
 }
 
-In this tutorial, we will create a model of the well known Agatha puzzle. Here is a brief description of the puzzle:
+\marginpar{please review}
+In this tutorial, we will create a model of the well known Agatha puzzle. 
+We use this instead of the already introduced traffic light example because it provides
+ more possibilities to apply Event-B's logic and to use operations on relations.
+Here is a brief description of the puzzle:
 
 \textit{Someone in Dreadsbury Mansion killed Aunt Agatha. Agatha, the butler, and Charles live in Dreadsbury Mansion and are the only ones to live there. A killer always hates, and is no richer than his victim. Charles hates no one that Agatha hates. Agatha hates everybody except the butler. The butler hates everyone not richer than Aunt Agatha. The butler hates everyone whom Agatha hates. No one hates everyone. Who killed Agatha?}
 
@@ -222,6 +226,10 @@ We mark the axiom \texttt{solution} as a theorem (\ref{tut_concepts_contexts}) b
 \end{figure}
 
 \info{Theorems describe properties that are expected to be able to be derived from the axioms.  Therefore, to prove a theorem you only use axioms and theorems that have already been proven.}
+
+The introduced theorem still has to be proven.
+Thus Rodin generates a proof obligation called \eventbpo{solution/THM}.
+But at this point of the tutorial we do not want to go into the details of proof yet.
 
 \index{ProB}
 \begin{rodin-plugin}{img/prob.png}{ProB}%

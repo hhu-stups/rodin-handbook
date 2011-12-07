@@ -460,9 +460,10 @@ The proof tree view provides a graphical representation of each individual proof
 The tree is made up of sequents. A line of the tree is shifted to the right when the corresponding node is a direct descendant of the node of the previous line. Each sequent is labeled with a comment which indicates which rule has been applied or which prover discharged the proof. By selecting a sequent in the proof tree, the hypotheses of the sequent are loaded to the \textsf{Selected Hypotheses window}, and the goal of the sequent is loaded to the \textsf{Goal view}.
 
 \paragraph{Decoration}
-
+\index{reviewed}
+\index{pending}
+\index{discharged}
 The symbol to the left of the leaf indicates the state of the sequent:
-
 \begin{itemize}
 	\item \icon{rodin/discharged.png} indicates that this sequent is discharged.
 	\item \icon{rodin/pending.png} indicates that this sequent is not discharged.
@@ -1006,3 +1007,8 @@ $loopOnAllPending(T_1 \ldots T_n) \;\;\defi\;\; loop(onAllPending(composeUntilSu
     timeout: a post action of arity 1 (with duration as input): limits the time allocated for the tactic that it is applied to (fails after time has gone out)
 
     limitDepth: a post action of arity 1 (with depth as input): limits the proof tree depth for the tactic that it is applied to (prevents tree from growing beyond a given depth)
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

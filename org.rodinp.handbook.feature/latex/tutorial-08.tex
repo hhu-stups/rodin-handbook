@@ -7,15 +7,18 @@
 \subsection{The Celebrity Problem}
 \label{tut_celebrity_problem}
 
-In this section, we will work on the model of the so-called celebrity problem. In the setting for this problem, we have a ``knows'' relation. This relation is defined so that
-
+In this section, we will work on the model of the so-called celebrity problem.
+We use a new model instead of the traffic light because it provides us with
+  some proofs where manual interaction is necessary.
+In the setting for this problem, we have a ``knows'' relation between persons.
+This relation is defined so that
 \begin{itemize}
 	\item no one knows himself,
 	\item the celebrity knows nobody,
 	\item but everybody knows the celebrity.
 \end{itemize}    
-
-The goal is to find the celebrity.
+The problem's goal is to find the celebrity.
+We want to model an algorithm fulfills this task.
 
 \warning{Make sure that you have no existing Project named Celebrity. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
 
@@ -31,6 +34,8 @@ Rodin takes a few seconds to extract and load all the files. Once it is done, it
 	\label{fig_tut_08_rodin_problemview}
 \end{center}
 \end{figure}
+
+We will describe how the model is organized below in \ref{the_celebrity_algorithm}.
 
 In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. Select the event \textsf{celebrity}. The problem is that the event is not declared as a refinement. To solve the problem, expand the event and add a new entry in the \textsf{REFINES} section (Click on the \icon{rodin/add.png} button to create a new entry). This declares that the event is a refinement of an event with the same name in the abstract machine (\ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
 
@@ -164,6 +169,73 @@ The following Section \ref{tut_final_second_refinement} shows the final \texttt{
 \END
 \end{description}
 
+\subsection{The Celebrity algorithm}
+\label{the_celebrity_algorithm}
+We take a brief tour through the model to see how the problem and algorithm is specified.
+The celebrity problem itself is described in the context \texttt{Celebrity\_c0}. There are
+  three constants. $P$ is the set of persons, each represented by a number, $c$ is the celebrity
+  we are looking for and $k$ is the ``knows'' relation between the persons.
+The axioms encode the properties about the ``knows'' relation that we stated above.
+
+In the most abstract machine \texttt{Celebrity\_0} we specify what the algorithm should do.
+The variable $r$ can be any person initially and the event \texttt{celebrity} 
+  finds the celebrity in one step. 
+After the event \texttt{celebrity} occurred, $r$ contains the result of the algorithm.
+You might ask yourself, what is the problem if we can just pick the celebrity and
+  assign it to the result?
+The answer is that we wrote down our problem in a way that we know that there is a celebrity $c$
+  and we specify the algorithm by stating it should return it.
+Later in the refinement we model how to find the celebrity without using $c$ anymore.
+By the refinement relation we know then that the algorithm works correctly.
+
+So let's have a look at the first refinement \texttt{Celebrity\_1}. 
+A variable $Q$ is introduced which contains a subset of the persons, the potential celebrities.
+We start with $Q$ being all persons.
+Two new events  \texttt{remove\_1} and \texttt{remove\_2} are added that remove persons
+  from $Q$ who cannot be the celebrity.
+\texttt{remove\_1} removes a person that knows somebody while \texttt{remove\_2}
+  removes a person that is not known by any other person.
+As an invariant we state that the celebrity is always in $Q$.
+When there is just one person left in the set, we know that this is the celebrity.
+
+The second refinement \texttt{Celebrity\_2} then splits the
+  potential celebrities $Q$ into one arbitrary person -- the candidate $b$ --
+  and the ``rest'' $R$.
+\texttt{remove\_1} then removes a person $x$ from $R$ if $b$ knows $x$.
+\texttt{remove\_2} checks if there is a person $x$ in $R$ that does not know the candidate.
+If found, $x$ is the new candidate $b$ and is removed from the rest $R$.
+If $R$ is empty, we know that the candidate is the celebrity.
+
+The third refinement then makes some more assumptions about the given problem.
+The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states that
+  there are $n+1$ persons with the numbers $0\upto n$.
+Instead of having an abstract data structure like a set, the third refinement just introduces
+  an index variable $a$ that points to the first person of the rest.
+Instead of taking an arbitrary element from $R$ as in the second refinement, the remove
+  events just takes the first element $a$. $a$ is then removed from $R$ just by increasing
+  it by one.
+When $a$ is larger then $n$, $R$ is empty and $b$ contains the result.
+
+This last refinement works only on the following three integer variables: 
+The index $a$, the candidate $b$ and the result $r$.
+Each event is deterministic and in every step only one event is enabled.
+The events together can be interpreted as an implementation of the algorithm:
+
+\begin{tabular}{ll}
+  $r \bcmeq 0$ & // initialisation \texttt{act1} \\
+  $a \bcmeq 1$ & // initialisation \texttt{act2} \\
+  $b \bcmeq 0$ & // initialisation \texttt{act3} \\
+  \textbf{while} $a\leq n$ \textbf{do} & // guard in \texttt{remove\_1} and \texttt{remove\_2}\\
+  \quad \textbf{if} $a\mapsto b\in k$ \textbf{then} & // guard in \texttt{remove\_1} and negated in \texttt{remove\_2}\\
+  \qquad $a \bcmeq a+1$ & // action in \texttt{remove\_1} \\
+  \quad \textbf{else} & // $a\mapsto b\not\in k$\\
+  \qquad $b \bcmeq a$ & // action \texttt{act1} in \texttt{remove\_2} \\
+  \qquad $a \bcmeq a+1$ & // action \texttt{act2} in \texttt{remove\_2} \\
+  \quad \textbf{end if} \\
+  \textbf{end while} \\
+  $r \bcmeq b$ & // action in \texttt{celebrity}
+\end{tabular}
+
 \subsection{The First Proof}
 \label{tut_first_proof}
 
@@ -172,7 +244,7 @@ In this section, we prove the model of the Celebrity Problem. To do this, click 
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/tutorial/tut_08_switch_perspective.png}
-	\caption{Switch Persepctive}
+	\caption{Switch Perspective}
 	\label{fig_tut_08_switch_perspective}
 \end{center}
 \end{figure}
@@ -201,7 +273,9 @@ Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then 
 
 %Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}). The p0 prover uses all selected hypotheses (the ones in Selected Hypotheses View).
 
-Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}. To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
+Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
+To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
+We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -210,8 +284,6 @@ Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
 %	\label{fig_tut_08_proving_perspective}
 %\end{center}
 %\end{figure}
-
-We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -223,11 +295,22 @@ We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation
 
 \info{Make sure that you understand the different buttons in the \textsf{Proof Control View} (\ref{proof_control_view}).}
 
-In order to prove the proof obligation, it suffices to prove \textsf{$x \neq c$}. Type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{\icon{rodin/ah_prover.png} button}. 
+What has to be proven is that the event \texttt{remove\_1} preserves the invariant \texttt{inv2},
+  $c\in Q$.
+The event's action assigns to $Q$ the new value $Q\setminus \{x\}$.
+Because we know that invariant $c\in Q$ held before the assignment, 
+ it suffices to prove that we do not remove $c$ from $Q$, i.e. \textsf{$x \neq c$}. Type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{\icon{rodin/ah_prover.png} button}. 
 
 \info{In order to revert a step, click on a node in the \texttt{Proof Tree View} and click on the \icon{rodin/pn_prover.png} button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
 
-The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof. To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
+Take a look at the Proof Tree View. The root node should now be labeled with \texttt{ah ($x\neq c$)},
+  that is the hypothesis we just added.
+The node has three children: The first is the proof of well-definedness condition of $x\neq c$ which is
+  just $\btrue$ and trivially proven.
+The second is the proof of the hypotheses $\lnot x=c$.
+The third is the proof of the original goal where the new hypotheses can be used.
+
+The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -237,7 +320,7 @@ The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourse
 \end{center}
 \end{figure}
 
-Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and the \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$. Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
+Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses. Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -255,8 +338,13 @@ In order to move to the next undischarged proof obligation, you may also use the
 
 \info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: We have to fill in an existential quantifier. First, look in the list of hypothesis to see if you find any variable that is in P and select that hypothesis. Then instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
 
-\subsection{Prooving --- an Art or a Science?}
+\subsection{Proving --- an Art or a Science?}
 \label{tut_proving_an_art_or_a_science}
 
-Prooving can be quite frustrating, both for beginners and advanced users.  Especially beginners sometimes get the impression that proofing is just ``clicking around'' that sometimes works and sometimes doesn't.  And when it works, it's not really clear why --- the proof tree is also difficult to read, even for experienced users.  We provided some additional guidance on proovers in Section~\ref{use_provers_effectively} that may be of help.
+Proving can be quite frustrating, both for beginners and advanced users.  Especially beginners sometimes get the impression that proofing is just ``clicking around'' that sometimes works and sometimes doesn't.  And when it works, it's not really clear why --- the proof tree is also difficult to read, even for experienced users.  We provided some additional guidance on provers in Section~\ref{use_provers_effectively} that may be of help.
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

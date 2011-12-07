@@ -108,7 +108,6 @@ We denote the sequence of all constants with $\varlist{c}$.
 An axiom is a statement that is assumed as true in the rest of the model.
 Each axiom consists of a label and a predicate $A(\varlist{c})$.
 
-
 Axioms can be marked as theorems,
   the generated proof obligation can be found in \ref{axioms_as_theorems}.
 The validity of a theorem results from the axioms declared before.
@@ -630,9 +629,13 @@ A variant $V(\allconstants,\concvariables)$ must be well-defined.
 
 \subsection{Theorems}
 \label{theorems}
+\index{theorem}
 Axioms, invariants and guards can be marked as theorems. In that case it must be proven that
   the validity of the theorems results from the axioms, invariants or guards declared before
   the theorem.
+
+\index{derived}
+Sometimes an axiom/invariant/guard marked as theorem is also called a \emph{derived} axiom/invariant/guard.
 
 \paragraph{Axioms}
 \label{axioms_as_theorems}

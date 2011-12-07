@@ -1,3 +1,5 @@
+% We do not want to have screen shots of the celebrity puzzle in this section:
+\clearpage
 \section{Location Access Controller}
 \label{tut_location_access_controller}
 
@@ -71,7 +73,7 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 
 
 \begin{rodin-plugin}{img/prob.png}{ProB}%
-  You can use ProB to search for deadlocks.
+  You can also use ProB to search for deadlocks.
   Right-click on the machine you want to check and start the animation with the
   ``Start Animation / Model Checking'' menu entry.
   After starting the animation, go to the Event View in the ProB perspective
@@ -115,7 +117,15 @@ In order to succeed with the proof, we need a tuple $p \mapsto l$ that is in \te
 
 So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outside$ are in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. All we need to prove now is that \textsf{P} is nonempty. This holds since carrier sets are always nonempty, but is a bit hard to prove. 
 
-\warning{In the Proof Control view, first disable the post-tactics (there is a small downward pointing arrow in the upper right hand corner above the toolbar. Click on this arrow and make sure that the option \textsf{Enable post-tactic} is unchecked in the dropdown menu. We turn off the post-tactics because we want to see the proof develop in its different stages.)}
+\warning{In the Proof Control view, first disable the post-tactics (there is a small downward pointing arrow in the upper right hand corner above the toolbar, see Figure~\ref{fig_tut_10_post_tactics}. Click on this arrow and make sure that the option \textsf{Enable post-tactic} is unchecked in the dropdown menu. We turn off the post-tactics because we want to see the proof develop in its different stages.)}
+
+\begin{figure}[!ht]
+  \begin{center}
+    	\includegraphics{img/tutorial/tut_10_post_tactics.png}
+    \caption{Disabling the proof post-tactics in the Proof Controling View}
+    \label{fig_tut_10_post_tactics}
+  \end{center}
+\end{figure}
 
 %\begin{center}
 %	\includegraphics[]{img/tutorial/tut_10_view_menu.png}

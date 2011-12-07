@@ -131,7 +131,10 @@ So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outsi
 %	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
 %\end{center}
 
-Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the Proof Control text area. Then, click on the \icon{rodin/auto_prover.png} button. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
+Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the Proof Control text area. 
+In the \textsf{Proof Tree} view you can now see three new nodes, $\btrue$, $\exists x\qdot x\in P$ and the original goal.
+Click on the \icon{rodin/auto_prover.png} button to prove $\btrue$, the well-definedness condition
+of our hypothesis. Then click \icon{rodin/auto_prover.png} another time to prove the hypothesis itself. Other provers do not work here. The first two of the three nodes are now marked as proven. After successfully adding the hypothesis, we can conclude the proof as follows:
 
 Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
 

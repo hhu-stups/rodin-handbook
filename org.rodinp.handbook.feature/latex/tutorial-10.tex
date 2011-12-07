@@ -58,7 +58,8 @@ Consider the event \textsf{pass} from the initial model:
 \END
 \end{description}
 
-Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{theorem} button to make it derived) and change the predicate so that it is the conjunction of the two guards:
+Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{not theorem} button to make it switch to \texttt{theorem}) and change the predicate so that it is the conjunction of the two guards.
+The difference between a ``normal'' invariant and one that is marked as theorem is that is must be proven that the theorem always holds if the other invariants declared before hold. We do not need to prove that an event preserves the invariant marked as theorem because this is a logical consequence when it preserves the other invariants.
 
 \begin{description}
 \INVARIANTS
@@ -69,9 +70,9 @@ Since the initial model has only one event (\textsf{pass}), the system might dea
 
 \info{Refer to the ProB Plugin with the deadlock freeness function.}
 
-Save the machine. We will see that the autoprover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
+Save the machine. We will see in the Event-B Explorer View that the autoprover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
 
-\warning{If you don't see the proof obligation \textsf{DLF/THM}, maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button. Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
+\warning{If you cannot find the proof obligation \textsf{DLF/THM}, maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button. Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
 
 Let us analyze whether this is an inconsistency in the model. Switch to the \texttt{Proving Perspective } and double click on the proof obligation \textsf{DLF/THM}.
 
@@ -100,7 +101,7 @@ So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outsi
 %	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
 %\end{center}
 
-Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button. Then, click on the \icon{rodin/auto_prover.png} button. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
+Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the Proof Control text area. Then, click on the \icon{rodin/auto_prover.png} button. Other provers do not work here. After successfully adding the hypothesis, we can conclude the proof as follows:
 
 Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
 
@@ -214,3 +215,8 @@ In our proof, we still need to show that anyone who is not \textsf{outside} can 
 \info{Try translating this into set theory. But do not worry if you get it wrong. You can still go back in the proof by right-clicking at the desired point in the proof tree and choose \textsf{Prune} in order to retry.}
 
 This concludes the tutorial. Please note that this tutorial gave you only an introduction to proving.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

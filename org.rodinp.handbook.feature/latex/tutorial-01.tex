@@ -30,9 +30,19 @@ This differs from the traditional development process. In a formal development, 
 \label{tut_predicate_logic}
 \index{predicate logic}
 
-Predicate logic is a mathematical logic containing variables that can be quantified.
-
-Event-B supports first-order logic which is, technically speaking, just one type of predicate logic.  
+In predicate logic statements (called predicates) can be expressed over variables
+  that can be quantified, like in ``for all values of $x$ \ldots''.
+Event-B's logic is predicate logic with the following features:
+\begin{itemize}
+\item Predicates and expressions are distinguished.
+\item All expressions have a data type, e.g. integer or set of integers.
+\item Quantification over variables, not predicates, is supported.
+  This includes quantification over sets.
+\item A partial function semantics is included, i.e. the predicate $1\div 0 = 1\div 0$ is not
+  a tautology because $1\div 0$ is not well defined.
+\item Comprehension sets are supported.
+\item Predicates can be evaluated to a Boolean value.
+\end{itemize}
 
 \subsection{Event-B}
 \label{tut_eventb}
@@ -66,3 +76,8 @@ Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform fo
 The GUI of an Eclipse application consists of views, editors, toolbars, quickviews, perspectives and many more elements.  If these terms are unfamiliar to you, please consult Section~\ref{eclipse} which contains references to Eclipse tutorials.
 
 In Section~\ref{tut_installation}, we present the Rodin-specific GUI elements.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

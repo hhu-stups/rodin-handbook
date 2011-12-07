@@ -58,6 +58,7 @@ Consider the event \textsf{pass} from the initial model:
 \END
 \end{description}
 
+\index{deadlock}
 Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{not theorem} button to make it switch to \texttt{theorem}) and change the predicate so that it is the conjunction of the two guards.
 The difference between a ``normal'' invariant and one that is marked as theorem is that is must be proven that the theorem always holds if the other invariants declared before hold. We do not need to prove that an event preserves the invariant marked as theorem because this is a logical consequence when it preserves the other invariants.
 
@@ -68,7 +69,26 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 	\end{description}
 \end{description}
 
-\info{Refer to the ProB Plugin with the deadlock freeness function.}
+
+\begin{rodin-plugin}{img/prob.png}{ProB}%
+  You can use ProB to search for deadlocks.
+  Right-click on the machine you want to check and start the animation with the
+  ``Start Animation / Model Checking'' menu entry.
+  After starting the animation, go to the Event View in the ProB perspective
+  (see \ref{fig_tut_prob_perspective}).
+  There are two ways to search for deadlocks:
+  \begin{itemize}
+  \item Just press on the \texttt{Check} button and mark \texttt{Find Deadlocks} before
+    starting the check by pressing the button \texttt{Start consistency checking}.
+    ProB then systematically ``executes'' all events and tries to find a state where no
+    event is enabled.
+  \item An alternative is to select \texttt{Deadlock Freedom Checking} after clicking
+    on the triangle right to the \texttt{Check} button.
+    ProB then prompts you for an optional predicate. Just leave that empty for the start.
+    The difference to the first alternative is that ProB searches now for variable values
+    where all invariants are true but none of the guards.
+  \end{itemize}
+\end{rodin-plugin}
 
 Save the machine. We will see in the Event-B Explorer View that the autoprover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
 

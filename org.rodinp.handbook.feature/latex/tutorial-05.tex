@@ -191,12 +191,11 @@ The butler hates everyone not richer than aunt Agatha and the butler hates every
 
 \pencil{
 \begin{description}
-\AXIOMS
+  \AXIOMS
 	\begin{description}
 		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer \limp  butler\mapsto x \in  hates) }
-		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
-		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
-		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }
+		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] }
+		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \limp  hates[\{ x\} ] \neq  persons }
 	\end{description}
 \end{description}
 }

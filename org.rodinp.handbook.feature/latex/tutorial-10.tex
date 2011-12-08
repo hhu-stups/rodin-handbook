@@ -129,11 +129,11 @@ Having a look the axioms, we find  \textsf{axm4} of \texttt{doors\_ctx1}, which 
 \end{description}
 So for every person $p$ in $P$, $p \mapsto l$ and $p \mapsto outside$ are in \textbf{aut}.
 (In words: every person is allowed to go both to the outside and to a location $l$).
-The basic idea of our proof is that a person is either outside and can to the location $l$.
+The basic idea of our proof is that a person is either outside and can go to the location $l$.
 When it is not outside, it can walk outside.
 
-What we implicitly assumed was that there is actually a person, so we need to prove now is that $P$ is non-empty. 
-This holds since carrier sets are always non-empty, but is a bit hard to prove. 
+We implicitly assumed that there is actually a person, so we need to prove now is that $P$ is non-empty. 
+This holds since carrier sets are always non-empty, but we need a person as an example for our further proof. 
 Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the \textsf{Proof Control} text area. 
 In the \textsf{Proof Tree} view you can now see three new nodes that have to be proven:
 \begin{itemize}
@@ -191,7 +191,7 @@ Again, you get three new goals.
 \begin{itemize}
 \item The first is the well-definedness condition of $sit(x) = outside$. $sit$ must be a function and $x$ in its domain.
   This is easy to prove since $sit$ is a total function (\ref{relations}). Just press \icon{rodin/auto_prover.png}.
-\item Then second node has the original goal but $sit(x) = outside$ as a hypothesis.
+\item The second node has the original goal but $sit(x) = outside$ as a hypothesis.
 \item The third node has the original goal but $\lnot sit(x) = outside$ as a hypothesis.
 \end{itemize}
 Let's continue with the case $sit(x)=outside$: When $x$ is outside, it can always go to the $l$ of \textsf{axm4}.
@@ -211,7 +211,7 @@ Note that the existential quantification introduces a new $l$ which has not (yet
 Now type $l$ into the yellow box of the goal and press the $\exists$ symbol to state that we use our $l$ as
   an example for the $l$ in the existential quantification.
 Again, we have first the trivial goal $\btrue$ as well-definedness condition, just press \icon{rodin/auto_prover.png}.
-The remaining goal should be $\exists l\qdot x\mapsto l\in aut \land sit(x)\neq l$.
+The remaining goal should be $x\mapsto l\in aut \land sit(x)\neq l$.
 This can be proven by the already selected hypothesis $sit(x)=outside$, $l\in L\setminus\{outside\}$ and $P\cprod\{l\}\subseteq aut$. Just
   press \icon{rodin/auto_prover.png}.
 
@@ -225,7 +225,7 @@ The new goal should be $x \mapsto outside\in aut \land sit(x)\neq outside$.
 To prove this we need the information that $x$ has the right to go $outside$.
 This is stated in the axiom $P \cprod\{outside\}\subseteq aut$.
 Have a look at the \textsf{Search Hypothesis} view. There should be still the result from the last search for $outside$.
-(If not, repeat the search by entering $outside$ into the \textsf{Proof Control} and press \icon{rodin/sh_prover.png}).
+(If not, repeat the search by entering $outside$ into the \textsf{Proof Control} and press \icon{rodin/sh_prover.png}.)
 Select $P \cprod\{outside\}\subseteq aut$ (in Figure~\ref{fig_tut_10_search_hypotheses}, it's the second entry) and
   press \icon{rodin/add.png} to add it to your selected hypothesis.
 Then the auto-prover has enough information, just click \icon{rodin/auto_prover.png} and

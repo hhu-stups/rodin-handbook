@@ -193,7 +193,7 @@ If a variable $v$ is declared in a machine $M_i$, it can be re-used in the
   direct refinement $M_{i+1}$. 
 In that case, it is assumed that the values of the abstract and concrete variable 
   are always equal.
-To ensure this, special proof obligations are generated (see below in section \ref{events}).
+To ensure this, special proof obligations are generated (see below in Section \ref{events}).
 Once a variable disappears in a refinement, i.e. is not declared in machine $M_{i+2}$,
   it cannot be re-introduced in a later refinement.
 
@@ -215,7 +215,7 @@ An event has the following elements:
 \item Witnesses
 \item Actions
 \item Status (ordinary, convergent or anticipated): The status is used
-  for termination proofs (see section~\ref{termination} for details).
+  for termination proofs (see Section~\ref{termination} for details).
 \end{itemize}
 
 An event can refine one or more events of an abstract machine. To keep things simple, we will
@@ -229,7 +229,7 @@ Likewise, if we refer to the parameters of the abstract events, we mean all the 
 \label{parameters}
 \index{parameter}
 An event may have an arbitrary number of \emph{parameters}. Their names must be unique, i.e. there must be no constant or variable with the same name.
-The types of the parameters must be inferable by the guards of the event.
+The types of the parameters must be inferable from the guards of the event.
 We denote the parameters of all abstract events with $\absparameters$ and the
 parameters of the concrete event with $\concparameters$.
 
@@ -301,8 +301,7 @@ Witnesses are necessary in the following circumstances:
 We denote the conjunction of all witnesses of an event with $\witnesspred$.
 
 \index{feasibility!of witnesses}
-The feasibility of the witness must be proven, i.e. that there is actually a value such that the
- predicate holds.
+The feasibility of the witness must be proven, i.e. that there is actually a value for which the predicate holds.
 \index{proof obligation!witness feasibility@witness feasibility (\eventbpo{WFIS})}
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
   {$\begin{array}{r@{\ }l}
@@ -474,15 +473,15 @@ In this case the refined event will implicitly have all the parameters,
 The ability to extend an event is just syntactic sugar -- the same effect
  can be achieved by manually copying the parameters, guards and actions.
 
-This is especially usefull when additional features are gradually introduced
- into a model by refinement, which is also called ``superposition refinement''.
+This is especially useful when additional features are gradually introduced
+ into a model by refinement (also called ``superposition refinement'').
 
 \subsubsection{Termination}
 \label{termination}
 \index{variant}
 \index{status of an event}
 \index{ordinary}\index{anticipated}\index{convergent}
-Event-B makes it possible to prove the termination of events in a model.
+Event-B makes it possible to prove how an event terminates.
 Termination means that a chosen set of events are enabled only a finite number
  of times before an event that is not marked as terminating occurs.
 To support proofs for termination, a \emph{variant} $V(\allconstants,\concvariables)$ can be specified in a model.
@@ -491,7 +490,7 @@ A variant is an expression that is either numeric
  a finite set ($V(\allconstants,\concvariables)\in\pow(\alpha)$,
  where $\alpha$ is an arbitrary type).
 
-Events can be marked as
+Events can be marked as:
 \begin{description}
 \item[ordinary] when the event may occur arbitrarily often and does not underly any restrictions
   regarding the variant.
@@ -501,7 +500,7 @@ Events can be marked as
 Informally, termination is proven by stating that the convergent events strictly decrease the variant
   which has a lower bound.
 If a model contains a convergent event, a variant must be specified.
-If only anticipated events are declared, it is sufficient to assume a default constant variant such
+If only anticipated events are declared, it is sufficient to create a default constant variant so
   that all anticipated events do not increase the variant.
 When an event is marked as anticipated, one must just prove that the event does not increase the
   variant.
@@ -511,8 +510,8 @@ A refinement of an anticipated event must be either anticipated or convergent.
 If the convergence of an event is proven, the convergence its refinements is also guaranteed due to
   the guard strengthening.
 
-A variant must be well-defined, the corresponding well-definedness proof obligations
-  can be found in \ref{well_definedness_of_variants}.
+A variant must be well-defined. The corresponding well-definedness proof obligations
+  can be found in Section \ref{well_definedness_of_variants}.
 The following other proof obligations are generated:
 
 \paragraph{Numeric variant}
@@ -674,7 +673,7 @@ For an invariant $H_{thm}$,
 
 We give a brief overview about which proof obligations are generated.
 This should help the user to identify why a proof obligation generated by identifying its label.
-For further information we refer to the relevant reference section.
+For further information, we refer to the relevant reference section.
 
 \begin{tabular}{lll}
   \hline
@@ -744,8 +743,7 @@ This table shows which identifiers can be used in predicates or expressions.
 \end{center}
 
 $\mbox{}^{*}$ Witnesses and actions have additional identifiers in their scope.
-See \ref{witness} for details on witnesses resp. \ref{assignments} for the scope
-of the different assignments in actions.
+See Section \ref{witness} for details on witnesses or Section \ref{assignments} for the scope of the different assignments in actions.
 
 %%% Local Variables: 
 %%% mode: latex

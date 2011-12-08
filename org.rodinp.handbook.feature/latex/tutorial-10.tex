@@ -28,7 +28,7 @@ Before describing the initial model, import the archive file \file{Doors.zip}{Do
 %The other event \textsf{PASS} of that model has to aim to change the location of a person.
 %We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-Let us look at the initial model which consists of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context. One is for people (\textsf{P}) and the other is for locations (\textsf{L}). There is a location called outside (\textsf{outside}) and a relation (\textsf{aut}) which reflects where people are allowed to go. Everyone is permitted to go \textsf{outside}. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, \textsf{sit}, which denotes where a person is located. 
+Let us look at the initial model which consists of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context. One is for people ($P$) and the other is for locations ($L$). There is a location called outside ($outside$) and a relation ($aut$) which reflects where people are allowed to go. Everyone is permitted to go outside. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, $sit$, which denotes where a person is located. 
 
 \subsubsection{Deadlock Freeness}
 \label{deadlock}
@@ -61,8 +61,14 @@ Consider the event \textsf{pass} from the initial model:
 \end{description}
 
 \index{deadlock}
-Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false. In this case, to prove that no deadlocks can occur requires proving that someone can always change room. Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{not theorem} button to make it switch to \texttt{theorem}) and change the predicate so that it is the conjunction of the two guards.
-The difference between a ``normal'' invariant and one that is marked as theorem is that is must be proven that the theorem always holds if the other invariants declared before hold. We do not need to prove that an event preserves the invariant marked as theorem because this is a logical consequence when it preserves the other invariants.
+Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false.
+In this case, to prove that no deadlocks can occur requires proving that someone can always change room.
+Clearly, we want to avoid this happening. We must therefore prove that the two guards are always true. 
+To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called \textsf{DLF} (click the \texttt{not theorem} button to make it switch to \texttt{theorem})
+  and change the predicate so that it is the conjunction of the two guards.
+The difference between a ``normal'' invariant and one that is marked as theorem is that is must be proven that the theorem always holds if the other invariants
+  declared before hold.
+ We do not need to prove that an event preserves the invariant marked as theorem because this is a logical consequence when it preserves the other invariants.
 
 \begin{description}
 \INVARIANTS
@@ -70,7 +76,6 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 		\nItemX{ DLF }{ \exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l) }
 	\end{description}
 \end{description}
-
 
 \begin{rodin-plugin}{img/prob.png}{ProB}%
   You can also use ProB to search for deadlocks.
@@ -92,51 +97,60 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
   \end{itemize}
 \end{rodin-plugin}
 
-Save the machine. We will see in the Event-B Explorer View that the autoprover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
+Save the machine. We will see in the Event-B Explorer View that the auto-prover (\ref{auto_prover}) fails to prove the theorem \textsf{DLF/THM}.
 
-\warning{If you cannot find the proof obligation \textsf{DLF/THM}, maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button. Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
+\warning{If you cannot find the proof obligation \textsf{DLF/THM}, maybe you forgot to mark the invariant as a theorem by clicking on the \texttt{theorem} button.
+  Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
 
 Let us analyze whether this is an inconsistency in the model. Switch to the \texttt{Proving Perspective } and double click on the proof obligation \textsf{DLF/THM}.
+In the Proof Control view, first disable the post-tactics (there is a small downward pointing arrow in the upper right hand corner above the toolbar, see Figure~\ref{fig_tut_10_post_tactics}.
+Click on this arrow and make sure that the option \textsf{Enable post-tactic} is unchecked in the dropdown menu.)
+We turn off the post-tactics because we want to see the proof develop in its different stages.
+Then select the root node in the \textsf{Prove Tree}, right-click on it and select \textsf{Purge}.
+This removes any proof that might be already started by the auto-provers.
+By doing this we want to assure that we you have the same proof as in this tutorial.
 
-%\begin{center}
-%	\includegraphics[]{img/tutorial/tut_10_carrier-sets.png}
-%\end{center}
+\begin{figure}[!ht]
+  \begin{center}
+    	\includegraphics{img/tutorial/tut_10_post_tactics.png}
+    \caption{Disabling the proof post-tactics in the Proof Controlling View}
+    \label{fig_tut_10_post_tactics}
+  \end{center}
+\end{figure}
 
-%\begin{center}
-%	\includegraphics[]{img/tutorial/tut_10_proversfailed.png}
-%\end{center}
-
-In order to succeed with the proof, we need a tuple $p \mapsto l$ that is in \textsf{aut} but not in \textsf{sit}. Searching the hypotheses, we find the \textsf{axm4} of \texttt{doors\_ctx1}, which states that there is a location \textsf{l} where everyone is allowed to go:
-
+In order to succeed with the proof, we need a pair $p \mapsto l$ that is in $aut$ but not in $sit$.
+Having a look the axioms, we find  \textsf{axm4} of \texttt{doors\_ctx1}, which states that 
+  there is a location $l$ different from $outside$ where everyone is allowed to go:
 \begin{description}
 \AXIOMS
 	\begin{description}
 		\nItemX{ axm4 }{ \exists l\qdot l\in L\setminus \{ outside\}  \land  P\cprod \{ l\} \subseteq aut }
 	\end{description}
 \end{description}
+So for every person $p$ in $P$, $p \mapsto l$ and $p \mapsto outside$ are in \textbf{aut}.
+(In words: every person is allowed to go both to the outside and to a location $l$).
+The basic idea of our proof is that a person is either outside and can to the location $l$.
+When it is not outside, it can walk outside.
 
-So for every person \textsf{p} in \textsf{P}, $p \mapsto l$ and $p \mapsto outside$ are in \textbf{aut}. Since these are different, at least one of them cannot be in the function \textbf{sit}. All we need to prove now is that \textsf{P} is nonempty. This holds since carrier sets are always nonempty, but is a bit hard to prove. 
+What we implicitly assumed was that there is actually a person, so we need to prove now is that $P$ is non-empty. 
+This holds since carrier sets are always non-empty, but is a bit hard to prove. 
+Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the \textsf{Proof Control} text area. 
+In the \textsf{Proof Tree} view you can now see three new nodes that have to be proven:
+\begin{itemize}
+\item $\btrue$ is the trivial well-definedness condition, just click on \icon{rodin/auto_prover.png} to prove it.
+\item $\exists x\qdot x\in P$ is the hypothesis that we introduced, just click on \icon{rodin/auto_prover.png} to prove it.
+\item $\exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l)$ is the original goal
+  but we can use the introduced hypothesis in the proof. We now continue with the proof of this goal.
+\end{itemize}
 
-\warning{In the Proof Control view, first disable the post-tactics (there is a small downward pointing arrow in the upper right hand corner above the toolbar, see Figure~\ref{fig_tut_10_post_tactics}. Click on this arrow and make sure that the option \textsf{Enable post-tactic} is unchecked in the dropdown menu. We turn off the post-tactics because we want to see the proof develop in its different stages.)}
+Click on the existential quantifier of the new hypothesis $\exists x \cdot x \in P$
+  (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}.
+You see that it is automatically instantiated. That means that we can use $x$ from now on in our proof as an example for a person
+  and we have the new hypothesis $x \in P$.
 
-\begin{figure}[!ht]
-  \begin{center}
-    	\includegraphics{img/tutorial/tut_10_post_tactics.png}
-    \caption{Disabling the proof post-tactics in the Proof Controling View}
-    \label{fig_tut_10_post_tactics}
-  \end{center}
-\end{figure}
-
-%\begin{center}
-%	\includegraphics[]{img/tutorial/tut_10_view_menu.png}
-%\end{center}
-
-Now add the hypothesis $\exists x . x \in P$ using the \icon{rodin/ah_prover.png} button after entering the predicate into the Proof Control text area. 
-In the \textsf{Proof Tree} view you can now see three new nodes, $\btrue$, $\exists x\qdot x\in P$ and the original goal.
-Click on the \icon{rodin/auto_prover.png} button to prove $\btrue$, the well-definedness condition
-of our hypothesis. Then click \icon{rodin/auto_prover.png} another time to prove the hypothesis itself. Other provers do not work here. The first two of the three nodes are now marked as proven. After successfully adding the hypothesis, we can conclude the proof as follows:
-
-Click on the existential quantifier of the expression $\exists x \cdot x \in P$ (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}. You see that it is automatically instantiated. It leads to the selected hypothesis $x \in P$. We can now instantiate \textsf{p} in the goal with \textsf{x}: enter \textsf{x} in the yellow box corresponding to \textsf{p} in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
+An existential quantification can be proven by giving an example for the variables. First, we
+  instantiate $p$ in the goal with $x$: enter $x$ in the yellow box corresponding to $p$ 
+  in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -154,10 +168,102 @@ Click on the existential quantifier of the expression $\exists x \cdot x \in P$ 
 \end{center}
 \end{figure}
 
-\warning{If the hypothesis does not appear immediately in the \textsf{Selected Hypothesis} view, reclick on the Auto Prover button until it does.}
+% \warning{If the hypothesis does not appear immediately in the \textsf{Selected Hypothesis} view, reclick on the Auto Prover button until it does.}
 
-Now \textsf{l} needs to be instantiated. In order to instantiate it, we need a case distinction. Type sit(x) = l into the \textsf{Proof Control View} and click on \textsf{Case Distinction button (dc)} to look at the two cases $sit(x) = l$ and $sit(x) \neq l$. Before starting with the cases, the prover now wants you to prove that $x \in dom(sit)$. This can be done with the \textsf{p0} prover since \textsf{sit} is a total function (\ref{relations}). In the first case, \textsf{x} is situated in \textsf{l}, so it cannot be in \textsf{outside}. You can instantiate \textsf{l} with \textsf{outside} (type \textsf{outside} in the box corresponding to \textsf{l} and click on the existential quantifier). In order to prove that \textsf{x} is allowed \textsf{outside}, you will need to select the hypothesis $P \times {outside} \subseteq aut$ (if this hypothesis doesn't appear in the search hypothesis, type outside in the proof control view, click on the \textsf{Search Hypothesis button} and add it to the selected hypothesis using the green plus icon). Then you can finish this case with the \textsf{p0} prover (select the items from this case from the proof tree and hit the \textsf{p0} button. If this doesn't work, hit the \icon{rodin/lasoo_prover.png} button to select all of the necessary hypotheses and try again). Now you have reached the other branch of the case distinction in the proof tree. In this case, you can simply instantiate \textsf{l} with \textsf{l} since 
-\textsf{x} is not situated there. Finally, use the \textsf{p0} button to finish the proof. 
+The instantiation produces two new nodes in the \textsf{Proof Tree} view. The first goal is the trivial well-definedness condition $\btrue$ and
+  can be easily discharged by pressing \icon{rodin/auto_prover.png}.
+The remaining goal is $\exists l\qdot (x \mapsto  l \in  aut \land  sit(x) \neq l)$ which results from the old goal by replacing $p$ by $x$.
+You can see the the current proof tree in Figure~\ref{fig_tut_10_proof_tree}. In the node \textsf{ah} we added the hypothesis, in \textsf{$\exists$ hyp}
+  we instantiated $x$ from a hypothesis and in \textsf{$\exists$ goal} we instantiated $p$ in the goal.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/tutorial/tut_10_proof_tree.png}
+	\caption{The proof tree after instantiating $p$ with $x$.}
+	\label{fig_tut_10_proof_tree}
+\end{center}
+\end{figure}
+
+Now we need an example for the remaining variable $l$.
+There are two situations we want to distinguish: The person $x$ could be outside or not.
+To do this, type $sit(x) = outside$ into the \textsf{Proof Control} view and click on the button \icon{rodin/dc_prover.png} (\textsf{dc} for distinguish case).
+Again, you get three new goals.
+\begin{itemize}
+\item The first is the well-definedness condition of $sit(x) = outside$. $sit$ must be a function and $x$ in its domain.
+  This is easy to prove since $sit$ is a total function (\ref{relations}). Just press \icon{rodin/auto_prover.png}.
+\item Then second node has the original goal but $sit(x) = outside$ as a hypothesis.
+\item The third node has the original goal but $\lnot sit(x) = outside$ as a hypothesis.
+\end{itemize}
+Let's continue with the case $sit(x)=outside$: When $x$ is outside, it can always go to the $l$ of \textsf{axm4}.
+To search for \textsf{axm4}, type $outside$ into the \textsf{Proof Control} text field and click the button \icon{rodin/sh_prover.png}. Now click on the $\exists$ symbol in the \textsf{axm4} (see Figure~\ref{fig_tut_10_search_hypotheses})
+to instantiate $l$.
+Now we have $l$ as an example for a location which is not outside and where everybody can go.
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics{img/tutorial/tut_10_search_hyp.png}
+    \caption{Searching hypothesis for $outside$: The third one is \textsf{axm4}.}
+    \label{fig_tut_10_search_hypotheses}
+  \end{center}
+\end{figure}
+Our goal still is $\exists l\qdot x\mapsto l\in aut \land sit(x)\neq l$.
+Note that the existential quantification introduces a new $l$ which has not (yet) anything to do with
+ our location $l$ where anybody can go.
+Now type $l$ into the yellow box of the goal and press the $\exists$ symbol to state that we use our $l$ as
+  an example for the $l$ in the existential quantification.
+Again, we have first the trivial goal $\btrue$ as well-definedness condition, just press \icon{rodin/auto_prover.png}.
+The remaining goal should be $\exists l\qdot x\mapsto l\in aut \land sit(x)\neq l$.
+This can be proven by the already selected hypothesis $sit(x)=outside$, $l\in L\setminus\{outside\}$ and $P\cprod\{l\}\subseteq aut$. Just
+  press \icon{rodin/auto_prover.png}.
+
+Now our second case of the case distinction remains where $x$ is not outside ($sit(x)\neq outside$). Then $x$ can just go outside.
+Again the goal is $\exists l\qdot x\mapsto l\in aut \land sit(x)\neq l$. Type
+$outside$ as an example for a location $l$ into the yellow box and press
+the $\exists$ symbol.
+Press  \icon{rodin/auto_prover.png} to discharge the trivial well-definedness condition $\btrue$.
+The new goal should be $x \mapsto outside\in aut \land sit(x)\neq outside$.
+
+To prove this we need the information that $x$ has the right to go $outside$.
+This is stated in the axiom $P \cprod\{outside\}\subseteq aut$.
+Have a look at the \textsf{Search Hypothesis} view. There should be still the result from the last search for $outside$.
+(If not, repeat the search by entering $outside$ into the \textsf{Proof Control} and press \icon{rodin/sh_prover.png}).
+Select $P \cprod\{outside\}\subseteq aut$ (in Figure~\ref{fig_tut_10_search_hypotheses}, it's the second entry) and
+  press \icon{rodin/add.png} to add it to your selected hypothesis.
+Then the auto-prover has enough information, just click \icon{rodin/auto_prover.png} and
+  the last goal of our theorem should be proven.
+
+We just summarize the proof. Compare this with your final proof tree (like in 
+Figure~\ref{fig_tut_10_final_proof_tree}).
+
+\begin{tabular}{l}
+  \hline
+  added hypotheses: $\exists x\qdot x\in P$ \\
+  \quad well-definedness condition $\btrue$: automatically proven\\
+  \quad the hypotheses: automatically proven \\
+  \quad instantiation of $x$ in the hypotheses $\exists x\qdot x\in P$\\
+  \qquad using $x$ as an example for the $\exists p \ldots$ in the goal\\
+  \quad\qquad well-definedness condition $\btrue$: automatically proven\\
+  \quad\qquad case distinction $sit(x)=outside$ \\
+  \qquad\qquad well-definedness condition
+    ($sit$ is a function with $x$ in its domain): automatically proven\\
+  \qquad\qquad first case: instantiation of $l$ from axiom \textsf{axm4}\\
+  \quad\qquad\qquad using $l$ as an example for the $\exists l \ldots$ in the goal\\
+  \qquad\qquad\qquad well-definedness condition $\btrue$: automatically proven\\
+  \qquad\qquad\qquad automatically proven\\
+  \qquad\qquad second case: using $outside$ as an example for the $\exists l \ldots$ in the goal\\
+  \quad\qquad\qquad well-definedness condition $\btrue$: automatically proven\\
+  \quad\qquad\qquad hypotheses $P\cprod\{outside\}$ selected\\
+  \qquad\qquad\qquad automatically proven\\
+  \hline
+\end{tabular}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics{img/tutorial/tut_10_proof_tree_final.png}
+    \caption{Searching hypothesis for $outside$: The third one is \textsf{axm4}.}
+    \label{fig_tut_10_final_proof_tree}
+  \end{center}
+\end{figure}
+
+
 
 \subsection{First Refinement}
 \label{tut_location_first_refinement}
@@ -178,7 +284,7 @@ We are faced with a difficulty here; it is not possible to prove that the refine
 
 The issue is that this condition cannot be verified in general. Moreover, the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. People are also more limited in the ways that they may move because they can only move between rooms that are connected.
 
-Now we know that this model contains a problem ignored in the document requrements. We must now find a sufficient solution.
+Now we know that this model contains a problem ignored in the document requirements. We must now find a sufficient solution.
 
 \info{Please note that post-tactics should still be disabled before starting this part of the tutorial.} 
 
@@ -198,7 +304,7 @@ This can be illustrated as demonstrated in Figure \ref{fig_tut_10_graph}.
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics[]{img/tutorial/tut_10_graph.png}
-	\caption{The floorplan of the location to be controlled.}
+	\caption{The floor plan of the location to be controlled.}
 	\label{fig_tut_10_graph}
 \end{center}
 \end{figure}
@@ -218,7 +324,7 @@ We will try to avoid using \textsf{exit} since we want to keep things as simple 
 sit \subseteq aut \land sit \in P \mathbin \rightarrow L.
 \]
 
-Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if $sit(p) = outside$. Add this case as previously using the \textsf{Case Distinction button (dc)}. To do this, you first need to instantiate the value for p. To do this, use the hypothesis $\exists p, l \cdot p \mapsto l \in aut \land sit(p) \neq l$ and then click on the existential quantifier to create the expression $ p \in P $ (see Figure \ref{fig_tut_10_instantiate_p}). Initialize the value of \textsf{q} with the value of \textsf{p} (type p into the yellow box next to q). For \textsf{m}, you will use the existential quantifier of \textsf{axm7} of \texttt{doors\_ctx2} to instantiate \textsf{m} (add the axiom as a hypothesis and then click on the existential quantifier next to the l. Once the variable has been initialised, type it into the yellow box next to m).
+Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if $sit(p) = outside$. Add this case as previously using the \textsf{Case Distinction button (dc)}. To do this, you first need to instantiate the value for p. To do this, use the hypothesis $\exists p, l \cdot p \mapsto l \in aut \land sit(p) \neq l$ and then click on the existential quantifier to create the expression $ p \in P $ (see Figure \ref{fig_tut_10_instantiate_p}). Initialize the value of \textsf{q} with the value of \textsf{p} (type p into the yellow box next to q). For \textsf{m}, you will use the existential quantifier of \textsf{axm7} of \texttt{doors\_ctx2} to instantiate \textsf{m} (add the axiom as a hypothesis and then click on the existential quantifier next to the l. Once the variable has been initialized, type it into the yellow box next to m).
 
 For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} connects locations to locations and defines at every location except \textsf{outside}.
 

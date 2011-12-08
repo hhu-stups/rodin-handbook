@@ -87,7 +87,8 @@ First we have to make the machine aware of the context by adding a \textsf{sees}
 \end{description}
 }
 
-We will start with the traffic lights for the pedestrians. It has only two colours (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_colour} to represent which of the lights is shown. The variable has a corresponding invariant and initialization (the changes are shown in the following code snippet):
+We will start with the traffic lights for the pedestrians. It has only two colours (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_colour} to represent which of the lights is shown. The variable has a corresponding invariant and initialization (the changes are shown in the following code snippet). The \textit{extended}	keyword in the initialisation means that all
+actions from the refined initialisation are copied:
 
 \pencil{
 \begin{description}

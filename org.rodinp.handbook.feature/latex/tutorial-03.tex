@@ -218,7 +218,12 @@ Please add this invariant with the label \texttt{inv3} to the model, use \texttt
 Obviously, this invariant can be violated, and Rodin informs us of this.  The \textsf{Event-B Explorer} (\ref{eventb_explorer}) provides this information in various ways.  Go to the explorer and expand the project (\texttt{tutorial-03}), the machine (\texttt{mac}) and the entry ``Proof Obligations''.
 You should see four proof obligations, two of which are discharged (marked with \icon{rodin/discharged}) and two of which are not discharged (\icon{rodin/pending}).
 
-\info{\textbf{Proof obligations:} Have a look at the proof obligation labels.
+\index{proof obligation}
+\info{\textbf{Proof obligations:} A proof obligation is something that has to be
+  proven to show the consistency of the machine, the correctness of theorems, etc.
+  A proof obligation consists of a label, a number of hypothesis that can be used
+  in the proof and a goal -- a predicate that must be proven.
+  Have a look at the proof obligation labels.
   They indicate the origin in the model where they were generated. 
   E.g. \eventbpo{set\_peds\_go/inv3/INV} is the proof obligation that the event  \eventbpo{set\_peds\_go} preserves the invariant (\eventbpo{INV}) with the label \eventbpo{inv3}.
   An overview about all labels can be found in \ref{generated_proof_obligations}.

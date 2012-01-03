@@ -306,12 +306,12 @@ The feasibility of the witness must be proven, i.e. that there is actually a val
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
   {$\begin{array}{r@{\ }l}
       & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
-      \limp & W(\allconstants,\allvariables,\concvariables',\concparameters,p)      
+      \limp & \exists p \qdot W(\allconstants,\allvariables,\concvariables',\concparameters,p)      
     \end{array}$}
 \pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
   {$\begin{array}{r@{\ }l}
       & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
-      \limp & W(\allconstants,\allvariables,\concvariables',\allparameters,x')
+      \limp & \exists x' \qdot W(\allconstants,\allvariables,\concvariables',\allparameters,x')
     \end{array}$}
 A witness may contain well-definedness conditions, see \ref{well_definedness_of_witnesses}
   for the corresponding proof obligation.

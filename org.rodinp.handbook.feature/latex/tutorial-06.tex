@@ -162,8 +162,8 @@ the variables of the concrete and the abstract machine. If a invariant refers to
 we call it a ``gluing invariant''. The gluing invariants are
 used to relate the states between the concrete and abstract machines.
 
-The events of a concrete machine can now refine an abstract event. To ensure that the concrete machine 
-does only what is allowed by the abstract one, we must show two things:
+An event of the abstract machine may be refined by one or several events of the concrete machine.
+To ensure that the concrete machine does only what is allowed by the abstract one, we must show two things:
 \begin{itemize}
 \item The concrete events can only occur when the abstract one can occur.
 \item If a concrete event occurs, the abstract event can occur in such a way that the resulting

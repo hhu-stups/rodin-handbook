@@ -59,7 +59,7 @@ identifier's type can be determined. In the traffic light example, a variable \t
 introduced and typed by an invariant $cars\_go \in \Bool$. In the next section, we'll see constants that
 will be typed by axioms (also predicates) and later we'll see parameters that will be typed by guards (again, predicates).
 
-In general, each term in Event-B has a certain type. 
+As a rule, each term in Event-B must have a certain type. 
 When saving a Event-B component, Rodin starts the type checker to ensure that types are correctly used. For example, the terms on both sides of an equality ($=$) must have the same type. If this is not the case, Rodin will generate an error message.
 For each type there exists a set that denotes exactly all elements that belong the type. We will now briefly
 give an overview about all types you might encounter.

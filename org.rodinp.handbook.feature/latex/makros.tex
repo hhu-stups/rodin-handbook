@@ -211,6 +211,24 @@
   \end{center}
 }
 
+
+% Titlepage stuff
+\ifplastex
+\else
+
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{
+\put(0,0){
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,
+keepaspectratio]{img/rodin_miikka_skaffari.jpg}%
+\vfill
+}}}
+
+\fi
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "rodin-doc"

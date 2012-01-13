@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[12pt]{book}
 \usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{graphicx}
@@ -8,9 +8,11 @@
 \usepackage{verbatim}
 \usepackage{wrapfig}
 \usepackage{makeidx}
+\usepackage{fix-cm}
 
 \input{config}
 \input{makros}
+
 
 \title{User Manual for Rodin v.\versionnr}
 \author{
@@ -23,10 +25,27 @@ Handbook $ $Rev$ $ \\
 
 \begin{document}        
 
-\maketitle
-
 \ifplastex
+\maketitle
+\begin{center}
+\includegraphics{img/rodin_miikka_skaffari_small.jpg}
+\end{center}
 \else
+\begin{titlepage}
+\AddToShipoutPicture*{\BackgroundPic}
+\vspace*{14.5cm}
+{ \fontsize{70}\selectfont \bfseries Rodin}
+
+\vspace*{0.5cm}
+{ \fontsize{24.5}\selectfont \bfseries User's Handbook}
+
+\vspace*{1cm}
+{ \fontsize{16}\selectfont \bfseries Covers Rodin v.\versionnr}
+
+\vspace*{2cm}
+{ \fontsize{16}\selectfont \bfseries Michael Jastram (Ed.)}
+
+\end{titlepage}
 \tableofcontents
 \fi
 
@@ -103,6 +122,8 @@ The content of this handbook has been growing since the formation of the Europea
 We would also like to thank Cliff Jones, who never gave up the quest to improve the Rodin documentation.
 
 The icons that you find throughout this handbook were created by Pixel-Mixer\footnote{\url{http://pixel-mixer.com/}}, who provides them for free.  Thanks!
+
+The cover picture was taken by \href{http://www.flickr.com/photos/miikka_skaffari/4697342246/}{Miikka Skaffari}, who made it available via the Creative Commons by-nc license, depicting a sculpture by Rodin.  Thanks!
 
 \section{DEPLOY}
 \label{deploy}

@@ -1,6 +1,13 @@
 \documentclass[12pt]{book}
 \usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
-\usepackage[colorlinks=true]{hyperref}
+\usepackage[colorlinks=true,
+	    pdftex,
+            pdfauthor={Michael Jastram (Ed.)},
+            pdftitle={Rodin User's Handbook},
+            pdfsubject={Rodin is a platform for Event-B based formal modeling},
+            pdfkeywords={Rodin, Event-B},
+            pdfproducer={http://handbook.event-b.org},
+            pdfcreator={plastex-based tool chain}]{hyperref}
 \usepackage{graphicx}
 \usepackage{bsymb}
 \usepackage{b2latex}
@@ -14,7 +21,7 @@
 \input{makros}
 
 
-\title{User Manual for Rodin v.\versionnr}
+\title{Rodin User's Handbook v.\versionnr}
 \author{
 Work in Progress\\
 Handbook $ $Rev$ $ \\
@@ -34,16 +41,28 @@ Handbook $ $Rev$ $ \\
 \begin{titlepage}
 \AddToShipoutPicture*{\BackgroundPic}
 \vspace*{14.5cm}
-{ \fontsize{70}\selectfont \bfseries Rodin}
+{\fontsize{70}{85}\selectfont \bfseries Rodin}
 
-\vspace*{0.5cm}
-{ \fontsize{24.5}\selectfont \bfseries User's Handbook}
+\vspace*{0.2cm}
+{\fontsize{24.5}{30}\selectfont \bfseries User's Handbook}
 
 \vspace*{1cm}
-{ \fontsize{16}\selectfont \bfseries Covers Rodin v.\versionnr}
+{\fontsize{16}{19}\selectfont \textbf{\textsf{Covers Rodin v.\versionnr}}}
 
-\vspace*{2cm}
-{ \fontsize{16}\selectfont \bfseries Michael Jastram (Ed.)}
+\vspace*{0.2cm}
+{\fontsize{16}{19}\selectfont \textbf{\textsf{Work in Progress, $ $Rev$ $}}}
+
+\vspace*{1cm}
+{\fontsize{16}{19}\selectfont \textsf{Michael Jastram (Ed.)}}
+
+\vspace*{1cm}
+\includegraphics[width=12mm]{img/deploy-logo.png}
+
+\vspace*{-8.4mm}
+\hspace*{12mm}
+{ \fontsize{11}{15}\selectfont \textsf{This work is sponsored by the Deploy Project}}
+
+\vspace*{-22mm}
 
 \end{titlepage}
 \tableofcontents

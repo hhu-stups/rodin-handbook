@@ -88,19 +88,22 @@ For more information, please visit \url{http://wiki.event-b.org/index.php/Text_E
 \subsection{Building the Model}
 \label{tut_building_the_model}
 
-\marginpar{This chapter needs to be adapted to Rodinv2.4}
-
 Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tut_first_machine}.  We start with the model state.  Two traffic lights will be modelled and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  
 
 \subsubsection{Creating Variables}
 \index{variable!creating a variable}
-Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the \icon{rodin/add.png} button to create a new variable.
-You will see two fields. The left one is filled with the word \texttt{var1}.  Change this to \texttt{cars\_go}.  The second field (after the double-slash ``//'') is a comment field in which you can write any necessary notes or explanations.
+
+Under the \textsf{MACHINE} heading, you see the machine name \textsf{mac}. There is a small green arrow to the right of this label. Place your cursor directly to the left of the green arrow, right click, and select \textsf{Add Child $\rangle$ Event-B Variable} to add a new variable. Optionally, you can also use the New Variable Wizard (the button \icon{rodin/newvar_edit.png}) to create your variable. By default, the variable is named \textsf{var1}. Place your cursor inside the \textsf{var1} label. The label turns into a textbox. Change the name to \textsf{cars\_go}. You can add a comment to the variable by placing your cursor to the right of the little green arrow and typing into the text box that appears.
+
+%Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the \icon{rodin/add.png} button to create a new variable.
+%You will see two fields. The left one is filled with the word \texttt{var1}.  Change this to \texttt{cars\_go}.  The second field (after the double-slash ``//'') is a comment field in which you can write any necessary notes or explanations.
 
 \index{comment}
-\info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as is possible with most programming languages.  You can use the comment field to ``park'' predicates and other strings temporarily.}
+\info{\textbf{Comments:} The comment field does not support line breaks, nor is is possible to ``comment out'' parts of the model as it is with most programming languages.}
 
-Create the second variable (\texttt{peds\_go}) in the same way.
+%\info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as is possible with most programming languages.  You can use the comment field to ``park'' predicates and other strings temporarily.}
+
+Create the second variable (\texttt{peds\_go}) in the same way, or place your cursor directly to the left of the small green arrow next to the label \textsf{cars\_go}, and either hit \textsf{CTRL-T} or right click and select \textsf{Add Sibling} from the menu.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -108,7 +111,7 @@ Create the second variable (\texttt{peds\_go}) in the same way.
 %\end{center}
 %\end{figure}
 
-Upon saving, the variables will be highlighted in red, indicating an error as shown in Figure \ref{fig_tut_03_error}.  The \textsf{Rodin Problems} view (\ref{rodin_problems_view}) shows corresponding error messages. In this case, the error message is ``Variable cars\_go does not have a type''.
+Upon saving, the variables will be underlined in red which indicates that an error is present as shown in Figure \ref{fig_tut_03_error}.  The \textsf{Rodin Problems} view (\ref{rodin_problems_view}) shows corresponding error messages. In this case, the error message is ``Variable cars\_go does not have a type''. \marginpar{fig\_tut\_03\_error should be updated to show the new error message}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -118,7 +121,9 @@ Upon saving, the variables will be highlighted in red, indicating an error as sh
 \end{center}
 \end{figure}
 
-Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
+Invariants are needed in order to specify the type of variables. Use the method described above to add invariants to your machine (except this time select \textsf{Add Child $\rangle$ Event-B Invariant} from the menu or click the \icon{rodin/newinv_edit.png} button to open up the New Invariant Wizard). Add two invariants (which will automatically be labelled \textsf{inv1} and \textsf{inv2}). The actual invariant appears to the left of the label and is prepopulated with the symbol $\btrue$, which represents the logical value ``true''. Placing your cursor inside the invariant field will change it to a text field and allow editing. 
+
+%Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
 Change the first invariant (the $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
 Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_types}).
 
@@ -131,7 +136,7 @@ Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_t
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question.}
 
 \index{yellow highlighting}
-After saving, you should see that the \textsf{EVENTS} section is highlighted in yellow as demonstrated in Figure~\ref{fig_tut_03_warning}.  Again, the \textsf{Rodin Problems} view gives us the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
+After saving, you should see that the \textsf{INITIALISATION} event is underlined in yellow with a small warning sign to the left as demonstrated in Figure~\ref{fig_tut_03_warning}. \marginpar{fig\_tut\_03\_warning needs to be updated} Again, the \textsf{Rodin Problems} view gives us the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -141,7 +146,9 @@ After saving, you should see that the \textsf{EVENTS} section is highlighted in 
 \end{center}
 \end{figure}
 
-To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZATION event.  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
+To fix this problem, place your cursor to the left of the small green arrow next to the label \textsf{INITIALISATION}. Right click and add an \textsf{Event-B Action}. Repeat to add another event. In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
+
+%To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZATION event.  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -151,7 +158,7 @@ To fix this problem, expand the \textsf{EVENTS} section and then the INITIALIZAT
 
 \subsubsection{State Transitions with Events}
 
-Our traffic light controller cannot yet change its state.  To make this possible, we create events (\ref{events}). We will first consider the traffic light for the pedestrians, and we will create two events. One will set it to ``go'' and one will set it to ``stop''.
+Our traffic light controller cannot yet change its state.  To make this possible, we create two events (Chapter \ref{events}) in the manner described above and name them \textsf{set\_peds\_go} and \textsf{set\_peds\_stop}. This will model the traffic light for the pedestrians, and for each of these, we will add an Event-B action to each of the events. These actions will change \textsf{peds\_go} to \textsf{TRUE} or \textsf{FALSE}, which simulates the changing of the traffic light.
 
 \warning{From now on, we won't describe the individual steps in the editor any more.  Instead, we will simply show the resulting model.} 
 
@@ -181,7 +188,7 @@ The two events will look as follows:
 \subsubsection{Event parameters}
 \index{parameter}
 
-For the traffic light for the cars, we present a different approach and use only one event with a parameter.  The event will use the new traffic light state as the argument.  The parameter is declared in the \textsf{any} section and typed in the \textsf{where} section:
+For the traffic light for the cars, we present a different approach and use only one event with a parameter.  The event will use the new traffic light state as the argument. For this, we need to add an Event-B Event Parameter, which will appear under the heading \textsf{ANY}, and an Event-B Guard, which will appear under the heading \textsf{WHERE}: 
 
 \pencil{
 \begin{description}

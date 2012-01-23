@@ -77,7 +77,7 @@ The easiest way to create a refinement is by right-clicking on the machine in th
 
 \warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go}) and variables that you do not have.)  }
 
-First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{seeing_a_context}) statement:
+First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{seeing_a_context}) statement. To do this, place your cursor to the left of the small green arrow next to your machine name \textsf{mac1}. Right click and select \textsf{Add Child $\rangle$ Event-B Sees Context Relationship}. A \textsf{SEES} heading will appear with the value \textsf{--undefined--}. Place your cursor over the undefined section and click. A small box listing all of the contexts in the project will pop up. Select \textsf{ctx1}:
 
 \pencil{
 \begin{description}
@@ -136,9 +136,9 @@ In its current state, this gluing invariant can be violated: if the event \texts
 \end{center}
 \end{figure}
 
-To fix this, we have to modify the two events in question.  Let's start with \textsf{set\_peds\_go}.  First, we change the event from extended to not extended in the Editor as shown in figure \ref{fig_tut_07_event_refinement}.
+To fix this, we have to modify the two events in question.  Let's start with \textsf{set\_peds\_go}.  First, we change the event from extended to not extended in the Editor by placing our cursor over the keyword \textsf{not extended} and clicking. This is shown in Figure \ref{fig_tut_07_event_refinement}.
 
-\marginpar{Must be adapted to Rodinv2.4}
+\marginpar{Screenshot must be adapted to Rodinv2.4}
 
 \begin{figure}[!ht]
 \begin{center}

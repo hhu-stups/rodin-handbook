@@ -23,7 +23,7 @@ We want to model an algorithm that fulfills this task.
 \warning{Make sure that you have no existing Project named Celebrity. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
 
 \index{import project}
-Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the according archive file and click on \textsf{Finish}.
+Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the option to import an existing archive file and then use the browse function to find your archive file and import it. After you have selected the appropriate archive file, click on \textsf{Finish}.
 
 Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
 
@@ -35,18 +35,14 @@ Rodin takes a few seconds to extract and load all the files. Once it is done, it
 \end{center}
 \end{figure}
 
-We will describe how the model is organized below in \ref{the_celebrity_algorithm}.
+We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.
 
-In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. Select the event \textsf{celebrity}. The problem is that the event is not declared as a refinement. To solve the problem, expand the event and add a new entry in the \textsf{REFINES} section (Click on the \icon{rodin/add.png} button to create a new entry). This declares that the event is a refinement of an event with the same name in the abstract machine (\ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
-
-\marginpar{Must be adapted to Rodinv2.4}
+In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. Select the event \textsf{celebrity}. The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section. This declares that the event is a refinement of an event with the same name in the abstract machine (Section \ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
 
 %Do we need an additional explanation for witnesses, since this is already done in tutorial 07!?
 %In any abstract event that uses parameters, if the concrete event has no parameter with the same name, the tool needs a witness so that it notices what value the parameter should take. Witnesses are also needed for variables that have a non-deterministic (\ref{non_deterministic}) assignment in an abstract event and do not appear in the concrete model.
 
-The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then expand the \textsf{celebrity} event and add a witness in the \textsf{WITH} section (Click on the \icon{rodin/add.png} button to create a new entry).
-
-\marginpar{Must be adapted to Rodinv2.4}
+The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the \textsf{celebrity}.
 
 A default witness \textsf{wit1} has been created, with a default value \textsf{$\top$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness is \textsf{x = b}. The event should now look as follows: 
 

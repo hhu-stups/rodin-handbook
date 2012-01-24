@@ -193,24 +193,49 @@ All of the windows that you cannot create directly when clicking on \textsf{New 
 \end{center}
 \end{figure}
 
-
 \subsection{The Event-B Editor}
+\label{new_eventb_editor}
+
+Once a context or a machine is created, a window appears in the editing area as shown in figure \ref{ffig_ref_01_eventb_editor1_neweditor}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor1_neweditor.png}
+	\caption{The Event-B editor}
+	\label{fig_ref_01_eventb_editor1_neweditor}
+\end{center}
+\end{figure}
+
+The editor allows you to edit the modelling elements of the context which are the dependencies, the carrier sets, the constants, and the axioms. By right-clicking on predefined places you can create new modelling elements. For instance, there is a small green arrow directly to the right of the name of the context (in this case, the name of the context is "ctx"). Place your cursor directly to the left of the green arrow and right click. Select the element that you would like to add from the \textsf{Add Child} menu as shown in figure \ref{fig_ref_01_neweditor_add_element}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_neweditor_add_element.png}
+	\caption{Adding a new modelling element}
+	\label{fig_ref_01_neweditor_add_element}
+\end{center}
+\end{figure}
+
+To remove a modelling element, right click on the modelling element and select \textsf{Delete}.
+
+It is also possible to add modelling elements by using wizards (See \ref{eventb_editor}).
+
+\subsection{The Structural Event-B Editor}
 \label{eventb_editor}
 \index{Event-B!editor}
-
-\marginpar{The chapter (with screenshots) must be adapted to Rodinv2.4}
 
 Once a context or a machine is created, a window appears in the editing area as shown in figure \ref{fig_ref_01_eventb_editor1}.
 
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/reference/ref_01_eventb_editor1.png}
-	\caption{The Event-B editor}
+	\caption{The Structured Event-B editor}
 	\label{fig_ref_01_eventb_editor1}
 \end{center}
 \end{figure}
 
-By default, you are in the \textsf{Edit} mode which allows you to edit the modelling elements of the context which are the dependencies (keyword "EXTENDS"), the carrier sets (keyword "SETS"), the constants (keyword "CONSTANTS"), and the axioms (keyword "AXIOMS"). By pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you can see the different modelling elements and also add, remove, or move them. Figure \ref{fig_ref_01_eventb_editor2} shows what the section looks like after pressing the triangle next to the keyword "AXIOMS".
+By default, you are in the \textsf{Edit} mode which allows you to edit the modelling elements of the context which are the dependencies, the carrier sets, the constants, and the axioms. By right-clicking on the modelling elements you can create new child and sibling elements. For instance,
+By pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you can see the different modelling elements and also add, remove, or move them. Figure \ref{fig_ref_01_eventb_editor2} shows what the section looks like after pressing the triangle next to the keyword "AXIOMS".
 
 \begin{figure}[!ht]
 \begin{center}

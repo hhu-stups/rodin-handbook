@@ -45,12 +45,16 @@ Linux Installation
 HOW TO BUILD AN UPDATE SITE
 ===========================
 
-1. Import the org.rodinp.handbook plugin (included in the /build/plugin/org.rodinp.handbook.zip)
-as an existing eclipse project into your eclipse workspace.
-2.  Right click on the org.rodinp.feature 
---> Export --> Plug-in Development --> Deployable features
-3. Please be sure that you have checked "Generate metadata repositiory" and 
-selected the category.xml in "Categorize repository" in the "Options" tab.
+1. Import the org.rodinp.handbook plugin as an existing eclipse 
+project into your eclipse workspace (as a reference) from /build/eclipse.
+If you already imported the project you have to refresh the plugin
+after building the update site project. 
+
+2.  Goto the org.rodinp.handbook.updatesite plugin and open the
+site.xml file.
+
+3. Click on the "Build all" button in order to build the update site.
+
 4. Deploy the files ... i.e. http://handbook.event-b.org/updatesite
 
 CONTACT

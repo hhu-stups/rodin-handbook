@@ -53,9 +53,11 @@ after building the update site project.
 2.  Goto the org.rodinp.handbook.updatesite plugin and open the
 site.xml file.
 
-3. Click on the "Build all" button in order to build the update site.
+3. Synchronize all features.
 
-4. Deploy the files ... i.e. http://handbook.event-b.org/updatesite
+4. Click on the "Build all" button in order to build the update site.
+
+5. Deploy the files ... i.e. http://handbook.event-b.org/updatesite
 
 CONTACT
 =======

@@ -26,8 +26,24 @@ Windows Installation:
 
 The resulting HTML and Eclipse Plugin with Eclipse help will be in the build folder.
 
+
+-------------------------------------------------------------------
+Linux Installation
+
+  Plastex is available in modern repositories, but it has a horrible
+  performance and creates a lot of zombies (but works).
+  
+  This problem is due to an old version of dvipng.  To solve this, 
+  install dvipng 1.14 or better.
+  
+  Download the .deb from
+  http://packages.debian.org/search?keywords=dvipng
+  Note: You may have to de-install plastex first, isntall dvipng,
+  and then reinstall plastex.
+-------------------------------------------------------------------
+
 HOW TO BUILD AN UPDATE SITE
-============
+===========================
 
 1. Import the org.rodinp.handbook plugin (included in the /build/plugin/org.rodinp.handbook.zip)
 as an existing eclipse project into your eclipse workspace.

@@ -67,7 +67,7 @@
     	
     	<mkdir dir="${build-dir}/plugin/plugins"/>
     	
-    	<jar destfile="${build-dir}/plugin/plugins/org.rodinp.handbook_1.0.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" manifest="${basedir}/skeleton/META-INF/MANIFEST.MF" />
+    	<jar destfile="${build-dir}/plugin/plugins/org.rodinp.handbook_2.4.0.${qualifier}.jar" basedir="${basedir}/build/eclipse" manifest="${basedir}/skeleton/META-INF/MANIFEST.MF" />
     	 
     	 <zip destfile="${build-dir}/plugin/org.rodinp.handbook.zip"
     	       basedir="${build-dir}/plugin"
@@ -89,6 +89,15 @@
     	<copy todir="${targetdir}/files">
     		<fileset dir="${basedir}/latex/files" />
 		</copy>
+    	<!-- The Eclipse help browser cannot handle elements with spaces,
+    	but such elements exist in the index.  We replace them. -->
+    	<replaceregexp
+    		match="plasTeX.Base.LaTeX.Index.IndexDestination[^>]*"
+    		replace="plasTeX.Base.LaTeX.Index.IndexDestination"
+    		flags="g"
+    	>
+    		<fileset dir="${targetdir}" includes="*.html"/>
+    	</replaceregexp>
     </target>
 
 	<target name="init">

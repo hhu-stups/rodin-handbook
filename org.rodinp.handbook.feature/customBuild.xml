@@ -93,7 +93,7 @@
     	but such elements exist in the index.  We replace them. -->
     	<replaceregexp
     		match="plasTeX.Base.LaTeX.Index.IndexDestination[^>]*"
-    		replace="plasTeX.Base.LaTeX.Index.IndexDestination"
+    		replace="plasTeX.Base.LaTeX.Index.IndexDestination/"
     		flags="g"
     	>
     		<fileset dir="${targetdir}" includes="*.html"/>

@@ -2,27 +2,35 @@
 \label{tut_proving}
 \index{proving}
 
-\tick{\textbf{Goals:} The goal of this section is to get familiar with the Proving Perspective and to carry out a simple proof by hand.}
+\tick{\textbf{Goals:} The goal of this section is to get familiar with the Proving Perspective and to carry out a simple proof by hand.  It also introduces more sophisticated data structures than the ones we introduced so far.}
 
 \subsection{The Celebrity Problem}
 \label{tut_celebrity_problem}
 
 In this section, we will work on the model of the so-called celebrity problem.
-We use a new model instead of the traffic light because it provides us with
-  some proofs where manual interaction is necessary.
+
+\warning{We use a new model instead of the traffic light because it provides us with
+  some proofs where manual interaction is necessary.}
+
 In the setting for this problem, we have a ``knows'' relation between persons.
 This relation is defined so that
+
 \begin{itemize}
 	\item no one knows himself,
 	\item the celebrity knows nobody,
 	\item but everybody knows the celebrity.
 \end{itemize}    
-The problem's goal is to find the celebrity.
-We want to model an algorithm that fulfills this task.
 
-\warning{Make sure that you have no existing Project named Celebrity. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
+The problem's goal is to find the celebrity. We want to model an algorithm that fulfills this task.
 
+\subsection{Importing a project}
+\label{tut_import_project}
 \index{import project}
+
+Rather than creating the model step by step, we provide the model as an archive.
+
+\warning{Make sure that you have no existing Project named ``Celebrity'', before importing the project. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
+
 Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the option to import an existing archive file and then use the browse function to find your archive file and import it. After you have selected the appropriate archive file, click on \textsf{Finish}.
 
 Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
@@ -35,16 +43,26 @@ Rodin takes a few seconds to extract and load all the files. Once it is done, it
 \end{center}
 \end{figure}
 
-We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.
+We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.  But before we do that, we will fix the exiting problems.
 
-In the first part of this section, our goal is to fix these problems. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. Select the event \textsf{celebrity}. The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section. This declares that the event is a refinement of an event with the same name in the abstract machine (Section \ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
+\subsection{Fixing Problems}
+\label{tut_celebrity_fixing problems}
+\index{warnings}
+
+Before proceeding, we will fix the problems shown in figure \ref{fig_tut_08_rodin_problemview}. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. The line with the offending statement is already highlighted\footnote{This is the behaviour of the default editor.  Other editors may exhibit a different behaviour}, which is the event called \textsf{celebrity}.
+
+The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section.  To do so, right-click in the empty space to the left of the word \textsf{celebrity} and select \textsf{Add Child $\rangle$ Event-B Refines Event Relationship}.
+
+\warning{Make sure that the cursor is on the relevant line before right-clicking.  Otherwise, you will get the wrong context menu.  Also, make sure that you are not in ``text edit'' mode (e.g. by left-clicking on an editable word, like ``celebrity'').  This will give you the wrong context menu as well. See section~\label{faq_new_editor_new_element}.}
+
+ This declares that the event is a refinement of an event with the same name in the abstract machine (Section \ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
 
 %Do we need an additional explanation for witnesses, since this is already done in tutorial 07!?
 %In any abstract event that uses parameters, if the concrete event has no parameter with the same name, the tool needs a witness so that it notices what value the parameter should take. Witnesses are also needed for variables that have a non-deterministic (\ref{non_deterministic}) assignment in an abstract event and do not appear in the concrete model.
 
 The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the \textsf{celebrity}.
 
-A default witness \textsf{wit1} has been created, with a default value \textsf{$\top$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness is \textsf{x = b}. The event should now look as follows: 
+A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness is \textsf{x = b}. The event should now look as follows: 
 
 \begin{description}
 	\EVT {celebrity}
@@ -72,7 +90,7 @@ Edit the content and save the file. One warning will disappear, and only two wil
 Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems View (\ref{rodin_problems_view}).
 }
 
-The following Section \ref{tut_final_second_refinement} shows the final \texttt{Celebrity\_2} machine.
+The following Section \ref{tut_final_second_refinement} shows the corrected \texttt{Celebrity\_2} machine.
 
 \subsection{The Final Second Refinement}
 \label{tut_final_second_refinement}
@@ -171,6 +189,7 @@ The following Section \ref{tut_final_second_refinement} shows the final \texttt{
 
 \subsection{The Celebrity algorithm}
 \label{the_celebrity_algorithm}
+
 We take a brief tour through the model to see how the problem and algorithm is specified.
 The celebrity problem itself is described in the context \texttt{Celebrity\_c0}. There are
   three constants. $P$ is the set of persons, each represented by a number, $c$ is the celebrity

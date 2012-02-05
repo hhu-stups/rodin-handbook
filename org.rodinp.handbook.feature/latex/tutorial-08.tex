@@ -95,6 +95,7 @@ The following Section \ref{tut_final_second_refinement} shows the corrected \tex
 \subsection{The Final Second Refinement}
 \label{tut_final_second_refinement}
 
+\pencil{
 \begin{description}
 \MACHINE{Celebrity\_2}
 \REFINES{Celebrity\_1}
@@ -186,7 +187,7 @@ The following Section \ref{tut_final_second_refinement} shows the corrected \tex
 		\end{description}
 \END
 \end{description}
-
+}
 \subsection{The Celebrity algorithm}
 \label{the_celebrity_algorithm}
 
@@ -195,6 +196,27 @@ The celebrity problem itself is described in the context \texttt{Celebrity\_c0}.
   three constants. $P$ is the set of persons, each represented by a number, $c$ is the celebrity
   we are looking for and $k$ is the ``knows'' relation between the persons.
 The axioms encode the properties about the ``knows'' relation that we stated above.
+
+\pencil{
+\begin{description}
+\CONTEXT{Celebrity\_c0}
+\CONSTANTS
+	\begin{description}
+		\Item{ k }
+		\Item{ c }
+		\Item{ P }
+	\end{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ axm1 }{ P \subseteq  \nat }
+		\nItemX{ axm2 }{ c \in  P }
+		\nItemX{ axm3 }{ k \in  (P \setminus  \{ c\} ) \rel  P }
+		\nItemX{ axm4 }{ k^{-1}  [\{ c\} ] = P \setminus  \{ c\}  }
+		\nItemX{ axm5 }{ k \binter  id = \emptyset  }
+	\end{description}
+\END
+\end{description}
+}
 
 In the most abstract machine \texttt{Celebrity\_0} we specify what the algorithm should do.
 The variable $r$ can be any person initially and the event \texttt{celebrity} 
@@ -206,6 +228,39 @@ The answer is that we wrote down our problem in a way that we know that there is
   and we specify the algorithm by stating it should return it.
 Later in the refinement we model how to find the celebrity without using $c$ anymore.
 By the refinement relation we know then that the algorithm works correctly.
+
+\pencil{
+\begin{description}
+\MACHINE{Celebrity\_0}
+\SEES{Celebrity\_c0}
+\VARIABLES
+	\begin{description}
+		\Item{ r }
+	\end{description}
+\INVARIANTS
+	\begin{description}
+		\nItemX{ inv1 }{ r \in  P }
+	\end{description}
+\EVENTS
+	\INITIALISATION
+		\begin{description}
+		\BeginAct
+			\begin{description}
+			\nItemX{ act1 }{ r :\in  P }
+			\end{description}
+		\EndAct
+		\end{description}
+	\EVT {celebrity}
+		\begin{description}
+		\BeginAct
+			\begin{description}
+			\nItemX{ act1 }{ r :=  c }
+			\end{description}
+		\EndAct
+		\end{description}
+\END
+\end{description}
+}
 
 So let's have a look at the first refinement \texttt{Celebrity\_1}. 
 A variable $Q$ is introduced which contains a subset of the persons, the potential celebrities.
@@ -223,11 +278,31 @@ The second refinement \texttt{Celebrity\_2} then splits the
 \texttt{remove\_1} then removes a person $x$ from $R$ if $b$ knows $x$.
 \texttt{remove\_2} checks if there is a person $x$ in $R$ that does not know the candidate.
 If found, $x$ is the new candidate $b$ and is removed from the rest $R$.
-If $R$ is empty, we know that the candidate is the celebrity.
+If $R$ is empty, we know that the candidate is the celebrity. (We do not print the machine
+here for brevity --- please consult the project that you imported earlier to see the model.)
 
 The third refinement then makes some more assumptions about the given problem.
 The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states that
   there are $n+1$ persons with the numbers $0\upto n$.
+
+\pencil{
+\begin{description}
+\CONTEXT{Celebrity\_c1}
+\EXTENDS{Celebrity\_c0}
+\CONSTANTS
+	\begin{description}
+		\Item{ n }
+	\end{description}
+\AXIOMS
+	\begin{description}
+		\nItemX{ axm1 }{ n \in  \nat }
+		\nItemX{ axm2 }{ n >  0 }
+		\nItemX{ axm3 }{ P = 0\upto n }
+	\end{description}
+\END
+\end{description}
+}
+
 Instead of having an abstract data structure like a set, the third refinement just introduces
   an index variable $a$ that points to the first person of the rest.
 Instead of taking an arbitrary element from $R$ as in the second refinement, the remove
@@ -239,6 +314,7 @@ This last refinement works only on the following three integer variables:
 The index $a$, the candidate $b$ and the result $r$.
 Each event is deterministic and in every step only one event is enabled.
 The events together can be interpreted as an implementation of the algorithm:
+\newline
 
 \begin{tabular}{ll}
   $r \bcmeq 0$ & // initialisation \texttt{act1} \\
@@ -288,10 +364,11 @@ The \texttt{Proving Perspective} contains three new important views:
 	\item[Goal View (\ref{goal_view})] This window shows what needs to be proved at the current position inside the proof tree.
 \end{description}
 
-Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then expand the \textsf{Proof Obligations} section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. Only three proofs have not been completed\footnote{Interestingly enough, this number can vary: Provers can be configured in the preferences, and changes there can have an impact on the ability to automatically discharge proofs.  In addition, all provers have time-outs.  On a slow machine, some proof obligations may not get discharged, compared to a faster machine with the same timeout.}  (a completed proof is indicated by a green check). 
+Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then expand the \textsf{Proof Obligations} section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. Only three proofs have not been completed\footnote{Interestingly enough, this number can vary: Provers can be configured in the preferences, and changes there can have an impact on the ability to automatically discharge proofs.  In addition, all provers have time-outs.  On a slow machine, some proof obligations may not get discharged, compared to a faster machine with the same timeout.}  (a completed proof is indicated by a green check \icon{rodin/discharged.png}). 
 
 %Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}). The p0 prover uses all selected hypotheses (the ones in Selected Hypotheses View).
 
+\info{Each proof has a label, e.g. \textsf{remove\_1/inv2/INV}.  Proof labels are explained in section~\ref{generated_proof_obligations}}.
 Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
 To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
 We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
@@ -325,11 +402,13 @@ Because we know that invariant $c\in Q$ held before the assignment,
 Take a look at the Proof Tree View. The root node should now be labeled with \texttt{ah ($x\neq c$)},
   that is the hypothesis we just added.
 The node has three children: The first is the proof of well-definedness condition of $x\neq c$ which is
-  just $\btrue$ and trivially proven.
+  just $\btrue$ and trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
 The second is the proof of the hypotheses $\lnot x=c$.
 The third is the proof of the original goal where the new hypotheses can be used.
 
 The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
+
+\info{There is no harm in selecting all hypothesis, but this approach does not scale.  By providing the necessary hypotheses, but not more, we drastically increase the chance for the prover to find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -339,7 +418,7 @@ The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourse
 \end{center}
 \end{figure}
 
-Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses. Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
+Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses.\footnote{The prover has rewritten this as $ \lnot x = c$} Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -351,6 +430,8 @@ Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \te
 
 After saving the proof, the proof obligation \textsf{remove\_1/inv2/INV} in the \textsf{Event-B Explorer} should also become a green chop.
 
+\info{Those proof obligations that were automatically discharged are marked with a tiny ``A'' next to the green chop.  As the one we just discharged was proven manually, this is now the first discharged PO without ``A''.}
+
 \info{There are alternative ways to prove the proof obligation. For instance, we can use the \icon{rodin/lasoo_prover.png} button to load those hidden hypotheses that contain identifiers in common with the goal into the \textsf{Selected Hypotheses View}, and we can also use it with the selected hypotheses.}
 
 In order to move to the next undischarged proof obligation, you may also use the \textsf{Next Undischarged PO button} (\icon{rodin/next_prover.png}) of the \textsf{Proof Control View} (\ref{proof_control_view}). The next proof can be solved the same way as the last one.
@@ -360,7 +441,7 @@ In order to move to the next undischarged proof obligation, you may also use the
 \subsection{Proving --- an Art or a Science?}
 \label{tut_proving_an_art_or_a_science}
 
-Proving can be quite frustrating, both for beginners and advanced users.  Especially beginners sometimes get the impression that proofing is just ``clicking around'' that sometimes works and sometimes doesn't.  And when it works, it's not really clear why --- the proof tree is also difficult to read, even for experienced users.  We provided some additional guidance on provers in Section~\ref{use_provers_effectively} that may be of help.
+Proving can be quite frustrating, both for beginners and advanced users.  Especially beginners sometimes get the impression that proofing is just ``clicking around'' that sometimes works and sometimes does not.  And when it works, it's not really clear why --- the proof tree is also difficult to read, even for experienced users.  We provided some additional guidance on provers in section~\ref{use_provers_effectively} that may be of help.
 
 
 %%% Local Variables: 

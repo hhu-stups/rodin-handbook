@@ -1,9 +1,11 @@
 % We do not want to have screen shots of the celebrity puzzle in this section:
 \clearpage
-\section{Location Access Controller}
+\section{A Sophisticated Case Study: Location Access Controller}
 \label{tut_location_access_controller}
 
 \tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. For this we use the model of a location access controller. The goal is to develop the proofs that ensure there are no deadlocks present in the initial model and in the first refinement.}
+
+\info{\marginpar{Reference to literature section}This example has been taken from the Event-B book and is quite sophisticated.  In this section, we are concerned with a subset of the complete model.  We encourage readers to consult the example in the book.}
 
 %\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
 
@@ -11,7 +13,8 @@ Through the model used in this section, we study a complete system and remind th
 
 Before describing the initial model, import the archive file \file{Doors.zip}{Doors.zip} that contains the model. To do this, select  \textsf{File $\rangle$ Import $\rangle$ General $\rangle$ Existing Project into Workspace}. Then select the according archive file and click on \textsf{Finish}. It will take Rodin a few seconds to extract and load all the files.
 
-\subsection{Initial Model} 
+\subsection{Deadlock Freeness of initial model}
+\label{deadlock}
 \label{tut_initial_model}
 
 %Besides we introduce:
@@ -28,15 +31,14 @@ Before describing the initial model, import the archive file \file{Doors.zip}{Do
 %The other event \textsf{PASS} of that model has to aim to change the location of a person.
 %We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-Let us look at the initial model which consists of \texttt{doors\_ctx1} and \texttt{doors\_0}. There are two carrier sets in the model context. One is for people ($P$) and the other is for locations ($L$). There is a location called outside ($outside$) and a relation ($aut$) which reflects where people are allowed to go. Everyone is permitted to go outside. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, $sit$, which denotes where a person is located. 
+Let us look at the initial model which consists of the context \texttt{doors\_ctx1} and the machine \texttt{doors\_0}. There are two carrier sets in the model context. One is for people ($P$) and the other is for locations ($L$). There is a location called outside ($outside$) and a relation ($aut$) which reflects where people are allowed to go. Everyone is permitted to go outside. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, $sit$, which denotes where a person is located. 
 
-\subsubsection{Deadlock Freeness}
-\label{deadlock}
 
-Looking through the initial model, you will see that everything already has been proved. This is true, but Rodin does not do any deadlock freeness proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
+Looking through the initial model, you will see that everything already has been proved (for the initial model and initial context). This is true, but Rodin does not do any deadlock freeness proof yet, so we will have to add them by ourself. A model is considered as deadlocked if the system reaches a state with no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
 
 Consider the event \textsf{pass} from the initial model:
 
+\pencil{
 \begin{description}
 \EVENTS
 	\EVT {pass}
@@ -59,6 +61,7 @@ Consider the event \textsf{pass} from the initial model:
 		\end{description}
 \END
 \end{description}
+}
 
 \index{deadlock}
 Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false.
@@ -73,12 +76,12 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 \begin{description}
 \INVARIANTS
 	\begin{description}
-		\nItemX{ DLF }{ \exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l) }
+		\nItemX{ DLF }{ \fbox{theorem} ~ \exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l) }
 	\end{description}
 \end{description}
 
 \begin{rodin-plugin}{img/prob.png}{ProB}%
-  You can also use ProB to search for deadlocks.
+  You can also use ProB to search for deadlocks (ensure that ProR is installed).
   Right-click on the machine you want to check and start the animation with the
   ``Start Animation / Model Checking'' menu entry.
   After starting the animation, go to the Event View in the ProB perspective
@@ -103,6 +106,7 @@ Save the machine. We will see in the Event-B Explorer View that the auto-prover 
   Another reason that you don't see the proof obligation \textsf{DLF/THM} could be that you forgot to rename the invariant ``DLF''.}
 
 Let us analyze whether this is an inconsistency in the model. Switch to the \texttt{Proving Perspective } and double click on the proof obligation \textsf{DLF/THM}.
+\index{post-tactics}
 In the Proof Control view, first disable the post-tactics (there is a small downward pointing arrow in the upper right hand corner above the toolbar, see Figure~\ref{fig_tut_10_post_tactics}.
 Click on this arrow and make sure that the option \textsf{Enable post-tactic} is unchecked in the dropdown menu.)
 We turn off the post-tactics because we want to see the proof develop in its different stages.
@@ -121,16 +125,20 @@ By doing this we want to assure that you have the same proof as in this tutorial
 In order to succeed with the proof, we need a pair $p \mapsto l$ that is in $aut$ but not in $sit$.
 Having a look the axioms, we find  \textsf{axm4} of \texttt{doors\_ctx1}, which states that 
   there is a location $l$ different from $outside$ where everyone is allowed to go:
+
+\pencil{
 \begin{description}
 \AXIOMS
 	\begin{description}
 		\nItemX{ axm4 }{ \exists l\qdot l\in L\setminus \{ outside\}  \land  P\cprod \{ l\} \subseteq aut }
 	\end{description}
 \end{description}
+}
+
 So for every person $p$ in $P$, $p \mapsto l$ and $p \mapsto outside$ are in \textbf{aut}.
-(In words: every person is allowed to go both to the outside and to a location $l$).
+(In other words: every person is allowed to go both to the outside and to a location $l$).
 The basic idea of our proof is that a person is either outside and can go to the location $l$.
-When it is not outside, it can walk outside.
+When she is not outside, she can walk outside\footnote{One could argue that this is too restrictive in the real world: After all, why do all people need authorization for the \textit{same} location l?  But arguing about the realism of the example is out of the scope.}.
 
 We implicitly assumed that there is actually a person, so what we need is that $P$ is non-empty. 
 This holds since carrier sets are always non-empty, but we need a person as an example for our further proof. 
@@ -147,6 +155,8 @@ Click on the existential quantifier of the new hypothesis $\exists x \cdot x \in
   (appearing in the \textsf{Selected Hypothesis} view) as demonstrated in Figure \ref{fig_tut_10_instantiate_x}.
 You see that it is automatically instantiated. That means that we can use $x$ from now on in our proof as an example for a person
   and we have the new hypothesis $x \in P$.
+
+\warning{If you hover over any red symbol for a short while, a menu will pop up, offering one or more transformations.  Make sure that you actually click before the menu pops up, otherwise clicking will have no effect.  If the menu popped up before you managed to click, you just have to click twice: First to discard the menu, and another time to actually perform the clicking.}
 
 An existential quantification can be proven by giving an example for the variables. First, we
   instantiate $p$ in the goal with $x$: enter $x$ in the yellow box corresponding to $p$ 
@@ -188,12 +198,16 @@ Now we need an example for the remaining variable $l$.
 There are two situations we want to distinguish: The person $x$ could be outside or not.
 To do this, type $sit(x) = outside$ into the \textsf{Proof Control} view and click on the button \icon{rodin/dc_prover.png} (\textsf{dc} for distinguish case).
 Again, you get three new goals.
+
 \begin{itemize}
 \item The first is the well-definedness condition of $sit(x) = outside$. $sit$ must be a function and $x$ in its domain.
   This is easy to prove since $sit$ is a total function (\ref{relations}). Just press \icon{rodin/auto_prover.png}.
 \item The second node has the original goal but $sit(x) = outside$ as a hypothesis.
 \item The third node has the original goal but $\lnot sit(x) = outside$ as a hypothesis.
 \end{itemize}
+
+\warning{Note that the second and third node will appear identical in the proof tree.  You will only see the differences in the hypotheses by selecting the nodes.}
+
 Let's continue with the case $sit(x)=outside$: When $x$ is outside, it can always go to the $l$ of \textsf{axm4}.
 To search for \textsf{axm4}, type $outside$ into the \textsf{Proof Control} text field and click the button \icon{rodin/sh_prover.png}. Now click on the $\exists$ symbol in the \textsf{axm4} (see Figure~\ref{fig_tut_10_search_hypotheses})
 to instantiate $l$.
@@ -244,7 +258,8 @@ Figure~\ref{fig_tut_10_final_proof_tree}).
   \quad\qquad well-definedness condition $\btrue$: automatically proven\\
   \quad\qquad case distinction $sit(x)=outside$ \\
   \qquad\qquad well-definedness condition
-    ($sit$ is a function with $x$ in its domain): automatically proven\\
+    ($sit$ is a function with $x$ in its domain): \\
+  \qquad\qquad\qquad\qquad\qquad\qquad automatically proven\\
   \qquad\qquad first case: instantiation of $l$ from axiom \textsf{axm4}\\
   \quad\qquad\qquad using $l$ as an example for the $\exists l \ldots$ in the goal\\
   \qquad\qquad\qquad well-definedness condition $\btrue$: automatically proven\\
@@ -265,30 +280,24 @@ Figure~\ref{fig_tut_10_final_proof_tree}).
 
 
 
-\subsection{First Refinement}
+\subsection{Deadlock Freeness of First Refinement}
 \label{tut_location_first_refinement}
 
 Now we are going to explain the main complexity of our model: the deadlock freeness proof for the first refinement. 
+
+\info{Please note that post-tactics should still be disabled before starting this part of the tutorial.} 
 
 The difference between the first refinement and the initial model is that a new constant \textsf{com} been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which will be explained later. 
 
 The event \textsf{INITIALISATION} does not change, but the event \textsf{PASS} is refined as a consequence. We assume that a person can move to another location l if they have the authorization to be in l (already defined in the abstraction) and also if the location l is connected to the location p where the person is at this precise moment (represented by sit(p)).
 
-We need to add a new guard that is more exact that that of the machine it refines:
+\pencil{
+\begin{description}
+\nItemX{ grd12 }{ sit(p)\mapsto l \in  com }
+\end{description}
+}
 
-\[
-( sit(p) \mapsto l \in com ) \Rightarrow ( sit(p)\neq l )
-\]
-
-We are faced with a difficulty here; it is not possible to prove that the refined event \textsf{PASS} does not happen less often than the abstract event \textsf{PASS} of its predecessor. To prove this we would have to prove that the guard of the abstract event implies that of the concrete event.
-
-The issue is that this condition cannot be verified in general. Moreover, the failure to prove the above condition indicates that there are possibilities that certain people could stay permanently blocked in locations. People are also more limited in the ways that they may move because they can only move between rooms that are connected.
-
-Now we know that this model contains a problem ignored in the document requirements. We must now find a sufficient solution.
-
-\info{Please note that post-tactics should still be disabled before starting this part of the tutorial.} 
-
-At the beginning of this section we need to come back to the \textsf{Event-B Perspective}. As described in Section \ref{tut_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
+Corresponding to Section \ref{tut_initial_model}, open \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows: 
 
 \begin{description}
 \INVARIANTS
@@ -299,17 +308,17 @@ At the beginning of this section we need to come back to the \textsf{Event-B Per
 
 Save the file. Once again, the prover fails to prove the deadlock freeness automatically. Actually all we want to prove is that ``any person authorized to be in a location must also be authorized to go in another location which communicates with the first one''.
 
-This can be illustrated as demonstrated in Figure \ref{fig_tut_10_graph}.
+% (mj) This picture does not make any sense whatsoever, it violates a number of axioms.
+% This can be illustrated as demonstrated in Figure \ref{fig_tut_10_graph}.
+%\begin{figure}[!ht]
+%\begin{center}
+%	\includegraphics[]{img/tutorial/tut_10_graph.png}
+%	\caption{The floor plan of the location to be controlled.}
+%	\label{fig_tut_10_graph}
+%\end{center}
+%\end{figure}
 
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics[]{img/tutorial/tut_10_graph.png}
-	\caption{The floor plan of the location to be controlled.}
-	\label{fig_tut_10_graph}
-\end{center}
-\end{figure}
-
-To begin with, switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving. At the beginning of the proof, there aren't any selected hypothesis, so we need to select a few. The old deadlock freeness invariant will be useful, and \textsf{axm7} of \texttt{doors\_ctx2} as well. 
+To begin with, switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving. At the beginning of the proof, there aren't any selected hypotheses, so we need to select a few. The old deadlock freeness invariant will be useful, and \textsf{axm7} of \texttt{doors\_ctx2} as well. 
 
 \begin{description}
 \AXIOMS
@@ -324,7 +333,22 @@ We will try to avoid using \textsf{exit} since we want to keep things as simple 
 sit \subseteq aut \land sit \in P \mathbin \rightarrow L.
 \]
 
-Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if $sit(p) = outside$. Add this case as previously using the \textsf{Case Distinction button (dc)}. To do this, you first need to instantiate the value for p. To do this, use the hypothesis $\exists p, l \cdot p \mapsto l \in aut \land sit(p) \neq l$ and then click on the existential quantifier to create the expression $ p \in P $ (see Figure \ref{fig_tut_10_instantiate_p}). Initialize the value of \textsf{q} with the value of \textsf{p} (type p into the yellow box next to q). For \textsf{m}, you will use the existential quantifier of \textsf{axm7} of \texttt{doors\_ctx2} to instantiate \textsf{m} (add the axiom as a hypothesis and then click on the existential quantifier next to the l. Once the variable has been initialized, type it into the yellow box next to m).
+After adding all these, the list of hypotheses should correspond to what is shown in figure~\ref{fig_tut_10_proofs}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[]{img/tutorial/tut_10_refinement1_proofs.png}
+	\caption{The initial hypotheses of our deadlock-freedom proof.}
+	\label{fig_tut_10_proofs}
+\end{center}
+\end{figure}
+
+Once again, the prover automatically rewrites the existential quantifiers in the hypotheses. We now look at the proof. There is an easy case if $sit(p) = outside$. Enter \textsf{outside} into the box for $m$ and press the red $\exists$.  The first WD proof obligation can be dismissed by \icon{rodin/auto_prover.png}.
+
+
+
+
+Add this case as previously using the \textsf{Case Distinction button (dc)}. To do this, you first need to instantiate the value for p. To do this, use the hypothesis $\exists p, l \cdot p \mapsto l \in aut \land sit(p) \neq l$ and then click on the existential quantifier to create the expression $ p \in P $ (see Figure \ref{fig_tut_10_instantiate_p}). Initialize the value of \textsf{q} with the value of \textsf{p} (type p into the yellow box next to q). For \textsf{m}, you will use the existential quantifier of \textsf{axm7} of \texttt{doors\_ctx2} to instantiate \textsf{m} (add the axiom as a hypothesis and then click on the existential quantifier next to the l. Once the variable has been initialized, type it into the yellow box next to m).
 
 For the other case, we will need the notion of \textbf{exit}. This function \textbf{exit} connects locations to locations and defines at every location except \textsf{outside}.
 

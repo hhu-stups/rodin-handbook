@@ -163,6 +163,7 @@
    \begin{description}%
 }{%
    \end{description}%
+   \pagebreak[3]%
 }
 \newcommand{\rrdesc}{\item[Description]}
 \newcommand{\rrdef}{\item[Definition]}
@@ -172,9 +173,29 @@
 \newcommand{\rrfis}{\item[Feasibility]}
 \newcommand{\rrex}{\item[Example]}
 
+% feasibility of actions as operator
 \newcommand{\actfis}{\mathcal{F}}
 
+% free identifiers in an expression
 \newcommand{\freeids}[1]{\textsl{Free}(#1)}
+
+% placeholder for arbitrary expressions
+\newcommand{\vexpr}[1]{\textsf{#1}}
+\newcommand{\predp}{\vexpr{P}}
+\newcommand{\predq}{\vexpr{Q}}
+\newcommand{\expra}{\vexpr{A}}
+\newcommand{\exprb}{\vexpr{B}}
+\newcommand{\expre}{\vexpr{E}}
+\newcommand{\exprf}{\vexpr{F}}
+\newcommand{\exprr}{\vexpr{R}}
+\newcommand{\exprs}{\vexpr{S}}
+\newcommand{\exprt}{\vexpr{T}}
+\newcommand{\exprla}{\vexpr{a}}
+\newcommand{\exprlb}{\vexpr{b}}
+\newcommand{\exprle}{\vexpr{e}}
+\newcommand{\exprlf}{\vexpr{f}}
+\newcommand{\exprlr}{\vexpr{r}}
+\newcommand{\exprls}{\vexpr{s}}
 
 % operators (L and D) for well-definendness
 \newcommand{\wdl}{\mathcal{L}}

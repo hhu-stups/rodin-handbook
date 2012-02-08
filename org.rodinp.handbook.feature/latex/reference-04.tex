@@ -198,9 +198,9 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 		\item New PP outputs a set of ``used hypotheses". If an unused hypotheses changes, the old proof can be reused.
 		\item New PP has limited support for equational reasoning. 
 	\end{itemize}
-	\item[Some Weaknesses:]
-	\begin{itemize} ~
-		\item New PP is unsound. There have been several bug reports. Most notably, see [1]. \marginpar{What is the [1] here refering to?}
+	\item[Some Weaknesses:] ~
+	\begin{itemize}
+		\item New PP is unsound. There have been several bug reports. Most notably, see [1]. \marginpar{TODO: What is the [1] here refering to?}
 		\item New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic 	reasoning (when the formula is not ground) is a long standing challenge.
 		\item New PP is unaware of set theoretical axioms. In particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$ is not recognized because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
 		\item If unnecessary hypotheses are present, they may prevent New PP from finding a proof even when the proof obligation obviously holds. We therefore advise you to unselect unnecessary hypotheses.
@@ -219,6 +219,7 @@ The following guidelines may be useful:
 
 \begin{itemize}
 	\item Add New PP restricted (PP restricted), P0 (Atelier B P0), and ML (Atelier B ML) to the auto-tactic. If the auto-tactic runs out of memory, remove New PP.
+      \marginpar{TODO: It is recommended above not to use New PP.}
 	\item If the model is small, add New PP after lasso (PP after lasso) and P1 (Atelier B P1) to the auto-tactic.
 	\item Whenever you think that the current proof obligation should be discharged automatically, invoke the auto-tactic (\icon{rodin/auto_prover.png}) instead of some particular automatic prover.
 	\item If the auto-tactic fails, it is usually best to simplify the proof obligation in some way. The most important ways of simplifying the proof obligation are:
@@ -287,3 +288,8 @@ Once the selection has been decided, clicking the Delete button to actually dele
 \subsubsection{Caution}
 
 Proof purging should not be performed on models that are not in a stable state. For instance, it should not be applied to a model that has some errors or warnings issued by the type checker. This is because if there are errors and warnings, not all proof obligations are generated. Therefore, some proofs may have been considered wrongly as obsolete.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

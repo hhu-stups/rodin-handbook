@@ -1,7 +1,7 @@
 \section{The First Machine: A Traffic Light Controller}
 \label{tut_first_machine}
 
-% a first machine, e.g. a traffic light with booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof lables are read, without changing to the proof perspective.
+% a first machine, e.g. a traffic light with Booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof lables are read, without changing to the proof perspective.
 
 \tick{\textbf{Goals:} The objective of this section is to get acquainted with the modeling environment. We will create a very simple model consisting of just one file to develop a feeling for Rodin and Event-B.}
 
@@ -17,19 +17,19 @@ In this tutorial, we will create a model of a traffic light controller.  We will
 
 In this section, we will implement a simplified controller with the following characteristics:
 \begin{itemize}
-	\item We will model the signals with boolean values to indicate ``stop'' (false) and ``go'' (true).  We do not model colors (yet) because
-      we think we should first specify our goal (regulating the traffic) and later we should add implementation details (the traffic light's colors).
-	\item Too keep the initial model simple, we will not include the push button yet. We will add it later.
+	\item We will model the signals with Boolean values to indicate ``stop'' (false) and ``go'' (true).  We do not model colors (yet) because
+      we think we should first specify our goal (regulating the traffic) and later add implementation details (the traffic light's colors).
+	\item To keep the initial model simple, we will not include the push button yet. We will add it later.
 \end{itemize}
 
 \subsection{Excursus: The specification process}
 \label{tut_excursus_the_sepcification_process}
 
-While this handbook is concerned with use of the Rodin tool, it's important to understand the specification process as well.  Especially for beginners it can be daunting and unclear where to start with the model, what kind of data structures and abstractions to use, and so on.
+While this handbook is concerned with use of the Rodin tool, it is important to understand the specification process as well.  It can be daunting and unclear especially for beginners to recognize where to start with the model, what kind of data structures and abstractions to use, and so on.
 
-We cover a few examples in this chapter that implicitly answer these questions, but there is no explicit set of instructions.  For example, we will first model the traffic lights as booleans, and later refine them into actual colors.  But how did we come up with this refinement strategy?  Likewise, we decided to add the push buttons at a later refinement.  In retrospect this may seem useful, but it leaves open the question on how we arrived at this structure in the first place.
+We cover a few examples in this chapter that should develop your ability to answer these questions implicitly, but there is no explicit set of instructions.  For example, we will first model the traffic lights as Boolean values and later refine them into actual colors.  But how did we come up with this refinement strategy?  Likewise, we decided to add the push buttons at a later refinement.  In retrospect this may seem useful, but it is still not clear how we arrived at this structure in the first place.
 
-Abrial has something to say about this in his book\footnote{\url{http://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}, for which some chapters are available in the Rodin Wiki.
+Jean-Raymond Abrial has something to say about this in his book\footnote{\url{http://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}. Some of the chapters are available in the Rodin Wiki.
 
 \subsection{Project Setup}
 \label{tut_project_setup}
@@ -58,10 +58,12 @@ Next, create a new Event-B Component.  Either use \textsf{File $\rangle$ New $\r
 \end{center}
 \end{figure}
 
-The newly created component will open in the Rodin Editor. This displays the machine hierarchy as text, although at this point, you cannot add any text apart from comments. Elements can be added to the model by clicking on using the wizards for variables, variants, invariants, and events (the \icon{rodin/newvar_edit.png},\icon{rodin/newvariant_edit.png},\icon{rodin/newinv_edit.png}, and \icon{rodin/newevt_edit.png} buttons). You can also add elements by finding the name of the machine under the MACHINE heading. There is a small green arrow directly to the right of the name of the machine (in this case, the name of the machine is "mac"). Place your cursor directly to the left of the green arrow and right click. Select the element that you would like to add from the \textsf{Add Child} menu. If an element of a certain type has already been created, you can also create more elements of that type right clicking on the type of the element you would like to add (e.g. \textsf{VARIABLES}) that is coloured in purple and select \textsf{Add Child}. You can also place your cursor directly before the green arrow to the left of an element name and hit \textsf{CTRL-T} or right click and select \textsf{Add Sibling}.
+The newly created component will open in the Rodin Editor. This displays the machine hierarchy as text, although at this point, you cannot add any text apart from comments. Elements can be added to the model by using the wizards for variables, variants, invariants, and events (the \icon{rodin/newvar_edit.png},\icon{rodin/newvariant_edit.png},\icon{rodin/newinv_edit.png}, and \icon{rodin/newevt_edit.png} buttons). 
+
+You can also add elements by finding the name of the machine under the MACHINE heading. There is a small green arrow directly to the right of the name of the machine (in this case, the name of the machine is ``mac"). Place your cursor directly to the left of the green arrow and right click. Select the element that you would like to add from the \textsf{Add Child} menu. If an element of a certain type has already been created, you can also create more elements of that type by right clicking on the type of the element you would like to add (e.g. \textsf{VARIABLES}) that is coloured in purple and select \textsf{Add Child}. You can also place your cursor directly before the green arrow to the left of an element name and hit \textsf{CTRL-T} or right click and select \textsf{Add Sibling}.
 \marginpar{Might be good to make a screenshot or at least get a .png of what the little green arrow looks like?}
 
-You can also edit the machine using the Event-B Machine Editor. To do this, right click on the mac component in the Event-B Explorer and select \textsf{Open With $\rangle$ Event-B Machine Editor}. This editor has four tabs at the bottom.  The \textsf{Pretty Print} shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model.  The \textsf{Edit} allows editing of the model.  It shows the six main sections of a machine (REFINES, SEES, etc.) in a collapsed state.  You can click on the \icon{rodin/collapsed.png} button to the left of a section to expand it.
+You can also edit the machine using the Event-B Machine Editor. To do this, right click on the \textsf{mac} component in the Event-B Explorer and select \textsf{Open With $\rangle$ Event-B Machine Editor}. This editor has four tabs at the bottom.  The \textsf{Pretty Print} tab shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model. Under the \textsf{Edit} tab, you can edit the model.  The six main sections of a machine (REFINES, SEES, etc.) are displayed in a collapsed state.  You can click on the \icon{rodin/collapsed.png} button to the left of a section to expand it.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -69,7 +71,7 @@ You can also edit the machine using the Event-B Machine Editor. To do this, righ
 %\end{center}
 %\end{figure}
 
-The editor is \textit{form-based}.  This means that in well-defined places an appropriate control (text field, dropdown, etc.) allows modifications. 
+This editor is \textit{form-based}.  This means that it can be modified by using controls (i.e. text fields, dropdowns, etc.) to input information. 
 
 \info{Alternative editors are available as plugins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{tut_camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
 
@@ -78,9 +80,9 @@ The editor is \textit{form-based}.  This means that in well-defined places an ap
 \index{editor!Camille text editor}
 
 \begin{rodin-plugin}{img/camille.png}{Camille}
-Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor, including copy and paste, undo, redo, etc.  However, please note that at this time, not all Rodin plugins are compatible with Camille.  Also, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
+Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor and provides all of the functions that most text editors provide (i.e. copy, paste, undo, redo, etc.)  However, please note that at this time not all Rodin plugins are compatible with Camille.  For more information, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
 
-Camille can be installed via its update site, which is preconfigured in Rodin.  Once installed, Camille is made the default editor.  The structural editor can still be used by selecting it from the context menu of a file in the project browser.
+Camille can be installed via its update site, which is preconfigured in Rodin.  Once installed, Camille will be set as the default editor.  The rodin editor or structural editor can still be used by selecting it from the context menu of a file in the project browser.
 
 For more information, please visit \url{http://wiki.event-b.org/index.php/Text_Editor}.
 
@@ -90,12 +92,14 @@ For more information, please visit \url{http://wiki.event-b.org/index.php/Text_E
 \subsection{Building the Model}
 \label{tut_building_the_model}
 
-Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tut_first_machine}.  We start with the model state.  Two traffic lights will be modelled and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  
+Back to the problem: Our objective is to build a simplified traffic light controller as described in \ref{tut_first_machine}.  We start with the model state.  Two traffic lights will be modelled, and we will therefore create two variables called  \texttt{cars\_go} and \texttt{peds\_go}.  
 
 \subsubsection{Creating Variables}
 \index{variable!creating a variable}
 
-Under the \textsf{MACHINE} heading, you see the machine name \textsf{mac}. There is a small green arrow to the right of this label. Place your cursor directly to the left of the green arrow, right click, and select \textsf{Add Child $\rangle$ Event-B Variable} to add a new variable. Optionally, you can also use the New Variable Wizard (the button \icon{rodin/newvar_edit.png}) to create your variable. By default, the variable is named \textsf{var1}. Place your cursor inside the \textsf{var1} label. The label turns into a textbox. Change the name to \textsf{cars\_go}. You can add a comment to the variable by placing your cursor to the right of the little green arrow and typing into the text box that appears.
+Under the \textsf{MACHINE} heading, you see the machine name \textsf{mac}. There is a small green arrow to the right of this label. Place your cursor directly to the left of the green arrow, right click, and select \textsf{Add Child $\rangle$ Event-B Variable} to add a new variable. Optionally, you can also use the New Variable Wizard (the button \icon{rodin/newvar_edit.png}) to create your variable. 
+
+By default, the variable is named \textsf{var1}. Place your cursor inside the \textsf{var1} label. The label will then turn into a textbox. Change the name to \textsf{cars\_go}. You can add a comment to the variable by placing your cursor to the right of the little green arrow and typing into the text box that appears.
 
 %Go to the \textsf{Edit} tab in the editor and expand the \textsf{VARIABLES} section.  Click on the \icon{rodin/add.png} button to create a new variable.
 %You will see two fields. The left one is filled with the word \texttt{var1}.  Change this to \texttt{cars\_go}.  The second field (after the double-slash ``//'') is a comment field in which you can write any necessary notes or explanations.
@@ -105,7 +109,7 @@ Under the \textsf{MACHINE} heading, you see the machine name \textsf{mac}. There
 
 %\info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as is possible with most programming languages.  You can use the comment field to ``park'' predicates and other strings temporarily.}
 
-Create the second variable (\texttt{peds\_go}) in the same way, or place your cursor directly to the left of the small green arrow next to the label \textsf{cars\_go}, and either hit \textsf{CTRL-T} or right click and select \textsf{Add Sibling} from the menu.
+Create the second variable (\texttt{peds\_go}) in the same way, or place your cursor directly to the left of the small green arrow next to the label \textsf{cars\_go} and hit either \textsf{CTRL-T} or right click and select \textsf{Add Sibling} from the menu.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -126,8 +130,8 @@ Upon saving, the variables will be underlined in red which indicates that an err
 Invariants are needed in order to specify the type of variables. Use the method described above to add invariants to your machine (except this time select \textsf{Add Child $\rangle$ Event-B Invariant} from the menu or click the \icon{rodin/newinv_edit.png} button to open up the New Invariant Wizard). Add two invariants (which will automatically be labelled \textsf{inv1} and \textsf{inv2}). The actual invariant appears to the left of the label and is prepopulated with the symbol $\btrue$, which represents the logical value ``true''. Placing your cursor inside the invariant field will change it to a text field and allow editing. 
 
 %Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
-Change the first invariant (the $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
-Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_types}).
+Change the first invariant (the symbol $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
+Event-B provides the build-in datatype \texttt{BOOL} amongst others (Section \ref{data_types}).
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -135,10 +139,12 @@ Event-B provides the build-in datatype \texttt{BOOL} amongst others (\ref{data_t
 %\end{center}
 %\end{figure}
 
-\info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question.}
+\index{Symbols view}
+\index{mathematical symbols}
+\info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question. Symbols can also be added manually by selecting them from the \textsf{Symbols} view}
 
 \index{yellow highlighting}
-After saving, you should see that the \textsf{INITIALISATION} event is underlined in yellow with a small warning sign to the left as demonstrated in Figure~\ref{fig_tut_03_warning}. Again, the \textsf{Rodin Problems} view gives us the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
+After saving, you should see that the \textsf{INITIALISATION} event is underlined in yellow with a small warning sign to the left as demonstrated in Figure~\ref{fig_tut_03_warning}. Again, the \textsf{Rodin Problems} view displays the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -219,7 +225,7 @@ Note how the parameter is used in the action block to set the new state.
 \label{tutorial:invariants}
 \index{invariant}
 
-If this model was actually in control of a traffic light, we would have a problem because nothing ispreventing the model from setting both traffic lights to \texttt{TRUE}.  The reason is that so far we only modeled the domain (the traffic lights and their states) and not the requirements.  We have the following safety requirement:
+If this model was actually in control of a traffic light, we would have a problem because nothing is preventing the model from setting both traffic lights to \texttt{TRUE}.  The reason is that so far we only modeled the domain (the traffic lights and their states) and not the requirements.  We have the following safety requirement:
 
 \begin{center}REQ-1: Both traffic lights must not be \texttt{TRUE} at the same time.\end{center}
 
@@ -227,10 +233,10 @@ We can model this requirement with the following invariant:
 \[
 \lnot  (cars\_go = TRUE \land  peds\_go = TRUE)
 \]
-Please add this invariant with the label \texttt{inv3} to the model, use \texttt{not} and \texttt{\&} for $\lnot$ and $\land$.
+Please add this invariant with the label \texttt{inv3} to the model (Use the ASCII codes \texttt{not} and \texttt{\&} to get the symbols $\lnot$ and $\land$).
 
 Obviously, this invariant can be violated, and Rodin informs us of this.  The \textsf{Event-B Explorer} (\ref{eventb_explorer}) provides this information in various ways.  Go to the explorer and expand the project (\texttt{tutorial-03}), the machine (\texttt{mac}) and the entry ``Proof Obligations''.
-You should see four proof obligations, two of which are discharged (marked with \icon{rodin/discharged}) and two of which are not discharged (\icon{rodin/pending}).
+You should see four proof obligations, two of which are discharged (marked with \icon{rodin/discharged}) and two of which are not discharged (marked with \icon{rodin/pending}).
 
 \index{proof obligation}
 \info{\textbf{Proof obligations:} A proof obligation is something that has to be
@@ -239,24 +245,25 @@ You should see four proof obligations, two of which are discharged (marked with 
   in the proof and a goal -- a predicate that must be proven.
   Have a look at the proof obligation labels.
   They indicate the origin in the model where they were generated. 
-  E.g. \eventbpo{set\_peds\_go/inv3/INV} is the proof obligation that the event  \eventbpo{set\_peds\_go} preserves the invariant (\eventbpo{INV}) with the label \eventbpo{inv3}.
-  An overview about all labels can be found in \ref{generated_proof_obligations}.
+  E.g. \eventbpo{set\_peds\_go/inv3/INV} is the proof obligation that must be verified to show that the event  \eventbpo{set\_peds\_go} preserves the invariant (\eventbpo{INV}) with the label \eventbpo{inv3}.
+  An overview about all labels can be found in Section \ref{generated_proof_obligations}.
   The proof obligations can also be found via other entries in the explorer, like the events they belong to.
   Elements that have non-discharged proof obligations as children are marked with a small question mark.  For instance, \texttt{inv3} has all proof obligations as children, while the event \texttt{set\_cars} has one.}
 
-To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (\ref{guards}) of the events.
+To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (Section \ref{guards}) of the events.
 
 \warning{Before looking at the solution, try to fix the model yourself.}
 
+\marginpar{Does ProB only work for Rodin 2?}
 \subsubsection{Finding Invariant Violations with ProB}
 \label{tut:prob}
 \index{ProB}
 \begin{rodin-plugin}{img/prob.png}{ProB}
-A useful tool for understanding and debugging a model is a model checker like ProB. You can install ProB from the ProB Update Site, directly from Rodin.  Just select \textsf{Install New Software...} from the \textsf{Help} menu and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2`` as an installation option, which you can then install using the normal Eclipse mechanism.
+A useful tool for understanding and debugging a model is a model checker like ProB. You can install ProB directly from Rodin by using the ProB Update Site.  Just select \textsf{Install New Software...} from the \textsf{Help} menu and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2`` as an installation option, which you can then install using the normal Eclipse mechanism. 
 
 We will continue the example at the point where we added the safety invariant (REQ-1), but didn't add guards yet to prevent the invariants from being violated.
 
-We launch ProB by right-clicking on the machine we'd like to animate and select \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machines.  Upon starting, only INITIALIZATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  this is done by double-clicking on an enabled event, or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALIZATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB Website} for more information.
+We launch ProB by right-clicking on the machine we'd like to animate and select \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machines.  Upon starting, only INITIALIZATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  This is done by double-clicking on an enabled event or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALIZATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the model checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB Website} for more information.
 
 \end{rodin-plugin}
 

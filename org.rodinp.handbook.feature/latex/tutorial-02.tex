@@ -11,26 +11,26 @@
 \end{itemize}
 }
 
-\warning{Rodin is fairly resource intensive.  You need a good computer with plenty of memory to run it.  Recommended is at least 2GB of memory.}
+\warning{Rodin is fairly resource intensive.  You need a good computer with plenty of memory to run it.  It is recommended to have at least 2GB of RAM.}
 
 \subsection{Install Rodin for the first time}
 \label{tut_install_rodin}
 
 \subsubsection{Step 1: Download}
 
-The first step is to download Rodin. Rodin is available for download at the Rodin Download page (\ref{faq_where_download_rodin})
+The first step is to download Rodin. Rodin is available for download on the Rodin Download page (\ref{faq_where_download_rodin})
 
-Rodin is available for Windows, Mac OS, and Linux.  No matter which platform you use, the distribution is always packed in a zip-file.  Download the zip file for your system anywhere on your PC.
+Rodin is available for Windows, Mac OS, and Linux.  For all the platforms, the distribution is always available for download as a zip file. Download the zip file for your system anywhere on your PC.
 
 \info{It is recommended that you download the latest stable version.}
 
 \subsubsection{Step 2: Install and Run Rodin}
 
-\warning{Rodin is easy to install on the platforms for which prebuild versions exist.  If no prebuild version exists for your platform, please check out Section~\ref{faq_os_not_supported} in the FAQ.}
+\warning{Rodin is easy to install on the platforms for which a prebuild version exists.  If no prebuild version exists for your platform, please check out Section~\ref{faq_os_not_supported} in the FAQ on suggestions for how to install Rodin} 
 
 To install Rodin, extract the contents of the zip file to a desired directory. You can run the tool by using the \texttt{rodin} executable.
 
-Starting Rodin should bring up a welcome screen.  It provides some quick guidance to Rodin.  In particular, it provides instructions on installing the provers.
+Starting Rodin should bring up a welcome screen.  It provides some quick guidance for Rodin.  In particular, it provides instructions on installing the provers.
 
 \warning{Please install the provers right away.  It is easy and only takes a few clicks.}
 
@@ -44,7 +44,7 @@ After dismissing the welcome screen, you should see the window shown in Figure \
 \end{center}
 \end{figure}
 
-After specifying a path click on the \textsf{OK} button. Rodin should start and bring up the window shown in Figure \ref{fig_tut_02_rodin_gui}.
+After specifying a path click the \textsf{OK} button. Rodin will start and the window shown in Figure \ref{fig_tut_02_rodin_gui} will open.
 
 \warning{When using a Linux distribution, a welcome window may open up. Exit out of this window to get to the main screen. Other problems can also occur when installing Rodin in Linux. See the release notes for details.\footnote{ See \href{http://wiki.event-b.org/index.php/Rodin_Platform_2.2_Release_Notes}{Rodin Release Notes}}}
 
@@ -56,24 +56,24 @@ After specifying a path click on the \textsf{OK} button. Rodin should start and 
 \end{center}
 \end{figure}
 
-As already mentioned in Section \ref{tut_eclipse}, the GUI of an Eclipse application consists of views, editors, toolbars, quickviews, perspectives and many more elements. We name the different Rodin GUI elements (i.e. views) which are visible after starting Rodin for the first time and explain their functions:
+As already mentioned in Section \ref{tut_eclipse}, the GUI of an Eclipse application consists of views, editors, toolbars, quickviews, perspectives and many more elements. Here we list the different Rodin GUI elements (i.e. views) which are visible after starting Rodin for the first time and explain their functions:
 
 \begin{description}
-	\item[Menu bar (\ref{menu_bar})] The menu bar of the Rodin programs provides file and edit operations and other commands.
-	\item[Tool bar (\ref{tool_bar})] The tool bar provides short cuts for familiar commands like save, print, undo and redo.
-	\item[Event-B Explorer (\ref{eventb_explorer})] The Event-B Explorer shows the projects' tree structures. It has projects as main entries and for each one its corresponding project files.
-	\item[Outline View (\ref{outline_view})] A view used to view the outline of the active editor or file respectively.
-	\item[Rodin Problems view (\ref{rodin_problems_view})] The Rodin Problems View shows problems (e.g., syntax errors) in the active editor.
-	\item[Symbols View (\ref{symbols_view})] A view that shows a list of available mathematical symbols which can be used in conjunction with the mathematical notation (\ref{mathematical_notation}).
-	\item[Editor View (\ref{editor_view})] The editor view contains the active editor.
+	\item[Menu bar (\ref{menu_bar})] The menu bar of the Rodin programs provides file and edit operations as well as other commands.
+	\item[Tool bar (\ref{tool_bar})] The tool bar provides short cuts for commonly used commands such as save, print, undo and redo.
+	\item[Event-B Explorer (\ref{eventb_explorer})] The Event-B Explorer shows the projects' tree structure. Projects are the main entries in this view, and when a project is expanded, the corresponding project files will also be shown.
+	\item[Outline View (\ref{outline_view})] The Outline view shows the outline of the active editor or file.
+	\item[Rodin Problems View (\ref{rodin_problems_view})] The Rodin Problems view displays problems (e.g., syntax errors) from the currently active projects.
+	\item[Symbols View (\ref{symbols_view})] The Symbols view shows a list of available mathematical symbols which can be used in conjunction with the mathematical notation (\ref{mathematical_notation}).
+	\item[Editor View (\ref{editor_view})] The Editor view displays the active editor and is the view in which Event-B files are edited.
 \end{description}
 
 \subsection{Install new plugins}
 \label{tut_install_plugins}
 
-This sections shows how to install new plugins for Rodin by using the example of the Atelier B Provers plugin (\ref{atelier_b_provers}). It is highly recommended that you install this plugin because it will not be possible to prove much without it.
+This sections describes how to install new plugins for Rodin by using the example of the Atelier B Provers plugin (\ref{atelier_b_provers}). It is highly recommended that you install this plugin because it will not be possible to prove much without it.
 
-Open the Install Manager \textsf{Help $\rangle$ Install New Software\ldots}. Click the downward arrow next to the field \textsf{Work with} to select the Atelier~B Provers update site. Check the box next to the Atelier~B Provers entry and click on the \textsf{Next} button (compare with figure \ref{fig_tut_02_install_manager}). Follow the installation instruction to install the plugin. After installing the plugin, you will be asked to restart Rodin in order to finalize the installation.
+Open the Install Manager \textsf{Help $\rangle$ Install New Software\ldots}. Click the downward arrow next to the field \textsf{Work with} to select the Atelier~B Provers update site. Check the box next to the Atelier~B Provers entry and click on the \textsf{Next} button (compare with Figure \ref{fig_tut_02_install_manager}). Follow the installation instruction to install the plugin. After installing the plugin, you will be asked to restart Rodin in order to finalize the installation.
 
 \warning{If you are using a firewall, you may need to change the proxy settings.}
 

@@ -15,14 +15,14 @@ Before we get started with the actual tutorial, we are going to go over the requ
 \subsection{Systems Development}
 \label{tut_systems_development}
 
-Ultimately, the purpose of the methods and tools introduced here is to improve systems development.  By this we mean the design and management of complex engineering projects over their life cycle.  Examples include cars, air traffic control systems, etc.
+Ultimately, the purpose of the methods and tools introduced here is to improve systems development.  By this we mean the design and management of complex engineering projects over their life cycle. Examples include cars, air traffic control systems, etc.
 
 ``Taking an interdisciplinary approach to engineering systems is inherently complex since the behaviour of and interaction among system components is not always immediately well defined or understood. Defining and characterizing such systems and subsystems and the interactions among them is one of the goals of systems engineering. In doing so, the gap that exists between informal requirements from users, operators, marketing organizations, and technical specifications is successfully bridged.''\footnote{\url{http://en.wikipedia.org/wiki/Systems_engineering\#Managing_complexity}}
 
 \subsection{Formal Modelling}
 \label{tut_formal_modelling}
 
-We are concerned with \textit{formalizing specifications}.  This allows us a more rigorous analysis (thereby improving the quality) and allows us to reuse the specification in the development an implementation.  This comes at the cost of higher up-front investments.
+We are concerned with \textit{formalizing specifications}.  Formal models allow us to perform a more rigorous analysis of our system (thereby improving the quality) and allow us to reuse the specification in the development an implementation.  This comes at the cost of higher up-front investments.
 
 This differs from the traditional development process. In a formal development, we transfer some effort from the test phase (where the implementation is verified) to the specification phase (where the specification in relation to the requirements is verified).
 
@@ -30,25 +30,25 @@ This differs from the traditional development process. In a formal development, 
 \label{tut_predicate_logic}
 \index{predicate logic}
 
-In predicate logic statements (called predicates) can be expressed over variables
-  that can be quantified, like in ``for all values of $x$ \ldots''.
-Event-B's logic is predicate logic with the following features:
+In predicate logic, statements (which are called predicates) can be expressed with variables
+  that can be quantified (e.g. ``for all values of $x$ \ldots'').
+Event-B uses predicate logic with the following features:
 \begin{itemize}
 \item Predicates and expressions are distinguished.
 \item All expressions have a data type, e.g. integer or set of integers.
 \item Quantification over variables, not predicates, is supported.
   This includes quantification over sets.
-\item A partial function semantics is included, i.e. the predicate $1\div 0 = 1\div 0$ is not
+\item A partial function semantics is included, e.g. the predicate $1\div 0 = 1\div 0$ is not
   a tautology because $1\div 0$ does not represent a valid value.
 \item Comprehension sets are supported.
-\item Predicates can be evaluated to a Boolean values.
+\item Predicates can be evaluated to a Boolean value.
 \end{itemize}
 
 \subsection{Event-B}
 \label{tut_eventb}
 \index{Event-B}
 
-Event-B is a notation for formal modelling based around an abstract machine notation (\index{abstract machine notation}).
+Event-B is a notation for formal modelling based around an abstract machine notation. \index{abstract machine notation}
 
 Event-B is considered an evolution of B (also known as classical B). It is a simpler notation which is easier to learn and use. It comes with tool support in the form of the Rodin Platform.
 
@@ -57,7 +57,7 @@ Event-B is considered an evolution of B (also known as classical B). It is a sim
 
 Rodin (\ref{rodin_platform}) is the name of the tool platform for Event-B.  It allows formal Event-B models to be created with an editor.  It generates proof obligations (\ref{generated_proof_obligations}) that can be discharged either automatically or interactively.
 
-Rodin is modular software and many extensions are available.  These include alternative editors, document generators, team support, and extensions (called plugins) to the notation which include decomposition or record support.  An up-to-date list of plugins is maintained in the Rodin Wiki (\ref{rodin_wiki})\footnote{Specifically, there links were valid at the time of writing:
+Rodin is a modular software and many extensions are available.  These include alternative editors, document generators, team support, and extensions (called plugins) some of which include support decomposition and records.  An up-to-date list of plugins is maintained in the Rodin Wiki (\ref{rodin_wiki})\footnote{These links were valid at the time of the writing of this document:
 
 \url{http://wiki.event-b.org/index.php/Rodin_plugins}
 
@@ -67,10 +67,10 @@ Rodin is modular software and many extensions are available.  These include alte
 \label{tut_eclipse}
 \index{Eclipse}
 
-Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform for building software tools.  This matters for two reasons:
+Rodin is based on the Eclipse Platform (\ref{eclipse}), a Java-based platform for building software tools.  This is important for two reasons:
 \begin{itemize}
-	\item If you have already used Eclipse-based software, then you will feel immediately comfortable with the handling of the Rodin application.
-	\item Many extensions, or plugins, are available for Eclipse-based software. There are Rodin-specific plugins as well as Rodin-independent plugins that may be useful to you.  The Rodin Wiki (\ref{rodin_wiki}), contains a list of plugins is maintained.
+	\item If you have already used Eclipse-based software, then you will feel immediately comfortable with how Rodin applications are handled.
+	\item Many extensions, or plugins, are available for Eclipse-based software. There are Rodin-specific plugins as well as plugins independent of Rodin that may be useful to you.  The Rodin Wiki (\ref{rodin_wiki}), contains a list of plugins is maintained.
 \end{itemize}
 
 The GUI of an Eclipse application consists of views, editors, toolbars, quickviews, perspectives and many more elements.  If these terms are unfamiliar to you, please consult Section~\ref{eclipse} which contains references to Eclipse tutorials.

@@ -9,7 +9,7 @@
 
 In this section, we will work with the model of the so-called celebrity problem.
 
-\warning{We use are using new model instead of the traffic light because it provides us with some proofs where manual interaction is necessary.}
+\warning{We are using a new model instead of the traffic light because it provides us with some proofs where manual interaction is necessary.}
 
 In the setting for this problem, we have a ``knows'' relation between persons.
 This relation is defined so that
@@ -32,7 +32,7 @@ Rather than creating the model step by step, we have provided the model as an ar
 
 Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the option to import an existing archive file. Use the browse function to find your archive file and import it. After you have selected the appropriate archive file, click on \textsf{Finish}.
 
-Rodin takes a few seconds to extract and load all the files. Once this is done, it displays a few problems with this project in the Rodin Problems view (compare with Figure \ref{fig_tut_08_rodin_problemview}).
+It will take a few seconds for Rodin to extract and load all the files. Once this is done, a few problems will be displayed in the Rodin Problems view (compare with Figure \ref{fig_tut_08_rodin_problemview}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -42,7 +42,7 @@ Rodin takes a few seconds to extract and load all the files. Once this is done, 
 \end{center}
 \end{figure}
 
-We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.  But before we do that, we will fix the existing problems.
+We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.  But before we do so, we will fix the existing problems.
 
 \subsection{Fixing Problems}
 \label{tut_celebrity_fixing problems}
@@ -52,16 +52,16 @@ Before proceeding, we will fix the problems shown in Figure \ref{fig_tut_08_rodi
 
 The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section.  To do so, right-click in the empty space to the left of the word \textsf{celebrity} or place your cursor directly to the left of the small green arrow and right-click. Now select \textsf{Add Child $\rangle$ Event-B Refines Event Relationship}.
 
-\warning{Make sure that the cursor is on the correct line before right-clicking.  Otherwise, you will get the wrong context menu.  Also, make sure that you are not in ``text edit'' mode (e.g. by left-clicking on an editable word, like ``celebrity'').  This will give you the wrong context menu as well. See the faq for more info (\ref{faq_new_editor_new_element}).}
+\warning{Make sure that the cursor is on the correct line before right-clicking.  Otherwise, you will get the wrong context menu.  Also, make sure that you are not in ``text edit'' mode (e.g. clicking on a word like ``celebrity'' that you can edit will bring you into ``text edit'' mode).  This will give you the wrong context menu as well. See the faq for more info (\ref{faq_new_editor_new_element}).}
 
- This declares that the event is a refinement of an event with the same name in the abstract machine (Section \ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
+ This declares that the event is a refinement of an event with the same name in the abstract machine (\ref{abstract_machine}). This is the case here, so we can now save the project and the warning should disappear.
 
 %Do we need an additional explanation for witnesses, since this is already done in tutorial 07!?
 %In any abstract event that uses parameters, if the concrete event has no parameter with the same name, the tool needs a witness so that it notices what value the parameter should take. Witnesses are also needed for variables that have a non-deterministic (\ref{non_deterministic}) assignment in an abstract event and do not appear in the concrete model.
 
-The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the \textsf{celebrity}.
+The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the event called \textsf{celebrity}.
 
-A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should \textsf{x = b}. The event should now look as follows: 
+A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. The name of a witness has to be the same as the parameter of the corresponding abstract event that it is refining. Here the name of the witness will have to be \textsf{x} so that it can be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should \textsf{b = x}. The event should now look as follows: 
 
 \begin{description}
 	\EVT {celebrity}
@@ -73,7 +73,7 @@ A default witness \textsf{wit1} has been created, with a default value \textsf{$
 			\end{description}
 		\Witnesses
 			\begin{description}
-			\nItem{ x }{ x=b }
+			\nItem{ x }{ b=x }
 			\end{description}
 		\ThenAct
 			\begin{description}
@@ -190,7 +190,7 @@ The following section (\ref{tut_final_second_refinement}) shows the corrected \t
 \subsection{The Celebrity algorithm}
 \label{the_celebrity_algorithm}
 
-We will take a brief tour through the model to see how the problem and algorithm are specified.
+We will now take a brief tour through the model to see how the problem and algorithm are specified.
 The celebrity problem itself is described in the context \texttt{Celebrity\_c0}. There are
   three constants. $P$ is the set of persons, each represented by a number, $c$ is the celebrity
   we are looking for and $k$ is the ``knows'' relation between the persons.
@@ -221,7 +221,7 @@ In the most abstract machine \texttt{Celebrity\_0} we specify what the algorithm
 The variable $r$ can be any person initially and the event \texttt{celebrity} 
   finds the celebrity in one step. 
 After the event \texttt{celebrity} has occurred, $r$ contains the result of the algorithm.
-You might then wonder why there is a problem if you can just pick the celebrity and assign it to the result. This is because we wrote down our problem in a way so that we are certain a celebrity $c$ exists and the algorithm simply returns it.
+You might then wonder why there is a problem if you can just pick the celebrity and assign it to the result. This is because we defined our problem in such a way so that we are certain a celebrity $c$ exists and the algorithm simply returns it.
 Later in the refinement, we will model how to find the celebrity without using $c$.
 Because of the refinement relation, we know that the algorithm works correctly.
 
@@ -329,7 +329,7 @@ The events together can be interpreted as an implementation of the algorithm:
 \subsection{The First Proof}
 \label{tut_first_proof}
 
-In this section, we prove the model of the Celebrity Problem. To do this, click on the box in the upper right hand corner that has a little plus sign to switch to the Proving Perspective. You can switch between perspectives using the shortcut bar as shown in Figure \ref{fig_tut_08_switch_perspective}. 
+In this section, we will carry out proofs for the model of the Celebrity Problem. To do this, click on the box in the upper right hand corner that has a little plus sign and switch to the Proving Perspective. You can switch between perspectives using the shortcut bar as shown in Figure \ref{fig_tut_08_switch_perspective}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -354,7 +354,7 @@ We should now see the window in Figure \ref{fig_tut_08_proving_perspective}.
 The \texttt{Proving Perspective} contains three new important views:
 
 \begin{description}
-	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate within the proof. We have not yet started the proof, so there is nothing to choose from.
+	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate within the proof. We have not yet started the proof, so there is nothing to see yet.
 	\item[Proof Control View (\ref{proof_control_view})] This is where we perform interactive proofs.
 	\item[Goal View (\ref{goal_view})] This window shows what needs to be proved at the current position inside the proof tree.
 \end{description}
@@ -396,13 +396,13 @@ Because we know that invariant $c\in Q$ was valid before the assignment,
 
 Take a look at the Proof Tree View. The root node should now be labeled with \texttt{ah ($x\neq c$)},
   which is the hypothesis that we just added.
-This node has three children: The first proves that $x\neq c$ is well-defined, which is therefore $\btrue$ and has already been trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
+This node has three children: The first proves that $x\neq c$ is well-defined, which is $\btrue$ and has already been trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
 The second is the proof of the hypotheses $\lnot x=c$.
 The third is the proof of the original goal where the new hypotheses can be used.
 
 The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Search Hypotheses} view (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
 
-\info{There is usually no harm in selecting all hypothesis, but this approach is not optimal.  By providing only necessary hypotheses and no more, we drastically increase the chance for the prover to find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
+\info{There is usually no harm in selecting all hypothesis, but this approach is not optimal.  By providing only necessary hypotheses and no more, we drastically increase the chance that the prover will find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -412,7 +412,7 @@ The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourse
 \end{center}
 \end{figure}
 
-Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses.\footnote{The prover has rewritten this as $ \lnot x = c$} Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
+The correct hypothesis for this proof was $k \in  (P \setminus  \{ c\} ) \rel  P$ (axiom 3 from the first context). If you were unable to figure this out, add this hypothesis to the selected hypothesis window now. Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses.\footnote{The prover has rewritten this as $ \lnot x = c$} Click a second time on the \textsf{p0} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -422,20 +422,20 @@ Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \te
 \end{center}
 \end{figure}
 
-After saving the proof, the proof obligation \textsf{remove\_1/inv2/INV} in the \textsf{Event-B Explorer} should also become a green chop.
+After saving the proof, the proof obligation \textsf{remove\_1/inv2/INV} in the \textsf{Event-B Explorer} should now have a \icon{rodin/discharged.png} next to it.
 
-\info{Those proof obligations that were automatically discharged are marked with a tiny ``A'' next to the green chop.  As the one we just discharged was proven manually, this is now the first discharged PO without an ``A''.}
+\info{Those proof obligations that were automatically discharged are marked with a tiny ``A'' next to the \icon{rodin/discharged.png}.  As the one we just discharged was proven manually, this is now the first discharged PO without an ``A''.}
 
 \info{There are alternative ways to prove the proof obligation. For instance, we can use the \icon{rodin/lasoo_prover.png} button to load all hidden hypotheses that contain identifiers in common with the goal into the \textsf{Selected Hypotheses View}, and we can also use it with the selected hypotheses.}
 
 In order to move to the next undischarged proof obligation, you may also use the \textsf{Next Undischarged PO button} (\icon{rodin/next_prover.png}) of the \textsf{Proof Control View} (\ref{proof_control_view}). The next proof can be solved the same way as the last one.
 
-\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: To do this, we have to fill in an existential quantifier. First, look in the list of hypothesis to see if you find any variable that is in P and select that hypothesis. Then instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
+\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: To do this, we have to fill in an existential quantifier. We need to instantiate \textsf{b'} correctly. The auto prover should have proved that $b' \in P$, so look for a variable that is already in P and add this value to the \textsf{Selected Hypotheses View}. To instansiate \textsf{b'}, type the name of the variable you have chosen into the yellow box that is shown in the \textsf{Goal View} (\ref{goal_view}) and then click on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
 
 \subsection{Proving --- an Art or a Science?}
 \label{tut_proving_an_art_or_a_science}
 
-Proving can be quite frustrating, both for beginners and advanced users.  Especially beginners sometimes get the impression that proofing is just ``clicking around'' that sometimes works and sometimes does not.  And when it works, it's not really clear why --- the proof tree is also difficult to read, even for experienced users.  We provided some additional guidance on provers in section~\ref{use_provers_effectively} that may be of help.
+Proving can be quite frustrating for both beginners and advanced users.  Beginners sometimes get the impression that proving is just ``clicking around'' that sometimes works and sometimes does not.  When it does work, it's not really clear why. The proof tree is also difficult to read even for experienced users.  We provided some additional guidance on provers in the reference chapter (\ref{use_provers_effectively}) that may be of help, but keep in mind that proving is a skill that can only be learned by practice. Here we are trying to help you learn how you can use Rodin to solve proofs, but actually teaching you how to prove something is not really in the scope of this document.
 
 
 %%% Local Variables: 

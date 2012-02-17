@@ -196,7 +196,7 @@ Again, you get three new goals.
 
 \begin{itemize}
 \item The first is the well-definedness condition of $sit(x) = outside$. $sit$ must be a function and $x$ is in its domain.
-  This is easy to prove since $sit$ is a total function (\ref{relations}). Press the \icon{rodin/p1.png} button to verify it. \marginpar{is the icon for p1 too small? Should we use \textsf{p1} instead?}
+  This is easy to prove since $sit$ is a total function (\ref{relations}). Press the \icon{rodin/p1.png} button to verify it.
 \item The second node has the original goal but $sit(x) = outside$ as a hypothesis.
 \item The third node has the original goal but $\lnot sit(x) = outside$ as a hypothesis.
 \end{itemize}
@@ -280,7 +280,7 @@ Now we are going to explain the main complexity of our model: the deadlock freen
 
 \info{Please remember that post-tactics should still be disabled before starting this part of the tutorial.} 
 
-The difference between the first refinement and the initial model is that a new constant \textsf{com} been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which allows anybody to get outside.  Please consult the book\marginpar{Reference to Abrial book} for the details regarding this model.
+The difference between the first refinement and the initial model is that a new constant \textsf{com} has been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which allows anybody to get outside.  Please consult the book\marginpar{Reference to Abrial book} for the details regarding this model.
 
 The event \textsf{INITIALISATION} does not change, but the event \textsf{PASS} is refined as a consequence. We assume that a person can move to another location $l$ if they have the authorization to be in $l$ (already defined in the abstraction) and also if the location $l$ is connected to the location $p$ where the person is at this precise moment (represented by $sit(p)$).
 
@@ -290,7 +290,7 @@ The event \textsf{INITIALISATION} does not change, but the event \textsf{PASS} i
 \end{description}
 }
 
-As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows\footnote{A number of concerns can be found with this statement.  For one, it only states that at least one person can move, while it may be better to state that every person can move.  Further, this statement would not detect life locks\index{life lock}: A situation where the system oscillates between a small number of states.}: 
+As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows\footnote{In the future, it might be worthwhile to change this theorem to take care of a couple of issues. It only states that at least one person can move, and it may be better to state that every person can move.  Furthermore, this statement is unable to detect live locks\index{live lock}: A situation where the system oscillates between a small number of states.}: 
 
 \pencil{
 \begin{description}
@@ -298,11 +298,11 @@ As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} mach
 \end{description}
 }
 
-Save the file. Once again, the prover fails to prove the deadlock freeness automatically. Stated in natural language, we want to prove is that ``at least one person authorized to be in a location must also be authorized to go in another location which communicates with the first one''.
+Save the file. Once again, the prover fails to prove this theorem automatically. What we want to prove is that ``at least one person authorized to be in a location must also be authorized to go in another location which communicates with the first one''.
 
-To begin with, switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving.  How to get started?  It is often a good idea to subdivide a proof into cases.  One distinction of cases could be whether the person is outside or not.  Let's do this.
+Switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving. When getting started, it is often a good idea to subdivide a proof into cases.  In this case, one distinction of cases should be to determine whether the person is outside or not.  
 
-First we need a variable denoting a location, in order to distinguish two cases in the first place.  We use the deadlock freeness invariant from the initial model for this purpose.  Using the search functionality, we add it as a hypothesis, as shown in figure~\ref{tut_10_ref_proof1}.
+First we need a variable denoting a location in order to distinguish between the two cases. We use the deadlock freeness invariant from the initial model for this purpose. Search through the possible hypotheses and add this theorem to the selected hypotheses (Figure~\ref{tut_10_ref_proof1}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -312,13 +312,13 @@ First we need a variable denoting a location, in order to distinguish two cases 
 \end{center}
 \end{figure}
 
-Now we can click on the red $\exists$ to instantiate the variables p and l, which in turn allows us to make the case distinction. To do this, we enter the following in the Proof Control View:
+Now click on the red $\exists$ to instantiate the variables p and l. This will allow us to make the case distinction. To do this, we enter the following in the Proof Control View:
 
 $$ sit(p) = outside $$
 
-... and press \icon{rodin/dc_prover.png}.  This will create three new nodes in the proof tree: The first one being the well-definedness again, followed by the two cases.  As always, we can just dismiss the first one with \icon{rodin/auto_prover.png}.
+Now press the \icon{rodin/dc_prover.png} button.  This will create three new nodes in the proof tree: The first one is once again the well-definedness condition, followed by the two cases that we have just defined.  As always, use the \icon{rodin/auto_prover.png} button to verify the well-definedness condition.
 
-The first case concerns $sit(p) = outside$.  We remember that \textsf{axm7} is a statement about the fact that at least one authorized room is connected to the outside:
+The first case is dealing with $sit(p) = outside$.  To verify this case, we need to use\textsf{axm7}, which states that at least one authorized room is connected to the outside:
 
 \pencil{
 \begin{description}
@@ -326,9 +326,9 @@ The first case concerns $sit(p) = outside$.  We remember that \textsf{axm7} is a
 \end{description}
 }
 
-We add \textsf{axm7} to the list of hypotheses.  Here, too, we would like to work with the location, so we instantiate this hypothesis, again by clicking on its red $\exists$.
+Add \textsf{axm7} to the list of hypotheses.  We would like to work with an instance of a location, so we instantiate this hypothesis by clicking on its red $\exists$ symbol.
 
-\info{Note that Rodin instaniated the variable with the name $l0$, instead of $l$, as the name $l$ already exists from the previous instantiation.}
+\info{Note that Rodin instaniated the variable with the name $l0$ instead of $l$ because the name $l$ already exists from the previous instantiation.}
 
 Now we have variables to instantiate our goal as well.  We enter the value $p$ in the yellow box for q and $l0$ in the yellow box for m (figure~\ref{tut_10_ref_proof2}) and press the red  $\exists$.
 
@@ -340,19 +340,19 @@ Now we have variables to instantiate our goal as well.  We enter the value $p$ i
 \end{center}
 \end{figure}
 
-This results in two new nodes to the proof tree, the first one being the well-defined proof obligation.  The last remaining proof obligation is really harmless, and intuitively understandable. Further, we can solve it with the given hypotheses.  Clicking \icon{rodin/p0.png} will discharge it.
+This results in two new nodes to the proof tree, the first one being the well-defined proof obligation.  The last remaining proof obligation can be solved with the given hypotheses.  Clicking \icon{rodin/p0.png} will discharge both of these proof obligations.
 
-This resolved the first case.  Now let's go to the second case, $sit(p) \neq outside$.  Again, we would like to instantiate the quantifier, but this time we have to use different values.  We still have p to substitute for q, but the location we express in terms of the exit relationship: Our axioms tell us that there is always an exit from every location, therefore $exit(sit(p))$ should be a valid substitution for m. Let's perform the substitution.  This advances our proof tree with a new node (and the well-definedness proof obligation, which we discharge with one click).
+Now the first case is resolved.  Now let's consider the second case, $sit(p) \neq outside$.  We would like to instantiate the quantifier again, but this time we have to use different values.  We still have p to substitute for q, but for the location we use the exit relationship: Our axioms tell us that there is always an exit from every location, so $exit(sit(p))$ should be a valid substitution for m. Let's perform the substitution.  This advances our proof tree with a new node (and the well-definedness proof obligation, which we discharge with one click).
 
-The resulting proof obligation is a conjunction.  We can discharge the two parts of it by clicking on the $\land$, resulting in two simpler goals in the proof tree.  We start with the \textbf{second} goal.
+The resulting proof obligation is a conjunction.  We can discharge the two parts of it by clicking on the red $\land$ symbol in the goal viel. This results in two simpler goals in the proof tree.  We start with the \textbf{second} goal.
 
-\info{We start with the second, rather than the first goal, because doing so will provide us with hypotheses that will be beneficial in discharging the first goal.  How do we know this? By experience, and by playing with the proofs for a long time.  Depressingly, there is no easy rule to guide through the proving process, just general guidelines and experience.}
+\info{We start with the second goal instead of the first goal because doing so will provide us with hypotheses that will be beneficial in discharging the first goal.  How do we know this? By experience and by playing with the proofs for a long time.  Depressingly, there is no easy rule to guide us through the proving process. There are just general guidelines and experience.}
 
 The goal we start with is:
 
 $$ sit(p) \mapsto exit(sit(p)) \in com $$
 
-We have no hypothesis yet that contains com.  We try \textsf{axm4}:
+None the hypotheses that we have added so far contain $com$, so add \textsf{axm4} to the selected hypotheses:
 
 \pencil{
 \begin{description}
@@ -360,13 +360,13 @@ We have no hypothesis yet that contains com.  We try \textsf{axm4}:
 \end{description}
 }
 
-We try  \icon{rodin/p0.png}, and Rodin discharges the goal.
+Hit the \icon{rodin/p0.png} button, and Rodin discharges the goal.
 
-We now approach the last undischarged goal:
+Now deal with the last undischarged goal:
 
 $$ p \mapsto exit(sit(p)) \in aut $$
 
-In other words, the person is authorized to follow the exit.  Again, we look through our axioms and find \textsf{axm6}, which essentially states: ``Everybody has the permission to leave from wherever they are'':
+This statement means that the person is authorized to follow the exit. To discharge this proof obligation we need to use \textsf{axm6}, which essentially states that ``Everybody has the permission to leave from wherever they are'':
 
 \pencil{
 \begin{description}
@@ -374,20 +374,20 @@ In other words, the person is authorized to follow the exit.  Again, we look thr
 \end{description}
 }
 
-We can remove the inclusion by clicking on the red $\subseteq$, which results in a hypothesis with universal quantifier, which we can instantiate with the variables that we already have at hand.  We substitute p for x and sit(p) for x0.  Look at the formula and confirm that this makes sense.
+Remove the inclusion by clicking on the red $\subseteq$, which results in a hypothesis with universal quantifier. Instantiate this with the variables that we already have on hand.  Instantiate x with p and x0 with sit(p).  Examine this formula and try to understand what it means.
 
-This results in two more goals in our proof tree, the first one being well-definedness again.
+This results in two more goals in our proof tree. The first goal is the well-definedness condition which we discharge with the \icon{rodin/auto_prover.png} button.
 
 The remaining goal is simple and essentially states that following the current position along the exit route will lead to a location where the user is authorized:
 
 $$ p \subseteq exit(sit(p)) \in aut $$
 
-We cannot discharge this with \icon{rodin/p0.png}; However, trying \icon{rodin/p1.png} will discharge it.  Using \icon{rodin/p1.png} is the same as selecting related hypotheses with \icon{rodin/lasoo_prover.png} and then using \icon{rodin/p0.png}.  The danger of this approach is that so many hypotheses are added, that the prover does not find a solution before timing out.  In this case, it worked.
+We cannot discharge this with the \icon{rodin/p0.png} prover; However, using the \icon{rodin/p1.png} prover will discharge it.  Using \icon{rodin/p1.png} is the same as selecting related hypotheses with \icon{rodin/lasoo_prover.png} and then using \icon{rodin/p0.png}.  The danger of this approach is that if too many hypotheses are added, the prover may not be able to find a solution before timing out.  In this case, it worked.
 
-\info{We leave it as an exercise to the reader to manually identify the hypotheses that are required to discharge this goal.}
+\info{As an exercise, try to manually identify the hypotheses that were required to discharge this goal.}
 
 
-This concludes the tutorial. Be aware that we just look at one small aspect of a rather sophisticated model.  Also, please be aware that this tutorial gave you only an introduction to proving.  To become an expert, we encourage you to study interesting models in the literature and to practice.
+This concludes this section of the tutorial. Be aware that we have just looked at one small aspect of a rather sophisticated model.  Also, please be aware that this tutorial gave you only an introduction to proving.  To become an expert, we encourage you to study interesting models and to practice.
 
 %%% Local Variables: 
 %%% mode: latex

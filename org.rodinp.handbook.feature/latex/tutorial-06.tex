@@ -2,8 +2,7 @@
 \label{tut_eventb_concepts}
 
 In Event-B we have two kind of components.
-We already encountered a \emph{context} that describes static elements of a model.
-The other component is a \emph{machine} that describes the dynamic behavior of a model.
+A \emph{context} describes the static elements of a model. A \emph{machine} describes the dynamic behavior of a model. We have already used a machine to model the traffic light problem in Section \ref{tut_first_machine}. In the last section (\ref{tut_contexts}), we used a context to model the Agatha problem.
 
 \subsection{Contexts}
 \label{tut_concepts_contexts}
@@ -17,40 +16,36 @@ A context has the following components:
   (See also \ref{sets}).
 \item[Constants]
 \index{constant}
-  We can declare constants here. The type of each constant must be given
-  by the axioms.
-\item[Axioms] The axioms are a list of predicates. 
-index{axiom}
-  They describe what can be taken for granted when developing a model.
-  The axioms can be later used in proofs that occur in components that
+  We can declare constants here. The type of each constant must be declared in the axiom section.
+\item[Axioms] The axiom section contains a list of predicates (called axioms).
+\index{axiom}
+  These axioms define rules that will always be the case for given elements of the context. These rules can then be taken for granted when developing a model.
+  The axioms can be used later in proofs that for components that
   use (``\emph{see}'') this context.
   Each axiom has a label attached to it.
 \item[Theorems]
 \index{theorem} 
-  Axioms can be marked as \emph{theorems}. In that case, we declare that
-  the predicate is provable by using the axioms that are written 
-  before the theorem.
-  Theorems can be used later in proofs just like the axioms.
+  Axioms can be marked as \emph{theorems}. If this is the case, we are declaring that
+  the predicate can be proved by using the axioms that have been written 
+  before this theorem.
+  Once they have been proven, theorems can be used later in proofs just like the other axioms.
 \item[Extends]
 \index{extends}
   A context may extend an arbitrary number of other contexts.
-  Extending another context $A$ has the effect that we can make use of
-  all constants and axioms declared in $A$ and we can add new constants
+  When we extend another context $A$, we can then use all constants and axioms declared in $A$ and also add new constants
   and axioms.
 \end{description}
 \index{proving!proof obligation}
-Rodin automatically generates \emph{proof obligations} (often abbreviated as PO) for properties that
-should be proven. Each proof obligation has a name that explains where it comes from.
+Rodin automatically generates \emph{proof obligations} (often abbreviated as PO) for properties that need to be proven. Each proof obligation has a name that identifies where the proof obligation was generated.
 There are two kind of proof obligations generated in a context:
 \begin{itemize}
   \item Each theorem must be proven. The proof obligation's name has the form 
     \eventbpo{label/THM}, where \eventbpo{label} is the theorem's label.
-  \item Some expressions are not obviously \emph{well-defined}.
-    E.g. the axiom $x \div y > 2$ is only meaningful if $y$ is different from 0.
+  \item Some expressions are not obviously \emph{well-defined}. For example, the axiom $x \div y > 2$ is only meaningful if $y$ is different from 0.
     Thus Rodin generates the proof obligation $y\neq 0$.
-    A well-defined proof obligation has the name \eventbpo{label/WD}.
+    A proof obligation for proving than an expression is well-defined has the name \eventbpo{label/WD}.
 \end{itemize}
-The order of the axioms and theorems matter because the proof of a theorem or the degree to which an expression is well-definded may depend on the axioms and theorems that are already written. This is necessary to avoid circular reasoning.
+The order of the axioms and theorems matter because the proof of a theorem or the degree to which an expression is well-definded may depend on the axioms and theorems that have already been written. This is necessary to avoid circular reasoning.
 
 
 \subsection{Machines}
@@ -61,26 +56,24 @@ A machine describes the dynamic behavior of a model by means of
 variables whose values are changed by events.
 A central aspect of modeling a machine is to prove that the machine
 never reaches an invalid state, i.e. the variables always have values
-that satisfy the invariant.
-First we briefly summarize of which parts a machine consists:
+that satisfy the invariants.
+Here is a brief summary of the part that a machine contains:
 
 \begin{description}
-\item[Refines] \index{refines} Optionally a machine can refine another one.
-  We'll see in Section \ref{tut_refinement} what that means.
+\item[Refines] \index{refines} A machine has the option of refining another one.
+  We will see in Section \ref{tut_refinement} what that means.
 \item[Sees] \index{sees} We can use the context's sets, constants and axioms  in
   a machine by declaring it in the \textsl{Sees} section.
-  The axioms can be used in every proof in the machine as hypothesis.
+  The axioms can be used in every proof in the machine as hypotheses.
 \item[Variables] \index{variable}
-  The variables' values are determined by an initialization and
-  can be changed by events. Together they constitute the state
-  of the machine.
-  Each variable must be given a type by the invariants.
+  The variables' values are determined by an initialization event and
+  can be changed by events. This constitues the state of the machine. The type of each variable must be declared in the invariant section.
 \item[Invariants] \index{invariant}
-  This are predicates that should be true for every reachable state.
+  These are predicates that should be true for every reachable state.
   Each invariant has a label.
 \item[Events] \index{event}
   An event can assign new values to variables.
-  The \emph{guards} of an event specify under which conditions it might occur.
+  The \emph{guards} of an event specify the conditions under which it can be executed.
   The initialization of the machine is a special case of an event.
 \end{description}
 
@@ -88,7 +81,7 @@ First we briefly summarize of which parts a machine consists:
 \label{tut_events}
 \index{event}
 
-We saw in Section \ref{tut_first_machine} what an event basically looks like using the example of a traffic light:
+We saw in Section \ref{tut_first_machine} what an event basically looks like by using the example of a traffic light:
 \begin{description}
 	\EVT {set\_cars}
 		\begin{description}
@@ -111,9 +104,8 @@ We have the event's name $set\_cars$, a \emph{parameter} with the name $new\_val
 a \emph{guard} with label grd1 and an \emph{action} with label act1.
 An event can have an arbitrary number of parameters, guards and events.
 
-The guards specify \emph{when} an event might occur, i.e. under which combinations
-of the values of the machine's variables and the parameters.
-The actions describe \emph{what} changes apply to the variables.
+The guards specify \emph{when} an event is allowed to occur, i.e. the event can only be executed if the values of the machine's variables and parameters match the values listed in the guard. If this is the case, we say that the event is enabled.
+The actions describe \emph{what} changes will then be applied to the variables.
 
 Only the variables that are explicitly mentioned in the actions are affected.
 All the other variables keep their old values. Beside the simple assignment ($\bcmeq$),
@@ -124,14 +116,14 @@ the reference section \ref{actions}.
 The \emph{initialization} of the machine is a special form of event. It has neither parameters
 nor guards.
 
-Invariants must always hold. To verify this, we must prove two things:
+Invariants must always be valid. To verify this, we must prove two things:
 \begin{itemize}
-  \item The initialization leads to a state where the invariant holds.
-  \item Assuming that the machine is in a state where the invariant holds,
-    every enabled event leads to a state where the invariant holds.
+  \item The initialization leads to a state where the invariant is valid.
+  \item Assuming that the machine is in a state where the invariant is valid,
+    every enabled event leads to a state where the invariant is valid.
 \end{itemize}
 
-Rodin generates proof obligations for every invariant that can be changed by an event, i.e. the invariant contains variables changed by an event.
+Rodin generates proof obligations for every invariant that can be affected by an event, i.e. the invariant contains variables that can be changed by an event.
 The name of the proof obligation is then \\ \eventbpo{event\_name/invariant\_label/INV}.
 The goal of such a proof is to assert that when all affected variables are replaced by new values from the actions, the invariant still holds. The hypotheses for such a proof obligation consist of:
 
@@ -141,21 +133,20 @@ The goal of such a proof is to assert that when all affected variables are repla
 \item All guards, because events can only be triggered when the guards are valid.
 \end{itemize}
 
-In the special case of an initialization, we cannot use the invariants because we do not
-make any assumptions about uninitialized machines.
+In the special case of an initialization event, we cannot use the invariants because we do not make any assumptions about uninitialized machines.
 
 \subsection{Refinement}
 \label{tut_refinement}
 \index{refinement}
 Refinement is a central concept in Event-B. Refinements are used to gradually
 introduce the details and complexity into a model.
-If a machine \texttt{B} refines a machine \texttt{A}, \texttt{B} is only allowed to behave in a way that
-corresponds to the behavior of \texttt{A}. We now look into more detail of what ``corresponds''
+If a machine \texttt{B} refines a machine \texttt{A}, \texttt{B} can only behave in a way that
+corresponds to the behavior of \texttt{A}. We will now look into more detail of what ``corresponds''
 here means.
 In such a setting, we call \texttt{A} the abstract and \texttt{B} the concrete machine.
 
-Here we give just a brief overview over the concept of refinement. Later in Section \ref{tut_expanding_traffic_light_system}
-we use refinement in an example.
+This is just overview over the concept of refinement. Later in Section \ref{tut_expanding_traffic_light_system}
+we will use refinement in an example.
 
 The concrete machine has its own set of variables. Its invariants can refer to
 the variables of the concrete and the abstract machine. If a invariant refers to both,
@@ -163,9 +154,9 @@ we call it a ``gluing invariant''. The gluing invariants are
 used to relate the states between the concrete and abstract machines.
 
 An event of the abstract machine may be refined by one or several events of the concrete machine.
-To ensure that the concrete machine does only what is allowed by the abstract one, we must show two things:
+To ensure that the concrete machine does only what is allowed to do by the abstract one, we must prove two things:
 \begin{itemize}
-\item The concrete events can only occur when the abstract one can occur.
+\item The concrete events can only occur when the abstract one occurs.
 \item If a concrete event occurs, the abstract event can occur in such a way that the resulting
   states correspond again, i.e. the gluing invariant remains true.
 \end{itemize}
@@ -174,26 +165,26 @@ The first condition is called ``guard strengthening''. The resulting proof oblig
 \eventbpo{concrete\_event/abstract\_guard/GRD}. We have to prove that under the assumption that the
 concrete event is enabled (i.e. its guard are true) and the invariants (both the abstract and the concrete) 
 hold, the abstract guards holds as well. Thus the goal is to prove that the abstract guard, the invariants and the
-concrete guards can be used as hypothesis in the proof.
+concrete guards can be used as hypotheses in the proof.
 
 The second condition, that the gluing invariant remains true, is just a more general case of the proof obligation which ensures 
 that an event does not violate the invariant. So the proof obligation's label is again 
 \eventbpo{concrete\_event/concrete\_invariant/INV}. The goal is to prove that the invariant of the concrete machine is valid when each occurence of a modified variable is replaced by its new value.
-The hypotheses we can use are:
+The hypotheses we use are:
 \begin{itemize}
-\item We assume that the invariant of both the concrete and abstract machines hold before the event occurred.
-\item The abstract invariants where the modified variables are replaced by their new values are valid because we know that the abstract event does not violate the invariants.
+\item We assume that the invariant of both the concrete and abstract machines were valid before the event occurred.
+\item The abstract invariants where the modified variables are replaced by their new values are valid because we know that the abstract event does not violate any invariants.
 \item The event occurs only when the guards of both the concrete and abstract machines are true.
 \end{itemize}
 
-These two conditions are the central piece to prove the correctness of a refinement. We now just explain a few
+These two conditions are the central issues that we need to deal with to prove the correctness of a refinement. We now just explain a few
 common special cases.
 
 \subsubsection{Variable re-use}
 \label{tut_variable_reuse}
-Most often, we do not want replace all variables by new ones. It is sometimes useful to keep all of the variables.
+Most of the time, we do not want to replace all variables with new ones. It is sometimes useful to keep all of the variables.
 We can do this just by repeating the names of the abstract variables in the variable section of the concrete
-machine. In that case, we must prove for each concrete event that changes such a variable that the corresponding 
+machine. In that case, we must prove for each concrete event that changes this variable that the corresponding 
 abstract event updates the variable in the same way.
 The proof obligation has the name \eventbpo{concrete\_event/abstract\_action/SIM}.
 
@@ -201,19 +192,19 @@ The proof obligation has the name \eventbpo{concrete\_event/abstract\_action/SIM
 \label{tut_skip}
 An event in the concrete machine might not refine any event in the abstract machine. In that case it is assumed
 to refine \emph{skip}, which is the event that does nothing and can occur any time. 
-The guard strengthening is then trivially true and doesn't need to be proven.
-It still must be proven that the gluing invariant holds but this time under the assumption that the abstract machine's
+The guard strengthening is then true and doesn't need to be proven.
+We still have to prove that the gluing invariant holds but this time under the assumption that the abstract machine's
 variables have not changed. Therefore, the new state of our newly introduced event corresponds to the same state of
 our abstract machine from before the event happened.
 
 \subsubsection{Witnesses}
 \label{tut_witnesses}
 \index{witness}
-Let's consider a situation where we have an abstract event with a parameter $p$ and in a refining event that no longer needs that parameter.
+Let's consider a situation where we have an abstract event with a parameter $p$ and we are dealing with a refined event that no longer needs that parameter.
 We saw above that we have to prove that for each concrete event the abstract event may act accordingly.
-With the parameter, however, we now have the situation that we must prove the existence of a value for $p$ such
+With the parameter, however, we now have the situation in which we must prove the existence of a value for $p$ such
 that an abstract event exists. Proofs with existential quantification are often hard to do, so Event-b 
-uses the construct of a \emph{witness}. A witness is just a predicate of the abstract parameter with the
+uses the a \emph{witness} construct. A witness is just a predicate of the abstract parameter with the
 name of the variable as label. Often a witness has just the simple form $p = \ldots$.
 
 

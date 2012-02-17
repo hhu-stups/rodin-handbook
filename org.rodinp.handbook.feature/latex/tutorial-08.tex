@@ -7,10 +7,9 @@
 \subsection{The Celebrity Problem}
 \label{tut_celebrity_problem}
 
-In this section, we will work on the model of the so-called celebrity problem.
+In this section, we will work with the model of the so-called celebrity problem.
 
-\warning{We use a new model instead of the traffic light because it provides us with
-  some proofs where manual interaction is necessary.}
+\warning{We use are using new model instead of the traffic light because it provides us with some proofs where manual interaction is necessary.}
 
 In the setting for this problem, we have a ``knows'' relation between persons.
 This relation is defined so that
@@ -18,7 +17,7 @@ This relation is defined so that
 \begin{itemize}
 	\item no one knows himself,
 	\item the celebrity knows nobody,
-	\item but everybody knows the celebrity.
+	\item everybody knows the celebrity.
 \end{itemize}    
 
 The problem's goal is to find the celebrity. We want to model an algorithm that fulfills this task.
@@ -27,13 +26,13 @@ The problem's goal is to find the celebrity. We want to model an algorithm that 
 \label{tut_import_project}
 \index{import project}
 
-Rather than creating the model step by step, we provide the model as an archive.
+Rather than creating the model step by step, we have provided the model as an archive file.
 
-\warning{Make sure that you have no existing Project named ``Celebrity'', before importing the project. If you do, then rename it. To do so, right click the project and select \textsf{Rename...}}
+\warning{Make sure that you have no existing Project named ``Celebrity'', before importing the project. If you have, then rename it by right clicking the project and selecting \textsf{Rename...}}
 
-Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the option to import an existing archive file and then use the browse function to find your archive file and import it. After you have selected the appropriate archive file, click on \textsf{Finish}.
+Import the archive file \file{Celebrity.zip}{Celebrity.zip} to you Event-B Explorer. To do this, select \textsf{File $\rangle $ Import $\rangle $ General $\rangle $ Existing Projects into Workspace}. Then select the option to import an existing archive file. Use the browse function to find your archive file and import it. After you have selected the appropriate archive file, click on \textsf{Finish}.
 
-Rodin takes a few seconds to extract and load all the files. Once it is done, it shows that there are a few problems with this project as you can see in the Rodin Problems View (compare with figure \ref{fig_tut_08_rodin_problemview}).
+Rodin takes a few seconds to extract and load all the files. Once this is done, it displays a few problems with this project in the Rodin Problems view (compare with Figure \ref{fig_tut_08_rodin_problemview}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -43,17 +42,17 @@ Rodin takes a few seconds to extract and load all the files. Once it is done, it
 \end{center}
 \end{figure}
 
-We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.  But before we do that, we will fix the exiting problems.
+We will describe how the model is organized below in Section \ref{the_celebrity_algorithm}.  But before we do that, we will fix the existing problems.
 
 \subsection{Fixing Problems}
 \label{tut_celebrity_fixing problems}
 \index{warnings}
 
-Before proceeding, we will fix the problems shown in figure \ref{fig_tut_08_rodin_problemview}. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on the warning to open the \texttt{Celebrity\_1} machine. The line with the offending statement is already highlighted\footnote{This is the behaviour of the default editor.  Other editors may exhibit a different behaviour}, which is the event called \textsf{celebrity}.
+Before proceeding, we will fix the problems shown in Figure \ref{fig_tut_08_rodin_problemview}. Let's take a look at the warning stating that the event label ``celebrity'' is misused (``Inconsistent use of event label celebrity''). Double-click on this warning to open the \texttt{Celebrity\_1} machine. The line with the error is already underlined in yellow\footnote{This is the behaviour of the default editor.  Other editors may exhibit a different behaviour}. This error is produced by the event called \textsf{celebrity}.
 
-The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section.  To do so, right-click in the empty space to the left of the word \textsf{celebrity} and select \textsf{Add Child $\rangle$ Event-B Refines Event Relationship}.
+The problem is that the event is not declared as a refinement. To solve the problem, add an \textsf{Event-B Refines Event Relationship} child which will add a new entry in the \textsf{REFINES} section.  To do so, right-click in the empty space to the left of the word \textsf{celebrity} or place your cursor directly to the left of the small green arrow and right-click. Now select \textsf{Add Child $\rangle$ Event-B Refines Event Relationship}.
 
-\warning{Make sure that the cursor is on the relevant line before right-clicking.  Otherwise, you will get the wrong context menu.  Also, make sure that you are not in ``text edit'' mode (e.g. by left-clicking on an editable word, like ``celebrity'').  This will give you the wrong context menu as well. See section~\label{faq_new_editor_new_element}.}
+\warning{Make sure that the cursor is on the correct line before right-clicking.  Otherwise, you will get the wrong context menu.  Also, make sure that you are not in ``text edit'' mode (e.g. by left-clicking on an editable word, like ``celebrity'').  This will give you the wrong context menu as well. See the faq for more info (\ref{faq_new_editor_new_element}).}
 
  This declares that the event is a refinement of an event with the same name in the abstract machine (Section \ref{abstract_machine}). As this is the case here, we can now save the project and the warning should disappear.
 
@@ -62,7 +61,7 @@ The problem is that the event is not declared as a refinement. To solve the prob
 
 The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the \textsf{celebrity}.
 
-A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness is \textsf{x = b}. The event should now look as follows: 
+A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. Its name will have to be \textsf{x} if we want it to be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should \textsf{x = b}. The event should now look as follows: 
 
 \begin{description}
 	\EVT {celebrity}
@@ -87,10 +86,10 @@ A default witness \textsf{wit1} has been created, with a default value \textsf{$
 Edit the content and save the file. One warning will disappear, and only two will remain.
 
 \info{
-Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems View (\ref{rodin_problems_view}).
+Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems view (\ref{rodin_problems_view}).
 }
 
-The following Section \ref{tut_final_second_refinement} shows the corrected \texttt{Celebrity\_2} machine.
+The following section (\ref{tut_final_second_refinement}) shows the corrected \texttt{Celebrity\_2} machine.
 
 \subsection{The Final Second Refinement}
 \label{tut_final_second_refinement}
@@ -191,7 +190,7 @@ The following Section \ref{tut_final_second_refinement} shows the corrected \tex
 \subsection{The Celebrity algorithm}
 \label{the_celebrity_algorithm}
 
-We take a brief tour through the model to see how the problem and algorithm is specified.
+We will take a brief tour through the model to see how the problem and algorithm are specified.
 The celebrity problem itself is described in the context \texttt{Celebrity\_c0}. There are
   three constants. $P$ is the set of persons, each represented by a number, $c$ is the celebrity
   we are looking for and $k$ is the ``knows'' relation between the persons.
@@ -221,13 +220,10 @@ The axioms encode the properties about the ``knows'' relation that we stated abo
 In the most abstract machine \texttt{Celebrity\_0} we specify what the algorithm should do.
 The variable $r$ can be any person initially and the event \texttt{celebrity} 
   finds the celebrity in one step. 
-After the event \texttt{celebrity} occurred, $r$ contains the result of the algorithm.
-You might ask yourself, what is the problem if we can just pick the celebrity and
-  assign it to the result?
-The answer is that we wrote down our problem in a way that we know that there is a celebrity $c$
-  and we specify the algorithm by stating it should return it.
-Later in the refinement we model how to find the celebrity without using $c$ anymore.
-By the refinement relation we know then that the algorithm works correctly.
+After the event \texttt{celebrity} has occurred, $r$ contains the result of the algorithm.
+You might then wonder why there is a problem if you can just pick the celebrity and assign it to the result. This is because we wrote down our problem in a way so that we are certain a celebrity $c$ exists and the algorithm simply returns it.
+Later in the refinement, we will model how to find the celebrity without using $c$.
+Because of the refinement relation, we know that the algorithm works correctly.
 
 \pencil{
 \begin{description}
@@ -265,21 +261,20 @@ By the refinement relation we know then that the algorithm works correctly.
 So let's have a look at the first refinement \texttt{Celebrity\_1}. 
 A variable $Q$ is introduced which contains a subset of the persons, the potential celebrities.
 We start with $Q$ being all persons.
-Two new events  \texttt{remove\_1} and \texttt{remove\_2} are added that remove persons
+Two new events,  \texttt{remove\_1} and \texttt{remove\_2}, are added to remove people
   from $Q$ who cannot be the celebrity.
 \texttt{remove\_1} removes a person that knows somebody while \texttt{remove\_2}
   removes a person that is not known by any other person.
-As an invariant we state that the celebrity is always in $Q$.
+An invariants states that the celebrity is always in $Q$.
 When there is just one person left in the set, we know that this is the celebrity.
 
-The second refinement \texttt{Celebrity\_2} then splits the
+The second refinement, \texttt{Celebrity\_2}, then splits the
   potential celebrities $Q$ into one arbitrary person -- the candidate $b$ --
   and the ``rest'' $R$.
 \texttt{remove\_1} then removes a person $x$ from $R$ if $b$ knows $x$.
 \texttt{remove\_2} checks if there is a person $x$ in $R$ that does not know the candidate.
 If found, $x$ is the new candidate $b$ and is removed from the rest $R$.
-If $R$ is empty, we know that the candidate is the celebrity. (We do not print the machine
-here for brevity --- please consult the project that you imported earlier to see the model.)
+If $R$ is empty, we know that the candidate is the celebrity. (We do not show the machine here because it simply takes up too much space --- please consult the project that you imported earlier to inspect the model.)
 
 The third refinement then makes some more assumptions about the given problem.
 The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states that
@@ -304,9 +299,9 @@ The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states tha
 }
 
 Instead of having an abstract data structure like a set, the third refinement just introduces
-  an index variable $a$ that points to the first person of the rest.
+  an index variable $a$ that points to the first person of $R$, which is the group of people who have not yet been checked.
 Instead of taking an arbitrary element from $R$ as in the second refinement, the remove
-  events just takes the first element $a$. $a$ is then removed from $R$ just by increasing
+  events just takes the first element $a$. $a$ is then removed from $R$ by increasing
   it by one.
 When $a$ is larger then $n$, $R$ is empty and $b$ contains the result.
 
@@ -359,16 +354,16 @@ We should now see the window in Figure \ref{fig_tut_08_proving_perspective}.
 The \texttt{Proving Perspective} contains three new important views:
 
 \begin{description}
-	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate inside the proof. Currently, we have not started with the proof, so there is no new place to move to.
+	\item[Proof Tree View (\ref{proof_tree_view})] Here we see a tree of the proof that we have done so far and the current position in it. By clicking in the tree, we can navigate within the proof. We have not yet started the proof, so there is nothing to choose from.
 	\item[Proof Control View (\ref{proof_control_view})] This is where we perform interactive proofs.
 	\item[Goal View (\ref{goal_view})] This window shows what needs to be proved at the current position inside the proof tree.
 \end{description}
 
-Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then expand the \textsf{Proof Obligations} section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. Only three proofs have not been completed\footnote{Interestingly enough, this number can vary: Provers can be configured in the preferences, and changes there can have an impact on the ability to automatically discharge proofs.  In addition, all provers have time-outs.  On a slow machine, some proof obligations may not get discharged, compared to a faster machine with the same timeout.}  (a completed proof is indicated by a green check \icon{rodin/discharged.png}). 
+Expand the \texttt{Celebrity\_1} machine in the \textsf{Event-B Explorer}. Then expand the \textsf{Proof Obligations} section. We can see that the auto prover (\ref{auto_prover}) did quite a good job. Only three proofs have not been completed\footnote{Interestingly enough, this number can vary: Provers can be configured in the preferences and changes there can have an impact on the ability to automatically discharge proofs.  In addition, all provers have timeouts.  On a slow machine, some proof obligations may not be discharged whereas on a faster machine with the same timeout they would be discharged.}  (a completed proof is indicated by a green check \icon{rodin/discharged.png}). 
 
 %Except for the last one of them, all of them could be proved with a different external prover, but in order to learn a few new techniques, we will prove them with the so called ``p0 prover'' (\ref{p0_prover}). The p0 prover uses all selected hypotheses (the ones in Selected Hypotheses View).
 
-\info{Each proof has a label, e.g. \textsf{remove\_1/inv2/INV}.  Proof labels are explained in section~\ref{generated_proof_obligations}}.
+\info{Each proof has a label, e.g. \textsf{remove\_1/inv2/INV}.  Proof labels are explained in Section~\ref{generated_proof_obligations}.}
 Let's start with the proof \textsf{remove\_1/inv2/INV} of \texttt{Celebrity\_1}.
 To do this, double click on the proof obligation \textsf{remove\_1/inv2/INV}.
 We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation}.
@@ -391,24 +386,23 @@ We should now see the window as shown in Figure \ref{fig_tut_08_proof_obligation
 
 \info{Make sure that you understand the different buttons in the \textsf{Proof Control View} (\ref{proof_control_view}).}
 
-What has to be proven is that the event \texttt{remove\_1} preserves the invariant \texttt{inv2},
+Here we need to prove that the event \texttt{remove\_1} preserves the invariant \texttt{inv2},
   $c\in Q$.
-The event's action assigns to $Q$ the new value $Q\setminus \{x\}$.
-Because we know that invariant $c\in Q$ held before the assignment, 
- it suffices to prove that we do not remove $c$ from $Q$, i.e. \textsf{$x \neq c$}. Type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{\icon{rodin/ah_prover.png} button}. 
+The event's action assigns the new value $Q\setminus \{x\} $to $Q$.
+Because we know that invariant $c\in Q$ was valid before the assignment, 
+ it is sufficient to prove that we do not remove $c$ from $Q$, i.e. \textsf{$x \neq c$}. Type this into the \textsf{Proof Control View} (\ref{proof_control_view}) and press the \textsf{\icon{rodin/ah_prover.png} button}. 
 
-\info{In order to revert a step, click on a node in the \texttt{Proof Tree View} and click on the \icon{rodin/pn_prover.png} button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
+\info{In order to undo a step, click on a node in the \texttt{Proof Tree View} and click on the \icon{rodin/pn_prover.png} button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
 
 Take a look at the Proof Tree View. The root node should now be labeled with \texttt{ah ($x\neq c$)},
-  that is the hypothesis we just added.
-The node has three children: The first is the proof of well-definedness condition of $x\neq c$ which is
-  just $\btrue$ and trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
+  which is the hypothesis that we just added.
+This node has three children: The first proves that $x\neq c$ is well-defined, which is therefore $\btrue$ and has already been trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
 The second is the proof of the hypotheses $\lnot x=c$.
 The third is the proof of the original goal where the new hypotheses can be used.
 
-The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Selected Hypotheses View} (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
+The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Search Hypotheses} view (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
 
-\info{There is no harm in selecting all hypothesis, but this approach does not scale.  By providing the necessary hypotheses, but not more, we drastically increase the chance for the prover to find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
+\info{There is usually no harm in selecting all hypothesis, but this approach is not optimal.  By providing only necessary hypotheses and no more, we drastically increase the chance for the prover to find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -430,13 +424,13 @@ Now click on the \textsf{p0} button to prove the goal $\lnot x = c$ with the \te
 
 After saving the proof, the proof obligation \textsf{remove\_1/inv2/INV} in the \textsf{Event-B Explorer} should also become a green chop.
 
-\info{Those proof obligations that were automatically discharged are marked with a tiny ``A'' next to the green chop.  As the one we just discharged was proven manually, this is now the first discharged PO without ``A''.}
+\info{Those proof obligations that were automatically discharged are marked with a tiny ``A'' next to the green chop.  As the one we just discharged was proven manually, this is now the first discharged PO without an ``A''.}
 
-\info{There are alternative ways to prove the proof obligation. For instance, we can use the \icon{rodin/lasoo_prover.png} button to load those hidden hypotheses that contain identifiers in common with the goal into the \textsf{Selected Hypotheses View}, and we can also use it with the selected hypotheses.}
+\info{There are alternative ways to prove the proof obligation. For instance, we can use the \icon{rodin/lasoo_prover.png} button to load all hidden hypotheses that contain identifiers in common with the goal into the \textsf{Selected Hypotheses View}, and we can also use it with the selected hypotheses.}
 
 In order to move to the next undischarged proof obligation, you may also use the \textsf{Next Undischarged PO button} (\icon{rodin/next_prover.png}) of the \textsf{Proof Control View} (\ref{proof_control_view}). The next proof can be solved the same way as the last one.
 
-\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: We have to fill in an existential quantifier. First, look in the list of hypothesis to see if you find any variable that is in P and select that hypothesis. Then instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
+\info{As an exercise, try to prove \texttt{Celebrity\_2}. A small hint: To do this, we have to fill in an existential quantifier. First, look in the list of hypothesis to see if you find any variable that is in P and select that hypothesis. Then instantiate \textsf{b'} and \textsf{R'} correctly (For instance, if you want to instantiate \textsf{b'} with \textsf{c}, then \textsf{$P \backslash \{ c\}$} is a good choice for \textsf{R'}) by typing the instantiations in the \textsf{Goal View} (\ref{goal_view}) and then clicking on the red existential quantifier. Now all open branches of the proof tree can be proved with \textsf{p0}. After this, we have completed all the proofs, and the model is ready for use. } 
 
 \subsection{Proving --- an Art or a Science?}
 \label{tut_proving_an_art_or_a_science}

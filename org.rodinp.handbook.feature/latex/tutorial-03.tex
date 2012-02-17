@@ -63,7 +63,7 @@ The newly created component will open in the Rodin Editor. This displays the mac
 You can also add elements by finding the name of the machine under the MACHINE heading. There is a small green arrow directly to the right of the name of the machine (in this case, the name of the machine is ``mac"). Place your cursor directly to the left of the green arrow and right click. Select the element that you would like to add from the \textsf{Add Child} menu. If an element of a certain type has already been created, you can also create more elements of that type by right clicking on the type of the element you would like to add (e.g. \textsf{VARIABLES}) that is coloured in purple and select \textsf{Add Child}. You can also place your cursor directly before the green arrow to the left of an element name and hit \textsf{CTRL-T} or right click and select \textsf{Add Sibling}.
 \marginpar{Might be good to make a screenshot or at least get a .png of what the little green arrow looks like?}
 
-You can also edit the machine using the Event-B Machine Editor. To do this, right click on the \textsf{mac} component in the Event-B Explorer and select \textsf{Open With $\rangle$ Event-B Machine Editor}. This editor has four tabs at the bottom.  The \textsf{Pretty Print} tab shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model. Under the \textsf{Edit} tab, you can edit the model.  The six main sections of a machine (REFINES, SEES, etc.) are displayed in a collapsed state.  You can click on the \icon{rodin/collapsed.png} button to the left of a section to expand it.
+You can also edit the machine using the Event-B Machine Editor. This was the default editor in Rodin 2.3 and earlier versions and is still available to view and edit machine files. To do this, right click on the \textsf{mac} component in the Event-B Explorer and select \textsf{Open With $\rangle$ Event-B Machine Editor}. This editor has four tabs at the bottom.  The \textsf{Pretty Print} tab shows the model as a whole with color highlighting, but it cannot be edited here.  This is useful to inspect the model. Under the \textsf{Edit} tab, you can edit the model.  The six main sections of a machine (REFINES, SEES, etc.) are displayed in a collapsed state.  You can click on the \icon{rodin/collapsed.png} button to the left of a section to expand it.
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -71,7 +71,7 @@ You can also edit the machine using the Event-B Machine Editor. To do this, righ
 %\end{center}
 %\end{figure}
 
-This editor is \textit{form-based}.  This means that it can be modified by using controls (i.e. text fields, dropdowns, etc.) to input information. 
+This editor is \textit{form-based}.  This means that it can be modified by using controls (i.e. text fields, dropdowns, etc.) to input information. More information about this editor is available in the reference section (\ref{eventb_editor}).
 
 \info{Alternative editors are available as plugins.  The form editor has the advantage of guiding the user through the model, but it takes up a lot of space and can be slow for big models.  The text-based Camille Editor (\ref{tut_camille}) is very popular.  Please visit the Rodin Wiki (\ref{rodin_wiki}) for the latest information.}
 
@@ -131,7 +131,7 @@ Invariants are needed in order to specify the type of variables. Use the method 
 
 %Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
 Change the first invariant (the symbol $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
-Event-B provides the build-in datatype \texttt{BOOL} amongst others (Section \ref{data_types}).
+Event-B provides the build-in datatype \texttt{BOOL} among others (\ref{data_types}).
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -166,7 +166,7 @@ To fix this problem, place your cursor to the left of the small green arrow next
 
 \subsubsection{State Transitions with Events}
 
-Our traffic light controller cannot yet change its state.  To make this possible, we create two events (Chapter \ref{events}) in the manner described above and name them \textsf{set\_peds\_go} and \textsf{set\_peds\_stop}. This will model the traffic light for the pedestrians, and for each of these, we will add an Event-B action to each of the events. These actions will change \textsf{peds\_go} to \textsf{TRUE} or \textsf{FALSE}, which simulates the changing of the traffic light.
+Our traffic light controller cannot yet change its state.  To make this possible, we create two events (\ref{events}) in the manner described above and name them \textsf{set\_peds\_go} and \textsf{set\_peds\_stop}. This will model the traffic light for the pedestrians, and for each of these, we will add an Event-B action to each of the events. These actions will change \textsf{peds\_go} to \textsf{TRUE} or \textsf{FALSE}, which simulates the changing of the traffic light.
 
 \warning{From now on, we won't describe the individual steps in the editor any more.  Instead, we will simply show the resulting model.} 
 
@@ -250,7 +250,7 @@ You should see four proof obligations, two of which are discharged (marked with 
   The proof obligations can also be found via other entries in the explorer, like the events they belong to.
   Elements that have non-discharged proof obligations as children are marked with a small question mark.  For instance, \texttt{inv3} has all proof obligations as children, while the event \texttt{set\_cars} has one.}
 
-To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (Section \ref{guards}) of the events.
+To prevent the invariant from being violated (and therefore to allow all proof obligations to be discharged), we need to strengthen the guards (\ref{guards}) of the events.
 
 \warning{Before looking at the solution, try to fix the model yourself.}
 

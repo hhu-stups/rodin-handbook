@@ -102,12 +102,12 @@ Three actions are available for machine files (see Figure \ref{fig_ref_01_menuba
 
 \paragraph{Event-B menu}
 
-When opening a machine or context file, some wizards for creating Event-B model elements are available for the user. The different wizards are described in Section \ref{eventb_editor}.
+When opening a machine or context file, some wizards for creating Event-B model elements are available for the user. The different wizards are described in Section \ref{eventb_wizards}.
 
 \subsubsection{Tool bar}
 \label{tool_bar}
 
-The tool bar provides short cuts for familiar commands like save, print, undo and redo. The tool bar also provides short cuts to the wizards for creating elements like axioms, constants, enumerated sets, etc., which are described in Section \ref{eventb_editor}.
+The tool bar provides short cuts for familiar commands like save, print, undo and redo. The tool bar also provides short cuts to the wizards for creating elements like axioms, constants, enumerated sets, etc., which are described in Section \ref{eventb_wizards}.
 
 \subsubsection{Editor View}
 \label{editor_view}
@@ -221,7 +221,7 @@ The editor allows you to edit the modelling elements of the context which are th
 
 To remove a modelling element, right click on the modelling element and select \textsf{Delete}.
 
-It is also possible to add modelling elements by using wizards (See \ref{eventb_editor}).
+It is also possible to add modelling elements by using wizards (See \ref{eventb_wizards}).
 
 \subsection{The Structural Event-B Editor}
 \label{eventb_editor}
@@ -261,135 +261,6 @@ By pressing the \icon{rodin/add.png} button, you can add a new modelling element
 \end{figure}
 
 To remove a modelling element, press the \icon{rodin/remove.png} button. You can also move an modelling element up or down by selecting it and then pressing one of the two arrows (\icon{rodin/up_edit.png} or \icon{rodin/down_edit.png}).
-
-It is also possible to add modelling elements by using wizards. You can active the different wizard by using the buttons in the tool bar as shown in Figure \ref{fig_ref_01_eventb_editor12} and in Figure \ref{fig_ref_01_eventb_editor13} or via the Event-B menu (keeping in mind that the wizards depend on the active file machine or context). The next sections explain how to use the wizards.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor12.png}
-	\caption{Wizards for context specific elements located in the tool bar}
-	\label{fig_ref_01_eventb_editor12}
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor13.png}
-	\caption{Wizards for machine specific elements located in the tool bar}
-	\label{fig_ref_01_eventb_editor13}
-\end{center}
-\end{figure}
-
-
-\subsubsection{New Carrier Sets Wizard}
-\index{wizard!New Carrier Sets Wizard}
-
-To activate the \textsf{New Carrier Sets Wizard}, press the \icon{rodin/newset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor4}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor4.png}
-	\caption{New Carrier Sets Wizard}
-	\label{fig_ref_01_eventb_editor4}
-\end{center}
-\end{figure}
-
-You can enter as many carrier sets as you want by pressing the \textsf{More} button. When you are finished, press the \textsf{OK} button. 
-
-\subsubsection{New Enumerated Set Wizard}
-\label{enumerated_set_wizard}
-\index{wizard!New Enumerated Set Wizard}
-
-To activate the \textsf{New Enumerated Set Wizard}, press the \icon{rodin/newenuset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor5}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor5.png}
-	\caption{New Enumerated Set Wizard}
-	\label{fig_ref_01_eventb_editor5}
-\end{center}
-\end{figure}
-
-Enter the name of the new enumerated set as well as the names of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you're finished, press the \textsf{OK} button. The benefit of using this wizard is that in addition to creating the set and its elements, the wizard automatically creates the axiom that is necessary for the context to work. For example, when you add the new carrier set \texttt{COLOUR} and the three constants \texttt{red}, \texttt{green}, and \texttt{orange}, the wizard automatically creates the following axiom $partition(COLOUR , \{red\}, \{green\}, \{orange\})$.
-
-\subsubsection{New Constants Wizard}
-\index{wizard!New Constants Wizard}
-
-To activate the \textsf{New Constants Wizard}, press the \icon{rodin/newcst_edit.png} button located in the tool bar. Pressing the button will bring up the window shown in Figure \ref{fig_ref_01_eventb_editor6}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor6.png}
-	\caption{New Constants Wizard}
-	\label{fig_ref_01_eventb_editor6}
-\end{center}
-\end{figure}
-
-You can then enter the names of a constant and an axiom which can be used to define the constant's type. By pressing the \textsf{More Axm.} button you can enter additional axioms. To add more constants, press the \textsf{Add} button. When you have finished, press the \textsf{OK} button.
-
-\subsubsection{New Axioms Wizard}
-\index{wizard!New Axioms Wizard}
-
-To activate the \textsf{New Axioms Wizard}, press the \icon{rodin/newaxm_edit.png} button located in the tool bar. Pressing the button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor7}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor7.png}
-	\caption{New Axioms Wizard}
-	\label{fig_ref_01_eventb_editor7}
-\end{center}
-\end{figure}
-
-You can then enter the axioms you want. If more axioms are needed, press the \textsf{More} button. When you are finished, press the \textsf{OK} button.
-
-Check the ``Theorem" checkbox to indicate that the corresponding axiom should be a theorem.
-
-\subsubsection{New Variable Wizard}
-\index{wizard!New Variable Wizard}
-
-To activate the \textsf{New Variable Wizard}, press the \icon{rodin/newvar_edit.png} button located in the tool bar. Pressing the button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor14}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor14.png}
-	\caption{New Variable Wizard}
-	\label{fig_ref_01_eventb_editor14}
-\end{center}
-\end{figure}
-
-You can then enter the names of the variable, what its state at initialization should be, and an invariant which defines its type. By pressing button \textsf{More Inv.}, you can enter additional invariants. For adding more variables, press the \textsf{Add} button. When you're finished, press the \textsf{OK} button. 
-
-\subsubsection{New Invariants Wizard}
-\index{wizard!New Invariants Wizard}
-
-To activate the \textsf{New Invariants Wizard}, press the \icon{rodin/newinv_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor15}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor15.png}
-	\caption{New Invariants Wizard}
-	\label{fig_ref_01_eventb_editor15}
-\end{center}
-\end{figure}
-
-You can then enter the invariants you want. If more invariants are needed, press the \textsf{More} button. Check the \textsf{Theorem} checkbox to indicate that the corresponding invariant should be a theorem.
-
-\subsubsection{New Event Wizard}
-\index{wizard!New Event Wizard}
-
-To activate the \textsf{New Events Wizard}, press the \icon{rodin/newevt_edit.png} button located in the tool bar. Pressing this button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor16}.
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor16.png}
-	\caption{New Event Wizard}
-	\label{fig_ref_01_eventb_editor16}
-\end{center}
-\end{figure}
-
-You can then enter the events that you want. As indicated, the following elements can be entered: name, parameters, guards, and actions. More parameters, guards and actions can be entered by pressing the corresponding buttons. If more events are needed, press the \textsf{Add} button. Press the \textsf{OK} button when you're finished.
-
-Note that an event with no guard is considered to the guard $true$. Also, an event with no action is considered to have the action $skip$. 
 
 \subsubsection{Dependencies (Context)}
 \index{context!dependencies}
@@ -459,6 +330,144 @@ Selecting the \textsf{Pretty Print} tab gives you a global view of your context 
 	\label{fig_ref_01_eventb_editor10}
 \end{center}
 \end{figure}
+
+
+\subsection{Wizards}
+\label{eventb_wizards}
+Beside directly entering modelling elements in the editor it is also possible to add them by using wizards.
+You can activate the different wizards by using the buttons in the tool bar as shown in Figure \ref{fig_ref_01_eventb_editor12} and in Figure \ref{fig_ref_01_eventb_editor13} or via the Event-B menu (keeping in mind that the wizards depend on the active file machine or context). The next sections explain how to use the wizards.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor12.png}
+	\caption{Wizards for context specific elements located in the tool bar}
+	\label{fig_ref_01_eventb_editor12}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor13.png}
+	\caption{Wizards for machine specific elements located in the tool bar}
+	\label{fig_ref_01_eventb_editor13}
+\end{center}
+\end{figure}
+
+
+\subsubsection{New Carrier Sets Wizard}
+\index{wizard!New Carrier Sets Wizard}
+\index{carrier set!using a wizard to create a carrier set}
+
+To activate the \textsf{New Carrier Sets Wizard}, press the \icon{rodin/newset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor4}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor4.png}
+	\caption{New Carrier Sets Wizard}
+	\label{fig_ref_01_eventb_editor4}
+\end{center}
+\end{figure}
+
+You can enter as many carrier sets as you want by pressing the \textsf{More} button. When you are finished, press the \textsf{OK} button. 
+
+\subsubsection{New Enumerated Set Wizard}
+\label{enumerated_set_wizard}
+\index{wizard!New Enumerated Set Wizard}
+
+To activate the \textsf{New Enumerated Set Wizard}, press the \icon{rodin/newenuset_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor5}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor5.png}
+	\caption{New Enumerated Set Wizard}
+	\label{fig_ref_01_eventb_editor5}
+\end{center}
+\end{figure}
+
+Enter the name of the new enumerated set as well as the names of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you're finished, press the \textsf{OK} button. The benefit of using this wizard is that in addition to creating the set and its elements, the wizard automatically creates the axiom that is necessary for the context to work. For example, when you add the new carrier set \texttt{COLOUR} and the three constants \texttt{red}, \texttt{green}, and \texttt{orange}, the wizard automatically creates the following axiom $partition(COLOUR , \{red\}, \{green\}, \{orange\})$.
+
+\subsubsection{New Constants Wizard}
+\index{wizard!New Constants Wizard}
+\index{constant!using a wizard to create a constant}
+
+To activate the \textsf{New Constants Wizard}, press the \icon{rodin/newcst_edit.png} button located in the tool bar. Pressing the button will bring up the window shown in Figure \ref{fig_ref_01_eventb_editor6}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor6.png}
+	\caption{New Constants Wizard}
+	\label{fig_ref_01_eventb_editor6}
+\end{center}
+\end{figure}
+
+You can then enter the names of a constant and an axiom which can be used to define the constant's type. By pressing the \textsf{More Axm.} button you can enter additional axioms. To add more constants, press the \textsf{Add} button. When you have finished, press the \textsf{OK} button.
+
+\subsubsection{New Axioms Wizard}
+\index{wizard!New Axioms Wizard}
+\index{axiom!using a wizard to create an axiom}
+
+To activate the \textsf{New Axioms Wizard}, press the \icon{rodin/newaxm_edit.png} button located in the tool bar. Pressing the button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor7}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor7.png}
+	\caption{New Axioms Wizard}
+	\label{fig_ref_01_eventb_editor7}
+\end{center}
+\end{figure}
+
+You can then enter the axioms you want. If more axioms are needed, press the \textsf{More} button. When you are finished, press the \textsf{OK} button.
+
+Check the ``Theorem" checkbox to indicate that the corresponding axiom should be a theorem.
+
+\subsubsection{New Variable Wizard}
+\index{wizard!New Variable Wizard}
+
+To activate the \textsf{New Variable Wizard}, press the \icon{rodin/newvar_edit.png} button located in the tool bar. Pressing the button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor14}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor14.png}
+	\caption{New Variable Wizard}
+	\label{fig_ref_01_eventb_editor14}
+\end{center}
+\end{figure}
+
+You can then enter the names of the variable, what its state at initialization should be, and an invariant which defines its type. By pressing button \textsf{More Inv.}, you can enter additional invariants. For adding more variables, press the \textsf{Add} button. When you're finished, press the \textsf{OK} button. 
+
+\subsubsection{New Invariants Wizard}
+\index{wizard!New Invariants Wizard}
+\index{invariant!using a wizard to add an invariant}
+
+To activate the \textsf{New Invariants Wizard}, press the \icon{rodin/newinv_edit.png} button located in the tool bar. Pressing the button bring up the window shown in Figure \ref{fig_ref_01_eventb_editor15}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor15.png}
+	\caption{New Invariants Wizard}
+	\label{fig_ref_01_eventb_editor15}
+\end{center}
+\end{figure}
+
+You can then enter the invariants you want. If more invariants are needed, press the \textsf{More} button. Check the \textsf{Theorem} checkbox to indicate that the corresponding invariant should be a theorem.
+
+\subsubsection{New Event Wizard}
+\index{wizard!New Event Wizard}
+\index{event!using a wizard to create an event}
+
+To activate the \textsf{New Events Wizard}, press the \icon{rodin/newevt_edit.png} button located in the tool bar. Pressing this button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor16}.
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_eventb_editor16.png}
+	\caption{New Event Wizard}
+	\label{fig_ref_01_eventb_editor16}
+\end{center}
+\end{figure}
+
+You can then enter the events that you want. As indicated, the following elements can be entered: name, parameters, guards, and actions. More parameters, guards and actions can be entered by pressing the corresponding buttons. If more events are needed, press the \textsf{Add} button. Press the \textsf{OK} button when you're finished.
+
+Note that an event with no guard is considered to the guard $true$. Also, an event with no action is considered to have the action $skip$. 
 
 \subsection{The Proving Perspective}
 \label{proving_perspective}

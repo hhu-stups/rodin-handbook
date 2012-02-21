@@ -20,7 +20,7 @@ Eclipse provides the technical foundation of Rodin.
 \label{project}
 \index{project}
 
-The primary concept in doing formal developments with the Rodin Platform is that of a project. A project contains the complete mathematical development of a Discrete Transition System. It is made of several components of two kinds: machines and contexts. Machines contain the variables, invariants, theorems, and events of a project, whereas contexts contain the carrier sets, constants, axioms, and theorems of a project. Figure \ref{fig_ref_10_project1} shows an overview.
+The primary concept in doing formal developments with the Rodin Platform is that of a project. A project contains the complete mathematical development of a Discrete Transition System. It consists of components of two different types: machines and contexts. Machines contain the variables, invariants, theorems, and events for a project. Contexts contain the carrier sets, constants, axioms, and theorems for a project. Figure \ref{fig_ref_10_project1} shows an overview.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -30,7 +30,8 @@ The primary concept in doing formal developments with the Rodin Platform is that
 \end{center}
 \end{figure}
 
-We remind the reader of the various relationships existing between machines and contexts. This is illustrated in the following figure. A machine can be ``refined" by another one, and a context can be ``extended" by another one (no cycles are allowed in both these relationships). Moreover, a machine can ``see" one or several contexts. A typical example of machine and context relationship is shown in Figure \ref{fig_ref_10_project2}. 
+
+Various relationships exist between machines and contexts. This is illustrated in the following figure. A machine can be ``refined" by another one, and a context can be ``extended" by another one. However, cycles are not allowed (i.e. the original machine cannot refine any of the refined machines). A machine can also ``see" one or several contexts. A typical example of machine and context relationship is shown in Figure \ref{fig_ref_10_project2}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -43,7 +44,7 @@ We remind the reader of the various relationships existing between machines and 
 \subsubsection{Rodin Nature}
 \label{rodin_nature}
 
-Eclipse Projects can have one or more natures to describe their purpose.  The GUI can then adapt to their nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
+Eclipse Projects can have one or more natures to describe their purpose.  The GUI thens adapt to this nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project in Rodin, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
 
 \pencil{
 \texttt{<nature>org.rodinp.core.rodinnature</nature>}
@@ -57,7 +58,7 @@ Eclipse Projects can have one or more natures to describe their purpose.  The GU
 
 \marginpar{Screenshots must be adapted to Rodinv2.4}
 
-Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. Views) which are visible and explain their functions.
+Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. views) which are visible and explain their functions.
 
 \imagedpi{img/reference/ref_01_eventb_perspective1.pdf}{150mm}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
 
@@ -70,26 +71,10 @@ The menu bar provides file and edit operations and other useful Event-B specific
 
 When opening a machine or context file, the following actions for automatically renaming the Event-B model elements are available for the user:
 
-One action is available when editing context files (see Figure \ref{fig_ref_01_menubar1}).
+One action is available when editing context files (see Figure \ref{fig_ref_01_menubar2}).
 
     \begin{itemize}
-    	\item Automatic Axiom Labelling: this action will rename the axioms alphanumerically renaming according to their order of appearance. 
-    \end{itemize}
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_01_menubar1.png}
-	\caption{Automatic rename actions for machine files}
-	\label{fig_ref_01_menubar1}
-\end{center}
-\end{figure}
-
-Three actions are available for machine files (see Figure \ref{fig_ref_01_menubar2}).
-
-    \begin{itemize}
-    	\item Automatic Invariant Labelling: this action will rename the invariants alphanumerically according to their order of appearance.
-	\item Automatic Guard Labelling: this action will rename the guards alphanumerically according to their order of appearance,
-	\item Automatic Action Labelling: this action will rename the actions alphanumerically according to their order of appearance. 
+    	\item Automatic Axiom Labelling: this action will rename the axioms alphanumerically according to their order of appearance. 
     \end{itemize}
 
 \begin{figure}[!ht]
@@ -100,6 +85,22 @@ Three actions are available for machine files (see Figure \ref{fig_ref_01_menuba
 \end{center}
 \end{figure}
 
+Three actions are available for machine files (see Figure \ref{fig_ref_01_menubar1}).
+
+    \begin{itemize}
+    	\item Automatic Invariant Labelling: this action will rename the invariants alphanumerically according to their order of appearance.
+	\item Automatic Guard Labelling: this action will rename the guards alphanumerically according to their order of appearance,
+	\item Automatic Action Labelling: this action will rename the actions alphanumerically according to their order of appearance. 
+    \end{itemize}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics{img/reference/ref_01_menubar1.png}
+	\caption{Automatic rename actions for machine files}
+	\label{fig_ref_01_menubar1}
+\end{center}
+\end{figure}
+
 \paragraph{Event-B menu}
 
 When opening a machine or context file, some wizards for creating Event-B model elements are available for the user. The different wizards are described in Section \ref{eventb_wizards}.
@@ -107,12 +108,12 @@ When opening a machine or context file, some wizards for creating Event-B model 
 \subsubsection{Tool bar}
 \label{tool_bar}
 
-The tool bar provides short cuts for familiar commands like save, print, undo and redo. The tool bar also provides short cuts to the wizards for creating elements like axioms, constants, enumerated sets, etc., which are described in Section \ref{eventb_wizards}.
+The tool bar provides shortcuts for familiar commands like save, print, undo and redo. The tool bar also provides shortcuts to the wizards for creating elements like axioms, constants, enumerated sets, etc., which are described in Section \ref{eventb_wizards}.
 
 \subsubsection{Editor View}
 \label{editor_view}
 
-The editor view contains the active Event-B editor which is described in Section \ref{eventb_editor}.
+The editor view contains the active Event-B editor which is described in Section \ref{new_eventb_editor}.
 
 \subsubsection{Outline View}
 \label{outline_view}
@@ -124,7 +125,7 @@ The outline view displays the outline of the active Event-B editor and lists ele
 \index{Rodin problems view}
 \index{view!Rodin Problems view}
 
-When the Static Checker discovers an error in a project, a \icon{rodin/error_ovr.png} marker is added to this project and to the faulty component in the \textsf{Event-B Explorer}. The error itself is shown in the Rodin Problems view (i.e. syntax errors) of the active Event-B editor.
+When the an error is discovered in a project, a \icon{rodin/error_ovr.png}\marginpar{update icon for Rodin 2.4} marker appears next to the line with the problem in the editor view, and the faulty component in the \textsf{Event-B Explorer} is also similarly marked. The error itself (e.g. a syntax error) is shown in the Rodin Problems view.
 
 By double-clicking on the error statement, you are transferred automatically to the place where the error has been detected so that you can correct it easily.
 
@@ -132,7 +133,7 @@ By double-clicking on the error statement, you are transferred automatically to 
 \label{symbols_view}
 \index{view!Symbols View}
 
-The symbols view is intended to give users a convenient way to add mathematical symbols to the various model editors. If an editor is open and a text field is active (the cursor is blinking), then clicking a symbol inserts it at the current position as demonstrated in Figure \ref{fig_ref_01_symbol_table1}. 
+The symbols view is intended to give users a convenient way to add mathematical symbols to the various model editors. If an editor is open and a text field is active (the cursor is blinking), clicking a symbol will insert it at the current position (see Figure \ref{fig_ref_01_symbol_table1}). 
 
 The ASCII code corresponding to the symbol over which the mouse hovers is also displayed as a tooltip so that the user can also learn how to input symbols directly. 
 
@@ -148,9 +149,9 @@ The ASCII code corresponding to the symbol over which the mouse hovers is also d
 \label{eventb_explorer}
 \index{Event-B!explorer}
 
-Projects can be found in the RODIN platform in the \textsf{Event-B Explorer}. This is usually situated on the left hand side of the screen as shown in Figure \ref{fig_ref_01_eventb_perspective1}. The \textsf{Event-B Explorer} contains a list of name of the current projects. Next to each project name is a small triangle. By pressing it, one can expand a project and see the machines and contexts that it contains.
+Projects can be found in the RODIN platform in the \textsf{Event-B Explorer}. This is usually situated on the left hand side of the screen as shown in Figure \ref{fig_ref_01_eventb_perspective1}. The \textsf{Event-B Explorer} contains a list of name of the current projects. Next to each project name is a \icon{rodin/collapsed.png} button. By pressing it, one can expand a project and see the machines and contexts that it contains.
 
-The icons (\icon{rodin/ctx_obj.png} or \icon{rodin/mch_obj.png}) next to the components help identify whether they are a context or machine respectively.
+The icons (\icon{rodin/ctx_obj.png} or \icon{rodin/mch_obj.png}) next to the component name identifies whether it is a context or machine respectively.
 
 When expanding a machine or a context, you can explore its elements. Double clicking on a specific element (i.e. a variable) opens the Event-B editor and marks the position of the variable in the machine or context as shown in Figure \ref{fig_ref_01_project_explorer1}. Furthermore, proof obligations are displayed when clicking on the small triangle next to the label \textsf{Proof Obligations} (for more information see Section \ref{proving_perspective}).
 
@@ -167,15 +168,14 @@ When expanding a machine or a context, you can explore its elements. Double clic
 \index{perspective!customization}
 \index{fast view bar}
 
-So far, you have needed two different perspectives to work with RODIN. But it actually is possible to work with only one perspective. In this section, we try to customize a perspective so that we do not need any other. If you have experience with customizing Eclipse perspectives, you may only want to read the next paragraph which contains a few thoughts about a good perspective for RODIN.
+So far, you have needed two different perspectives to work with RODIN. However, it is actually possible to work with only one perspective. In this section, we will try to customize a perspective so that we do not need any other. If you have experience with customizing Eclipse perspectives, you may only want to read the next paragraph which contains a few suggestions for a good perspective for RODIN.
 
-As a start, we should think about what we want the perspective to look like. The proving perspective already is quite nice, but we may want to use a little bit more editing space when in the Event-B perspective. To create more space, we could move all windows that currently are on both sides of the editing area onto one side, as they never really need to be used simultaneously. For a bit more space, we could dock all of these windows onto the so-called Fast View bar so that they disappear when they are not needed. It would also be nice to be able to split the screen and work on several compontents at once. For example, we could have an abstract machine on one side of the editing surface, and the concrete machine on the other.
+We should start by thinking about how we want our perspective to appear. The proving perspective already is quite nice, but we may want to use a little bit more editing space when in the Event-B perspective. To create more space, we can move all windows that currently are on both sides of the editing area onto one side since they never really need to be used simultaneously. We can also dock all of these windows onto the so-called Fast View bar so that they disappear when they are not needed. It would also be nice to be able to split the screen and work on several components at once. Then we could edit both the abstract machine and the concrete machine at the same time.
 
-For the most part, the perspectives can be customized by dragging and dropping the different windows. First of all, you need to find the Fast View Bar. Usually, it is at the bottom end of the Eclipse window, but it also can be on the side or hidden inside the Shortcut Bar. For our purposes, it probably is best to have it on the right side of the screen. Place it there by dragging it with the mouse. Now, add some items to it. To do this, press the \textsf{New Fast View} button on the bar. It might be better to leave the Goal, the Problems and the Proof Control window at the bottom of the screen, as you may want them to stay open while editing. A good selection of tools to add to the Fast View bar may be:
+For the most part, the perspectives can be customized by dragging and dropping the different windows. First of all, you need to find the Fast View bar. Usually, it is at the bottom of the Eclipse window, but it also can be on the side or hidden inside the Shortcut Bar. For our purposes, it probably is best to have it on the right side of the screen. Place it there by dragging and dropping it with the mouse. Now add some items to it. To do this, press the \textsf{Show View as a Fast View} button on the bar.\marginpar{maybe a screenshot could explain this better?} It may be a good idea to to leave the Goal, the Rodin Problems and the Proof Control views open at the bottom of the screen since you may want them to stay open while editing. A good selection of views to add to the Fast View bar may be:
 
 \begin{itemize}
-	\item Project Explorer
-	\item Obligation Explorer
+	\item Project Explorer	
 	\item Search Hypothesis
 	\item Cache Hypothesis
 	\item Proof Tree
@@ -183,7 +183,7 @@ For the most part, the perspectives can be customized by dragging and dropping t
 	\item Progress Window
 \end{itemize}
 
-All of the windows that you cannot create directly when clicking on \textsf{New Fast View} can be found under \textsf{Others/General}. Once you are done, the window should look like in Figure \ref{fig_ref_10_customizing}. Click on ``Save Perspective As…'' in the Window menu to save the perspective.
+All of the windows that you cannot create directly when clicking on \textsf{Show View as a Fast View} can be found under \textsf{Others/General}. After you are finished, the window should look like Figure \ref{fig_ref_10_customizing}. Click on ``Save Perspective As...'' in the Window menu to save the perspective.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -197,9 +197,9 @@ All of the windows that you cannot create directly when clicking on \textsf{New 
 \label{new_eventb_editor}
 \index{editor!default editor}
 
-Once a context or a machine is created, a window appears in the editing area as shown in figure \ref{fig_ref_01_eventb_editor1_neweditor}.
+Once a context or a machine is created, a window appears in the editing area as shown in Figure \ref{fig_ref_01_eventb_editor1_neweditor}.
 
-\warning{The editor described here was made the default editor in Rodin 2.4 (February 2012) and still has some minor issues (see section~\ref{faq_new_editor_new_element}, for instance).  The alternative structural editor is still available, see section~\ref{eventb_editor}.}
+\warning{The editor described here was made the default editor in Rodin 2.4 (February 2012) and still has some minor issues (see Section~\ref{faq_new_editor_new_element}).  The alternative structural editor is still available ( see section~\ref{eventb_editor}).}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -209,7 +209,9 @@ Once a context or a machine is created, a window appears in the editing area as 
 \end{center}
 \end{figure}
 
-The editor allows you to edit the modelling elements of the context which are the dependencies, the carrier sets, the constants, and the axioms. By right-clicking on predefined places you can create new modelling elements. For instance, there is a small green arrow directly to the right of the name of the context (in this case, the name of the context is "ctx"). Place your cursor directly to the left of the green arrow and right click. Select the element that you would like to add from the \textsf{Add Child} menu as shown in figure \ref{fig_ref_01_neweditor_add_element}.
+The editor allows you to edit the modelling elements of the context which are the dependencies, the carrier sets, the constants, and the axioms. By right-clicking in predefined places you can create new modelling elements. For instance, a \icon{rodin/structured_arrow.png} symbol appears directly to the right of the name of the context (in this case, the name of the context is ``ctx"). Place your cursor directly to the left of this symbol and right click. Select the element that you would like to add from the \textsf{Add Child} menu as shown in figure \ref{fig_ref_01_neweditor_add_element}.
+
+Machine elements can also be added in the same way. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -227,9 +229,9 @@ It is also possible to add modelling elements by using wizards (See \ref{eventb_
 \label{eventb_editor}
 \index{editor!structural editor}
 
-\info{The editor described here was the default editor until Rodin 2.3.  It is still available, but has to be started explicitly through the context menu of the Component.}
+\info{The editor described here was the default editor until Rodin 2.3.  It is still available. To use this editor, right click on a machine or context file in the \textsf{Event-B Explorer} and select \textsf{Open With $\rangle$ Event-B Machine Editor}.}
 
-Once a context or a machine is created, a window appears in the editing area as shown in figure \ref{fig_ref_01_eventb_editor1}.
+Once a context or a machine is created, a window appears in the editing area as shown in Figure \ref{fig_ref_01_eventb_editor1}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -239,8 +241,8 @@ Once a context or a machine is created, a window appears in the editing area as 
 \end{center}
 \end{figure}
 
-By default, you are in the \textsf{Edit} mode which allows you to edit the modelling elements of the context which are the dependencies, the carrier sets, the constants, and the axioms. By right-clicking on the modelling elements you can create new child and sibling elements. For instance,
-By pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you can see the different modelling elements and also add, remove, or move them. Figure \ref{fig_ref_01_eventb_editor2} shows what the section looks like after pressing the triangle next to the keyword "AXIOMS".
+By default, you are in \textsf{Edit} mode which allows you to edit the modelling elements of the context (the dependencies, the carrier sets, the constants, and the axioms). By right-clicking on the modelling elements you can create new child and sibling elements. For instance,
+by pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you can see the different modelling elements and also add, remove, or move them. Figure \ref{fig_ref_01_eventb_editor2} shows what the section looks like after pressing the triangle next to the keyword "AXIOMS".
 
 \begin{figure}[!ht]
 \begin{center}
@@ -250,7 +252,7 @@ By pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you 
 \end{center}
 \end{figure}
 
-By pressing the \icon{rodin/add.png} button, you can add a new modelling element. For instance, clicking on the \icon{rodin/add.png} button next in the \textsf{AXIOMS} section will add a new axiom element. You can now enter a new axiom and a comment in the corresponding boxes as indicated in Figure \ref{fig_ref_01_eventb_editor3}.
+By pressing the \icon{rodin/add.png} button, you can add a new modelling element. For instance, clicking on the \icon{rodin/add.png} button in the \textsf{AXIOMS} section will add a new axiom element. You can now enter a new axiom and a comment in the corresponding boxes as indicated in Figure \ref{fig_ref_01_eventb_editor3}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -311,12 +313,12 @@ By pressing the \textsf{set}, \textsf{cst}, or \textsf{axm} buttons in the upper
 
 If you select an element, you can change its priority by pressing the \icon{rodin/up_edit.png} button or the \icon{rodin/down_edit.png} button‎. You do this for axioms, carrier sets, constants and extended contexts.
 
-Right clicking in this view will bring up a contextual menu that allows you to add a new carrier set, constant, axiom or extended context. 
+Right clicking in this view will bring up a context menu that allows you to add a new carrier set, constant, axiom or extended context. 
 
 \subsubsection{Synthesis (Machine)}
 \index{machine!synthesis}
 
-The \textsf{Synthesis} tab for machines is very similar to the one of contexts (see above) except that you have a global view of your machine's elements (refined machine/seen context/variable/invariant/event/variant).
+The \textsf{Synthesis} tab for machines is very similar to the one of contexts (see above) except that you have a global view of your machine's elements (refined machines, seen contexts, variables, invariants, events, and variants).
 
 \subsubsection{Pretty Print}
 \index{pretty print}
@@ -334,8 +336,8 @@ Selecting the \textsf{Pretty Print} tab gives you a global view of your context 
 
 \subsection{Wizards}
 \label{eventb_wizards}
-Beside directly entering modelling elements in the editor it is also possible to add them by using wizards.
-You can activate the different wizards by using the buttons in the tool bar as shown in Figure \ref{fig_ref_01_eventb_editor12} and in Figure \ref{fig_ref_01_eventb_editor13} or via the Event-B menu (keeping in mind that the wizards depend on the active file machine or context). The next sections explain how to use the wizards.
+In addition to being able to directly enter modelling elements in the editor, it is also possible to add them by using wizards.
+You can activate the different wizards by using the buttons in the tool bar as shown in Figure \ref{fig_ref_01_eventb_editor12} and in Figure \ref{fig_ref_01_eventb_editor13} or via the Event-B menu (the menu will only provide the wizards that you need for creating your machine components or context components). The next sections explain how to use the wizards.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -418,7 +420,7 @@ To activate the \textsf{New Axioms Wizard}, press the \icon{rodin/newaxm_edit.pn
 
 You can then enter the axioms you want. If more axioms are needed, press the \textsf{More} button. When you are finished, press the \textsf{OK} button.
 
-Check the ``Theorem" checkbox to indicate that the corresponding axiom should be a theorem.
+Check the ``Theorem" checkbox if the corresponding axiom that you created should be marked as a a theorem.
 
 \subsubsection{New Variable Wizard}
 \index{wizard!New Variable Wizard}
@@ -433,7 +435,7 @@ To activate the \textsf{New Variable Wizard}, press the \icon{rodin/newvar_edit.
 \end{center}
 \end{figure}
 
-You can then enter the names of the variable, what its state at initialization should be, and an invariant which defines its type. By pressing button \textsf{More Inv.}, you can enter additional invariants. For adding more variables, press the \textsf{Add} button. When you're finished, press the \textsf{OK} button. 
+You can then enter the names of the variable, what its state at initialization should be, and an invariant which defines its type. By pressing button \textsf{More Inv.}, you can enter additional invariants. To add more variables, press the \textsf{Add} button. When you're finished, press the \textsf{OK} button. 
 
 \subsubsection{New Invariants Wizard}
 \index{wizard!New Invariants Wizard}
@@ -449,7 +451,7 @@ To activate the \textsf{New Invariants Wizard}, press the \icon{rodin/newinv_edi
 \end{center}
 \end{figure}
 
-You can then enter the invariants you want. If more invariants are needed, press the \textsf{More} button. Check the \textsf{Theorem} checkbox to indicate that the corresponding invariant should be a theorem.
+You can then enter the invariants you want. If more invariants are needed, press the \textsf{More} button. Check the \textsf{Theorem} checkbox to indicate that the corresponding invariant should be marked as a theorem.
 
 \subsubsection{New Event Wizard}
 \index{wizard!New Event Wizard}
@@ -513,16 +515,16 @@ The symbol to the left of the leaf indicates the state of the sequent:
 	\item \icon{rodin/reviewed.png} indicates that this sequent has been reviewed. 
 \end{itemize}
 
-Internal nodes in the proof display the symbols in reverse colours. Note that a ``reviewed" sequent is one that is not discharged yet by the prover. Instead, it has been ``seen" by the user who decided to postpone the proof. Marking sequents as ``reviewed" is very convenient since the provers will ignore these leaves and focus on specific areas of interest. This allows the proof to be discharged interactively in a gradual fashion. In order to discharge a ``reviewed" sequent, select it and prune the tree at that node: the node will become ``brown" again (undischarged), and you can now try to discharge it. 
+Internal nodes in the proof display the symbols with the colours inverted. Note that a ``reviewed" sequent is one that is not yet discharged by the prover. Instead, it has been ``seen" by the user who decided to postpone the proof. Marking sequents as ``reviewed" is very convenient since the provers will ignore these leaves and focus on specific areas of interest. This allows the proof to be discharged interactively in a gradual fashion. In order to discharge a ``reviewed" sequent, select it and prune the tree at that node: the node will become ``brown" again (undischarged), and you can now try to discharge it. 
 
 \paragraph{Navigation within the Proof Tree}
 
 There are three buttons on the top of the proof tree view:
 
 \begin{itemize}
-	\item \icon{rodin/showgoal.png} allows you to see the goal of corresponding to each. node,
-	\item \icon{rodin/collapseall.png} allows you to fully expand the proof tree.
-	\item \icon{rodin/expandall.png} allows you to fully collapse the tree; only the root stays visible. 
+	\item \icon{rodin/showgoal.png} allows you to see the goal of corresponding to each node.
+	\item \icon{rodin/expandall.png} allows you to fully expand the proof tree.
+	\item \icon{rodin/collapseall.png} allows you to fully collapse the tree; only the root stays visible. 
 \end{itemize}
 
 \paragraph{Manipulating the Proof Tree}
@@ -537,7 +539,7 @@ The button next to each node in the proof tree allows you to expand or collapse 
 The proof tree can be pruned at a selected node. This means that the subtree of the selected node is removed from the proof tree. The selected node becomes a leaf and displays the symbol \icon{rodin/pending.png}. The proof activity can then be resumed from this node. After selecting a node in the proof tree, pruning can be performed in two ways:
 
 \begin{itemize}
-	\item by right-clicking and then selecting \textsf{Prune},
+	\item by right-clicking and selecting \textsf{Prune},
 	\item by clicking on the \icon{rodin/pn_prover.png} button in the proof control view. 
 \end{itemize}
 
@@ -547,7 +549,7 @@ Before pruning a particular node, the node (and its subtree) can be copied to th
 
 \subparagraph{Copy/Paste}
 
-By selecting a node in the proof tree and then right-clicking with the mouse, you can copy the part of the proof tree starting at that sequent (including the node and its subtree). Pasting the node and subtree back in is done in a similar manner with a right mouse click on a proof node. This allows reuse of part of a proof tree in the same or even in another proof.
+By selecting a node in the proof tree and then right-clicking with the mouse, you can copy the part of the proof tree starting at that sequent (including the node and its subtree). Pasting the node and subtree back in is done in a similar manner with a right mouse click on a proof node. This allows you to reuse a part of a proof tree in the same proof or even in another proof.
 
 \subsubsection{Goal and Selected Hypotheses}
 \label{goal_view}
@@ -587,7 +589,7 @@ Other proof rules can be applied when green buttons appear in the \textsf{Goal} 
 \end{center}
 \end{figure}
 
-To instantiate a quantifier, the user enters the desired expression in the box behind the quantifier and clicks on the quantifier (the red $\exists$) as demonstrated in figure \ref{fig_ref_01_proving_perspective5}.
+To instantiate a quantifier, the user enters the desired expression in the yellow box behind the quantifier and clicks on the quantifier (the red $\exists$) as demonstrated in figure \ref{fig_ref_01_proving_perspective5}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -617,8 +619,8 @@ The following buttons are available in the \textsf{Proof Control} view:
 \begin{itemize}
     \item \icon{rodin/nppr.png} invokes the new predicate prover. A drop-down list indicates alternative strategies.
     \item \icon{rodin/reviewed.png} indicates that a node has been reviewed. In an attempt by the user to carry out sequents in a certain order, they might decide to postpone the task of discharging some sequents until a later stage. To do this, the sequent can be marked as reviewed by choosing the correct node and clicking on this button. This indicates that by visually checking the sequent, the user is convinced that they can discharge it later, but they do not want to do it right now.
-    \item \icon{rodin/p0.png} external provers can be invoked from the drop-down list to test sequents using different forces.
-    \item \icon{rodin/dc_prover.png} begins a proof by cases. The proof is split into two branches. In the first branchf, the predicate supplied by the user is added to the Selected Hypotheses, and the user attempts to discharge this branch. In the second branch, the predicate supplied by the user is negated and added to the Selected Hypotheses. The user then attempts to discharge this branch. 
+    \item \icon{rodin/p0.png} external provers can be invoked from the drop-down list to test sequents.
+    \item \icon{rodin/dc_prover.png} begins a proof by cases. The proof is split into two branches. In the first branch, the predicate supplied by the user is added to the \textsf{Selected Hypotheses}, and the user attempts to discharge this branch. In the second branch, the predicate supplied by the user is negated and added to the \textsf{Selected Hypotheses}. The user then attempts to discharge this branch. 
     \item \icon{rodin/ah_prover.png} adds a new hypothesis. The predicate in the editing area should be proved by the user. It is then added as a new selected hypothesis.
     \item \icon{rodin/ae_prover.png} adds an abstract expression. The expression in the editing area is given a fresh name.
     \item \icon{rodin/auto_prover.png} invokes the auto-prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a the machine or context is saved. Using this button, you can invoke the auto-prover within an interactive proof.
@@ -635,37 +637,44 @@ The following buttons are available in the \textsf{Proof Control} view:
     \item \icon{rodin/next_rv.png} loads the next reviewed node of the current proof tree.
 \end{itemize}
 
-You can also disable/enable post-tactics which allows you to decide if post-tactics should run after each interactive proof step. In addition, you can open the preferences for post-tactics. For this, open the menu of the \textsf{Proof Control} view via the little triangle on the top right corner of the view.
+You can also disable/enable post-tactics which allows you to decide if post-tactics should run after each interactive proof step. In addition, you can open the preferences for post-tactics. To do this, open the menu of the \textsf{Proof Control} view via the \icon{rodin/expanded.png} button in the upper right corner of the view.
 
 \paragraph{The Smiley}
 
-The smiley can be one of three different colours: (1) red indicates that the proof tree contains one or more undischarged sequents, (2) blue indicates that all undischarged sequents of the proof tree have been reviewed, (3) green indicates that all sequents of the proof tree are discharged.
+The smiley can be one of three different colours: 
+
+\begin{enumerate}
+	\item red indicates that the proof tree contains one or more undischarged sequents
+	\item blue indicates that all undischarged sequents of the proof tree have been reviewed
+	\item green indicates that all sequents of the proof tree are discharged.
+\end{enumerate}
 
 \paragraph{The Editing Area}
 
-The editing area allows the user to supply parameters for proof commands. For example, when the user attempts to add a new hypothesis (by clicking on the ah button), the new hypothesis should have been written by the user in the editing area.
+The editing area allows the user to enter parameters for proof commands. For example, in order for the user to add a new hypothesis, the user should enter this hypothesis into the editing area and then should click on the \icon{rodin/ah_prover.png} button.
 
 \paragraph{ML/PP and Hypotheses}
 
 \subparagraph{ML}
 
-\icon{rodin/ml.png} (mono-lemma) prover appears in the drop-down list under the button (pp) as M0, M1, M2, M3, and ML. The different configuration (e.g., M0) refer to the proof force of the ML prover. All hypotheses are passed to ML.
+The \icon{rodin/ml.png} (mono-lemma) prover appears in the drop-down list under the button (pp) as M0, M1, M2, M3, and ML. The different configuration (e.g., M0) refer to the proof force of the ML prover. All hypotheses are passed to ML.
 
 \subparagraph{PP}
 
-\icon{rodin/pp.png} (predicate prover) appears in the drop-down list under the button (pp) as P0, P1, PP.
+The \icon{rodin/pp.png} (predicate prover) appears in the drop-down list under the button (pp) as P0, P1, PP.
 
 \begin{itemize}
-	\item \icon{rodin/p0.png} uses all selected hypotheses (the ones in Selected Hypotheses window).
-	\item \icon{rodin/p1.png} performs a lasoo operation on the selected hypotheses and the goal and uses the resulting hypotheses.
-	\item \icon{rodin/pp.png} uses all hypotheses. 
+	\item The \icon{rodin/p0.png} prover uses all selected hypotheses in the \textsf{Selected Hypotheses} view.
+	\item The \icon{rodin/p1.png} prover performs a lasoo operation on the selected hypotheses and the goal and uses the resulting hypotheses.
+	\item The \icon{rodin/pp.png} prover uses all hypotheses. 
 \end{itemize}
 
 \subsubsection{Auto Prover}
 \label{auto_prover}
 \index{auto prover}
 
-The auto-prover can be configured by means of a preference page, which can be obtained as follows: press the ``Window" button on the top toolbar. On the coming menu, press the ``Preferences" button. On the coming menu, press the ``Event-B" menu, then the ``Sequent Prover'', and finally the ``Auto-Tactic" button. This yields the window in Figure \ref{fig_ref_10_auto_prover_pref}.
+The auto-prover can be configured by means of a preference page. To access the preference window, select \textsf{Window $\rangle$ Preferences}.  In the window that pops up, expand the \textsf{Event-B} section and then the \textsf{Sequent Prover} section, and select the \textsf{Auto/Post Tactic} option. Select the \textsf{Profiles} tab. After selecting \textsf{Default Auto Tactic Profile} the tactic details are listed for that profile. To create your own Auto Tactic Profile that you can edit, select either \textsf{New...} or hit \textsf{Duplicate} to copy the default profile and make a few changes. Once you have created a new profile, hit the \textsf{Edit...} button and a window will pop up that allows you to edit your profile... 
+\marginpar{This window is actually described in much further detail in the section on preferences. The preferences shown in the current screenshot are no longer available.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -675,14 +684,15 @@ The auto-prover can be configured by means of a preference page, which can be ob
 \end{center}
 \end{figure}
 
-On the left part you can see the ordered sequence of individual tactics composing the auto-prover, whereas the right part contains further tactics you can incorporate in the left part. By selecting a tactic you can move it from on part to the other or change the order in the left part.
+
+%On the left part you can see the ordered sequence of individual tactics composing the auto-prover, whereas the right part contains further tactics you can incorporate in the left part. By selecting a tactic you can move it from on part to the other or change the order in the left part.
 Section~\ref{proof_tactics} gives an overview about what proof tactics are and 
   which are available.
 
 \subsubsection{The Search Hypotheses View}
 \index{view!Search Hypotheses}
 
-By typing a string in the \textsf{Proof Control} view and pressing the \textsf{Search Hypotheses} (\icon{rodin/sh_prover.png}) button, a window is provided which contains all the  hypotheses that have a character string in common with the one entered by the user in the editing area. For example, if we search for hypotheses involving the character string ``cr", then after pressing the \textsf{Search Hypothesis} (\icon{rodin/sh_prover.png}) button on the \textsf{Proof Control} view, we obtain the windows as shown in Figure \ref{fig_ref_01_proving_perspective7}. 
+By typing a string in the \textsf{Proof Control} view and pressing the \textsf{Search Hypotheses} (\icon{rodin/sh_prover.png}) button, all the  hypotheses that have a character string in common with the one entered by the user in the editing area are shown in the Search Hypotheses view. For example, if we search for hypotheses containing the character string ``cr'', then after pressing the \textsf{Search Hypothesis} (\icon{rodin/sh_prover.png}) button on the \textsf{Proof Control} view, we obtain the windows as shown in Figure \ref{fig_ref_01_proving_perspective7}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -692,29 +702,29 @@ By typing a string in the \textsf{Proof Control} view and pressing the \textsf{S
 \end{center}
 \end{figure}
 
-This view also integrates a ``quick search" area (A), that allows us to search quickly hypotheses involving short character strings such as ``cr", a search hypothesis button (B) that behaves the same as the button of the proving window, a refresh button (C) that updates the window manually for more control, and a drop down menu (D) to set the preferences of the view up.
+This view also integrates a ``quick search'' area (A), that allows us to search for hypotheses containing short character strings such as ``cr", a search hypothesis button (B) that behaves the same as the button in the Proof Control view, a refresh button (C) that updates the window manually, and a drop down menu (D) to set up the preferences for the view.
 
-By pressing return key or the button (B) (once a short string has been entered into the input area (A)), hypotheses can be searched quickly as if we used the Proof Control as described before.
+By pressing return key or the button (B) (once a short string has been entered into the input area (A)), specific hypotheses can be found just as quickly as if we had used the Proof Control as described previously.
 
 The drop down menu (D) allows some preferences about the searched hypotheses to be set.
 
-If we change preferences for the search, we might need to manually ``update'' the view with the button (C). By selecting the ``Consider hidden hypotheses in search" option, we can review all hypotheses that have been unselected in the \textsf{Selected Hypotheses} window.
+After we have changed preferences for the search, we might need to manually ``update'' the view with the button (C). By selecting the ``Consider hidden hypotheses in search" option, we can view all the hypotheses are not selected in the \textsf{Selected Hypotheses} window.
 
-To move hypotheses to the \textsf{Selected Hypotheses} window, select the wanted hypothesis (using the check boxes) and press the \icon{rodin/add.png} button. Adding these hypotheses to the selected hypotheses means that they will be visible to the prover. They can then be used during the next interactive proof phase.
+To move hypotheses to the \textsf{Selected Hypotheses} window, select the desired hypotheses (using the check boxes) and press the \icon{rodin/add.png} button. Adding these hypotheses to the selected hypotheses means that they will be visible to the prover. They can then be used during the next interactive proof phase.
 
 To remove hypotheses from the \textsf{Search Hypotheses} window, use the \icon{rodin/remove.png} button. This button also appears above the selected hypotheses and allows the user to remove any hypothesis from the \textsf{Selected Hypotheses} window.
 
 The other button, situated to the left each hypotheses, is the \icon{rodin/falsify_prover.png} button. Clicking on this will attempt a proof by contradiction. The effect is the same as if the hypothesis were in the \textsf{Selected Hypotheses} window. 
 
-\subsubsection{The Cache Hypotheses Window}
+\subsubsection{The Cache Hypotheses View}
 
-This window allows the user to keep track of recently manipulated (i.e., used, removed, or selected) hypotheses for any PO. For example, when the user applies a rewrite to a hypothesis, a new hypothesis (after the rewriting) is selected, and the original hypothesis is deselected and put in the \textsf{Cache Hypotheses} window.
+This window allows the user to keep track of recently manipulated (i.e. used, removed, or selected) hypotheses for any PO. For example, when the user rewrites a hypothesis, the new hypothesis is selected, and the original hypothesis is deselected and put in the \textsf{Cache Hypotheses} window.
 
-Similar operations (to that of the \textsf{Selected Hypotheses} and \textsf{Search Hypotheses} windows) such as removing, selecting and proof by contradiction (ct) are also available for the cached hypotheses. Interactive proof steps (e.g., rewriting) can also be carried out from the \textsf{Cache Hypotheses} window.
+Operations similar to those in the \textsf{Selected Hypotheses} and \textsf{Search Hypotheses} views are also available for the cached hypotheses. It is possible to remove, select, and start a proof by contradiction (\icon{rodin/falsify_prover.png}) in the \textsf{Cache Hypotheses} view as well. Interactive proof steps (e.g., rewriting) can also be carried out in the \textsf{Cache Hypotheses} view.
 
 \subsubsection{Proof Information View}
 
-This view displays information so that the user can relate a proof obligation to the model. For example, typical information for an event invariant preservation includes the event as well as the invariant in question. For instance in Figure \ref{fig_ref_01_proving_perspective8}, the hyperlinks \textsf{CreateToken} and \textsf{inv2} can be used to navigate to the containing machine. 
+This view displays information so that the user can relate a proof obligation to the model. For example, typical information for an event invariant preservation includes the event as well as the invariant in question. For instance, in Figure \ref{fig_ref_01_proving_perspective8}, the hyperlinks \textsf{CreateToken} and \textsf{inv2} can be used to navigate to the containing machine. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -727,7 +737,7 @@ This view displays information so that the user can relate a proof obligation to
 \subsubsection{Rule Details View}
 
 This view displays the information relating to a given proof tree node onto which a rule was applied.
-A command is available when right-clicking on a proof tree node in order to reveal the \textsf{Rule Details} view (See Figure \ref{fig_ref_01_proving_perspective9}).
+This information can be viewed by right clicking on any node in the proof tree and selecting \textsf{Show Details...} (see Figure \ref{fig_ref_01_proving_perspective9}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -737,7 +747,7 @@ A command is available when right-clicking on a proof tree node in order to reve
 \end{center}
 \end{figure}
 
-By default, this view is a fast view. If the window does not appear, seek the button (identified by the view's icon) at the bottom left of the workbench to make this view visible.
+By default, this view appears in the Fast View bar. If the window does not appear, click on the \icon{rodin/info_prover_rule.png} button in the Fast View bar to make this view visible. The Fast View bar is in the lower left corner of the Rodin workspace by default.
 
 Figure \ref{fig_ref_01_proving_perspective10} gives an overview of the \textsf{Rule Details View}.
 
@@ -749,7 +759,7 @@ Figure \ref{fig_ref_01_proving_perspective10} gives an overview of the \textsf{R
 \end{center}
 \end{figure}
 
-A quick summary of the applied rule contents is provided. In this figure, we display the contents of the rule named \textsf{$\forall$ hyp mp}, where an input has been used to instantiate an hypothesis. One can quickly see the input that was used to instantiate the rule (the line below \textsf{Rule: $\forall$ hyp mp instantiated with:}), and the hypothesis that was considered by this rule (the line below \textsf{Input Sequent:}). Furthermore, it is possible to view the antecedents created by this rule in details (i.e. child proof tree nodes) and the actions performed on the hypotheses (selection, deselection, etc.). 
+We will now quickly cover all of the information that is displayed in this view. In this figure, the contents of the rule \textsf{$\forall$ hyp mp} are displayed. Here an input has been used to instantiate an hypothesis. The input that was used to instantiate the rule is shown on the line below \textsf{Rule: $\forall$ hyp mp instantiated with:}, and the hypothesis that was used by this rule is shown on the line below \textsf{Input Sequent:}. Furthermore, it is possible to view the antecedents (i.e. child proof tree nodes) created by this rule in detail and the actions (selection, deselection, etc.) that have been performed on the hypotheses. 
 
 \subsubsection{Auto-tactic and Post-tactic}
 \index{auto-tactic}
@@ -769,7 +779,7 @@ The auto-tactic automatically applies a combination (i.e. ordered list) of rewri
 
 The post-tactic is also a combination of rewrite tactics, inference tactics and external provers and is applied automatically after each interactive proof step. However, it can also be invoked manually by clicking on the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control} view.
 
-Note that the post-tactic can be disabled quickly by clicking on the little arrow (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then on \textsf{Disable post-tactic} option (B) as shown in figure \ref{fig_ref_01_proving_perspective12}.
+Note that the post-tactic can be disabled quickly by clicking on the \textsf{rodin/expanded.png} button (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then on by deselecting the box next to the \textsf{Enable post-tactic} option (B) as shown in Figure \ref{fig_ref_01_proving_perspective12}. \marginpar{This screenshot needs to be updated for Rodin 2.4}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -781,13 +791,13 @@ Note that the post-tactic can be disabled quickly by clicking on the little arro
 
 \paragraph{Principles}
 
-The ordered list of rewrite tactics, inference tactics and external provers that should be applied is called a profile. There are two default profiles. One is for auto-tactics and one is for post-tactics. These default profiles are immutable in time but can be duplicated for further modification by the user. The user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are shipped with projects if defined at the project level or can be imported or exported if defined at a workspace level. This makes it easy to share the profiles. 
+The ordered list of rewrite tactics, inference tactics and external provers that should be applied is called a profile. There are two default profiles. One is for auto-tactics and one is for post-tactics. These default profiles are cannot be edited, but they can be duplicated for further modification by the user. The user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are saved within projects if they are defined at the project level, and they can be imported or exported if they are defined at a workspace level. This makes it easy to share the profiles. 
 
 There are two ways to run the automatic or post tactics:
 
 \begin{itemize}
 	\item Manually by clicking on the \icon{rodin/auto_prover.png} button or the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control view} to launch the auto-tactic (with the selected auto-tactic profile) and the post-tactic (with the selected post-tactic profile) respectively.
-	\item Automatically if such preference is activated. (Auto-tactic will then run after each proof step and post-tactic will run after each step and rebuild). Post-tactics and auto-tactics only need to be activated in order to run automatically (see previous sections on how to activate auto- and post-tactic). 
+	\item Automatically if such preference is activated. (Auto-tactic will then run after each proof step and post-tactic will run after each step and rebuild). Post-tactics and auto-tactics only need to be activated in order to run automatically (see previous sections on how to activate auto- and post-tactics). 
 \end{itemize}
 
 The user can separately define tactic profiles and assign them to post and auto tactics. Therefore, there are two tabs in the \textsf{Auto/Post Tactic} preference page for each of these choices. These tabs will be described in Section \ref{ref_01_preferences_auto_post_tactic}. 
@@ -796,7 +806,7 @@ The user can separately define tactic profiles and assign them to post and auto 
 \label{preferences}
 \index{preferences}
 
-Rodin provides several options to set preferences the Event-B editor. You can access the preferences via \textsf{Window $\rangle$ Preferences $\rangle$ Event-B} in the menu bar. The following subsections describe the different preference option.
+Rodin provides several options to set the preferences of the Event-B editor. You can access the preferences via \textsf{Window $\rangle$ Preferences $\rangle$ Event-B} in the menu bar. The following subsections describe the different preference options.
 
 \subsubsection{Appearance}
 
@@ -804,7 +814,7 @@ This section provides settings for the Event-B editor appearance.
 
 \paragraph{Colours and Fonts}
 
-The colour and fonts preference page allows you to set the text and comment colour of the Event-B editor. Furthermore, it allows to toggle on or off the borders of the different fields in the Event-B editor. Figure \ref{fig_ref_01_preferences13} shows the Colours and Fonts preference page.
+The colour and fonts preference page allows you to set the text and comment colour of the Event-B editor. Furthermore, it allows you to turn  the borders of the different fields in the Event-B editor on or off. Figure \ref{fig_ref_01_preferences13} shows the Colours and Fonts preference page.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -814,14 +824,14 @@ The colour and fonts preference page allows you to set the text and comment colo
 \end{center}
 \end{figure}
 
-\subsubsection{Context and Machine Editor}
+\subsubsection{Modelling UI}
 
-The context and machine editor preference pages allows you to customize the visible tabs of the context and machine editor.
+The modelling UI preference pages allows you to customize the visible tabs of the context and machine editor for the Event-B Structural Editor.
 
 \subsubsection{Prefix Settings}
 \index{preferences!prefix}
 
-This page describes the mechanism used to set element prefixes and perform renaming using dedicated actions for both machines and contexts. Note that prefixes are used for automatic renaming when elements should be alphanumerically ordered as well as when new elements are created. 
+This page describes the default values that are used for the prefixes of the different elements of contexts and machines. Note that prefixes are used for automatic renaming when elements should be alphanumerically ordered in addition to when new elements are created. 
 
 %\paragraph{Principles}
 
@@ -854,13 +864,13 @@ Figure \ref{fig_ref_01_preferences1} shows that modifying prefixes on the worksp
 
 \paragraph{How to set prefixes}
 
-Prefix settings can be accessed through in two different ways depending on the scope of their application: \textsf{Window $\rangle$ Preferences $\rangle$ Event-B $\rangle$ Modelling UI $\rangle$ Prefix settings} or directly via, \textsf{Rename $\rangle$ Customize prefixes...}.
+Prefix settings can be accessed in two different ways depending on the scope of their application: via \textsf{Window $\rangle$ Preferences $\rangle$ Event-B $\rangle$ Modelling UI $\rangle$ Prefix settings} or via \textsf{Rename $\rangle$ Customize prefixes...}.
 
 \paragraph{Project specific settings}
 
-The user can select profiles locally for a project. To do so, you can select the \textsf{Prefix Settings} property page available via right-click on a project and select the \textsf{Properties} item. You can also click on the \textsf{Configure project specific settings} link on the \textsf{Prefix Settings} preference page. In this case, one will have to choose the project for which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. 
+The user can select profiles locally for a project. To do so, select the \textsf{Prefix Settings} that is available in the menu that pops up after right-clicking on a project, and select the \textsf{Properties} item. You can also click on the \textsf{Configure project specific settings} link on the \textsf{Prefix Settings} preference page. In this case, one will have to choose the project for which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. \marginpar{Is this current for Rodin 2.4?}
 
-A window (see Figure \ref{fig_ref_01_preferences2}) appears, where a page handling prefixes settings allows a user to customize prefixes for a chosen project. On this page, the user can toggle the button \textsf{Enable project specific settings}.
+A window (see Figure \ref{fig_ref_01_preferences2}) appears that allows a user to customize prefixes for a chosen project. On this page, the user can toggle the button \textsf{Enable project specific settings}:
 
 \begin{figure}[!ht]
 \begin{center}
@@ -887,7 +897,7 @@ A window (see Figure \ref{fig_ref_01_preferences2}) appears, where a page handli
 
 This section describes the \textsf{Auto/Post Tactic} tab of the \textsf{Auto/Post Tactic} preference page.
 
-There are two scopes to set up preferences for the auto and post tactics: the workspace level and the project level. Note that if the automatic application of tactics is decided only at the workspace level, this option will also be set for the project level.
+There are two scopes to set up preferences for the auto and post tactics: the workspace level and the project level. Note that if the automatic application of tactics is declared only at the workspace level, this option will also be set for the project level.
 
 To access these preferences, open the ``Auto/Post Tactic" preference page that can be found after \textsf{Window $\rangle$ Preference $\rangle$ Sequent Prover}.
 
@@ -901,7 +911,7 @@ Figure \ref{fig_ref_01_preferences7} shows the \textsf{Auto/Post Tactic} prefere
 \end{center}
 \end{figure}
 
-The buttons 1 and 2 are activating/deactivating the automatic use of auto- and post-tactics. Here you can also choose the profile that should be used for auto- and post-tactics. Note that there is always a profile selected, and this profile can be changed regardless of whether the tactics are automatically launched or not because there is always a way to manually launch auto- and post-tactics. On the previously references figure, the \textsf{Default Auto Tactic Profile} is used for the automatic tactic, and the \textsf{Default Post Tactic Profile} is used for the post-tactic.
+The options shown by (1) and (2) allow you to activate/deactivate the automatic use of auto- and post-tactics. Here you can also choose the profile that should be used for auto- and post-tactics. Note that there is always a profile selected, and this profile can be changed regardless of whether the tactics are automatically launched or not because there is always a way to manually launch auto- and post-tactics. On the previously referenced figure, the \textsf{Default Auto Tactic Profile} is used for the automatic tactic, and the \textsf{Default Post Tactic Profile} is used for the post-tactic.
 
 %Figure \ref{fig_ref_01_preferences8} shows the "Auto/Post Tactic" reference page with both auto-tactic and post-tactic to automatically run, and where the user selects the profile "MyFirstTacticProfile" to be used as auto-tactic profile. 
 
@@ -918,7 +928,7 @@ The buttons 1 and 2 are activating/deactivating the automatic use of auto- and p
 
 This section describes the \textsf{Profile} tab of the \textsf{Auto/Post Tactic} preference page. 
 
-Figure \ref{fig_ref_01_preferences9} shows the contents of the profile tab. There are two visible lists: a list of profiles on the left and the tactics or provers that compose these profiles (Profile Details). Here one can see the contents of the default Auto Tactic Profile.
+Figure \ref{fig_ref_01_preferences9} shows the contents of the profile tab. There are two visible lists: a list of profiles on the left and the tactics or provers that make up these profiles (Profile Details). Here one can see the contents of the default Auto Tactic Profile.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -933,14 +943,14 @@ There are 4 buttons available to the user:
 \begin{itemize}
 	\item New: to create a new profile ``from scratch",
 	\item Edit: to edit an existing (editable) profile,
-	\item Remove: to remove a profile definitively,
+	\item Remove: to delete a profile completely,
 	\item Duplicate: to duplicate a selected profile for further slight modification.
 \end{itemize}
 
-Default profiles can not be edited nor removed. That is why they this option appears in gray on the previously referenced figure.
+Default profiles can not be edited nor removed. That is why these options are coloured in gray in the previously referenced figure.
 
 Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or create a profile. For instance, here we create a profile named ``MyFirstTacticProfile".
-
+\marginpar{update screenshot}
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics{img/reference/ref_01_preferences10.png}
@@ -950,10 +960,11 @@ Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or crea
 \end{figure}
 
 The list on the right represents the available and unselected tactics. The list of the left displays the profile contents and shows the selected tactics that will be applied from the top to the bottom. The user can choose a tactic from the list on the left and hit the \textsf{$>>$} button to select it or unselect some tactics from the list of the right using the \textsf{$<<$} button. The user can re-order the priority of the selected tactic using the \textsf{Up} and \textsf{Down} button. By clicking on \textsf{Finish}, the profile will be saved and available for use in the auto and post tactics.
+\marginpar{update for Rodin 2.4}
 
 \paragraph{Project specific settings}
 
-The user can select profiles locally for each project. To do so, select the \textsf{Auto/Post Tactic} property page available via right-click on a project and select the  \textsf{Properties} item, or click the \textsf{Configure project specific settings link} on the \textsf{Auto/Post Tactic} preference page. Figure \ref{fig_ref_01_preferences11} shows what this \textsf{Auto/Post Tactic} tab looks like.
+The user can select profiles locally for each project. To do so, select the \textsf{Auto/Post Tactic} property page in the window that pops up when right-clicking on a project and selecting the \textsf{Properties} item, or selecting the \textsf{Configure project specific settings link} on the \textsf{Auto/Post Tactic} preference page. Figure \ref{fig_ref_01_preferences11} shows what this \textsf{Auto/Post Tactic} tab looks like.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -998,11 +1009,11 @@ Here is the documentation about the current implementation of the Auto-tactic an
 
 Tactic combinators can be used to construct complex proof strategies.
 
-Historically, one combinator has existed since the beginning of auto tactic preferences: the ``loop on all pending". It takes one or more tactics and loops them over every pending child until all tactic fail. Until Rodin 2.3 was released, it was the only combinator in Rodin. It is used on the configurable list of auto and post tactics. Rodin 2.3 is easier to configure because there are several other combinators and auto tactic editors.
+Historically, one combinator has existed since the beginning of auto tactic preferences: the ``loop on all pending". It takes one or more tactics and loops them over every pending child until all tactic fail. Until Rodin 2.3 was released, this was the only combinator in Rodin. It is used on the configurable list of auto and post tactics. Rodin 2.3 is easier to configure because there are several other combinators and auto tactic editors.
 
 The following is a list of combinators present by default.
 
-One may notice the absence of child-specific combinator (i.e. combinators that apply tactic T1 on the first child, T2 on the second child, etc.) even though this kind of combinator exists in other provers. The reason is that we are concerned mainly  auto tactics and these are tactics that are attempted in a general context. Provers with child-specific combinators are used to make manual proof because they require proof-specific adaptation.
+One may notice the absence of child-specific combinator (i.e. combinators that apply tactic T1 on the first child, T2 on the second child, etc.) even though this kind of combinator exists in other provers. The reason is that we are concerned mainly  auto tactics and these are tactics that are attempted in a general context. Provers with child-specific combinators are used to make manual proofs because they require proof-specific adaptation.
 
 \subparagraph{Composers}
 

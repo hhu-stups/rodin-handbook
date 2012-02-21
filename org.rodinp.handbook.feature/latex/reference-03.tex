@@ -259,7 +259,7 @@ The following reference subsections will have the form the form: \\[2em]
     A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
     $\predp_1$ is used to specify the types of the identifiers.
 
-    The existantial quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if there is a valuation of
+    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if there is a valuation of
     $x_1\ldots,x_n$ such that $\predp$ is satisfied.
 
     The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
@@ -430,7 +430,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\exprs\subseteq \exprt$ checks if $\exprs$ is a subset of $\exprt$, i.e. if all elements of $\exprs$ occurr in $\exprt$.
+    $\exprs\subseteq \exprt$ checks if $\exprs$ is a subset of $\exprt$, i.e. if all elements of $\exprs$ occur in $\exprt$.
     $\exprs\subset \exprt$ checks if $\exprs$ is a subset of $\exprt$ and $\exprs$ does not equal $\exprt$.
     $\exprs\not\subseteq \exprt$ resp. $\exprs\not\subset \exprt$ are the respective negated variants.
   \rrdef
@@ -463,7 +463,7 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     The union $\exprs\bunion \exprt$ denotes the set that contains all elements that are in $\exprs$ or $\exprt$.
-    The intersection $\exprs\binter \exprt$ denotes the set that contains all elment that are in both $\exprs$ and $\exprt$.
+    The intersection $\exprs\binter \exprt$ denotes the set that contains all elements that are in both $\exprs$ and $\exprt$.
     The set subtraction or set difference $\exprs\setminus \exprt$ denotes all elements that are in $\exprs$ but not in $\exprt$.
   \rrdef
     $\exprs\bunion \exprt = \{~x~|~x\in \exprs\lor x\in \exprt~\}$\\
@@ -658,7 +658,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrdesc
     $\exprs\rel \exprt$ is the set of relations between the two sets $\exprs$ and $\exprt$.
     A relation consists of pairs where the first element is of $\exprs$ and the
-    second of $\exprt$. $\exprs\rel \exprt$ is just an abreviation for $\pow(\exprs\rel \exprt)$.
+    second of $\exprt$. $\exprs\rel \exprt$ is just an abbreviation for $\pow(\exprs\rel \exprt)$.
 
     A total relation is a relation which relates each element of $\exprs$ to at least one element of $\exprt$.
 
@@ -854,7 +854,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\prjone$ is a function that maps a pair to its first element. Likewise $\prjtwo$ maps
     a pair to its second element.
 
-    $\id$, $\prjone$ and $\prjtwo$ are generic definitions. Their type must be infered
+    $\id$, $\prjone$ and $\prjtwo$ are generic definitions. Their type must be inferred
     from the environment.
   \rrdef
     $\id = \{~x\mapsto x~|~\btrue~\}$\\
@@ -1035,7 +1035,7 @@ The following reference subsections will have the form the form: \\[2em]
   $\cdot$  & \texttt{*}   & Multiplication \\
   $\div$   & \texttt{/}   & Integer division \\
   $\bmod$  & \texttt{mod} & Modulo \\
-  $\expn$  & \texttt{\textasciicircum} & Exponentation \\
+  $\expn$  & \texttt{\textasciicircum} & Exponentiation \\
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
@@ -1125,7 +1125,7 @@ The following reference subsections will have the form the form: \\[2em]
 
     The following lambda expression uses the $\boftype$ operator:\\
     $(\lambda x\boftype \intg\mapsto y\boftype\Bool ~|~ x>0 ~\qdot~ x+1)$\\
-    An arguably more readably version without the use of $\boftype$ is:\\
+    An arguably more readable version without the use of $\boftype$ is:\\
     $(\lambda x\mapsto y ~|~ x>0 \land y\in\Bool ~\qdot~ x+1)$
 \end{rodinrefentry}
 \end{samepage}

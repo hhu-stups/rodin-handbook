@@ -200,7 +200,7 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 	\end{itemize}
 	\item[Some Weaknesses:] ~
 	\begin{itemize}
-		\item New PP is unsound. There have been several bug reports. Most notably, see [1]. \marginpar{TODO: What is the [1] here refering to?}
+		\item New PP is unsound. There have been several bug reports.
 		\item New PP does not support arithmetic; hence, $\vdash_{\mathcal L} 1=1$ is discharged, but $\vdash_{\mathcal L} 1+1=2$ is not. Note that arithmetic 	reasoning (when the formula is not ground) is a long standing challenge.
 		\item New PP is unaware of set theoretical axioms. In particular, $\vdash_{\mathcal L} \exists A\cdot \forall x\cdot x \in A \leqv x \in B \lor x \in C$ is not recognized because the union axiom is not available within New PP. Roughly spoken, New PP can only reuse sets that already appear in the formula, but it is unable to introduce new sets. Note that set theoretical reasoning is perceived as a hard problem.
 		\item If unnecessary hypotheses are present, they may prevent New PP from finding a proof even when the proof obligation obviously holds. We therefore advise you to unselect unnecessary hypotheses.
@@ -218,9 +218,8 @@ It is very hard, in general, to predict whether a certain automatic prover can o
 The following guidelines may be useful:
 
 \begin{itemize}
-	\item Add New PP restricted (PP restricted), P0 (Atelier B P0), and ML (Atelier B ML) to the auto-tactic. If the auto-tactic runs out of memory, remove New PP.
-      \marginpar{TODO: It is recommended above not to use New PP.}
-	\item If the model is small, add New PP after lasso (PP after lasso) and P1 (Atelier B P1) to the auto-tactic.
+	\item Add PP restricted, P0, and ML to the auto-tactic. If the auto-tactic runs out of memory, remove PP.
+	\item If the model is small, add PP after lasso and P1 to the auto-tactic.
 	\item Whenever you think that the current proof obligation should be discharged automatically, invoke the auto-tactic (\icon{rodin/auto_prover.png}) instead of some particular automatic prover.
 	\item If the auto-tactic fails, it is usually best to simplify the proof obligation in some way. The most important ways of simplifying the proof obligation are:
 	\begin{itemize}
@@ -231,8 +230,8 @@ The following guidelines may be useful:
 	\end{itemize}
 	\item You can also apply one of the automatic provers. They may be more successful than the auto-tactic because they have a longer timeout.
 	\begin{itemize}
-		\item Try New PP before PP or ML because New PP proofs can be better reused, if the model changes.
-		\item The configurations that act on more than the selected hypotheses (New PP after lasso and unrestricted P1, PP and ML) become useless when the model grows. 
+		% \item Try New PP before PP or ML because New PP proofs can be better reused, if the model changes.
+		\item The configurations that act on more than the selected hypotheses (unrestricted P1, PP and ML) become useless when the model grows. 
 	\end{itemize}
 	\item When everything fails, try to unfold the proof obligation manually, by clicking on the red links.
 	\begin{itemize}

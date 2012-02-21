@@ -171,6 +171,7 @@ The following reference subsections will have the form the form: \\[2em]
 \subsection{Predicates}
 \label{predicates}
 
+\begin{samepage}
 \subsubsection{Logical primitives}
 \index{true!as predicate@as predicate ($\btrue$)}\index{false!as predicate@as predicate ($\bfalse$)}
 \index{$\btrue$ (true)}
@@ -187,7 +188,9 @@ The following reference subsections will have the form the form: \\[2em]
   $\wdl(\btrue) \defi \btrue$ \\
   $\wdl(\bfalse) \defi \btrue$ \\
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Logical operators}
 \index{conjunction@conjunction ($\land$)}\index{disjunction@disjunction ($\lor$)}\index{implication@implication ($\limp$)}\index{equivalence@equivalence ($\leqv$)}\index{negation@negation ($\lnot$)}
 \index{$\land$ (conjunction)}\index{$\lor$ (disjunction)}\index{$\limp$ (implication)}\index{$\leqv$ (equivalence)}\index{$\lnot$ (negation)}
@@ -236,7 +239,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\predp\leqv \predq) \defi \wdl(\predp) \land \wdl(\predq)$ \\
     $\wdl(\lnot(\predp)) \defi \wdl(\predp)$ \\
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Quantified predicates}
 \label{quantified_predicates}
 \index{for all@for all ($\forall$)}
@@ -265,7 +270,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$\\
     $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Equality}
 \label{equality}
 \index{equality@equality ($=$)}
@@ -284,7 +291,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\expre = \exprf) \defi \wdl(\expre) \land \wdl(\exprf)$ \\
     $\wdl(\expre \neq \exprf) \defi \wdl(\expre) \land \wdl(\exprf)$ \\
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Membership}
 \label{membership}
 \index{membership@membership ($\in$)}
@@ -304,7 +313,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\expre\in\exprs) \defi \wdl(\expre) \land \wdl(\exprs)$ \\
     $\wdl(\expre\not\in\exprs) \defi \wdl(\expre) \land \wdl(\exprs)$ \\
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsection{Booleans}
 \label{booleans}
 \index{boolean}
@@ -338,11 +349,13 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\False) \defi \btrue$\\
     $\wdl(\bool(\predp)) \defi \wdl(\predp)$
 \end{rodinrefentry}
+\end{samepage}
 
 
 \subsection{Sets}
 \label{sets}
 
+\begin{samepage}
 \subsubsection{Set comprehensions}
 \label{set_comprehensions}
 \index{set!comprehension set}
@@ -377,7 +390,9 @@ The following reference subsections will have the form the form: \\[2em]
     $= \{~x~|~ \exists y \qdot y\in 1\upto 10 \land x=y\expn 2~\}$\\
     $= \{~x\expn 2~|~x\in 1\upto 10~\}$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Basic sets}
 \index{set!empty set@empty set ($\emptyset$)}
 \index{set!set extension}
@@ -401,7 +416,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\emptyset) \defi \btrue$\\
     $\wdl(\{\expre_1,\ldots,\expre_n\}) \defi \wdl(\expre_1) \land\ldots\land \wdl(\expre_n)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Subsets}
 \label{subsets}
 \index{subset@subset ($\subseteq,\subset$)}
@@ -429,7 +446,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
     for each operator $\opelipse$ of  $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Operations on sets}
 \index{union!union@union ($\bunion$)}
 \index{intersection@intersection ($\binter$)}
@@ -457,7 +476,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
     for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Power sets}
 \index{set!power set@power set ($\pow$)}
 \begin{rrnames}
@@ -478,7 +499,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\pow(\exprs)) \defi \wdl(\exprs)$\\
     $\wdl(\pow_1(\exprs)) \defi \wdl(\exprs)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Finite sets}
 \index{set!finite}
 \index{set!cardinality@cardinality ($\card$)}
@@ -503,7 +526,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\bfinite(\exprs)) \defi \wdl(\exprs)$\\
     $\wdl(\card(\exprs)) \defi \wdl(\exprs) \land \bfinite(\exprs)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Partition}
 \label{partition}
 \index{partition}
@@ -525,7 +550,9 @@ The following reference subsections will have the form the form: \\[2em]
   \rrwd
     $\wdl(\bpartition(\exprs,s_1,\ldots,s_n)) \defi \wdl(\exprs) \land \wdl(s_1) \land \ldots \land \wdl(s_n)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Generalized union and intersection}
 \index{union!generalized union}
 \index{intersection!generalized intersection@generalized intersection ($\bunaryinter$)}
@@ -547,8 +574,10 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\bunaryunion(\exprs)) \defi \wdl(\exprs)$ \\
     $\wdl(\bunaryinter(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset$
 \end{rodinrefentry}
+\end{samepage}
 
 
+\begin{samepage}
 \subsubsection{Quantified union and intersection}
 \index{union!quantified union@quantified union ($\Union$)}
 \index{intersection!quantified intersection@quantified intersection ($\Inter$)}
@@ -584,10 +613,12 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\Union \expre~|~\predp) \defi (~\forall\freeids{\expre} \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~)$\\
     $\wdl(\Inter \expre~|~\predp) \defi (~\forall\freeids{\expre} \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~) \land \exists\freeids{\expre} \qdot \wdl(\predp)$
 \end{rodinrefentry}
+\end{samepage}
 
 \subsection{Relations}
 \label{relations}
 
+\begin{samepage}
 \subsubsection{Pairs and Cartesian product}
 \label{pairs_and_cartesian_product}
 \index{pair}
@@ -612,7 +643,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\expre\mapsto\exprf)\defi\wdl(\expre)\land\wdl(\exprf)$\\
     $\wdl(\exprs\cprod \exprt)\defi\wdl(\exprs)\land\wdl(\exprt)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Relations}
 \index{relation@relation ($\rel$,$\trel$,$\srel$,$\strel$)}
 \begin{rrnames}
@@ -644,7 +677,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$.
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Domain and Range}
 \label{domain_and_range}
 \index{domain@domain ($\dom$)}
@@ -670,7 +705,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\dom(\exprlr)) \defi \wdl(\exprlr)$\\
     $\wdl(\ran(\exprlr)) \defi \wdl(\exprlr)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Domain and Range Restrictions}
 \label{domain_and_range_restrictions}
 \index{domain restriction@domain restriction ($\domres$)}
@@ -706,7 +743,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\exprs\opelipse\exprlr)\defi\wdl(\exprs)\land\wdl(\exprlr)$ for each operator $\opelipse$ of
     $\domres$, $\domsub$, $\ranres$, $\ransub$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Operations on relations}
 \label{operations_on_relations}
 \index{composition!forward composition of relations ($\fcomp$)}
@@ -774,7 +813,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\fcomp$, $\bcomp$, $\ovl$, $\pprod$, $\dprod$\\
     $\wdl(\exprlr^{-1})\defi\wdl(\exprlr)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Relational image}
 \label{relational_image}
 \index{relational image}
@@ -793,7 +834,9 @@ The following reference subsections will have the form the form: \\[2em]
   \rrwd
     $\wdl(\exprlr[\exprs])\defi\wdl(\exprlr)\land\wdl(\exprs)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Constant relations}
 \label{constant_relations}
 \index{identity relation@identity relation ($\id$)}
@@ -829,7 +872,9 @@ The following reference subsections will have the form the form: \\[2em]
     The assumption that a relation $r$ is irreflexive can be expressed by:\\
     $r\binter \id=\emptyset$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Sets of functions}
 \index{function@function ($\pfun$, $\tfun$)}
 \index{injection@injection ($\pinj$,$\tinj$)}
@@ -872,8 +917,9 @@ The following reference subsections will have the form the form: \\[2em]
   For each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
   $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
 \end{rodinrefentry}
+\end{samepage}
 
-
+\begin{samepage}
 \subsubsection{Function application}
 \label{function_application}
 \index{function application}
@@ -892,7 +938,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\exprlf(\exprla))\defi\wdl(\exprlf)\land\wdl(\exprla)\land\exprlf\in\alpha\pfun\beta \land \exprla\in\dom(\exprlf)$
     with $\pow(\alpha\cprod\beta)$ being the type of $\exprlf$.
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Lambda}
 \label{lambda}
 \index{lambda@lamba expression ($\lambda$)}
@@ -930,9 +978,10 @@ The following reference subsections will have the form the form: \\[2em]
     The dot product of two 2-dimensional vectors can be defined by:\\
     $dotp = (\lambda~(a \mapsto b)\mapsto(c \mapsto d)~\qdot~a\in\intg\land  b\in\intg\land  c\in\intg\land  d\in\intg~|~a\cdot c+b\cdot d~)$
 \end{rodinrefentry}
+\end{samepage}
 
 
-
+\begin{samepage}
 \subsection{Arithmetic}
 \label{arithmetic}
 
@@ -965,7 +1014,9 @@ The following reference subsections will have the form the form: \\[2em]
   $\wdl(\nat_1) \defi \btrue$\\
   $\wdl(\exprla\upto\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb)$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Arithmetic operations}
 \label{arithmetic_operations}
 \index{addition@addition ($+$)}
@@ -1012,7 +1063,9 @@ The following reference subsections will have the form the form: \\[2em]
   $\wdl(\exprla\bmod\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb) \land \exprla\geq 0 \land \exprlb> 0$ \\
   $\wdl(\exprla\expn\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb) \land \exprla\geq 0 \land \exprlb\geq 0$ 
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Minimum and Maximum}
 \label{minimum_and_maximum}
 \index{minimum@minimum ($\min$)}
@@ -1035,7 +1088,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\min(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset \land \exists b \qdot \forall x\qdot x\in \exprs\limp b\leq x$\\
     $\wdl(\max(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset \land \exists b \qdot \forall x\qdot x\in \exprs\limp b\geq x$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsection{Typing}
 \label{typing}
 \index{oftype operator ($\boftype$)}
@@ -1073,6 +1128,7 @@ The following reference subsections will have the form the form: \\[2em]
     An arguably more readably version without the use of $\boftype$ is:\\
     $(\lambda x\mapsto y ~|~ x>0 \land y\in\Bool ~\qdot~ x+1)$
 \end{rodinrefentry}
+\end{samepage}
 
 
 \subsection{Assignments}
@@ -1089,6 +1145,7 @@ in the expression $\expre$.
 
 \newcommand{\eventbassignmentexpr}[1]{\expre_{#1}(\allconstants,\concvariables,\concparameters)}
 
+\begin{samepage}
 \subsubsection{Deterministic Assignments}
 \label{deterministic_assignments}
 \index{assignment!deterministic ($\bcmeq$)}
@@ -1125,7 +1182,9 @@ in the expression $\expre$.
     \quad\defi\quad 
     \wdl(\eventbassignmentexpr{1}) \land \wdl(\eventbassignmentexpr{2})$
 \end{rodinrefentry}
+\end{samepage}
 
+\begin{samepage}
 \subsubsection{Non-deterministic assignment with before-after-predicate}
 \label{nondeterministic_assignments}
 \index{assignment!non-deterministic}
@@ -1159,8 +1218,9 @@ in the expression $\expre$.
       \quad\defi\quad
       \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
 \end{rodinrefentry}
+\end{samepage}
 
-
+\begin{samepage}
 \subsubsection{Non-deterministic assignment by sets}
 \index{assignment!become element of@become element of ($\bcmin$)}
 \index{become element of@become element of assignment ($\bcmin$)}
@@ -1187,6 +1247,7 @@ in the expression $\expre$.
   \rrfis
     $\actfis(~x \bcmin \eventbassignmentexpr{}~) \defi \eventbassignmentexpr{}\neq\emptyset$
 \end{rodinrefentry}
+\end{samepage}
 
 %%% Local Variables: 
 %%% mode: latex

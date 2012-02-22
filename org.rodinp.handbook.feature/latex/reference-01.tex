@@ -623,7 +623,7 @@ The following buttons are available in the \textsf{Proof Control} view:
     \item \icon{rodin/dc_prover.png} begins a proof by cases. The proof is split into two branches. In the first branch, the predicate supplied by the user is added to the \textsf{Selected Hypotheses}, and the user attempts to discharge this branch. In the second branch, the predicate supplied by the user is negated and added to the \textsf{Selected Hypotheses}. The user then attempts to discharge this branch. 
     \item \icon{rodin/ah_prover.png} adds a new hypothesis. The predicate in the editing area should be proved by the user. It is then added as a new selected hypothesis.
     \item \icon{rodin/ae_prover.png} adds an abstract expression. The expression in the editing area is given a fresh name.
-    \item \icon{rodin/auto_prover.png} invokes the auto-prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a the machine or context is saved. Using this button, you can invoke the auto-prover within an interactive proof.
+    \item \icon{rodin/auto_prover.png} invokes the auto prover which attempts to discharge the goal. The auto-prover is applied automatically on all proof obligations after a the machine or context is saved. Using this button, you can invoke the auto-prover within an interactive proof.
     \item \icon{rodin/broom_prover.png} executes the post-tactics.
     \item \icon{rodin/lasoo_prover.png} loads the hidden hypotheses that contain identifiers in common with the goal and with the selected hypotheses into the Selected Hypotheses window 
     \item \icon{rodin/bk_prover.png} backtracks from the current node (i.e., prunes its parent).
@@ -673,21 +673,21 @@ The \icon{rodin/pp.png} (predicate prover) appears in the drop-down list under t
 \label{auto_prover}
 \index{auto prover}
 
-The auto-prover can be configured by means of a preference page. To access the preference window, select \textsf{Window $\rangle$ Preferences}.  In the window that pops up, expand the \textsf{Event-B} section and then the \textsf{Sequent Prover} section, and select the \textsf{Auto/Post Tactic} option. Select the \textsf{Profiles} tab. After selecting \textsf{Default Auto Tactic Profile} the tactic details are listed for that profile. To create your own Auto Tactic Profile that you can edit, select either \textsf{New...} or hit \textsf{Duplicate} to copy the default profile and make a few changes. Once you have created a new profile, hit the \textsf{Edit...} button and a window will pop up that allows you to edit your profile... 
-\marginpar{This window is actually described in much further detail in the section on preferences. The preferences shown in the current screenshot are no longer available.}
+The auto prover can be run by clicking the \icon{rodin/auto_prover.png}. This prover automatically applies all of the tactics that are predefined in the auto-tactic profile. Section~\ref{ref_01_preferences_auto_post_tactic} describes in detail how to configure the auto prover, and Section~\ref{proof_tactics} gives an overview about what proof tactics are and which are available.
 
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics{img/reference/ref_10_auto_prover_pref.png}
-	\caption{Auto Prover Preferences}
-	\label{fig_ref_10_auto_prover_pref}
-\end{center}
-\end{figure}
+%The auto-prover can be configured by means of a preference page. To access the preference window, select \textsf{Window $\rangle$ Preferences}.  In the window that pops up, expand the \textsf{Event-B} section and then the \textsf{Sequent Prover} section, and select the \textsf{Auto/Post Tactic} option. Select the \textsf{Profiles} tab. After selecting \textsf{Default Auto Tactic Profile} the tactic details are listed for that profile. To create your own Auto Tactic Profile that you can edit, select either \textsf{New...} or hit \textsf{Duplicate} to copy the default profile and make a few changes. Once you have created a new profile, hit the \textsf{Edit...} button and a window will pop up that allows you to edit your profile... 
+
+%\begin{figure}[!ht]
+%\begin{center}
+%	\includegraphics{img/reference/ref_10_auto_prover_pref.png}
+%	\caption{Auto Prover Preferences}
+%	\label{fig_ref_10_auto_prover_pref}
+%\end{center}
+%\end{figure}
 
 
 %On the left part you can see the ordered sequence of individual tactics composing the auto-prover, whereas the right part contains further tactics you can incorporate in the left part. By selecting a tactic you can move it from on part to the other or change the order in the left part.
-Section~\ref{proof_tactics} gives an overview about what proof tactics are and 
-  which are available.
+%Section~\ref{proof_tactics} gives an overview about what proof tactics are and which are available.
 
 \subsubsection{The Search Hypotheses View}
 \index{view!Search Hypotheses}
@@ -779,7 +779,7 @@ The auto-tactic automatically applies a combination (i.e. ordered list) of rewri
 
 The post-tactic is also a combination of rewrite tactics, inference tactics and external provers and is applied automatically after each interactive proof step. However, it can also be invoked manually by clicking on the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control} view.
 
-Note that the post-tactic can be disabled quickly by clicking on the \textsf{rodin/expanded.png} button (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then on by deselecting the box next to the \textsf{Enable post-tactic} option (B) as shown in Figure \ref{fig_ref_01_proving_perspective12}. \marginpar{This screenshot needs to be updated for Rodin 2.4}
+Note that the post-tactic can be disabled quickly by clicking on the \textsf{rodin/expanded.png} button (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then on by deselecting the box next to the \textsf{Enable post-tactic} option (B) as shown in Figure \ref{fig_ref_01_proving_perspective12}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -788,6 +788,7 @@ Note that the post-tactic can be disabled quickly by clicking on the \textsf{rod
 	\label{fig_ref_01_proving_perspective12}
 \end{center}
 \end{figure}
+\marginpar{This screenshot needs to be updated for Rodin 2.4. The menu item is \textsf{Enable Post-tactic} with a box to toggle it on and off}
 
 \paragraph{Principles}
 
@@ -868,7 +869,7 @@ Prefix settings can be accessed in two different ways depending on the scope of 
 
 \paragraph{Project specific settings}
 
-The user can select profiles locally for a project. To do so, select the \textsf{Prefix Settings} that is available in the menu that pops up after right-clicking on a project, and select the \textsf{Properties} item. You can also click on the \textsf{Configure project specific settings} link on the \textsf{Prefix Settings} preference page. In this case, one will have to choose the project for which the prefixes should be set up. This is allowed via a specific project selection dialog. After the project selection, a dialog for prefix settings opens for the selected project. \marginpar{Is this current for Rodin 2.4?}
+The user can select profiles locally for a project. To do so, select the \textsf{Properties} item in the menu that pops up after right-clicking on a project in the \textsf{Event-B Explorer}. Then open the \textsf{Prefix Settings} tab and check the box to enable project specific settings. You can also click access this page by selecting \textsf{Window $\rangle$ Preferences} and then viewing the \textsf{Event-B $\rangle$ Modelling UI $\rangle$ Prefix Settings} page. Now select the \textsf{Configure project specific settings} link and select the desired project. 
 
 A window (see Figure \ref{fig_ref_01_preferences2}) appears that allows a user to customize prefixes for a chosen project. On this page, the user can toggle the button \textsf{Enable project specific settings}:
 
@@ -959,8 +960,8 @@ Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or crea
 \end{center}
 \end{figure}
 
+\marginpar{The description of the process to update the tactic profiles needs to be updated after the screenshot is updated}
 The list on the right represents the available and unselected tactics. The list of the left displays the profile contents and shows the selected tactics that will be applied from the top to the bottom. The user can choose a tactic from the list on the left and hit the \textsf{$>>$} button to select it or unselect some tactics from the list of the right using the \textsf{$<<$} button. The user can re-order the priority of the selected tactic using the \textsf{Up} and \textsf{Down} button. By clicking on \textsf{Finish}, the profile will be saved and available for use in the auto and post tactics.
-\marginpar{update for Rodin 2.4}
 
 \paragraph{Project specific settings}
 

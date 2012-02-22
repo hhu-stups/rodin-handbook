@@ -27,27 +27,27 @@
 In Event-B, we have two types of components: contexts and machines.
 Here we describe briefly the different elements of a context or machine.
 We do not use a specific syntax for describing the components because the syntax is dependent on the editor that is
-used. The default editor requires a structure which contains the elements that are described here.
+used. 
 
-Proof obligations are generated to guarantee certain properties of the modeled system.
-We will explain here which proof obligations are generated and we will list the goal and hypotheses that can be used
+Proof obligations are generated to guarantee that certain properties of the modelled system are valid.
+We will explain here which proof obligations are generated, and we will list the goal and hypotheses that can be used
 when performing the proof for each one.
-This is done in the form:
+This will be presented in the form:
 \pode{Description}{Label of the proof obligation (\eventbpo{label} refers to the label of the respective 
   axiom/invariant/guard/etc.)}{Goal that should be proved}
 \info{Please note that Rodin often does not show a proof obligation if it
   is obviously true.
-  If you expect a proof obligation that Rodin does not show, you can enforce
-  that the proof obligation is showed by changing the model temporarily 
-  in a way that the proof cannot be proven.
-  E.g. you can introduce a division by zero to see the corresponding
+  If you expect to see a proof obligation that Rodin does not show, you can force
+  that the proof obligation to be shown by changing the model temporarily 
+  so that the proof obligation cannot be automatically discharged.
+  For example, you could introduce a division by zero to see the corresponding
   well-definedness condition.}
 
-We first describe context and machines and how their consistency is proven.
-There are several locations where proof obligations due to well-definedness conditions
+We will begin by describing contexts and machines and how to prove their consistency.
+There are several locations where proof obligations for well-definedness conditions
  or predicates marked as theorems are raised.
-We summarized the proof obligations in separate sections (\ref{well_definedness_proof_obligations}
-resp. \ref{theorems}).
+We summarized the proof obligations in separate sections. Well-definedness proof obligations are discussed in Section \ref{well_definedness_proof_obligations}
+and proof obligations for theorems are discussed in Section \ref{theorems}.
 
 
 \subsection{About the notation that we use}
@@ -57,11 +57,11 @@ We denote a sequence of identifiers with $\varlist{x} = x_1,\ldots,x_n$ and $\va
 As a convention, we use
 \begin{itemize}
 \item $\allconstants$ for constants
-\item $\absvariables$ and $\concvariables$ for variables of an abstract resp. concrete machine
-\item $\absparameters$ and $\concparameters$ for parameters of an abstract resp. concrete machine
+\item $\absvariables$ and $\concvariables$ for variables of an abstract or a concrete machine respectively
+\item $\absparameters$ and $\concparameters$ for parameters of an abstract or concrete machine respectively
 \item $A$ for axioms
-\item $I$ and $J$ for the invariants of the abstract machines resp. concrete machine
-\item $G$ and $H$ for the guards of the abstract events resp. concrete event
+\item $I$ and $J$ for the invariants of the abstract machines or concrete machine respectively
+\item $G$ and $H$ for the guards of the abstract events or concrete event respectively
 \end{itemize}
 
 \subsection{Contexts}
@@ -80,7 +80,7 @@ A context describes the static part of a model. It consists of
 \label{carrier_sets}
 \index{carrier set}
 A new data type can be declared by adding its name -- an identifier -- to the \eventbsection{Sets} section.
-The identifier must be unique, i.e. it must not have been already declared as a constant or set in an extended context.
+The identifier must be unique, i.e. it must not have been already declared as a constant or set in the current context or an extended context.
 The identifier is then implicitly introduced as a new constant (see below) that represents the set of all elements of the type. 
 
 A common pattern for declaring enumerated sets (sets where all elements are explicitly given)
@@ -105,15 +105,13 @@ Constants can be declared by adding their unique name (an identifier) to the \ev
 An axiom must also be in place from which the type of the constant can be inferred.
 We denote the sequence of all constants with $\varlist{c}$.
 
-An axiom is a statement that is assumed as true in the rest of the model.
+An axiom is a statement that is assumed to be true in the rest of the model.
 Each axiom consists of a label and a predicate $A(\varlist{c})$.
 
-Axioms can be marked as theorems,
-  the generated proof obligation can be found in \ref{axioms_as_theorems}.
-The validity of a theorem results from the axioms declared before.
+Axioms can be marked as theorems. The proof obligation that are then generated are described in Section \ref{axioms_as_theorems}.
+The validity of a theorem can be proven from the axioms that have already been declared.
 
-The well-definedness of axioms must be proven if an axiom contains a well-definedness condition
-  (see \ref{well_definedness_of_axioms} for the proof obligation).
+The well-definedness of axioms must be proven if an axiom contains a well-definedness condition (\ref{well_definedness_of_axioms}).
 
 \subsection{Machines}
 \label{machine}
@@ -140,7 +138,7 @@ and so on. The most concrete refinement would be $M_n$.
 Basically, a refinement consists of two aspects:
 \begin{enumerate}
 	\item The concrete machine's state is connected to the state of the
-      abstract machine. To do this, an invariant is used to relate abstract and concrete variable. 
+      abstract machine. To do this, an invariant is used to relate abstract and concrete variables. 
       \index{gluing invariant}
       This invariant is called a \emph{gluing invariant}. 
 	\item Each abstract event can be refined by one or more
@@ -170,19 +168,19 @@ The type of the variables must be inferable by the invariants of the machine.
 We denote the variables of the abstract machines $M_1,\ldots,M_{n-1}$ with a $\absvariables$ and the variables of the concrete machine with a $\concvariables$.
 
 \index{invariant}
-An invariant is a statement that must hold at each state of the machine.
+An invariant is a statement that must be valid at each state of the machine.
 Each invariant $i$ consists of a label and a predicate $I_i(\allconstants,\absvariables,\concvariables)$.
 An invariant can refer to the constants as well as the variables of the concrete and all abstract machines.
 
 We write $\absinvariants$ to denote the conjunction of all invariants
-of the abstract machines and $\concinvariants$ for the conjunction of the machine's invariant.
+of the abstract machines and $\concinvariants$ for the conjunction of the concrete machine's invariant.
 
 Invariants that are marked as theorems derive their correctness from the preservation
   of other invariants, so their preservation does not need to be proven.
-The proof obligation can be found in \ref{invariants_as_theorems}.
+The proof obligation can be found in Section \ref{invariants_as_theorems}.
 
 If an invariant contains a well-definedness condition, 
-  a corresponding proof obligation is generated (see \ref{well_definedness_of_invariants}).
+  a corresponding proof obligation is generated (\ref{well_definedness_of_invariants}).
 
 \paragraph{Common variables between machines}
 \label{common_variables}
@@ -193,18 +191,18 @@ If a variable $v$ is declared in a machine $M_i$, it can be re-used in the
   direct refinement $M_{i+1}$. 
 In that case, it is assumed that the values of the abstract and concrete variable 
   are always equal.
-To ensure this, special proof obligations are generated (see below in Section \ref{events}).
-Once a variable disappears in a refinement, i.e. is not declared in machine $M_{i+2}$,
+To ensure this, special proof obligations are generated (\ref{events}).
+Once a variable disappears in a refinement, i.e. it is not declared in machine $M_{i+2}$,
   it cannot be re-introduced in a later refinement.
 
 \subsubsection{Events}
 \label{events}
 \index{event}
-A possible state change of a machine is defined by an event.
+A possible state change for a machine is defined by an event.
 The condition under which an event can be executed is given by a guard. The event's action
 describes how the new and old state relate to each other.
 
-Events occur atomically (i.e. one event happens at a time) leading to a new state.
+Events occur atomically (i.e. one event happens at a time) and to a new state.
 Two events never happen at the same time. Time is also not factored into the execution of the event.
 
 An event has the following elements:
@@ -220,23 +218,23 @@ An event has the following elements:
 
 An event can refine one or more events of an abstract machine. To keep things simple, we will
   first consider events with only one refined event.
-If there are several refinement steps -- e.g. event $E_1$ is refined by $E_2$ and $E_2$ by
+If there are several refinement steps, we describe events from the refined machines as abstract events and the event from the conrete machine as the concrete event. For example, if an event $E_1$ is refined by $E_2$ and $E_2$ is refined by
   $E3$, we call $E_1$ and $E_2$ the abstract events and $E_3$ the concrete event.
 Likewise, if we refer to the parameters of the abstract events, we mean all the parameters
-  of $E_1$ and $E_2$.
+  of all the abstract events (e.g., the parameters of $E_1$ and $E_2$).
 
 \paragraph{Parameters}
 \label{parameters}
 \index{parameter}
-An event may have an arbitrary number of \emph{parameters}. Their names must be unique, i.e. there must be no constant or variable with the same name.
-The types of the parameters must be inferable from the guards of the event.
+An event can have an arbitrary number of \emph{parameters}. Their names must be unique, i.e. there must be no constant or variable with the same name.
+The types of the parameters must be declared in the guards of the event.
 We denote the parameters of all abstract events with $\absparameters$ and the
 parameters of the concrete event with $\concparameters$.
 
 Similarly to variables, an event can have parameters in common with the event it refines.
 If the refined event has a parameter $t$ which is not a parameter of the refinement, 
  a witness $W_t(\allconstants,\allvariables,\concvariables',\concparameters,t)$ for
- the abstract parameter must be specified (see below -- \ref{witness}).
+ the abstract parameter must be specified (\ref{witness}).
 
 \paragraph{Guards}
 \label{guards}
@@ -246,10 +244,10 @@ Variables or parameters of abstract machines are not accessible in a guard.
 
 We write $G(\allconstants,\absvariables,\absparameters)$ for the conjunction of all guards of all abstract events.
 
-Like axioms and invariants, guards can be marked as theorems, too. 
-The proof obligation can be found in \ref{guards_as_theorems}.
+Like axioms and invariants, guards can also be marked as theorems. 
+The proof obligation can be found in Section \ref{guards_as_theorems}.
 If the guard contains WD-conditions, a proof obligation is generated
-See \ref{well_definedness_of_guards} for the proof obligation.
+See Section \ref{well_definedness_of_guards} for the proof obligation.
 
 \paragraph{Actions}
 \label{actions}
@@ -268,7 +266,7 @@ All variables to which no new value is assigned keep the same value in new and o
 We now define the before-after-predicate $\concbeforeafter$ of the actions together.
 Let $Q_1,\ldots,Q_n$ be the before-after-predicate of the event's assignments. 
 Let $x_1,\ldots,x_k$ be the variables that are assigned by any action of the event.
-And $y_1,\ldots,y_l$ be the variables of the concrete machine that are \emph{not} modified by any of 
+Let $y_1,\ldots,y_l$ be the variables of the concrete machine that are \emph{not} modified by any of 
  the event's actions (i.e. $\concvariables = x_1,\ldots,x_k,y_1,\ldots,y_l$).
 Then the before-after-predicate of the concrete event is 
   $\bapred = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
@@ -281,7 +279,7 @@ $x'$ is replaced directly by $x$ when $x$ is not changed by the event and replac
 \label{witness}
 \index{witness}
 
-Witnesses are composed of a label and a predicate that are is to establish a link between the values 
+Witnesses are composed of a label and a predicate that establishes a link between the values 
   of the variables and parameters of the concrete and abstract events.
 Most of the time, this predicate is a simple equality.
 \warning{Unlike other elements in Event-B that have a label, the label of a witness has a meaning
@@ -313,15 +311,15 @@ The feasibility of the witness must be proven, i.e. that there is actually a val
       & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
       \limp & \exists x' \qdot W(\allconstants,\allvariables,\concvariables',\allparameters,x')
     \end{array}$}
-A witness may contain well-definedness conditions, see \ref{well_definedness_of_witnesses}
+A witness may contain well-definedness conditions. See \ref{well_definedness_of_witnesses}
   for the corresponding proof obligation.
 
-\paragraph{Initialization}
+\paragraph{Initialisation}
 \label{initialization}
-\index{initialization}
-The initialization of a machine is given by a special event called \textsl{INITIALISATION}.
-Unlike other events, the initialization must not contain guards and parameters.
-The actions must not make use of variable values before the initialization event occurs.
+\index{initialisation}
+The initialisation of a machine is given by a special event called \textsl{INITIALISATION}.
+Unlike other events, the initialisation must not contain guards and parameters.
+The actions must not make use of variable values before the initialisation event occurs.
 All variables must have a value assigned to them. If there is no assignment for the variable $x$, Rodin assumes a default assignment of the form $x\bcmsuch \btrue$.
 
 \paragraph{Ensuring machine consistency}
@@ -329,15 +327,14 @@ All variables must have a value assigned to them. If there is no assignment for 
 \index{consistency of a machine}
 The following proof obligations are generated for events:
 
-The assignment of each action must be well-defined when the event is enabled, see
+The assignment of each action must be well-defined when the event is enabled. See
   \ref{well_definedness_of_actions} for the corresponding proof obligation.
   
 \index{feasibility!of actions}
 If the event's guard is enabled, every action must be feasible.
   This is trivially true in the case of the deterministic assignments.
   For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
-  The feasibility operator $\actfis$ is defined in the reference
-  section regarding non-deterministic assignments.
+  The feasibility operator $\actfis$ is defined in Section~\ref{nondeterministic_assignments}. \marginpar{Is the feasibility operator actually defined here? It is used, but not defined as far as I can tell.}
   
   \index{proof obligation!action feasibility@action feasibility (\eventbpo{FIS})}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
@@ -349,7 +346,7 @@ If the event's guard is enabled, every action must be feasible.
 
 For each invariant $I_i$ with the label \eventbpo{invlabel} 
   that contains a variable affected by the assignment, it must be proven
-  that the invariant still holds with the new values.
+  that the invariant still is still valid for the new values.
   \index{proof obligation!invariant preservation@invariant preservation (\eventbpo{INV})}
   \pode{Invariant preservation}%
   {\eventbpo{eventlabel/invlabel/INV}}%
@@ -363,7 +360,7 @@ For each invariant $I_i$ with the label \eventbpo{invlabel}
   for variables that are assigned by an deterministic ($x \bcmeq E$) assignment.
 
 \index{establishment of the invariant}
-There are special cases regarding initialisation:
+There are special proof obligations generated for the initialisation event:
   \pode{Action feasibility (in the initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
   {$\axioms \limp  \actfis(a)$}
   \pode{Invariant establishment}%
@@ -374,7 +371,7 @@ There are special cases regarding initialisation:
 \label{refinement_proof_obligations}
 An event can refine one or more events of the abstract machine.
 We first consider the refinement of only one event. 
-For refining more than one event (i.e. merging events), please see below in Section~\ref{merging_events}.
+For refining more than one event (i.e. merging events), please refer below to Section~\ref{merging_events}.
 
 \index{skip}
 If an event does not refine an abstract event, it is implicitly assumed that it refines \emph{skip}, the
@@ -405,9 +402,9 @@ If an abstract event's action $i$ (with before-after predicate $Q_i(\allconstant
   assigns a value to a variable that is also declared in the concrete machine,
   it must be proven that the abstract event's behaviour
   corresponds to the concrete behaviour.
-The behaviour of the concrete event is given by the concrete before-after-predicate $\bapred$,
-the relevant abstract behaviour by the before-after-predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$.
-The relation between abstract and concrete event is specified by the witnesses.
+The behaviour of the concrete event is given by the concrete before-after-predicate $\bapred$, and
+the relevant abstract behaviour is given by the before-after-predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$.
+The relation between abstract and concrete event is specified by witnesses.
 \index{proof obligation!action simulation@action simulation (\eventbpo{SIM})}
 \pode{Action simulation}%
   {\eventbpo{eventname/actionlabel/SIM}}%
@@ -448,8 +445,8 @@ To merge events, two conditions must be taken into account.
 \item All abstract events must have identical actions.
 \end{itemize}
 Instead of the guard strengthening proof obligation, the following proof obligation is
-created with $G_1,\ldots,G_n$ being the abstract guards of the merged events
-  and $\absparameters_1,\ldots,\absparameters_n$ their parameters.
+created with $G_1,\ldots,G_n$ as the abstract guards of the merged events
+  and $\absparameters_1,\ldots,\absparameters_n$ as their parameters.
 \index{proof obligation!merging events@merging events (\eventbpo{MRG})}
 \pode{Guard strengthening (merge)}{\eventbpo{eventlabel/MRG}}%
   {$\begin{array}{l@{\ }l}
@@ -459,8 +456,8 @@ created with $G_1,\ldots,G_n$ being the abstract guards of the merged events
       \limp & G_1(\allconstants,\absvariables,\absparameters_1)\lor\ldots\lor G_n(\allconstants,\absvariables,\absparameters_n)      
     \end{array}
 $}
-The other proof obligations are the same than refining a single event.
-Also the same rules for defining witnesses apply.
+The other proof obligations are the same as for refining a single event.
+Also, the same rules for defining witnesses apply.
 
 \subsubsection{Extending events}
 \label{extending_events}
@@ -469,9 +466,7 @@ Also the same rules for defining witnesses apply.
 Instead of refining another event, an event can \emph{extend} it.
 In this case the refined event will implicitly have all the parameters, 
  guards and actions of the refined event. It can have additional parameters,
- guards and actions.
-The ability to extend an event is just syntactic sugar -- the same effect
- can be achieved by manually copying the parameters, guards and actions.
+ guards and actions. The same effect can be achieved by manually copying the parameters, guards and actions.
 
 This is especially useful when additional features are gradually introduced
  into a model by refinement (also called ``superposition refinement'').
@@ -481,7 +476,7 @@ This is especially useful when additional features are gradually introduced
 \index{variant}
 \index{status of an event}
 \index{ordinary}\index{anticipated}\index{convergent}
-Event-B makes it possible to prove how an event terminates.
+Event-B makes it possible to prove how an event will terminate.
 Termination means that a chosen set of events are enabled only a finite number
  of times before an event that is not marked as terminating occurs.
 To support proofs for termination, a \emph{variant} $V(\allconstants,\concvariables)$ can be specified in a model.
@@ -507,8 +502,7 @@ When an event is marked as anticipated, one must just prove that the event does 
 The proof of termination is then delayed to the refinements of the anticipated event.
 A refinement of an anticipated event must be either anticipated or convergent.
 
-If the convergence of an event is proven, the convergence its refinements is also guaranteed due to
-  the guard strengthening.
+If the convergence of an event is proven, the convergence of its refinements is also guaranteed due to guard strengthening.
 
 A variant must be well-defined. The corresponding well-definedness proof obligations
   can be found in Section \ref{well_definedness_of_variants}.
@@ -516,7 +510,7 @@ The following other proof obligations are generated:
 
 \paragraph{Numeric variant}
 \label{numeric_variant}
-  If the variant is numeric an anticipated or convergent event
+  If the variant is numeric, an anticipated or convergent event
   must only be enabled when the variant is non-negative.
 \pode{Numeric variant is a natural number}{\eventbpo{eventlabel/NAT}}%
   {$\begin{array}{r@{\ }l}
@@ -541,7 +535,7 @@ and an anticipated event must not increase the variant.
 
 \paragraph{Set variant}
 \label{set_variant}
-  If the variant is a set t must be proven that the set is always finite:
+  If the variant is a set t, it must be proven that the set is always finite:
 \pode{Decreasing of a variant (anticipated event)}{\eventbpo{FIN}}%
   {$\axioms \land \absinvariants \land \concinvariants \limp \bfinite(V(\allconstants,\concvariables))$}
 A convergent event must remove elements from the set
@@ -559,6 +553,7 @@ and an anticipated event must not add elements.
       \limp & V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)
     \end{array}$}
 
+\marginpar{edited up to this section}
 \subsection{Well-definedness proof obligations}
 \label{well_definedness_proof_obligations}
 There are several locations where well-definedness proof obligations can occur.

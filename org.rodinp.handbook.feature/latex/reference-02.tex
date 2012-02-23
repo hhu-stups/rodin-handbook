@@ -334,7 +334,7 @@ The assignment of each action must be well-defined when the event is enabled. Se
 If the event's guard is enabled, every action must be feasible.
   This is trivially true in the case of the deterministic assignments.
   For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
-  The feasibility operator $\actfis$ is defined in Section~\ref{nondeterministic_assignments}. \marginpar{Is the feasibility operator actually defined here? It is used, but not defined as far as I can tell.}
+  The feasibility operator $\actfis$ is defined in Section~\ref{well_definedness}. 
   
   \index{proof obligation!action feasibility@action feasibility (\eventbpo{FIS})}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
@@ -553,20 +553,18 @@ and an anticipated event must not add elements.
       \limp & V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)
     \end{array}$}
 
-\marginpar{edited up to this section}
 \subsection{Well-definedness proof obligations}
 \label{well_definedness_proof_obligations}
-There are several locations where well-definedness proof obligations can occur.
-In the reference of the mathematical notation the well-definedness conditions
-of each operator are defined by the $\wdl$-operator (see \ref{well_definedness}).
+There are several locations where well-definedness proof obligations can be created.
+The mathematical notation of the well-definedness conditions
+of each operator are defined by the $\wdl$-operator (\ref{well_definedness}).
 
-For well-definedness conditions the order of axioms, invariants and guards is important.
-Trivial ($\btrue$) well-definedness conditions are usually not shown in Rodin.
+For well-definedness conditions, the order of axioms, invariants and guards is important.
+Well-definedness conditions are not usually shown in Rodin if they are trivial ($\btrue$).
 
 \paragraph{Axioms}
 \label{well_definedness_of_axioms}
-For an axiom $A_w$, 
-  let $A_b$ denote (the conjunction of) all axioms declared
+For an axiom $A_w$, $A_b$ denotes (the conjunction of) all axioms declared
   in extended contexts and the axioms already declared in
   the current context before the axiom in question.
 \index{proof obligation!well-definedness of an axiom@well-definedness of an axiom (\eventbpo{WD})}
@@ -575,8 +573,7 @@ For an axiom $A_w$,
 
 \paragraph{Invariants}
 \label{well_definedness_of_invariants}
-For an invariant $J_w$, 
-  let $J_b$ denote (the conjunction of) all the model's 
+For an invariant $J_w$, $J_b$ denotes (the conjunction of) all the model's 
   invariants declared before the theorem.
 \index{proof obligation!well-definedness of an invariant@well-definedness of an invariant (\eventbpo{WD})}
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}%
@@ -585,8 +582,7 @@ For an invariant $J_w$,
 
 \paragraph{Guards}
 \label{well_definedness_of_guards}
-For an invariant $H_w$, 
-  let $H_b$ denote (the conjunction of) all the model's 
+For an invariant $H_w$, $H_b$ denotes (the conjunction of) all the model's 
   invariants declared before the theorem.
 \index{proof obligation!well-definedness of a guard@well-definedness of a guard (\eventbpo{WD})}
 \pode{Well-definedness of a guard}{\eventbpo{eventname/guardlabel/WD}}%
@@ -605,9 +601,9 @@ A witness $W$ may contain well-definedness conditions.
 
 \paragraph{Actions}
 \label{well_definedness_of_actions}
-The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ of
+The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ in
  an event must be well-defined.
-\index{proof obligation!well-definedness of an action@well-definedness of an action (\eventbpo{WD})}
+\index{proof obligation!well-definedness of an action@well-definedness in an action (\eventbpo{WD})}
 \pode{Well-definedness of an action}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
   {$\axioms \land \absinvariants \land \concinvariants \land
@@ -624,8 +620,7 @@ A variant $V(\allconstants,\concvariables)$ must be well-defined.
 \subsection{Theorems}
 \label{theorems}
 \index{theorem}
-Axioms, invariants and guards can be marked as theorems. In that case it must be proven that
-  the validity of the theorems results from the axioms, invariants or guards declared before
+Axioms, invariants and guards can be marked as theorems. This means that the validity of the theorems must be proven from the axioms, invariants or guards declared before
   the theorem.
 
 \index{derived}
@@ -633,8 +628,7 @@ Sometimes an axiom/invariant/guard marked as theorem is also called a \emph{deri
 
 \paragraph{Axioms}
 \label{axioms_as_theorems}
-For an axiom $A_{thm}$, 
-  let $A_b$ denote (the conjunction of) all axioms declared
+For an axiom $A_{thm}$, $A_b$ denotes (the conjunction of) all axioms declared
   in extended contexts and the axioms already declared in
   the current context before the axiom in question.
 \index{proof obligation!axiom as theorem@axiom as theorem (\eventbpo{THM})}
@@ -643,8 +637,7 @@ For an axiom $A_{thm}$,
 
 \paragraph{Invariants}
 \label{invariants_as_theorems}
-For an invariant $I_{thm}$, 
-  let $I_b$ denote (the conjunction of) all the model's 
+For an invariant $I_{thm}$, $I_b$ denotes (the conjunction of) all the model's 
   invariants declared before the theorem.
 \index{proof obligation!invariant as theorem@invariant as theorem (\eventbpo{THM})}
 \pode{An invariant as theorem}{\eventbpo{label/THM}}%
@@ -653,8 +646,7 @@ For an invariant $I_{thm}$,
 
 \paragraph{Guards}
 \label{guards_as_theorems}
-For an invariant $H_{thm}$, 
-  let $H_b$ denote (the conjunction of) all the event's 
+For an invariant $H_{thm}$, $H_b$ denotes (the conjunction of) all the event's 
   guards declared before the theorem.
 \index{proof obligation!guard as theorem@guard as theorem (\eventbpo{THM})}
 \pode{A guard as theorem}{\eventbpo{label/THM}}%
@@ -681,9 +673,8 @@ For an invariant $H_{thm}$,
 \index{NAT (natural number proof obligation)}
 \index{VAR (decreasing of variant proof obligation)}
 
-We give a brief overview about which proof obligations are generated.
-This should help the user to identify why a proof obligation generated by identifying its label.
-For further information, we refer to the relevant reference section.
+This is a brief overview about the different proof obligations that are generated.
+The user can use this table to identify a specific proof obligation. For further information, a link to the relevant reference section is provided.
 
 \begin{tabular}{lll}
   \hline
@@ -720,20 +711,7 @@ For further information, we refer to the relevant reference section.
 \label{visibility_of_identifiers}
 \index{identifier}
 
-This table shows which identifiers can be used in predicates or expressions. 
-\begin{description}
-\item[Sets] Sets that are defined in the context (in case of an axiom) or in a seen context.
-  If a context extends another context, the sets of the extended context are treated as if they
-  are defined in the extending context.
-\item[Constants] Like the sets, constants that are defined in the context (in case of an axiom) or
-  in a seen context.
-\item[Concrete Variables] Variables that are defined in the machine itself. This does \emph{not}
-  include variables of refined machines.
-\item[Abstract Variables] Variables that are defined in an abstract machine.
-\item[Concrete Parameters] Parameters that are defined in the event itself. This does \emph{not}
-  include parameters of refined events.
-\item[Abstract Parameters] Parameters that are defined in an abstract event.
-\end{description}
+Expressions and predicates are comprised of certain Event-B elements. The following table describes the elements that each predicate or expression use:
 
 \begin{center}
   \newcommand{\markcell}{$\times$}
@@ -752,8 +730,23 @@ This table shows which identifiers can be used in predicates or expressions.
   \end{tabular}    
 \end{center}
 
-$\mbox{}^{*}$ Witnesses and actions have additional identifiers in their scope.
-See Section \ref{witness} for details on witnesses or Section \ref{assignments} for the scope of the different assignments in actions.
+However, expressions and predicates can only use elements that are identified within a specific scope:
+
+\begin{description}
+\item[Sets] Sets can be used when they are defined in the context (in case of an axiom) or in a seen context.
+  If a context extends another context, the sets of the extended context are treated as if they
+  are defined in the extending context.
+\item[Constants] Constants can be used when they are defined in the context (in the case of an axiom) or in a seen context.
+\item[Concrete Variables] Concrete variables that are defined in the machine itself can be used. This does \emph{not}
+  include variables of refined machines.
+\item[Abstract Variables] Abstract variables  that are defined in an abstract machine can be used.
+\item[Concrete Parameters] Parameters that are defined in the event itself can be used. This does \emph{not} include parameters of refined events.
+\item[Abstract Parameters] Parameters that are defined in an abstract event can be used.
+\end{description}
+
+
+
+$\mbox{}^{*}$ Witnesses and actions have additional elements in their scope. Section \ref{witness} provides more information about witnesses, and Section \ref{assignments} explains the scope for actions that have different types of assignments in further detail.
 
 %%% Local Variables: 
 %%% mode: latex

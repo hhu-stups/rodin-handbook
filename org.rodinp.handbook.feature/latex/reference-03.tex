@@ -5,21 +5,20 @@
 \subsection{Introduction}
 \label{mathematical_notation_introduction}
 
-In the following we use sans serif letters like $\exprla$, $\expra$, $\exprlb$, $\exprb$, \ldots as
-placeholders for arbitrary expressions as opposed to $a$, $A$, $b$, $B$ which should represent
+In the following section, we use sans serif letters like $\exprla$, $\expra$, $\exprlb$, $\exprb$, \ldots as
+placeholders for arbitrary expressions instead of $a$, $A$, $b$, $B$ which represent
 Event-B identifiers.
-E.g. the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
+For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
 
 We use the symbol $\defi$ to state that two predicates or assignments have an equivalent meaning.
 We have tried to find a balance between having a precise and concise description for all Event-B's
-mathematical components and still being easily readable.
-Many of the operators can be expressed by using other, simpler constructs.
-Other, like equality ($=$) or universal quantification ($\forall$) are just described by natural language.
+mathematical components and having a text that is still easily readable.
+Many of the operators can be expressed using other, simpler constructs.
+Other, like equality ($=$) or universal quantification ($\forall$) are simply described by natural language.
 
-When we introduce new identifiers when expressing an operator by e.g. a set comprehension, we assume
-that the new identifier does not occur free in the rewritten expressions.
+When we introduce new identifiers while expressing an operator (e.g. a set comprehension), we assume that the new identifier does not occur free in the rewritten expressions \marginpar{Does this paragraph make sense?} (i.e. any new identifiers that are used to express an operator must either be bound to the original operator or must not appear in the original operator at all). 
 
-\info{There is a four-page \file{EventB-Summary.pdf}{Event-B Cheat Sheet}, representing a concise summary of the Event-B mathematical toolkit.  Thanks to Ken Robinson for making it available.}
+\info{For more information, download the four-page \file{EventB-Summary.pdf}{Event-B Cheat Sheet}, which provides a concise summary of the Event-B mathematical toolkit.  We would like to thank Ken Robinson for making it available.}
 
 \subsubsection{Data types}
 \label{data_types}
@@ -42,23 +41,23 @@ In Event-B we have 3 kinds of basic data types:
 From all data types $\alpha, \beta$, two other kinds of data types can be constructed:
 \begin{itemize}
 \item $\pow(\alpha)$ contains the sets of elements of $\alpha$.
-\item \index{pair!as type} $\alpha\cprod\beta$ contains the pairs where the first element is of type $\alpha$ and the
-  second element of type $\beta$.
+\item \index{pair!as type} $\alpha\cprod\beta$ is the set of pairs where the first element is of type $\alpha$ and the
+  second element is of type $\beta$.
 \end{itemize}
 \index{type expression} Expressions that are constructed by the rules above are called \emph{type expressions}.
 
 \paragraph{A note about the notation}
 We use the Greek letters $\alpha$, $\beta$, $\gamma$, \ldots to represent arbitrary data types.
 For an expression $\vexpr{E}$, we write $\expre\in\alpha$ to state that $\expre$ is of type $\alpha$.
-In the following descriptions of Event-B's mathematical construct we describe the
+In the following descriptions of Event-B's mathematical constructsm, we will describe the
   types of all constructs and their components.
 
 For example, we will describe the maplet $\expre\mapsto \exprf$ which is defined as $\expre\mapsto \exprf\in\alpha\cprod\beta$ with
- $\expre\in\alpha$ and $\exprf\in\beta$. We do not make any restrictions on the types $\alpha$ and $\beta$.
+ $\expre\in\alpha$ and $\exprf\in\beta$. We do not restrict the types of $\alpha$ and $\beta$.
 
-For predicates, we just describe the data types of their components. 
+For predicates, we simply describe the data types of their components. 
 The predicate itself does not have a type.
-For example, consider the components' types of the equality of two expressions $\expre=\vexpr{F}$: $\expre\in\alpha$ and $\exprf\in\alpha$.
+For example, consider the components' types for the equality of two expressions $\expre=\vexpr{F}$: $\expre\in\alpha$ and $\exprf\in\alpha$.
 By stating that $\expre$ and $\exprf$ are both of type $\alpha$, we express that both expressions must have the
   same type but do not make any further assumptions about their types.
 
@@ -68,9 +67,9 @@ By stating that $\expre$ and $\exprf$ are both of type $\alpha$, we express that
 \index{L-operator@$\wdl{}$-operator}
 
 A predicate which describes the condition under which an expression or predicate in Event-B can be safely evaluated is the well-definedness condition.
-An example with integer division makes this clear: The expression $x\div y$ makes only sense when $y\neq 0$.
+An example with integer division makes this clear: The expression $x\div y$ only makes sense when $y\neq 0$.
 
-Well-definedness conditions are usually used for the well-definedness proof obligations.
+Well-definedness conditions are usually used for well-definedness proof obligations (\ref{well_definedness_proof_obligations}).
 
 In Rodin, the $\wdl$-operator defines which well-defined condition a predicate or expression has.
 When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
@@ -158,7 +157,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc A short description of what the operator does
-  \rrdef A more formal definition
+  \rrdef A formal definition of what the operator does
   \rrtypes A description of the types of all arguments and, if the operation
     is an expression, the expression's type
   \rrwd
@@ -167,7 +166,7 @@ The following reference subsections will have the form the form: \\[2em]
     Non-deterministic assignments may have feasibility conditions.
     These are used in the proof obligations of an event (Section~\ref{consistency_proof_obligations}).
   \rrex
-    We add examples to some constructs to clarify their use.
+    For some constructs, an example is provided to clarify their use.
 \end{rodinrefentry}
 
 \subsection{Predicates}
@@ -208,7 +207,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrdesc
   These are the usual logical operators.
   \rrdef
-  The following truth tables give an overview:
+  The following truth tables describe the behaviours of these operators:
   \begin{center}
     \begin{tabular}{cc|cccc}
       $\predp$       & $\predq$       & $\predp\land \predq$ & $\predp\lor \predq$ & $\predp\limp \predq$ & $\predp\leqv \predq$ \\
@@ -229,10 +228,10 @@ The following reference subsections will have the form the form: \\[2em]
   \rrtypes
     All arguments are predicates.
   \rrwd
-    Please note that the operators $\land$ and $\lor$ are not commutative,
+    Please note that the operators $\land$ and $\lor$ are not commutative
     because their well-definedness conditions distinguish between the first and second argument.
     Therefore, if their arguments have well-definedness conditions, the order matters.
-    E.g. $x\neq 0 \land y\div x=3$ is always well-defined,
+    For example, $x\neq 0 \land y\div x=3$ is always well-defined,
     but $y\div x=3 \land x\neq 0$ still has the well-definedness condition $x\neq 0$.
 
     $\wdl(\predp\land \predq) \defi \wdl(\predp) \land (\predp \limp \wdl(\predq))$ \\
@@ -261,8 +260,7 @@ The following reference subsections will have the form the form: \\[2em]
     A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
     $\predp_1$ is used to specify the types of the identifiers.
 
-    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if there is a valuation of
-    $x_1\ldots,x_n$ such that $\predp$ is satisfied.
+    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
 
     The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
     They can be referenced in $\predp$.
@@ -284,7 +282,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-  Checks if both expressions are (not) equal.
+  Checks if both expressions are or are not equal.
   \rrdef
   $\expre \neq \exprf \defi \lnot( \expre=\exprf)$
   \rrtypes
@@ -335,7 +333,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\Bool$ is a pre-defined carrier set that contains the constants $\True$ and $\False$.
 
     $\bool(\predp)$ denotes the Boolean value of a predicate $\predp$. If $\predp$ is true, the expression
-    is $\True$, if $\predp$ is false, the expression is $\False$.
+    is $\True$. If $\predp$ is false, the expression is $\False$.
   \rrdef
     $\bpartition(\Bool,\{\True\},\{\False\})$\\
     %$\Bool = \{\True,\False\}$ \\
@@ -371,7 +369,7 @@ The following reference subsections will have the form the form: \\[2em]
     must be inferable by the predicate $\predp$.
     The predicate $\predp$ and $\expre$ can contain references to the identifiers \textit{ids}.
 
-    The set comprehension $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}$ contains all values of $\expre$ for values
+    The set comprehension $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}$ contains all values of $\expre$ for the values
     of $x_1,\ldots,x_n$ where $\predp$ is true.
 
     $\{~\expre~|~\predp~\}$ is a short form for $\{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$ where $\freeids{\expre}$ denotes the
@@ -434,7 +432,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrdesc
     $\exprs\subseteq \exprt$ checks if $\exprs$ is a subset of $\exprt$, i.e. if all elements of $\exprs$ occur in $\exprt$.
     $\exprs\subset \exprt$ checks if $\exprs$ is a subset of $\exprt$ and $\exprs$ does not equal $\exprt$.
-    $\exprs\not\subseteq \exprt$ resp. $\exprs\not\subset \exprt$ are the respective negated variants.
+    $\exprs\not\subseteq \exprt$ and $\exprs\not\subset \exprt$ are the respective negated variants.
   \rrdef
     $\exprs \subseteq \exprt \defi \forall e \qdot e\in \exprs \limp e\in \exprt$\\
     $\exprs \not\subseteq \exprt \defi \lnot(\exprs \subseteq \exprt)$\\
@@ -442,7 +440,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprs \not\subset \exprt \defi \lnot(\exprs \subset \exprt)$
   \rrtypes
     $\exprs \opelipse \exprt$ is a predicate
-    with $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\alpha)$ and for each operator $\opelipse$ of 
+    with $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\alpha)$ for each operator $\opelipse$ of
     $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
   \rrwd
     $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
@@ -473,7 +471,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprs\setminus \exprt = \{~x~|~x\in \exprs\land x\not\in \exprt~\}$
   \rrtypes
     $\exprs\opelipse \exprt\in\pow(\alpha)$
-    with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\alpha)$ and for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
+    with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\alpha)$ for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
   \rrwd
     $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
     for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
@@ -595,7 +593,7 @@ The following reference subsections will have the form the form: \\[2em]
     Analogously is $\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre$ the intersection of all values of $\expre$ for
     valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $\predp$.
 
-    Like set comprehensions (Section \ref{set_comprehensions}), the quantified union and intersection have a
+    Like set comprehensions (\ref{set_comprehensions}), the quantified union and intersection have a
     short form where the free variables of the expression are quantified implicitly:
     $\Union \expre~|~\predp$ and $\Inter \expre~|~\predp$.
   \rrdef
@@ -672,7 +670,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprs \srel \exprt = \{~r~|~r\in \exprs\rel \exprt\land \ran(r) = \exprs~\}$\\
     $\exprs \strel \exprt = (\exprs \trel \exprt) \land (\exprs \srel \exprt)$
   \rrtypes
-    For $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$ and
+    For $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
     $\exprs \opelipse \exprt\in\pow(\pow(\alpha\cprod\beta))$
   \rrwd
@@ -693,7 +691,7 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     If $r$ is a relation between the sets $\exprs$ and $\exprt$, 
-    the domain $\dom(\exprlr)$ is the set of elements of $\exprs$ that are related to at least one
+    the domain $\dom(\exprlr)$ is the set of the elements of $\exprs$ that are related to at least one
     element of $\exprt$ by $\exprlr$.
 
     Likewise the range $\ran(\exprlr)$ is the set of elements of $\exprt$ to which at least one element
@@ -725,10 +723,10 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     The domain restriction $\exprs\domres \exprlr$ is a subset of the relation $\exprlr$ that contains
-    all pairs whose first element is in $\exprs$. $\exprs\domsub\exprlr$ is the subset where 
+    all of the pairs whose first element is in $\exprs$. $\exprs\domsub\exprlr$ is the subset where 
     the pair's first element is \emph{not} in $\exprs$.
     
-    Analogously the range restriction $\exprlr\ranres\exprs$ is a subset that contains all pairs
+    In the same way, the range restriction $\exprlr\ranres\exprs$ is a subset that contains all of the pairs
     whose second element is in $\exprs$ and $\exprlr\ransub\exprs$ is the set where the pair's second
     element is not in $\exprs$.
   \rrdef
@@ -775,8 +773,7 @@ The following reference subsections will have the form the form: \\[2em]
     $z$ to $y$.
 
     $\exprls\bcomp\exprlr$ can be written as an alternative to $\exprlr\fcomp\exprls$.
-    This reflects the fact that for two functions $f$ and $g$ holds
-    $f(g(x)) = (f\bcomp g)(x)$.
+    This reflects the fact that $f(g(x)) = (f\bcomp g)(x)$ holds for two functions $f$ and $g$.
 
     The relational overwrite $\exprlr\ovl\exprls$ is equal to $\exprlr$ except all entries in $\exprlr$
     whose first element is in the domain of $\exprls$ are replaced by the corresponding 
@@ -913,7 +910,7 @@ The following reference subsections will have the form the form: \\[2em]
   $\exprs \tsur \exprt = (\exprs\psur \exprt) \binter (\exprs\tfun \exprt)$\\
   $\exprs \tbij \exprt = (\exprs\tinj \exprt) \binter (\exprs\tsur \exprt)$\\
   \rrtypes
-  With $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\beta)$ and for each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
+    $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\beta)$ for each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
   $\exprs \opelipse \exprt \in \pow(\pow(\alpha\cprod\beta))$
   \rrwd
   For each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
@@ -1053,7 +1050,7 @@ The following reference subsections will have the form the form: \\[2em]
 
     $\exprla\bmod\exprlb = c~\defi~c\in 0\upto\exprlb-1 \land \exists k~\qdot~k\in\nat\land k\cdot \exprlb + c = \exprla$
   \rrtypes
-  With $\exprla\in\intg$, $\exprlb\in\intg$ and for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
+  With $\exprla\in\intg$, $\exprlb\in\intg$ for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
   $\exprla\opelipse \exprlb\in\intg$\\
   $-\exprla\in\intg$
   \rrwd
@@ -1078,7 +1075,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\min(\exprs)$ resp. $\max(\exprs)$ denotes the smallest resp. largest number in the set of integers $\exprs$.
+    $\min(\exprs)$ and $\max(\exprs)$ denotes the smallest and largest number in the set of integers $\exprs$ respectively.
 
     The minimum and maximum are only defined if such a number exists.
   \rrdef
@@ -1105,7 +1102,7 @@ The following reference subsections will have the form the form: \\[2em]
     type is specified by the type expression $\alpha$ (Section \ref{data_types}).
 
     $\mathsf{\expre}$ is restricted to expressions whose type does not depend on an argument of that expression.
-    Namely these are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
+    These are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
 
     Another location where the operator can be used is the declaration of bound variables 
     in quantifiers and patterns in lambda expressions.
@@ -1140,7 +1137,7 @@ The following reference subsections will have the form the form: \\[2em]
 We did not consider the scope of the expressions in the previous sections, i.e. we did not say which constants or variables can be used in an expression or predicate, because
 this depends completely on the context where the expression is used.
 
-The following paragraphs are about assignments. Depending on the type of assignment it
+The following paragraphs are about assignments. Depending on the type of assignment, it
 may be important to specify which identifiers can be used.
 Thus we use the notion $\expre(x_1,\ldots,x_n)$ to specify which free identifiers may occur
 in the expression $\expre$.
@@ -1167,10 +1164,10 @@ in the expression $\expre$.
   \rrdef
     The before-after-predicate of $x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}$ is\\ $x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
 
-    The assignment is equivalent to
+    This assignment is equivalent to
     $x_1,\ldots,x_n \bcmsuch x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
 
-    The special form is syntactic sugar for:\\
+    The special form for this assignment is:\\
     $x(\eventbassignmentexpr{1}) \bcmeq \eventbassignmentexpr{2}
       \quad\defi\quad 
       x \bcmeq x \ovl \{~\eventbassignmentexpr{1} \mapsto \eventbassignmentexpr{2}~\}$
@@ -1199,14 +1196,14 @@ in the expression $\expre$.
 \begin{rodinrefentry}
   \rrdesc
     $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
-    assigns to the variables $x_1\ldots,x_n$ any value such that the the
+    assignsany value to the variables $x_1\ldots,x_n$ such that the the
     before-after-predicate $Q$ is fulfilled.
     Each $x_i$ is an identifier that refers to a variable of the concrete machine.
     $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
     variables of the concrete machine and parameters of the concrete event.
     $x_1,\ldots,x_n$ are in $\concvariables$.
 
-    This is the most general form of assignment, all other assignments can be converted to this.
+    This is the most general form of assignment. All other assignments can be converted to this.
   \rrdef
     The before-after-predicate is $Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$.
   \rrtypes
@@ -1231,8 +1228,8 @@ in the expression $\expre$.
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x \bcmin \eventbassignmentexpr{}$ assigns to the variable $x$ any value of the
-    set $\expre$. $x$ is an identifier that refers to a variable
+    $x \bcmin \eventbassignmentexpr{}$ assigns any value of the
+    set $\expre$ to the variable $x$. $x$ is an identifier that refers to a variable
     of the concrete machine.
     $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
     variables of the concrete machine and parameters of the concrete event.

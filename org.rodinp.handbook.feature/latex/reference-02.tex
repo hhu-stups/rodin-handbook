@@ -334,7 +334,7 @@ The assignment of each action must be well-defined when the event is enabled. Se
 If the event's guard is enabled, every action must be feasible.
   This is trivially true in the case of the deterministic assignments.
   For a non-deterministic assignment $a$, the feasibility $\actfis(a)$ must be proven.
-  The feasibility operator $\actfis$ is defined in Section~\ref{well_definedness}. 
+  The feasibility operator $\actfis$ is defined in Section~\ref{assignments}. \marginpar{The feasibility operator is used in the referenced section, but it is never actually defined anywhere}
   
   \index{proof obligation!action feasibility@action feasibility (\eventbpo{FIS})}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
@@ -737,10 +737,9 @@ However, expressions and predicates can only use elements that are identified wi
   If a context extends another context, the sets of the extended context are treated as if they
   are defined in the extending context.
 \item[Constants] Constants can be used when they are defined in the context (in the case of an axiom) or in a seen context.
-\item[Concrete Variables] Concrete variables that are defined in the machine itself can be used. This does \emph{not}
-  include variables of refined machines.
+\item[Concrete Variables] Concrete variables that are defined in the machine itself can be used.
 \item[Abstract Variables] Abstract variables  that are defined in an abstract machine can be used.
-\item[Concrete Parameters] Parameters that are defined in the event itself can be used. This does \emph{not} include parameters of refined events.
+\item[Concrete Parameters] Parameters that are defined in the event itself can be used. 
 \item[Abstract Parameters] Parameters that are defined in an abstract event can be used.
 \end{description}
 

@@ -16,7 +16,7 @@ A context has the following components:
 \item[Sets]
 \index{set}
   User-defined types can be declared in the \textsl{SETS} section
-  (See also \ref{sets}).
+  (see Section \ref{sets} for more information).
 \item[Constants]
 \index{constant}
   We can declare constants here. The type of each constant must be declared in the axiom section.
@@ -57,7 +57,7 @@ The order of the axioms and theorems matter because the proof of a theorem or th
 
 A machine describes the dynamic behavior of a model by means of
 variables whose values are changed by events.
-A central aspect of modeling a machine is to prove that the machine
+A central aspect of modelling a machine is to prove that the machine
 never reaches an invalid state, i.e. the variables always have values
 that satisfy the invariants.
 Here is a brief summary of the part that a machine contains:
@@ -69,7 +69,7 @@ Here is a brief summary of the part that a machine contains:
   a machine by declaring it in the \textsl{Sees} section.
   The axioms can be used in every proof in the machine as hypotheses.
 \item[Variables] \index{variable}
-  The variables' values are determined by an initialization event and
+  The variables' values are determined by an initialisation event and
   can be changed by events. This constitues the state of the machine. The type of each variable must be declared in the invariant section.
 \item[Invariants] \index{invariant}
   These are predicates that should be true for every reachable state.
@@ -77,7 +77,7 @@ Here is a brief summary of the part that a machine contains:
 \item[Events] \index{event}
   An event can assign new values to variables.
   The \emph{guards} of an event specify the conditions under which it can be executed.
-  The initialization of the machine is a special case of an event.
+  The initialisation of the machine is a special case of an event.
 \end{description}
 
 \subsection{Events}
@@ -113,15 +113,15 @@ The actions describe \emph{what} changes will then be applied to the variables.
 Only the variables that are explicitly mentioned in the actions are affected.
 All the other variables keep their old values. Beside the simple assignment ($\bcmeq$),
 there are other forms of actions ($\bcmin$ or $\bcmsuch$) which are explained in
-the reference section \ref{actions}.
+Section \ref{actions}.
 
-\index{initialization}
-The \emph{initialization} of the machine is a special form of event. It has neither parameters
+\index{initialisation}
+The \emph{initialisation} of the machine is a special form of event. It has neither parameters
 nor guards.
 
 Invariants must always be valid. To verify this, we must prove two things:
 \begin{itemize}
-  \item The initialization leads to a state where the invariant is valid.
+  \item The initialisation leads to a state where the invariant is valid.
   \item Assuming that the machine is in a state where the invariant is valid,
     every enabled event leads to a state where the invariant is valid.
 \end{itemize}
@@ -136,7 +136,7 @@ The goal of such a proof is to assert that when all affected variables are repla
 \item All guards, because events can only be triggered when the guards are valid.
 \end{itemize}
 
-In the special case of an initialization event, we cannot use the invariants because we do not make any assumptions about uninitialized machines.
+In the special case of an initialisation event, we cannot use the invariants because we do not make any assumptions about uninitialized machines.
 
 \subsection{Refinement}
 \label{tut_refinement}

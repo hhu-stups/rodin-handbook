@@ -3,6 +3,12 @@
 
 \section{General Questions}
 
+\subsection{Where can I get help?}
+
+In addition to this handbook, consider looking in the Rodin Wiki (\ref{rodin_wiki}) for an answer.
+
+There is also a vibrant community that is helpful and responsive.  You can contact it via the Rodin user mailinglist at \href{mailto:rodin-b-sharp-user@lists.sourceforge.net}{rodin-b-sharp-user@lists.sourceforge.net}.
+
 \subsection{What is Event-B?}
 \index{Event-B}
 
@@ -90,13 +96,21 @@ A page describing the ASCII shortcuts that can be used for entering mathematical
 
 This page is also available in the dynamic help system. The advantage of using dynamic help is that it is able to display the help page side-by-side with the other views and editors. To start the dynamic help, click \textsf{Help $\rangle$ Dynamic Help}, then select \textsf{Contents} and select the page in the tree. 
 
-\subsection{Rodin (and Eclipse) doesn't take into account the MOZILLA\_FIVE\_HOME environment variable} \marginpar{Is there anyway to keep the title of this section witin the margins?}
+\subsection{Pretty Print does not work on Linux}
+\index{xulrunner}
+
+Configuring Rodin on Linux can be tricky.  In particular, the pretty print view of the original editor requires an HTML control to render.  It it does not work after installing Rodin, you may have to configure xulrunner as follows:
 
 Add a property by appending the following code to your \textsf{eclipse/eclipse.ini} or \textsf{rodin/rodin.ini} file: 
 
 \begin{verbatim} 
 	-Dorg.eclipse.swt.browser.XULRunnerPath=/usr/lib/xulrunner/xulrunner-xxx 
 \end{verbatim} 
+
+\subsection{Some mathematical characters are wrong}
+\index{Font}
+
+The Rodin editor must use the correct font to work properly, which is \textsf{Brave Sans Mono}. Depending on the editor, the font has to be configured via Window $\rangle$ Preferences $\rangle$ Colors and Fonts $\rangle$ Basic Text $\rangle$ Font.
 
 \subsection{No More Handles}
 
@@ -134,7 +148,13 @@ To fix this problem:
 \subsection{How do I send a bug report?}
 \label{bug_report}
 
-\marginpar{question needs to be answered!!!}
+This depends on the nature of the bug:
+\begin{itemize}
+	\item Problems with the core Rodin platform, as well as feature requests, should be filed via the SourceForge bug tracker: \url{http://wiki.event-b.org/index.php/Bugs_and_Feature_Requests}
+	\item To file problems with individual plugins, check the plugin's documentation in the wiki (\ref{rodin_wiki}).
+	\item If you are unsure whether to file a bug or not, consider asking a question on the Rodin user list at \href{mailto:rodin-b-sharp-user@lists.sourceforge.net}{rodin-b-sharp-user@lists.sourceforge.net}.
+	\item To report a problem with the handbook, use the feedback button that is present in the HTML and Eclipse Help version of the handbook.
+\end{itemize}
 
 \section{Modelling}
 \index{modelling}
@@ -210,8 +230,7 @@ In order to remove a component, press the right-click on the component. In the c
 \subsection{In the new Rodin Editor, how can I add an element to machine?}
 \label{faq_new_editor_new_element}
 
-\marginpar{The link for this Section doesn't appear to be working}
-\info{Please also consult Section~\label{new_eventb_editor}. The editor is described in more detail there.} 
+\info{Please also consult Section~\ref{new_eventb_editor}. The editor is described in more detail there.} 
 
 
 Whenever you pull up a context menu in the new editor, please pay attention to the following two issues:
@@ -248,8 +267,7 @@ Once a ``Save" has been completed, three tools are called automatically, these a
 	\item the Auto-Prover (\ref{auto_prover})
 \end{itemize}
 
-This can take some time. A ``Progress" window can be opened at the bottom right of the screen to see which tools are working (most of the time, it will be the auto-prover).
-\marginpar{How can this progress window be opened up?} 
+This can take some time. A ``Progress'' view can be opened at the bottom right of the screen to see which tools are working (most of the time, it will be the auto-prover).  This is done via Window $\range$ Show View $\range$ Progress.
 
 \section{Proving}
 \index{proving}

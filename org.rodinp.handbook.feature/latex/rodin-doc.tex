@@ -17,6 +17,7 @@
 \usepackage{wrapfig}
 \usepackage{makeidx}
 \usepackage{fix-cm}
+\usepackage[utf8]{inputenc}
 
 \input{config}
 \input{makros}
@@ -71,6 +72,39 @@ Handbook $ $Rev$ $ \\
 \tableofcontents
 \fi
 
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\label{preface}
+
+Nobody likes to write documentation, yet everybody agrees that documentation is crucially important.  For a tool platform as complex as Rodin, documentation is essential, if it wants to succeed in reaching a wider audience.
+
+The executive team of the DEPLOY project recognized this and established at a meeting at ETH in 2010 the following, amongst other things: ``It is clear that the current documentation would not support, say, an engineer in an automotive company to start using the tools without significant support''.  It then commissioned the creation of a better Rodin documentation.  This handbook is the result of this effort.
+
+Rather than reinventing the wheel, we took all existing documentation into account, restructured it, extended it where necessary, created plenty of cross-references, and put the result through an editorial process to ensure readability.
+
+A word of warning and encouragement: Don't expect to be an expert in Event-B modelling after reading this handbook.  It's aim is to provide support while getting acquainted with the tool platform and to provide the basics of modelling, as well as being a companion to experts.  Beginners can work their way through the tutorial, which starts with installation and ends with moderately difficult proofs.  Additional support is available in the form of an FAQ and a comprehensive index.  Advanced users can resort to a comprehensive reference section, where they can quickly find essential information regarding the formalism.
+
+Wherever the handbook requires former knowledge, it provides pointers on where to get it.  Wherever it stops, it provides references to further reading.  In particular, it provides plenty of references to the Rodin Wiki, and provides information on how to get in touch with the Rodin community.  We are confident that this handbook will achieve its mission of getting new users acquainted with Rodin without frustration, and hopefully some fun.
+
+\begin{flushright}
+  Michael Jastram, Düsseldorf, 2012
+\end{flushright}
+
+\chapter*{Foreword}
+\addcontentsline{toc}{chapter}{Foreword}
+\label{foreword}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed metus ligula, congue ac suscipit sed, malesuada sed ligula. Maecenas ultrices, diam a ornare pellentesque, tellus justo mattis magna, nec tincidunt neque nibh ac lorem. Aliquam pellentesque sapien quis elit ornare consequat ultrices enim lacinia. Curabitur justo est, pulvinar eget dignissim a, dapibus a elit. Proin nec leo neque, quis cursus odio. Morbi rhoncus tincidunt est, dignissim mollis mi iaculis id. 
+
+Nulla nisi quam, ullamcorper in vestibulum at, varius at tellus. Nullam vehicula pharetra erat, sit amet dapibus massa auctor bibendum. Maecenas congue mattis tortor, in porttitor diam consectetur ut. Curabitur vel leo risus. Praesent justo elit, rhoncus sit amet eleifend sed, viverra sit amet libero. Pellentesque nec justo dolor, quis vehicula odio. Mauris in interdum dui. Morbi tellus nunc, dapibus et faucibus vitae, faucibus vitae nulla.
+
+Suspendisse ut mauris risus, quis tempus nulla. Sed ac velit consectetur tortor facilisis posuere eu et nulla. Praesent quis nibh diam, eget luctus magna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis pulvinar justo id urna eleifend varius. Nullam lacinia, metus id rhoncus accumsan, augue mi hendrerit purus, et condimentum lorem lectus non ipsum. Donec accumsan lacus vel mauris rhoncus quis porttitor sem rhoncus. 
+
+Morbi bibendum arcu sed arcu molestie feugiat. Ut hendrerit enim quis mauris pellentesque scelerisque. Cras bibendum, enim in viverra faucibus, turpis lorem ultricies eros, a condimentum velit arcu vel leo. Duis pulvinar dictum vestibulum. Fusce id interdum ligula. Aliquam pretium hendrerit eros, vehicula faucibus leo fermentum a. Sed ut nisi libero. Aenean blandit, dui sed dapibus pellentesque, dolor turpis facilisis diam, vitae malesuada quam mauris in nisi.
+
+
+\begin{flushright}Michael Buttler, Southampton, 2012\end{flushright}
+
 \chapter{Introduction}
 
 This handbook provides documentation for users of the Rodin toolset, which provides tools for working with Event-B models.
@@ -115,12 +149,21 @@ This handbook is complemented by the Rodin wiki (\url{http://wiki.event-b.org/})
 \subsection{Feedback}
 \label{feedback}
 
-All online versions of the handbook contain a button or link for feedback.  Work on the handbook will continue until at least January 2012, so your feedback will be read and will help to improve this handbook.  You can also submit feedback via email to \texttt{rodin-handbook@formalmind.com}.
+All online versions of the handbook contain a button or link for feedback.  Work on the handbook will continue until March 2012, so your feedback will be read and will help to improve this handbook.
 
-\section{Foreword}
-\label{foreword}
+You can also submit feedback via email to \texttt{rodin-hand\-book@formal\-mind.com}.
 
-It would be nice to recruit somebody for the foreword - maybe Cliff and/or Jean-Raymond.
+\section{Further Reading}
+\label{literature}
+
+In this section, we present a selected list of reading materials that provide information that is not covered in this handbook.
+
+\subsection{Modeling in Event-B: System and Software Engineering, J.-R. Abrial (2010)}
+\label{abrial_2010}
+
+This book represents the ultimate authority on Event-B, written by its creator.  The example from Section~\ref{tut_location_access_controller} is based on an example from the book.
+
+From the Editor: ``A practical text suitable for an introductory or advanced course in formal methods, this book presents a mathematical approach to modelling and designing systems using an extension of the B formal method: Event-B. Based on the idea of refinement, the author's systematic approach allows the user to construct models gradually and to facilitate a systematic reasoning method by means of proofs. Readers will learn how to build models of programs and, more generally, discrete systems, but this is all done with practice in mind. The numerous examples provided arise from various sources of computer system developments, including sequential programs, concurrent programs and electronic circuits. The book also contains a large number of exercises and projects ranging in difficulty. Each of the examples included in the book has been proved using the Rodin Platform tool set, which is available free for download at www.event-b.org.''
 
 \section{Conventions}
 \label{conventions}

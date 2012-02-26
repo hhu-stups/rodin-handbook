@@ -394,9 +394,9 @@ Because we know that invariant $c\in Q$ was valid before the assignment,
 
 \info{In order to undo a step, click on a node in the \texttt{Proof Tree View} and click on the \icon{rodin/pn_prover.png} button in the \texttt{Proof Control View} or open the context menu of a node and select \texttt{Prune}.}
 
-Take a look at the Proof Tree View. The root node should now be labeled with \texttt{ah ($x\neq c$)},
+Take a look at the Proof Tree View. The root node should now be labelled with \texttt{ah ($x\neq c$)},
   which is the hypothesis that we just added.
-This node has three children: The first proves that $x\neq c$ is well-defined, which is $\btrue$ and has already been trivially proven.\marginpar{(mj) ... and how do we know that this used to be the WD proof obligation?  This information seems to be lost.}
+This node has three children: The first proves that $x\neq c$ is well-defined\footnote{You may wonder how we know that this is the well-definedness proof obligation}, which is $\btrue$ and has already been trivially proven.
 The second is the proof of the hypotheses $\lnot x=c$.
 The third is the proof of the original goal where the new hypotheses can be used.
 

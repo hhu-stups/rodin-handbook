@@ -262,8 +262,10 @@ This concludes the tutorial about contexts. The following section shows the comp
 		\nItemX{ hate\_relation }{ hates \in  persons \rel  persons }
 		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
 		\\\hspace*{3,4 cm}  richer \binter  id = \emptyset  \land 
-		\\\hspace*{3,4 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) \limp  x\mapsto z\in richer) \land 
-		\\\hspace*{3,4 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y \limp  (x\mapsto y\in richer \leqv  y\mapsto x \notin  richer)) }
+		\\\hspace*{3,4 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) 
+		\\\hspace*{4,4 cm}\limp  x\mapsto z\in richer) \land 
+		\\\hspace*{3,4 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y 
+		\\\hspace*{4,4 cm}\limp  (x\mapsto y\in richer \leqv  y\mapsto x \notin  richer)) }
 		\nItemX{ killer\_type }{ killer \in  persons }
 		\nItemX{ killer\_hates }{ killer \mapsto  Agatha \in  hates }
 		\nItemX{ killer\_not\_richer }{ killer \mapsto  Agatha \notin  richer }

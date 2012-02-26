@@ -5,7 +5,7 @@
 
 \tick{\textbf{Goals:} In this section, we will take a closer look at a few more complex proofs. Here we use the model of a location access controller. The goal is to develop the proofs that ensure there are no deadlocks present in the initial model and in the first refinement.}
 
-\info{\marginpar{Reference to literature section}This example has been taken from the Event-B book and is quite sophisticated.  In this section, we are dealing with a subset of the complete model.  We encourage readers to consult the example in the book.}
+\info{This example has been taken from the Event-B book (\ref{abrial_2010}) and is quite sophisticated.  In this section, we are dealing with a subset of the complete model.  We encourage readers to consult the example in the book.}
 
 %\info {First of all you need to download the following \file{Doors.zip}{Location Access Controller problem}.}
 
@@ -280,7 +280,7 @@ Now we are going to explain the main complexity of our model: the deadlock freen
 
 \info{Please remember that post-tactics should still be disabled before starting this part of the tutorial.} 
 
-The difference between the first refinement and the initial model is that a new constant \textsf{com} has been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which allows anybody to get outside.  Please consult the book\marginpar{Reference to Abrial book} for the details regarding this model.
+The difference between the first refinement and the initial model is that a new constant \textsf{com} has been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which allows anybody to get outside.  Please consult the Event-B book (\ref{abrial_2010}) for the details regarding this model.
 
 The event \textsf{INITIALISATION} does not change, but the event \textsf{PASS} is refined as a consequence. We assume that a person can move to another location $l$ if they have the authorisation to be in $l$ (already defined in the abstraction) and also if the location $l$ is connected to the location $p$ where the person is at this precise moment (represented by $sit(p)$).
 

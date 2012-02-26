@@ -4,6 +4,8 @@
 \section{General Questions}
 
 \subsection{Where can I get help?}
+\label{faq_getting_help}
+\index{mailing list}
 
 In addition to this handbook, consider looking in the Rodin Wiki (\ref{rodin_wiki}) for an answer.
 
@@ -156,6 +158,22 @@ This depends on the nature of the bug:
 	\item To report a problem with the handbook, use the feedback button that is present in the HTML and Eclipse Help version of the handbook.
 \end{itemize}
 
+\subsection{Where did the GUI window go?}
+
+When you are looking for a particular view, and the view does not appear or if it appears in a different place than is usual, try clicking on \textsf{Window $\rangle $ Reset Perspective...}. This will reset the different views back to their default positions. If you can't find menu buttons from one of the views, try resizing the view in question to see if part of the menu has been hidden.
+
+\subsection{Where vs. When: What's going on?}
+\index{when}
+\index{where}
+
+You may have noticed that both in this tutorial, as well as in the tool, events sometimes use the keyword ``when'' and sometimes ``where''.  The idea of this was to make the formal statements more intuitive.  Unfortunately, this created more confusion than anything else.
+
+The short answer is: ``when'' and ``where'' in events have exactly the same meaning, for all practical purposes.
+
+The long answer is: In some contexts (but not all), the tool changes the keywords to make the meaning of the event more apparent.  The distinguishing factor is the parameter: an event without a parameter uses the keyword ``when'', and an event with a parameter uses the keyword ``where''.
+
+To make things even more confusing, this doesn't apply everywhere: The Event-B structural editor always uses the keyword ``where'', but the pretty print for the Event-B structural editor switches between the two.  The default Rodin editor always uses the keyword "where". The Event-B syntax in this handbook has been generated with the \LaTeX plugin, which also switches between the two keywords.
+
 \section{Modelling}
 \index{modelling}
 
@@ -291,24 +309,6 @@ Yes, it is.  Check out Section~\ref{use_provers_effectively} to begin using the 
 	\item \textsf{PP} means \textit{discharged by the predicate prover},
 	\item \textsf{ML} means \textit{discharged by the mono lemma prover}
 \end{itemize}
-
-\section{Usage Questions}
-
-\subsection{Where did the GUI window go?}
-
-When you are looking for a particular view, and the view does not appear or if it appears in a different place than is usual, try clicking on \textsf{Window $\rangle $ Reset Perspective...}. This will reset the different views back to their default positions. If you can't find menu buttons from one of the views, try resizing the view in question to see if part of the menu has been hidden.
-
-\subsection{Where vs. When: What's going on?}
-\index{when}
-\index{where}
-
-You may have noticed that both in this tutorial, as well as in the tool, events sometimes use the keyword ``when'' and sometimes ``where''.  The idea of this was to make the formal statements more intuitive.  Unfortunately, this created more confusion than anything else.
-
-The short answer is: ``when'' and ``where'' in events have exactly the same meaning, for all practical purposes.
-
-The long answer is: In some contexts (but not all), the tool changes the keywords to make the meaning of the event more apparent.  The distinguishing factor is the parameter: an event without a parameter uses the keyword ``when'', and an event with a parameter uses the keyword ``where''.
-
-To make things even more confusing, this doesn't apply everywhere: The Event-B structural editor always uses the keyword ``where'', but the pretty print for the Event-B structural editor switches between the two.  The default Rodin editor always uses the keyword "where". The Event-B syntax in this handbook has been generated with the \LaTeX plugin, which also switches between the two keywords.
 
 %%% Local Variables: 
 %%% mode: latex

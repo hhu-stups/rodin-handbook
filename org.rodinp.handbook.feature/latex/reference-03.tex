@@ -16,9 +16,11 @@ mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.
 Other, like equality ($=$) or universal quantification ($\forall$) are simply described by natural language.
 
-When we introduce new identifiers while expressing an operator (e.g. a set comprehension), we assume that the new identifier does not occur free in the rewritten expressions \marginpar{Does this paragraph make sense?} (i.e. any new identifiers that are used to express an operator must either be bound to the original operator or must not appear in the original operator at all). 
+When we introduce new identifiers while expressing an operator (e.g. by using a set comprehension),
+we assume that the new identifier does not occur free in the rewritten expressions.
+(see Section~\ref{free_identifiers} for more information on free identifiers).
 
-\info{For more information, download the four-page \file{EventB-Summary.pdf}{Event-B Cheat Sheet}, which provides a concise summary of the Event-B mathematical toolkit.  We would like to thank Ken Robinson for making it available.}
+\info{For a concise summary of the Event-B mathematical toolkit, download the four-page \file{EventB-Summary.pdf}{Event-B Cheat Sheet}.  We would like to thank Ken Robinson for making it available.}
 
 \subsubsection{Data types}
 \label{data_types}
@@ -538,17 +540,18 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\bpartition(\exprs,s_1,\ldots,s_n)$ is a predicate that states that 
-    the sets $s_1,\ldots,s_n$ constitute a partition of $\exprs$.
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)$ is a predicate that states that 
+    the sets $\exprls_1,\ldots,\exprls_n$ constitute a partition of $\exprs$.
     The union of all elements of a partition is $\exprs$ and all elements are disjoint.
 
-    $\bpartition(\exprs)$ is equivalent to $\exprs = \emptyset$.
+    $\bpartition(\exprs)$ is equivalent to $\exprs = \emptyset$
+    and $\bpartition(\exprs,\exprls)$ to $\exprs = \exprls$.
   \rrdef
-    $\bpartition(\exprs,s_1,\ldots,s_n) \defi \exprs=s_1\bunion\ldots\bunion s_n \land \forall i,j \qdot i\neq j \limp s_i\binter s_j = \emptyset$
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n) \defi \exprs=\exprls_1\bunion\ldots\bunion\exprls_n \land \forall i,j \qdot i\neq j \limp\exprls_i\binter\exprls_j = \emptyset$
   \rrtypes
-    $\bpartition(\exprs,s_1,\ldots,s_n)$ is a predicate with $\exprs\in\pow(\alpha)$ and $s_i\in\pow(\alpha)$ for $i\in 1\upto n$
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)$ is a predicate with $\exprs\in\pow(\alpha)$ and $\exprls_i\in\pow(\alpha)$ for $i\in 1\upto n$
   \rrwd
-    $\wdl(\bpartition(\exprs,s_1,\ldots,s_n)) \defi \wdl(\exprs) \land \wdl(s_1) \land \ldots \land \wdl(s_n)$
+    $\wdl(\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)) \defi \wdl(\exprs) \land \wdl(\exprls_1) \land \ldots \land \wdl(\exprls_n)$
 \end{rodinrefentry}
 \end{samepage}
 

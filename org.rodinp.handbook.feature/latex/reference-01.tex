@@ -44,7 +44,7 @@ Various relationships exist between machines and contexts. This is illustrated i
 \subsubsection{Rodin Nature}
 \label{rodin_nature}
 
-Eclipse Projects can have one or more natures to describe their purpose.  The GUI thens adapt to this nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project in Rodin, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
+Eclipse Projects can have one or more natures to describe their purpose.  The GUI then adapt to this nature.  Rodin Projects must have the Rodin-Nature.  If you create an Event-B project in Rodin, it automatically has the right nature.  If you want to modify an existing project, you can edit the \texttt{.project} file and add the following XML in the \texttt{<natures>} section:
 
 \pencil{
 \texttt{<nature>org.rodinp.core.rodinnature</nature>}
@@ -486,7 +486,7 @@ The Proving Perspective consists of a number of views: the \textsf{Proof Tree}, 
 
 To work on an PO that has not yet been discharged, it is necessary to load the proof into the Proving Perspective. To do this, switch to the Proving Perspective. Select the project from the Event-B Explorer and select and expand the component (context or machine). Finally, select (double-click) the proof obligation of interest. A number of views will be updated with details of the corresponding proof. 
 
-Note that pressing the \icon{rodin/discharged.png} button on the top left hand side of the \textsf{Event-B Explorer} will remove all discharged proof obligations (PO's) from the view. 
+Note that pressing the \icon{rodin/discharged.png} button on the top left hand side of the \textsf{Event-B Explorer} will remove all discharged proof obligations (POs) from the view. 
 
 \subsubsection{The Proof Tree}
 \label{proof_tree_view}
@@ -665,7 +665,7 @@ The \icon{rodin/pp.png} (predicate prover) appears in the drop-down list under t
 
 \begin{itemize}
 	\item The \icon{rodin/p0.png} prover uses all selected hypotheses in the \textsf{Selected Hypotheses} view.
-	\item The \icon{rodin/p1.png} prover performs a lasoo operation on the selected hypotheses and the goal and uses the resulting hypotheses.
+	\item The \icon{rodin/p1.png} prover performs a lasso operation on the selected hypotheses and the goal and uses the resulting hypotheses.
 	\item The \icon{rodin/pp.png} prover uses all hypotheses. 
 \end{itemize}
 

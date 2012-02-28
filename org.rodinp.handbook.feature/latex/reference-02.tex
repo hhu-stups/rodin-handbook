@@ -218,7 +218,7 @@ An event has the following elements:
 
 An event can refine one or more events of an abstract machine. To keep things simple, we will
   first consider events with only one refined event.
-If there are several refinement steps, we describe events from the refined machines as abstract events and the event from the conrete machine as the concrete event. For example, if an event $E_1$ is refined by $E_2$ and $E_2$ is refined by
+If there are several refinement steps, we describe events from the refined machines as abstract events and the event from the concrete machine as the concrete event. For example, if an event $E_1$ is refined by $E_2$ and $E_2$ is refined by
   $E3$, we call $E_1$ and $E_2$ the abstract events and $E_3$ the concrete event.
 Likewise, if we refer to the parameters of the abstract events, we mean all the parameters
   of all the abstract events (e.g., the parameters of $E_1$ and $E_2$).
@@ -387,7 +387,7 @@ This condition is called \emph{guard strengthening}.
 For each abstract guard $G_i$ with label \eventbpo{guardlabel}, the following
 proof obligation is generated:
 \index{proof obligation!guard strengthening@guard strengthening (\eventbpo{GRD})}
-\pode{Guard strenghtening}%
+\pode{Guard strengthening}%
 {\eventbpo{eventname/guardlabel/GRD}}% 
 {$\begin{array}{r@{\ }l}
    & \axioms \land \absinvariants \land \concinvariants
@@ -487,7 +487,7 @@ A variant is an expression that is either numeric
 
 Events can be marked as:
 \begin{description}
-\item[ordinary] when the event may occur arbitrarily often and does not underly any restrictions
+\item[ordinary] when the event may occur arbitrarily often and does not underlie any restrictions
   regarding the variant.
 \item[convergent] when the event must decrease the variant.
 \item[anticipated] when the event must not increase the variant.

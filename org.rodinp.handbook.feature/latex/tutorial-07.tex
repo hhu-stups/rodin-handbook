@@ -304,7 +304,7 @@ Here is the resulting event:
 \end{description}
 }
 
-Now you can get rid of the variable \textsf{cars\_go} and its inisialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{tut_data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
+Now you can get rid of the variable \textsf{cars\_go} and its initialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{tut_data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
 
 \pencil{
 \begin{description}

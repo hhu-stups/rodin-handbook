@@ -328,7 +328,7 @@ The first case is dealing with $sit(p) = outside$.  To verify this case, we need
 
 Add \textsf{axm7} to the list of hypotheses.  We would like to work with an instance of a location, so we instantiate this hypothesis by clicking on its red $\exists$ symbol.
 
-\info{Note that Rodin instaniated the variable with the name $l0$ instead of $l$ because the name $l$ already exists from the previous instantiation.}
+\info{Note that Rodin instantiated the variable with the name $l0$ instead of $l$ because the name $l$ already exists from the previous instantiation.}
 
 Now we have variables to instantiate our goal as well.  We enter the value $p$ in the yellow box for q and $l0$ in the yellow box for m (figure~\ref{tut_10_ref_proof2}) and press the red  $\exists$.
 
@@ -344,7 +344,7 @@ This results in two new nodes to the proof tree, the first one being the well-de
 
 Now the first case is resolved.  Now let's consider the second case, $sit(p) \neq outside$.  We would like to instantiate the quantifier again, but this time we have to use different values.  We still have p to substitute for q, but for the location we use the exit relationship: Our axioms tell us that there is always an exit from every location, so $exit(sit(p))$ should be a valid substitution for m. Let's perform the substitution.  This advances our proof tree with a new node (and the well-definedness proof obligation, which we discharge with one click).
 
-The resulting proof obligation is a conjunction.  We can discharge the two parts of it by clicking on the red $\land$ symbol in the goal viel. This results in two simpler goals in the proof tree.  We start with the \textbf{second} goal.
+The resulting proof obligation is a conjunction.  We can discharge the two parts of it by clicking on the red $\land$ symbol in the goal view. This results in two simpler goals in the proof tree.  We start with the \textbf{second} goal.
 
 \info{We start with the second goal instead of the first goal because doing so will provide us with hypotheses that will be beneficial in discharging the first goal.  How do we know this? By experience and by playing with the proofs for a long time.  Depressingly, there is no easy rule to guide us through the proving process. There are just general guidelines and experience.}
 

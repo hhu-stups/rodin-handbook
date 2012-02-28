@@ -48,7 +48,7 @@ There are two kind of proof obligations generated in a context:
     Thus Rodin generates the proof obligation $y\neq 0$.
     A proof obligation for proving than an expression is well-defined has the name \eventbpo{label/WD}.
 \end{itemize}
-The order of the axioms and theorems matter because the proof of a theorem or the degree to which an expression is well-definded may depend on the axioms and theorems that have already been written. This is necessary to avoid circular reasoning.
+The order of the axioms and theorems matter because the proof of a theorem or the degree to which an expression is well-defined may depend on the axioms and theorems that have already been written. This is necessary to avoid circular reasoning.
 
 
 \subsection{Machines}
@@ -70,7 +70,7 @@ Here is a brief summary of the part that a machine contains:
   The axioms can be used in every proof in the machine as hypotheses.
 \item[Variables] \index{variable}
   The variables' values are determined by an initialisation event and
-  can be changed by events. This constitues the state of the machine. The type of each variable must be declared in the invariant section.
+  can be changed by events. This constitutes the state of the machine. The type of each variable must be declared in the invariant section.
 \item[Invariants] \index{invariant}
   These are predicates that should be true for every reachable state.
   Each invariant has a label.
@@ -172,7 +172,7 @@ concrete guards can be used as hypotheses in the proof.
 
 The second condition, that the gluing invariant remains true, is just a more general case of the proof obligation which ensures 
 that an event does not violate the invariant. So the proof obligation's label is again 
-\eventbpo{concrete\_event/concrete\_invariant/INV}. The goal is to prove that the invariant of the concrete machine is valid when each occurence of a modified variable is replaced by its new value.
+\eventbpo{concrete\_event/concrete\_invariant/INV}. The goal is to prove that the invariant of the concrete machine is valid when each occurrence of a modified variable is replaced by its new value.
 The hypotheses we use are:
 \begin{itemize}
 \item We assume that the invariant of both the concrete and abstract machines were valid before the event occurred.

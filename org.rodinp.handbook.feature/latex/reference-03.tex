@@ -377,7 +377,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\{~\expre~|~\predp~\}$ is a short form for $\{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$ where $\freeids{\expre}$ denotes the
     list of free identifiers occurring in $\expre$ (see Section \ref{free_identifiers})).
   \rrdef
-    $\{~\expre~|~\predp~\} = \{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$
+    $\{~\expre~|~\predp~\} \defi \{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$
   \rrtypes
     With $x_1\in\alpha_1, \ldots, x_n\in\alpha_n$ and $\expre\in\beta$:\\
     $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\} \in \pow(\beta)$\\
@@ -409,8 +409,8 @@ The following reference subsections will have the form the form: \\[2em]
     The empty set $\emptyset$ contains no elements.
     The set extension $\{\expre_1,\ldots,\expre_n\}$ is the set that contains exactly the elements $\expre_1,\ldots,\expre_n$.
   \rrdef
-    $\emptyset = \{~x~|~\bfalse~\}$\\
-    $\{\expre_1,\ldots,\expre_n\} = \{~x~|~x=\expre_1\lor\ldots\lor x=\expre_n\}$
+    $\emptyset \defi \{~x~|~\bfalse~\}$\\
+    $\{\expre_1,\ldots,\expre_n\} \defi \{~x~|~x=\expre_1\lor\ldots\lor x=\expre_n\}$
   \rrtypes
     $\emptyset\in\pow(\alpha)$, where $\alpha$ is an arbitrary type.\\
     $\{\expre_1,\ldots,\expre_n\}\in\pow(\alpha)$ with $\expre_1\in\alpha,\ldots,\expre_n\in\alpha$
@@ -468,9 +468,9 @@ The following reference subsections will have the form the form: \\[2em]
     The intersection $\exprs\binter \exprt$ denotes the set that contains all elements that are in both $\exprs$ and $\exprt$.
     The set subtraction or set difference $\exprs\setminus \exprt$ denotes all elements that are in $\exprs$ but not in $\exprt$.
   \rrdef
-    $\exprs\bunion \exprt = \{~x~|~x\in \exprs\lor x\in \exprt~\}$\\
-    $\exprs\binter \exprt = \{~x~|~x\in \exprs\land x\in \exprt~\}$\\
-    $\exprs\setminus \exprt = \{~x~|~x\in \exprs\land x\not\in \exprt~\}$
+    $\exprs\bunion \exprt \defi \{~x~|~x\in \exprs\lor x\in \exprt~\}$\\
+    $\exprs\binter \exprt \defi \{~x~|~x\in \exprs\land x\in \exprt~\}$\\
+    $\exprs\setminus \exprt \defi \{~x~|~x\in \exprs\land x\not\in \exprt~\}$
   \rrtypes
     $\exprs\opelipse \exprt\in\pow(\alpha)$
     with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\alpha)$ for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
@@ -492,8 +492,8 @@ The following reference subsections will have the form the form: \\[2em]
     $\pow(\exprs)$ denotes the set of all subsets of the set $\exprs$.
     $\pow(\exprs)$ denotes the set of all non-empty subsets of the set $\exprs$.
   \rrdef
-    $\pow(\exprs) = \{~x~|~x\subseteq \exprs~\}$\\
-    $\pow_1(\exprs) = \pow(\exprs)\setminus\{\emptyset\}$
+    $\pow(\exprs) \defi \{~x~|~x\subseteq \exprs~\}$\\
+    $\pow_1(\exprs) \defi \pow(\exprs)\setminus\{\emptyset\}$
   \rrtypes
     $\pow(\alpha)\in\pow(\pow(\alpha))$ and $\pow_1(\alpha)\in\pow(\pow(\alpha))$ with
     $\exprs\in\pow(\alpha)$.
@@ -569,8 +569,8 @@ The following reference subsections will have the form the form: \\[2em]
     $\bunaryinter(\exprs)$ is the intersection of all elements of $\exprs$. 
     The intersection is only defined for non-empty $\exprs$.
   \rrdef
-    $\bunaryunion(\exprs) = \{~x~|~\exists s \qdot s\in \exprs \land x\in s~\}$ \\
-    $\bunaryinter(\exprs) = \{~x~|~\forall s \qdot s\in \exprs \limp x\in s~\}$
+    $\bunaryunion(\exprs) \defi \{~x~|~\exists s \qdot s\in \exprs \land x\in s~\}$ \\
+    $\bunaryinter(\exprs) \defi \{~x~|~\forall s \qdot s\in \exprs \limp x\in s~\}$
   \rrtypes
     $\bunaryunion(\exprs)\in\pow(\alpha)$ and $\bunaryinter(\exprs)\in\pow(\alpha)$ with $\exprs\in\pow(\pow(\alpha))$.
   \rrwd
@@ -638,7 +638,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprs\cprod \exprt$ denotes the set of pairs where the first element is a member of $\exprs$ and
     second element is a member of $\exprt$.
   \rrdef
-    $\exprs\cprod \exprt = \{~x\mapsto y~|~x\in \exprs\land y\in Y~\}$
+    $\exprs\cprod \exprt \defi \{~x\mapsto y~|~x\in \exprs\land y\in Y~\}$
   \rrtypes
     $\expre\mapsto\exprf\in\alpha\cprod\beta$ with $\expre\in\alpha$ and $\exprf\in\beta$.\\
     $\exprs\cprod \exprt\in\pow(\alpha\cprod\beta)$ with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$.
@@ -668,10 +668,10 @@ The following reference subsections will have the form the form: \\[2em]
     A surjective relation is a relation where there is at least one element of $\exprs$ for each element of $\exprt$
     such that both are related.
   \rrdef
-    $\exprs \rel \exprt = \pow(\exprs\cprod \exprt)$\\
-    $\exprs \trel \exprt = \{~r~|~r\in \exprs\rel \exprt\land \dom(r) = \exprs~\}$\\
-    $\exprs \srel \exprt = \{~r~|~r\in \exprs\rel \exprt\land \ran(r) = \exprs~\}$\\
-    $\exprs \strel \exprt = (\exprs \trel \exprt) \land (\exprs \srel \exprt)$
+    $\exprs \rel \exprt \defi \pow(\exprs\cprod \exprt)$\\
+    $\exprs \trel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \dom(r) = \exprs~\}$\\
+    $\exprs \srel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \ran(r) = \exprs~\}$\\
+    $\exprs \strel \exprt \defi (\exprs \trel \exprt) \land (\exprs \srel \exprt)$
   \rrtypes
     For $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
@@ -700,8 +700,8 @@ The following reference subsections will have the form the form: \\[2em]
     Likewise the range $\ran(\exprlr)$ is the set of elements of $\exprt$ to which at least one element
     of $\exprs$ relates by $\exprlr$.
   \rrdef
-    $\dom(\exprlr) = \{~x~|~\exists y \qdot x\mapsto y\in \exprlr~\}$\\
-    $\ran(\exprlr) = \{~y~|~\exists x \qdot x\mapsto y\in \exprlr~\}$
+    $\dom(\exprlr) \defi \{~x,y~\qdot~ x\mapsto y\in \exprlr~|~x~\}$\\
+    $\ran(\exprlr) \defi \{~y,y~\qdot~ x\mapsto y\in \exprlr~|~y~\}$
   \rrtypes
     $\dom(\exprlr)\in\pow(\alpha)$ and $\ran(\exprlr)\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$.
   \rrwd
@@ -733,10 +733,10 @@ The following reference subsections will have the form the form: \\[2em]
     whose second element is in $\exprs$ and $\exprlr\ransub\exprs$ is the set where the pair's second
     element is not in $\exprs$.
   \rrdef
-    $\exprs\domres\exprlr = \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\in\exprs\}$\\
-    $\exprs\domsub\exprlr = \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\not\in\exprs\}$\\
-    $\exprlr\ranres\exprs = \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\in\exprs\}$\\
-    $\exprlr\ransub\exprs = \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\not\in\exprs\}$
+    $\exprs\domres\exprlr \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\in\exprs\}$\\
+    $\exprs\domsub\exprlr \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\not\in\exprs\}$\\
+    $\exprlr\ranres\exprs \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\in\exprs\}$\\
+    $\exprlr\ransub\exprs \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\not\in\exprs\}$
   \rrtypes
     $\exprs\domres\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\domsub\exprlr\in\pow(\alpha\cprod\beta)$
     with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\alpha)$\\
@@ -791,12 +791,12 @@ The following reference subsections will have the form the form: \\[2em]
     The inverse relation $\exprlr^{-1}$ relates an element $x$ to $y$ if the original relation $\exprlr$
     relates $y$ to $x$.
   \rrdef
-    $\exprlr\fcomp\exprls = \{~x \mapsto y~|~\exists z\qdot x \mapsto z \in\exprlr \land z \mapsto y \in\exprls~\}$\\
-    $\exprlr\bcomp\exprls = \exprls\fcomp\exprlr$\\
-    $\exprlr\ovl\exprls = \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
-    $\exprlr\pprod\exprls = \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
-    $\exprlr\dprod\exprls = \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
-    $\exprlr^{-1} = \{y\mapsto x~|~x\mapsto y\in\exprlr~\}$
+    $\exprlr\fcomp\exprls \defi \{~x,y,z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y \in\exprls ~|~ x \mapsto y~\}$\\
+    $\exprlr\bcomp\exprls \defi \exprls\fcomp\exprlr$\\
+    $\exprlr\ovl\exprls \defi \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
+    $\exprlr\pprod\exprls \defi \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
+    $\exprlr\dprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
+    $\exprlr^{-1} \defi \{y\mapsto x~|~x\mapsto y\in\exprlr~\}$
   \rrtypes
     $\exprlr\fcomp\exprls\in\pow(\alpha\cprod\gamma)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
       $\exprls\in\pow(\beta\cprod\gamma)$\\
@@ -830,7 +830,7 @@ The following reference subsections will have the form the form: \\[2em]
     The relational image $\exprlr[\exprs]$ are those elements in the range of $\exprlr$
     that are mapped from $\exprs$.
   \rrdef
-    $\exprlr[\exprs] = \{~x,y~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~|~y~\}$
+    $\exprlr[\exprs] \defi \{~x,y~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~|~y~\}$
   \rrtypes
     $\exprlr[\exprs]\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\alpha)$
   \rrwd
@@ -859,9 +859,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\id$, $\prjone$ and $\prjtwo$ are generic definitions. Their type must be inferred
     from the environment.
   \rrdef
-    $\id = \{~x\mapsto x~|~\btrue~\}$\\
-    $\prjone = \{~ (x\mapsto y)\mapsto x~|~\btrue~\}$\\
-    $\prjtwo = \{~ (x\mapsto y)\mapsto y~|~\btrue~\}$
+    $\id \defi \{~x\mapsto x~|~\btrue~\}$\\
+    $\prjone \defi \{~ (x\mapsto y)\mapsto x~|~\btrue~\}$\\
+    $\prjtwo \defi \{~ (x\mapsto y)\mapsto y~|~\btrue~\}$
   \rrtypes
     $\id\in\pow(\alpha\cprod\alpha)$ for an arbitrary type $\alpha$.\\
     $\prjone\in\pow((\alpha\cprod\beta)\cprod\alpha)$ and
@@ -905,13 +905,13 @@ The following reference subsections will have the form the form: \\[2em]
 
   A function is bijective (is a bijection) if it is both injective and surjective.
   \rrdef
-  $\exprs \pfun \exprt = \{~ f ~|~ f\in \exprs\rel \exprt \land (\forall e,x,y \qdot e\mapsto x\in f \land e\mapsto y\in f \limp x=y) ~\}$\\
-  $\exprs \tfun \exprt = \{~ f ~|~ f\in \exprs\pfun \exprt \land \dom(f) = \exprs ~\}$\\
-  $\exprs \pinj \exprt = \{~ f ~|~ f\in \exprs\pfun \exprt \land f^{-1} \in  \exprt\pfun \exprs ~\}$\\
-  $\exprs \tinj \exprt = (\exprs\pinj \exprt) \binter (\exprs\tfun \exprt)$\\
-  $\exprs \psur \exprt = \{~ f ~|~ f\in \exprs\pfun \exprt \land \ran(f) = \exprt ~\}$\\
-  $\exprs \tsur \exprt = (\exprs\psur \exprt) \binter (\exprs\tfun \exprt)$\\
-  $\exprs \tbij \exprt = (\exprs\tinj \exprt) \binter (\exprs\tsur \exprt)$\\
+  $\exprs \pfun \exprt \defi \{~ f ~|~ f\in \exprs\rel \exprt \land (\forall e,x,y \qdot e\mapsto x\in f \land e\mapsto y\in f \limp x=y) ~\}$\\
+  $\exprs \tfun \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land \dom(f) = \exprs ~\}$\\
+  $\exprs \pinj \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land f^{-1} \in  \exprt\pfun \exprs ~\}$\\
+  $\exprs \tinj \exprt \defi (\exprs\pinj \exprt) \binter (\exprs\tfun \exprt)$\\
+  $\exprs \psur \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land \ran(f) = \exprt ~\}$\\
+  $\exprs \tsur \exprt \defi (\exprs\psur \exprt) \binter (\exprs\tfun \exprt)$\\
+  $\exprs \tbij \exprt \defi (\exprs\tinj \exprt) \binter (\exprs\tsur \exprt)$\\
   \rrtypes
     $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\beta)$ for each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
   $\exprs \opelipse \exprt \in \pow(\pow(\alpha\cprod\beta))$
@@ -942,37 +942,39 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rodinrefentry}
 \end{samepage}
 
+% TODO: This is a ruther ugly hack, but without explicit page break,
+% the section about the lambda operator get stretched
+\clearpage
 \begin{samepage}
 \subsubsection{Lambda}
 \label{lambda}
 \index{lambda@lamba expression ($\lambda$)}
-\newcommand{\lambdapattern}{\mathcal{P}}
 \begin{rrnames}
   $\lambda$  & \texttt{\%}  & Lambda
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $(\lambda~\lambdapattern~\qdot~\predp~|~\expre~)$ is a function that maps an ``input'' $\lambdapattern$ to
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)$ is a function that maps an ``input'' $\exprlp$ to
     a result $\expre$ such that $\predp$ holds. 
 
-    $\lambdapattern$ is a pattern of identifiers, parentheses and $\mapsto$ which follows the
+    $\exprlp$ is a pattern of identifiers, parentheses and $\mapsto$ which follows the
     following rules:
     \begin{itemize}
     \item An identifier $x$ is a pattern.
     \item An identifier $x$, followed by an $\boftype$ operator is a pattern (See \ref{typing}
       for more details).
-    \item A pair $p\mapsto q$ is a pattern if $p$ and $q$ are patterns.
-    \item $(p)$ is pattern if $p$ is pattern.
+    \item A pair $\exprla\mapsto\exprlb$ is a pattern if $\exprla$ and $\exprlb$ are patterns.
+    \item $(\exprla)$ is pattern if $\exprla$ is pattern.
     \end{itemize}
-    In the simplest case, $\lambdapattern$ is just an identifier.
+    In the simplest case, $\exprlp$ is just an identifier.
   \rrdef
-    $(\lambda~\lambdapattern~\qdot~\predp~|~\expre~) = \{~\lambdapattern\mapsto \expre~|~\predp~\}$
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~) \defi \{~\exprlp\mapsto \expre~|~\predp~\}$
   \rrtypes
-    $(\lambda~\lambdapattern~\qdot~\predp~|~\expre~)\in\pow(~\alpha\cprod\beta~)$
-    with $\lambdapattern\in\alpha$, $\predp$ being a predicate and $\expre\in\beta$.
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)\in\pow(~\alpha\cprod\beta~)$
+    with $\exprlp\in\alpha$, $\predp$ being a predicate and $\expre\in\beta$.
   \rrwd
-    $\wdl(\lambda~\lambdapattern~\qdot~\predp~|~\expre~)~\defi~
-    \forall \freeids{\lambdapattern}~\qdot~\wdl(\predp)\land (\predp\limp \wdl(\expre))$
+    $\wdl(\lambda~\exprlp~\qdot~\predp~|~\expre~)~\defi~
+    \forall \freeids{\exprlp}~\qdot~\wdl(\predp)\land (\predp\limp \wdl(\expre))$
   \rrex
     A function $double$ that returns the double value of a natural number:\\
     $double = (\lambda x~\qdot~x\in\nat~|~2\cdot x)$
@@ -981,7 +983,9 @@ The following reference subsections will have the form the form: \\[2em]
     $dotp = (\lambda~(a \mapsto b)\mapsto(c \mapsto d)~\qdot~a\in\intg\land  b\in\intg\land  c\in\intg\land  d\in\intg~|~a\cdot c+b\cdot d~)$
 \end{rodinrefentry}
 \end{samepage}
-
+% TODO: This is a ruther ugly hack, but without explicit page break,
+% the section about the lambda operator get stretched
+\clearpage
 
 \begin{samepage}
 \subsection{Arithmetic}
@@ -1002,9 +1006,9 @@ The following reference subsections will have the form the form: \\[2em]
   The two subsets $\nat$ and $\nat_1$ contain all elements greater than or equal to 0 and 1 respectively.
   The range of numbers between $\exprla$ and $\exprlb$ is denoted by $\exprla\upto\exprlb$.
   \rrdef
-  $\nat   = \{~ n ~|~ n\in\intg\land n\geq 0~\}$\\
-  $\nat_1 = \{~ n ~|~ n\in\intg\land n\geq 1~\}$\\
-  $\exprla\upto\exprlb = \{~ n ~|~ n\in\intg\land\exprla\leq n \land n\leq\exprlb~\}$
+  $\nat   \defi \{~ n ~|~ n\in\intg\land n\geq 0~\}$\\
+  $\nat_1 \defi \{~ n ~|~ n\in\intg\land n\geq 1~\}$\\
+  $\exprla\upto\exprlb \defi \{~ n ~|~ n\in\intg\land\exprla\leq n \land n\leq\exprlb~\}$
   \rrtypes
   $\intg\in\pow(\intg)$ \\
   $\nat\in \pow(\intg)$ \\
@@ -1175,7 +1179,8 @@ in the expression $\expre$.
       \quad\defi\quad 
       x \bcmeq x \ovl \{~\eventbassignmentexpr{1} \mapsto \eventbassignmentexpr{2}~\}$
   \rrtypes
-    $x_i\in\alpha$ and  $\eventbassignmentexpr{i}\in\alpha$ for $i \in 1\upto n$.
+    %$x_i$ and $E_i$ must have the same type:
+    $x_i\in\alpha_i$ and  $\eventbassignmentexpr{i}\in\alpha_i$ for $i \in 1\upto n$.
   \rrwd
     $\wdl(~x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}~)
       \quad\defi\quad 

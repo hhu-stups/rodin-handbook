@@ -1152,7 +1152,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x_1,\ldots,x_n \bcmeq ,\expre_1\ldots,\expre_n$
+    $x_1,\ldots,x_n \bcmeq \expre_1\ldots,\expre_n$
     assigns the expressions $\expre_i$ to the variable $x_i$, with $i\in1\upto n$.
     All $x_i$ must be distinct identifiers that refer to variables of the concrete machine.
     %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
@@ -1210,7 +1210,7 @@ The following reference subsections will have the form the form: \\[2em]
     The before-after-predicate is $Q(x_1',\ldots,x_n')$.
   \rrtypes
     $Q(x_1',\ldots,x_n')$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
-    $x_1\in\alpha$ and $x'_1\in\alpha$ for $i\in 1\upto n$.
+    $x_1\in\alpha_i$ and $x'_1\in\alpha_i$ for $i\in 1\upto n$.
   \rrwd
     $\wdl(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)
     \quad\defi\quad

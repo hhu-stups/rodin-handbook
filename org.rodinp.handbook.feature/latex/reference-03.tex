@@ -10,7 +10,7 @@ placeholders for arbitrary expressions instead of $a$, $A$, $b$, $B$ which repre
 Event-B identifiers.
 For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
 
-We use the symbol $\defi$ to state that two predicates or assignments have an equivalent meaning.
+We use the symbol $\defi$ to state that two expressions, predicates or assignments have an equivalent meaning.
 We have tried to find a balance between having a precise and concise description for all Event-B's
 mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.
@@ -1141,14 +1141,6 @@ The following reference subsections will have the form the form: \\[2em]
 \label{assignments}
 \index{assignment}
 
-We did not consider the scope of the expressions in the previous sections, i.e. we did not say which constants or variables can be used in an expression or predicate, because
-this depends completely on the context where the expression is used.
-
-The following paragraphs are about assignments. Depending on the type of assignment, it
-may be important to specify which identifiers can be used.
-Thus we use the notion $\expre(x_1,\ldots,x_n)$ to specify which free identifiers may occur
-in the expression $\expre$.
-
 \newcommand{\eventbassignmentexpr}[1]{\expre_{#1}(\allconstants,\concvariables,\concparameters)}
 
 \begin{samepage}
@@ -1160,34 +1152,34 @@ in the expression $\expre$.
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x_1,\ldots,x_n \bcmeq ,\eventbassignmentexpr{1}\ldots,\eventbassignmentexpr{n}$
+    $x_1,\ldots,x_n \bcmeq ,\expre_1\ldots,\expre_n$
     assigns the expressions $\expre_i$ to the variable $x_i$, with $i\in1\upto n$.
     All $x_i$ must be distinct identifiers that refer to variables of the concrete machine.
-    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
-    variables of the concrete machine and parameters of the concrete event.
+    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    %variables of the concrete machine and parameters of the concrete event.
 
-    There is a special form of the assignment which does a relational overwrite:\\
-    $x(\exprf(\allconstants,\concvariables,\concparameters)) \bcmeq \expre(\allconstants,\concvariables,\concparameters)$.
+    There is a special form of the assignment which uses a relational overwrite:\\
+    $x(\exprf) \bcmeq \expre$.
   \rrdef
-    The before-after-predicate of $x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}$ is\\ $x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
+    The before-after-predicate of $x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n$ is\\ $x_1' = \expre_1 \land \ldots \land x_n' = \expre_n$.
 
     This assignment is equivalent to
-    $x_1,\ldots,x_n \bcmsuch x_1' = \eventbassignmentexpr{1} \land \ldots \land x_n' = \eventbassignmentexpr{n}$.
+    $x_1,\ldots,x_n \bcmsuch x_1' = \expre_1 \land \ldots \land x_n' = \expre_n$.
 
     The special form for this assignment is:\\
-    $x(\eventbassignmentexpr{1}) \bcmeq \eventbassignmentexpr{2}
+    $x(\exprf) \bcmeq \expre
       \quad\defi\quad 
-      x \bcmeq x \ovl \{~\eventbassignmentexpr{1} \mapsto \eventbassignmentexpr{2}~\}$
+      x \bcmeq x \ovl \{~\exprf \mapsto \expre~\}$
   \rrtypes
-    %$x_i$ and $E_i$ must have the same type:
-    $x_i\in\alpha_i$ and  $\eventbassignmentexpr{i}\in\alpha_i$ for $i \in 1\upto n$.
+    $x_i$ and $E_i$ must have the same type:
+    $x_i\in\alpha_i$ and  $\expre_i\in\alpha_i$ for $i \in 1\upto n$.
   \rrwd
-    $\wdl(~x_1,\ldots,x_n \bcmeq \eventbassignmentexpr{1},\ldots,\eventbassignmentexpr{n}~)
+    $\wdl(~x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n~)
       \quad\defi\quad 
-      \wdl(\eventbassignmentexpr{1}) \land \ldots \land \wdl(\eventbassignmentexpr{n})$ \\
-    $\wdl(~x(\eventbassignmentexpr{1}) \bcmeq \eventbassignmentexpr{2}~)
+      \wdl(\expre_1) \land \ldots \land \wdl(\expre_n)$ \\
+    $\wdl(~x(\exprf) \bcmeq \expre~)
     \quad\defi\quad 
-    \wdl(\eventbassignmentexpr{1}) \land \wdl(\eventbassignmentexpr{2})$
+    \wdl(\exprf) \land \wdl(\expre)$
 \end{rodinrefentry}
 \end{samepage}
 
@@ -1203,27 +1195,30 @@ in the expression $\expre$.
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
+    $x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')$
     assigns any value to the variables $x_1\ldots,x_n$ such that the the
     before-after-predicate $Q$ is fulfilled.
     Each $x_i$ is an identifier that refers to a variable of the concrete machine.
-    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
-    variables of the concrete machine and parameters of the concrete event.
-    $x_1,\ldots,x_n$ are in $\concvariables$.
+    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    %variables of the concrete machine and parameters of the concrete event.
+    %$x_1,\ldots,x_n$ are in $\concvariables$.
+    We write $Q(x_1',\ldots,x_n')$ to emphasise the fact that the identifiers $x_1',\ldots,x_n'$
+    can be used additionally to the constants, concrete variables and parameters in predicate.
 
     This is the most general form of assignment. All other assignments can be converted to this.
   \rrdef
-    The before-after-predicate is $Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$.
+    The before-after-predicate is $Q(x_1',\ldots,x_n')$.
   \rrtypes
-    $x\in\alpha$ and $\eventbassignmentexpr{}\in\pow(\alpha)$
+    $Q(x_1',\ldots,x_n')$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
+    $x_1\in\alpha$ and $x'_1\in\alpha$ for $i\in 1\upto n$.
   \rrwd
-    $\wdl(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')~)
+    $\wdl(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)
     \quad\defi\quad
-    \wdl(x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n'))$
+    \wdl(x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n'))$
   \rrfis
-    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')~)
+    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)
       \quad\defi\quad
-      \exists x_1',\ldots,x_n' \qdot Q(\allconstants,\concvariables,\concparameters,x_1',\ldots,x_n')$
+      \exists x_1',\ldots,x_n' ~\qdot~ Q(x_1',\ldots,x_n')$
 \end{rodinrefentry}
 \end{samepage}
 
@@ -1236,23 +1231,21 @@ in the expression $\expre$.
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x \bcmin \eventbassignmentexpr{}$ assigns any value of the
+    $x \bcmin \expre$ assigns any value of the
     set $\expre$ to the variable $x$. $x$ is an identifier that refers to a variable
     of the concrete machine.
-    $\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
-    variables of the concrete machine and parameters of the concrete event.
+    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    %variables of the concrete machine and parameters of the concrete event.
   \rrdef
-    The before-after-predicate is $x' \in \eventbassignmentexpr{}$. \\
+    The before-after-predicate is $x' \in \expre$. \\
     The assignment is equivalent to
-    $x \bcmsuch x' \in \eventbassignmentexpr{}$.
+    $x \bcmsuch x' \in \expre$.
   \rrtypes
-    $x\in\alpha$ and $\eventbassignmentexpr{}\in\pow(\alpha)$
+    $x\in\alpha$ and $\expre\in\pow(\alpha)$
   \rrwd
-    $\wdl(~x \bcmin\eventbassignmentexpr{}~)
-    \quad\defi\quad
-    \wdl(\expre(\allconstants,\concvariables,\concparameters))$
+    $\wdl(~x \bcmin\expre~) \quad\defi\quad \wdl(\expre)$
   \rrfis
-    $\actfis(~x \bcmin \eventbassignmentexpr{}~) \defi \eventbassignmentexpr{}\neq\emptyset$
+    $\actfis(~x \bcmin \expre~) \quad\defi\quad \expre\neq\emptyset$
 \end{rodinrefentry}
 \end{samepage}
 

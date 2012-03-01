@@ -11,7 +11,11 @@ placeholders for arbitrary expressions instead of $a$, $A$, $b$, $B$ which repre
 Event-B identifiers.
 For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
 
-We use the symbol $\defi$ to state that two expressions, predicates or assignments have an equivalent meaning.
+We use the $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
+can be equivalently rewritten by $\exprb$ if $\expra$'s  well-definedness condition
+is fulfilled.
+If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
+we use the form $\expra = x \defi \predp$.
 We have tried to find a balance between having a precise and concise description for all Event-B's
 mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.

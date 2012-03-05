@@ -785,7 +785,7 @@ The auto-tactic automatically applies a combination (i.e. ordered list) of rewri
 
 The post-tactic is also a combination of rewrite tactics, inference tactics and external provers and is applied automatically after each interactive proof step. However, it can also be invoked manually by clicking on the \icon{rodin/broom_prover.png} button in the \textsf{Proof Control} view.
 
-Note that the post-tactic can be disabled quickly by clicking on the \textsf{rodin/expanded.png} button (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then on by deselecting the box next to the \textsf{Enable post-tactic} option (B) as shown in Figure \ref{fig_ref_01_proving_perspective12}. 
+Note that the post-tactic can be disabled quickly by clicking on the \textsf{rodin/expanded.png} button (marked with an A) of the \textsf{Proof Control} view (right upper corner) and then by deselecting the box next to the \textsf{Enable post-tactic} option (B) as shown in Figure \ref{fig_ref_01_proving_perspective12}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -797,7 +797,7 @@ Note that the post-tactic can be disabled quickly by clicking on the \textsf{rod
 
 \paragraph{Principles}
 
-The ordered list of rewrite tactics, inference tactics and external provers that should be applied is called a profile. There are two default profiles. One is for auto-tactics and one is for post-tactics. These default profiles are cannot be edited, but they can be duplicated for further modification by the user. The user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are saved within projects if they are defined at the project level, and they can be imported or exported if they are defined at a workspace level. This makes it easy to share the profiles. 
+The ordered list of rewrite tactics, inference tactics and external provers that should be applied is called a profile. There are two default profiles. One is for auto-tactics and one is for post-tactics. These default profiles cannot be edited, but they can be duplicated for further modification by the user. The user can edit a profile and select it to run as automatic or post tactic. The idea is to have a set of available tactic profiles to be used as needed. Moreover, these edited profiles are saved within projects if they are defined at the project level, and they can be imported or exported if they are defined at a workspace level. This makes it easy to share the profiles. 
 
 There are two ways to run the automatic or post tactics:
 
@@ -903,7 +903,7 @@ A window (see Figure \ref{fig_ref_01_preferences2}) appears that allows a user t
 
 This section describes the \textsf{Auto/Post Tactic} tab of the \textsf{Auto/Post Tactic} preference page.
 
-There are two scopes to set up preferences for the auto and post tactics: the workspace level and the project level. Note that if the automatic application of tactics is declared only at the workspace level, this option will also be set for the project level.
+There are two scopes for the preferences of auto and post tactics: the workspace level and the project level. Note that if the automatic application of tactics is declared only at the workspace level, this option will also be set for the project level.
 
 To access these preferences, open the ``Auto/Post Tactic" preference page that can be found after \textsf{Window $\rangle$ Preference $\rangle$ Sequent Prover}.
 
@@ -948,7 +948,7 @@ There are 4 buttons available to the user:
 
 \begin{itemize}
 	\item New: to create a new profile ``from scratch",
-	\item Edit: to edit an existing (editable) profile,
+	\item Edit: to edit an existing profile (that can be edited),
 	\item Remove: to delete a profile completely,
 	\item Duplicate: to duplicate a selected profile for further slight modification.
 \end{itemize}
@@ -964,8 +964,7 @@ Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or crea
 \end{center}
 \end{figure}
 
-\marginpar{The description of the process to update the tactic profiles needs to be updated after the screenshot is updated}
-The list on the right represents the available and unselected tactics. The list of the left displays the profile contents and shows the selected tactics that will be applied from the top to the bottom. The user can choose a tactic from the list on the left and hit the \textsf{$>>$} button to select it or unselect some tactics from the list of the right using the \textsf{$<<$} button. The user can re-order the priority of the selected tactic using the \textsf{Up} and \textsf{Down} button. By clicking on \textsf{Finish}, the profile will be saved and available for use in the auto and post tactics.
+In the box labelled \textsf{Tactics} on the left, there is a list of all the different tactics that can be applied to a proof (tactics are explained in more detail in Section \ref{proof_tactics}). In the box labelled \textsf{Combinators} (combinators are explained in more detail below in Section \ref{preferences_for_the_automatic_tactics}), there is a list of all the combinators that can be used for the proof tactic. To create your proof tactic, drag and drop one of the combinators into the center box. Then drag the proof tactics and drop them on top of the combinator that you just added. This will add the proof tactic to the combinator. You can also add more combinators or even other profiles (available in the \textsf{Profiles} box on the right side) to the combinator that you are working on. If you aren't certain what a proof tactic or combinator does, select it, and a description of the proof tactic or combinator will be be shown in the \textsf{Description} box that is shown in the lower right hand corner. If the tactic profile that you have created is valid, you will be able to hit the \textsf{Finish} button in the lower right hand corner in order to save it.
 
 \paragraph{Project specific settings}
 
@@ -979,7 +978,7 @@ The user can select profiles locally for each project. To do so, select the \tex
 \end{center}
 \end{figure}
 
-Note that the enablement of automatic use of post and auto tactics is decided at the workspace level. Figure \ref{fig_ref_01_preferences12} shows the Profiles tab of the \textsf{Auto/Post Tactic} page for a project specific setting. At the project level, there is a contextual menu available via right click from the list of defined profiles. 
+Note that the enablement of automatic use of post and auto tactics is decided at the workspace level. Figure \ref{fig_ref_01_preferences12} shows the \textsf{Profiles} tab of the \textsf{Auto/Post Tactic} page for a project specific setting. At the project level, there is a contextual menu available via right click from the list of defined profiles. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -996,7 +995,7 @@ This contextual menu offers two options to the user:
 	\item Export to Workspace Profiles push a selected profile up in the list of workspace profiles.
 \end{itemize}
 
-\subsubsection{Preferences for the automatic tactics}
+\subsubsection{Preferences for Tactic Profiles}
 \label{preferences_for_the_automatic_tactics}
 \index{auto-tactic}
 \index{preferences!tactics}
@@ -1011,6 +1010,8 @@ The purpose of this section is to give a more detailed preferences to the user s
 Here is the documentation about the current implementation of the Auto-tactic and Post-tactic preferences.
 
 \paragraph{Tactic Combinators}
+\index{tactic combinator}
+\index{combinator}
 
 Tactic combinators can be used to construct complex proof strategies.
 
@@ -1018,7 +1019,7 @@ Historically, one combinator has existed since the beginning of auto tactic pref
 
 The following is a list of combinators present by default.
 
-One may notice the absence of child-specific combinator (i.e. combinators that apply tactic T1 on the first child, T2 on the second child, etc.) even though this kind of combinator exists in other provers. The reason is that we are concerned mainly  auto tactics and these are tactics that are attempted in a general context. Provers with child-specific combinators are used to make manual proofs because they require proof-specific adaptation.
+One may notice the absence of child-specific combinator (i.e. combinators that apply tactic T1 on the first child, T2 on the second child, etc.) even though this kind of combinator exists in other provers. The reason is that these tactic profiles are applied automatically and therefore are only used in a general context. Provers with child-specific combinators are used to make manual proofs because they require proof-specific adaptation.
 
 \subparagraph{Composers}
 

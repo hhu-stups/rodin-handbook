@@ -14,8 +14,8 @@ For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeho
 We use the $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
 can be equivalently rewritten by $\exprb$ if $\expra$'s  well-definedness condition
 is fulfilled.
-If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
-we use the form $\expra = x \defi \predp$.
+%If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
+%we use the form $\expra = x \defi \predp$.
 We have tried to find a balance between having a precise and concise description for all Event-B's
 mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.
@@ -524,7 +524,7 @@ The following reference subsections will have the form the form: \\[2em]
     finite sets.
   \rrdef
     $\bfinite(\exprs) ~\defi~ \exists n,b~\qdot~n\in\nat\land b\in \exprs\tbij 1\upto n$\\
-    $\card(\exprs)=n ~\defi~ \exists b~\qdot~b\in \exprs\tbij 1\upto n$
+    $\exists b~\qdot~b\in \exprs\tbij 1\upto \card(\exprs)$
   \rrtypes
     $\bfinite(\exprs)$ is a predicate and
     $\card(\exprs)\in\intg$
@@ -926,6 +926,9 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rodinrefentry}
 \end{samepage}
 
+% TODO: This is a ruther ugly hack, but without explicit page break,
+% the section about the lambda operator get stretched
+\clearpage
 \begin{samepage}
 \subsubsection{Function application}
 \label{function_application}
@@ -938,7 +941,7 @@ The following reference subsections will have the form the form: \\[2em]
     The function application $\exprlf(\exprla)$ yields the value for $\exprla$ of the function $\exprlf$.
     It is only defined if $\exprla$ is in the domain of $\exprlf$ and if $\exprlf$ is actually a function.
   \rrdef
-    $\exprlf(\exprla) = \exprlb \defi \exprla \mapsto \exprlb\in \exprlf$
+    $\exprla\mapsto\exprlf(\exprla)\in\exprlf$
   \rrtypes
     $\exprlf(\exprla)\in\beta$ with $\exprlf\in\pow(\alpha\cprod\beta)$ and $\exprla\in\alpha$
   \rrwd
@@ -947,9 +950,6 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rodinrefentry}
 \end{samepage}
 
-% TODO: This is a ruther ugly hack, but without explicit page break,
-% the section about the lambda operator get stretched
-\clearpage
 \begin{samepage}
 \subsubsection{Lambda}
 \label{lambda}
@@ -1091,8 +1091,8 @@ The following reference subsections will have the form the form: \\[2em]
 
     The minimum and maximum are only defined if such a number exists.
   \rrdef
-    $\min(\exprs) = b \defi b\in\exprs \land (\forall x\qdot x\in \exprs\limp b\leq x)$\\
-    $\max(\exprs) = b \defi b\in\exprs \land (\forall x\qdot x\in \exprs\limp b\geq x)$
+    $\min(\exprs)\in\exprs \land (\forall x\qdot x\in \exprs\limp\min(\exprs)\leq x)$\\
+    $\max(\exprs)\in\exprs \land (\forall x\qdot x\in \exprs\limp\max(\exprs)\geq x)$
   \rrtypes
     $\min(\exprs)\in\intg$ and $\max(\exprs)\in\intg$ with $\exprs\in\pow(\intg)$.
   \rrwd

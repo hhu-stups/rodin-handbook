@@ -12,14 +12,14 @@ Event-B identifiers.
 For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
 
 We use the $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
-can be equivalently rewritten by $\exprb$ if $\expra$'s  well-definedness condition
+can be equivalently rewritten as $\exprb$ if $\expra$'s  well-definedness condition
 is fulfilled.
 %If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
 %we use the form $\expra = x \defi \predp$.
 We have tried to find a balance between having a precise and concise description for all Event-B's
 mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.
-Other, like equality ($=$) or universal quantification ($\forall$) are simply described by natural language.
+Other, like equality ($=$) or universal quantification ($\forall$) are simply described with natural language.
 
 When we introduce new identifiers while expressing an operator (e.g. by using a set comprehension),
 we assume that the new identifier does not occur free in the rewritten expressions
@@ -39,7 +39,7 @@ In Event-B we have 3 kinds of basic data types:
   $\Bool$ is the set of Booleans. 
   It has two elements $\Bool = \{\True,\False\}$.
 \item \index{carrier set}
-  User defined carrier sets. 
+  Users can define carrier sets. 
   These are defined in the \eventbsection{Sets} section of a context.
   Carrier sets are never empty.
   There is no other assumption made about carrier sets unless it is stated explicitly as
@@ -1208,7 +1208,8 @@ The following reference subsections will have the form the form: \\[2em]
     %variables of the concrete machine and parameters of the concrete event.
     %$x_1,\ldots,x_n$ are in $\concvariables$.
     We write $Q(x_1',\ldots,x_n')$ to emphasise the fact that the identifiers $x_1',\ldots,x_n'$
-    can be used additionally to the constants, concrete variables and parameters in the predicate $Q$.
+%can be used additionally to the constants
+    can also be used for the constants, concrete variables and parameters in the predicate $Q$. \marginpar{are the constants being used for or as the constants... in the predicate}
 
     This is the most general form of assignment. All other assignments can be converted to this.
   \rrdef

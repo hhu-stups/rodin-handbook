@@ -10,9 +10,19 @@
 <link tal:condition="links/prev" rel="prev" tal:attributes="href links/prev/url; title links/prev/title/textContent" />
 <link tal:condition="links/up" rel="up" tal:attributes="href links/up/url; title links/up/title/textContent" />
 <link rel="stylesheet" href="styles/styles.css" />
-
+<style tal:condition="not:links/prev" type="text/css">
+  #indexbg {
+	background-image:url('icons/rodin_miikka_skaffari_index.jpg');
+	background-repeat:no-repeat;
+	background-position:top left;
+	margin:0;
+	padding:0;
+  }
+</style>
 </head>
 <body>
+
+<div id="indexbg">
 
 <div style="float: right; text-align: center; font-family: sans-serif;">
 <a href="" id="feedbackbubble" style="color: red; text-decoration: none;">
@@ -78,6 +88,7 @@ document.getElementById("feedbackbubble").href = url;
 document.getElementById("feedback").href = url;
 </script>
 
+</div>
 </div>
 
 <script language="javascript" src="makeindex.js" type="text/javascript"></script>

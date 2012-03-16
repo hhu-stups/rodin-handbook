@@ -21,14 +21,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navigation { clear:both }
-.navigation td          { background-color: #ffffff;
-                          color: #000000;
+.navigation td          { color: #000000;
                           font-weight: bold;
                           font-family: avantgarde, sans-serif;
                           font-size: 110% }
 
 .navigation img { border-width: 0px }
-.navtitle { width: 100% }
+.navtitle { width: 100%; }
 
 .contents ul {
     font-family: "Lucida Grande", Arial, Helvetica, sans-serif;

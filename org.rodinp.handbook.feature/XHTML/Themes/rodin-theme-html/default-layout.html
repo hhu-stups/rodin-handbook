@@ -10,6 +10,15 @@
 <link tal:condition="links/prev" rel="prev" tal:attributes="href links/prev/url; title links/prev/title/textContent" />
 <link tal:condition="links/up" rel="up" tal:attributes="href links/up/url; title links/up/title/textContent" />
 <link rel="stylesheet" href="styles/styles.css" />
+<style tal:condition="not:links/prev" type="text/css">
+  #indexbg {
+	background-image:url('icons/rodin_miikka_skaffari_index.jpg');
+	background-repeat:no-repeat;
+	background-position:top left;
+	margin:0;
+	padding:0;
+  }
+</style>
 </head>
 <body>
 
@@ -72,7 +81,8 @@ document.getElementById("feedbackmail").href = mail;
 </script>
 
 
-</td><td valign="top" width="40">&nbsp;</td><td valign="top" >
+</td><td valign="top" width="40">&nbsp;</td><td valign="top">
+<div id="indexbg">
 
 <div class="navigation" metal:define-macro="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
@@ -126,6 +136,8 @@ document.getElementById("feedbackbubble").href = url;
 <li tal:replace="nothing"><a href=".">Duis et eros</a></li>
 <li tal:replace="nothing"><a href=".">Duis est</a></li>
 </ul>
+</div>
+
 </div>
 
 <div class="navigation">

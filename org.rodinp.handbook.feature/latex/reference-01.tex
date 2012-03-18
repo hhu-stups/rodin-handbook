@@ -1026,7 +1026,7 @@ One may notice the absence of child-specific combinator (i.e. combinators that a
 A composer combinator applies its given tactic(s) to the given node. The given node may be open or closed. It succeeds if at least 1 tactic application is successful. 
 
 \begin{center}
-    \begin{tabular}{ | l | l | l | l | p{5cm} |}
+    \begin{tabular}{ | l | l | p{4.5cm} | p{4.5cm} |}
     \hline
 	Name & Arity & Description & Stops when  \\ \hline
 	Sequence & 1..n  & applies given tactics in given order & all tactics have been applied  \\ \hline
@@ -1041,7 +1041,7 @@ A composer combinator applies its given tactic(s) to the given node. The given n
 A selector combinator applies its given tactic to the set of nodes it selects. Selected nodes are computed from the given node. The given node may be open or closed. It succeeds if the tactic application is successful for at least 1 selected node. 
 
 \begin{center}
-    \begin{tabular}{ | l | l | l | p{5cm} |}
+    \begin{tabular}{ | l | l | p{10cm} |}
     \hline
 	Name & Arity & Selects \\ \hline
 	On all pending  & 1 & all pending children of the given node (the given node itself if it is open) \\ \hline

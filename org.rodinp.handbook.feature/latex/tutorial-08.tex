@@ -63,6 +63,7 @@ The three remaining warnings state that witnesses (\ref{witness}) are missing. D
 
 A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. The name of a witness has to be the same as the parameter of the corresponding abstract event that it is refining. Here the name of the witness will have to be \textsf{x} so that it can be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should \textsf{b = x}. The event should now look as follows: 
 
+\pencil{
 \begin{description}
 	\EVT {celebrity}
 	\REF {celebrity}
@@ -82,6 +83,7 @@ A default witness \textsf{wit1} has been created, with a default value \textsf{$
 		\EndAct
 		\end{description}
 \end{description}
+}
 
 Edit the content and save the file. One warning will disappear, and only two will remain.
 

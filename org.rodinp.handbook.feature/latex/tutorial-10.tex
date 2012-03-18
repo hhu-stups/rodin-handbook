@@ -70,12 +70,14 @@ To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called 
   and change the predicate so that it is the conjunction of the two guards.
 The difference between a ``normal'' invariant and one that is marked as theorem is that you must prove that a theorem is always valid when the previously listed invariants are valid. Then we don't need to prove that an event preserves the invariant marked as theorem because we can conclude this logically when it already preserves the other invariants.
 
+\pencil{
 \begin{description}
 \INVARIANTS
 	\begin{description}
 		\nItemX{ DLF }{ \fbox{theorem} ~ \exists p, l\qdot (p \mapsto  l \in  aut \land  sit(p) \neq  l) }
 	\end{description}
 \end{description}
+}
 
 \warning{ Make sure that when you add your DLF invariant, you add it after the other two invariants in \textsf{doors\_0}. The auto prover uses these invariants to prove that the DLF invariant is well defined, and if they aren't in the right order, the proof obligation \textsf{DLF/WD} will not be discharged
 }

@@ -787,11 +787,11 @@ The following reference subsections will have the form the form: \\[2em]
     whose first element is in the domain of $\exprls$ are replaced by the corresponding 
     entries in $\exprls$.
     
-    If a relation $\exprlr$ relates an element $x$ to $y$ and $\exprls$ relates $x$ to $z$,
-    the parallel product $\exprlr\pprod\exprls$ relates $x$ to the pair $y\mapsto z$.
-
-    The direct product $\exprlr\dprod\exprls$ relates a pair $x\mapsto y$ to a pair $m\mapsto n$
+    The parallel product $\exprlr\pprod\exprls$ relates a pair $x\mapsto y$ to a pair $m\mapsto n$
     when $\exprlr$ relates $x$ to $m$ and $\exprls$ relates $y$ to $n$.
+
+    If a relation $\exprlr$ relates an element $x$ to $y$ and $\exprls$ relates $x$ to $z$,
+    the direct product $\exprlr\dprod\exprls$ relates $x$ to the pair $y\mapsto z$.
 
     The inverse relation $\exprlr^{-1}$ relates an element $x$ to $y$ if the original relation $\exprlr$
     relates $y$ to $x$.
@@ -799,8 +799,8 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprlr\fcomp\exprls \defi \{~x,y,z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y \in\exprls ~|~ x \mapsto y~\}$\\
     $\exprlr\bcomp\exprls \defi \exprls\fcomp\exprlr$\\
     $\exprlr\ovl\exprls \defi \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
-    $\exprlr\pprod\exprls \defi \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
-    $\exprlr\dprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
+    $\exprlr\pprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
+    $\exprlr\dprod\exprls \defi \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
     $\exprlr^{-1} \defi \{y\mapsto x~|~x\mapsto y\in\exprlr~\}$
   \rrtypes
     $\exprlr\fcomp\exprls\in\pow(\alpha\cprod\gamma)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
@@ -809,11 +809,11 @@ The following reference subsections will have the form the form: \\[2em]
       $\exprls\in\pow(\beta\cprod\gamma)$\\
     $\exprlr\ovl\exprls\in\pow(\alpha\cprod\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
       $\exprls\in\pow(\alpha\cprod\beta)$\\
-    $\exprlr\pprod\exprls\in\pow(\alpha\cprod(\beta\cprod\gamma))$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
-      $\exprls\in\pow(\alpha\cprod\gamma)$\\
-    $\exprlr\dprod\exprls\in\pow(~(\alpha\cprod\gamma)\cprod(\beta\cprod\delta)~)$ with
+    $\exprlr\pprod\exprls\in\pow(~(\alpha\cprod\gamma)\cprod(\beta\cprod\delta)~)$ with
       $\exprlr\in\pow(\alpha\cprod\beta)$ and
       $\exprls\in\pow(\gamma\cprod\delta)$\\
+    $\exprlr\dprod\exprls\in\pow(\alpha\cprod(\beta\cprod\gamma))$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\alpha\cprod\gamma)$\\
     $\exprlr^{-1}\in\pow(\beta\cprod\alpha)$ with $\exprlr\in\pow(\alpha\cprod\beta)$
   \rrwd
     $\wdl(\exprlr\opelipse\exprls)\defi\wdl(\exprlr)\land\wdl(\exprls)$ for each operator $\opelipse$ of

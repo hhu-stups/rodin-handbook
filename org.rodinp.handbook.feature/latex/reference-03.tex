@@ -705,8 +705,8 @@ The following reference subsections will have the form the form: \\[2em]
     Likewise the range $\ran(\exprlr)$ is the set of elements of $\exprt$ to which at least one element
     of $\exprs$ relates by $\exprlr$.
   \rrdef
-    $\dom(\exprlr) \defi \{~x,y~\qdot~ x\mapsto y\in \exprlr~|~x~\}$\\
-    $\ran(\exprlr) \defi \{~y,y~\qdot~ x\mapsto y\in \exprlr~|~y~\}$
+    $\dom(\exprlr) \defi \{~x~|~\exists y~\qdot~ x\mapsto y\in\exprlr~\}$\\
+    $\ran(\exprlr) \defi \{~y~|~\exists x~\qdot~ x\mapsto y\in\exprlr~\}$
   \rrtypes
     $\dom(\exprlr)\in\pow(\alpha)$ and $\ran(\exprlr)\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$.
   \rrwd
@@ -796,7 +796,7 @@ The following reference subsections will have the form the form: \\[2em]
     The inverse relation $\exprlr^{-1}$ relates an element $x$ to $y$ if the original relation $\exprlr$
     relates $y$ to $x$.
   \rrdef
-    $\exprlr\fcomp\exprls \defi \{~x,y,z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y \in\exprls ~|~ x \mapsto y~\}$\\
+    $\exprlr\fcomp\exprls \defi \{~x \mapsto y~|~\exists z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y\in\exprls~\}$\\
     $\exprlr\bcomp\exprls \defi \exprls\fcomp\exprlr$\\
     $\exprlr\ovl\exprls \defi \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
     $\exprlr\pprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
@@ -835,7 +835,7 @@ The following reference subsections will have the form the form: \\[2em]
     The relational image $\exprlr[\exprs]$ are those elements in the range of $\exprlr$
     that are mapped from $\exprs$.
   \rrdef
-    $\exprlr[\exprs] \defi \{~x,y~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~|~y~\}$
+    $\exprlr[\exprs] \defi \{~y~|~\exists x~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~\}$
   \rrtypes
     $\exprlr[\exprs]\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\alpha)$
   \rrwd

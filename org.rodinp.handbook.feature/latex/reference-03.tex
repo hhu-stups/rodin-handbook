@@ -203,6 +203,9 @@ The following reference subsections will have the form the form: \\[2em]
 \index{conjunction@conjunction ($\land$)}\index{disjunction@disjunction ($\lor$)}\index{implication@implication ($\limp$)}\index{equivalence@equivalence ($\leqv$)}\index{negation@negation ($\lnot$)}
 \index{$\land$ (conjunction)}\index{$\lor$ (disjunction)}\index{$\limp$ (implication)}\index{$\leqv$ (equivalence)}\index{$\lnot$ (negation)}
 
+\hline
+\vspace{5mm}
+
 \begin{rrnames}
   $\land$  & \texttt{\&}  & Conjunction \\
   $\lor$   & \texttt{or}  & Disjunction \\
@@ -256,13 +259,35 @@ The following reference subsections will have the form the form: \\[2em]
 \index{exists@exists ($\exists$)}
 \index{quantification!universal@universal ($\forall$)}
 \index{quantification!existential@existential ($\exists$)}
+
+\hline
+\vspace{5mm}
 \begin{rrnames}
   $\forall$ & \texttt{!} & Universal quantification \\
   $\exists$ & \texttt{\#} & Existential quantification \\
 \end{rrnames}
-\begin{rodinrefentry}
-  \rrdesc
-    The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
+%\begin{rodinrefentry}
+%  \rrdesc
+%    The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
+%    possible values of $x_1\ldots,x_n$.
+%    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
+%    $\predp_1$ is used to specify the types of the identifiers.
+
+%    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
+
+%    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
+%    They can be referenced in $\predp$.
+%  \rrtypes
+%    The quantifiers and the $\predp$ are predicates.    
+%  \rrwd
+%    $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$\\
+%    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+%\end{rodinrefentry}
+
+
+\begin{tabular}{r|p{12cm}}
+\textbf{Description} &  
+		The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
     possible values of $x_1\ldots,x_n$.
     A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
     $\predp_1$ is used to specify the types of the identifiers.
@@ -270,13 +295,14 @@ The following reference subsections will have the form the form: \\[2em]
     The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
 
     The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
-    They can be referenced in $\predp$.
-  \rrtypes
-    The quantifiers and the $\predp$ are predicates.    
-  \rrwd
-    $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$\\
-    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
-\end{rodinrefentry}
+    They can be referenced in $\predp$. \\[2mm]
+
+\textbf{Types} &  The quantifiers and the $\predp$ are predicates.  \\[2mm]
+
+\textbf{WD} &  $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+
+    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$ \\
+\end{tabular}
 \end{samepage}
 
 \begin{samepage}

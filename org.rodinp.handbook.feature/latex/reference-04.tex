@@ -13,6 +13,7 @@ In Section~\ref{generated_proof_obligations}, we learned what proof obligations 
 	\item Explain reasoners
 	\item Describe how to perform automatic and manual proving
 	\item Purge proofs for maintenance
+	\item Simplify proofs for maintenability and storage
 \end{itemize}}
 
 \subsection{Sequents}
@@ -289,6 +290,19 @@ Once the selection has been decided, hit the \textsf{Delete} button to actually 
 \subsubsection{Caution}
 
 Proof purging should not be performed on models that are not in a stable state. For instance, it should not be applied to a model that has some errors or warnings issued by the type checker. This is because if there are errors and warnings, not all proof obligations are generated. Therefore, some proofs may have been considered wrongly as obsolete.
+
+\subsection{Simplifying Proofs}
+\label{simplifying_proofs}
+\index{simplifying proofs}
+\index{proving!simplifying}
+
+Proofs consists of trees where each node is a proof step. Storing or investigating a proof consists in saving or reviewing all these nodes. With post tactics activated, some unneeded steps might be added to the proof, after each manual step. Indeed, the post tactics try to apply some rewriting and inference rules which are themselves grouped into proof steps. When the proof step concern some useless hypotheses, for example, the applied rules are not useful in the proof. They can even appear cumbersome regarding storage or later investigation of the proofs. Hence, it is recommended to apply simplification before storage of huge proofs and/or proofs involving extensively post tactics.
+
+\subsubsection{Selecting simplification input}
+In any view, right-clicking an Event-B project or file will display a popup menu with a \textsf{Simplify Proof(s)} option. If several files or projects (or both) are selected, simplification will apply to all of them.
+
+\subsubsection{Automatic simplification option}
+It is possible to automatically launch the simplification on proof save. However, because this task can be performance consuming this feature is disabled by default. It can be enabled by selecting \textsf{Window} $ \rangle $ \textsf{Preferences} $ \rangle $ \textsf{Event-B} $ \rangle $ \text{Sequent Prover} $ \rangle $ \textsf{Simplify complete proofs when saving}.
 
 %%% Local Variables: 
 %%% mode: latex

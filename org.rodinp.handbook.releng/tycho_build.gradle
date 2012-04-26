@@ -70,7 +70,7 @@ subprojects {
 		
 		
 		if(features.every{ it != project.name }){			// Generating Poms for sub projects except features
-			content = new File("${project.name}/META-INF/MANIFEST.MF").getText("UTF-8") 
+			content = new File("../${project.name}/META-INF/MANIFEST.MF").getText("UTF-8") 
 
 	 		printFileLine = { 
 				if(  it ==~ /Bundle-Version.+qualifier/ ){
@@ -98,7 +98,7 @@ subprojects {
 			println artifactId
 			println "\t"+versionNumber
 	
-			def f = new File(artifactId+'/pom.xml') 
+			def f = new File('../'+artifactId+'/pom.xml') 
 			f.delete()
 			f << start()+elder()+artifact(artifactId, versionNumber)+end()
 			/*	
@@ -114,7 +114,7 @@ subprojects {
 			
 				boolean idfound = false
 
-				content = new File("${project.name}/feature.xml").getText("UTF-8") 
+				content = new File("../${project.name}/feature.xml").getText("UTF-8") 
 
 				printFileLine = {
 		
@@ -146,7 +146,7 @@ subprojects {
 				println "\t"+versionNumber
 
 
-				def f = new File(artifactId+'/pom.xml') 
+				def f = new File('../'+artifactId+'/pom.xml') 
 				f.delete()
 				f << feature(artifactId, versionNumber)
 							
@@ -167,11 +167,11 @@ clean {
 task createParent() << {
 	//		---------				 define Parent 				---------		//
 		
-	new File("${parentID}").mkdir() 			
+	new File("../${parentID}").mkdir() 			
 	versionNumber 	=	'1.0.0.qualifier'
 	artifactId 		=	parentId()
 
-	def f = new File(artifactId+'/pom.xml') 
+	def f = new File('../'+artifactId+'/pom.xml') 
 	f.delete()
 	f << parentPom(artifactId)
 	for(int i = 0; i < targetRepositories.size(); i++){
@@ -192,17 +192,17 @@ task createRepository() << {
 	//			------------	 	define Repository			---------		//
 			
 			
-	new File("${repositoryName}").mkdir() 
+	new File("../${repositoryName}").mkdir() 
 				
 	versionNumber 	=	'1.0.0.qualifier'
 	artifactId		=	repositoryName
 	featureVersionNumber = '1.0.0.qualifier'
-	def f = new File(artifactId+'/category.xml') 
+	def f = new File('../'+artifactId+'/category.xml') 
 	f.delete()
 	f << categoryHead()
 	for(int i = 0; i < features.size(); i++){
 					
-		content = new File("${features[i]}/feature.xml").getText("UTF-8") 
+		content = new File("../${features[i]}/feature.xml").getText("UTF-8") 
 		printFileLine = {
 			if(  it ==~ /.+version.+qualifier.+/ ){
 				featureVersionNumber = it.substring(15,it.size()-1) 
@@ -226,7 +226,7 @@ task createRepository() << {
 				
 	f << categoryEnd()
 				
-	def pom = new File(artifactId+'/pom.xml') 
+	def pom = new File('../'+artifactId+'/pom.xml') 
 	pom.delete()
 	pom << reposi()
 }// end of repository definition

@@ -1,0 +1,30 @@
+groupID			=	"org.rodinp.handbook"
+features		=	["org.rodinp.handbook.feature"]		// must be the same as the folder name
+
+descriptions	=	[["org.rodinp.handbook.feature": "Rodin Handbook"] ]		// label and descriptions of the features
+
+repositoryName	=	groupID+".repository"		// will be the folder name
+parentID		= 	groupID+".parent"			// will be the same as the folder name
+
+targetRepositories = ["http://download.eclipse.org/releases/indigo/"]		// ps Repository with Target Definition File
+
+apply from: 'tycho_build.gradle'
+
+// Local tasks
+task importPlugin << {
+	sourcedir = 'org.rodinp.handbook.feature/build/eclipse'
+	targetdir = 'org.rodinp.handbook'
+	delete file(targetdir)
+	new File(targetdir).mkdirs() 
+	copy {
+		from sourcedir
+		into targetdir
+	}
+}
+
+task collectArtifacts(type:Copy) {
+	    from groupID+'.repository/target/repository/'
+	    into 'updatesite'
+	    from "index.html"
+	    into 'updatesite'
+}

@@ -237,7 +237,7 @@ task createPoms(dependsOn: [createParent, createRepository, subprojects.deploy])
 
 task install(dependsOn: [createPoms] , type:Exec) {
 	description = "\tExecutes a 'mvn install' of the parent pom.xml and auto-generates Tycho Poms"	
-	commandLine 'mvn', 'install', '-f', parentID+'/pom.xml'
+	commandLine 'mvn', 'install', '-f', '../'+parentID+'/pom.xml'
 }
 
 

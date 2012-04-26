@@ -1,7 +1,8 @@
 <project default="generate-all">
 
 	<property name="build-dir" value="${basedir}/build"/>
-	
+	<!--${eclipse.workspace}
+	${workspace_loc}-->
 	<property name="theme-html" value="rodin-theme-html"/>
 	<property name="theme-eclipse" value="rodin-theme-eclipse"/>	
 	
@@ -58,7 +59,7 @@
     	  <replacevalue><![CDATA[<toc topic="index.html" ]]></replacevalue>
         </replace>
     	
-    	<!-- delete old eclipse help zip -->
+    	<!-- delete old eclipse help zip x
     	<delete dir="${build-dir}/plugin" includes="*.zip"/>
     	
     	<tstamp>
@@ -74,6 +75,8 @@
     	       update="true" />
     
     	<delete dir="${build-dir}/plugin/plugins"/>
+		-->
+    	
     </target>
 
     <target name="generate" depends="init">
@@ -94,8 +97,7 @@
     	<replaceregexp
     		match="plasTeX.Base.LaTeX.Index.IndexDestination[^>]*"
     		replace="plasTeX.Base.LaTeX.Index.IndexDestination/"
-    		flags="g"
-    	>
+    		flags="g">
     		<fileset dir="${targetdir}" includes="*.html"/>
     	</replaceregexp>
     </target>

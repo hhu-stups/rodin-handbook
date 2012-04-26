@@ -12,8 +12,8 @@ apply from: 'tycho_build.gradle'
 
 // Local tasks
 task importPlugin << {
-	sourcedir = 'org.rodinp.handbook.feature/build/eclipse'
-	targetdir = 'org.rodinp.handbook'
+	sourcedir = '../org.rodinp.handbook.feature/build/eclipse'
+	targetdir = '../org.rodinp.handbook'
 	delete file(targetdir)
 	new File(targetdir).mkdirs() 
 	copy {
@@ -23,8 +23,8 @@ task importPlugin << {
 }
 
 task collectArtifacts(type:Copy) {
-	    from groupID+'.repository/target/repository/'
-	    into 'updatesite'
+	    from '../'+groupID+'.repository/target/repository/'
+	    into '../updatesite'
 	    from "index.html"
-	    into 'updatesite'
+	    into '../updatesite'
 }

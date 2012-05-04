@@ -39,12 +39,17 @@ task deleteOldArtifacts(type: Delete) {
 	delete updateSite
 }
 
-task collectArtifacts(type:Copy) {
-        from workspacePath+groupID+'.feature/build/'
-        into workspacePath+'current'
-	    from workspacePath+groupID+'.repository/target/repository/'
-	    into workspacePath+'updatesite'
-	    from "index.html"
-	    into workspacePath+'updatesite'
+task collectArtifacts()  << {
+  copy {
+   from workspacePath+groupID+'.feature/build/'
+   into workspacePath+'current'
+  }
+  copy { 
+   from workspacePath+groupID+'.repository/target/repository/'
+   into workspacePath+'updatesite'
+  }
+  copy {
+   from "index.html"
+   into workspacePath+'updatesite'
+  }
 }
-

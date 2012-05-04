@@ -10,10 +10,7 @@ targetRepositories = []		// ps Repository with Target Definition File
 
 workspacePath = "../"					// Relative Path to workspace directory e.g. your build is located in the folder workspace/buildscript please set relativePath to ".../"
 
-
 apply from: 'tycho_build.gradle'
-
-'
 
 // Local tasks
 task importPlugin << {

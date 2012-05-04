@@ -27,9 +27,15 @@ task importPlugin << {
 	}
 }
 
-task collectArtifacts(type:Copy) {
-	    from '../'+groupID+'.repository/target/repository/'
-	    into '../updatesite'
-	    from "index.html"
-	    into '../updatesite'
+task deleteOldArtifacts(type: Delete) {
+  	String updateSite = workspacePath+'updatesite'
+	delete updateSite
 }
+
+task collectArtifacts(type:Copy) {
+	    from groupID+'.repository/target/repository/'
+	    into 'updatesite'
+	    from "index.html"
+	    into 'updatesite'
+}
+

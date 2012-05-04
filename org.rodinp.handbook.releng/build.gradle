@@ -24,6 +24,16 @@ task importPlugin << {
 	}
 }
 
+task deleteOldHelpPlugin(type: Delete) {
+  	String helpPlugin = workspacePath+'org.rodinp.handbook'
+	delete helpPlugin
+}
+
+task importHelpPlugin(type:Copy) {
+	    from workspacePath+'org.rodinp.handbook.feature/build/eclipse'
+	    into workspacePath+'org.rodinp.handbook'
+}
+
 task deleteOldArtifacts(type: Delete) {
   	String updateSite = workspacePath+'updatesite'
 	delete updateSite

@@ -1,14 +1,19 @@
 groupID			=	"org.rodinp.handbook"
-features		=	["org.rodinp.handbook.feature"]		// must be the same as the folder name
+features		=	["org.rodinp.handbook.feature"]		// must be the same as the folder name Please remember to add '../' if necessary
 
-descriptions	=	[["org.rodinp.handbook.feature": "Rodin Handbook"] ]		// label and descriptions of the features
+descriptions	=	[["org.rodinp.handbook.feature": "Rodin Handbook"]]		// label and descriptions of the features
 
 repositoryName	=	groupID+".repository"		// will be the folder name
 parentID		= 	groupID+".parent"			// will be the same as the folder name
 
 targetRepositories = []		// ps Repository with Target Definition File
 
+workspacePath = "../"					// Relative Path to workspace directory e.g. your build is located in the folder workspace/buildscript please set relativePath to ".../"
+
+
 apply from: 'tycho_build.gradle'
+
+'
 
 // Local tasks
 task importPlugin << {

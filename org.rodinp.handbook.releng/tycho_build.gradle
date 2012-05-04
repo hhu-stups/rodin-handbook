@@ -70,7 +70,7 @@ subprojects {
 		
 		
 		if(features.every{ it != project.name }){			// Generating Poms for sub projects except features
-			content = new File("../${project.name}/META-INF/MANIFEST.MF").getText("UTF-8") 
+			content = new File(workspacePath+"${project.name}/META-INF/MANIFEST.MF").getText("UTF-8") 
 
 	 		printFileLine = { 
 				if(  it ==~ /Bundle-Version.+qualifier/ ){
@@ -84,8 +84,11 @@ subprojects {
 				}
 		
 				if(  it ==~ /Bundle-SymbolicName:.+/ ){
-					artifactId = it.substring(21)
-					artifactId = artifactId.replace(";singleton:=true",'')
+					artifactId = it
+					artifactId = artifactId.replace("Bundle-SymbolicName:", '');
+					artifactId = artifactId.replace(";",'')
+					artifactId = artifactId.replace(" ",'')
+					artifactId = artifactId.replace("singleton:=true",'')
 				}
 				/*	Artifact ID is taken from Bundle-SymbolicName minus the
 				*	16 chars ';singleton:=true'
@@ -98,7 +101,7 @@ subprojects {
 			println artifactId
 			println "\t"+versionNumber
 	
-			def f = new File('../'+artifactId+'/pom.xml') 
+			def f = new File(workspacePath+artifactId+'/pom.xml') 
 			f.delete()
 			f << start()+elder()+artifact(artifactId, versionNumber)+end()
 			/*	
@@ -114,14 +117,18 @@ subprojects {
 			
 				boolean idfound = false
 
-				content = new File("../${project.name}/feature.xml").getText("UTF-8") 
+				content = new File(workspacePath+"${project.name}/feature.xml").getText("UTF-8") 
 
 				printFileLine = {
 		
 					if(  it ==~ /.+version.+qualifier.+/ ){
-						versionNumber = it.substring(15,it.size()-1) 
-						// possibile error: cuts off first 15 chars and leaves out last '"'
-			
+						versionNumber = it 
+						versionNumber = versionNumber.replace(" ", '')
+						versionNumber = versionNumber.replace("version=", '')
+						versionNumber = versionNumber.replace('"', '')
+						versionNumber = versionNumber.replace('<', '')
+						versionNumber = versionNumber.replace('>', '')
+						
 						/*	Version Number is taken from Feature.xml 
 						*	feature.xml is searched for version="version.qualifier"
 						*	first 15 chars and last '"' are cut off
@@ -131,12 +138,13 @@ subprojects {
 		
 		
 					if(  it ==~ /.+id=".+/ && idfound == false ){
-						artifactId = it.substring(10,it.length()-1)
+						artifactId = it
+						artifactId = artifactId.replace("id=", '')
+						artifactId = artifactId.replace(" ", '')
+						artifactId = artifactId.replace('"', '')
 						idfound = true
 					}
-					/*	Artifact ID is taken from Bundle-SymbolicName minus the
-					*	16 chars ';singleton:=true'
-					*/
+				
 				}
 	
 				content.eachLine( printFileLine )
@@ -146,7 +154,7 @@ subprojects {
 				println "\t"+versionNumber
 
 
-				def f = new File('../'+artifactId+'/pom.xml') 
+				def f = new File(workspacePath+artifactId+'/pom.xml') 
 				f.delete()
 				f << feature(artifactId, versionNumber)
 							
@@ -167,11 +175,11 @@ clean {
 task createParent() << {
 	//		---------				 define Parent 				---------		//
 		
-	new File("../${parentID}").mkdir() 			
+	new File(workspacePath+"${parentID}").mkdir() 			
 	versionNumber 	=	'1.0.0.qualifier'
 	artifactId 		=	parentId()
 
-	def f = new File('../'+artifactId+'/pom.xml') 
+	def f = new File(workspacePath+artifactId+'/pom.xml') 
 	f.delete()
 	f << parentPom(artifactId)
 	for(int i = 0; i < targetRepositories.size(); i++){
@@ -192,30 +200,41 @@ task createRepository() << {
 	//			------------	 	define Repository			---------		//
 			
 			
-	new File("../${repositoryName}").mkdir() 
+	new File(workspacePath+"${repositoryName}").mkdir() 
 				
 	versionNumber 	=	'1.0.0.qualifier'
 	artifactId		=	repositoryName
 	featureVersionNumber = '1.0.0.qualifier'
-	def f = new File('../'+artifactId+'/category.xml') 
+	def f = new File(workspacePath+artifactId+'/category.xml') 
 	f.delete()
 	f << categoryHead()
 	for(int i = 0; i < features.size(); i++){
-					
-		content = new File("../${features[i]}/feature.xml").getText("UTF-8") 
+
+		content = new File("${workspacePath}${features[i]}/feature.xml").getText("UTF-8") 
+		boolean idfound = false
 		printFileLine = {
-			if(  it ==~ /.+version.+qualifier.+/ ){
-				featureVersionNumber = it.substring(15,it.size()-1) 
-				// possibile error: cuts off first 15 chars and leaves out last '"'
-				
-				/*	Version Number is taken from Feature.xml 
-				*	feature.xml is searched for version="version.qualifier"
-				*	first 15 chars and last '"' are cut off
-				*/
-				}		
+				if(  it ==~ /.+version.+qualifier.+/ ){
+					featureVersionNumber = it 
+					featureVersionNumber = featureVersionNumber.replace(" ", '')
+					featureVersionNumber = featureVersionNumber.replace("version=", '')
+					featureVersionNumber = featureVersionNumber.replace('"', '')
+
+
+				}
+	
+	
+				if(  it ==~ /.+id=".+/ && idfound == false ){
+					featureArtifactId = it
+					featureArtifactId = featureArtifactId.replace("id=", '')
+					featureArtifactId = featureArtifactId.replace(" ", '')
+					featureArtifactId = featureArtifactId.replace('"', '')
+					idfound = true
+				}
+			
 		}
+	
 		content.eachLine( printFileLine )
-		f << categoryFeatures(features[i], featureVersionNumber)
+		f << categoryFeatures(featureArtifactId.replace(workspacePath,''), featureVersionNumber)
 	}// for
 			
 	for(int i = 0; i < features.size(); i++){
@@ -226,7 +245,7 @@ task createRepository() << {
 				
 	f << categoryEnd()
 				
-	def pom = new File('../'+artifactId+'/pom.xml') 
+	def pom = new File(workspacePath+artifactId+'/pom.xml') 
 	pom.delete()
 	pom << reposi()
 }// end of repository definition
@@ -237,7 +256,7 @@ task createPoms(dependsOn: [createParent, createRepository, subprojects.deploy])
 
 task install(dependsOn: [createPoms] , type:Exec) {
 	description = "\tExecutes a 'mvn install' of the parent pom.xml and auto-generates Tycho Poms"	
-	commandLine 'mvn', 'install', '-f', '../'+parentID+'/pom.xml'
+	commandLine 'mvn', 'install', '-f', workspacePath+parentID+'/pom.xml'
 }
 
 

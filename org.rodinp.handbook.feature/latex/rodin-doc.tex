@@ -1,3 +1,17 @@
+\ifdefined\isinprint
+\documentclass[10pt]{book}
+\usepackage[paperwidth=155.93mm,paperheight=233.89mm]{geometry}
+\usepackage[colorlinks=false,
+            pdfborder={0 0 0}
+	        pdftex,
+            plainpages=false,
+            pdfauthor={Michael Jastram (Ed.)},
+            pdftitle={Rodin User's Handbook},
+            pdfsubject={Rodin is a platform for Event-B based formal modelling},
+            pdfkeywords={Rodin, Event-B},
+            pdfproducer={http://handbook.event-b.org},
+            pdfcreator={plastex-based tool chain}]{hyperref}
+\else
 \documentclass[12pt]{book}
 \usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
 \usepackage[colorlinks=true,
@@ -9,6 +23,7 @@
             pdfkeywords={Rodin, Event-B},
             pdfproducer={http://handbook.event-b.org},
             pdfcreator={plastex-based tool chain}]{hyperref}
+\fi
 \usepackage{graphicx}
 \usepackage{bsymb}
 \usepackage{b2latex}
@@ -39,29 +54,27 @@ Handbook $ $Rev$ $ \\
 \else
 \begin{titlepage}
 \AddToShipoutPicture*{\BackgroundPic}
-\vspace*{14.5cm}
-{\fontsize{70}{85}\selectfont \bfseries Rodin}
+\vspace*{\titletop}
+{\titledimrodin\selectfont \bfseries Rodin}
 
-\vspace*{0.2cm}
-{\fontsize{24.5}{30}\selectfont \bfseries User's Handbook}
+\vspace*{\titlesubtitledistance}
+{\titledimhandbook\selectfont \bfseries User's Handbook}
 
-\vspace*{1cm}
-{\fontsize{16}{19}\selectfont \textbf{\textsf{Covers Rodin v.\versionnr}}}
+\vspace*{\titlesecdistance}
+{\titledimsubtext\selectfont \textbf{\textsf{Covers Rodin v.\versionnr}}}
 
-\vspace*{1cm}
-{\fontsize{16}{19}\selectfont \textsf{Michael Jastram (Ed.)}}
+\vspace*{\titlesecdistance}
+{\titledimsubtext\selectfont \textsf{Michael Jastram (Ed.)}}
 
-\vspace*{0.2cm}
-{\fontsize{16}{19}\selectfont \textsf{Foreword by Prof. Michael Butler}}
+\vspace*{\titlesubtitledistance}
+{\titledimsubtext\selectfont \textsf{Foreword by Prof. Michael Butler}}
 
-\vspace*{1cm}
-\includegraphics[width=12mm]{img/deploy-logo.png}
+\vspace*{\titlesecdistance}
+{\titledimsponsor\selectfont %
+  $\vcenter{\hbox{\includegraphics[height=4ex]{img/deploy-logo.png}}}$
+  \textsf{This work is sponsored by the Deploy Project}}
 
-\vspace*{-8.4mm}
-\hspace*{12mm}
-{ \fontsize{11}{15}\selectfont \textsf{This work is sponsored by the Deploy Project}}
-
-\vspace*{-22mm}
+\vspace*{\titlebottom}
 
 \end{titlepage}
 \phantomsection
@@ -145,7 +158,9 @@ The handbook is stored in the Rodin SVN repository and is authored in \LaTeX.  C
 
 Each page of the online version also has a feedback button, where feedback can be left using an online form.  This feedback will be processed on a regular basis by volunteers.
 
-There is also a mailing list for handbook authors at \texttt{rodin-b-sharp-handbook@lists.\-sourceforge.net}.
+There is also a mailing list for handbook authors at 
+\ifinprint \\ \fi
+\texttt{rodin-b-sharp-handbook@lists.\-sourceforge.net}.
 
 You can also submit feedback via email to \texttt{rodin-hand\-book@formal\-mind.com}.
 

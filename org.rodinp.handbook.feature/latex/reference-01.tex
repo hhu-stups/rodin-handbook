@@ -24,7 +24,18 @@ The primary concept in doing formal developments with the Rodin Platform is that
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_10_project1.png}
+  \framebox{\parbox{0.3\textwidth}{{\large Machine}
+    \begin{itemize}
+    \item[] variables
+    \item[] invariants
+    \item[] events
+    \end{itemize}}}
+  \hspace*{5em}\framebox{\parbox{0.3\textwidth}{{\large Context}
+    \begin{itemize}
+    \item[] carrier sets
+    \item[] constants
+    \item[] axioms
+    \end{itemize}}}
 	\caption{Overview Machine and Context}
 	\label{fig_ref_10_project1}
 \end{center}
@@ -35,7 +46,7 @@ Various relationships exist between machines and contexts. This is illustrated i
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_10_project2.png}
+	\includerodinimg{reference/ref_10_project2.png}
 	\caption{A typical example of machine and context relationship}
 	\label{fig_ref_10_project2}
 \end{center}
@@ -58,7 +69,7 @@ Eclipse Projects can have one or more natures to describe their purpose.  The GU
 
 Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. views) which are visible and explain their functions.
 
-\imagedpi{img/reference/ref_01_eventb_perspective1.pdf}{150mm}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
+\imagedpi{reference/ref_01_eventb_perspective1.pdf}{\textwidth}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
 
 \subsubsection{Menu bar}
 \label{menu_bar}
@@ -77,7 +88,7 @@ One action is available when editing context files (see Figure \ref{fig_ref_01_m
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_menubar2.png}
+	\includerodinimg{reference/ref_01_menubar2.png}
 	\caption{Automatic rename actions for context files}
 	\label{fig_ref_01_menubar2}
 \end{center}
@@ -93,7 +104,7 @@ Three actions are available for machine files (see Figure \ref{fig_ref_01_menuba
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_menubar1.png}
+	\includerodinimg{reference/ref_01_menubar1.png}
 	\caption{Automatic rename actions for machine files}
 	\label{fig_ref_01_menubar1}
 \end{center}
@@ -137,7 +148,7 @@ The ASCII code corresponding to the symbol over which the mouse hovers is also d
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_symbol_table1.png}
+	\includerodintwimg{1.0}{reference/ref_01_symbol_table1.png}
 	\caption{Clicking a symbol inserts it at the current position}
 	\label{fig_ref_01_symbol_table1}
 \end{center}
@@ -155,7 +166,7 @@ When expanding a machine or a context, you can explore its elements. Double clic
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_project_explorer1.png}
+	\includerodintwimg{1.0}{reference/ref_01_project_explorer1.png}
 	\caption{Double clicking on an element opens the Event-B editor and marks the corresponding position}
 	\label{fig_ref_01_project_explorer1}
 \end{center}
@@ -174,7 +185,7 @@ For the most part, the perspectives can be customized by dragging and dropping t
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_customizing2.png}
+	\includerodinimg{reference/ref_01_customizing2.png}
 	\caption{Show View as a Fast View}
 	\label{fig_ref_01_customizing2}
 \end{center}
@@ -193,7 +204,7 @@ All of the windows that you cannot create directly when clicking on \textsf{Show
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_10_customizing.png}
+	\includerodintwimg{1.0}{reference/ref_10_customizing.png}
 	\caption{Our self-made Quick perspective}
 	\label{fig_ref_10_customizing}
 \end{center}
@@ -209,7 +220,7 @@ Once a context or a machine is created, a window appears in the editing area as 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor1_neweditor.png}
+	\includerodintwimg{1.0}{reference/ref_01_eventb_editor1_neweditor.png}
 	\caption{The Event-B editor}
 	\label{fig_ref_01_eventb_editor1_neweditor}
 \end{center}
@@ -221,7 +232,7 @@ Machine elements can also be added in the same way.
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_neweditor_add_element.png}
+	\includerodintwimg{1.0}{reference/ref_01_neweditor_add_element.png}
 	\caption{Adding a new modelling element}
 	\label{fig_ref_01_neweditor_add_element}
 \end{center}
@@ -241,7 +252,7 @@ Once a context or a machine is created, a window appears in the editing area as 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor1.png}
+	\includerodinimg{reference/ref_01_eventb_editor1.png}
 	\caption{The Structured Event-B editor}
 	\label{fig_ref_01_eventb_editor1}
 \end{center}
@@ -252,7 +263,7 @@ by pressing the triangle (\icon{rodin/collapsed.png}) next to each keyword, you 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor2.png}
+	\includerodinimg{reference/ref_01_eventb_editor2.png}
 	\caption{By pressing the triangle you can collapse/expand context sections}
 	\label{fig_ref_01_eventb_editor2}
 \end{center}
@@ -262,7 +273,7 @@ By pressing the \icon{rodin/add.png} button, you can add a new modelling element
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor3.png}
+	\includerodintwimg{1.0}{reference/ref_01_eventb_editor3.png}
 	\caption{Adding a new modelling element}
 	\label{fig_ref_01_eventb_editor3}
 \end{center}
@@ -277,7 +288,7 @@ By selecting the \textsf{Dependencies} tab at the bottom of the Event-B editor, 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor8.png}
+	\includerodinimg{reference/ref_01_eventb_editor8.png}
 	\caption{Dependencies tab of the Event-B editor}
 	\label{fig_ref_01_eventb_editor8}
 \end{center}
@@ -289,7 +300,7 @@ There is also another way to create a new context as an extension existing one. 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor9.png}
+	\includerodinimg{reference/ref_01_eventb_editor9.png}
 	\caption{New EXTENDS Clause window}
 	\label{fig_ref_01_eventb_editor9}
 \end{center}
@@ -309,7 +320,7 @@ Selecting the \textsf{Synthesis} tab brings up a global view of your context's e
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor11.png}
+	\includerodinimg{reference/ref_01_eventb_editor11.png}
 	\caption{The Synthesis tab of the Event-B editor}
 	\label{fig_ref_01_eventb_editor11}
 \end{center}
@@ -333,7 +344,7 @@ Selecting the \textsf{Pretty Print} tab gives you a global view of your context 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor10.png}
+	\includerodinimg{reference/ref_01_eventb_editor10.png}
 	\caption{The Pretty Print tab of the Event-B editor}
 	\label{fig_ref_01_eventb_editor10}
 \end{center}
@@ -347,7 +358,7 @@ You can activate the different wizards by using the buttons in the tool bar as s
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor12.png}
+	\includerodinimg{reference/ref_01_eventb_editor12.png}
 	\caption{Wizards for context specific elements located in the tool bar}
 	\label{fig_ref_01_eventb_editor12}
 \end{center}
@@ -355,7 +366,7 @@ You can activate the different wizards by using the buttons in the tool bar as s
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor13.png}
+	\includerodinimg{reference/ref_01_eventb_editor13.png}
 	\caption{Wizards for machine specific elements located in the tool bar}
 	\label{fig_ref_01_eventb_editor13}
 \end{center}
@@ -370,7 +381,7 @@ To activate the \textsf{New Carrier Sets Wizard}, press the \icon{rodin/newset_e
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor4.png}
+	\includerodinimg{reference/ref_01_eventb_editor4.png}
 	\caption{New Carrier Sets Wizard}
 	\label{fig_ref_01_eventb_editor4}
 \end{center}
@@ -386,13 +397,14 @@ To activate the \textsf{New Enumerated Set Wizard}, press the \icon{rodin/newenu
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor5.png}
+	\includerodinimg{reference/ref_01_eventb_editor5.png}
 	\caption{New Enumerated Set Wizard}
 	\label{fig_ref_01_eventb_editor5}
 \end{center}
 \end{figure}
 
-Enter the name of the new enumerated set as well as the names of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you're finished, press the \textsf{OK} button. The benefit of using this wizard is that in addition to creating the set and its elements, the wizard automatically creates the axiom that is necessary for the context to work. For example, when you add the new carrier set \texttt{COLOUR} and the three constants \texttt{red}, \texttt{green}, and \texttt{orange}, the wizard automatically creates the following axiom $partition(COLOUR , \{red\}, \{green\}, \{orange\})$.
+Enter the name of the new enumerated set as well as the names of its elements. By pressing the \textsf{More Elements} button, you can enter additional elements. When you're finished, press the \textsf{OK} button. The benefit of using this wizard is that in addition to creating the set and its elements, the wizard automatically creates the axiom that is necessary for the context to work. For example, when you add the new carrier set \texttt{COLOUR} and the three constants \texttt{red}, \texttt{green}, and \texttt{orange}, the wizard automatically creates the following axiom 
+\[partition(COLOUR , \{red\}, \{green\}, \{orange\})\].
 
 \subsubsection{New Constants Wizard}
 \index{wizard!New Constants Wizard}
@@ -402,7 +414,7 @@ To activate the \textsf{New Constants Wizard}, press the \icon{rodin/newcst_edit
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor6.png}
+	\includerodinimg{reference/ref_01_eventb_editor6.png}
 	\caption{New Constants Wizard}
 	\label{fig_ref_01_eventb_editor6}
 \end{center}
@@ -418,7 +430,7 @@ To activate the \textsf{New Axioms Wizard}, press the \icon{rodin/newaxm_edit.pn
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor7.png}
+	\includerodinimg{reference/ref_01_eventb_editor7.png}
 	\caption{New Axioms Wizard}
 	\label{fig_ref_01_eventb_editor7}
 \end{center}
@@ -435,7 +447,7 @@ To activate the \textsf{New Variable Wizard}, press the \icon{rodin/newvar_edit.
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor14.png}
+	\includerodinimg{reference/ref_01_eventb_editor14.png}
 	\caption{New Variable Wizard}
 	\label{fig_ref_01_eventb_editor14}
 \end{center}
@@ -451,7 +463,7 @@ To activate the \textsf{New Invariants Wizard}, press the \icon{rodin/newinv_edi
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor15.png}
+	\includerodinimg{reference/ref_01_eventb_editor15.png}
 	\caption{New Invariants Wizard}
 	\label{fig_ref_01_eventb_editor15}
 \end{center}
@@ -467,7 +479,7 @@ To activate the \textsf{New Events Wizard}, press the \icon{rodin/newevt_edit.pn
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_eventb_editor16.png}
+	\includerodintwimg{1.0}{reference/ref_01_eventb_editor16.png}
 	\caption{New Event Wizard}
 	\label{fig_ref_01_eventb_editor16}
 \end{center}
@@ -486,7 +498,7 @@ When proof obligations (POs) (\ref{generated_proof_obligations}) are not dischar
 
 The Proving Perspective consists of a number of views: the \textsf{Proof Tree}, the \textsf{Goal}, the \textsf{Selected Hypotheses}, the \textsf{Proof Control}, the \textsf{Search Hypotheses}, the \textsf{Cache Hypotheses} and the \textsf{Proof Information}. In the discussion that follows we look at each of these views individually. Figure \ref{fig_ref_01_proving_perspective1} shows an overview of the Proving Perspective.
 
-\imagedpi{img/reference/ref_01_proving_perspective1.pdf}{150mm}{img/reference/ref_01_proving_perspective1.png}{Overview of the Proving Perspective}{fig_ref_01_proving_perspective1}
+\imagedpi{reference/ref_01_proving_perspective1.pdf}{\textwidth}{img/reference/ref_01_proving_perspective1.png}{Overview of the Proving Perspective}{fig_ref_01_proving_perspective1}
 
 \subsubsection{Loading a Proof}
 
@@ -502,7 +514,7 @@ The proof tree view provides a graphical representation of each individual proof
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective2.png}
+	\includerodinimg{reference/ref_01_proving_perspective2.png}
 	\caption{The Proof Tree}
 	\label{fig_ref_01_proving_perspective2}
 \end{center}
@@ -566,7 +578,7 @@ Each sequent in the proof tree have corresponding hypotheses and goals. A user w
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective3.png}
+	\includerodintwimg{0.7}{reference/ref_01_proving_perspective3.png}
 	\caption{Open proof obligation}
 	\label{fig_ref_01_proving_perspective3}
 \end{center}
@@ -589,7 +601,7 @@ Other proof rules can be applied when green buttons appear in the \textsf{Goal} 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective4.png}
+	\includerodintwimg{0.8}{reference/ref_01_proving_perspective4.png}
 	\caption{Applying a rule}
 	\label{fig_ref_01_proving_perspective4}
 \end{center}
@@ -599,7 +611,7 @@ To instantiate a quantifier, the user enters the desired expression in the yello
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective5.png}
+	\includerodinimg{reference/ref_01_proving_perspective5.png}
 	\caption{Instantiating a quantifier}
 	\label{fig_ref_01_proving_perspective5}
 \end{center}
@@ -614,7 +626,7 @@ The \textsf{Proof Control} view contains the buttons with which you can perform 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective6.png}
+	\includerodintwimg{1.1}{reference/ref_01_proving_perspective6.png}
 	\caption{The Proof Control View}
 	\label{fig_ref_01_proving_perspective6}
 \end{center}
@@ -685,7 +697,7 @@ The auto prover can be run by clicking the \icon{rodin/auto_prover.png}. This pr
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics{img/reference/ref_10_auto_prover_pref.png}
+%	\includerodinimg{reference/ref_10_auto_prover_pref.png}
 %	\caption{Auto Prover Preferences}
 %	\label{fig_ref_10_auto_prover_pref}
 %\end{center}
@@ -702,7 +714,7 @@ By typing a string in the \textsf{Proof Control} view and pressing the \textsf{S
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective7.png}
+	\includerodinimg{reference/ref_01_proving_perspective7.png}
 	\caption{The Search Hypotheses View}
 	\label{fig_ref_01_proving_perspective7}
 \end{center}
@@ -732,8 +744,8 @@ Operations similar to those in the \textsf{Selected Hypotheses} and \textsf{Sear
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective15.png}
-	\caption{Proof Information View}
+	\includerodintwimg{0.7}{reference/ref_01_proving_perspective15.png}
+	\caption{Type Environment View}
 	\label{fig_ref_01_proving_perspective15}
 \end{center}
 \end{figure}
@@ -746,7 +758,7 @@ This view displays information so that the user can relate a proof obligation to
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective8.png}
+	\includerodinimg{reference/ref_01_proving_perspective8.png}
 	\caption{Proof Information View}
 	\label{fig_ref_01_proving_perspective8}
 \end{center}
@@ -759,7 +771,7 @@ This information can be viewed by right clicking on any node in the proof tree a
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective9.png}
+	\includerodinimg{reference/ref_01_proving_perspective9.png}
 	\caption{Open Rule Details View}
 	\label{fig_ref_01_proving_perspective9}
 \end{center}
@@ -771,7 +783,7 @@ Figure \ref{fig_ref_01_proving_perspective10} gives an overview of the \textsf{R
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective10.png}
+	\includerodinimg{reference/ref_01_proving_perspective10.png}
 	\caption{Rule Details View}
 	\label{fig_ref_01_proving_perspective10}
 \end{center}
@@ -789,7 +801,7 @@ The auto-tactic automatically applies a combination (i.e. ordered list) of rewri
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective11.png}
+	\includerodinimg{reference/ref_01_proving_perspective11.png}
 	\caption{Toggle auto-prover via project menu}
 	\label{fig_ref_01_proving_perspective11}
 \end{center}
@@ -801,7 +813,7 @@ Note that the post-tactic can be disabled quickly by clicking on the \textsf{rod
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_proving_perspective12.png}
+	\includerodinimg{reference/ref_01_proving_perspective12.png}
 	\caption{Proof Control view menu}
 	\label{fig_ref_01_proving_perspective12}
 \end{center}
@@ -836,7 +848,7 @@ The colour and fonts preference page allows you to set the text and comment colo
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences13.png}
+	\includerodinimg{reference/ref_01_preferences13.png}
 	\caption{Colours and Fonts preferences}
 	\label{fig_ref_01_preferences13}
 \end{center}
@@ -870,11 +882,11 @@ This page describes the default values that are used for the prefixes of the dif
 
 Figure \ref{fig_ref_01_preferences1} shows that modifying prefixes on the workspace level or on the project level will affect the names used at creation of new Event-B elements. One can see that the prefixes for variables and invariants, which were originally set to ``var" or ``inv'', have been replaced by ``variable" and ``invariant". New elements are then named using those prefixes.
 
-\imagedpi{img/reference/ref_01_preferences1.pdf}{135mm}{img/reference/ref_01_preferences1.png}{Prefix Settings}{fig_ref_01_preferences1}
+\imagedpi{reference/ref_01_preferences1.pdf}{\textwidth}{img/reference/ref_01_preferences1.png}{Prefix Settings}{fig_ref_01_preferences1}
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences1.png}
+%	\includerodinimg{reference/ref_01_preferences1.png}
 %	\caption{Prefix Settings}
 %	\label{fig_ref_01_preferences1}
 %\end{center}
@@ -892,7 +904,7 @@ A window (see Figure \ref{fig_ref_01_preferences2}) appears that allows a user t
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences2.png}
+	\includerodinimg{reference/ref_01_preferences2.png}
 	\caption{Project specific prefix settings}
 	\label{fig_ref_01_preferences2}
 \end{center}
@@ -923,13 +935,13 @@ The \textsf{Proof Control} view menu shows whether there are sequent prover pref
 Indeed, the command label in the menu tells if project specific settings are set, or if the workspace settings are considered. The command opens the corresponding \textsf{Auto/Post Tactic} page.
 
 \begin{figure}
-\begin{minipage}[t]{.40\linewidth}
- \centering \includegraphics{img/reference/ref_01_proving_perspective13.png}
+\begin{minipage}[t]{.45\linewidth}
+ \centering \includerodintwimg{1.0}{reference/ref_01_proving_perspective13.png}
  \caption{(a) direct access to the Celebrity project specific settings}
  \label{fig_ref_01_proving_perspective13}
 \end{minipage}\hfill
-\begin{minipage}[t]{.40\linewidth}
-\centering \includegraphics{img/reference/ref_01_proving_perspective14.png}
+\begin{minipage}[t]{.45\linewidth}
+\centering \includerodintwimg{1.0}{reference/ref_01_proving_perspective14.png}
 \caption{(b) no project settings exist for the current PO, direct access to workspace settings}
  \label{fig_ref_01_proving_perspective14}
 \end{minipage}
@@ -945,7 +957,7 @@ Figure \ref{fig_ref_01_preferences7} shows the \textsf{Auto/Post Tactic} prefere
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences7.png}
+	\includerodintwimg{1.0}{reference/ref_01_preferences7.png}
 	\caption{The ``Auto/Post Tactic" preference page}
 	\label{fig_ref_01_preferences7}
 \end{center}
@@ -957,7 +969,7 @@ The options shown by (1) and (2) allow you to activate/deactivate the automatic 
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics{img/reference/ref_01_preferences8.png}
+%	\includerodinimg{reference/ref_01_preferences8.png}
 %	\caption{Selecting a profile for the Auto-Tactics}
 %	\label{fig_ref_01_preferences8}
 %\end{center}
@@ -972,7 +984,7 @@ Figure \ref{fig_ref_01_preferences9} shows the contents of the profile tab. Ther
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences9.png}
+	\includerodintwimg{1.0}{reference/ref_01_preferences9.png}
 	\caption{Selecting a profile for the Auto-Tactics}
 	\label{fig_ref_01_preferences9}
 \end{center}
@@ -992,7 +1004,7 @@ Default profiles can not be edited nor removed. That is why these options are co
 Figure \ref{fig_ref_01_preferences10} shows the dialog available to edit or create a profile. For instance, here we create a profile named ``MyFirstTacticProfile".
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences10.png}
+	\includerodintwimg{1.0}{reference/ref_01_preferences10.png}
 	\caption{Selecting a profile for the Auto-Tactics}
 	\label{fig_ref_01_preferences10}
 \end{center}
@@ -1006,7 +1018,7 @@ The user can select profiles locally for each project. To do so, select the \tex
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences11.png}
+	\includerodintwimg{1.0}{reference/ref_01_preferences11.png}
 	\caption{Auto/Post Tactic Tab for project specific settings for Auto/Post Tactic}
 	\label{fig_ref_01_preferences11}
 \end{center}
@@ -1016,7 +1028,7 @@ Note that the enablement of automatic use of post and auto tactics is decided at
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/reference/ref_01_preferences12.png}
+	\includerodintwimg{1.0}{reference/ref_01_preferences12.png}
 	\caption{Profiles Tab for project specific settings for Auto/Post Tactic}
 	\label{fig_ref_01_preferences12}
 \end{center}
@@ -1060,7 +1072,7 @@ One may notice the absence of child-specific combinator (i.e. combinators that a
 A composer combinator applies its given tactic(s) to the given node. The given node may be open or closed. It succeeds if at least 1 tactic application is successful. 
 
 \begin{center}
-    \begin{tabular}{ | l | l | p{4.5cm} | p{4.5cm} |}
+    \begin{tabular}{ | p{0.18\textwidth} | l | p{0.28\textwidth} | p{0.28\textwidth} |}
     \hline
 	Name & Arity & Description & Stops when  \\ \hline
 	Sequence & 1..n  & applies given tactics in given order & all tactics have been applied  \\ \hline
@@ -1075,7 +1087,7 @@ A composer combinator applies its given tactic(s) to the given node. The given n
 A selector combinator applies its given tactic to the set of nodes it selects. Selected nodes are computed from the given node. The given node may be open or closed. It succeeds if the tactic application is successful for at least 1 selected node. 
 
 \begin{center}
-    \begin{tabular}{ | l | l | p{10cm} |}
+    \begin{tabular}{ | l | l | p{0.55\textwidth} |}
     \hline
 	Name & Arity & Selects \\ \hline
 	On all pending  & 1 & all pending children of the given node (the given node itself if it is open) \\ \hline
@@ -1087,7 +1099,7 @@ A selector combinator applies its given tactic to the set of nodes it selects. S
 A post actions applies its given tactic to the given node. The given node must be open (otherwise it fails). Then it performs a specific treatment which is guarded by a trigger condition. 
 
 \begin{center}
-    \begin{tabular}{ | p{1,5cm} | p{1cm} | p{6cm} | p{5cm} |}
+    \begin{tabular}{ | l | l | p{0.3\textwidth} | p{0.3\textwidth} |}
     \hline
 	Name & Arity & Trigger Condition & Post Action \\ \hline
 	Attempt & 1 & the given node still has pending children (subtree not closed) & prune proof tree at given node  \\ \hline
@@ -1095,7 +1107,12 @@ A post actions applies its given tactic to the given node. The given node must b
 \end{center}
 
 \subparagraph{Loop on All pending}
-\[loopOnAllPending(T_1 \ldots T_n) \;\;\defi\;\; loop(onAllPending(composeUntilSuccess(T_1 \ldots T_n)))\]
+\[
+\begin{array}{rl}
+        & loopOnAllPending(T_1 \ldots T_n) \\
+  \defi & loop(onAllPending(composeUntilSuccess(T_1 \ldots T_n)))
+\end{array}
+\]
 
 \paragraph{Other Ideas}
 

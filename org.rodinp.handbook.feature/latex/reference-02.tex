@@ -9,13 +9,6 @@
 \newcommand{\absbeforeafter}{\mathcal{S}}
 \newcommand{\concbeforeafter}{\mathcal{T}}
 
-\newcommand{\axioms}{A(\allconstants)}
-\newcommand{\absinvariants}{I(\allconstants,\absvariables)}
-\newcommand{\concinvariants}{J(\allconstants,\absvariables,\concvariables)}
-\newcommand{\absguards}{G(\allconstants,\absvariables,\absparameters)}
-\newcommand{\concguards}{H(\allconstants,\concvariables,\concparameters)}
-\newcommand{\witnesspred}{W(\allconstants,\allvariables,\absvariables',\concvariables',\allparameters)}
-\newcommand{\bapred}{\concbeforeafter(\allconstants,\concparameters,\concvariables,\concvariables')}
 
 % The screenshots from the previous section should not appear in this section
 \clearpage
@@ -64,6 +57,27 @@ As a convention, we use
 \item $G$ and $H$ for the guards of the abstract events or concrete event respectively
 \end{itemize}
 
+\subsection{Substitutions}
+We use the notation $P[E/x]$ for a substitution of all free occurrences of the variable $x$ in
+$P$ by the expression $E$.
+Several substitutions can be performed simultaneously with $P(E_1/x_1,\ldots,E_n/x_n)$.
+In particular, we use the syntax $P[\varlist{x}'/\varlist{x}]$ to denote the substitution of
+each identifier $x$ in the sequence $\varlist{x}$ by $x'$.
+For more information on free identifiers, see Section~\ref{free_identifiers}.
+
+Examples:
+\begin{itemize}
+\item $(x>y)[5+2/y]$ corresponds to the predicate $(x>5+2)$.
+\item $(x>y)[2\cdot y/x,5+2/y]$ corresponds to the predicate $(2\cdot y>5+2)$.
+\item $(\exists x \qdot x\in S \land x>y)[2\cdot y/x,5+2/y]$ corresponds to the predicate
+  $(\exists x \qdot x\in S \land x>5+2)$, because the $x$ is a quantified variable 
+  (i.e. it is not a free variable).
+\item For a sequence $\varlist{v}=v_1,v_2,v_3$ the predicate 
+  $(v_1\subseteq v_2\land v_3\in v_1)[\varlist{v}'/\varlist{v}]$  corresponds to
+  $(v_1'\subseteq v_2'\land v_3'\in v_1')$.
+\end{itemize}
+
+
 \subsection{Contexts}
 \label{context}
 \index{context}
@@ -106,7 +120,8 @@ An axiom must also be in place from which the type of the constant can be inferr
 We denote the sequence of all constants with $\varlist{c}$.
 
 An axiom is a statement that is assumed to be true in the rest of the model.
-Each axiom consists of a label and a predicate $A(\varlist{c})$.
+Each axiom consists of a label and a predicate $A$.
+All free identifiers in $A$ must be constants.
 
 Axioms can be marked as theorems. The proof obligation that are then generated are described in Section \ref{axioms_as_theorems}.
 The validity of a theorem can be proven from the axioms that have already been declared.
@@ -158,7 +173,7 @@ The invariants are accumulated during refinements.
 \label{seeing_a_context}
 If the machine sees a context, the sets and constants declared in the context can be used in
  all predicates and expressions.
-The conjunction of axioms $A(\allconstants)$ can be used as hypotheses in the proofs.
+The conjunction of axioms $A$ can be used as hypotheses in the proofs.
 
 \subsubsection{Variables and invariants}
 \label{variables_and_invariants}
@@ -169,11 +184,11 @@ We denote the variables of the abstract machines $M_1,\ldots,M_{n-1}$ with a $\a
 
 \index{invariant}
 An invariant is a statement that must be valid at each state of the machine.
-Each invariant $i$ consists of a label and a predicate $I_i(\allconstants,\absvariables,\concvariables)$.
+Each invariant $i$ consists of a label and a predicate $I_i$.
 An invariant can refer to the constants as well as the variables of the concrete and all abstract machines.
 
-We write $\absinvariants$ to denote the conjunction of all invariants
-of the abstract machines and $\concinvariants$ for the conjunction of the concrete machine's invariant.
+We write $I$ to denote the conjunction of all invariants
+of the abstract machines and $J$ for the conjunction of the concrete machine's invariant.
 
 Invariants that are marked as theorems derive their correctness from the preservation
   of other invariants, so their preservation does not need to be proven.
@@ -233,16 +248,19 @@ parameters of the concrete event with $\concparameters$.
 
 Similarly to variables, an event can have parameters in common with the event it refines.
 If the refined event has a parameter $t$ which is not a parameter of the refinement, 
- a witness $W_t(\allconstants,\allvariables,\concvariables',\concparameters,t)$ for
+ a witness $W_t$ for
  the abstract parameter must be specified (\ref{witness}).
+All free identifiers in $W_t$ must be either constants, concrete or abstract variables, concrete
+ parameters or the abstract parameter $t$.
 
 \paragraph{Guards}
 \label{guards}
 \index{guard}
-Each \emph{guard} consist of a label and a predicate $H(\allconstants,\concvariables,\concparameters)$.
+Each \emph{guard} consist of a label and a predicate $H$.
+All free identifiers in $H$ must be constants, concrete variables or concrete parameters.
 Variables or parameters of abstract machines are not accessible in a guard.
 
-We write $G(\allconstants,\absvariables,\absparameters)$ for the conjunction of all guards of all abstract events.
+We write $G$ for the conjunction of all guards of all abstract events.
 
 Like axioms and invariants, guards can also be marked as theorems. 
 The proof obligation can be found in Section \ref{guards_as_theorems}.
@@ -269,11 +287,11 @@ Let $x_1,\ldots,x_k$ be the variables that are assigned by any action of the eve
 Let $y_1,\ldots,y_l$ be the variables of the concrete machine that are \emph{not} modified by any of 
  the event's actions (i.e. $\concvariables = x_1,\ldots,x_k,y_1,\ldots,y_l$).
 Then the before-after-predicate of the concrete event is 
-  $\bapred = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
+  $\concbeforeafter = Q_1 \land \ldots \land Q_n \land y_1 = y_1' \land \ldots \land y_l=y_l'$.
 
 Please note that Rodin optimizes proof obligations when a before-after-predicate is a hypothesis.
-$x'$ is replaced directly by $x$ when $x$ is not changed by the event and replaced by $E(\allconstants,\concvariables,\concparameters)$
- when $E(\allconstants,\concvariables,\concparameters)$ is assigned to $x$ deterministically.
+$x'$ is replaced directly by $x$ when $x$ is not changed by the event and replaced by $E$
+ when $E$ is assigned to $x$ deterministically.
 
 \paragraph{Witnesses}
 \label{witness}
@@ -289,27 +307,32 @@ If the user does not specify a witness, Rodin uses the default witness $\btrue$.
 Witnesses are necessary in the following circumstances:
 \begin{itemize}
 \item The abstract event has a parameter $p$ that is not a parameter of the concrete  event.
-  In this case, the label of the witness must be $p$, and the witness has the form 
-  $W_p(\allconstants,\allvariables,\concvariables',\concparameters,p)$.
+  In this case, the label of the witness must be $p$, and the witness has the form  $W_p$.
+  All identifiers of $W_p$ must be either constants, concrete or abstract variables,
+  primed concrete variables (i.e.~$v'$ for each concrete variable $v$),
+  concrete parameters or the abstract parameter $p$.
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
-  In this case, the label of the witness must be $x'$, the witness has the form
-  $W_{x'}(\allconstants,\allvariables,\concvariables',\allparameters,x')$.
+  In this case, the label of the witness must be $x'$, the witness has the form $W_{x'}$.
+  All identifiers of $W_p$ must be either constants, concrete or abstract variables,
+  primed concrete variables (i.e.~$v'$ for each concrete variable $v$),
+  concrete parameters or the primed abstract variable $x'$.
+  $x'$ denotes the new value of $x$.
 \end{itemize}
-We denote the conjunction of all witnesses of an event with $\witnesspred$.
+We denote the conjunction of all witnesses of an event with $W$.
 
 \index{feasibility!of witnesses}
 The feasibility of the witness must be proven, i.e. that there is actually a value for which the predicate holds.
 \index{proof obligation!witness feasibility@witness feasibility (\eventbpo{WFIS})}
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
-      \limp & \exists p \qdot W(\allconstants,\allvariables,\concvariables',\concparameters,p)      
+      & A \land I \land J \land H \\
+      \limp & \exists p \qdot W_p
     \end{array}$}
 \pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \bapred \\
-      \limp & \exists x' \qdot W(\allconstants,\allvariables,\concvariables',\allparameters,x')
+      & A \land I \land J \land H \land \concbeforeafter \\
+      \limp & \exists x' \qdot W_{x'}
     \end{array}$}
 A witness may contain well-definedness conditions. See \ref{well_definedness_of_witnesses}
   for the corresponding proof obligation.
@@ -339,33 +362,32 @@ If the event's guard is enabled, every action must be feasible.
   \index{proof obligation!action feasibility@action feasibility (\eventbpo{FIS})}
   \pode{Action feasibility}{\eventbpo{eventlabel/actionlabel/FIS}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants
-      \land \absguards \land \concguards \\
-      \limp & \actfis(a)      
+      & A \land I \land J \land H \land W_p \land \absbeforeafter \\
+      \limp & \actfis(a)
     \end{array}$}
 
-For each invariant $I_i$ with the label \eventbpo{invlabel} 
+For each invariant $J_i$ with the label \eventbpo{invlabel} 
   that contains a variable affected by the assignment, it must be proven
   that the invariant still is still valid for the new values.
+
   \index{proof obligation!invariant preservation@invariant preservation (\eventbpo{INV})}
   \pode{Invariant preservation}%
   {\eventbpo{eventlabel/invlabel/INV}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants 
-      \land \absguards \land \concguards \\
-      \limp & I_i(\allconstants,\allvariables')      
+      & A \land I \land J \land H \land W_{v} \land \concbeforeafter \\
+      \limp & J_i[\absvariables'/\absvariables,\concvariables'/\concvariables]
     \end{array}$}
   Rodin simplifies this proof obligations by replacing $x'$ with $x$ for variables that are not
-  changed and $x'$ by $E(\allconstants,\concvariables,\concparameters)$ 
+  changed and $x'$ by $E$
   for variables that are assigned by a deterministic ($x \bcmeq E$) assignment.
 
 \index{establishment of the invariant}
 There are special proof obligations generated for the initialisation event:
   \pode{Action feasibility (in the initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
-  {$\axioms \limp  \actfis(a)$}
+  {$A \land W \land \concbeforeafter \limp  \actfis(a)$}
   \pode{Invariant establishment}%
   {\eventbpo{INITIALISATION/invlabel/INV}}%
-  {$\axioms \limp I_i(\allconstants,\allvariables')$}
+  {$A \land W \land \concbeforeafter \limp I_i[\absvariables'/\absvariables,\concvariables'/\concvariables]$}
 
 \subsubsection{Ensuring a correct refinement}
 \label{refinement_proof_obligations}
@@ -390,29 +412,25 @@ proof obligation is generated:
 \pode{Guard strengthening}%
 {\eventbpo{eventname/guardlabel/GRD}}% 
 {$\begin{array}{r@{\ }l}
-   & \axioms \land \absinvariants \land \concinvariants
-  \land \concguards \land \\
-  & \witnesspred \land \bapred  \\
-  \limp & G_i(\allconstants,\absvariables,\absparameters)
+   & A \land I \land J \land H \land W_p \\
+  \limp & G_i
   \end{array}$}
 
 \paragraph{Action simulation}
 \label{action_simulation}
-If an abstract event's action $i$ (with before-after predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$)
+If an abstract event's action $i$ (with before-after predicate $Q_i$)
   assigns a value to a variable that is also declared in the concrete machine,
   it must be proven that the abstract event's behaviour
   corresponds to the concrete behaviour.
-The behaviour of the concrete event is given by the concrete before-after-predicate $\bapred$, and
-the relevant abstract behaviour is given by the before-after-predicate $Q_i(\allconstants,\absvariables,\absparameters,\absvariables')$.
+The behaviour of the concrete event is given by the concrete before-after-predicate $\concbeforeafter$,
+and the relevant abstract behaviour is given by the before-after-predicate $Q_i$.
 The relation between abstract and concrete event is specified by witnesses.
 \index{proof obligation!action simulation@action simulation (\eventbpo{SIM})}
 \pode{Action simulation}%
   {\eventbpo{eventname/actionlabel/SIM}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants 
-      \land \concguards \land \\
-      & \witnesspred \land \bapred \\
-      \limp & Q_i(\allconstants,\absvariables,\absparameters,\absvariables')
+      & A \land I \land J \land H \land W \land \concbeforeafter \\
+      \limp & Q_i
     \end{array}$}
 When the assignments are deterministic or the witnesses are equations, the proof obligation can usually
 be simplified by Rodin.
@@ -420,18 +438,15 @@ be simplified by Rodin.
 \paragraph{Preserved variables}
 \label{preserved_variables}
 If $x$ is a variable of both the abstract and concrete machine and
-  the concrete event assigns a value $x$ but the abstract event does not,
+  the concrete event assigns a value to $x$ but the abstract event does not,
   it must be proven that the variable's value does not change.
-Let $Q_i(\allconstants,\concvariables,\concparameters,\concvariables')$ be the before-after-predicate
-  of the action that changes $x$.
+Let $Q_i$ be the before-after-predicate of the action that changes $x$.
 \index{proof obligation!equality of a preserved variable@equality of a preserved variable (\eventbpo{EQL})}
 \pode{Equality of a preserved variable $x$}%
   {\eventbpo{eventname/$x$/EQL}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants 
-      \land \concguards
-      \land Q_i(\allconstants,\concvariables,\concparameters,\concvariables') \\
-      \limp & x'=x      
+      & A \land I \land J \land H \land Q_i \\
+      \limp & x'=x
     \end{array}$}
 
 \subsubsection{Merging events}
@@ -450,10 +465,8 @@ created with $G_1,\ldots,G_n$ as the abstract guards of the merged events
 \index{proof obligation!merging events@merging events (\eventbpo{MRG})}
 \pode{Guard strengthening (merge)}{\eventbpo{eventlabel/MRG}}%
   {$\begin{array}{l@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \concguards \land \\
-      & \witnesspred \land \bapred \\
-      \limp & G_1(\allconstants,\absvariables,\absparameters_1)\lor\ldots\lor G_n(\allconstants,\absvariables,\absparameters_n)      
+      & A \land I \land J \land H \land W \land \concbeforeafter \\
+      \limp & G_1\lor\ldots\lor G_n
     \end{array}
 $}
 The other proof obligations are the same as for refining a single event.
@@ -479,10 +492,11 @@ This is especially useful when additional features are gradually introduced
 Event-B makes it possible to prove how an event will terminate.
 Termination means that a chosen set of events are enabled only a finite number
  of times before an event that is not marked as terminating occurs.
-To support proofs for termination, a \emph{variant} $V(\allconstants,\concvariables)$ can be specified in a model.
+To support proofs for termination, a \emph{variant} $V$ can be specified in a model.
+ All free identifiers in $V$ must be constants or concrete variables.
 A variant is an expression that is either numeric 
- ($V(\allconstants,\concvariables)\in\intg$) or
- a finite set ($V(\allconstants,\concvariables)\in\pow(\alpha)$,
+ ($V\in\intg$) or
+ a finite set ($V\in\pow(\alpha)$,
  where $\alpha$ is an arbitrary type).
 
 Events can be marked as:
@@ -514,43 +528,41 @@ The following other proof obligations are generated:
   must only be enabled when the variant is non-negative.
 \pode{Numeric variant is a natural number}{\eventbpo{eventlabel/NAT}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land
-      \absguards \land \concguards \\
-      \limp & V(\allconstants,\concvariables)\in\nat
+      & A \land I \land J \land G \land H \\
+      \limp & V\in\nat
     \end{array}$}
 A convergent event must decrease the variant
 \pode{Decreasing of a numeric variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \\
-      & \absguards \land \concguards \land \bapred \\
-      \limp & V(\allconstants,\concvariables')<V(\allconstants,\concvariables)
+      & A \land I \land J \land G \land H \land \concbeforeafter \\
+      \limp & V[\varlist{w}'/\varlist{w}]<V
     \end{array}$}
 and an anticipated event must not increase the variant.
 \pode{Decreasing of a numeric variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \\
-      & \absguards \land \concguards \land \bapred \\
-      \limp & V(\allconstants,\concvariables')\leq V(\allconstants,\concvariables)
+      & A \land I \land J \land G \land H \land \concbeforeafter \\
+      \limp & V[\varlist{w}'/\varlist{w}]\leq V
     \end{array}$}
 
 \paragraph{Set variant}
 \label{set_variant}
   If the variant is a set t, it must be proven that the set is always finite:
 \pode{Decreasing of a variant (anticipated event)}{\eventbpo{FIN}}%
-  {$\axioms \land \absinvariants \land \concinvariants \limp \bfinite(V(\allconstants,\concvariables))$}
+  {$\begin{array}{r@{\ }l}
+      & A \land I \land J \\
+      \limp & \bfinite(V)
+    \end{array}$}
 A convergent event must remove elements from the set
 \pode{Decreasing of a set variant (convergent event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \\
-      & \absguards \land \concguards \land \bapred \\
-      \limp & V(\allconstants,\concvariables')\subset V(\allconstants,\concvariables)
+      & A \land I \land J \land G \land H \land \concbeforeafter \\
+      \limp & V[\varlist{w}'/\varlist{w}]\subset V
     \end{array}$}
 and an anticipated event must not add elements.
 \pode{Decreasing of a set variant (anticipated event)}{\eventbpo{eventlabel/VAR}}%
   {$\begin{array}{r@{\ }l}
-      & \axioms \land \absinvariants \land \concinvariants \land \\
-      & \absguards \land \concguards \land \bapred \\
-      \limp & V(\allconstants,\concvariables')\subseteq V(\allconstants,\concvariables)
+      & A \land I \land J \land G \land H \land \concbeforeafter \\
+      \limp & V[\varlist{w}'/\varlist{w}]\subseteq V
     \end{array}$}
 
 \subsection{Well-definedness proof obligations}
@@ -569,7 +581,7 @@ For an axiom $A_w$, $A_b$ denotes (the conjunction of) all axioms declared
   the current context before the axiom in question.
 \index{proof obligation!well-definedness of an axiom@well-definedness of an axiom (\eventbpo{WD})}
 \pode{Well-definedness of an axiom}{\eventbpo{label/WD}}%
-  {$A_b(\allconstants) \limp \wdl(A_w(\allconstants))$}.
+  {$A_b \limp \wdl(A_w)$}
 
 \paragraph{Invariants}
 \label{well_definedness_of_invariants}
@@ -577,8 +589,8 @@ For an invariant $J_w$, $J_b$ denotes (the conjunction of) all the model's
   invariants declared before the theorem.
 \index{proof obligation!well-definedness of an invariant@well-definedness of an invariant (\eventbpo{WD})}
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}%
-  {$\axioms \land \absinvariants \land J_b(\allconstants,\absvariables,\concvariables)
-    \limp \wdl(J_w(\allconstants,\absvariables,\concvariables))$}
+  {$A \land I \land J_b
+    \limp \wdl(J_w)$}
 
 \paragraph{Guards}
 \label{well_definedness_of_guards}
@@ -586,17 +598,15 @@ For an invariant $H_w$, $H_b$ denotes (the conjunction of) all the model's
   invariants declared before the theorem.
 \index{proof obligation!well-definedness of a guard@well-definedness of a guard (\eventbpo{WD})}
 \pode{Well-definedness of a guard}{\eventbpo{eventname/guardlabel/WD}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land
-    H_b(\allconstants,\concvariables,\concparameters) 
-    \limp \wdl(H_w(\allconstants,\concvariables,\concparameters))$}
+  {$A \land I \land J \land H_b
+    \limp \wdl(H_w)$}
 
 \paragraph{Witnesses}
 \label{well_definedness_of_witnesses}
 A witness $W$ may contain well-definedness conditions.
 \index{proof obligation!well-definedness of a witness@well-definedness of a witness (\eventbpo{WWD})}
 \pode{Well-definedness of a witness}{\eventbpo{eventlabel/witnesslabel/WWD}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land
-    \bapred
+  {$A \land I \land J \land \concbeforeafter
     \limp \wdl(W)$}
 
 \paragraph{Actions}
@@ -606,15 +616,14 @@ The assignment $a$ of each action with the label $\eventbpo{actionlabel}$ in
 \index{proof obligation!well-definedness of an action@well-definedness in an action (\eventbpo{WD})}
 \pode{Well-definedness of an action}%
   {\eventbpo{eventlabel/actionlabel/WD}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land
-    \absguards \land \concguards \limp \wdl(~a~)$}
+  {$A \land I \land J \land G \land H \limp \wdl(~a~)$}
 
 \paragraph{Variants}
 \label{well_definedness_of_variants}
-A variant $V(\allconstants,\concvariables)$ must be well-defined.
+A variant $V$ must be well-defined.
 \index{proof obligation!well-definedness of a variant@well-definedness of a variant (\eventbpo{VWD})}
 \pode{Well-definedness of a variant}{\eventbpo{VWD}}%
-  {$\axioms \land \concinvariants \limp \wdl(V(\allconstants,\concvariables))$}
+  {$A \land J \limp \wdl(V)$}
 
 
 \subsection{Theorems}
@@ -633,26 +642,23 @@ For an axiom $A_{thm}$, $A_b$ denotes (the conjunction of) all axioms declared
   the current context before the axiom in question.
 \index{proof obligation!axiom as theorem@axiom as theorem (\eventbpo{THM})}
 \pode{An axiom as theorem}{\eventbpo{label/THM}}%
-  {$A_b(\allconstants) \limp A_{thm}(\allconstants)$}
+  {$A_b \limp A_{thm}$}
 
 \paragraph{Invariants}
 \label{invariants_as_theorems}
-For an invariant $I_{thm}$, $I_b$ denotes (the conjunction of) all the model's 
+For an invariant $J_{thm}$, $J_b$ denotes (the conjunction of) all the model's 
   invariants declared before the theorem.
 \index{proof obligation!invariant as theorem@invariant as theorem (\eventbpo{THM})}
 \pode{An invariant as theorem}{\eventbpo{label/THM}}%
-  {$\axioms \land \absinvariants \land I_b(\allconstants,\absvariables,\concvariables)
-    \limp I_{thm}(\allconstants,\absvariables,\concvariables)$}
+  {$A \land I \land J_b \limp J_{thm}$}
 
 \paragraph{Guards}
 \label{guards_as_theorems}
-For an invariant $H_{thm}$, $H_b$ denotes (the conjunction of) all the event's 
+For a guard $H_{thm}$, $H_b$ denotes (the conjunction of) all the event's 
   guards declared before the theorem.
 \index{proof obligation!guard as theorem@guard as theorem (\eventbpo{THM})}
 \pode{A guard as theorem}{\eventbpo{label/THM}}%
-  {$\axioms \land \absinvariants \land \concinvariants \land
-    H_b(\allconstants,\concvariables,\concparameters) 
-    \limp H_{thm}(\allconstants,\concvariables,\concparameters)$}
+  {$A \land I \land J \land H_b \limp H_{thm}$}
 
 \subsection{Generated proof obligations}
 \label{generated_proof_obligations}
@@ -673,10 +679,14 @@ For an invariant $H_{thm}$, $H_b$ denotes (the conjunction of) all the event's
 \index{NAT (natural number proof obligation)}
 \index{VAR (decreasing of variant proof obligation)}
 
-This is a brief overview about the different proof obligations that are generated.
-The user can use this table to identify a specific proof obligation. For further information, a link to the relevant reference section is provided.
+Table \ref{tab:generated_pos} shows
+ a brief overview about the different proof obligations that are generated.
+The user can use this table to identify a specific proof obligation. For further information, 
+a reference to the relevant reference section is provided.
 
-\begin{tabular}{lll}
+\begin{table}
+  \centering
+\begin{tabular}{p{0.4\textwidth}ll}
   \hline
   \multicolumn{3}{l}{\textbf{generated in contexts}} \\
   well-definedness of an axiom & \eventbpo{label/WD} & \ref{well_definedness_of_axioms} \\
@@ -692,8 +702,8 @@ The user can use this table to identify a specific proof obligation. For further
   invariant preservation & \eventbpo{event/invariantlabel/INV} & \ref{consistency_proof_obligations} \\
   \hline
   \multicolumn{3}{l}{\textbf{generated for refinements}} \\
-  guard strengthening & \eventbpo{event/abstract\_guard\_label/GRD} & \ref{guard_strengthening} \\
-  action simulation & \eventbpo{event/abstract\_action\_label/SIM} & \ref{action_simulation} \\
+  guard strengthening & \eventbpo{event/abstract\_grd\_label/GRD} & \ref{guard_strengthening} \\
+  action simulation & \eventbpo{event/abstract\_act\_label/SIM} & \ref{action_simulation} \\
   equality of a preserved variable & \eventbpo{event/variable/EQL} & \ref{preserved_variables} \\
   guard strengthening (merge) & \eventbpo{event/MRG} & \ref{merging_events} \\
   well definedness of a witness & \eventbpo{event/identifier/WWD} & \ref{well_definedness_of_witnesses} \\
@@ -705,7 +715,10 @@ The user can use this table to identify a specific proof obligation. For further
   natural number for a numeric variant & \eventbpo{event/NAT} & \ref{numeric_variant} \\
   decreasing of variant & \eventbpo{event/VAR} &\ref{numeric_variant} \\
   \hline
-\end{tabular}
+\end{tabular}  
+  \caption{Generated Proof Obligations}
+  \label{tab:generated_pos}
+\end{table}
 
 \subsection{Visibility of identifiers}
 \label{visibility_of_identifiers}
@@ -715,10 +728,10 @@ Expressions and predicates are comprised of certain Event-B elements. The follow
 
 \begin{center}
   \newcommand{\markcell}{$\times$}
-  \begin{tabular}{lcccccc}
+  \begin{tabular}{l*{6}{@{\hspace{0.8em}}c}}
   \hline
-               &           &           & concrete  & abstract  & concrete   & abstract \\
-               & sets      & constants & variables & variables & parameters & parameters \\
+               & sets  & constants & \multicolumn{2}{c}{variables} & \multicolumn{2}{c}{parameters} \\
+               &       &           & concrete  & abstract & concrete  & abstract  \\
   \hline
   axiom        & \markcell & \markcell &           &           &            & \\
   invariant    & \markcell & \markcell & \markcell & \markcell &            & \\

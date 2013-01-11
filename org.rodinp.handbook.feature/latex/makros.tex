@@ -2,6 +2,32 @@
 \newif\ifplastex
 \plastexfalse
 
+% defining a if(isinprint) environment
+\newif\ifinprint
+\ifdefined\isinprint
+\inprinttrue
+\else
+\inprintfalse
+\fi
+
+% for the print, we use an extra b&w directory
+\ifinprint
+\newcommand{\rodinimgdir}{bwimg}
+\else
+\newcommand{\rodinimgdir}{img}
+\fi
+
+\ifinprint
+\def\doculist#1#2{
+\begin{quote}
+\hspace{-10mm}
+\includegraphics[height=4ex]{#2}
+\vspace{-8mm}
+
+#1
+\end{quote}
+}
+\else
 \def\doculist#1#2{
 \begin{quote}
 \hspace{-10mm}
@@ -11,15 +37,47 @@
 #1
 \end{quote}
 }
+\fi
 
-\def\tick#1{\doculist{#1}{img/tick_64.png}}
-\def\info#1{\doculist{#1}{img/info_64.png}}
-\def\warning#1{\doculist{#1}{img/warning_64.png}}
-\def\pencil#1{\doculist{#1}{img/pencil_64.png}}
+% dimensions on the title page
+\newlength{\titletop}
+\newlength{\titlesubtitledistance}
+\newlength{\titlebottom}
+\newlength{\titlesecdistance}
+\ifinprint
+\def\titledimrodin{\fontsize{58}{71}}
+\def\titledimhandbook{\fontsize{20.5}{25}}
+\def\titledimsubtext{\fontsize{13}{16}}
+\def\titledimsponsor{\fontsize{11}{15}}
+\setlength{\titletop}{120mm}
+\setlength{\titlesubtitledistance}{2mm}
+\setlength{\titlebottom}{-30mm}
+\setlength{\titlesecdistance}{8mm}
+\else
+\def\titledimrodin{\fontsize{70}{85}}
+\def\titledimhandbook{\fontsize{24.5}{30}}
+\def\titledimsubtext{\fontsize{16}{19}}
+\def\titledimsponsor{\fontsize{11}{15}}
+\setlength{\titletop}{145mm}
+\setlength{\titlesubtitledistance}{2mm}
+\setlength{\titlebottom}{-22mm}
+\setlength{\titlesecdistance}{10mm}
+\fi
+
+\ifinprint
+\def\tick#1{\doculist{#1}{img/bw/tick_64.png}}
+\def\info#1{\doculist{#1}{img/bw/info_64.png}}
+\def\warning#1{\doculist{#1}{img/bw/warning.pdf}}
+\else
+\def\tick#1{\doculist{#1}{\rodinimgdir/tick_64.png}}
+\def\info#1{\doculist{#1}{\rodinimgdir/info_64.png}}
+\def\warnging#1{\doculist{#1}{\rodinimgdir/warning_64.png}}
+\fi
+\def\pencil#1{\doculist{#1}{\rodinimgdir/pencil_64.png}}
 
 % macro for icons
 \def\icon#1{
-\includegraphics[height=2ex]{img/icons/#1}
+\includegraphics[height=2ex]{\rodinimgdir/icons/#1}
 }
 
 % macro for image versions (pdf version + html version)
@@ -39,13 +97,16 @@
 	\else
 		\begin{figure}[!ht]
 		\begin{center}
-			\includegraphics[width=#2]{#1}
+			\includegraphics[width=#2]{\rodinimgdir/#1}
 			\caption{#4}
 			\label{#5}
 		\end{center}
 		\end{figure}
 	\fi
 }
+
+\newcommand{\includerodinimg}[1]{\includegraphics{\rodinimgdir/#1}}
+\newcommand{\includerodintwimg}[2]{\includegraphics[width=#1\textwidth]{\rodinimgdir/#2}}
 
 % different method to write an ASCII backslash for plastex and normal pdflatex
 \ifplastex
@@ -86,7 +147,7 @@
 \renewcommand{\tmpName}{#2}
   \begin{verse}
 \begin{wrapfigure}{l}{}
-    \includegraphics{#1}
+    \includegraphics{\rodinimgdir/#1}
 \end{wrapfigure}
 }
 {
@@ -103,7 +164,7 @@
 \begin{shaded}
 \begin{wrapfigure}{l}{10mm}
 \vspace{-5mm}
-\includegraphics[width=10mm]{#1}
+\includegraphics[width=10mm]{\rodinimgdir/#1}
 \vspace{-5mm}
 \end{wrapfigure}
 \noindent

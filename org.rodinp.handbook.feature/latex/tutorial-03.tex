@@ -11,7 +11,7 @@ In this tutorial, we will create a model of a traffic light controller.  We will
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_trafficlight.png}
+	\includerodintwimg{1.0}{tutorial/tut_03_trafficlight.png}
 	\caption{The traffic light controller}
 	\label{fig_tut_03_traffic_light}
 \end{center}
@@ -40,7 +40,7 @@ Models typically consist of multiple files that are managed in a project.  Creat
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_tutorial-3.png}
+	\includerodinimg{tutorial/tut_03_tutorial-3.png}
 	\caption{New Event-B Project Wizard}
 	\label{fig_tut_03_new_project_wizard}
 \end{center}
@@ -54,7 +54,7 @@ Next, create a new Event-B Component.  Either use \textsf{File $\rangle$ New $\r
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_mac.png}
+	\includerodinimg{tutorial/tut_03_mac.png}
 	\caption{New Event-B Component Wizard}
 	\label{fig_tut_03_new_component_wizard}
 \end{center}
@@ -68,7 +68,7 @@ You can also edit the machine using the Event-B Machine Editor. This was the def
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics[]{img/tutorial/tut_03_interface.png}
+%	\includerodinimg{tutorial/tut_03_interface.png}
 %\end{center}
 %\end{figure}
 
@@ -80,7 +80,7 @@ This editor is \textit{form-based}.  This means that it can be modified by using
 \label{tut_camille}
 \index{editor!Camille text editor}
 
-\begin{rodin-plugin}{img/camille.png}{Camille}
+\begin{rodin-plugin}{camille.png}{Camille}
 Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor and provides all of the functions that most text editors provide (i.e. copy, paste, undo, redo, etc.)  However, please note that at this time not all Rodin plugins are compatible with Camille.  For more information, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
 
 Camille can be installed via its update site, which is preconfigured in Rodin.  Once installed, Camille will be set as the default editor.  The rodin editor or structural editor can still be used by selecting it from the context menu of a file in the project browser.
@@ -114,7 +114,7 @@ Create the second variable (\texttt{peds\_go}) in the same way, or place your cu
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics[]{img/tutorial/tut_03_new-variable.png}
+%	\includerodinimg{tutorial/tut_03_new-variable.png}
 %\end{center}
 %\end{figure}
 
@@ -122,7 +122,7 @@ Upon saving, the variables will be underlined in red which indicates that an err
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_error_neweditor.png}
+	\includerodintwimg{1.0}{tutorial/tut_03_error_neweditor.png}
 	\caption{Red highlighted elements indicate errors}
 	\label{fig_tut_03_error}
 \end{center}
@@ -136,7 +136,7 @@ Event-B provides the build-in datatype \texttt{BOOL} among others (\ref{data_typ
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics[width=0.7\textwidth]{img/tutorial/tut_03_invariants.png}
+%	\includerodintwimg{0.7}{tutorial/tut_03_invariants.png}
 %\end{center}
 %\end{figure}
 
@@ -149,7 +149,7 @@ After saving, you should see that the \textsf{INITIALISATION} event is underline
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_yellow_neweditor.png}
+	\includerodintwimg{1.0}{tutorial/tut_03_yellow_neweditor.png}
 	\caption{Yellow highlighted elements indicate warnings}
 	\label{fig_tut_03_warning}
 \end{center}
@@ -161,7 +161,7 @@ To fix this problem, place your cursor to the left of the small green arrow next
 
 %\begin{figure}[!ht]
 %\begin{center}
-%	\includegraphics[]{img/tutorial/tut_03_events.png}
+%	\includerodinimg{tutorial/tut_03_events.png}
 %\end{center}
 %\end{figure}
 
@@ -258,7 +258,7 @@ To prevent the invariant from being violated (and therefore to allow all proof o
 \subsubsection{Finding Invariant Violations with ProB}
 \label{tut:prob}
 \index{ProB}
-\begin{rodin-plugin}{img/prob.png}{ProB}
+\begin{rodin-plugin}{prob.png}{ProB}
 A useful tool for understanding and debugging a model is a model checker like ProB. You can install ProB directly from Rodin by using the ProB Update Site.  Just select \textsf{Install New Software...} from the \textsf{Help} menu and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2`` as an installation option, which you can then install using the normal Eclipse mechanism. 
 
 We will continue the example at the point where we added the safety invariant (REQ-1), but didn't add guards yet to prevent the invariants from being violated.
@@ -269,7 +269,7 @@ We launch ProB by right-clicking on the machine we'd like to animate and select 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_prob_perspective.png}
+	\includerodintwimg{1.0}{tutorial/tut_03_prob_perspective.png}
 	\caption{The ProB Perspective}
 	\label{fig_tut_prob_perspective}
 \end{center}
@@ -277,7 +277,7 @@ We launch ProB by right-clicking on the machine we'd like to animate and select 
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_03_prob_invariant_violation.png}
+	\includerodintwimg{1.0}{tutorial/tut_03_prob_invariant_violation.png}
 	\caption{An invariant violation, found by ProB}
 	\label{tut_03_prob_invariant_violation}
 \end{center}

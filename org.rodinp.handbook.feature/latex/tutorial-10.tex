@@ -82,7 +82,7 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 \warning{ Make sure that when you add your DLF invariant, you add it after the other two invariants in \textsf{doors\_0}. The auto prover uses these invariants to prove that the DLF invariant is well defined, and if they aren't in the right order, the proof obligation \textsf{DLF/WD} will not be discharged
 }
 
-\begin{rodin-plugin}{img/prob.png}{ProB}%
+\begin{rodin-plugin}{prob.png}{ProB}%
   You can also use ProB to search for deadlocks (after ensuring that ProR is installed).
   Right-click on the machine you want to check and start the animation with the
   ``Start Animation / Model Checking'' menu entry.
@@ -116,7 +116,7 @@ By doing this we want to assure that you have the same proof as in this tutorial
 
 \begin{figure}[!ht]
   \begin{center}
-    	\includegraphics{img/tutorial/tut_10_post_tactics.png}
+    	\includerodinimg{tutorial/tut_10_post_tactics.png}
     \caption{Disabling the proof post-tactics in the Proof Controlling View}
     \label{fig_tut_10_post_tactics}
   \end{center}
@@ -162,7 +162,7 @@ We can prove an existential quantification by giving an example for the variable
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/tut_10_instantiate_x.png}
+	\includerodinimg{tutorial/tut_10_instantiate_x.png}
 	\caption{Click on the existential quantifier in order to ...}
 	\label{fig_tut_10_instantiate_x}
 \end{center}
@@ -170,7 +170,7 @@ We can prove an existential quantification by giving an example for the variable
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/tut_10_instantiate_p.png}
+	\includerodinimg{tutorial/tut_10_instantiate_p.png}
 	\caption{... instantiate it, in this case by substituting $x$.}
 	\label{fig_tut_10_instantiate_p}
 \end{center}
@@ -185,7 +185,7 @@ You can see the the current proof tree in Figure~\ref{fig_tut_10_proof_tree}. Th
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/tut_10_proof_tree.png}
+	\includerodinimg{tutorial/tut_10_proof_tree.png}
 	\caption{The proof tree after instantiating $p$ with $x$.}
 	\label{fig_tut_10_proof_tree}
 \end{center}
@@ -211,7 +211,7 @@ to instantiate $l$.
 Now we have $l$ as an example for a location which is not outside and where everybody can go.
 \begin{figure}[!ht]
   \begin{center}
-    \includegraphics{img/tutorial/tut_10_search_hyp.png}
+    \includerodinimg{tutorial/tut_10_search_hyp.png}
     \caption{Searching hypothesis for $outside$: The third one is \textsf{axm4}.}
     \label{fig_tut_10_search_hypotheses}
   \end{center}
@@ -253,21 +253,22 @@ Figure~\ref{fig_tut_10_final_proof_tree}).
   \quad\qquad well-definedness condition $\btrue$: automatically proven\\
   \quad\qquad case distinction $sit(x)=outside$ \\
   \qquad\qquad well-definedness condition
-    ($sit$ is a function with $x$ in its domain): \\
-  \qquad\qquad\qquad\qquad\qquad\qquad proven using the \textsf{p1} provers\\
+    ($sit$ is a function with $x$ in its \\
+  \qquad\qquad\qquad\qquad\qquad\qquad domain): proven using the \textsf{p1} provers\\
   \qquad\qquad first case: instantiation of $l$ from axiom \textsf{axm4}\\
   \quad\qquad\qquad using $l$ as an example for the $\exists l \ldots$ in the goal\\
   \qquad\qquad\qquad well-definedness condition $\btrue$: automatically proven\\
-  \qquad\qquad\qquad automatically proven\\
-  \qquad\qquad second case: using $outside$ as an example for the $\exists l \ldots$ in the goal\\
+  \qquad\qquad\qquad remaining goal: automatically proven\\
+  \qquad\qquad second case: using $outside$ as an example \\
+  \qquad\qquad\qquad\qquad\qquad\qquad for the $\exists l \ldots$ in the goal \\
   \quad\qquad\qquad well-definedness condition $\btrue$: automatically proven\\
   \quad\qquad\qquad hypotheses $P\cprod\{outside\}$ selected\\
-  \qquad\qquad\qquad automatically proven\\
+  \qquad\qquad\qquad remaining goal: automatically proven\\
   \hline
 \end{tabular}
 \begin{figure}[!ht]
   \begin{center}
-    \includegraphics{img/tutorial/tut_10_proof_tree_final.png}
+    \includerodinimg{tutorial/tut_10_proof_tree_final.png}
     \caption{Searching hypothesis for $outside$: The third one is \textsf{axm4}.}
     \label{fig_tut_10_final_proof_tree}
   \end{center}
@@ -308,7 +309,7 @@ First we need a variable denoting a location in order to distinguish between the
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_10_ref_proof1.png}
+	\includerodinimg{tutorial/tut_10_ref_proof1.png}
 	\caption{Adding a hypothesis to instantiate a variable for a case distinction.}
 	\label{tut_10_ref_proof1}
 \end{center}
@@ -320,7 +321,7 @@ $$ sit(p) = outside $$
 
 Now press the \icon{rodin/dc_prover.png} button.  This will create three new nodes in the proof tree: The first one is once again the well-definedness condition, followed by the two cases that we have just defined.  As always, use the \icon{rodin/auto_prover.png} button to verify the well-definedness condition.
 
-The first case is dealing with $sit(p) = outside$.  To verify this case, we need to use\textsf{axm7}, which states that at least one authorized room is connected to the outside:
+The first case is dealing with $sit(p) = outside$.  To verify this case, we need to use \textsf{axm7}, which states that at least one authorized room is connected to the outside:
 
 \pencil{
 \begin{description}
@@ -336,7 +337,7 @@ Now we have variables to instantiate our goal as well.  We enter the value $p$ i
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[]{img/tutorial/tut_10_ref_proof2.png}
+	\includerodinimg{tutorial/tut_10_ref_proof2.png}
 	\caption{Preparing the instantiation by providing values for $p$ and $l0$.}
 	\label{tut_10_ref_proof2}
 \end{center}

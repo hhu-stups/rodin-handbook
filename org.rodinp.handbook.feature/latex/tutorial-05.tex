@@ -25,7 +25,7 @@ Next, create a new Event-B Component. The process for creating a context is simi
 
 %\begin{figure}[h!t]
 %\begin{center}
-%	\includegraphics{img/tutorial/tut_05_agatha1.png}
+%	\includerodinimg{tutorial/tut_05_agatha1.png}
 %	\caption{New Event-B Component Wizard}
 %	\label{fig_tut_05_new_component}
 %\end{center}
@@ -35,7 +35,7 @@ Click the \textsf{Finish} button. Rodin should start the editor with the created
 
 \begin{figure}[h!t]
 \begin{center}
-	\includegraphics{img/tutorial/tut_05_agatha2_neweditor.png}
+	\includerodintwimg{1.0}{tutorial/tut_05_agatha2_neweditor.png}
 	\caption{Context file opened with Rodin Editor}
 	\label{fig_tut_05_context_file}
 \end{center}
@@ -80,7 +80,7 @@ Now the constants themselves are not very useful since they have no type (after 
 \begin{description}
 \AXIOMS
 	\begin{description}
-		\nItemX{ person\_partition }{ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
+		\nItemX{ person\_partition }{ \\ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
 	\end{description}
 \end{description}
 }
@@ -219,7 +219,7 @@ All axioms are set to ``not theorem'' when they are created. But we need the sol
 
 \begin{figure}[h!t]
 \begin{center}
-	\includegraphics{img/tutorial/tut_05_agatha3_neweditor.png}
+	\includerodinimg{tutorial/tut_05_agatha3_neweditor.png}
 	\caption{Mark an Axiom as Theorem}
 	\label{fig_tut_05_mark_theorem}
 \end{center}
@@ -232,8 +232,8 @@ Thus Rodin generates a proof obligation called \eventbpo{solution/THM}.
 However, at this point of the tutorial we do not want to go into more detail about proving yet.
 
 \index{ProB}
-\begin{rodin-plugin}{img/prob.png}{ProB}%
-  You can use ProB to animate contexts, too. Just right-click on the context in the explorer and select \textsf{Start Animation / Model Checking}. If ProB finds solutions for the specified constants that fulfil the axioms, an event ``\texttt{SETUP\_CONTEXT}'' is enabled that assigns values to the constants. In our example, ProB should find a solution where Agatha is the murder. You can actually inspect the axioms and the theorem in the state view to see why they are fulfilled.
+\begin{rodin-plugin}{prob.png}{ProB}%
+  You can use ProB to animate contexts, too. Just right-click on the context in the explorer and select \textsf{Start Animation / Model Checking}. If ProB finds solutions for the specified constants that fulfil the axioms, an event ``\texttt{SETUP\_CONTEXT}'' is enabled that assigns values to the constants. In our example, ProB should find a solution where Agatha is the murderer. You can actually inspect the axioms and the theorem in the state view to see why they are fulfilled.
 \end{rodin-plugin}
 
 This concludes the tutorial about contexts. The following section shows the complete Context.
@@ -261,17 +261,18 @@ This concludes the tutorial about contexts. The following section shows the comp
 		\nItemX{ person\_partition }{ partition(persons, \{ Agatha\} , \{ butler\} , \{ Charles\} ) }
 		\nItemX{ hate\_relation }{ hates \in  persons \rel  persons }
 		\nItemX{ richer\_relation }{ richer \in  persons \rel  persons \land 
-		\\\hspace*{3,4 cm}  richer \binter  id = \emptyset  \land 
-		\\\hspace*{3,4 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) 
-		\\\hspace*{4,4 cm}\limp  x\mapsto z\in richer) \land 
-		\\\hspace*{3,4 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y 
-		\\\hspace*{4,4 cm}\limp  (x\mapsto y\in richer \leqv  y\mapsto x \notin  richer)) }
+		\\\hspace*{2.5 cm}  richer \binter  id = \emptyset  \land 
+		\\\hspace*{2.5 cm}  (\forall  x,y,z \qdot  ( x\mapsto y\in richer \land  y\mapsto z\in richer) 
+		\\\hspace*{3.2 cm}\limp  x\mapsto z\in richer) \land 
+		\\\hspace*{2.5 cm}  (\forall  x,y \qdot x\in persons \land  y\in persons \land  x\neq y 
+		\\\hspace*{3.2 cm}\limp  (x\mapsto y\in richer \leqv  y\mapsto x \notin  richer)) }
 		\nItemX{ killer\_type }{ killer \in  persons }
 		\nItemX{ killer\_hates }{ killer \mapsto  Agatha \in  hates }
 		\nItemX{ killer\_not\_richer }{ killer \mapsto  Agatha \notin  richer }
 		\nItemX{ charles\_hates }{ hates[\{ Agatha\} ] \binter  hates[\{ Charles\} ] = \emptyset  }
 		\nItemX{ agatha\_hates }{ hates[\{ Agatha\} ] = persons \setminus  \{ butler\}  }
-		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer \limp  butler\mapsto x \in  hates) }
+		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer 
+          \\\hspace*{3.5 cm}\limp  butler\mapsto x \in  hates) }
 		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
 		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
 		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }

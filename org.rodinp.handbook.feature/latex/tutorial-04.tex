@@ -1,3 +1,4 @@
+\newcommand{\dascii}[1]{\textrm{ASCII: } \texttt{#1}}
 \newcommand{\lascii}[1]{\qquad\quad \textrm{ASCII: } \texttt{#1}}
 \newcommand{\inascii}[1]{(ASCII: \texttt{#1})}
 
@@ -36,7 +37,8 @@ When a variable is introduced by a quantifier, the type of the variable must be 
 $a$ and $b$ could be integers, Boolean values or some other type.
 In this case, we must make the type of the variables explicit by stating that $a$ and $b$ are elements
 of the appropriate sets. Let's use integers again to correct the previous expression:
-\[ \forall a,b \qdot a\in\intg \land b\in\intg \land a\neq b \limp b\neq a \lascii{!a,b.\ a:INT \& b:INT \& a/=b => b/=a} \]
+\[ \forall a,b \qdot a\in\intg \land b\in\intg \land a\neq b \limp b\neq a\]
+\[ \dascii{!a,b.\ a:INT \& b:INT \& a/=b => b/=a} \]
 The conjunction operator ($\land$) has a stronger binding that the implication $\limp$, so the above expression is equivalent to
 \[ \forall a,b \qdot (a\in\intg \land b\in\intg \land a\neq b) \limp b\neq a\]
 
@@ -71,7 +73,7 @@ give an overview about all types you might encounter.
 \index{Boolean!as type}
 \index{data type!Boolean} 
   We have already seen the Boolean type ($\Bool$) in the previous section (\ref{tut_first_machine}).
-  It has exactly two elements, $\Bool = \{\True,\False\}$.
+  It has exactly two elements, $\Bool = \{\True,$ $\False\}$.
 \item[Carrier sets]
 \index{carrier set} 
 \index{data type!carrier set}
@@ -151,7 +153,8 @@ Additionally, we have to say that $working$ and $broken$ are not the same by $wo
 
 If the enumerated sets gets larger, we need to state for every two element of the set that they are
 distinct. Thus, for a set of 10 constants, we'll need $(10^2-10)\div 2 = 45$ predicates.
-Again, we can use the partition operator to express this in a more concise way: $partition(STATUS,\{working\},\{broken\})$.
+Again, we can use the partition operator to express this in a more concise way: 
+\[partition(STATUS,\{working\},\{broken\})\]
 
 \subsection{Relations}
 \label{tut_relations}

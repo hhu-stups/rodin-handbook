@@ -1,4 +1,4 @@
-\section{Expanding the Traffic Light System: Contexts and Refinement}
+\section[Contexts and Refinement]{Expanding the Traffic Light System:\\ Contexts and Refinement}
 \label{tut_expanding_traffic_light_system}
 
 \tick{\textbf{Goals:} We apply what we learned in the previous section by introducing a context with traffic light colours and a refinement to integrate them. We will also introduce another refinement for the push buttons.}
@@ -12,7 +12,7 @@ We will introduce data refinement in this section.  The objective is to create a
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/tl-colors.png}
+	\includerodintwimg{0.7}{tutorial/tl-colors.png}
 	\caption{Mapping between Abstract and Concrete Events}
 	\label{fig_tut_07_tl_colours}
 \end{center}
@@ -134,7 +134,7 @@ In its current state, this gluing invariant can be violated: if the event \texts
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/undischarged1.png}
+	\includerodinimg{tutorial/undischarged1.png}
 	\caption{Mapping between Abstract and Concrete Events}
 	\label{fig_tut_07_undischarged}
 \end{center}
@@ -144,7 +144,7 @@ To fix this, we have to modify the two events in question.  Let's start with \te
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics{img/tutorial/tut_07_event_refinement.png}
+	\includerodinimg{tutorial/tut_07_event_refinement.png}
 	\caption{Switch from extended to not extended}
 	\label{fig_tut_07_event_refinement}
 \end{center}
@@ -159,6 +159,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 \warning{If you get the error message ``Identifier peds\_go has not been declared'', then there are references to the refined variable left somewhere in the model.  %It can be helpful to use the \textsf{Pretty Print} view, as it will show the ``inherited'' elements from the abstract machine as well.
 }
 
+\ifinprint\pagebreak\fi %TODO: remove this
 \subsection{The refined machine with data refinement for peds\_go}
 \label{tut_refined_machine}
 

@@ -59,7 +59,7 @@ For an expression $\vexpr{E}$, we write $\expre\in\alpha$ to state that $\expre$
 In the following descriptions of Event-B's mathematical constructs, we will describe the
   types of all constructs and their components.
 
-For example, we will describe the maplet $\expre\mapsto \exprf$ which is defined as $\expre\mapsto \exprf\in\alpha\cprod\beta$ with
+For example, we will describe the maplet $\expre\mapsto \exprf$ whose type is defined by $\expre\mapsto \exprf\in\alpha\cprod\beta$ with
  $\expre\in\alpha$ and $\exprf\in\beta$. We do not restrict the types of $\alpha$ and $\beta$.
 
 For predicates, we simply describe the data types of their components. 
@@ -93,7 +93,8 @@ In many cases, this is just the conjunction of the well-definedness conditions f
 Free identifiers in predicates and expressions are those identifiers which are used but not introduced by quantifiers.
 More formally, we define the set of free identifiers $\freeids{\expre}$ of an expression or predicate $E$ recursively as follows:
 
-\begin{tabular}{|l|l|}
+\begin{center}
+\begin{tabular}{ll}
   \hline
   \textbf{Expression / Predicate} & \textbf{Free identifiers} \\
   \hline
@@ -109,9 +110,10 @@ More formally, we define the set of free identifiers $\freeids{\expre}$ of an ex
   & $\emptyset$ \\
   \hline
   $\begin{array}{lllll}
-    \lnot \expra & \bool(\expra) & \pow(\expra) & \pow_1(\expra) & \bfinite(\expra) \\
-    \card(\expra) & \bunaryunion(\expra) & \bunaryinter(\expra) & \expra^{-1} & \dom(\expra) \\
-    \ran(\expra) & -\expra & \min(\expra) & \max(\expra)
+    \lnot \expra & \bool(\expra) & \pow(\expra) & \pow_1(\expra) \\
+    \bfinite(\expra) & \card(\expra) & \bunaryunion(\expra) & \bunaryinter(\expra) \\
+    \expra^{-1} & \dom(\expra) &  \ran(\expra) & -\expra \\
+    \min(\expra) & \max(\expra)
   \end{array}$ 
   & $\freeids{\expra}$ \\
   \hline
@@ -154,7 +156,8 @@ More formally, we define the set of free identifiers $\freeids{\expre}$ of an ex
   \end{array}$
   & $\freeids{\predp}\setminus\freeids{\expre}$\\
   \hline
-\end{tabular}
+\end{tabular}  
+\end{center}
 
 \subsubsection{Structure of the subsections}
 The following reference subsections will have the form the form: \\[2em]
@@ -1252,31 +1255,28 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')$
+    $x_1,\ldots,x_n \bcmsuch Q$
     assigns any value to the variables $x_1\ldots,x_n$ such that the the
     before-after-predicate $Q$ is fulfilled.
     Each $x_i$ is an identifier that refers to a variable of the concrete machine.
-    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
-    %variables of the concrete machine and parameters of the concrete event.
-    %$x_1,\ldots,x_n$ are in $\concvariables$.
-    We write $Q(x_1',\ldots,x_n')$ to emphasise the fact that the identifiers $x_1',\ldots,x_n'$
-%can be used additionally to the constants
-    can also be used for the constants, concrete variables and parameters in the predicate $Q$.
+    
+    All free identifiers in $Q$ must be constants, concrete parameters,
+    concrete variables or primed versions of the modified variables ($x_1',\ldots,x_n'$).
 
     This is the most general form of assignment. All other assignments can be converted to this.
   \rrdef
-    The before-after-predicate is $Q(x_1',\ldots,x_n')$.
+    The before-after-predicate is $Q$.
   \rrtypes
-    $Q(x_1',\ldots,x_n')$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
+    $Q$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
     $x_1\in\alpha_i$ and $x'_1\in\alpha_i$ for $i\in 1\upto n$.
   \rrwd
-    $\wdl(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)
+    $\wdl(~x_1,\ldots,x_n \bcmsuch Q~)
     \quad\defi\quad
-    \wdl(x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n'))$
+    \forall x_1',\ldots,x_n' \qdot \wdl(~Q~)$
   \rrfis
-    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)
-      \quad\defi\quad
-      \exists x_1',\ldots,x_n' ~\qdot~ Q(x_1',\ldots,x_n')$
+    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)$ \\
+    $\quad\defi\quad$
+    $\exists x_1',\ldots,x_n' ~\qdot~ Q(x_1',\ldots,x_n')$
 \end{rodinrefentry}
 \end{samepage}
 
@@ -1293,8 +1293,8 @@ The following reference subsections will have the form the form: \\[2em]
     $x \bcmin \expre$ assigns any value of the
     set $\expre$ to the variable $x$. $x$ is an identifier that refers to a variable
     of the concrete machine.
-    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
-    %variables of the concrete machine and parameters of the concrete event.
+
+    All free identifiers in $E$ must be constants, concrete variables or concrete parameters.
   \rrdef
     The before-after-predicate is $x' \in \expre$. \\
     The assignment is equivalent to

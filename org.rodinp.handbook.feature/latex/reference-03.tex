@@ -707,7 +707,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrdesc
     $\exprs\rel \exprt$ is the set of relations between the two sets $\exprs$ and $\exprt$.
     A relation consists of pairs where the first element is of $\exprs$ and the
-    second of $\exprt$. $\exprs\rel \exprt$ is just an abbreviation for $\pow(\exprs\rel \exprt)$.
+    second of $\exprt$. $\exprs\rel \exprt$ is just an abbreviation for $\pow(\exprs\cprod\exprt)$.
 
     A total relation is a relation which relates each element of $\exprs$ to at least one element of $\exprt$.
 
@@ -768,8 +768,8 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rrnames}
   $\domres$  & \texttt{<|}           & Domain restriction\\
   $\domsub$  & \texttt{<}\texttt{<|} & Domain subtraction\\
-  $\domres$  & \texttt{|>}           & Range restriction\\
-  $\domsub$  & \texttt{|>>}          & Range subtraction
+  $\ranres$  & \texttt{|>}           & Range restriction\\
+  $\ransub$  & \texttt{|>>}          & Range subtraction
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc

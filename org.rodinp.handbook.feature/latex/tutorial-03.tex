@@ -33,6 +33,23 @@ We cover a few examples in this chapter that should develop your ability to answ
 
 Jean-Raymond Abrial has something to say about this in his book\footnote{\url{http://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}. Some of the chapters are available in the Rodin Wiki.
 
+\begin{rodin-plugin}{pror.png}{ProR Requirements}
+\index{requirements}
+\index{ProR Requirements Tool}
+\index{traceabililty}
+\index{specification}
+
+It takes some time to learn how to read formal specifications, and not all stakeholders are willing to learn it.  Further, textual requiremenets are almost always the starting point for a formal specification.  It would be nice to kep a traceability to the origianl requirements.
+
+\href{http://wiki.event-b.org/index.php/ProR}{ProR} is a tool for editing requirements.  An integration with Rodin exists, which allows a traceability between textual requirements and model elements to be established.  This shows the Event-B model elements seamless as part of the textual requirements.  The various traceability options are demonstrated in the \href{http://www.formalmind.com/en/blog/using-rmf-integrate-your-models}{Formal Mind Blog}.
+
+Further, the traces are tracked, and if the source or the target of a trace changes, a marker is set, so that the changes can be inspected and verified.
+
+Being able to set traces is not enough, if there is not a theory behind it to make it useful.  One such theory is based on the WRSPM reference model.  How this works in practice can be seen in \href{http://www.stups.uni-duesseldorf.de/w/Special:Publication/RMF_Mark_Book_Jastram_2013}{this paper}.
+
+Last, ProR is based on the ReqIF standard, which is supported by major industry tools for requirements management (like Rational DOORS or PTC integrity).  This eases the integration of Event-B into existing development processes.
+\end{rodin-plugin}
+
 \subsection{Project Setup}
 \label{tut_project_setup}
 

@@ -44,9 +44,9 @@ The primary concept in doing formal developments with the Rodin Platform is that
 
 Various relationships exist between machines and contexts. This is illustrated in the following figure. A machine can be ``refined" by another one, and a context can be ``extended" by another one. However, cycles are not allowed (i.e. the original machine cannot refine any of the refined machines). A machine can also ``see" one or several contexts. A typical example of machine and context relationship is shown in Figure \ref{fig_ref_10_project2}. 
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \begin{center}
-	\includerodinimg{reference/ref_10_project2.png}
+	\includerodintwimg{0.5}{reference/ref_10_project2.png}
 	\caption{A typical example of machine and context relationship}
 	\label{fig_ref_10_project2}
 \end{center}
@@ -69,7 +69,17 @@ Eclipse Projects can have one or more natures to describe their purpose.  The GU
 
 Figure \ref{fig_ref_01_eventb_perspective1} shows an overview of the opening window of the Event-B Perspective. The following subsections identify the different Rodin GUI elements (i.e. views) which are visible and explain their functions.
 
+\ifinprint
+\begin{figure}
+  \begin{center}
+    \includerodintwimg{1}{reference/ref_01_eventb_perspective2.png}
+    \caption{Overview of the Event-B Perspective}
+    \label{fig_ref_01_eventb_perspective1}
+  \end{center}
+\end{figure}
+\else
 \imagedpi{reference/ref_01_eventb_perspective1.pdf}{\textwidth}{img/reference/ref_01_eventb_perspective1.png}{Overview of the Event-B Perspective}{fig_ref_01_eventb_perspective1}
+\fi
 
 \subsubsection{Menu bar}
 \label{menu_bar}
@@ -86,7 +96,7 @@ One action is available when editing context files (see Figure \ref{fig_ref_01_m
     	\item Automatic Axiom Labelling: this action will rename the axioms alphanumerically according to their order of appearance. 
     \end{itemize}
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \begin{center}
 	\includerodinimg{reference/ref_01_menubar2.png}
 	\caption{Automatic rename actions for context files}
@@ -102,7 +112,7 @@ Three actions are available for machine files (see Figure \ref{fig_ref_01_menuba
 	\item Automatic Action Labelling: this action will rename the actions alphanumerically according to their order of appearance. 
     \end{itemize}
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \begin{center}
 	\includerodinimg{reference/ref_01_menubar1.png}
 	\caption{Automatic rename actions for machine files}
@@ -477,9 +487,9 @@ You can then enter the invariants you want. If more invariants are needed, press
 
 To activate the \textsf{New Events Wizard}, press the \icon{rodin/newevt_edit.png} button located in the tool bar. Pressing this button brings up the window shown in Figure \ref{fig_ref_01_eventb_editor16}.
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \begin{center}
-	\includerodintwimg{1.0}{reference/ref_01_eventb_editor16.png}
+	\includerodintwimg{0.7}{reference/ref_01_eventb_editor16.png}
 	\caption{New Event Wizard}
 	\label{fig_ref_01_eventb_editor16}
 \end{center}
@@ -498,7 +508,17 @@ When proof obligations (POs) (\ref{generated_proof_obligations}) are not dischar
 
 The Proving Perspective consists of a number of views: the \textsf{Proof Tree}, the \textsf{Goal}, the \textsf{Selected Hypotheses}, the \textsf{Proof Control}, the \textsf{Search Hypotheses}, the \textsf{Cache Hypotheses} and the \textsf{Proof Information}. In the discussion that follows we look at each of these views individually. Figure \ref{fig_ref_01_proving_perspective1} shows an overview of the Proving Perspective.
 
+\ifinprint
+\begin{figure}
+  \begin{center}
+    \includerodintwimg{1}{reference/ref_01_proving_perspective1b.png}
+    \caption{Overview of the Proving Perspective}
+    \label{fig_ref_01_proving_perspective1}
+  \end{center}
+\end{figure}
+\else
 \imagedpi{reference/ref_01_proving_perspective1.pdf}{\textwidth}{img/reference/ref_01_proving_perspective1.png}{Overview of the Proving Perspective}{fig_ref_01_proving_perspective1}
+\fi
 
 \subsubsection{Loading a Proof}
 
@@ -882,7 +902,17 @@ This page describes the default values that are used for the prefixes of the dif
 
 Figure \ref{fig_ref_01_preferences1} shows that modifying prefixes on the workspace level or on the project level will affect the names used at creation of new Event-B elements. One can see that the prefixes for variables and invariants, which were originally set to ``var" or ``inv'', have been replaced by ``variable" and ``invariant". New elements are then named using those prefixes.
 
+\ifinprint
+\begin{figure}
+  \begin{center}
+    \includerodintwimg{1}{reference/ref_01_preferences1b}
+    \caption{Prefix Settings}
+    \label{fig_ref_01_preferences1}
+  \end{center}
+\end{figure}
+\else
 \imagedpi{reference/ref_01_preferences1.pdf}{\textwidth}{img/reference/ref_01_preferences1.png}{Prefix Settings}{fig_ref_01_preferences1}
+\fi
 
 %\begin{figure}[!ht]
 %\begin{center}

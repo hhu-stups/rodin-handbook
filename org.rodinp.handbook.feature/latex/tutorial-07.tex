@@ -79,7 +79,7 @@ When you have refined a machine, the Rodin Editor will show you all the elements
 
 
 
-\warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{sets\_peds\_go}) and variables that you do not have.  }
+\warning{For this tutorial, make sure that you right-click on the machine and select refine from the drop-down menu. If you have created a machine the normal way and later edited the refines section, the tutorial will assume that you have events (e.g. \textsf{set\_peds\_go}) and variables that you do not have.  }
 
 First we have to make the machine aware of the context by adding a \textsf{sees} (\ref{seeing_a_context}) statement. To do this, place your cursor to the left of the small green arrow (\icon{rodin/structured_arrow.png}) next to your machine name \textsf{mac1}. Right click and select \textsf{Add Child $\rangle$ Event-B Sees Context Relationship}. A \textsf{SEES} heading will appear with the value \textsf{--undefined--}. Place your cursor over the undefined section and click. A small box listing all of the contexts in the project will pop up. Select \textsf{ctx1}:
 
@@ -159,7 +159,7 @@ Once all references to \textsf{peds\_go} have been replace, we can remove the va
 \warning{If you get the error message ``Identifier peds\_go has not been declared'', then there are references to the refined variable left somewhere in the model.  %It can be helpful to use the \textsf{Pretty Print} view, as it will show the ``inherited'' elements from the abstract machine as well.
 }
 
-\ifinprint\pagebreak\fi %TODO: remove this
+%\ifinprint\pagebreak\fi %TODO: remove this
 \subsection{The refined machine with data refinement for peds\_go}
 \label{tut_refined_machine}
 

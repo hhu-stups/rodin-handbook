@@ -1,6 +1,6 @@
 \ifdefined\isinprint
-\documentclass[10pt]{book}
-\usepackage[paperwidth=155.93mm,paperheight=233.89mm]{geometry}
+\documentclass[twoside,10pt]{book}
+\usepackage[twoside,paperwidth=155.93mm,paperheight=233.89mm,margin=15mm,bindingoffset=5mm]{geometry}
 \usepackage[colorlinks=false,
             pdfborder={0 0 0}
 	        pdftex,
@@ -37,7 +37,6 @@
 \input{config}
 \input{makros}
 
-
 \title{Rodin User's Handbook v.\versionnr}
 \author{
 Work in Progress\\
@@ -48,10 +47,11 @@ Handbook $ $Rev$ $ \\
 }
 
 \begin{document}        
-
+\pagestyle{empty}
 \ifplastex
 \maketitle
 \else
+\pagenumbering{roman}
 \begin{titlepage}
 \AddToShipoutPicture*{\BackgroundPic}
 \vspace*{\titletop}
@@ -77,6 +77,28 @@ Handbook $ $Rev$ $ \\
 \vspace*{\titlebottom}
 
 \end{titlepage}
+\ifdefined\isinprint
+\cleardoublepage
+% Title page
+\vspace*{10em}
+\begin{center}
+  {\huge \textbf{Rodin User's Handbook}}\\
+  \vspace{2em}
+  {\large Covers Rodin v.\versionnr}
+\end{center}
+\clearpage
+% Copyright page
+\vspace*{\fill}
+\noindent\textbf{Rodin User's Handbook}\\
+~\\
+\noindent\copyright Formal Mind Gmbh 2013\\
+This work, except the cover image, is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit \href{http://creativecommons.org/licenses/by-sa/3.0/}{creative\-com\-mons.org/\-licenses/\-by-sa/3.0/} or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.\\
+The cover image of a Rodin statue was created by Miikka Skaffari.
+It is licensed under a Creative Commons Attribution-NonCommercial 3.0 Unported License.  To view a copy of this license, visit \href{http://creativecommons.org/licenses/by-sa/3.0/}{creative\-com\-mons.org/\-licenses/\-by-sa/3.0/} or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+\vspace{10em}
+\else\fi
+\cleardoublepage
+\pagenumbering{arabic}
 \phantomsection
 \addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
@@ -85,6 +107,7 @@ Handbook $ $Rev$ $ \\
 \chapter*{Preface}
 \addcontentsline{toc}{chapter}{Preface}
 \label{preface}
+\pagestyle{headings}
 
 Nobody likes to write documentation, yet everybody agrees that documentation is crucially important.  For a tool platform as complex as Rodin, documentation is necessary if it is supposed to succeed in reaching a wider audience.
 

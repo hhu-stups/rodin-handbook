@@ -12,7 +12,7 @@
 
 % for the print, we use an extra b&w directory
 \ifinprint
-\newcommand{\rodinimgdir}{bwimg}
+\newcommand{\rodinimgdir}{img}
 \else
 \newcommand{\rodinimgdir}{img}
 \fi
@@ -180,11 +180,7 @@
 }
 \fi
 
-\ifinprint
-\newenvironment{plugin-pror}{\begin{rodin-plugin}{bw/pror.png}{ProR Requirements}}{\end{rodin-plugin}}
-\else
 \newenvironment{plugin-pror}{\begin{rodin-plugin}{pror.png}{ProR Requirements}}{\end{rodin-plugin}}
-\fi
 
 % Marginpars are  cropped - this formats them nicely.
 \let\oldmarginpar\marginpar

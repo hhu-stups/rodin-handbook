@@ -12,7 +12,7 @@
 
 % for the print, we use an extra b&w directory
 \ifinprint
-\newcommand{\rodinimgdir}{img}
+\newcommand{\rodinimgdir}{img-print}
 \else
 \newcommand{\rodinimgdir}{img}
 \fi
@@ -64,15 +64,9 @@
 \setlength{\titlesecdistance}{10mm}
 \fi
 
-\ifinprint
-\def\tick#1{\doculist{#1}{img/bw/tick_64.png}}
-\def\info#1{\doculist{#1}{img/bw/info_64.png}}
-\def\warning#1{\doculist{#1}{img/bw/warning.pdf}}
-\else
-\def\tick#1{\doculist{#1}{\rodinimgdir/tick_64.png}}
-\def\info#1{\doculist{#1}{\rodinimgdir/info_64.png}}
+\def\tick#1{\doculist{#1}{img/tick_64.png}}
+\def\info#1{\doculist{#1}{img/info_64.png}}
 \def\warning#1{\doculist{#1}{\rodinimgdir/warning_64.png}}
-\fi
 \def\pencil#1{\doculist{#1}{\rodinimgdir/pencil_64.png}}
 
 % macro for icons

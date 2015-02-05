@@ -1,0 +1,1314 @@
+\clearpage
+\section{Mathematical Notation}
+\label{mathematical_notation}
+\index{notation!mathematical}
+
+\subsection{Introduction}
+\label{mathematical_notation_introduction}
+
+In the following section, we use sans serif letters like $\exprla$, $\expra$, $\exprlb$, $\exprb$, \ldots as
+placeholders for arbitrary expressions instead of $a$, $A$, $b$, $B$ which represent
+Event-B identifiers.
+For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
+
+We use the $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
+can be equivalently rewritten as $\exprb$ if $\expra$'s  well-definedness condition
+is fulfilled.
+%If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
+%we use the form $\expra = x \defi \predp$.
+We have tried to find a balance between having a precise and concise description for all Event-B's
+mathematical components and having a text that is still easily readable.
+Many of the operators can be expressed using other, simpler constructs.
+Other, like equality ($=$) or universal quantification ($\forall$) are simply described with natural language.
+
+When we introduce new identifiers while expressing an operator (e.g. by using a set comprehension),
+we assume that the new identifier does not occur free in the rewritten expressions
+(see Section~\ref{free_identifiers} for more information on free identifiers).
+
+\info{For a concise summary of the Event-B mathematical toolkit, download the four-page \file{EventB-Summary.pdf}{Event-B Cheat Sheet}.  We would like to thank Ken Robinson for making it available.}
+
+\subsubsection{Data types}
+\label{data_types}
+\index{data type}
+\index{type|see{data type}}
+
+In Event-B we have 3 kinds of basic data types:
+\begin{itemize}
+\item \index{integer!as type} $\intg$ is the set of all integers.
+\item \index{boolean!as type}
+  $\Bool$ is the set of Booleans. 
+  It has two elements $\Bool = \{\True,\False\}$.
+\item \index{carrier set}
+  Users can define carrier sets. 
+  These are defined in the \eventbsection{Sets} section of a context.
+  Carrier sets are never empty.
+  There is no other assumption made about carrier sets unless it is stated explicitly as
+  an axiom.
+\end{itemize}
+From all data types $\alpha, \beta$, two other kinds of data types can be constructed:
+\begin{itemize}
+\item $\pow(\alpha)$ contains the sets of elements of $\alpha$.
+\item \index{pair!as type} $\alpha\cprod\beta$ is the set of pairs where the first element is of type $\alpha$ and the
+  second element is of type $\beta$.
+\end{itemize}
+\index{type expression} Expressions that are constructed by the rules above are called \emph{type expressions}.
+
+\paragraph{A note about the notation}
+We use the Greek letters $\alpha$, $\beta$, $\gamma$, \ldots to represent arbitrary data types.
+For an expression $\vexpr{E}$, we write $\expre\in\alpha$ to state that $\expre$ is of type $\alpha$.
+In the following descriptions of Event-B's mathematical constructs, we will describe the
+  types of all constructs and their components.
+
+For example, we will describe the maplet $\expre\mapsto \exprf$ whose type is defined by $\expre\mapsto \exprf\in\alpha\cprod\beta$ with
+ $\expre\in\alpha$ and $\exprf\in\beta$. We do not restrict the types of $\alpha$ and $\beta$.
+
+For predicates, we simply describe the data types of their components. 
+The predicate itself does not have a type.
+For example, consider the components' types for the equality of two expressions $\expre=\vexpr{F}$: $\expre\in\alpha$ and $\exprf\in\alpha$.
+By stating that $\expre$ and $\exprf$ are both of type $\alpha$, we express that both expressions must have the
+  same type but do not make any further assumptions about their types.
+
+\subsubsection{Well-definedness}
+\label{well_definedness}
+\index{well-definedness}
+\index{L-operator@$\wdl{}$-operator}
+
+A predicate which describes the condition under which an expression or predicate in Event-B can be safely evaluated is the well-definedness condition.
+An example with integer division makes this clear: The expression $x\div y$ only makes sense when $y\neq 0$.
+
+Well-definedness conditions are usually used for well-definedness proof obligations (\ref{well_definedness_proof_obligations}).
+
+In Rodin, the $\wdl$-operator defines which well-defined condition a predicate or expression has.
+When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
+
+In the following sections, we state for each mathematical construct what the well-definedness conditions are.
+In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a construct.
+
+\info{The $\wdl$-operator cannot be expressed in Event-B itself. It is only used to describe Event-B's concept of well-definedness
+  and how the well-definedness proof obligations are generated.}
+
+\subsubsection{Free identifiers}
+\label{free_identifiers}
+\index{free identifiers}
+Free identifiers in predicates and expressions are those identifiers which are used but not introduced by quantifiers.
+More formally, we define the set of free identifiers $\freeids{\expre}$ of an expression or predicate $E$ recursively as follows:
+
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+  \textbf{Expression / Predicate} & \textbf{Free identifiers} \\
+  \hline
+  Identifier $x$ & $\{x\}$ \\
+  \hline
+  Integer $n$ & $\emptyset$ \\
+  \hline
+  $\begin{array}{lllll}
+    \btrue &  \bfalse & \Bool & \True & \False \\
+    \emptyset & \id & \prjone & \prjtwo & \intg \\
+    \nat & \nat_1
+  \end{array}$ 
+  & $\emptyset$ \\
+  \hline
+  $\begin{array}{lllll}
+    \lnot \expra & \bool(\expra) & \pow(\expra) & \pow_1(\expra) \\
+    \bfinite(\expra) & \card(\expra) & \bunaryunion(\expra) & \bunaryinter(\expra) \\
+    \expra^{-1} & \dom(\expra) &  \ran(\expra) & -\expra \\
+    \min(\expra) & \max(\expra)
+  \end{array}$ 
+  & $\freeids{\expra}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \expra\land\exprb & \expra\lor\exprb & \expra\limp\exprb & \expra\leqv\exprb & \expra=\exprb \\
+    \expra\neq\exprb & \expra\in\exprb & \expra\not\in\exprb & \expra\subseteq \exprb & \expra\not\subseteq\exprb \\
+    \expra\subset \exprb & \expra\not\subset \exprb & \expra\bunion \exprb & \expra\binter \exprb & \expra\setminus \exprb \\
+    \expra\cprod \exprb & \expra\rel \exprb & \expra\trel \exprb & \expra\srel \exprb & \expra\strel \exprb \\
+    \expra\domres \exprb & \expra\domsub \exprb & \expra\ranres \exprb &  \expra\ransub \exprb & \expra\fcomp \exprb \\
+    \expra\bcomp \exprb & \expra\ovl \exprb & \expra\pprod \exprb & \expra\dprod \exprb & \expra[\exprb] \\
+    \expra\pfun \exprb & \expra\tfun \exprb & \expra\pinj \exprb & \expra\tinj \exprb & \expra\psur \exprb \\
+    \expra\tsur \exprb & \expra\tbij \exprb & \expra(\exprb) & \expra+\exprb & \expra-\exprb \\
+    \expra\cdot \exprb & \expra\div \exprb & \expra\bmod \exprb & \expra\expn \exprb & \expra\boftype\exprb
+  \end{array}$ 
+  & $\freeids{\expra}\cup\freeids{\exprb}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~\expre_1,\ldots,\expre_n~\} &
+    \bpartition(\expre_1,\ldots,\expre_n)
+  \end{array}$
+  & $\freeids{\expre_1}\cup\ldots\cup\freeids{\expre_n}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \forall\textsl{ids}~\qdot~\predp &
+    \exists\textsl{ids}~\qdot~\predp
+  \end{array}$
+  & $\freeids{\predp}\setminus\textsl{ids}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~\textsl{ids}~\qdot~\predp~|~\expre~\} & 
+    \Union\textsl{ids}~\qdot~\predp~|~\expre &
+    \Inter\textsl{ids}~\qdot~\predp~|~\expre
+  \end{array}$
+  & $(\freeids{\predp}\cup\freeids{\expre})\setminus\textsl{ids}$ \\
+  \hline
+  $\begin{array}{lllll}
+    \{~\expre~|~\predp~\} &
+    \Union \expre~|~\predp &
+    \Inter \expre~|~\predp
+  \end{array}$
+  & $\freeids{\predp}\setminus\freeids{\expre}$\\
+  \hline
+\end{tabular}  
+\end{center}
+
+\subsubsection{Structure of the subsections}
+The following reference subsections will have the form the form: \\[2em]
+\begin{rrnames}
+  math. Symbol  & \texttt{ASCII representation}  & Name of the operator \\
+  \ldots & \ldots & \ldots \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc A short description of what the operator does
+  \rrdef A formal definition of what the operator does
+  \rrtypes A description of the types of all arguments and, if the operation
+    is an expression, the expression's type
+  \rrwd
+    A description of the well-definedness conditions using the $\wdl$ operator
+  \rrfis
+    Non-deterministic assignments may have feasibility conditions.
+    These are used in the proof obligations of an event (\ref{consistency_proof_obligations}).
+  \rrex
+    For some constructs, an example is provided to clarify their use.
+\end{rodinrefentry}
+
+\subsection{Predicates}
+\label{predicates}
+
+\begin{samepage}
+\subsubsection{Logical primitives}
+\index{true!as predicate@as predicate ($\btrue$)}\index{false!as predicate@as predicate ($\bfalse$)}
+\index{$\btrue$ (true)}
+\index{$\bfalse$ (false)}
+
+\begin{rrnames}
+  $\btrue$  & \texttt{true}  & True \\
+  $\bfalse$ & \texttt{false} & False \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  The predicates $\btrue$ and $\bfalse$ are the predicates that are true and false respectively.
+  \rrwd
+  $\wdl(\btrue) \defi \btrue$ \\
+  $\wdl(\bfalse) \defi \btrue$ \\
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Logical operators}
+\index{conjunction@conjunction ($\land$)}\index{disjunction@disjunction ($\lor$)}\index{implication@implication ($\limp$)}\index{equivalence@equivalence ($\leqv$)}\index{negation@negation ($\lnot$)}
+\index{$\land$ (conjunction)}\index{$\lor$ (disjunction)}\index{$\limp$ (implication)}\index{$\leqv$ (equivalence)}\index{$\lnot$ (negation)}
+
+
+
+\begin{rrnames}
+  $\land$  & \texttt{\&}  & Conjunction \\
+  $\lor$   & \texttt{or}  & Disjunction \\
+  $\limp$  & \texttt{=>}  & Implication \\
+  $\leqv$  & \texttt{<=>} & Equivalence \\
+  $\lnot$  & \texttt{not} & Negation \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  These are the usual logical operators.
+  \rrdef
+  The following truth tables describe the behaviours of these operators:
+  \begin{center}
+    \begin{tabular}{cc|cccc}
+      $\predp$       & $\predq$       & $\predp\land \predq$ & $\predp\lor \predq$ & $\predp\limp \predq$ & $\predp\leqv \predq$ \\
+      \hline
+      $\bfalse$ & $\bfalse$ & $\bfalse$  & $\bfalse$ & $\btrue$   & $\btrue$   \\
+      $\bfalse$ & $\btrue$  & $\bfalse$  & $\btrue$  & $\btrue$   & $\bfalse$  \\
+      $\btrue$  & $\bfalse$ & $\bfalse$  & $\btrue$  & $\bfalse$  & $\bfalse$  \\
+      $\btrue$  & $\btrue$  & $\btrue$   & $\btrue$  & $\btrue$   & $\btrue$   \\
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|c}
+      $\predp$       & $\lnot \predp$ \\
+      \hline
+      $\bfalse$ & $\btrue$ \\
+      $\btrue$  & $\bfalse$ \\
+    \end{tabular}
+  \end{center}
+  \rrtypes
+    All arguments are predicates.
+  \rrwd
+    Please note that the operators $\land$ and $\lor$ are not commutative
+    because their well-definedness conditions distinguish between the first and second argument.
+    Therefore, if their arguments have well-definedness conditions, the order matters.
+    For example, $x\neq 0 \land y\div x=3$ is always well-defined,
+    but $y\div x=3 \land x\neq 0$ still has the well-definedness condition $x\neq 0$.
+
+    $\wdl(\predp\land \predq) \defi \wdl(\predp) \land (\predp \limp \wdl(\predq))$ \\
+    $\wdl(\predp\lor \predq)  \defi \wdl(\predp) \land (\predp \lor \wdl(\predq))$ \\
+    $\wdl(\predp\limp \predq) \defi \wdl(\predp) \land (\predp \limp \wdl(\predq))$ \\
+    $\wdl(\predp\leqv \predq) \defi \wdl(\predp) \land \wdl(\predq)$ \\
+    $\wdl(\lnot(\predp)) \defi \wdl(\predp)$ \\
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Quantified predicates}
+\label{quantified_predicates}
+\index{for all@for all ($\forall$)}
+\index{exists@exists ($\exists$)}
+\index{quantification!universal@universal ($\forall$)}
+\index{quantification!existential@existential ($\exists$)}
+
+
+\begin{rrnames}
+  $\forall$ & \texttt{!} & Universal quantification \\
+  $\exists$ & \texttt{\#} & Existential quantification \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
+    possible values of $x_1\ldots,x_n$.
+    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
+    $\predp_1$ is used to specify the types of the identifiers.
+
+    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
+
+    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
+    They can be referenced in $\predp$.
+  \rrtypes
+    The quantifiers and the $\predp$ are predicates.    
+  \rrwd
+    $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$\\
+    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+\end{rodinrefentry}
+\end{samepage}
+
+%\begin{tabular}{r|p{12cm}}
+%\textbf{Description} &  
+%		The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
+%    possible values of $x_1\ldots,x_n$.
+%    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
+ %   $\predp_1$ is used to specify the types of the identifiers.
+
+%    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
+
+%    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
+%    They can be referenced in $\predp$. \\[2mm]
+
+%\textbf{Types} &  The quantifiers and the $\predp$ are predicates.  \\[2mm]
+%
+%\textbf{WD} &  $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+%
+%    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$ \\
+%\end{tabular}
+
+
+\begin{samepage}
+\subsubsection{Equality}
+\label{equality}
+\index{equality@equality ($=$)}
+
+\begin{rrnames}
+  $=$    & \texttt{=}  & equality \\
+  $\neq$ & \texttt{/=} & inequality \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  Checks if both expressions are or are not equal.
+  \rrdef
+  $\expre \neq \exprf \defi \lnot( \expre=\exprf)$
+  \rrtypes
+    $\expre = \exprf$ and $\expre \neq \exprf$ are predicates with $\expre\in\alpha$ and $\exprf\in\alpha$, i.e. $\expre$ and $\exprf$ must have the same type.
+  \rrwd
+    $\wdl(\expre = \exprf) \defi \wdl(\expre) \land \wdl(\exprf)$ \\
+    $\wdl(\expre \neq \exprf) \defi \wdl(\expre) \land \wdl(\exprf)$ \\
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Membership}
+\label{membership}
+\index{membership@membership ($\in$)}
+
+\begin{rrnames}
+  $\in$     & \texttt{:}  & set membership \\
+  $\not\in$ & \texttt{/:} & negated set membership \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    Checks if an expression $\expre$ denotes an element of a set $\exprs$.
+  \rrdef
+    $\expre\not\in\exprs \defi \lnot(\expre\in\exprs)$
+  \rrtypes
+    $\expre\in\exprs$ and $\expre\not\in\exprs$ are predicates 
+    with $\expre\in\alpha$ and $\exprs\in\pow(\alpha)$.
+  \rrwd
+    $\wdl(\expre\in\exprs) \defi \wdl(\expre) \land \wdl(\exprs)$ \\
+    $\wdl(\expre\not\in\exprs) \defi \wdl(\expre) \land \wdl(\exprs)$ \\
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsection{Booleans}
+\label{booleans}
+\index{boolean}
+\index{boolean!the operator $\bool$}
+\index{true!as expression ($\True$)}
+\index{false!as expression ($\False$)}
+
+\begin{rrnames}
+  $\Bool$     & \texttt{BOOL}    & Boolean values \\
+  $\True$     & \texttt{TRUE}    & Boolean true \\
+  $\False$    & \texttt{FALSE}   & Boolean false \\
+  $\bool$     & \texttt{bool}    & Convert a predicate into a Boolean value \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\Bool$ is a pre-defined carrier set that contains the constants $\True$ and $\False$.
+
+    $\bool(\predp)$ denotes the Boolean value of a predicate $\predp$. If $\predp$ is true, the expression
+    is $\True$. If $\predp$ is false, the expression is $\False$.
+  \rrdef
+    $\bpartition(\Bool,\{\True\},\{\False\})$\\
+    %$\Bool = \{\True,\False\}$ \\
+    $\bool(\predp)=\True \leqv \predp$
+  \rrtypes
+    $\Bool\in\pow(\Bool)$\\
+    $\True\in\Bool$ \\
+    $\False\in\Bool$ \\
+    $\bool(\predp)\in\Bool$ with $\predp$ being a predicate.
+  \rrwd
+    $\wdl(\Bool) \defi \btrue$\\
+    $\wdl(\True) \defi \btrue$\\
+    $\wdl(\False) \defi \btrue$\\
+    $\wdl(\bool(\predp)) \defi \wdl(\predp)$
+\end{rodinrefentry}
+\end{samepage}
+
+
+\subsection{Sets}
+\label{sets}
+
+\begin{samepage}
+\subsubsection{Set comprehensions}
+\label{set_comprehensions}
+\index{set!comprehension set}
+
+\begin{rrnames}
+  $\{~\textit{ids}~\qdot~\predp~|~\expre~\}$     & \texttt{\{\textit{ids}.P|E\}}    & Set comprehension \\
+  $\{~\expre~|~\predp~\}$                        & \texttt{\{E|P\}}      & Set comprehension (short form)\\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    \textit{ids} is a comma-separated list of one ore more identifiers whose type
+    must be inferable by the predicate $\predp$.
+    The predicate $\predp$ and $\expre$ can contain references to the identifiers \textit{ids}.
+
+    The set comprehension $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}$ contains all values of $\expre$ for the values
+    of $x_1,\ldots,x_n$ where $\predp$ is true.
+
+    $\{~\expre~|~\predp~\}$ is a short form for $\{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$ where $\freeids{\expre}$ denotes the
+    list of free identifiers occurring in $\expre$ (see Section \ref{free_identifiers})).
+  \rrdef
+    $\{~\expre~|~\predp~\} \defi \{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$
+  \rrtypes
+    With $x_1\in\alpha_1, \ldots, x_n\in\alpha_n$ and $\expre\in\beta$:\\
+    $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\} \in \pow(\beta)$\\
+    $\{~\expre~|~\predp~\} \in \pow(\beta)$  
+  \rrwd
+    $\wdl(\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}) \quad\defi\quad \forall x_1,\ldots,x_n \qdot \wdl(\predp) \land (\predp \limp \wdl(\expre))$\\
+    $\wdl(\{~\expre~|~\predp~\}) \quad\defi\quad \forall \freeids{\expre} \qdot \wdl(\predp) \land (\predp \limp \wdl(\expre))$
+  \rrex
+    The following set comprehensions contain all the first 10 squares numbers:\\
+    $\{1,4,9,16,25,36,49,64,81,100\}$\\
+    $= \{~x~\qdot~x\in 1\upto 10~|~x\expn 2\}$\\
+    $= \{~x~|~ \exists y \qdot y\in 1\upto 10 \land x=y\expn 2~\}$\\
+    $= \{~x\expn 2~|~x\in 1\upto 10~\}$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Basic sets}
+\index{set!empty set@empty set ($\emptyset$)}
+\index{set!set extension}
+
+\begin{rrnames}
+  $\emptyset$     & \texttt{\{\}}        & Empty set \\
+  $\{\textit{exprs}\}$    & \texttt{\{\textit{exprs}\}}  & Set extension \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\textit{exprs}$ is a comma-separated list of one or more expressions of the same type.
+
+    The empty set $\emptyset$ contains no elements.
+    The set extension $\{\expre_1,\ldots,\expre_n\}$ is the set that contains exactly the elements $\expre_1,\ldots,\expre_n$.
+  \rrdef
+    $\emptyset \defi \{~x~|~\bfalse~\}$\\
+    $\{\expre_1,\ldots,\expre_n\} \defi \{~x~|~x=\expre_1\lor\ldots\lor x=\expre_n\}$
+  \rrtypes
+    $\emptyset\in\pow(\alpha)$, where $\alpha$ is an arbitrary type.\\
+    $\{\expre_1,\ldots,\expre_n\}\in\pow(\alpha)$ with $\expre_1\in\alpha,\ldots,\expre_n\in\alpha$
+  \rrwd
+    $\wdl(\emptyset) \defi \btrue$\\
+    $\wdl(\{\expre_1,\ldots,\expre_n\}) \defi \wdl(\expre_1) \land\ldots\land \wdl(\expre_n)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Subsets}
+\label{subsets}
+\index{subset@subset ($\subseteq,\subset$)}
+
+\begin{rrnames}
+  $\subseteq$     & \texttt{<:}  & subset \\
+  $\not\subseteq$ & \texttt{/<:}  & not a subset \\
+  $\subset$       & \texttt{<}\texttt{<:}  & strict subset \\
+  $\not\subset$   & \texttt{/<}\texttt{<:}  & not a strict subset \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\exprs\subseteq \exprt$ checks if $\exprs$ is a subset of $\exprt$, i.e. if all elements of $\exprs$ occur in $\exprt$.
+    $\exprs\subset \exprt$ checks if $\exprs$ is a subset of $\exprt$ and $\exprs$ does not equal $\exprt$.
+    $\exprs\not\subseteq \exprt$ and $\exprs\not\subset \exprt$ are the respective negated variants.
+  \rrdef
+    $\exprs \subseteq \exprt \defi \forall e \qdot e\in \exprs \limp e\in \exprt$\\
+    $\exprs \not\subseteq \exprt \defi \lnot(\exprs \subseteq \exprt)$\\
+    $\exprs \subset \exprt \defi \exprs \subseteq \exprt \land \exprs\neq \exprt$\\
+    $\exprs \not\subset \exprt \defi \lnot(\exprs \subset \exprt)$
+  \rrtypes
+    $\exprs \opelipse \exprt$ is a predicate
+    with $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\alpha)$ for each operator $\opelipse$ of
+    $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
+  \rrwd
+    $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
+    for each operator $\opelipse$ of  $\subseteq$, $\not\subseteq$, $\subset$, $\not\subset$.
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Operations on sets}
+\index{union!union@union ($\bunion$)}
+\index{intersection!intersection@intersection ($\binter$)}
+\index{set!difference set@difference set ($\setminus$)}
+\index{set!set subtraction@set subtraction ($\setminus$)}
+\index{subtraction!of sets@of sets ($\setminus$)}
+
+\begin{rrnames}
+  $\bunion$   & \texttt{\mybackslash/} & Union \\
+  $\binter$   & \texttt{/\mybackslash} & Intersection \\
+  $\setminus$ & \texttt{\mybackslash}  & Set subtraction \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The union $\exprs\bunion \exprt$ denotes the set that contains all elements that are in $\exprs$ or $\exprt$.
+    The intersection $\exprs\binter \exprt$ denotes the set that contains all elements that are in both $\exprs$ and $\exprt$.
+    The set subtraction or set difference $\exprs\setminus \exprt$ denotes all elements that are in $\exprs$ but not in $\exprt$.
+  \rrdef
+    $\exprs\bunion \exprt \defi \{~x~|~x\in \exprs\lor x\in \exprt~\}$\\
+    $\exprs\binter \exprt \defi \{~x~|~x\in \exprs\land x\in \exprt~\}$\\
+    $\exprs\setminus \exprt \defi \{~x~|~x\in \exprs\land x\not\in \exprt~\}$
+  \rrtypes
+    $\exprs\opelipse \exprt\in\pow(\alpha)$
+    with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\alpha)$ for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
+  \rrwd
+    $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
+    for each operator $\opelipse$ of $\bunion$, $\binter$, $\setminus$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Power sets}
+\index{set!power set@power set ($\pow$)}
+
+\begin{rrnames}
+  $\pow$      & \texttt{POW}  & Power set \\
+  $\pow_1$    & \texttt{POW1} & Set of non-empty subsets \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\pow(\exprs)$ denotes the set of all subsets of the set $\exprs$.
+    $\pow(\exprs)$ denotes the set of all non-empty subsets of the set $\exprs$.
+  \rrdef
+    $\pow(\exprs) \defi \{~x~|~x\subseteq \exprs~\}$\\
+    $\pow_1(\exprs) \defi \pow(\exprs)\setminus\{\emptyset\}$
+  \rrtypes
+    $\pow(\alpha)\in\pow(\pow(\alpha))$ and $\pow_1(\alpha)\in\pow(\pow(\alpha))$ with
+    $\exprs\in\pow(\alpha)$.
+  \rrwd
+    $\wdl(\pow(\exprs)) \defi \wdl(\exprs)$\\
+    $\wdl(\pow_1(\exprs)) \defi \wdl(\exprs)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Finite sets}
+\index{set!finite}
+\index{set!cardinality@cardinality ($\card$)}
+\index{cardinality@cardinality ($\card$)}
+
+\begin{rrnames}
+  $\bfinite$ & \texttt{finite} & Finite set \\
+  $\card$    & \texttt{card}   & Cardinality of a finite set \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bfinite(\exprs)$ is a predicate that states that $\exprs$ is a finite set.
+    $\card(\exprs)$ denotes the cardinality of $\exprs$. The cardinality is only defined for
+    finite sets.
+  \rrdef
+    $\bfinite(\exprs) ~\defi~ \exists n,b~\qdot~n\in\nat\land b\in \exprs\tbij 1\upto n$\\
+    $\exists b~\qdot~b\in \exprs\tbij 1\upto \card(\exprs)$
+  \rrtypes
+    $\bfinite(\exprs)$ is a predicate and
+    $\card(\exprs)\in\intg$
+    with $\exprs\in\pow(\alpha)$, i.e. $\exprs$ must be a set.
+  \rrwd
+    $\wdl(\bfinite(\exprs)) \defi \wdl(\exprs)$\\
+    $\wdl(\card(\exprs)) \defi \wdl(\exprs) \land \bfinite(\exprs)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Partition}
+\label{partition}
+\index{partition}
+\index{set!partition}
+
+\begin{rrnames}
+  $\bpartition$ & \texttt{partition} & Partitions of a set \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)$ is a predicate that states that 
+    the sets $\exprls_1,\ldots,\exprls_n$ constitute a partition of $\exprs$.
+    The union of all elements of a partition is $\exprs$ and all elements are disjoint.
+
+    $\bpartition(\exprs)$ is equivalent to $\exprs = \emptyset$
+    and $\bpartition(\exprs,\exprls)$ to $\exprs = \exprls$.
+  \rrdef
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n) \defi \exprs=\exprls_1\bunion\ldots\bunion\exprls_n \land \forall i,j \qdot i\neq j \limp\exprls_i\binter\exprls_j = \emptyset$
+  \rrtypes
+    $\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)$ is a predicate with $\exprs\in\pow(\alpha)$ and $\exprls_i\in\pow(\alpha)$ for $i\in 1\upto n$
+  \rrwd
+    $\wdl(\bpartition(\exprs,\exprls_1,\ldots,\exprls_n)) \defi \wdl(\exprs) \land \wdl(\exprls_1) \land \ldots \land \wdl(\exprls_n)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Generalized union and intersection}
+\index{union!generalized union}
+\index{intersection!generalized intersection@generalized intersection ($\bunaryinter$)}
+
+\begin{rrnames}
+  $\bunaryunion$ & \texttt{union} & Generalized union \\
+  $\bunaryinter$ & \texttt{inter} & Generalized intersection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\bunaryunion(\exprs)$ is the union of all elements of $\exprs$.
+    $\bunaryinter(\exprs)$ is the intersection of all elements of $\exprs$. 
+    The intersection is only defined for non-empty $\exprs$.
+  \rrdef
+    $\bunaryunion(\exprs) \defi \{~x~|~\exists s \qdot s\in \exprs \land x\in s~\}$ \\
+    $\bunaryinter(\exprs) \defi \{~x~|~\forall s \qdot s\in \exprs \limp x\in s~\}$
+  \rrtypes
+    $\bunaryunion(\exprs)\in\pow(\alpha)$ and $\bunaryinter(\exprs)\in\pow(\alpha)$ with $\exprs\in\pow(\pow(\alpha))$.
+  \rrwd
+    $\wdl(\bunaryunion(\exprs)) \defi \wdl(\exprs)$ \\
+    $\wdl(\bunaryinter(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset$
+\end{rodinrefentry}
+\end{samepage}
+
+
+\begin{samepage}
+\subsubsection{Quantified union and intersection}
+\index{union!quantified union@quantified union ($\Union$)}
+\index{intersection!quantified intersection@quantified intersection ($\Inter$)}
+
+\begin{rrnames}
+  $\Union$ & \texttt{UNION} & Quantified union \\
+  $\Inter$ & \texttt{INTER} & Quantified intersection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\Union x_1\ldots,x_n~\qdot~\predp~|~\expre$ is the union of all values of $\expre$ for valuations of the identifiers
+    $x_1\ldots,x_n$ that fulfill the predicate $\predp$. The types of $x_1,\ldots,x_n$ must be inferable by $\predp$.
+
+    Analogously is $\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre$ the intersection of all values of $\expre$ for
+    valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $\predp$.
+
+    Like set comprehensions (\ref{set_comprehensions}), the quantified union and intersection have a
+    short form where the free variables of the expression are quantified implicitly:
+    $\Union \expre~|~\predp$ and $\Inter \expre~|~\predp$.
+  \rrdef
+    $\Union x_1\ldots,x_n~\qdot~\predp~|~\expre = \union(\{~x_1\ldots,x_n~\qdot~\predp~|~\expre\})$\\
+    $\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre = \inter(\{~x_1\ldots,x_n~\qdot~\predp~|~\expre\})$\\
+    $\Union \expre~|~\predp = \Union \freeids{\expre}~\qdot~\predp~|~\expre$\\
+    $\Inter \expre~|~\predp = \Inter \freeids{\expre}~\qdot~\predp~|~\expre$
+  \rrtypes
+    With $\expre\in\pow(\alpha)$ and $\predp$ being a predicate:\\
+    $(\Union x_1\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
+    $(\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
+    $(\Union \expre~|~\predp) \in \pow(\alpha)$\\
+    $(\Inter \expre~|~\predp) \in \pow(\alpha)$\\
+  \rrwd
+    $\wdl(\Union x_1\ldots,x_n~\qdot~\predp~|~\expre) \defi (~\forall x_1\ldots,x_n \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~)$\\
+    $\wdl(\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre) \defi (~\forall x_1\ldots,x_n \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~) \land \exists x_1\ldots,x_n \qdot \wdl(\predp)$\\
+    $\wdl(\Union \expre~|~\predp) \defi (~\forall\freeids{\expre} \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~)$\\
+    $\wdl(\Inter \expre~|~\predp) \defi (~\forall\freeids{\expre} \qdot \wdl(\predp) \land (\predp\limp\wdl(\expre))~) \land \exists\freeids{\expre} \qdot \wdl(\predp)$
+\end{rodinrefentry}
+\end{samepage}
+
+\subsection{Relations}
+\label{relations}
+
+\begin{samepage}
+\subsubsection{Pairs and Cartesian product}
+\label{pairs_and_cartesian_product}
+\index{pair}
+\index{maplet@maplet ($\mapsto$)}
+\index{Cartesian product@Cartesian product ($\cprod$)}
+
+\begin{rrnames}
+  $\mapsto$ & \texttt{|->} & Pair \\
+  $\cprod$  & \texttt{**}  & Cartesian product
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\expre\mapsto\exprf$ denotes the pair whose first element is $\expre$ and second element is $\exprf$.
+
+    $\exprs\cprod \exprt$ denotes the set of pairs where the first element is a member of $\exprs$ and
+    second element is a member of $\exprt$.
+  \rrdef
+    $\exprs\cprod \exprt \defi \{~x\mapsto y~|~x\in \exprs\land y\in \exprt~\}$
+  \rrtypes
+    $\expre\mapsto\exprf\in\alpha\cprod\beta$ with $\expre\in\alpha$ and $\exprf\in\beta$.\\
+    $\exprs\cprod \exprt\in\pow(\alpha\cprod\beta)$ with $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$.
+  \rrwd
+    $\wdl(\expre\mapsto\exprf)\defi\wdl(\expre)\land\wdl(\exprf)$\\
+    $\wdl(\exprs\cprod \exprt)\defi\wdl(\exprs)\land\wdl(\exprt)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Relations}
+\index{relation@relation ($\rel$,$\trel$,$\srel$,$\strel$)}
+
+\begin{rrnames}
+  $\rel$   & \texttt{<->} & Relations \\
+  $\trel$  & \texttt{<}\texttt{<->} & Total relations \\
+  $\srel$  & \texttt{<->>} & Surjective relations \\
+  $\strel$ & \texttt{<}\texttt{<->>} & Total surjective relations \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\exprs\rel \exprt$ is the set of relations between the two sets $\exprs$ and $\exprt$.
+    A relation consists of pairs where the first element is of $\exprs$ and the
+    second of $\exprt$. $\exprs\rel \exprt$ is just an abbreviation for $\pow(\exprs\cprod\exprt)$.
+
+    A total relation is a relation which relates each element of $\exprs$ to at least one element of $\exprt$.
+
+    A surjective relation is a relation where there is at least one element of $\exprs$ for each element of $\exprt$
+    such that both are related.
+  \rrdef
+    $\exprs \rel \exprt \defi \pow(\exprs\cprod \exprt)$\\
+    $\exprs \trel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \dom(r) = \exprs~\}$\\
+    $\exprs \srel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \ran(r) = \exprt~\}$\\
+    $\exprs \strel \exprt \defi (\exprs \trel \exprt) \land (\exprs \srel \exprt)$
+  \rrtypes
+    For $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$
+    for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
+    $\exprs \opelipse \exprt\in\pow(\pow(\alpha\cprod\beta))$
+  \rrwd
+    $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
+    for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$.
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Domain and Range}
+\label{domain_and_range}
+\index{domain@domain ($\dom$)}
+\index{range@range ($\ran$)}
+
+\begin{rrnames}
+  $\dom$  & \texttt{dom} & Domain \\
+  $\ran$  & \texttt{ran} & Range \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    If $r$ is a relation between the sets $\exprs$ and $\exprt$, 
+    the domain $\dom(\exprlr)$ is the set of the elements of $\exprs$ that are related to at least one
+    element of $\exprt$ by $\exprlr$.
+
+    Likewise the range $\ran(\exprlr)$ is the set of elements of $\exprt$ to which at least one element
+    of $\exprs$ relates by $\exprlr$.
+  \rrdef
+    $\dom(\exprlr) \defi \{~x~|~\exists y~\qdot~ x\mapsto y\in\exprlr~\}$\\
+    $\ran(\exprlr) \defi \{~y~|~\exists x~\qdot~ x\mapsto y\in\exprlr~\}$
+  \rrtypes
+    $\dom(\exprlr)\in\pow(\alpha)$ and $\ran(\exprlr)\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$.
+  \rrwd
+    $\wdl(\dom(\exprlr)) \defi \wdl(\exprlr)$\\
+    $\wdl(\ran(\exprlr)) \defi \wdl(\exprlr)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Domain and Range Restrictions}
+\label{domain_and_range_restrictions}
+\index{domain restriction@domain restriction ($\domres$)}
+\index{domain subtraction@domain subtraction ($\domsub$)}
+\index{range restriction@range restriction ($\ranres$)}
+\index{range subtraction@range subtraction ($\ransub$)}
+
+\begin{rrnames}
+  $\domres$  & \texttt{<|}           & Domain restriction\\
+  $\domsub$  & \texttt{<}\texttt{<|} & Domain subtraction\\
+  $\ranres$  & \texttt{|>}           & Range restriction\\
+  $\ransub$  & \texttt{|>>}          & Range subtraction
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The domain restriction $\exprs\domres \exprlr$ is a subset of the relation $\exprlr$ that contains
+    all of the pairs whose first element is in $\exprs$. $\exprs\domsub\exprlr$ is the subset where 
+    the pair's first element is \emph{not} in $\exprs$.
+    
+    In the same way, the range restriction $\exprlr\ranres\exprs$ is a subset that contains all of the pairs
+    whose second element is in $\exprs$ and $\exprlr\ransub\exprs$ is the set where the pair's second
+    element is not in $\exprs$.
+  \rrdef
+    $\exprs\domres\exprlr \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\in\exprs\}$\\
+    $\exprs\domsub\exprlr \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land x\not\in\exprs\}$\\
+    $\exprlr\ranres\exprs \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\in\exprs\}$\\
+    $\exprlr\ransub\exprs \defi \{~x\mapsto y~|~x\mapsto y\in \exprlr\land y\not\in\exprs\}$
+  \rrtypes
+    $\exprs\domres\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\domsub\exprlr\in\pow(\alpha\cprod\beta)$
+    with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\alpha)$\\
+    $\exprlr\ranres\exprs\in\pow(\alpha\cprod\beta)$ and $\exprlr\ransub\exprs\in\pow(\alpha\cprod\beta)$
+    with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\beta)$  
+  \rrwd
+    $\wdl(\exprs\opelipse\exprlr)\defi\wdl(\exprs)\land\wdl(\exprlr)$ for each operator $\opelipse$ of
+    $\domres$, $\domsub$, $\ranres$, $\ransub$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Operations on relations}
+\label{operations_on_relations}
+\index{composition!forward composition of relations ($\fcomp$)}
+\index{composition!backward composition of relations ($\bcomp$)}
+\index{relation!backward composition ($\bcomp$)}
+\index{relation!forward composition ($\bcomp$)}
+\index{product!parallel product of relations ($\pprod$)}
+\index{product!direct product of relations ($\dprod$)}
+\index{relation!parallel product ($\pprod$)}
+\index{relation!direct product ($\dprod$)}
+\index{inverse ($\mbox{}^{-1}$)}
+\index{relation!inverse ($\mbox{}^{-1}$)}
+
+\begin{rrnames}
+  $\fcomp$    & \texttt{;}                  & Relational forward composition\\
+  $\bcomp$    & \texttt{circ}               & Relational backward composition\\
+  $\ovl$      & \texttt{<+}                 & Relational override \\
+  $\pprod$    & \texttt{||}                 & Parallel product \\
+  $\dprod$    & \texttt{><}                 & Direct product \\
+  $\mbox{}^{-1}$ & \texttt{\textasciitilde}  & Inverse \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    An element $x$ is related by $\exprlr\fcomp \exprs$ to an element $y$ if
+    there is an element $z$ such that $\exprlr$ relates $x$ to $z$ and $\exprs$ relates
+    $z$ to $y$.
+
+    $\exprls\bcomp\exprlr$ can be written as an alternative to $\exprlr\fcomp\exprls$.
+    This reflects the fact that $f(g(x)) = (f\bcomp g)(x)$ holds for two functions $f$ and $g$.
+
+    The relational overwrite $\exprlr\ovl\exprls$ is equal to $\exprlr$ except all entries in $\exprlr$
+    whose first element is in the domain of $\exprls$ are replaced by the corresponding 
+    entries in $\exprls$.
+    
+    The parallel product $\exprlr\pprod\exprls$ relates a pair $x\mapsto y$ to a pair $m\mapsto n$
+    when $\exprlr$ relates $x$ to $m$ and $\exprls$ relates $y$ to $n$.
+
+    If a relation $\exprlr$ relates an element $x$ to $y$ and $\exprls$ relates $x$ to $z$,
+    the direct product $\exprlr\dprod\exprls$ relates $x$ to the pair $y\mapsto z$.
+
+    The inverse relation $\exprlr^{-1}$ relates an element $x$ to $y$ if the original relation $\exprlr$
+    relates $y$ to $x$.
+  \rrdef
+    $\exprlr\fcomp\exprls \defi \{~x \mapsto y~|~\exists z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y\in\exprls~\}$\\
+    $\exprlr\bcomp\exprls \defi \exprls\fcomp\exprlr$\\
+    $\exprlr\ovl\exprls \defi \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
+    $\exprlr\pprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
+    $\exprlr\dprod\exprls \defi \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
+    $\exprlr^{-1} \defi \{y\mapsto x~|~x\mapsto y\in\exprlr~\}$
+  \rrtypes
+    $\exprlr\fcomp\exprls\in\pow(\alpha\cprod\gamma)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\beta\cprod\gamma)$\\
+    $\exprlr\bcomp\exprls\in\pow(\gamma\cprod\alpha)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\beta\cprod\gamma)$\\
+    $\exprlr\ovl\exprls\in\pow(\alpha\cprod\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\alpha\cprod\beta)$\\
+    $\exprlr\pprod\exprls\in\pow(~(\alpha\cprod\gamma)\cprod(\beta\cprod\delta)~)$ with
+      $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\gamma\cprod\delta)$\\
+    $\exprlr\dprod\exprls\in\pow(\alpha\cprod(\beta\cprod\gamma))$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and
+      $\exprls\in\pow(\alpha\cprod\gamma)$\\
+    $\exprlr^{-1}\in\pow(\beta\cprod\alpha)$ with $\exprlr\in\pow(\alpha\cprod\beta)$
+  \rrwd
+    $\wdl(\exprlr\opelipse\exprls)\defi\wdl(\exprlr)\land\wdl(\exprls)$ for each operator $\opelipse$ of
+    $\fcomp$, $\bcomp$, $\ovl$, $\pprod$, $\dprod$\\
+    $\wdl(\exprlr^{-1})\defi\wdl(\exprlr)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Relational image}
+\label{relational_image}
+\index{relational image}
+\index{relation!image}
+
+\begin{rrnames}
+  $[\ldots]$  & \texttt{[}\ldots\texttt{]}  & Relational image
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The relational image $\exprlr[\exprs]$ are those elements in the range of $\exprlr$
+    that are mapped from $\exprs$.
+  \rrdef
+    $\exprlr[\exprs] \defi \{~y~|~\exists x~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~\}$
+  \rrtypes
+    $\exprlr[\exprs]\in\pow(\beta)$ with $\exprlr\in\pow(\alpha\cprod\beta)$ and $\exprs\in\pow(\alpha)$
+  \rrwd
+    $\wdl(\exprlr[\exprs])\defi\wdl(\exprlr)\land\wdl(\exprs)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Constant relations}
+\label{constant_relations}
+\index{identity relation@identity relation ($\id$)}
+\index{relation!identity ($\id$)}
+\index{projection@projection ($\prjone$,$\prjtwo$)}
+
+\begin{rrnames}
+  $\id$      & \texttt{id}   & Identity relation \\
+  $\prjone$  & \texttt{prj1} & First projection \\
+  $\prjtwo$  & \texttt{prj2} & Second projection \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\id$ is the identity relation that maps every element to itself.
+
+    $\prjone$ is a function that maps a pair to its first element. Likewise $\prjtwo$ maps
+    a pair to its second element.
+
+    $\id$, $\prjone$ and $\prjtwo$ are generic definitions. Their type must be inferred
+    from the environment.
+  \rrdef
+    $\id \defi \{~x\mapsto x~|~\btrue~\}$\\
+    $\prjone \defi \{~ (x\mapsto y)\mapsto x~|~\btrue~\}$\\
+    $\prjtwo \defi \{~ (x\mapsto y)\mapsto y~|~\btrue~\}$
+  \rrtypes
+    $\id\in\pow(\alpha\cprod\alpha)$ for an arbitrary type $\alpha$.\\
+    $\prjone\in\pow((\alpha\cprod\beta)\cprod\alpha)$ and
+    $\prjone\in\pow((\alpha\cprod\beta)\cprod\beta)$ for arbitrary types $\alpha$ and $\beta$.
+  \rrwd
+    $\wdl(\id)\defi\btrue$\\
+    $\wdl(\prjone)\defi\btrue$\\
+    $\wdl(\prjtwo)\defi\btrue$
+  \rrex
+    The assumption that a relation $r$ is irreflexive can be expressed by:\\
+    $r\binter \id=\emptyset$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Sets of functions}
+\index{function@function ($\pfun$, $\tfun$)}
+\index{injection@injection ($\pinj$,$\tinj$)}
+\index{surjection@surjection ($\psur$,$\tsur$)}
+\index{bijection@bijection ($\tbij$)}
+
+\begin{rrnames}
+  $\pfun$  & \texttt{+->}   & Partial functions\\
+  $\tfun$  & \texttt{-->}   & Total functions \\
+  $\pinj$  & \texttt{>+>}   & Partial injections\\
+  $\tinj$  & \texttt{>->}   & Total injections \\
+  $\psur$  & \texttt{+->>}  & Partial surjections\\
+  $\tsur$  & \texttt{-->>}  & Total surjections \\
+  $\tbij$  & \texttt{>->>}  & Bijections \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  A partial function from $\exprs$ to $\exprt$ is a relation that maps an element of $\exprs$ to at most one element
+  of $\exprt$. A function is total if its domain contains all elements of $\exprs$, i.e. it maps every element
+  of $\exprs$ to an element of $\exprt$.
+
+  A function is injective (is an injection) if two distinct elements of $\exprs$ are always mapped to distinct
+  elements of $\exprt$. It is also equivalent to say that the inverse of an injective function is a also a function.
+
+  A function is surjective (is a surjection) if for every element of $\exprt$ there exists an element in $\exprs$
+  that is mapped to it.
+
+  A function is bijective (is a bijection) if it is both injective and surjective.
+  \rrdef
+  $\exprs \pfun \exprt \defi \{~ f ~|~ f\in \exprs\rel \exprt \land (\forall e,x,y \qdot e\mapsto x\in f \land e\mapsto y\in f \limp x=y) ~\}$\\
+  $\exprs \tfun \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land \dom(f) = \exprs ~\}$\\
+  $\exprs \pinj \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land f^{-1} \in  \exprt\pfun \exprs ~\}$\\
+  $\exprs \tinj \exprt \defi (\exprs\pinj \exprt) \binter (\exprs\tfun \exprt)$\\
+  $\exprs \psur \exprt \defi \{~ f ~|~ f\in \exprs\pfun \exprt \land \ran(f) = \exprt ~\}$\\
+  $\exprs \tsur \exprt \defi (\exprs\psur \exprt) \binter (\exprs\tfun \exprt)$\\
+  $\exprs \tbij \exprt \defi (\exprs\tinj \exprt) \binter (\exprs\tsur \exprt)$\\
+  \rrtypes
+    $\exprs\in\pow(\alpha)$, $\exprt\in\pow(\beta)$ for each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
+  $\exprs \opelipse \exprt \in \pow(\pow(\alpha\cprod\beta))$
+  \rrwd
+  For each operator $\opelipse$ of $\pfun$, $\tfun$, $\pinj$, $\tinj$, $\psur$, $\tsur$, $\tbij$:\\
+  $\wdl(\exprs\opelipse \exprt) \defi \wdl(\exprs) \land \wdl(\exprt)$
+\end{rodinrefentry}
+\end{samepage}
+
+% TODO: This is a ruther ugly hack, but without explicit page break,
+% the section about the lambda operator get stretched
+\clearpage
+\begin{samepage}
+\subsubsection{Function application}
+\label{function_application}
+\index{function application}
+
+\begin{rrnames}
+  $(\ldots)$  & \texttt{(}\ldots\texttt{)}  & Function application
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    The function application $\exprlf(\exprla)$ yields the value for $\exprla$ of the function $\exprlf$.
+    It is only defined if $\exprla$ is in the domain of $\exprlf$ and if $\exprlf$ is actually a function.
+  \rrdef
+    $\exprla\mapsto\exprlf(\exprla)\in\exprlf$
+  \rrtypes
+    $\exprlf(\exprla)\in\beta$ with $\exprlf\in\pow(\alpha\cprod\beta)$ and $\exprla\in\alpha$
+  \rrwd
+    $\wdl(\exprlf(\exprla))\defi\wdl(\exprlf)\land\wdl(\exprla)\land\exprlf\in\alpha\pfun\beta \land \exprla\in\dom(\exprlf)$
+    with $\pow(\alpha\cprod\beta)$ being the type of $\exprlf$.
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Lambda}
+\label{lambda}
+\index{lambda@lamba expression ($\lambda$)}
+
+\begin{rrnames}
+  $\lambda$  & \texttt{\%}  & Lambda
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)$ is a function that maps an ``input'' $\exprlp$ to
+    a result $\expre$ such that $\predp$ holds. 
+
+    $\exprlp$ is a pattern of identifiers, parentheses and $\mapsto$ which follows the
+    following rules:
+    \begin{itemize}
+    \item An identifier $x$ is a pattern.
+    \item An identifier $x$, followed by an $\boftype$ operator is a pattern (See \ref{typing}
+      for more details).
+    \item A pair $\exprla\mapsto\exprlb$ is a pattern if $\exprla$ and $\exprlb$ are patterns.
+    \item $(\exprla)$ is pattern if $\exprla$ is pattern.
+    \end{itemize}
+    In the simplest case, $\exprlp$ is just an identifier.
+  \rrdef
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~) \defi \{~\exprlp\mapsto \expre~|~\predp~\}$
+  \rrtypes
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)\in\pow(~\alpha\cprod\beta~)$
+    with $\exprlp\in\alpha$, $\predp$ being a predicate and $\expre\in\beta$.
+  \rrwd
+    $\wdl(\lambda~\exprlp~\qdot~\predp~|~\expre~)~\defi~
+    \forall \freeids{\exprlp}~\qdot~\wdl(\predp)\land (\predp\limp \wdl(\expre))$
+  \rrex
+    A function $double$ that returns the double value of a natural number:\\
+    $double = (\lambda x~\qdot~x\in\nat~|~2\cdot x)$
+
+    The dot product of two 2-dimensional vectors can be defined by:\\
+    $dotp = (\lambda~(a \mapsto b)\mapsto(c \mapsto d)~\qdot~a\in\intg\land  b\in\intg\land  c\in\intg\land  d\in\intg~|~a\cdot c+b\cdot d~)$
+\end{rodinrefentry}
+\end{samepage}
+% TODO: This is a ruther ugly hack, but without explicit page break,
+% the section about the lambda operator get stretched
+\clearpage
+
+\begin{samepage}
+\subsection{Arithmetic}
+\label{arithmetic}
+
+\subsubsection{Sets of numbers}
+\index{integer!as set@as set ($\intg$)}
+\index{natural numbers@natural numbers ($\nat$)}
+
+\begin{rrnames}
+  $\intg$  & \texttt{INT}  & Integers \\
+  $\nat$   & \texttt{NAT}  & Natural numbers, starting with 0 \\
+  $\nat_1$ & \texttt{NAT1} & Natural numbers, starting with 1 \\
+  $\upto$  & \texttt{..}   & Range of numbers
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  The set of all integers is denoted by $\intg$. It contains all elements of the type.
+  The two subsets $\nat$ and $\nat_1$ contain all elements greater than or equal to 0 and 1 respectively.
+  The range of numbers between $\exprla$ and $\exprlb$ is denoted by $\exprla\upto\exprlb$.
+  \rrdef
+  $\nat   \defi \{~ n ~|~ n\in\intg\land n\geq 0~\}$\\
+  $\nat_1 \defi \{~ n ~|~ n\in\intg\land n\geq 1~\}$\\
+  $\exprla\upto\exprlb \defi \{~ n ~|~ n\in\intg\land\exprla\leq n \land n\leq\exprlb~\}$
+  \rrtypes
+  $\intg\in\pow(\intg)$ \\
+  $\nat\in \pow(\intg)$ \\
+  $\nat_1\in\pow(\intg)$ \\
+  $\exprla\upto\exprlb\in\pow(\intg)$  with  $\exprla\in\intg$ and $\exprlb\in\intg$
+  \rrwd
+  $\wdl(\intg) \defi \btrue$\\
+  $\wdl(\nat) \defi \btrue$\\
+  $\wdl(\nat_1) \defi \btrue$\\
+  $\wdl(\exprla\upto\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Arithmetic operations}
+\label{arithmetic_operations}
+\index{addition@addition ($+$)}
+\index{plus@plus ($+$)}
+\index{subtraction!of integers@of integers ($-$)}
+\index{minus@minus ($-$)}
+\index{multiplication@multiplication ($\cdot$)}
+\index{product!of integers@of integers ($\cdot$)}
+\index{division@division ($\div$)}
+\index{modulo@modulo ($\bmod$)}
+\index{reminder|see{modulo}}
+\index{exponentation@exponentation ($\expn$)}
+
+\begin{rrnames}
+  $+$      & \texttt{+}   & Addition \\
+  $-$      & \texttt{-}   & Subtraction or unary minus \\
+  $\cdot$  & \texttt{*}   & Multiplication \\
+  $\div$   & \texttt{/}   & Integer division \\
+  $\bmod$  & \texttt{mod} & Modulo \\
+  $\expn$  & \texttt{\textasciicircum} & Exponentiation \\
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+  These are the usual arithmetic operations.
+  \rrdef
+    Addition, subtraction and multiplication behave as expected.
+
+    The division is defined in a way that $1\div 2=0$ and $-1\div 2=0$:\\
+    $\exprla\div\exprlb = \max(\{~c ~|~ c\in\nat \land\exprlb\cdot c \leq\exprla~\})$ for $\exprla\in\nat$ and $\exprlb\in\nat$\\
+%    $a\div b=c \defi \exists r \qdot 0\leq r \land r<b \land  b\cdot c + r = a$ for $a\in\nat$ and $b\in\nat$\\
+    $(-\exprla)\div b = - (\exprla\div b)$\\
+    $\exprla\div (-b) = - (\exprla\div b)$
+
+    $\exprla\bmod\exprlb = c~\defi~c\in 0\upto\exprlb-1 \land \exists k~\qdot~k\in\nat\land k\cdot \exprlb + c = \exprla$
+  \rrtypes
+  With $\exprla\in\intg$, $\exprlb\in\intg$ for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
+  $\exprla\opelipse \exprlb\in\intg$\\
+  $-\exprla\in\intg$
+  \rrwd
+  $\wdl(\exprla+\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb)$ \\
+  $\wdl(\exprla-\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb)$ \\
+  $\wdl(-\exprla) \defi \wdl(\exprla)$ \\
+  $\wdl(\exprla\cdot \exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb)$ \\
+  $\wdl(\exprla\div\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb) \land \exprlb\neq 0$ \\
+  $\wdl(\exprla\bmod\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb) \land \exprla\geq 0 \land \exprlb> 0$ \\
+  $\wdl(\exprla\expn\exprlb) \defi \wdl(\exprla) \land \wdl(\exprlb) \land \exprla\geq 0 \land \exprlb\geq 0$ 
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Minimum and Maximum}
+\label{minimum_and_maximum}
+\index{minimum@minimum ($\min$)}
+\index{maximum@maximum ($\max$)}
+
+\begin{rrnames}
+  $\min$      & \texttt{min}   & Minimum \\
+  $\max$      & \texttt{max}   & Maximum
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\min(\exprs)$ and $\max(\exprs)$ denotes the smallest and largest number in the set of integers $\exprs$ respectively.
+
+    The minimum and maximum are only defined if such a number exists.
+  \rrdef
+    $\min(\exprs)\in\exprs \land (\forall x\qdot x\in \exprs\limp\min(\exprs)\leq x)$\\
+    $\max(\exprs)\in\exprs \land (\forall x\qdot x\in \exprs\limp\max(\exprs)\geq x)$
+  \rrtypes
+    $\min(\exprs)\in\intg$ and $\max(\exprs)\in\intg$ with $\exprs\in\pow(\intg)$.
+  \rrwd
+    $\wdl(\min(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset \land \exists b \qdot \forall x\qdot x\in \exprs\limp b\leq x$\\
+    $\wdl(\max(\exprs)) \defi \wdl(\exprs) \land \exprs\neq\emptyset \land \exists b \qdot \forall x\qdot x\in \exprs\limp b\geq x$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsection{Typing}
+\label{typing}
+\index{oftype operator ($\boftype$)}
+
+\begin{rrnames}
+  $\boftype$      & \texttt{oftype}   & of type
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $\expre\boftype \alpha$ is an expression that has exactly the value of $\expre$ but its
+    type is specified by the type expression $\alpha$ (\ref{data_types}).
+
+    $\mathsf{\expre}$ is restricted to expressions whose type does not depend on an argument of that expression.
+    These are the constant relations $\id$, $\prjone$, $\prjtwo$ and the empty set $\emptyset$.
+
+    Another location where the operator can be used is the declaration of bound variables 
+    in quantifiers and patterns in lambda expressions.
+    Each identifier can be followed by $\boftype$ and the identifier's type.
+  \rrdef
+    $\expre\boftype\alpha = \expre$
+  \rrtypes
+    $\expre\boftype\alpha\in\alpha$ with $\expre\in\alpha$
+  \rrwd
+    $\wdl(\expre\boftype\alpha) \defi \wdl(\expre)$
+  \rrex
+    The predicate $\emptyset=\emptyset$ is not correctly typed in Event-B because the types
+    of $\emptyset$ are not inferable. A valid alternative would be:\\
+    $(\emptyset\boftype\intg) = \emptyset$
+
+    The predicate $\exists x,y ~\qdot~ x\neq y$ is not correctly typed because the types of $x$ and $y$
+    cannot be inferred: A valid alternative (for integers) is:\\
+    $\exists x\boftype\intg,y ~\qdot~ x\neq y$
+
+    The following lambda expression uses the $\boftype$ operator:\\
+    $(\lambda x\boftype \intg\mapsto y\boftype\Bool ~|~ x>0 ~\qdot~ x+1)$\\
+    An arguably more readable version without the use of $\boftype$ is:\\
+    $(\lambda x\mapsto y ~|~ x>0 \land y\in\Bool ~\qdot~ x+1)$
+\end{rodinrefentry}
+\end{samepage}
+
+
+\subsection{Assignments}
+\label{assignments}
+\index{assignment}
+
+\newcommand{\eventbassignmentexpr}[1]{\expre_{#1}(\allconstants,\concvariables,\concparameters)}
+
+\begin{samepage}
+\subsubsection{Deterministic Assignments}
+\label{deterministic_assignments}
+\index{assignment!deterministic ($\bcmeq$)}
+
+\begin{rrnames}
+  $\bcmeq$ & \texttt{:=} & deterministic assignment
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x_1,\ldots,x_n \bcmeq \expre_1\ldots,\expre_n$
+    assigns the expressions $\expre_i$ to the variable $x_i$, with $i\in1\upto n$.
+    All $x_i$ must be distinct identifiers that refer to variables of the concrete machine.
+    %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
+    %variables of the concrete machine and parameters of the concrete event.
+
+    There is a special form of the assignment which uses a relational overwrite:\\
+    $x(\exprf) \bcmeq \expre$.
+  \rrdef
+    The before-after-predicate of $x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n$ is\\ $x_1' = \expre_1 \land \ldots \land x_n' = \expre_n$.
+
+    This assignment is equivalent to
+    $x_1,\ldots,x_n \bcmsuch x_1' = \expre_1 \land \ldots \land x_n' = \expre_n$.
+
+    The special form for this assignment is:\\
+    $x(\exprf) \bcmeq \expre
+      \quad\defi\quad 
+      x \bcmeq x \ovl \{~\exprf \mapsto \expre~\}$
+  \rrtypes
+    $x_i$ and $E_i$ must have the same type:
+    $x_i\in\alpha_i$ and  $\expre_i\in\alpha_i$ for $i \in 1\upto n$.
+  \rrwd
+    $\wdl(~x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n~)
+      \quad\defi\quad 
+      \wdl(\expre_1) \land \ldots \land \wdl(\expre_n)$ \\
+    $\wdl(~x(\exprf) \bcmeq \expre~)
+    \quad\defi\quad 
+    \wdl(\exprf) \land \wdl(\expre)$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Non-deterministic assignment with before-after-predicate}
+\label{nondeterministic_assignments}
+\index{assignment!non-deterministic}
+\index{assignment!become such@become such ($\bcmsuch$)}
+\index{become such@become such assignment ($\bcmsuch$)}
+\index{before-after predicate}
+
+\begin{rrnames}
+  $\bcmsuch$ & \texttt{:|} & non-deterministic assignment with a before-after-predicate
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x_1,\ldots,x_n \bcmsuch Q$
+    assigns any value to the variables $x_1\ldots,x_n$ such that the the
+    before-after-predicate $Q$ is fulfilled.
+    Each $x_i$ is an identifier that refers to a variable of the concrete machine.
+    
+    All free identifiers in $Q$ must be constants, concrete parameters,
+    concrete variables or primed versions of the modified variables ($x_1',\ldots,x_n'$).
+
+    This is the most general form of assignment. All other assignments can be converted to this.
+  \rrdef
+    The before-after-predicate is $Q$.
+  \rrtypes
+    $Q$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
+    $x_1\in\alpha_i$ and $x'_1\in\alpha_i$ for $i\in 1\upto n$.
+  \rrwd
+    $\wdl(~x_1,\ldots,x_n \bcmsuch Q~)
+    \quad\defi\quad
+    \forall x_1',\ldots,x_n' \qdot \wdl(~Q~)$
+  \rrfis
+    $\actfis(~x_1,\ldots,x_n \bcmsuch Q(x_1',\ldots,x_n')~)$ \\
+    $\quad\defi\quad$
+    $\exists x_1',\ldots,x_n' ~\qdot~ Q(x_1',\ldots,x_n')$
+\end{rodinrefentry}
+\end{samepage}
+
+\begin{samepage}
+\subsubsection{Non-deterministic assignment by sets}
+\index{assignment!become element of@become element of ($\bcmin$)}
+\index{become element of@become element of assignment ($\bcmin$)}
+
+\begin{rrnames}
+  $\bcmin$ & \texttt{::} & non-deterministic assignment of a set member
+\end{rrnames}
+\begin{rodinrefentry}
+  \rrdesc
+    $x \bcmin \expre$ assigns any value of the
+    set $\expre$ to the variable $x$. $x$ is an identifier that refers to a variable
+    of the concrete machine.
+
+    All free identifiers in $E$ must be constants, concrete variables or concrete parameters.
+  \rrdef
+    The before-after-predicate is $x' \in \expre$. \\
+    The assignment is equivalent to
+    $x \bcmsuch x' \in \expre$.
+  \rrtypes
+    $x\in\alpha$ and $\expre\in\pow(\alpha)$
+  \rrwd
+    $\wdl(~x \bcmin\expre~) \quad\defi\quad \wdl(\expre)$
+  \rrfis
+    $\actfis(~x \bcmin \expre~) \quad\defi\quad \expre\neq\emptyset$
+\end{rodinrefentry}
+\end{samepage}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

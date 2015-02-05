@@ -1,0 +1,293 @@
+\ifdefined\isinprint
+\documentclass[twoside,10pt]{book}
+\usepackage[twoside,paperwidth=155.93mm,paperheight=233.89mm,hmargin={15mm,15mm},vmargin={20mm,20mm},bindingoffset=5mm]{geometry}
+\usepackage[hyphens]{url} 
+\usepackage[colorlinks=false,
+            pdfborder={0 0 0}
+	        pdftex,
+            plainpages=false,
+            pdfauthor={Michael Jastram (Editor)},
+            pdftitle={Rodin User's Handbook},
+            pdfsubject={Rodin is a platform for Event-B based formal modelling},
+            pdfkeywords={Rodin, Event-B},
+            pdfproducer={http://handbook.event-b.org},
+            pdfcreator={plastex-based tool chain}]{hyperref}
+\else
+\documentclass[12pt]{book}
+\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=3cm]{geometry}
+\usepackage[hyphens]{url} 
+\usepackage[colorlinks=true,
+	        pdftex,
+            plainpages=false,
+            pdfauthor={Michael Jastram (Ed.)},
+            pdftitle={Rodin User's Handbook},
+            pdfsubject={Rodin is a platform for Event-B based formal modelling},
+            pdfkeywords={Rodin, Event-B},
+            pdfproducer={http://handbook.event-b.org},
+            pdfcreator={plastex-based tool chain}]{hyperref}
+\fi
+\usepackage{graphicx}
+\usepackage{bsymb}
+\usepackage{b2latex}
+\usepackage{fancyhdr,lastpage,color}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{makeidx}
+\usepackage{fix-cm}
+\usepackage[utf8]{inputenc}
+
+\input{config}
+\input{makros}
+
+\title{Rodin User's Handbook v.\versionnr}
+\author{
+Work in Progress\\
+Handbook $ $Rev$ $ \\
+\\
+\href{mailto:rodin-handbook@formalmind.com}{rodin-handbook@formalmind.com}\\
+\href{http://handbook.event-b.org}{handbook.event-b.org}
+}
+
+\begin{document}        
+\pagestyle{empty}
+\ifplastex
+\maketitle
+\else
+\pagenumbering{roman}
+\begin{titlepage}
+\AddToShipoutPicture*{\BackgroundPic}
+\vspace*{\titletop}
+{\titledimrodin\selectfont \bfseries Rodin}
+
+\vspace*{\titlesubtitledistance}
+{\titledimhandbook\selectfont \bfseries User's Handbook}
+
+\vspace*{\titlesecdistance}
+{\titledimsubtext\selectfont \textbf{\textsf{Covers Rodin v.\versionnr}}}
+
+\vspace*{\titlesecdistance}
+{\titledimsubtext\selectfont \textsf{Michael Jastram (Editor)}}
+
+\vspace*{\titlesubtitledistance}
+{\titledimsubtext\selectfont \textsf{Foreword by Prof. Michael Butler}}
+
+\vspace*{\titlesecdistance}
+{\titledimsponsor\selectfont %
+  $\vcenter{\hbox{\includegraphics[height=4ex]{img/deploy-logo.png}}}$
+  \textsf{This work is sponsored by the Deploy Project}}
+
+\vspace*{\titlebottom}
+
+\end{titlepage}
+\ifdefined\isinprint
+\cleardoublepage
+% Title page
+\vspace*{10em}
+\begin{center}
+  {\huge \textbf{Rodin User's Handbook}}\\
+  \vspace{2em}
+  {\large Covers Rodin v.\versionnr}
+\end{center}
+\clearpage
+% Copyright page
+\vspace*{\fill}
+\noindent\textbf{Rodin User's Handbook}\\
+~\\
+\noindent\copyright Formal Mind Gmbh 2014\\
+This work, except the cover image, is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit \href{http://creativecommons.org/licenses/by-sa/3.0/}{creative\-com\-mons.org/\-licenses/\-by-sa/3.0/} or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.\\
+The cover image of a Rodin statue was created by Miikka Skaffari.
+It is licensed under a Creative Commons Attribution-NonCommercial 3.0 Unported License.  To view a copy of this license, visit \href{http://creativecommons.org/licenses/by-sa/3.0/}{creative\-com\-mons.org/\-licenses/\-by-sa/3.0/} or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+\vspace{10em}
+\else\fi
+\cleardoublepage
+\pagenumbering{arabic}
+\phantomsection
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\fi
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\label{preface}
+\pagestyle{headings}
+
+Nobody likes to write documentation, yet everybody agrees that documentation is crucially important.  For a tool platform as complex as Rodin, documentation is necessary if it is supposed to succeed in reaching a wider audience.
+
+The executive team of the DEPLOY project recognized this. In a meeting at ETH in 2010, the team established, amongst other things, that ``it is clear that the current documentation would not support, say, an engineer in an automotive company to start using the tools without significant support''.  It then commissioned the creation of better Rodin documentation.  This handbook is the result of this effort.
+
+Rather than reinventing the wheel, we took all the existing documentation into account, restructured it, extended it where necessary, created plenty of cross-references, and put the resulting document through an editorial process to ensure readability.
+
+A word of warning and encouragement: Don't expect to be an expert in Event-B modelling after reading this handbook.  Its aim is to provide support while getting acquainted with the tool platform. It provides the basics of modelling and can also be used as a companion guide for experts.  Beginners can work their way through the tutorial, which starts with installation and ends with moderately difficult proofs.  Additional support is available in the form of an FAQ and a comprehensive index.  Advanced users can refer to the comprehensive reference section, where they can quickly find essential information regarding the different formalisms.
+
+Whenever the handbook requires former knowledge, it provides links and hints about where to get it.  Whenever it stops, it provides references for further reading.  In particular, it provides plenty of references to the Rodin Wiki, and provides information on how to get in touch with the Rodin community.  We are confident that this handbook will achieve its mission to get new users acquainted with Rodin without frustration and hopefully some with fun.
+
+\begin{flushright}
+  Michael Jastram, Düsseldorf, 2012
+\end{flushright}
+
+\chapter*{Foreword}
+\addcontentsline{toc}{chapter}{Foreword}
+\label{foreword}
+
+The Rodin tool supports the application of the Event-B formal method.  It provides core functionality for syntactic analysis and proof-based verification of Event-B models. Rodin also provides extension points for a range of additional plug-ins that enrich the core functionality through support for features such as model checking, model animation, graphical front ends, additional proof capabilities and code generation.While the B Method, developed by Jean-Raymond Abrial in the early 1990s, is focused on supporting formal development of \textit{software}, Event-B broadens the perspective to cover \textit{systems}; instead of just modelling software components, Event-B is intended for modelling and reasoning about systems that may consist of physical components, electronics and software.  An essential difference between Event-B and the B Method is that Event-B admits a richer notion of refinement in which new observables may be introduced in refinement steps; this means that complex interactions between subcomponents may be abstracted from in early stage modelling and then introduced through refinement in incremental stages.  
+
+At around the same time that Jean-Raymond was developing the concepts in Event-B, I was involved in an initiative with the University of Newcastle (Alexander Romanovsky, Cliff Jones), {\AA}bo Akademi  (Kaisa Sere, Elena Troubitsyna) and Jean-Raymond to put together an EU proposal on formal methods for dependable systems.  That became the RODIN project (2004 to 2007) and a key part of the project was the development of an open source extensible toolset to support refinement-based formal development.  Many of Jean-Raymond’s ideas on Event-B were worked into the requirements for the tool and the development of the core tool platform was led by Jean-Raymond and Laurent Voisin (both then at ETH Zurich). Thorough analysis was undertaken to determine that Eclipse was the right platform on which to build an open toolset.  The ease with which the core may be extended with plug-ins from a range of teams to provide seamless functionality indicates this was a good decision. The tools developed in the RODIN project took on the name of the project and, since it had a certain cachet, it was decided to retain the Rodin name for the tool after the project ended.
+
+The RODIN Project was followed by the DEPLOY Project which addressed further development of the Rodin core and associated plug-ins in parallel with industrial-scale deployment of the Rodin tools.  Exposing the tools to serious industrial users in DEPLOY drove the developers to implement significant improvements in performance, usability and stability of Rodin and key plug-ins such as ProB, the Theory plug-in, Camille and UML-B.  Of course, as well as demanding improvements to the tool, the industrial users demanded documentation on the tool, which led to this handbook.  Michael Jastram and the team at D\"{u}sseldorf have done an excellent job in pulling together, extending and improving various sources of documentation on the Rodin tool.  Like the Rodin tools, it will serve as a valuable resource that will continue to evolve beyond the DEPLOY project.
+
+\begin{flushright}Michael Butler, Southampton, 2012\end{flushright}
+
+\chapter{Introduction}
+\label{introduction}
+
+This handbook provides documentation for users of the Rodin toolset, which provides tools for working with Event-B models.
+
+Event-B is a formal method for system-level modelling and analysis. Key features of Event-B are the use of set theory as a modelling notation, the use of refinement to represent systems at different abstraction levels and the use of mathematical proof to verify consistency between refinement levels.
+
+The Rodin Platform is an Eclipse-based IDE for Event-B that provides effective support for refinement and mathematical proof. The platform is open source, contributes to the Eclipse framework and is further extensible with plugins. 
+
+This handbook covers the use of the core platform.  Documentation for developers and regarding extensions can be found in the Rodin wiki (\ref{rodin_wiki}).
+
+\section{Overview}
+
+This handbook consists of five parts:
+
+\begin{description}
+	\item[Introduction (Chapter~\ref{introduction})] You are reading the introduction right now.  Its purpose is to help you orient yourself and to find information quickly.
+	\item[Tutorial (Chapter~\ref{tutorial})] If you are completely new to Rodin, the tutorial is a good way to get up to speed quickly.  It guides you through the installation and usage of the tool and gives you an overview of the Event-B modelling notation.
+	\item[Reference (Chapter~\ref{reference})] The reference section provides comprehensive documentation of Rodin and its components.
+	\item[Frequently Asked Questions  (Chapter~\ref{faq})] Common issues are listed by category in the FAQ.
+	\item[Index] We included an index particularly for the print version of the handbook, but it may be useful in the electronic versions as well.  
+\end{description}
+
+\subsection{Formats of this Handbook}
+\label{handbook_formats}
+
+The handbook comes in various formats:
+
+\begin{description}
+	\item[Eclipse Help] The Rodin Handbook is shipped with Rodin and can be accessed through the help system.  The handbook will be updated with the standard Rodin update mechanism.
+	\item[Online Help] You can access the handbook online at \url{http://handbook.event-b.org}.
+	\item[PDF Help] Both online versions also include a link to the PDF version of the handbook.
+\end{description}
+
+\subsection{Rodin Wiki}
+\label{rodin_wiki}
+
+This handbook is complemented by the Rodin wiki (\url{http://wiki.event-b.org/}).  Sometimes, the handbook will refer to the wiki for more information.  Also, plugin and developer information is usually located in the wiki.
+
+\subsection{Contributing}
+\label{feedback}
+
+The handbook is stored in the Rodin SVN repository and is authored in \LaTeX.  Changes that are checked in will be built automatically on the Jenkins server, managed by the University of Düsseldorf.  The result should be available at \url{http://handbook.event-b.org} shortly after committing changes.
+
+Each page of the online version also has a feedback button, where feedback can be left using an online form.  This feedback will be processed on a regular basis by volunteers.
+
+There is also a mailing list for handbook authors at 
+\ifinprint \\ \fi
+\texttt{rodin-b-sharp-handbook@lists.\-sourceforge.net}.
+
+You can also submit feedback via email to \texttt{rodin-hand\-book@formal\-mind.com}.
+
+\section{Further Reading}
+\label{literature}
+
+In this section, we present a selected list of reading materials that provide information that is not covered in this handbook.
+
+\subsection{Modeling in Event-B: System and Software Engineering, J.-R. Abrial (2010)}
+\label{abrial_2010}
+
+This book represents the ultimate authority on Event-B, written by its creator.  The example from Section~\ref{tut_location_access_controller} is based on an example from the book.
+
+From the editor: ``A practical text suitable for an introductory or advanced course in formal methods, this book presents a mathematical approach to modelling and designing systems using an extension of the B formal method: Event-B. Based on the idea of refinement, the author's systematic approach allows the user to construct models gradually and to facilitate a systematic reasoning method by means of proofs. Readers will learn how to build models of programs and, more generally, discrete systems, but this is all done with practice in mind. The numerous examples provided arise from various sources of computer system developments, including sequential programs, concurrent programs and electronic circuits. The book also contains a large number of exercises and projects ranging in difficulty. Each of the examples included in the book has been proved using the Rodin Platform tool set, which is available free for download at www.event-b.org.''
+
+\subsection{Rodin: An Open Toolset for Modelling and Reasoning in Event-B (2009)}
+\label{abrialBHHMV_2009}
+
+This article discusses the design principles of the Rodin platform and the Event-B language and 
+explains the motivation behind it.
+
+The abstract states: ``[\ldots] we present the Rodin modelling tool that seamlessly integrates modelling and proving. 
+ We outline how the Event-B language was designed to facilitate proof and how the tool has been designed to support changes to 
+ models while minimising the impact of changes on existing proofs. 
+ We outline the important features of the prover architecture and explain how well-definedness is treated. [\ldots]''
+
+The authors J.-R.~Abrial, M.~Butler, S.~Hallerstede, T.~S.~Hoang, F.~Mehta and L.~Voisin have published the article in the journal Software Tools and Technology Transfer (STTT).
+
+\subsection{The B-Method, an Introduction (Steve Schneider)}
+\label{schneider_book}
+
+This text represents the ``standard textbook'' for learning formal modeling in B (rather than Event-B).  As Event-B is similar to B, this book is a great introduction to the topic, allowing students to get acquainted with the subject matter, even without an instructor. (ISBN: 978-0333792841)
+
+\subsection{Event-B Cookbook}
+
+Those interested in more general guidelines on how to develop and structure formal models in Event-B, the paper ``Towards a Cookbook for Modelling and Refinement of Control Problems''\footnote{\url{http://deploy-eprints.ecs.soton.ac.uk/108/}} may be of interest.  It is an ``attempt to develop some guidelines on modelling control problems in Event-B''. 
+
+\subsection{Proofs for the Working Engineer (2008)}
+In his dissertation at the ETH Zurich Fahrad Mehta describes how theorem proving
+can be a practical tool for software engineers and presents the ideas that are used
+in building Rodin's infrastructure.
+
+\subsection{The Proof Obligation Generator (2005)}
+In this technical report (ETH Zürich)  Stefan Hallerstede describes which proof obligations
+(see Section~\ref{generated_proof_obligations}) are generated for a model
+and gives a justification why these are correct.
+
+\section{Conventions}
+\label{conventions}
+
+We use the following conventions in this manual:
+
+\tick{Checklists and milestones are designated with a tick. Here we summarize what we want to learn or should have learned so far.}
+\info{Useful information and tricks are designated by the information sign.}
+\warning{Potential problems and warnings are designated by a warning sign.}
+\pencil{Examples and Code are designated by a pencil.}
+
+We use \texttt{typewriter} font for file names and directories.
+
+We use \textsf{sans serif font} for GUI elements like menus and buttons.  Menu actions are depicted by a chain of elements, separated by ``$\rangle$'', e.g. \textsf{File $\rangle$ New $\rangle$ Event-B Component}.
+
+\section{Acknowledgements}
+\label{sec:acknowledgements}
+
+The content of this handbook has been growing since the formation of the European Union IST Project RODIN in 2004.  Giving credit to every contributor is almost impossible and attempting to do so would almost certainly omit some people, which would contradict the spirit of this work.  It should be sufficient to say that we extend our gratitude to all contributors to the Rodin Wiki (\ref{rodin_wiki}). In particular, we would like to thank Systerel\footnote{\url{http://www.systerel.fr}} for their significant contributions to the handbook as they have been the main driver behind the tool and its documentation.
+
+Jean-Raymond Abrial and the team at the ETH Zurich had a key role in the development of Event-B
+ and the Rodin project. Thank you very much!
+
+We would also like to thank Cliff Jones, who never gave up the quest to improve the Rodin documentation, and Ken Robinson, who contributed the \file{EventB-Summary.pdf}{Event-B Cheat Sheet}.
+
+We are grateful to the editorial team that made this book possible in the first place, consisting of Daniel Plagge, Lukas Ladenberger and Joy Clark.  We also thank Prof. Michael Leuschel, department head of the institute of software technology and programming languages at the University of Düsseldorf, who supported us in pursuing this project.
+
+The icons that you find throughout this handbook were created by Pixel-Mixer\footnote{\url{http://pixel-mixer.com/}}, who provides them for free.  Thanks!
+
+The cover picture was taken by \href{http://www.skaffari.fi/}{Miikka Skaffari}, who made it available via the Creative Commons by-nc license, depicting a sculpture by Rodin.  Thanks!
+
+\section{DEPLOY}
+\label{deploy}
+
+This work has been sponsored by the DEPLOY project\footnote{\url{http://www.deploy-project.eu/}}.  DEPLOY is a European Commission Information and Communication Technologies FP7 project.
+
+The overall aim of the EC Information and Communication Technologies FP7 DEPLOY Project is to make major advances in engineering methods for dependable systems through the deployment of formal engineering methods. Formal engineering methods enable greater mastery of complexity than found in traditional software engineering processes. It is the central role played by mechanically-analysed formal models throughout the system development flow that enables mastery of complexity.
+
+As well as leading to big improvements in system dependability, greater mastery of complexity also leads to greater productivity by reducing the expensive test-debug-rework cycle and by facilitating increased reuse of software.
+
+The goal of the project is to achieve and evaluate industrial take-up of DEPLOY's methods and tools (which started with DEPLOY's industrial partners) as well as to perform further research on methods and tools that is considered necessary.
+
+\input{creative-commons}
+
+% \input{style-guide}
+
+\input{tutorial}
+
+\input{reference}
+
+\input{faq}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index} 
+\printindex
+
+\end{document}
+

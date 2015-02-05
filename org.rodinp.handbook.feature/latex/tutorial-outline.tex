@@ -1,0 +1,31 @@
+
+The objective of this tutorial is to get you to a stage where you can use Rodin and build Event-B models.  We expect you to have a basic understanding of logic and an idea why doing formal modelling is a good idea.  You should be able to work through the tutorial with little or no outside help.
+
+This tutorial covers installation and configuration for Rodin. It will teach you step by step how to build formal models. It also provides the essential theory and provides links to further information.
+
+We attempt to alternate between theory and practical application and thereby keep you motivated.  We encourage you not to download solutions to the examples but instead to actively build them up yourself as the tutorial progresses.
+
+If something is unclear, remember to check the Reference chapter (Chapter \ref{reference}) for more information.
+
+\section{Outline}
+\label{tut_outline}
+
+\begin{description}
+	\item[Background before getting started (\ref{tut_before_getting_started})] We give a brief description of what Event-B is, what it is being used for and what kind of background knowledge we expect.
+	\item[Installation (\ref{tut_installation})] We guide you through downloading, installing and starting Rodin and point out platform differences.  We install the provers.  We list the different window views and describe what they do.
+	\item[The First Machine (\ref{tut_first_machine})] We introduce our first example: a traffic light machine that uses boolean values for signals.  We introduce guards, which allow the proof obligations to be automatically discharged.  We explain how proof labels are read without changing to the proof perspective.
+	\item[Mathematical notation (\ref{tut_mathematical_notation})] At this point we quickly go through the most important aspects of predicate calculus and provide links to the reference chapter and to external literature.  We explain everything used by the traffic light system, we introduce all data types and we provide a brief intoduction of sets and relations.  We also explain the difference between predicates and expressions. For example, this is where we explain the difference between TRUE and $\top$.  
+	\item[Introducing Contexts (\ref{tut_contexts})] We introduce contexts to apply the theoretical concepts that were introduced in the previous section.  We use the Agatha-Puzzle as an example to step by step introduce more and more complex elements.  We cover theorems and also mention well-definedness.
+	\item[Event-B Concepts (\ref{tut_eventb_concepts})] This is another theoretical section that provides more background information about the previous examples.  We analyze the anatomy of a machine and introduce all the elements that a machine or context may have. We describe the sees and refines concepts which will be applied in the next section, and we briefly mention concepts like data refinement and witnesses although we do not explain them in detail.
+	\item[Expanding the Traffic Light System (\ref{tut_expanding_traffic_light_system})]  We apply what we learn\-ed in the previous section by introducing a context with traffic light colors and a refinement to integrate them.  We will introduce another refinement to model the push buttons.
+	\item[Proving (\ref{tut_proving})] So far all proof obligations have been discharged automatically.  Now we switch to the proving perspective and explore it for the first time.
+We edit the configuration for the auto prover, invalidate proofs and show that with the new configuration they will not be discharged any more.  We carry out a simple proof manually and describe the provers available.
+	\item[Proving Deadlock Freeness (\ref{tut_location_access_controller})] In this section we define what it means for a machine to be deadlock free. We use a more complex example to explore how much the Rodin provers can accomplish.
+	\item[Outlook (\ref{tut_outlook})] This concludes the tutorial. We provide many links here for further reading.  In particular, we reference the documentation from the Deploy project and the Rodin Wiki.
+\end{description}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rodin-doc"
+%%% End: 

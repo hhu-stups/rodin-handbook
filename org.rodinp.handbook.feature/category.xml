@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.rodinp.handbook.feature_1.0.0.qualifier.jar" id="org.rodinp.handbook.feature" version="1.0.0.qualifier">
+      <category name="Rodin Handbook"/>
+   </feature>
+   <category-def name="Rodin Handbook" label="Rodin Handbook">
+      <description>
+         Rodin Handbook
+      </description>
+   </category-def>
+</site>

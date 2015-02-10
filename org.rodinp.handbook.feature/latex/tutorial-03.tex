@@ -215,6 +215,26 @@ The two events will look as follows:
 \end{description}
 }
 
+\newcommand{\CamilleEVT}[1]{  \item[\textcolor{keycolor}{event }] \textit{#1} \paraSpc } 
+\newcommand{\CamillenItemX}[2]{ \item[\textcolor{labelcolor}{$\tt ~~~~@#1$}] \textcolor{xcodecolor}{$\it #2$} \itemSpc } % opt1
+\begin{rodin-plugin}{camille.png}{Camille}
+Within Camille this part of the model has a different textual representation.
+For example, the first event has to be written as follows:
+
+\begin{description}
+	\CamilleEVT {set\_peds\_go}
+		\begin{description}
+		\BeginAct
+			\begin{description}
+			     \CamillenItemX{ act1 }{ peds\_go :=  TRUE }
+			\end{description}
+		\EndAct
+		\end{description}
+\end{description}
+
+\warning{From now on, we won't describe the differences between the Rodin editor and Camille any more.} 
+\end{rodin-plugin}
+
 \subsubsection{Event parameters}
 \index{parameter}
 

@@ -23,18 +23,18 @@ Before describing the initial model, import the archive file \file{Doors.zip}{Do
 %	\item The two carrier sets of persons, P, and locations, L
 %	\item The constant authorisation, \textbf{aut}, representing a relation between P and L, actually where people are allowed to go %(Axiom 1).
 %	\item The variable, \textbf{sit}, which denote where a person is, \textbf{sit} is a function from P to L.
-%\end{itemize} 
- 
+%\end{itemize}
+
 %Moreover, we introduce a special constant “location”, named \textbf{outside}. Everyone is authorized to be in outside (Axiom 3) and a %person cannot be in two locations at a time. However every person, which is in a certain location, is authorized to be there.
 
 %Initially, everyone is outside as indicated in event \textsf{INITIALISATION}.
 %The other event \textsf{PASS} of that model has to aim to change the location of a person.
 %We call the proof of deadlock freeness through this tutorial the proof justifying that someone can always change location.
 
-Let us look at the initial model which consists of the context \texttt{doors\_ctx1} and the machine \texttt{doors\_0}. There are two carrier sets in the model context. One is for people ($P$) and the other is for locations ($L$). There is a location called outside ($outside$) and a relation ($aut$) which defines the places that people are allowed to go. Everyone is permitted to go outside. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, $sit$, which denotes where a person is located. 
+Let us look at the initial model which consists of the context \texttt{doors\_ctx1} and the machine \texttt{doors\_0}. There are two carrier sets in the model context. One is for people ($P$) and the other is for locations ($L$). There is a location called outside ($outside$) and a relation ($aut$) which defines the places that people are allowed to go. Everyone is permitted to go outside. The model machine has one event, \textsf{pass}, which changes the location of a person and one variable, $sit$, which denotes where a person is located.
 
 
-Looking through the initial model, you will see that everything already has been proved (for the initial model and initial contexts). This is true, but Rodin has not yet proved that the model is deadlock free yet, so we will have to prove this ourselves. A model is considered to be deadlocked if the system reaches a state where there are no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement. 
+Looking through the initial model, you will see that everything already has been proved (for the initial model and initial contexts). This is true, but Rodin has not yet proved that the model is deadlock free yet, so we will have to prove this ourselves. A model is considered to be deadlocked if the system reaches a state where there are no outgoing transitions. The objective of this section is to develop proofs for deadlock freeness for the initial model and for the first refinement.
 
 Consider the event \textsf{pass} from the initial model:
 
@@ -65,7 +65,7 @@ Consider the event \textsf{pass} from the initial model:
 
 \index{deadlock}
 Since the initial model has only one event (\textsf{pass}), the system might deadlock when both guards of the event (\textsf{grd11} and \textsf{grd12}) are false.
-In this case, to prove that no deadlocks can occur requires proving that someone can always change room. We must therefore prove that the two guards are always true. 
+In this case, to prove that no deadlocks can occur requires proving that someone can always change room. We must therefore prove that the two guards are always true.
 To do this, add a new derived invariant (a theorem) to \texttt{doors\_0} called \textsf{DLF} (click once on the label \texttt{not theorem} to make it switch to \texttt{theorem})
   and change the predicate so that it is the conjunction of the two guards.
 The difference between a ``normal'' invariant and one that is marked as theorem is that you must prove that a theorem is always valid when the previously listed invariants are valid. Then we don't need to prove that an event preserves the invariant marked as theorem because we can conclude this logically when it already preserves the other invariants.
@@ -83,7 +83,7 @@ The difference between a ``normal'' invariant and one that is marked as theorem 
 }
 
 \begin{rodin-plugin}{prob.png}{ProB}%
-  You can also use ProB to search for deadlocks (after ensuring that ProR is installed).
+  You can also use ProB to search for deadlocks (after ensuring that ProB is installed).
   Right-click on the machine you want to check and start the animation with the
   ``Start Animation / Model Checking'' menu entry.
   After starting the animation, go to the Event View in the ProB perspective
@@ -123,7 +123,7 @@ By doing this we want to assure that you have the same proof as in this tutorial
 \end{figure}
 
 In order to succeed with the proof, we need a pair $p \mapsto l$ that is in $aut$ but not in $sit$.
-Having a look the axioms, we find  \textsf{axm4} of \texttt{doors\_ctx1}, which states that 
+Having a look the axioms, we find  \textsf{axm4} of \texttt{doors\_ctx1}, which states that
   there is a location $l$ different from $outside$ where everyone is allowed to go:
 
 \pencil{
@@ -139,8 +139,8 @@ So for every person $p$ in $P$, $p \mapsto l$ and $p \mapsto outside$ are in $au
 (In other words: every person is allowed to go to both the outside and a location $l$).
 The basic idea of our proof is that a person is either already outside or at the location $l$. If someone is outside, they are allowed to move to $l$, and if they are not outside, they are allowed to move outside. \footnote{One could argue that this is too restrictive in the real world: After all, why do all people need authorisation for the \textit{same} location l?  But arguing about the realism of the example is out of the scope.}.
 
-We assume that there is actually a person, so we need a set $P$ that is non-empty. 
-This is automatically the case since carrier sets are always non-empty, but we need a person as an example for our further proof. 
+We assume that there is actually a person, so we need a set $P$ that is non-empty.
+This is automatically the case since carrier sets are always non-empty, but we need a person as an example for our further proof.
 Now add the hypothesis $\exists x \qdot x \in P$ by entering this predicate into the \textsf{Proof Control} text area and hitting the \icon{rodin/ah_prover.png} button.
 In the \textsf{Proof Tree} view you can now see three new nodes have appeared that need to be proven:
 \begin{itemize}
@@ -157,8 +157,8 @@ The hypothesis disappears and is replaced by a new hypothesis $x \in P$. This is
 \warning{If you hover over any red symbol for a short while, a menu will pop up, offering one or more transformations.  Make sure that you actually click on the symbol before the menu pops up because otherwise clicking will no longer have any effect.  If the menu has popped up before you managed to click on the symbol, you will have to click twice: the first click will discard the menu and the next click will actually perform the operation.}
 
 We can prove an existential quantification by giving an example for the variables. First, we
-  instantiate $p$ in the goal with the variable $x$ that we created: enter $x$ in the yellow box corresponding to $p$ 
-  in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}. 
+  instantiate $p$ in the goal with the variable $x$ that we created: enter $x$ in the yellow box corresponding to $p$
+  in the \textsf{Goal View} and click on the existential quantifier as shown in Figure \ref{fig_tut_10_instantiate_p}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -240,7 +240,7 @@ Select $P \cprod\{outside\}\subseteq aut$ (in Figure~\ref{fig_tut_10_search_hypo
   press the \icon{rodin/add.png} button to add it to your selected hypothesis. The auto-prover now has enough hypotheses, so simply click the \icon{rodin/auto_prover.png} button and
   the last goal of our theorem should be proven.
 
-Here is the summary of the proof. Compare this with your final proof tree (as shown in 
+Here is the summary of the proof. Compare this with your final proof tree (as shown in
 Figure~\ref{fig_tut_10_final_proof_tree}).
 
 \begin{tabular}{l}
@@ -279,9 +279,9 @@ Figure~\ref{fig_tut_10_final_proof_tree}).
 \subsection{Deadlock Freeness of First Refinement}
 \label{tut_location_first_refinement}
 
-Now we are going to explain the main complexity of our model: the deadlock freeness proof for the first refinement. 
+Now we are going to explain the main complexity of our model: the deadlock freeness proof for the first refinement.
 
-\info{Please remember that post-tactics should still be disabled before starting this part of the tutorial.} 
+\info{Please remember that post-tactics should still be disabled before starting this part of the tutorial.}
 
 The difference between the first refinement and the initial model is that a new constant \textsf{com} has been added in order to describe which rooms are connected. Additionally, we have a constant \textsf{exit}, which allows anybody to get outside.  Please consult the Event-B book (\ref{abrial_2010}) for the details regarding this model.
 
@@ -293,7 +293,7 @@ The event \textsf{INITIALISATION} does not change, but the event \textsf{PASS} i
 \end{description}
 }
 
-As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows\footnote{In the future, it might be worthwhile to change this theorem to take care of a couple of issues. It only states that at least one person can move, and it may be better to state that every person can move.  Furthermore, this statement is unable to detect live locks\index{live lock}: A situation where the system oscillates between a small number of states.}: 
+As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} machine and add a derived invariant (theorem) called \textsf{DLF} as follows\footnote{In the future, it might be worthwhile to change this theorem to take care of a couple of issues. It only states that at least one person can move, and it may be better to state that every person can move.  Furthermore, this statement is unable to detect live locks\index{live lock}: A situation where the system oscillates between a small number of states.}:
 
 \pencil{
 \begin{description}
@@ -303,7 +303,7 @@ As in the last section (\ref{tut_initial_model}), open the \texttt{door\_1} mach
 
 Save the file. Once again, the prover fails to prove this theorem automatically. What we want to prove is that ``at least one person authorized to be in a location must also be authorized to go in another location which communicates with the first one''.
 
-Switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving. When getting started, it is often a good idea to subdivide a proof into cases.  In this case, one distinction of cases should be to determine whether the person is outside or not.  
+Switch over to the proving perspective and double click on \textsf{DLF/THM} to begin proving. When getting started, it is often a good idea to subdivide a proof into cases.  In this case, one distinction of cases should be to determine whether the person is outside or not.
 
 First we need a variable denoting a location in order to distinguish between the two cases. We use the deadlock freeness invariant from the initial model for this purpose. Search through the possible hypotheses and add this theorem to the selected hypotheses (Figure~\ref{tut_10_ref_proof1}).
 
@@ -392,7 +392,7 @@ We cannot discharge this with the \icon{rodin/p0.png} prover; However, using the
 
 This concludes this section of the tutorial. Be aware that we have just looked at one small aspect of a rather sophisticated model.  Also, please be aware that this tutorial gave you only an introduction to proving.  To become an expert, we encourage you to study interesting models and to practice.
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "rodin-doc"
-%%% End: 
+%%% End:

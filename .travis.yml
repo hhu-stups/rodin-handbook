@@ -8,7 +8,7 @@ install:
   - tar -xzvf plastex.tar.gz
   - cd plastex-1.0.0 && sudo python setup.py install
 script:
-- cd hhu-stups/rodin-handbook
+- cd $TRAVIS_BUILD_DIR
 - cd org.rodinp.handbook.feature
 - ant -file customBuild.xml
 - cd ..

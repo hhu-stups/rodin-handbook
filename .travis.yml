@@ -2,7 +2,7 @@ sudo: required
 language: java
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y texlive-full python-imaging
+  - sudo apt-get install -y texlive-full python-imaging rubber
 install:
   - wget -O plastex.tar.gz https://github.com/tiarno/plastex/archive/1.0.0.tar.gz
   - tar -xzvf plastex.tar.gz

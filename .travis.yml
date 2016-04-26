@@ -1,5 +1,5 @@
 sudo: required
-language: r
+language: java
 script:
 - cd org.rodinp.handbook.feature
 - ant -file customBuild.xml

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature url="features/org.rodinp.handbook.feature_2.5.0.qualifier.jar" id="org.rodinp.handbook.feature" version="2.5.0.qualifier">
+		<category name="org.rodinp.handbook.feature.category"/>
+	</feature>
+
+<category-def name="org.rodinp.handbook.feature.category" label="Rodin Handbook">
+      <description>
+null
+      </description>
+   </category-def>
+
+</site>

@@ -17,14 +17,13 @@ script:
   - cd ..
   - cp -r org.rodinp.handbook.feature/build/eclipse/* org.rodinp.handbook/
   - mvn -f org.rodinp.handbook.parent/pom.xml install
-  - mkdir -p current
-  - cp -r org.rodinp.handbook.feature/build/* current/
-  - mkdir -p updatesite
-  - cp -r org.rodinp.handbook.repository/target/repository/* updatesite/
-  - cp org.rodinp.handbook.releng/index.html updatesite/
+  - mkdir -p upload/current
+  - cp -r org.rodinp.handbook.feature/build/* upload/current/
+  - mkdir -p upload/updatesite
+  - cp -r org.rodinp.handbook.repository/target/repository/* upload/updatesite/
+  - cp org.rodinp.handbook.releng/index.html upload/updatesite/
 after_success:
-  - travis-custom-deploy sftp current
-  - travis-custom-deploy sftp updatesite
+  - travis-custom-deploy sftp upload
 env:
   global:
   - secure: QfHLesV1wqgrSOLBAV8+7x977KxBcd5H6GIa+qxJZBDAKS7Dkp0yLdPtujBvC4CPPjcG6kZG89rDARRHU+XNC0C3w1ZzHjCuhYmd4eKOKwi0ENF9wBYi94Z5QVhDR37xq91lR09cnMh+ueBgu2XKiZJxAmbbcuo6lEEdeI0Arsc=

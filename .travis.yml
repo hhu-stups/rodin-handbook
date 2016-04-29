@@ -14,11 +14,9 @@ script:
   - ant -file customBuild.xml
   - cd ..
   - cd org.rodinp.handbook.releng
-  - gradle deleteOldHelpPlugin deleteOldArtifacts importHelpPlugin createPoms
+  - gradle  importHelpPlugin
   - cd ..
   - mvn -f org.rodinp.handbook.parent/pom.xml install
-  - cd org.rodinp.handbook.releng
-  - gradle collectArtifacts
 after_success:
   - travis-custom-deploy sftp current
 env:

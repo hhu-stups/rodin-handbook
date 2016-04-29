@@ -3,6 +3,7 @@ language: java
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y texlive-full python-imaging rubber
+  - rvm install 2.0.0
   - gem install travis-custom-deploy
 install:
   - wget -O plastex.tar.gz https://github.com/tiarno/plastex/archive/1.0.0.tar.gz

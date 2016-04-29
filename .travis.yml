@@ -2,7 +2,8 @@ sudo: required
 language: java
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y texlive-full python-imaging rubber
+  - sudo apt-get install -y python-imaging rubber
+  - sudo apt-get install -y texlive-base
   - rvm install 2.0.0
   - gem install travis-custom-deploy
 install:

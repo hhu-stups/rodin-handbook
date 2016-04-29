@@ -24,6 +24,7 @@ script:
   - cp org.rodinp.handbook.releng/index.html updatesite/
 after_success:
   - travis-custom-deploy sftp current
+  - travis-custom-deploy sftp updatesite
 env:
   global:
   - secure: QfHLesV1wqgrSOLBAV8+7x977KxBcd5H6GIa+qxJZBDAKS7Dkp0yLdPtujBvC4CPPjcG6kZG89rDARRHU+XNC0C3w1ZzHjCuhYmd4eKOKwi0ENF9wBYi94Z5QVhDR37xq91lR09cnMh+ueBgu2XKiZJxAmbbcuo6lEEdeI0Arsc=

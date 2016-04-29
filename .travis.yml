@@ -15,10 +15,13 @@ script:
   - cd org.rodinp.handbook.feature
   - ant -file customBuild.xml
   - cd ..
-  - cd org.rodinp.handbook.releng
-  - gradle  importHelpPlugin
-  - cd ..
+  - cp -r org.rodinp.handbook.feature/build/eclipse/* org.rodinp.handbook/
   - mvn -f org.rodinp.handbook.parent/pom.xml install
+  - mkdir -p current
+  - cp -r org.rodinp.handbook.feature/build/* current/
+  - mkdir -p updatesite
+  - cp -r org.rodinp.handbook.repository/target/repository/* updatesite/
+  - cp org.rodinp.handbook.releng/index.html updatesite/
 after_success:
   - travis-custom-deploy sftp current
 env:

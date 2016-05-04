@@ -18,7 +18,9 @@ script:
   - cp -r org.rodinp.handbook.feature/build/eclipse/* org.rodinp.handbook/
   - mvn -f org.rodinp.handbook.parent/pom.xml install
   - mkdir -p upload/current
-  - cp -r org.rodinp.handbook.feature/build/* upload/current/
+  - cp -r org.rodinp.handbook.feature/build/files upload/current/
+  - cp -r org.rodinp.handbook.feature/build/html upload/current/
+  - cp -r org.rodinp.handbook.feature/build/pdf upload/current/
   - mkdir -p upload/updatesite
   - cp -r org.rodinp.handbook.repository/target/repository/* upload/updatesite/
   - cp org.rodinp.handbook.releng/index.html upload/updatesite/

@@ -27,3 +27,16 @@ build:
       - org.rodinp.handbook.feature/build/html
       - org.rodinp.handbook.feature/build/pdf
       - org.rodinp.handbook.repository/target/repository
+
+deploy:
+  stage: deploy
+  only:
+    - develop@general/stups/rodin_handbook
+  image: alpine:3
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - apk update
+    - apk add lftp openssh-client
+  script:
+    - LFTP_PASSWORD="${DEPLOY_PASSWORD}" lftp -c "set cmd:fail-exit true; set sftp:auto-confirm true; open --user ${DEPLOY_USERNAME} --env-password sftp://${DEPLOY_HOST}/${DEPLOY_REMOTE_BASEDIR}/handbook/rodin/; mirror -vvv -R org.rodinp.handbook.feature/build current; mirror -vvv -R org.rodinp.handbook.repository/target/repository updatesite"

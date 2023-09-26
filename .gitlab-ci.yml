@@ -23,5 +23,7 @@ build:
     - cp org.rodinp.handbook.releng/index.html org.rodinp.handbook.repository/target/repository
   artifacts:
     paths:
-      - org.rodinp.handbook.feature/build
+      - org.rodinp.handbook.feature/build/files
+      - org.rodinp.handbook.feature/build/html
+      - org.rodinp.handbook.feature/build/pdf
       - org.rodinp.handbook.repository/target/repository

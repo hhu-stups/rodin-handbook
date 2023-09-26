@@ -20,7 +20,7 @@ build:
     - cd ..
     - cp -r org.rodinp.handbook.feature/build/eclipse/* org.rodinp.handbook/
     - mvn -f org.rodinp.handbook.parent/pom.xml install
-    - cp org.rodinp.handbook.releng/index.html org.rodinp.handbook.repository/target/repository
+    - cp org.rodinp.handbook.repository/index.html org.rodinp.handbook.repository/target/repository
   artifacts:
     paths:
       - org.rodinp.handbook.feature/build/files

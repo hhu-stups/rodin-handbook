@@ -31,7 +31,7 @@ build:
 deploy:
   stage: deploy
   only:
-    - develop@general/stups/rodin_handbook
+    - master@general/stups/rodin_handbook
   image: alpine:3
   variables:
     GIT_STRATEGY: none

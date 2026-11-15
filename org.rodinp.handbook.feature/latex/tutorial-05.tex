@@ -2,7 +2,7 @@
 \label{tut_contexts}
 \index{context}
 
-\tick{\textbf{Goals:} In this section we introduce contexts that apply to the theoretical concepts that were introduced in the previous section (\ref{tut_mathematical_notation}). We will create a very simple model consisting of just one context file.
+\tick{\textbf{Goals:} In this section we introduce contexts to apply the theoretical concepts that were introduced in the previous section (\ref{tut_mathematical_notation}). We will create a very simple model consisting of just one context file.
 }
 
 In this tutorial, we will create a model of the well known Agatha puzzle. 
@@ -117,7 +117,7 @@ The second constant \texttt{richer} is also a relation between \texttt{persons}:
 \end{description}
 }
 
-However, we know that the relation is irreflexive (no person is richer than itself):
+However, we know that the relation is irreflexive (no person is richer than themselves):
 
 \pencil{
 \begin{description}
@@ -191,7 +191,7 @@ Charles hates no one that Agatha hates and Agatha hates everybody except the but
 \end{description}
 }
 
-The butler hates everyone not richer than aunt Agatha and the butler hates everyone whom Agatha hates. However, no one hates everyone:
+The butler hates everyone not richer than Aunt Agatha and the butler hates everyone whom Agatha hates. However, no one hates everyone:
 
 \pencil{
 \begin{description}
@@ -273,9 +273,8 @@ This concludes the tutorial about contexts. The following section shows the comp
 		\nItemX{ agatha\_hates }{ hates[\{ Agatha\} ] = persons \setminus  \{ butler\}  }
 		\nItemX{ butler\_hates\_1 }{ \forall x\qdot ( x\mapsto Agatha \notin  richer 
           \\\hspace*{3.5 cm}\limp  butler\mapsto x \in  hates) }
-		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] \land 
-		\\\hspace*{3,2 cm}  (\forall  x\qdot  x\in persons \limp  hates[\{ x\} ] \neq  persons) }
-		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \land  hates[\{ x\} ] \neq  persons }
+		\nItemX{ butler\_hates\_2 }{ hates[\{ Agatha\} ] \subseteq  hates[\{ butler\} ] }
+		\nItemX{ noone\_hates\_everyone }{ \forall  x \qdot  x \in  persons \limp  hates[\{ x\} ] \neq  persons }
 		\nItemX{ solution }  { \fbox{theorem} ~ killer = Agatha }
 	\end{description}
 \END

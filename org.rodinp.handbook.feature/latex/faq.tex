@@ -14,12 +14,12 @@ There is also a vibrant community that is helpful and responsive.  You can conta
 \subsection{What is Event-B?}
 \index{Event-B}
 
-Event-B is a formal method for system-level modelling and analysis. Key features of event-B are the use of set theory as a modelling notation, the use of refinement to represent systems at different abstraction levels and the use of mathematical proofs to verify consistency between refinement levels.
+Event-B is a formal method for system-level modelling and analysis. Key features of Event-B are the use of set theory as a modelling notation, the use of refinement to represent systems at different abstraction levels and the use of mathematical proofs to verify consistency between refinement levels.
 More details are available at \url{http://www.event-b.org}.
 
 \subsection{What is the difference between Event-B and the B method?}
 
-Event-B (\ref{tut_eventb}) is derived from the \href{http://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{http://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, etc.). However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while the purpose of Event-B is used to model full systems (including hardware, software and environment of operation).
+Event-B (\ref{tut_eventb}) is derived from the \href{http://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{http://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, etc.). However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while Event-B is used to model full systems (including hardware, software and environment of operation).
 
 Event-B and the B method use mathematical languages which are similar but do not match exactly (in particular, operator precedences are different).
 
@@ -32,7 +32,7 @@ The \textbf{Rodin Platform} is an Eclipse-based IDE for Event-B that provides su
 
 The Rodin Platform (\ref{rodin_platform}) was initially developed within the European Commission funded Rodin project (IST-511599), where Rodin is an acronym for ``Rigorous Open Development Environment for Complex Systems''. Rodin is also the name of a famous French sculptor. One of his most famous works is the \href{http://en.wikipedia.org/wiki/The_Thinker}{Thinker}. 
 
-\subsection{Where I can download Rodin?}
+\subsection{Where can I download Rodin?}
 \label{faq_where_download_rodin}
 
 Rodin is available for download at the Rodin Download page: \url{http://wiki.event-b.org/index.php/Rodin_Platform_Releases}
@@ -43,13 +43,13 @@ Glad to hear that you want to help!  Please see the \url{http://wiki.event-b.org
 
 \subsection{My operating system is not supported!  How can I install Rodin on my platform?}
 \label{faq_os_not_supported}
-At the time of writing this document, prebuild versions exist for only a small number of operating systems.  There are two recommended approaches for running Rodin in these situations:
+At the time of writing this document, prebuilt versions exist for only a small number of operating systems.  There are two recommended approaches for running Rodin in these situations:
 \begin{description}
 	\item[Build Rodin from the sources] Users who have some experience in building Java software can simply build Rodin from source.  For more information, please consult the Developer Documentation in the Rodin Wiki: \url{http://wiki.event-b.org/index.php/Rodin_Developer_Support}
 	\item[Run Rodin in a virtual environment] With a fast computer, you can also use a virtual environment (e.g. VirtualBox) and install an operating system into that environment that supports Rodin (e.g. a 32bit version of Linux).
 \end{description}
 
-There are other options available for more specialized scenarios (e.g. running 32bit Rodin on a 64bit Linux system).  However, the two approaches described above are the most simple.
+There are other options available for more specialized scenarios (e.g. running 32bit Rodin on a 64bit Linux system).  However, the two approaches described above are the simplest.
 
 \section{General Tool Usage}
 
@@ -67,7 +67,7 @@ The cleaner just undoes what the builder does, i.e. it removes proof obligations
 A status may change from \emph{discharged} to \emph{not discharged} when the proof is no longer compatible with the corresponding proof obligation (e.g. when a hypothesis is changed), but \textbf{the proof itself is still there!}
 You can try to \href{http://wiki.event-b.org/index.php/Proof_Obligation_Commands#Proof_Replay_on_Undischarged_POs}{replay} it.
 
-Confusion may arise when automatic provers have been launched. The cleaner does not undo these automatic proofs (why would it ?!!). Once a proof has been made, the platform does not modify or delete it by itself. Even obsolete proofs are preserved (\ref{obsolete_proof})!
+Confusion may arise when automatic provers have been launched. The cleaner does not undo these automatic proofs (why would it?). Once a proof has been made, the platform does not modify or delete it by itself. Even obsolete proofs are preserved (\ref{obsolete_proof})!
 
 \subsection{How do I install external plugins without using the Eclipse Update Manager?}
 
@@ -87,9 +87,9 @@ Generally, the builder spends most of its time attempting to prove POs. There ar
 Note that if you disable the automated prover, you always can run it later on some files by using the contextual menu in the Event-B Explorer. 
 
 To disable the automated prover, open \textsf{Rodin Preferences} 
-(menu \textsf{Window $\rangle$ Preferences...}). In the tree on the left-hand panel, select \textsf{Event-B $\rangle$ Sequent Prover $\rangle$ Auto/Post-tactic}. Then, in the main panel ensure that the checkbox labelled \textsf{Enable auto-tactic for proving} for proving is not selected. 
+(menu \textsf{Window $\rangle$ Preferences...}). In the tree on the left-hand panel, select \textsf{Event-B $\rangle$ Sequent Prover $\rangle$ Auto/Post-tactic}. Then, in the main panel ensure that the checkbox labelled \textsf{Enable auto-tactic for proving} is not selected. 
 
-To review a proof obligation, just open it in the interactive prover and then click on the \emph{review} button (this is a round blue button with a \emph{R} in the \textsf{Proof Control} toolbar). The proof obligation should now labelled with the same icon in the Event-B explorer. 
+To review a proof obligation, just open it in the interactive prover and then click on the \emph{review} button (this is a round blue button with an \emph{R} in the \textsf{Proof Control} toolbar). The proof obligation should now be labelled with the same icon in the Event-B explorer. 
 
 \subsection{What are the ASCII shortcuts for mathematical operators?}
 \index{symbols}
@@ -101,7 +101,7 @@ This page is also available in the dynamic help system. The advantage of using d
 \subsection{Pretty Print does not work on Linux}
 \index{xulrunner}
 
-Configuring Rodin on Linux can be tricky.  In particular, the pretty print view of the original editor requires an HTML control to render.  It it does not work after installing Rodin, you may have to configure xulrunner as follows:
+Configuring Rodin on Linux can be tricky.  In particular, the pretty print view of the original editor requires an HTML control to render.  If it does not work after installing Rodin, you may have to configure xulrunner as follows:
 
 Add a property by appending the following code to your \textsf{eclipse/eclipse.ini} or \textsf{rodin/rodin.ini} file: 
 
@@ -173,18 +173,18 @@ The short answer is: ``when'' and ``where'' in events have exactly the same mean
 
 The long answer is: In some contexts (but not all), the tool changes the keywords to make the meaning of the event more apparent.  The distinguishing factor is the parameter: an event without a parameter uses the keyword ``when'', and an event with a parameter uses the keyword ``where''.
 
-To make things even more confusing, this doesn't apply everywhere: The Event-B structural editor always uses the keyword ``where'', but the pretty print for the Event-B structural editor switches between the two.  The default Rodin editor always uses the keyword "where". The Event-B syntax in this handbook has been generated with the \LaTeX plugin, which also switches between the two keywords.
+To make things even more confusing, this doesn't apply everywhere: The Event-B structural editor always uses the keyword ``where'', but the pretty print for the Event-B structural editor switches between the two.  The default Rodin editor always uses the keyword "where". The Event-B syntax in this handbook has been generated with the \LaTeX\ plugin, which also switches between the two keywords.
 
 \section{Modelling}
 \index{modelling}
 
 \subsection{Witness for \textsf{Xyz} missing. Default witness generated}
 
-A parameter has disappeared during a refinement. If this is intentional, add a witness (\ref{witness}) to tell the machine how the abstract parameter should refined. 
+A parameter has disappeared during a refinement. If this is intentional, add a witness (\ref{witness}) to tell the machine how the abstract parameter should be refined. 
 
 \subsection{Identifier \textsf{Xyz} should not occur free in a witness}
 
-This means that the \textsf{Xyz} identifier appears in a witness predicate, but \textsf{Xyz} is a disappearing abstract variable or parameter and is not set as the witness label. To resolve this error, set change the witness label to the identifier \textsf{Xyz}.
+This means that the \textsf{Xyz} identifier appears in a witness predicate, but \textsf{Xyz} is a disappearing abstract variable or parameter and is not set as the witness label. To resolve this error, change the witness label to the identifier \textsf{Xyz}.
 
 \subsection{Witness \textsf{Xyz} must be a disappearing abstract variable or parameter in the \textsf{INITIALISATION} event}
 \index{witness}
@@ -193,21 +193,21 @@ The witness is for the after value of the abstract variable, hence you should us
 
 \subsection{I've added a witness for \textsf{Xyz} but it keeps saying ``Identifier \textsf{Xyz} has not been defined''}
 
-As specified in the Section \ref{witness}, the witness must be labelled with the name \textsf{Xyz} of the abstract parameter of the event that is being refined. A concrete example can be found in Section \ref{tut_extend_traffic_witnesses}.
+As specified in Section \ref{witness}, the witness must be labelled with the name \textsf{Xyz} of the abstract parameter of the event that is being refined. A concrete example can be found in Section \ref{tut_extend_traffic_witnesses}.
 
 \subsection{How can I create a new Event-B Project?}
 \index{project}
 
 Please read Section \ref{tut_project_setup} to learn how to create a new Event-B project.
 
-\subsection{How can I remove a Event-B Project?}
+\subsection{How can I remove an Event-B Project?}
 
 In order to remove a project, first select it on the \textsf{Project Explorer} and then right click with the mouse. The contextual menu will appear on the screen as indicated in Figure \ref{fig_faq_removeproject}.
 
 \begin{figure}[!ht]
 \begin{center}
 	\includerodinimg{faq/faq_removeproject.png}
-	\caption{Removing a Event-B Project}
+	\caption{Removing an Event-B Project}
 	\label{fig_faq_removeproject}
 \end{center}
 \end{figure}
@@ -216,37 +216,37 @@ Simply click on \textsf{Delete}, and your project will be deleted (after you con
 
 \subsection{How can I export an Event-B Project?}
 
-Exporting a project is the operation by which you can construct automatically a ``.zip" file containing the entire project. Such a file can be sent by email. Once received, an exported project can be imported (next section). It then becomes a project like the other ones which were created locally. In order to export a project, select it and then select on \textsf{File $\rangle$ Export...} from the menubar as indicated in Figure \ref{fig_faq_exportproject}. 
+Exporting a project is the operation by which you can construct automatically a ``.zip" file containing the entire project. Such a file can be sent by email. Once received, an exported project can be imported (next section). It then becomes a project like the other ones which were created locally. In order to export a project, select it and then select \textsf{File $\rangle$ Export...} from the menubar as indicated in Figure \ref{fig_faq_exportproject}. 
 
 \begin{figure}[!ht]
 \begin{center}
 	\includerodinimg{faq/faq_exportproject.png}
-	\caption{Export a Event-B Project}
+	\caption{Export an Event-B Project}
 	\label{fig_faq_exportproject}
 \end{center}
 \end{figure}
 
 The \textsf{Export} wizard will pop up. In this window, select \textsf{General $\rangle$ Archive File} and click the \textsf{Next $>$} button. Specify the path and name of the archive file into which you want to export your project and finally select \textsf{Finish}. This menu sequence (and the various options) is a part of the Eclipse platform. For more information, refer to the Eclipse documentation. 
 
-\subsection{How can I import a Event-B Project?}
+\subsection{How can I import an Event-B Project?}
 
 A ``.zip" file corresponding to a project which has been exported elsewhere can be imported locally. In order to do this, click on \textsf{File $\rangle$ Import} from the menubar. In the import wizard, select \textsf{General $\rangle$ Existing Projects into Workspace} and click \textsf{Next $>$}. Then choose the \textsf{Select archive file} option and hit the \textsf{Browse...} button to find the zip file that you want to import. Now click \textsf{Finish}. As with exporting, this menu sequence and layout are part of Eclipse.
 
 The importation will fail if the name of the imported project (not the name of the file) is the same as the name of an existing local project. This means that when you are exporting a project, it is a good idea to modify its name in case the person who imports the project already has a project with that same name (which could be a previous version of the exported project). Changing the name of a project is explained in the next section. 
 
-\subsection{How can I change the name of a Event-B Project?}
+\subsection{How can I change the name of an Event-B Project?}
 
 Select the project whose name you want to modify, and then click on \textsf{File $\rangle$ Rename...}. Modify the name and click on \textsf{OK}. The name of your project will then have been modified accordingly. 
 
-\subsection{How can I create a Event-B Component?}
+\subsection{How can I create an Event-B Component?}
 
 Please check Section \ref{tut_project_setup} to learn how to create a new Event-B component.
 
-\subsection{How can I remove a Event-B Component?}
+\subsection{How can I remove an Event-B Component?}
 
-In order to remove a component, press the right-click on the component. In the context menu, select \textsf{Delete}. This component is removed from the \textsf{Project Explorer}. 
+In order to remove a component, right-click on the component. In the context menu, select \textsf{Delete}. This component is removed from the \textsf{Project Explorer}. 
 
-\subsection{In the new Rodin Editor, how can I add an element to machine?}
+\subsection{In the new Rodin Editor, how can I add an element to a machine?}
 \label{faq_new_editor_new_element}
 
 \info{Please also consult Section~\ref{new_eventb_editor}. The editor is described in more detail there.} 
@@ -258,9 +258,9 @@ Whenever you pull up a context menu in the new editor, please pay attention to t
 	\item Make sure the cursor is not in ``edit'' mode. This is the case when you are able to edit a textual element.  If this is the case, you will also get an incorrect context menu.
 \end{itemize}
 
-The different elements of the machine, can of course, be added using the different wizards for element creation (New Variable Wizard \icon{rodin/newvar_edit.png}, New Variant Wizard \icon{rodin/newvariant_edit.png}, New Invariant Wizard \icon{rodin/newinv_edit.png}, and New Event Wizard \icon{rodin/newevt_edit.png}) which are described in more detail in Section \ref{eventb_wizards}. 
+The different elements of the machine can, of course, be added using the different wizards for element creation (New Variable Wizard \icon{rodin/newvar_edit.png}, New Variant Wizard \icon{rodin/newvariant_edit.png}, New Invariant Wizard \icon{rodin/newinv_edit.png}, and New Event Wizard \icon{rodin/newevt_edit.png}) which are described in more detail in Section \ref{eventb_wizards}. 
 
-You can also add new elements by placing your cursor directly to the left of the small green arrow (\icon{rodin/structured_arrow.png}) that appears next to your machine name in \textsf{MACHINE} section. Now right click and select the component that you want to add from the \textsf{Add Child} menu. You can also add an element by right clicking on the heading of the section of the element you want to add (e.g. \textsf{VARIABLES}) and selecting \textsf{Add Child}, or by placing your cursor directly to the left of the small green arrow (\icon{rodin/structured_arrow.png}) next to the name of any of the components that already exist and selecting \textsf{Add Sibling}. Unfortunately, if your cursor is not directly next to the small green arrow (while the cursor is blinking, the left side of the arrow is actually touching the cursor), these methods do not actually work. 
+You can also add new elements by placing your cursor directly to the left of the small green arrow (\icon{rodin/structured_arrow.png}) that appears next to your machine name in the \textsf{MACHINE} section. Now right click and select the component that you want to add from the \textsf{Add Child} menu. You can also add an element by right clicking on the heading of the section of the element you want to add (e.g. \textsf{VARIABLES}) and selecting \textsf{Add Child}, or by placing your cursor directly to the left of the small green arrow (\icon{rodin/structured_arrow.png}) next to the name of any of the components that already exist and selecting \textsf{Add Sibling}. Unfortunately, if your cursor is not directly next to the small green arrow (while the cursor is blinking, the left side of the arrow is actually touching the cursor), these methods do not actually work. 
 
 \subsection{How can I use multiple lines for a comment, predicate or expression (using the new editor)?}
 

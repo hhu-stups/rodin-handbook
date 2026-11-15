@@ -13,7 +13,7 @@ In Section~\ref{generated_proof_obligations}, we learned what proof obligations 
 	\item Explain reasoners
 	\item Describe how to perform automatic and manual proving
 	\item Purge proofs for maintenance
-	\item Simplify proofs for maintenability and storage
+	\item Simplify proofs for maintainability and storage
 \end{itemize}}
 
 \subsection{Sequents}
@@ -26,7 +26,7 @@ Sequents are of the following form
 
 $H \vdash G$
 
-where $H$ is the set of hypotheses (predicates) and $G$ is the goal that can be proved from the predicates.
+where $H$ is the set of hypotheses (predicates) and $G$ is the goal that is to be proved from the hypotheses.
 
 The above statement can be read as follows: Under the hypotheses $H$, prove the goal $G$.
 
@@ -38,11 +38,11 @@ In its pure mathematical form, a proof rule is a tool to perform a formal proof 
 
 $$\frac{\quad A\quad}{C}$$
 
-where $A$ is a (possibly empty) list of sequents (the antecedents of the proof rule) and $C$ is a sequent (the consequent of the rule). We interpret the above proof rule as follows: The combination of the proofs of each sequent of $A$ prove the sequent $C$.
+where $A$ is a (possibly empty) list of sequents (the antecedents of the proof rule) and $C$ is a sequent (the consequent of the rule). We interpret the above proof rule as follows: The combination of the proofs of each sequent of $A$ proves the sequent $C$.
 
 \pencil{\textbf{Example:} Consider the following proof rule:
 $$ \frac{ E_1 }{ E_1 \lor E_2 } $$
-This says that if $E_1$ is valid, then the statement $E_1 \lor E_2$ must be valid as well.  Thus, we can replace the sequent by the consequent.
+This says that if $E_1$ is valid, then the statement $E_1 \lor E_2$ must be valid as well.  Thus, in order to prove $E_1 \lor E_2$, it is sufficient to prove $E_1$, i.e.\ we can replace the consequent by the antecedent.
 }
 
 \subsubsection{Proof Rule Representation in Rodin}
@@ -65,9 +65,9 @@ Each antecedent of the proof rule contains the following information:
 	\item[added hypotheses] The set of added hypotheses. 
 \end{description}
 
-With this representation, a proof rule in Rodin corresponding to a proof schema as follows: 
+With this representation, a proof rule in Rodin corresponds to a proof schema as follows: 
 
-$$\begin{array}{c} H, H_u, H_{A_0} \vdash G_{A_0} ~~~\ldots~~~ H, H_u, H_{A_n-1} \vdash G_{A_n-1} \\ \hline H, H_u \vdash G_u \end{array} $$
+$$\begin{array}{c} H, H_u, H_{A_0} \vdash G_{A_0} ~~~\ldots~~~ H, H_u, H_{A_{n-1}} \vdash G_{A_{n-1}} \\ \hline H, H_u \vdash G_u \end{array} $$
 
 Where:
 \begin{itemize}
@@ -80,7 +80,7 @@ Where:
 
 \subsubsection{Applying Proof Rules}
 
-Given a proof rule of the form mentioned above, the following describes how to apply this rule to an input sequent. If the process is successful, a list of output sequences is produced. 
+Given a proof rule of the form mentioned above, the following describes how to apply this rule to an input sequent. If the process is successful, a list of output sequents is produced. 
 
 \begin{itemize}
 	\item The rule is not applicable if the goal of the sequent is not exactly the same as the used goal or if any of the used hypotheses are not contained in the set of hypotheses of the input sequent. 
@@ -113,7 +113,7 @@ It may be useful to consider the following categories of tactics:
 Basic tactics are tactics that change the proof tree only at the point of application.
 
 \begin{itemize}
-	\item     Prune - This tactic is a direct application of the pruning facility providing by the proof tree. The tactic is successful if the input node is not pending. 
+	\item     Prune - This tactic is a direct application of the pruning facility provided by the proof tree. The tactic is successful if the input node is not pending. 
 	\item     Rule Application Tactics - Tactics of this class provide a wrapper around a proof rule (\ref{proof_rules}). The tactic is successful if the proof rule is successfully applied to the input node. 
 
 	\item     Reasoner Application Tactics - Tactics of this class provide a wrapper around a reasoner (\ref{reasoners}). The tactic is successful if the reasoner is successfully applied to the input node. 
@@ -129,7 +129,7 @@ Tactical tactics are constructed from existing tactics. They indicate different 
 	\item         Composing Sequential - A tactic to compose a list of sub-tactics that can be applied to the point of application. The tactic is successful if one of the sub-tactics is successful. 
 \end{itemize}
 
-More complex proof strategy can be constructed by combining the above tactical tactics. 
+More complex proof strategies can be constructed by combining the above tactical tactics. 
 
 \subsection{Provers}
 \index{Atelier B provers}
@@ -193,11 +193,11 @@ The ML prover can be quite helpful when the proofs involve arithmetic.
 	\item[Names in the proof control:] nPP R., nPP with a lasso symbol, nPP
 	\item[Names in the proof tree:] Predicate Prover
 	\item[Names in the preferences:] PP restricted, PP after lasso, PP unrestricted
-	\item[Input:] In the configuration ``restricted", all selected hypotheses and the goal are passed to New PP. In the configuration ``after lasso", a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that have a common symbol with the goal or a hypothesis that is currently selected. In the configuration ``unrestricted", all the available hypotheses are passed to New PP.
-	\item[How the Prover Proceeds:] First, all function and predicate symbols that are different from ``$\in$" and not related to arithmetic are translated away. For example A $\subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
+	\item[Input:] In the configuration ``restricted", all selected hypotheses and the goal are passed to New PP. In the configuration ``after lasso", a lasso operation is applied to the selected hypotheses and the goal and the result is passed to New PP. The lasso operation selects any unselected hypothesis that has a common symbol with the goal or a hypothesis that is currently selected. In the configuration ``unrestricted", all the available hypotheses are passed to New PP.
+	\item[How the Prover Proceeds:] First, all function and predicate symbols that are different from ``$\in$" and not related to arithmetic are translated away. For example $A \subseteq B$ is translated to $\forall x\cdot x \in A \limp x \in B$. Then New PP translates the proof obligation to CNF (conjunctive normal form) and applies a combination of unit resolution and the Davis Putnam algorithm.
 	\item[Some Strengths:] ~
 	\begin{itemize}
-		\item New PP outputs a set of ``used hypotheses". If an unused hypotheses changes, the old proof can be reused.
+		\item New PP outputs a set of ``used hypotheses". If an unused hypothesis changes, the old proof can be reused.
 		\item New PP has limited support for equational reasoning. 
 	\end{itemize}
 	\item[Some Weaknesses:] ~
@@ -249,7 +249,7 @@ The following guidelines may be useful:
 
 Reasoners are applied to the sequent of a given proof tree node and provide a way to contribute to the provers.  They are typically of more interest to the developer than the user. 
 
-A reasoner is (and has to be) quite ``rough" : it takes a given sequent and produces a proof rule that will (if possible) apply to this given sequent. A tactic can use several reasoners by applying them in loops, combining them, or even calling other tactics.
+A reasoner is (and has to be) quite ``rough'': it takes a given sequent and produces a proof rule that will (if possible) apply to this given sequent. A tactic can use several reasoners by applying them in loops, combining them, or even calling other tactics.
 
 \subsection{Purging Proofs}
 \label{purging_proofs}
@@ -263,7 +263,7 @@ The purpose of the proof purger is to allow the user to delete obsolete proofs.
 \subsubsection{Why proofs become obsolete}
 \label{obsolete_proof}
 
-Proof obligations are named after the main elements related to it, such as events and invariants. Therefore, each time such an element is renamed manually, the corresponding proof obligations get a new name. However, the existing proof is not renamed, and a new proof gets created with the new name.
+Proof obligations are named after the main elements related to them, such as events and invariants. Therefore, each time such an element is renamed manually, the corresponding proof obligations get a new name. However, the existing proof is not renamed, and a new proof gets created with the new name.
 
 Consequently, after a lot of model editing, more and more obsolete proofs are stored in proof files.
 
@@ -271,7 +271,7 @@ Consequently, after a lot of model editing, more and more obsolete proofs are st
 
 In any view, right-clicking an Event-B project or file will display a popup menu with a \textsf{Purge Proofs...} option. If several files or projects (or both) are selected, purging will apply to all of them.
 
-Firstly, the proof purger tries to find obsolete proofs in the selection. If no obsolete proofs are found, a message will pop up informing the user that no proof needs to be purged. Otherwise, a new window will pop up displaying a list of all POs that are considered obsolete, i.e. all proofs that exist in some proof file and but no longer correspond to any concrete project or file.
+Firstly, the proof purger tries to find obsolete proofs in the selection. If no obsolete proofs are found, a message will pop up informing the user that no proof needs to be purged. Otherwise, a new window will pop up displaying a list of all POs that are considered obsolete, i.e. all proofs that exist in some proof file but no longer correspond to any concrete project or file.
 
 \subsubsection{Choosing proofs to delete}
 
@@ -289,14 +289,14 @@ Once the selection has been decided, hit the \textsf{Delete} button to actually 
 
 \subsubsection{Caution}
 
-Proof purging should not be performed on models that are not in a stable state. For instance, it should not be applied to a model that has some errors or warnings issued by the type checker. This is because if there are errors and warnings, not all proof obligations are generated. Therefore, some proofs may have been considered wrongly as obsolete.
+Proof purging should not be performed on models that are not in a stable state. For instance, it should not be applied to a model that has some errors or warnings issued by the type checker. This is because if there are errors and warnings, not all proof obligations are generated. Therefore, some proofs may wrongly be considered obsolete.
 
 \subsection{Simplifying Proofs}
 \label{simplifying_proofs}
 \index{simplifying proofs}
 \index{proving!simplifying}
 
-Proofs consists of trees where each node is a proof step. Storing or investigating a proof consists in saving or reviewing all these nodes. With post tactics activated, some unneeded steps might be added to the proof, after each manual step. Indeed, the post tactics try to apply some rewriting and inference rules which are themselves grouped into proof steps. When the proof step concern some useless hypotheses, for example, the applied rules are not useful in the proof. They can even appear cumbersome regarding storage or later investigation of the proofs. Hence, it is recommended to apply simplification before storage of huge proofs and/or proofs involving extensively post tactics.
+Proofs consist of trees where each node is a proof step. Storing or investigating a proof consists in saving or reviewing all these nodes. With post tactics activated, some unneeded steps might be added to the proof, after each manual step. Indeed, the post tactics try to apply some rewriting and inference rules which are themselves grouped into proof steps. When the proof steps concern some useless hypotheses, for example, the applied rules are not useful in the proof. They can even appear cumbersome regarding storage or later investigation of the proofs. Hence, it is recommended to apply simplification before storage of huge proofs and/or proofs that make extensive use of post tactics.
 
 \subsubsection{Selecting simplification input}
 In any view, right-clicking an Event-B project or file will display a popup menu with a \textsf{Simplify Proof(s)} option. If several files or projects (or both) are selected, simplification will apply to all of them.

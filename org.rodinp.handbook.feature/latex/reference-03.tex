@@ -11,7 +11,7 @@ placeholders for arbitrary expressions instead of $a$, $A$, $b$, $B$ which repre
 Event-B identifiers.
 For example, the $\exprle$ and $\exprs$ in $\exprle\in\exprs$ could be a placeholder for $5+2$ and $\nat$.
 
-We use the $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
+We use $\expra\defi\exprb$ to state that an expression, predicate or assignment $\expra$
 can be equivalently rewritten as $\exprb$ if $\expra$'s  well-definedness condition
 is fulfilled.
 %If an expression $\expra$ yields a value $x$ that we want to describe by a predicate $\predp$
@@ -19,7 +19,7 @@ is fulfilled.
 We have tried to find a balance between having a precise and concise description for all Event-B's
 mathematical components and having a text that is still easily readable.
 Many of the operators can be expressed using other, simpler constructs.
-Other, like equality ($=$) or universal quantification ($\forall$) are simply described with natural language.
+Others, like equality ($=$) or universal quantification ($\forall$) are simply described with natural language.
 
 When we introduce new identifiers while expressing an operator (e.g. by using a set comprehension),
 we assume that the new identifier does not occur free in the rewritten expressions
@@ -78,8 +78,8 @@ An example with integer division makes this clear: The expression $x\div y$ only
 
 Well-definedness conditions are usually used for well-definedness proof obligations (\ref{well_definedness_proof_obligations}).
 
-In Rodin, the $\wdl$-operator defines which well-defined condition a predicate or expression has.
-When applied to the above example, integer division can be formatted as follows: $\wdl(x\div y) \defi y\neq 0$.
+In Rodin, the $\wdl$-operator defines which well-definedness condition a predicate or expression has.
+When applied to the above example, integer division can be expressed as follows: $\wdl(x\div y) \defi y\neq 0$.
 
 In the following sections, we state for each mathematical construct what the well-definedness conditions are.
 In many cases, this is just the conjunction of the well-definedness conditions for the different syntactical parts of a construct.
@@ -160,7 +160,7 @@ More formally, we define the set of free identifiers $\freeids{\expre}$ of an ex
 \end{center}
 
 \subsubsection{Structure of the subsections}
-The following reference subsections will have the form the form: \\[2em]
+The following reference subsections will have the form: \\[2em]
 \begin{rrnames}
   math. Symbol  & \texttt{ASCII representation}  & Name of the operator \\
   \ldots & \ldots & \ldots \\
@@ -270,39 +270,39 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
-    possible values of $x_1\ldots,x_n$.
-    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
+    possible values of $x_1,\ldots,x_n$.
+    A usual pattern for quantification is $\forall x_1,\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
     $\predp_1$ is used to specify the types of the identifiers.
 
-    The existential quantification $\exists x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
+    The existential quantification $\exists x_1,\ldots,x_n~\qdot~\predp$ is true if a value of $x_1,\ldots,x_n$ exists such that $\predp$ is satisfied.
 
-    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
+    The types of all identifiers $x_1,\ldots,x_n$ must be inferable from $\predp$.
     They can be referenced in $\predp$.
   \rrtypes
     The quantifiers and the $\predp$ are predicates.    
   \rrwd
-    $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$\\
-    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+    $\wdl(\forall x_1,\ldots,x_n~\qdot~\predp) \defi ~\forall x_1,\ldots,x_n \qdot \wdl(\predp)$\\
+    $\wdl(\exists x_1,\ldots,x_n~\qdot~\predp) \defi ~\forall x_1,\ldots,x_n \qdot \wdl(\predp)$
 \end{rodinrefentry}
 \end{samepage}
 
 %\begin{tabular}{r|p{12cm}}
 %\textbf{Description} &  
 %		The universal quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if $\predp$ is satisfied for all
-%    possible values of $x_1\ldots,x_n$.
-%    A usual pattern for quantification is $\forall x_1\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
+%    possible values of $x_1,\ldots,x_n$.
+%    A usual pattern for quantification is $\forall x_1,\ldots,x_n~\qdot~\predp_1\limp \predp_2$ where
  %   $\predp_1$ is used to specify the types of the identifiers.
 
-%    The existential quantification $\forall x_1\ldots,x_n~\qdot~\predp$ is true if a value of $x_1\ldots,x_n$ exists such that $\predp$ is satisfied.
+%    The existential quantification $\forall x_1,\ldots,x_n~\qdot~\predp$ is true if a value of $x_1,\ldots,x_n$ exists such that $\predp$ is satisfied.
 
-%    The types of all identifiers $x_1\ldots,x_n$ must be inferable by $\predp$.
+%    The types of all identifiers $x_1,\ldots,x_n$ must be inferable by $\predp$.
 %    They can be referenced in $\predp$. \\[2mm]
 
 %\textbf{Types} &  The quantifiers and the $\predp$ are predicates.  \\[2mm]
 %
-%\textbf{WD} &  $\wdl(\forall x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$
+%\textbf{WD} &  $\wdl(\forall x_1,\ldots,x_n~\qdot~\predp) \defi ~\forall x_1,\ldots,x_n \qdot \wdl(\predp)$
 %
-%    $\wdl(\exists x_1\ldots,x_n~\qdot~\predp) \defi ~\forall x_1\ldots,x_n \qdot \wdl(\predp)$ \\
+%    $\wdl(\exists x_1,\ldots,x_n~\qdot~\predp) \defi ~\forall x_1,\ldots,x_n \qdot \wdl(\predp)$ \\
 %\end{tabular}
 
 
@@ -403,15 +403,15 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    \textit{ids} is a comma-separated list of one ore more identifiers whose type
-    must be inferable by the predicate $\predp$.
+    \textit{ids} is a comma-separated list of one or more identifiers whose type
+    must be inferable from the predicate $\predp$.
     The predicate $\predp$ and $\expre$ can contain references to the identifiers \textit{ids}.
 
     The set comprehension $\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}$ contains all values of $\expre$ for the values
     of $x_1,\ldots,x_n$ where $\predp$ is true.
 
     $\{~\expre~|~\predp~\}$ is a short form for $\{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$ where $\freeids{\expre}$ denotes the
-    list of free identifiers occurring in $\expre$ (see Section \ref{free_identifiers})).
+    list of free identifiers occurring in $\expre$ (see Section \ref{free_identifiers}).
   \rrdef
     $\{~\expre~|~\predp~\} \defi \{~\freeids{\expre}~\qdot~\predp~|~\expre~\}$
   \rrtypes
@@ -422,7 +422,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\wdl(\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre~\}) \quad\defi\quad \forall x_1,\ldots,x_n \qdot \wdl(\predp) \land (\predp \limp \wdl(\expre))$\\
     $\wdl(\{~\expre~|~\predp~\}) \quad\defi\quad \forall \freeids{\expre} \qdot \wdl(\predp) \land (\predp \limp \wdl(\expre))$
   \rrex
-    The following set comprehensions contain all the first 10 squares numbers:\\
+    The following set comprehensions contain the first 10 square numbers:\\
     $\{1,4,9,16,25,36,49,64,81,100\}$\\
     $= \{~x~\qdot~x\in 1\upto 10~|~x\expn 2\}$\\
     $= \{~x~|~ \exists y \qdot y\in 1\upto 10 \land x=y\expn 2~\}$\\
@@ -530,12 +530,12 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     $\pow(\exprs)$ denotes the set of all subsets of the set $\exprs$.
-    $\pow(\exprs)$ denotes the set of all non-empty subsets of the set $\exprs$.
+    $\pow_1(\exprs)$ denotes the set of all non-empty subsets of the set $\exprs$.
   \rrdef
     $\pow(\exprs) \defi \{~x~|~x\subseteq \exprs~\}$\\
     $\pow_1(\exprs) \defi \pow(\exprs)\setminus\{\emptyset\}$
   \rrtypes
-    $\pow(\alpha)\in\pow(\pow(\alpha))$ and $\pow_1(\alpha)\in\pow(\pow(\alpha))$ with
+    $\pow(\exprs)\in\pow(\pow(\alpha))$ and $\pow_1(\exprs)\in\pow(\pow(\alpha))$ with
     $\exprs\in\pow(\alpha)$.
   \rrwd
     $\wdl(\pow(\exprs)) \defi \wdl(\exprs)$\\
@@ -634,24 +634,24 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\Union x_1\ldots,x_n~\qdot~\predp~|~\expre$ is the union of all values of $\expre$ for valuations of the identifiers
-    $x_1\ldots,x_n$ that fulfill the predicate $\predp$. The types of $x_1,\ldots,x_n$ must be inferable by $\predp$.
+    $\Union x_1,\ldots,x_n~\qdot~\predp~|~\expre$ is the union of all values of $\expre$ for valuations of the identifiers
+    $x_1,\ldots,x_n$ that fulfill the predicate $\predp$. The types of $x_1,\ldots,x_n$ must be inferable from $\predp$.
 
-    Analogously is $\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre$ the intersection of all values of $\expre$ for
-    valuations of the identifiers $x_1\ldots,x_n$ that fulfill the predicate $\predp$.
+    Analogously, $\Inter x_1,\ldots,x_n~\qdot~\predp~|~\expre$ is the intersection of all values of $\expre$ for
+    valuations of the identifiers $x_1,\ldots,x_n$ that fulfill the predicate $\predp$.
 
     Like set comprehensions (\ref{set_comprehensions}), the quantified union and intersection have a
     short form where the free variables of the expression are quantified implicitly:
     $\Union \expre~|~\predp$ and $\Inter \expre~|~\predp$.
   \rrdef
-    $\Union x_1\ldots,x_n~\qdot~\predp~|~\expre = \union(\{~x_1\ldots,x_n~\qdot~\predp~|~\expre\})$\\
-    $\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre = \inter(\{~x_1\ldots,x_n~\qdot~\predp~|~\expre\})$\\
+    $\Union x_1,\ldots,x_n~\qdot~\predp~|~\expre = \union(\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre\})$\\
+    $\Inter x_1,\ldots,x_n~\qdot~\predp~|~\expre = \inter(\{~x_1,\ldots,x_n~\qdot~\predp~|~\expre\})$\\
     $\Union \expre~|~\predp = \Union \freeids{\expre}~\qdot~\predp~|~\expre$\\
     $\Inter \expre~|~\predp = \Inter \freeids{\expre}~\qdot~\predp~|~\expre$
   \rrtypes
     With $\expre\in\pow(\alpha)$ and $\predp$ being a predicate:\\
-    $(\Union x_1\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
-    $(\Inter x_1\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
+    $(\Union x_1,\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
+    $(\Inter x_1,\ldots,x_n~\qdot~\predp~|~\expre) \in \pow(\alpha)$\\
     $(\Union \expre~|~\predp) \in \pow(\alpha)$\\
     $(\Inter \expre~|~\predp) \in \pow(\alpha)$\\
   \rrwd
@@ -717,7 +717,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprs \rel \exprt \defi \pow(\exprs\cprod \exprt)$\\
     $\exprs \trel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \dom(r) = \exprs~\}$\\
     $\exprs \srel \exprt \defi \{~r~|~r\in \exprs\rel \exprt\land \ran(r) = \exprt~\}$\\
-    $\exprs \strel \exprt \defi (\exprs \trel \exprt) \land (\exprs \srel \exprt)$
+    $\exprs \strel \exprt \defi (\exprs \trel \exprt) \binter (\exprs \srel \exprt)$
   \rrtypes
     For $\exprs\in\pow(\alpha)$ and $\exprt\in\pow(\beta)$
     for each operator $\opelipse$ of $\rel$, $\trel$, $\srel$, $\strel$:\\
@@ -740,7 +740,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    If $r$ is a relation between the sets $\exprs$ and $\exprt$, 
+    If $\exprlr$ is a relation between the sets $\exprs$ and $\exprt$, 
     the domain $\dom(\exprlr)$ is the set of the elements of $\exprs$ that are related to at least one
     element of $\exprt$ by $\exprlr$.
 
@@ -827,7 +827,7 @@ The following reference subsections will have the form the form: \\[2em]
     $\exprls\bcomp\exprlr$ can be written as an alternative to $\exprlr\fcomp\exprls$.
     This reflects the fact that $f(g(x)) = (f\bcomp g)(x)$ holds for two functions $f$ and $g$.
 
-    The relational overwrite $\exprlr\ovl\exprls$ is equal to $\exprlr$ except all entries in $\exprlr$
+    The relational override $\exprlr\ovl\exprls$ is equal to $\exprlr$ except all entries in $\exprlr$
     whose first element is in the domain of $\exprls$ are replaced by the corresponding 
     entries in $\exprls$.
     
@@ -842,7 +842,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrdef
     $\exprlr\fcomp\exprls \defi \{~x \mapsto y~|~\exists z~\qdot~x \mapsto z \in\exprlr \land z \mapsto y\in\exprls~\}$\\
     $\exprlr\bcomp\exprls \defi \exprls\fcomp\exprlr$\\
-    $\exprlr\ovl\exprls \defi \exprls\bunion (dom(\exprls)\domsub\exprlr)$\\
+    $\exprlr\ovl\exprls \defi \exprls\bunion (\dom(\exprls)\domsub\exprlr)$\\
     $\exprlr\pprod\exprls \defi \{~(x\mapsto y)\mapsto(m\mapsto n)~|~x\mapsto m\in\exprlr\land y\mapsto n\in\exprls ~\}$\\
     $\exprlr\dprod\exprls \defi \{~x\mapsto(y\mapsto z)~|~x\mapsto y\in\exprlr \land x\mapsto z\in\exprls ~\}$\\
     $\exprlr^{-1} \defi \{y\mapsto x~|~x\mapsto y\in\exprlr~\}$
@@ -877,7 +877,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    The relational image $\exprlr[\exprs]$ are those elements in the range of $\exprlr$
+    The relational image $\exprlr[\exprs]$ is the set of those elements in the range of $\exprlr$
     that are mapped from $\exprs$.
   \rrdef
     $\exprlr[\exprs] \defi \{~y~|~\exists x~\qdot~x\in \exprs\land x\mapsto y\in\exprlr~\}$
@@ -916,7 +916,7 @@ The following reference subsections will have the form the form: \\[2em]
   \rrtypes
     $\id\in\pow(\alpha\cprod\alpha)$ for an arbitrary type $\alpha$.\\
     $\prjone\in\pow((\alpha\cprod\beta)\cprod\alpha)$ and
-    $\prjone\in\pow((\alpha\cprod\beta)\cprod\beta)$ for arbitrary types $\alpha$ and $\beta$.
+    $\prjtwo\in\pow((\alpha\cprod\beta)\cprod\beta)$ for arbitrary types $\alpha$ and $\beta$.
   \rrwd
     $\wdl(\id)\defi\btrue$\\
     $\wdl(\prjone)\defi\btrue$\\
@@ -950,7 +950,7 @@ The following reference subsections will have the form the form: \\[2em]
   of $\exprs$ to an element of $\exprt$.
 
   A function is injective (is an injection) if two distinct elements of $\exprs$ are always mapped to distinct
-  elements of $\exprt$. It is also equivalent to say that the inverse of an injective function is a also a function.
+  elements of $\exprt$. It is also equivalent to say that the inverse of an injective function is also a function.
 
   A function is surjective (is a surjection) if for every element of $\exprt$ there exists an element in $\exprs$
   that is mapped to it.
@@ -1001,15 +1001,15 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{samepage}
 \subsubsection{Lambda}
 \label{lambda}
-\index{lambda@lamba expression ($\lambda$)}
+\index{lambda@lambda expression ($\lambda$)}
 
 \begin{rrnames}
   $\lambda$  & \texttt{\%}  & Lambda
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)$ is a function that maps an ``input'' $\exprlp$ to
-    a result $\expre$ such that $\predp$ holds. 
+    $(\lambda~\exprlp~\qdot~\predp~|~\expre~)$ is a function that maps each ``input'' $\exprlp$ for which $\predp$ holds to
+    the result $\expre$. 
 
     $\exprlp$ is a pattern of identifiers, parentheses and $\mapsto$ which follows the
     following rules:
@@ -1018,7 +1018,7 @@ The following reference subsections will have the form the form: \\[2em]
     \item An identifier $x$, followed by an $\boftype$ operator is a pattern (See \ref{typing}
       for more details).
     \item A pair $\exprla\mapsto\exprlb$ is a pattern if $\exprla$ and $\exprlb$ are patterns.
-    \item $(\exprla)$ is pattern if $\exprla$ is pattern.
+    \item $(\exprla)$ is a pattern if $\exprla$ is a pattern.
     \end{itemize}
     In the simplest case, $\exprlp$ is just an identifier.
   \rrdef
@@ -1089,7 +1089,7 @@ The following reference subsections will have the form the form: \\[2em]
 \index{division@division ($\div$)}
 \index{modulo@modulo ($\bmod$)}
 \index{reminder|see{modulo}}
-\index{exponentation@exponentation ($\expn$)}
+\index{exponentiation@exponentiation ($\expn$)}
 
 \begin{rrnames}
   $+$      & \texttt{+}   & Addition \\
@@ -1113,7 +1113,7 @@ The following reference subsections will have the form the form: \\[2em]
 
     $\exprla\bmod\exprlb = c~\defi~c\in 0\upto\exprlb-1 \land \exists k~\qdot~k\in\nat\land k\cdot \exprlb + c = \exprla$
   \rrtypes
-  With $\exprla\in\intg$, $\exprlb\in\intg$ for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$: \\
+  With $\exprla\in\intg$, $\exprlb\in\intg$ for each operator $\opelipse$ of $+$, $-$, $\cdot$, $\div$, $\bmod$, $\expn$: \\
   $\exprla\opelipse \exprlb\in\intg$\\
   $-\exprla\in\intg$
   \rrwd
@@ -1139,7 +1139,7 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $\min(\exprs)$ and $\max(\exprs)$ denotes the smallest and largest number in the set of integers $\exprs$ respectively.
+    $\min(\exprs)$ and $\max(\exprs)$ denote the smallest and largest number in the set of integers $\exprs$ respectively.
 
     The minimum and maximum are only defined if such a number exists.
   \rrdef
@@ -1188,9 +1188,9 @@ The following reference subsections will have the form the form: \\[2em]
     $\exists x\boftype\intg,y ~\qdot~ x\neq y$
 
     The following lambda expression uses the $\boftype$ operator:\\
-    $(\lambda x\boftype \intg\mapsto y\boftype\Bool ~|~ x>0 ~\qdot~ x+1)$\\
+    $(\lambda x\boftype \intg\mapsto y\boftype\Bool ~\qdot~ x>0 ~|~ x+1)$\\
     An arguably more readable version without the use of $\boftype$ is:\\
-    $(\lambda x\mapsto y ~|~ x>0 \land y\in\Bool ~\qdot~ x+1)$
+    $(\lambda x\mapsto y ~\qdot~ x>0 \land y\in\Bool ~|~ x+1)$
 \end{rodinrefentry}
 \end{samepage}
 
@@ -1211,13 +1211,13 @@ The following reference subsections will have the form the form: \\[2em]
 \end{rrnames}
 \begin{rodinrefentry}
   \rrdesc
-    $x_1,\ldots,x_n \bcmeq \expre_1\ldots,\expre_n$
+    $x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n$
     assigns the expressions $\expre_i$ to the variable $x_i$, with $i\in1\upto n$.
     All $x_i$ must be distinct identifiers that refer to variables of the concrete machine.
     %$\allconstants,\concvariables,\concparameters$ represent the sequence of all constants, 
     %variables of the concrete machine and parameters of the concrete event.
 
-    There is a special form of the assignment which uses a relational overwrite:\\
+    There is a special form of the assignment which uses a relational override:\\
     $x(\exprf) \bcmeq \expre$.
   \rrdef
     The before-after-predicate of $x_1,\ldots,x_n \bcmeq \expre_1,\ldots,\expre_n$ is\\ $x_1' = \expre_1 \land \ldots \land x_n' = \expre_n$.
@@ -1256,7 +1256,7 @@ The following reference subsections will have the form the form: \\[2em]
 \begin{rodinrefentry}
   \rrdesc
     $x_1,\ldots,x_n \bcmsuch Q$
-    assigns any value to the variables $x_1\ldots,x_n$ such that the the
+    assigns any value to the variables $x_1,\ldots,x_n$ such that the
     before-after-predicate $Q$ is fulfilled.
     Each $x_i$ is an identifier that refers to a variable of the concrete machine.
     
@@ -1268,7 +1268,7 @@ The following reference subsections will have the form the form: \\[2em]
     The before-after-predicate is $Q$.
   \rrtypes
     $Q$ is a predicate and all $x_i$ and $x'_i$ must have the same type:
-    $x_1\in\alpha_i$ and $x'_1\in\alpha_i$ for $i\in 1\upto n$.
+    $x_i\in\alpha_i$ and $x'_i\in\alpha_i$ for $i\in 1\upto n$.
   \rrwd
     $\wdl(~x_1,\ldots,x_n \bcmsuch Q~)
     \quad\defi\quad

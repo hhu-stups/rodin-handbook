@@ -17,7 +17,7 @@ This relation is defined so that
 \begin{itemize}
 	\item no one knows himself,
 	\item the celebrity knows nobody,
-	\item everybody knows the celebrity.
+	\item everybody else knows the celebrity.
 \end{itemize}    
 
 The problem's goal is to find the celebrity. We want to model an algorithm that fulfills this task.
@@ -61,7 +61,7 @@ The problem is that the event is not declared as a refinement. To solve the prob
 
 The three remaining warnings state that witnesses (\ref{witness}) are missing. Double click on the warning to open the concrete model (here \texttt{Celebrity\_2}). Then add an \textsf{Event-B Witness} child to the event called \textsf{celebrity}.
 
-A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (e.g. the predicate ``true'') which we need to change. The name of a witness has to be the same as the parameter of the corresponding abstract event that it is refining. Here the name of the witness will have to be \textsf{x} so that it can be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should \textsf{b = x}. The event should now look as follows: 
+A default witness \textsf{wit1} has been created, with a default value \textsf{$\btrue$} (i.e.\ the predicate ``true'') which we need to change. The name of a witness has to be the same as the parameter of the corresponding abstract event that it is refining. Here the name of the witness will have to be \textsf{x} so that it can be a witness for the parameter \textsf{x} of the corresponding abstract event in the machine \texttt{Celebrity\_1}. The abstract event has the assignment \textsf{$r \bcmeq x$}, while the concrete one has the assignment \textsf{$r \bcmeq b$}. So the content of the witness should be \textsf{b = x}. The event should now look as follows: 
 
 \pencil{
 \begin{description}
@@ -88,7 +88,7 @@ A default witness \textsf{wit1} has been created, with a default value \textsf{$
 Edit the content and save the file. One warning will disappear, and only two will remain.
 
 \info{
-Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the variable it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems view (\ref{rodin_problems_view}).
+Try completing the other two witnesses on your own. A hint: Both witnesses are simple equalities, and both can be found by comparing the third guard of the abstract event with the second guard of the concrete one. Remember to give the witness the name of the abstract parameter it stands for. If you completed this step correctly, there should be no warning, info or error left in the Rodin Problems view (\ref{rodin_problems_view}).
 }
 
 The following section (\ref{tut_final_second_refinement}) shows the corrected \texttt{Celebrity\_2} machine.
@@ -223,7 +223,7 @@ In the most abstract machine \texttt{Celebrity\_0} we specify what the algorithm
 The variable $r$ can be any person initially and the event \texttt{celebrity} 
   finds the celebrity in one step. 
 After the event \texttt{celebrity} has occurred, $r$ contains the result of the algorithm.
-You might then wonder why there is a problem if you can just pick the celebrity and assign it to the result. This is because we defined our problem in such a way so that we are certain a celebrity $c$ exists and the algorithm simply returns it.
+You might then wonder why there is a problem if you can just pick the celebrity and assign it to the result. This is because we defined our problem in such a way that we are certain a celebrity $c$ exists and the algorithm simply returns it.
 Later in the refinement, we will model how to find the celebrity without using $c$.
 Because of the refinement relation, we know that the algorithm works correctly.
 
@@ -266,17 +266,17 @@ We start with $Q$ being all persons.
 Two new events,  \texttt{remove\_1} and \texttt{remove\_2}, are added to remove people
   from $Q$ who cannot be the celebrity.
 \texttt{remove\_1} removes a person that knows somebody while \texttt{remove\_2}
-  removes a person that is not known by any other person.
-An invariants states that the celebrity is always in $Q$.
+  removes a person that is not known by some other person.
+An invariant states that the celebrity is always in $Q$.
 When there is just one person left in the set, we know that this is the celebrity.
 
 The second refinement, \texttt{Celebrity\_2}, then splits the
   potential celebrities $Q$ into one arbitrary person -- the candidate $b$ --
   and the ``rest'' $R$.
-\texttt{remove\_1} then removes a person $x$ from $R$ if $b$ knows $x$.
+\texttt{remove\_1} then removes a person $x$ from $R$ if $x$ knows $b$.
 \texttt{remove\_2} checks if there is a person $x$ in $R$ that does not know the candidate.
 If found, $x$ is the new candidate $b$ and is removed from the rest $R$.
-If $R$ is empty, we know that the candidate is the celebrity. (We do not show the machine here because it simply takes up too much space --- please consult the project that you imported earlier to inspect the model.)
+If $R$ is empty, we know that the candidate is the celebrity. (The complete machine is shown in Section~\ref{tut_final_second_refinement}.)
 
 The third refinement then makes some more assumptions about the given problem.
 The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states that
@@ -303,9 +303,9 @@ The context \texttt{Celebrity\_c1} extends \texttt{Celebrity\_c0} and states tha
 Instead of having an abstract data structure like a set, the third refinement just introduces
   an index variable $a$ that points to the first person of $R$, which is the group of people who have not yet been checked.
 Instead of taking an arbitrary element from $R$ as in the second refinement, the remove
-  events just takes the first element $a$. $a$ is then removed from $R$ by increasing
+  events just take the first element $a$. $a$ is then removed from $R$ by increasing
   it by one.
-When $a$ is larger then $n$, $R$ is empty and $b$ contains the result.
+When $a$ is larger than $n$, $R$ is empty and $b$ contains the result.
 
 This last refinement works only on the following three integer variables: 
 The index $a$, the candidate $b$ and the result $r$.
@@ -399,22 +399,22 @@ Because we know that invariant $c\in Q$ was valid before the assignment,
 Take a look at the Proof Tree View. The root node should now be labelled with \texttt{ah ($x\neq c$)},
   which is the hypothesis that we just added.
 This node has three children: The first proves that $x\neq c$ is well-defined\footnote{You may wonder how we know that this is the well-definedness proof obligation}, which is $\btrue$ and has already been trivially proven.
-The second is the proof of the hypotheses $\lnot x=c$.
-The third is the proof of the original goal where the new hypotheses can be used.
+The second is the proof of the hypothesis $\lnot x=c$.
+The third is the proof of the original goal where the new hypothesis can be used.
 
 The new goal is $\lnot x = c$. Now, try selecting the right hypotheses by yourself in order to complete the proof (Hint: What axiom states that the celebrity does not know anybody?). To do this, click on the \icon{rodin/sh_prover.png} button in the \textsf{Proof Control View}. On the left side we should see now the \textsf{Search Hypotheses} view (see Figure \ref{fig_tut_08_search_hypothesis}). If you cannot find the right hypotheses, you may also just select all hypotheses. To add the selected hypothesis to the \textsf{Selected Hypotheses View} just click on the \icon{rodin/add.png} button. 
 
-\info{There is usually no harm in selecting all hypothesis, but this approach is not optimal.  By providing only necessary hypotheses and no more, we drastically increase the chance that the prover will find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
+\info{There is usually no harm in selecting all hypotheses, but this approach is not optimal.  By providing only necessary hypotheses and no more, we drastically increase the chance that the prover will find the solution before timing out.  On large models it is next to impossible to prove everything without hand-picking the hypotheses.}
 
 \begin{figure}[!ht]
 \begin{center}
 	\includerodinimg{tutorial/tut_08_search_hypothesis.png}
-	\caption{Search Hypothesis View}
+	\caption{Search Hypotheses View}
 	\label{fig_tut_08_search_hypothesis}
 \end{center}
 \end{figure}
 
-The correct hypothesis for this proof was $k \in  (P \setminus  \{ c\} ) \rel  P$ (axiom 3 from the first context). If you were unable to figure this out, add this hypothesis to the selected hypothesis window now. Now click on the \icon{rodin/p0.png} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus {x}$ and $x\neq c$ is now one of our hypotheses.\footnote{The prover has rewritten this as $ \lnot x = c$} Click a second time on the \icon{rodin/p0.png} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
+The correct hypothesis for this proof was $k \in  (P \setminus  \{ c\} ) \rel  P$ (axiom 3 from the first context). If you were unable to figure this out, add this hypothesis to the selected hypothesis window now. Now click on the \icon{rodin/p0.png} button to prove the goal $\lnot x = c$ with the \textsf{Predicate prover on selected hypothesis}. The goal should be discharged and in the Proof Tree you should see that the first two children of the root node are proven. The \textsf{Proof Control View} should now show the original goal $c \in Q \setminus \{x\}$ and $x\neq c$ is now one of our hypotheses.\footnote{The prover has rewritten this as $ \lnot x = c$} Click a second time on the \icon{rodin/p0.png} button in order to finalize the proof. The smiley in the \textsf{Proof Control View} should now become green indicating that all sequents of the proof tree are discharged as shown in Figure \ref{fig_tut_08_proof_final}.
 
 \begin{figure}[!ht]
 \begin{center}

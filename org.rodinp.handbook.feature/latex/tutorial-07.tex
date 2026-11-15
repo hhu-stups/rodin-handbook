@@ -73,7 +73,7 @@ This completes the context.
 
 The easiest way to create a refinement is by right-clicking on the machine in the project browser and selecting \textsf{Refine} (in this case, we will be refining the machine \textsf{mac} from the project \textsf{tutorial-3}).  This will create a ``stub'' consisting of all variables and events. Please use this method to create a machine with name \texttt{mac1}.
 
-When you have refined a machine, the Rodin Editor will show you all the elements of the abstracted machine, but the inherited actions will be shown in grey. This means that you can add actions to the event, but you cannot edit the actions that are already there.
+When you have refined a machine, the Rodin Editor will show you all the elements of the abstract machine, but the inherited actions will be shown in grey. This means that you can add actions to the event, but you cannot edit the actions that are already there.
 
 %\warning{In refinements, the \textsf{Edit} View of the Editor hides some information from the abstract machine by default.  This can be particularly important when you modify a refined event.  The \textsf{Pretty Print} View shows all the element with elements from the abstract machine in \textit{italics}.}
 
@@ -91,7 +91,7 @@ First we have to make the machine aware of the context by adding a \textsf{sees}
 \end{description}
 }
 
-We will start with the traffic lights for the pedestrians. It has only two colours (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_colour} to represent which of the lights is shown. The variable has a corresponding invariant and initialisation (the changes are shown in the following code snippet). The \textit{extended}	keyword in the initialisation means that all
+We will start with the traffic light for the pedestrians. It has only two colours (red and green) and only one of them is shown at a time.  We introduce a new variable called \textsf{peds\_colour} to represent which of the lights is shown. The variable has a corresponding invariant and initialisation (the changes are shown in the following code snippet). The \textit{extended}	keyword in the initialisation means that all
 actions from the refined initialisation are copied:
 
 \pencil{
@@ -135,7 +135,7 @@ In its current state, this gluing invariant can be violated: if the event \texts
 \begin{figure}[!ht]
 \begin{center}
 	\includerodinimg{tutorial/undischarged1.png}
-	\caption{Mapping between Abstract and Concrete Events}
+	\caption{Undischarged Proof Obligations}
 	\label{fig_tut_07_undischarged}
 \end{center}
 \end{figure}
@@ -150,11 +150,11 @@ To fix this, we have to modify the two events in question.  Let's start with \te
 \end{center}
 \end{figure}
 
-This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colour} (replacing \textsf{peds\_go := true} with \textsf{peds\_colour := green}).  While we are at it, we can also rename the name of the event to something more fitting (e.g. \textsf{set\_peds\_green}).
+This change will copy the guard and action from the abstract machine, so that we can modify it.  We can now replace the action with the corresponding action regarding \textsf{peds\_colour} (replacing \textsf{peds\_go := TRUE} with \textsf{peds\_colour := green}).  While we are at it, we can also rename the event to something more fitting (e.g. \textsf{set\_peds\_green}).
 
 Next, we perform the corresponding change on \textsf{set\_peds\_stop} (change the action to \textsf{peds\_\-colour := red} and rename the event \textsf{set\_peds\_red}). Lastly, the event \textsf{set\_cars} also contains a reference to \textsf{peds\_go} that must be replaced (in the second guard, replace \textsf{peds\_go = FALSE} with \textsf{peds\_colour = red}).
 
-Once all references to \textsf{peds\_go} have been replace, we can remove the variable \textsf{peds\_go} from the \textsf{VARIABLES} section. You will also need to change the \textsf{INITIALISATION} event to \textsf{not extended} and remove the action which initialises the variable \textsf{peds\_go}. Now you shouldn't have any errors or warnings, and all proof obligations should be discharged.
+Once all references to \textsf{peds\_go} have been replaced, we can remove the variable \textsf{peds\_go} from the \textsf{VARIABLES} section. You will also need to change the \textsf{INITIALISATION} event to \textsf{not extended} and remove the action which initialises the variable \textsf{peds\_go}. Now you shouldn't have any errors or warnings, and all proof obligations should be discharged.
 
 \warning{If you get the error message ``Identifier peds\_go has not been declared'', then there are references to the refined variable left somewhere in the model.  %It can be helpful to use the \textsf{Pretty Print} view, as it will show the ``inherited'' elements from the abstract machine as well.
 }
@@ -240,9 +240,9 @@ The refinement of \textsf{set\_cars} is more difficult since the event uses a pa
 
 A witness is to an event's parameter what a gluing invariant is to a variable: it is a mapping between the abstract parameter and the new parameter and allows the abstract parameter to disappear.  In this example, the abstract parameter \textsf{new\_value} is of type \textsf{BOOL}, and we introduce a new parameter \textsf{new\_value\_colours} of type \textsf{COLOURS}.
 
-\warning{The naming of a witnesses' label is extremely important. It must be the name of the abstract parameter.  In our example, the label must be \textsf{new\_value}}
+\warning{The naming of a witness's label is extremely important. It must be the name of the abstract parameter.  In our example, the label must be \textsf{new\_value}.}
 
-Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialisation as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to determine between the two gluing invariants).  Note that the traffic light for the cars can show more than one colour at a time.  Therefore, the variable contains a set of colours instead of just one colour (as modelled for \textsf{peds\_colour}):
+Let's get started.  We first provide the new variable, gluing invariant, typing invariant and initialisation as we have done before (at this point you can also rename the gluing invariant from the last section as \textsf{gluing\_peds} in order to be able to distinguish between the two gluing invariants).  Note that the traffic light for the cars can show more than one colour at a time.  Therefore, the variable contains a set of colours instead of just one colour (as modelled for \textsf{peds\_colour}):
 
 \pencil{
 \begin{description}
@@ -305,7 +305,7 @@ Here is the resulting event:
 \end{description}
 }
 
-Now you can get rid of the variable \textsf{cars\_go} and its initialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{tut_data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards each of which define one transition:
+Now you can get rid of the variable \textsf{cars\_go} and its initialisation clause, and there will not be any errors or warnings. But even though all proof obligations are now discharged, we're not done yet. Even though the traffic light doesn't violate the safety property from the abstract machine, it doesn't behave the way described in Section~\ref{tut_data_refinement}.  We still have to ensure that the lights are activated in the proper sequence.  We can impose this behavior by adding four guards, each of which defines one transition:
 
 \pencil{
 \begin{description}
@@ -463,7 +463,7 @@ Now we need to integrate the push button with the traffic light logic:
 	\item At some point, the button variable must be reset.
 \end{itemize}
 
-As we will see in the following discussion, this be more tricky than it first appears.  For now, we will introduce a guard preventing the car lights from turning green when the button is true, and we will reset the button when the pedestrian lights turn red:
+As we will see in the following discussion, this can be more tricky than it first appears.  For now, we will introduce a guard preventing the car lights from turning green when the button is true, and we will reset the button when the pedestrian lights turn red:
 
 \pencil{
 \begin{description}

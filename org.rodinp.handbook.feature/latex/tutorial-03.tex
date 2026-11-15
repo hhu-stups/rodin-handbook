@@ -1,7 +1,7 @@
 \section{The First Machine: A Traffic Light Controller}
 \label{tut_first_machine}
 
-% a first machine, e.g. a traffic light with Booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof lables are read, without changing to the proof perspective.
+% a first machine, e.g. a traffic light with Booleans for signals.  We introduce guards, resulting in the proof obligations to be discharged automatically. We explain how proof labels are read, without changing to the proof perspective.
 
 \tick{\textbf{Goals:} The objective of this section is to get acquainted with the modelling environment. We will create a very simple model consisting of just one file to develop a feeling for Rodin and Event-B.}
 
@@ -36,18 +36,18 @@ Jean-Raymond Abrial has something to say about this in his book\footnote{\url{ht
 \begin{plugin-pror}
 \index{requirements}
 \index{ProR Requirements Tool}
-\index{traceabililty}
+\index{traceability}
 \index{specification}
 
-It takes some time to learn how to read formal specifications, and not all stakeholders are willing to learn it.  Further, textual requiremenets are almost always the starting point for a formal specification.  It would be nice to kep a traceability to the origianl requirements.
+It takes some time to learn how to read formal specifications, and not all stakeholders are willing to learn it.  Further, textual requirements are almost always the starting point for a formal specification.  It would be nice to keep traceability to the original requirements.
 
-\href{http://wiki.event-b.org/index.php/ProR}{ProR} is a tool for editing requirements.  An integration with Rodin exists, which allows a traceability between textual requirements and model elements to be established.  This shows the Event-B model elements seamless as part of the textual requirements.  The various traceability options are demonstrated in the \href{http://www.formalmind.com/en/blog/using-rmf-integrate-your-models}{Formal Mind Blog}.
+\href{http://wiki.event-b.org/index.php/ProR}{ProR} is a tool for editing requirements.  An integration with Rodin exists, which allows a traceability between textual requirements and model elements to be established.  This shows the Event-B model elements seamlessly as part of the textual requirements.  The various traceability options are demonstrated in the \href{http://www.formalmind.com/en/blog/using-rmf-integrate-your-models}{Formal Mind Blog}.
 
 Further, the traces are tracked, and if the source or the target of a trace changes, a marker is set, so that the changes can be inspected and verified.
 
 Being able to set traces is not enough, if there is not a theory behind it to make it useful.  One such theory is based on the WRSPM reference model.  How this works in practice can be seen in \href{http://www.stups.uni-duesseldorf.de/w/Special:Publication/RMF_Mark_Book_Jastram_2013}{this paper}.
 
-Last, ProR is based on the ReqIF standard, which is supported by major industry tools for requirements management (like Rational DOORS or PTC integrity).  This eases the integration of Event-B into existing development processes.
+Last, ProR is based on the ReqIF standard, which is supported by major industry tools for requirements management (like Rational DOORS or PTC Integrity).  This eases the integration of Event-B into existing development processes.
 \end{plugin-pror}
 
 \subsection{Project Setup}
@@ -98,10 +98,10 @@ This editor is \textit{form-based}.  This means that it can be modified by using
 \index{editor!Camille text editor}
 
 \begin{rodin-plugin}{camille.png}{Camille}
-Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor and provides all of the functions that most text editors provide (i.e. copy, paste, undo, redo, etc.)  However, please note that at this time not all Rodin plugins are compatible with Camille.  For more information, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
+Camille is a ``real'' text editor that provides the same feel as a typical Eclipse text editor and provides all of the functions that most text editors provide (e.g.\ copy, paste, undo, redo, etc.).  However, please note that at this time not all Rodin plugins are compatible with Camille.  For more information, please consult the extensive documentation in the Rodin Wiki (\ref{rodin_wiki}).
 
 Camille can be installed via its update site, which is preconfigured in Rodin.  Once installed, Camille will be set as the default editor.
-The rodin editor or structural editor can still be used by selecting it from the context menu of a file in the project browser.
+The Rodin editor or the structural editor can still be used by selecting it from the context menu of a file in the project browser.
 
 Note that the syntax employed by Camille differs from the one employed by the Rodin editor.
 For example, the keywords with the exception of \textbf{INITIALISATION} are written in lower-case letters: \textbf{machine}, \textbf{variables}, \textbf{invariants}, \textbf{events}, etc. Also, the labels have to be prefixed with the \textbf{@} symbol.
@@ -127,7 +127,7 @@ By default, the variable is named \textsf{var1}. Place your cursor inside the \t
 %You will see two fields. The left one is filled with the word \texttt{var1}.  Change this to \texttt{cars\_go}.  The second field (after the double-slash ``//'') is a comment field in which you can write any necessary notes or explanations.
 
 \index{comment}
-\info{\textbf{Comments:} The comment field does not support line breaks, nor is is possible to ``comment out'' parts of the model as it is with most programming languages.}
+\info{\textbf{Comments:} The comment field does not support line breaks, nor is it possible to ``comment out'' parts of the model as it is with most programming languages.}
 
 %\info{\textbf{Comments:} The comment field supports line breaks.  Note that it is not possible to ``comment out'' parts of the model, as is possible with most programming languages.  You can use the comment field to ``park'' predicates and other strings temporarily.}
 
@@ -153,7 +153,7 @@ Invariants are needed in order to specify the type of variables. Use the method 
 
 %Types are provided by invariants. Expand the \textsf{INVARIANTS} section and add two elements by following the same steps as above.  Invariants have labels.  Default labels are generated (\texttt{inv1} and \texttt{inv2}).  The actual invariant is prepopulated with $\btrue$, which represents the logical value ``true''.
 Change the first invariant (the symbol $\btrue$, not the label \texttt{inv1}) to $cars\_go \in  BOOL$ and the second invariant to $peds\_go \in  BOOL$.
-Event-B provides the build-in datatype \texttt{BOOL} among others (\ref{data_types}).
+Event-B provides the built-in datatype \texttt{BOOL} among others (\ref{data_types}).
 
 %\begin{figure}[!ht]
 %\begin{center}
@@ -166,7 +166,7 @@ Event-B provides the build-in datatype \texttt{BOOL} among others (\ref{data_typ
 \info{\textbf{Mathematical Symbols:} Every mathematical symbol has an ASCII-representation and the substitution occurs automatically.  To generate ``element of'' ($\in$), simply type a colon (``:'').  The editor will perform the substitution after a short delay. The \textsf{Symbols} view shows all supported mathematical symbols. The ASCII representation of a symbol can be found by hovering over the symbol in question. Symbols can also be added manually by selecting them from the \textsf{Symbols} view}
 
 \index{yellow highlighting}
-After saving, you should see that the \textsf{INITIALISATION} event is underlined in yellow with a small warning sign to the left as demonstrated in Figure~\ref{fig_tut_03_warning}. Again, the \textsf{Rodin Problems} view displays the error message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
+After saving, you should see that the \textsf{INITIALISATION} event is underlined in yellow with a small warning sign to the left as demonstrated in Figure~\ref{fig_tut_03_warning}. Again, the \textsf{Rodin Problems} view displays the warning message: ``Variable cars\_go is not initialized''. Every variable must be initialized in a way that is consistent with the model.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -176,7 +176,7 @@ After saving, you should see that the \textsf{INITIALISATION} event is underline
 \end{center}
 \end{figure}
 
-To fix this problem, place your cursor to the left of the small green arrow next to the label \textsf{INITIALISATION}. Right click and add an \textsf{Event-B Action}. Repeat to add another event. In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
+To fix this problem, place your cursor to the left of the small green arrow next to the label \textsf{INITIALISATION}. Right click and add an \textsf{Event-B Action}. Repeat to add another action. In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
 %To fix this problem, expand the \textsf{EVENTS} section and then the INITIALISATION event.  Add two elements in the \textsf{THEN} block.  These are actions that also have labels.  In the action fields, enter $cars\_go :=  FALSE$ and $peds\_go :=  FALSE$.
 
@@ -188,7 +188,7 @@ To fix this problem, place your cursor to the left of the small green arrow next
 
 \subsubsection{State Transitions with Events}
 
-Our traffic light controller cannot yet change its state.  To make this possible, we create two events (\ref{events}) in the manner described above and name them \textsf{set\_peds\_go} and \textsf{set\_peds\_stop}. This will model the traffic light for the pedestrians, and for each of these, we will add an Event-B action to each of the events. These actions will change \textsf{peds\_go} to \textsf{TRUE} or \textsf{FALSE}, which simulates the changing of the traffic light.
+Our traffic light controller cannot yet change its state.  To make this possible, we create two events (\ref{events}) in the manner described above and name them \textsf{set\_peds\_go} and \textsf{set\_peds\_stop}. This will model the traffic light for the pedestrians, and we will add an Event-B action to each of the events. These actions will change \textsf{peds\_go} to \textsf{TRUE} or \textsf{FALSE}, which simulates the changing of the traffic light.
 
 \warning{From now on, we won't describe the individual steps in the editor any more.  Instead, we will simply show the resulting model.} 
 
@@ -283,7 +283,7 @@ You should see four proof obligations, two of which are discharged (marked with 
 \index{proof obligation}
 \info{\textbf{Proof obligations:} A proof obligation is something that has to be
   proven to show the consistency of the machine, the correctness of theorems, etc.
-  A proof obligation consists of a label, a number of hypothesis that can be used
+  A proof obligation consists of a label, a number of hypotheses that can be used
   in the proof and a goal -- a predicate that must be proven.
   Have a look at the proof obligation labels.
   They indicate the origin in the model where they were generated. 
@@ -300,11 +300,11 @@ To prevent the invariant from being violated (and therefore to allow all proof o
 \label{tut:prob}
 \index{ProB}
 \begin{rodin-plugin}{prob.png}{ProB}
-A useful tool for understanding and debugging a model is a model checker like ProB. You can install ProB directly from Rodin by using the ProB Update Site.  Just select \textsf{Install New Software...} from the \textsf{Help} menu and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2`` as an installation option, which you can then install using the normal Eclipse mechanism. 
+A useful tool for understanding and debugging a model is a model checker like ProB. You can install ProB directly from Rodin by using the ProB Update Site.  Just select \textsf{Install New Software...} from the \textsf{Help} menu and select ``ProB'' from the dropdown. You should see ``ProB for Rodin2'' as an installation option, which you can then install using the normal Eclipse mechanism. 
 
 We will continue the example at the point where we added the safety invariant (REQ-1), but didn't add guards yet to prevent the invariants from being violated.
 
-We launch ProB by right-clicking on the machine we'd like to animate and select \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machines.  Upon starting, only INITIALISATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  This is done by double-clicking on an enabled event or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALISATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the model checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB Website} for more information.
+We launch ProB by right-clicking on the machine we'd like to animate and selecting \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machine.  Upon starting, only INITIALISATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  This is done by double-clicking on an enabled event or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALISATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the model checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB Website} for more information.
 
 \end{rodin-plugin}
 

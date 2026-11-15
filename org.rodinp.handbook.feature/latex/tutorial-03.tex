@@ -31,7 +31,7 @@ While this handbook is concerned with use of the Rodin tool, it is important to 
 
 We cover a few examples in this chapter that should develop your ability to answer these questions implicitly, but there is no explicit set of instructions.  For example, we will first model the traffic lights as Boolean values and later refine them into actual colors.  But how did we come up with this refinement strategy?  Likewise, we decided to add the push buttons at a later refinement.  In retrospect this may seem useful, but it is still not clear how we arrived at this structure in the first place.
 
-Jean-Raymond Abrial has something to say about this in his book\footnote{\url{http://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}. Some of the chapters are available in the Rodin Wiki.
+Jean-Raymond Abrial has something to say about this in his book\footnote{\url{https://www.amazon.com/Modeling-Event-B-System-Software-Engineering/dp/0521895561}}. Some of the chapters are available in the Rodin Wiki.
 
 \begin{plugin-pror}
 \index{requirements}
@@ -41,11 +41,11 @@ Jean-Raymond Abrial has something to say about this in his book\footnote{\url{ht
 
 It takes some time to learn how to read formal specifications, and not all stakeholders are willing to learn it.  Further, textual requirements are almost always the starting point for a formal specification.  It would be nice to keep traceability to the original requirements.
 
-\href{http://wiki.event-b.org/index.php/ProR}{ProR} is a tool for editing requirements.  An integration with Rodin exists, which allows a traceability between textual requirements and model elements to be established.  This shows the Event-B model elements seamlessly as part of the textual requirements.  The various traceability options are demonstrated in the \href{http://www.formalmind.com/en/blog/using-rmf-integrate-your-models}{Formal Mind Blog}.
+\href{https://wiki.event-b.org/index.php/ProR}{ProR} is a tool for editing requirements.  An integration with Rodin exists, which allows a traceability between textual requirements and model elements to be established.  This shows the Event-B model elements seamlessly as part of the textual requirements.  The various traceability options are demonstrated in the \href{https://www.formalmind.com/en/blog/using-rmf-integrate-your-models}{Formal Mind Blog}.
 
 Further, the traces are tracked, and if the source or the target of a trace changes, a marker is set, so that the changes can be inspected and verified.
 
-Being able to set traces is not enough, if there is not a theory behind it to make it useful.  One such theory is based on the WRSPM reference model.  How this works in practice can be seen in \href{http://www.stups.uni-duesseldorf.de/w/Special:Publication/RMF_Mark_Book_Jastram_2013}{this paper}.
+Being able to set traces is not enough, if there is not a theory behind it to make it useful.  One such theory is based on the WRSPM reference model.  How this works in practice is described in \href{https://docserv.uni-duesseldorf.de/servlets/DerivateServlet/Derivate-23358}{this dissertation}.
 
 Last, ProR is based on the ReqIF standard, which is supported by major industry tools for requirements management (like Rational DOORS or PTC Integrity).  This eases the integration of Event-B into existing development processes.
 \end{plugin-pror}
@@ -106,7 +106,7 @@ The Rodin editor or the structural editor can still be used by selecting it from
 Note that the syntax employed by Camille differs from the one employed by the Rodin editor.
 For example, the keywords with the exception of \textbf{INITIALISATION} are written in lower-case letters: \textbf{machine}, \textbf{variables}, \textbf{invariants}, \textbf{events}, etc. Also, the labels have to be prefixed with the \textbf{@} symbol.
 The syntax employed for logical formulas is, however, identical.
-For more information, please visit \url{http://wiki.event-b.org/index.php/Text_Editor}.
+For more information, please visit \url{https://wiki.event-b.org/index.php/Text_Editor}.
 
 
 \end{rodin-plugin}
@@ -304,7 +304,7 @@ A useful tool for understanding and debugging a model is a model checker like Pr
 
 We will continue the example at the point where we added the safety invariant (REQ-1), but didn't add guards yet to prevent the invariants from being violated.
 
-We launch ProB by right-clicking on the machine we'd like to animate and selecting \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machine.  Upon starting, only INITIALISATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  This is done by double-clicking on an enabled event or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALISATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the model checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{http://www.stups.uni-duesseldorf.de/ProB}{ProB Website} for more information.
+We launch ProB by right-clicking on the machine we'd like to animate and selecting \textsf{Start Animation / Model Checking}.  Rodin will switch to the ProB-Perspective, as shown in Figure~\ref{fig_tut_prob_perspective}. The top left pane shows the available events of the machine.  Upon starting, only INITIALISATION is enabled.  The middle pane shows the current state of the machine, and the right pane shows a history.  On the bottom of the main pane we can see whether any errors occurred, like invariant violations. We can now interact with the model by triggering events.  This is done by double-clicking on an enabled event or by right-clicking it and selecting a set of parameters, if applicable.  We first trigger INITIALISATION.  After that, all events are enabled.  Next, we trigger \texttt{set\_cars} and \texttt{set\_peds\_go}  with the parameter $TRUE$.  As expected, we will get an invariant violation.  In the state view, we can ``drill down'' and find out which invariant was violated, and the history view shows us how we reached this state (Figure~\ref{tut_03_prob_invariant_violation}). After modifying a machine, ProB has to be restarted, which is done again by right-clicking the machine and selecting ProB.  Triggering events to find invariant violations is not very efficient.  But ProB can perform model checking automatically.  To do so, select \textsf{Model Checking} from the \textsf{Checks} menu from the ``Events'' View (the view on the left).  After optionally adjusting some parameters, the model checking can be triggered by pressing ``Start Consistency Checking".  Upon completion, the result of the check is shown. ProB has many more functions and also supports additional formalisms. Please visit the \href{https://prob.hhu.de/}{ProB Website} for more information.
 
 \end{rodin-plugin}
 

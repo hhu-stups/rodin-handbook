@@ -19,7 +19,7 @@ More details are available at \url{http://www.event-b.org}.
 
 \subsection{What is the difference between Event-B and the B method?}
 
-Event-B (\ref{tut_eventb}) is derived from the \href{http://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{http://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, etc.). However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while Event-B is used to model full systems (including hardware, software and environment of operation).
+Event-B (\ref{tut_eventb}) is derived from the \href{https://en.wikipedia.org/wiki/B-Method}{B method}. Both notations have the same \href{https://en.wikipedia.org/wiki/Jean-Raymond_Abrial}{inventor}, and share many common concepts (set-theory, refinement, proof obligations, etc.). However, they are used for quite different purposes. The B method is devoted to the development of \textit{correct by construction} software, while Event-B is used to model full systems (including hardware, software and environment of operation).
 
 Event-B and the B method use mathematical languages which are similar but do not match exactly (in particular, operator precedences are different).
 
@@ -30,22 +30,22 @@ The \textbf{Rodin Platform} is an Eclipse-based IDE for Event-B that provides su
 
 \subsection{Where does the Rodin name come from?}
 
-The Rodin Platform (\ref{rodin_platform}) was initially developed within the European Commission funded Rodin project (IST-511599), where Rodin is an acronym for ``Rigorous Open Development Environment for Complex Systems''. Rodin is also the name of a famous French sculptor. One of his most famous works is the \href{http://en.wikipedia.org/wiki/The_Thinker}{Thinker}. 
+The Rodin Platform (\ref{rodin_platform}) was initially developed within the European Commission funded Rodin project (IST-511599), where Rodin is an acronym for ``Rigorous Open Development Environment for Complex Systems''. Rodin is also the name of a famous French sculptor. One of his most famous works is the \href{https://en.wikipedia.org/wiki/The_Thinker}{Thinker}. 
 
 \subsection{Where can I download Rodin?}
 \label{faq_where_download_rodin}
 
-Rodin is available for download at the Rodin Download page: \url{http://wiki.event-b.org/index.php/Rodin_Platform_Releases}
+Rodin is available for download at the Rodin Download page: \url{https://wiki.event-b.org/index.php/Rodin_Platform_Releases}
 
 \subsection{How to contribute and develop?}
 
-Glad to hear that you want to help!  Please see the \url{http://wiki.event-b.org/index.php/Developer_FAQ} page.
+Glad to hear that you want to help!  Please see the \url{https://wiki.event-b.org/index.php/Developer_FAQ} page.
 
 \subsection{My operating system is not supported!  How can I install Rodin on my platform?}
 \label{faq_os_not_supported}
 At the time of writing this document, prebuilt versions exist for only a small number of operating systems.  There are two recommended approaches for running Rodin in these situations:
 \begin{description}
-	\item[Build Rodin from the sources] Users who have some experience in building Java software can simply build Rodin from source.  For more information, please consult the Developer Documentation in the Rodin Wiki: \url{http://wiki.event-b.org/index.php/Rodin_Developer_Support}
+	\item[Build Rodin from the sources] Users who have some experience in building Java software can simply build Rodin from source.  For more information, please consult the Developer Documentation in the Rodin Wiki: \url{https://wiki.event-b.org/index.php/Rodin_Developer_Support}
 	\item[Run Rodin in a virtual environment] With a fast computer, you can also use a virtual environment (e.g. VirtualBox) and install an operating system into that environment that supports Rodin (e.g. a 32bit version of Linux).
 \end{description}
 
@@ -65,7 +65,7 @@ No! This is a common misunderstanding of what a project clean does. A project co
 The cleaner just undoes what the builder does, i.e. it removes proof obligations and statuses, but it never modifies any proof.
 
 A status may change from \emph{discharged} to \emph{not discharged} when the proof is no longer compatible with the corresponding proof obligation (e.g. when a hypothesis is changed), but \textbf{the proof itself is still there!}
-You can try to \href{http://wiki.event-b.org/index.php/Proof_Obligation_Commands#Proof_Replay_on_Undischarged_POs}{replay} it.
+You can try to \href{https://wiki.event-b.org/index.php/Proof_Obligation_Commands#Proof_Replay_on_Undischarged_POs}{replay} it.
 
 Confusion may arise when automatic provers have been launched. The cleaner does not undo these automatic proofs (why would it?). Once a proof has been made, the platform does not modify or delete it by itself. Even obsolete proofs are preserved (\ref{obsolete_proof})!
 
@@ -73,7 +73,7 @@ Confusion may arise when automatic provers have been launched. The cleaner does 
 
 Although it is recommended that you install additional plugins into the Rodin platform using the Eclipse Update Manager, this might not always be practical. In this case, you can install these plugins by emulating the operations normally performed by the Update Manager either manually or by using ad-hoc scripts. 
 
-The manual installation of plugins is described in \href{http://wiki.event-b.org/index.php/Installing_external_plugins_manually}{\emph{Installing external plugins manually}}. 
+Information on the available plugins and their installation can be found on the \href{https://wiki.event-b.org/index.php/Rodin_Plug-ins}{\emph{Rodin Plug-ins}} page of the Rodin Wiki. 
 
 \subsection{The builder takes too long}
 
@@ -117,7 +117,7 @@ The Rodin editor must use the correct font to work properly, which is \textsf{Br
 
 \subsection{No More Handles}
 
-On Windows platforms, Rodin may crash and generate the error message  ``no more handles''. An OS specific limitation is described \href{http://journals.jevon.org/users/jevon-phd/entry/19833}{here} and \href{https://bugs.eclipse.org/bugs/show_bug.cgi?id=211124}{here}. A workaround is provided at \href{http://blogs.msdn.com/b/ntdebugging/archive/2007/01/04/desktop-heap-overview.aspx}{this site}. 
+On Windows platforms, Rodin may crash and generate the error message  ``no more handles''. An OS specific limitation is described \href{https://bugs.eclipse.org/bugs/show_bug.cgi?id=211124}{here}. A workaround is provided at \href{https://learn.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview}{this site}. 
 
 \subsection{Software installation fails}
 
@@ -132,7 +132,7 @@ No repository found containing:
 \end{verbatim}
 
 
-This is an eclipse/p2 bug that is referenced \href{http://stackoverflow.com/questions/511367/error-when-updating-eclipse}{here}. 
+This is an eclipse/p2 bug that is referenced \href{https://stackoverflow.com/questions/511367/error-when-updating-eclipse}{here}. 
 
 To fix this problem: 
 
@@ -153,7 +153,7 @@ To fix this problem:
 
 This depends on the nature of the bug:
 \begin{itemize}
-	\item Problems with the core Rodin platform, as well as feature requests, should be filed via the SourceForge bug tracker: \url{http://wiki.event-b.org/index.php/Bugs_and_Feature_Requests}
+	\item Problems with the core Rodin platform, as well as feature requests, should be filed via the SourceForge bug tracker: \url{https://wiki.event-b.org/index.php/Bugs_and_Feature_Requests}
 	\item To file problems with individual plugins, check the plugin's documentation in the wiki (\ref{rodin_wiki}).
 	\item If you are unsure whether to file a bug or not, consider asking a question on the Rodin user list at \href{mailto:rodin-b-sharp-user@lists.sourceforge.net}{rodin-b-sharp-user@lists.sourceforge.net}.
 	\item To report a problem with the handbook, use the feedback button that is present in the HTML and Eclipse Help version of the handbook.
@@ -297,7 +297,7 @@ Yes, it is.  Check out Section~\ref{use_provers_effectively} to begin using the 
 
 \subsection{How can I do a Proof by Induction?}
 \index{induction@proof by induction}
-\href{http://wiki.event-b.org/index.php/Induction_proof}{This page about proof by induction} will give you some starting tips.
+\href{https://wiki.event-b.org/index.php/Induction_proof}{This page about proof by induction} will give you some starting tips.
 
 \subsection{What do the labels on the proof tree mean?}
 

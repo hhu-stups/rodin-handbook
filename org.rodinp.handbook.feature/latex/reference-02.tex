@@ -47,17 +47,51 @@ and proof obligations for theorems are discussed in Section \ref{theorems}.
 \label{about_the_notation}
 
 We denote a sequence of identifiers with $\varlist{x} = x_1,\ldots,x_n$ and $\varlist{x}' = x'_1,\ldots,x'_n$.
-As a convention, we use
-\begin{itemize}
-\item $\allconstants$ for constants
-\item $\absvariables$ and $\concvariables$ for variables of an abstract or a concrete machine respectively
-\item $\absparameters$ and $\concparameters$ for parameters of an abstract or concrete machine respectively
-\item $A$ for axioms
-\item $I$ and $J$ for the invariants of the abstract machines or concrete machine respectively
-\item $G$ and $H$ for the guards of the abstract events or concrete event respectively
-\end{itemize}
+Table~\ref{tab:po_notation} summarises the symbols that we use in the proof obligations
+throughout this section.  Conjunctions of an empty set of predicates (e.g.\ the guards of an
+event without guards) are $\btrue$.
+
+\begin{table}[!ht]
+\index{notation!proof obligations}
+\centering
+\begin{tabular}{l p{0.58\textwidth} l}
+  \hline
+  \textbf{Symbol} & \textbf{Meaning} & \textbf{Section} \\
+  \hline
+  \multicolumn{3}{l}{\textbf{Identifiers}} \\
+  $\allconstants$ & the constants (including carrier sets) & \ref{constants_and_axioms} \\
+  $\absvariables$ & the variables of the abstract machines & \ref{variables_and_invariants} \\
+  $\concvariables$ & the variables of the concrete machine & \ref{variables_and_invariants} \\
+  $\absparameters$ & the parameters of the abstract events & \ref{parameters} \\
+  $\concparameters$ & the parameters of the concrete event & \ref{parameters} \\
+  $x'$ & the value of variable $x$ after the event (``primed'' variable) & \ref{actions} \\
+  \hline
+  \multicolumn{3}{l}{\textbf{Predicates}} \\
+  $A$ & the conjunction of all axioms of all seen contexts & \ref{seeing_a_context} \\
+  $I$ & the conjunction of the invariants of the abstract machines & \ref{variables_and_invariants} \\
+  $J$ & the conjunction of the invariants of the concrete machine; $J_i$ is a single invariant & \ref{variables_and_invariants} \\
+  $G$ & the conjunction of the guards of the abstract events; $G_i$ is a single guard & \ref{guards} \\
+  $H$ & the conjunction of the guards of the concrete event & \ref{guards} \\
+  $W$ & the conjunction of all witnesses of the concrete event & \ref{witness} \\
+  $W_p$ & the conjunction of the witnesses for abstract parameters; $W_{x'}$ is the witness for a disappearing abstract variable $x$ & \ref{witness} \\
+  $\absbeforeafter$ & the before-after-predicate of the abstract event ($\btrue$ if there is none) & \ref{consistency_proof_obligations} \\
+  $\concbeforeafter$ & the before-after-predicate of the concrete event, i.e.\ the conjunction of the $Q_i$ and $y=y'$ for all unchanged variables $y$ & \ref{actions} \\
+  $Q_i$ & the before-after-predicate of a single action $i$ & \ref{actions} \\
+  $A_b$, $J_b$, $H_b$ & the axioms, invariants or guards declared \emph{before} the element in question & \ref{well_definedness_proof_obligations} \\
+  \hline
+  \multicolumn{3}{l}{\textbf{Expressions and operators}} \\
+  $V$ & the variant & \ref{termination} \\
+  $\wdl(E)$ & the well-definedness condition of $E$ & \ref{well_definedness} \\
+  $\actfis(a)$ & the feasibility condition of the assignment $a$ & \ref{assignments} \\
+  $P[E/x]$ & substitution of $x$ by $E$ in $P$ & \ref{substitutions} \\
+  \hline
+\end{tabular}
+\caption{Symbols used in the proof obligations}
+\label{tab:po_notation}
+\end{table}
 
 \subsection{Substitutions}
+\label{substitutions}
 We use the notation $P[E/x]$ for a substitution of all free occurrences of the variable $x$ in
 $P$ by the expression $E$.
 Several substitutions can be performed simultaneously with $P[E_1/x_1,\ldots,E_n/x_n]$.

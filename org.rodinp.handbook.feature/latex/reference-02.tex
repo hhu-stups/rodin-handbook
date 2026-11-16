@@ -315,7 +315,7 @@ Witnesses are necessary in the following circumstances:
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
   In this case, the label of the witness must be $x'$, the witness has the form $W_{x'}$.
-  All identifiers of $W_p$ must be either constants, concrete or abstract variables,
+  All identifiers of $W_{x'}$ must be either constants, concrete or abstract variables,
   primed concrete variables (i.e.~$v'$ for each concrete variable $v$),
   concrete parameters or the primed abstract variable $x'$.
   $x'$ denotes the new value of $x$.
@@ -388,7 +388,7 @@ There are special proof obligations generated for the initialisation event:
   {$A \land W \land \concbeforeafter \limp  \actfis(a)$}
   \pode{Invariant establishment}%
   {\eventbpo{INITIALISATION/invlabel/INV}}%
-  {$A \land W \land \concbeforeafter \limp I_i[\absvariables'/\absvariables,\concvariables'/\concvariables]$}
+  {$A \land W \land \concbeforeafter \limp J_i[\absvariables'/\absvariables,\concvariables'/\concvariables]$}
 
 \subsubsection{Ensuring a correct refinement}
 \label{refinement_proof_obligations}
@@ -547,8 +547,8 @@ and an anticipated event must not increase the variant.
 
 \paragraph{Set variant}
 \label{set_variant}
-  If the variant is a set t, it must be proven that the set is always finite:
-\pode{Decreasing of a variant (anticipated event)}{\eventbpo{FIN}}%
+  If the variant is a set, it must be proven that the set is always finite:
+\pode{Finiteness of a set variant}{\eventbpo{FIN}}%
   {$\begin{array}{r@{\ }l}
       & A \land I \land J \\
       \limp & \bfinite(V)
@@ -587,7 +587,7 @@ For an axiom $A_w$, $A_b$ denotes (the conjunction of) all axioms declared
 \paragraph{Invariants}
 \label{well_definedness_of_invariants}
 For an invariant $J_w$, $J_b$ denotes (the conjunction of) all the model's 
-  invariants declared before the theorem.
+  invariants declared before the invariant in question.
 \index{proof obligation!well-definedness of an invariant@well-def. of an invariant (\eventbpo{WD})}
 \pode{Well-definedness of an invariant}{\eventbpo{label/WD}}%
   {$A \land I \land J_b
@@ -596,7 +596,7 @@ For an invariant $J_w$, $J_b$ denotes (the conjunction of) all the model's
 \paragraph{Guards}
 \label{well_definedness_of_guards}
 For a guard $H_w$, $H_b$ denotes (the conjunction of) all the event's
-  guards declared before the theorem.
+  guards declared before the guard in question.
 \index{proof obligation!well-definedness of a guard@well-definedness of a guard (\eventbpo{WD})}
 \pode{Well-definedness of a guard}{\eventbpo{eventname/guardlabel/WD}}%
   {$A \land I \land J \land H_b

@@ -82,10 +82,7 @@ Creative Commons License
 <img src="icons/feedback.gif" /> <a class="footer" href="" id="feedback">Feedback</a>
 <div style="visibility:hidden;" id="section" tal:content="self/title"></div>
 <script>
-section = encodeURIComponent(document.getElementById("section").innerHTML);
-url = "https://spreadsheets.google.com/spreadsheet/viewform?formkey=dEJmXzUydnRzZGdDVE16WFZmZmd1alE6MQ"
-    + String.fromCharCode(38) + "entry_0=" + section;
-document.getElementById("feedbackbubble").href = url;
+url = "https://github.com/hhu-stups/rodin-handbook/issues";
 document.getElementById("feedback").href = url;
 </script>
 

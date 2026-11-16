@@ -385,7 +385,7 @@ For each invariant $J_i$ with the label \eventbpo{invlabel}
 \index{establishment of the invariant}
 There are special proof obligations generated for the initialisation event:
   \pode{Action feasibility (in the initialisation)}{\eventbpo{INITIALISATION/actionlabel/FIS}}%
-  {$A \land W \land \concbeforeafter \limp  \actfis(a)$}
+  {$A \limp \actfis(a)$}
   \pode{Invariant establishment}%
   {\eventbpo{INITIALISATION/invlabel/INV}}%
   {$A \land W \land \concbeforeafter \limp J_i[\absvariables'/\absvariables,\concvariables'/\concvariables]$}

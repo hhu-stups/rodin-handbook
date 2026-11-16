@@ -310,24 +310,24 @@ Witnesses are necessary in the following circumstances:
 \item The abstract event has a parameter $p$ that is not a parameter of the concrete  event.
   In this case, the label of the witness must be $p$, and the witness has the form  $W_p$.
   All identifiers of $W_p$ must be either constants, concrete or abstract variables,
-  primed concrete variables (i.e.~$v'$ for each concrete variable $v$),
+  primed concrete variables (i.e.~$w'$ for each concrete variable $w$),
   concrete parameters or the abstract parameter $p$.
 \item The abstract event assigns non-deterministically (using $\bcmin$ or $\bcmsuch$) 
   a value to a variable $x$ that is not a variable of the concrete machine.
   In this case, the label of the witness must be $x'$, the witness has the form $W_{x'}$.
   All identifiers of $W_{x'}$ must be either constants, concrete or abstract variables,
-  primed concrete variables (i.e.~$v'$ for each concrete variable $v$),
+  primed concrete variables (i.e.~$w'$ for each concrete variable $w$),
   concrete parameters or the primed abstract variable $x'$.
   $x'$ denotes the new value of $x$.
 \end{itemize}
-We denote the conjunction of all witnesses of an event with $W$.
+We denote the conjunction of all witnesses of an event with $W$, and the conjunction of all witnesses for abstract parameters with $W_p$.
 
 \index{feasibility!of witnesses}
 The feasibility of the witness must be proven, i.e. that there is actually a value for which the predicate holds.
 \index{proof obligation!witness feasibility@witness feasibility (\eventbpo{WFIS})}
 \pode{Witness feasibility for a parameter $p$}{\eventbpo{eventlabel/$p$/WFIS}}%
   {$\begin{array}{r@{\ }l}
-      & A \land I \land J \land H \\
+      & A \land I \land J \land H \land \concbeforeafter \\
       \limp & \exists p \qdot W_p
     \end{array}$}
 \pode{Witness feasibility for an abstract variable $x$}{\eventbpo{eventlabel/$x'$/WFIS}}%
